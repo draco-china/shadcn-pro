@@ -1,3 +1,10 @@
+# 1.0.0 (2026-05-25)
+
+
+### Features
+
+* initial release ([2369338](https://github.com/draco-china/shadcn-pro/commit/2369338eb92df77c4162ceefc31cc41517627914))
+
 # [1.16.0](https://github.com/draco-china/shadcn-pro/compare/v1.15.0...v1.16.0) (2026-05-23)
 
 
