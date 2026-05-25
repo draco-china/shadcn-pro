@@ -1,0 +1,10 @@
+{
+  "title": "Components",
+  "pages": [
+    "pro-descriptions",
+    "pro-editor",
+    "pro-fields",
+    "pro-form",
+    "pro-table"
+  ]
+}

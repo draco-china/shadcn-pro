@@ -1,0 +1,70 @@
+---
+title: Input
+description: Enhanced input component built on top of shadcn/ui Input — with prefix/suffix decorators, one-click clear, and password visibility toggle.
+---
+
+<ComponentPreview name="pro-input-docs-demo" previewClassName="min-h-[300px]" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro add pro-input
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+bun add @formily/core @formily/react lucide-react
+```
+
+<Step>Copy and paste the following file into your project under `components/pro/pro-fields/`.</Step>
+
+- `components/pro/pro-fields/input.tsx`
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Input } from "@/components/pro/pro-fields/input"
+import { Password } from "@/components/pro/pro-fields/password"
+
+export default function Demo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input placeholder="Basic input" />
+      <Input prefix={<SearchIcon />} placeholder="With prefix icon" allowClear />
+      <Password placeholder="Password" />
+    </div>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `prefix` | `ReactNode` | — | Content to render before the input (icon or text). |
+| `suffix` | `ReactNode` | — | Content to render after the input (icon or text). |
+| `allowClear` | `boolean` | `false` | Show a clear button when the input has a value. |
+| `onClear` | `() => void` | — | Called when the clear button is clicked. |
+| `inputClassName` | `string` | — | CSS class passed to the inner shadcn Input when using `Password`. |

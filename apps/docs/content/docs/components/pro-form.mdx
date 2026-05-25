@@ -1,0 +1,240 @@
+---
+title: ProForm
+description: Schema-driven forms with dynamic fields, validation, and field linkage — powered by FormilyJS and shadcn/ui.
+---
+
+<ComponentPreview name="pro-form-docs-demo" previewClassName="min-h-[440px]" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro add pro-form
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+bun add @formily/core @formily/react @formily/validator
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="pro-form" title="components/ui/pro-form.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { createForm, ProForm, SchemaField } from "@/components/ui/pro-form"
+
+const form = createForm()
+
+export default function BasicForm() {
+  return (
+    <ProForm form={form} onFinish={(values) => console.log(values)}>
+      <SchemaField>
+        <SchemaField.String
+          name="username"
+          title="Username"
+          required
+          x-decorator="FormItem"
+          x-component="Input"
+          x-component-props={{ placeholder: "Enter username" }}
+        />
+        <SchemaField.String
+          name="email"
+          title="Email"
+          required
+          x-decorator="FormItem"
+          x-component="Input"
+          x-component-props={{ type: "email", placeholder: "user@example.com" }}
+        />
+      </SchemaField>
+    </ProForm>
+  )
+}
+```
+
+## Examples
+
+### Validation
+
+Real-time and async field validation with custom error messages.
+
+<ComponentPreview name="pro-form-validation-demo" previewClassName="min-h-[480px]" />
+
+### Field Linkage
+
+Show or hide fields dynamically based on other field values.
+
+<ComponentPreview name="pro-form-linkage-demo" previewClassName="min-h-[480px]" />
+
+### Schema-Driven
+
+Define your entire form with a JSON schema:
+
+```tsx
+import { createForm, ProForm, SchemaField } from "@/components/ui/pro-form"
+
+const schema = {
+  type: "object",
+  properties: {
+    username: {
+      type: "string",
+      title: "Username",
+      required: true,
+      "x-component": "Input",
+      "x-validator": [{ required: true, message: "Username is required" }],
+    },
+    role: {
+      type: "string",
+      title: "Role",
+      "x-component": "Select",
+      enum: [
+        { label: "Admin", value: "admin" },
+        { label: "User", value: "user" },
+        { label: "Guest", value: "guest" },
+      ],
+    },
+    notifications: {
+      type: "boolean",
+      title: "Enable notifications",
+      "x-component": "Switch",
+    },
+  },
+}
+
+const form = createForm()
+
+export default function SchemaForm() {
+  return (
+    <ProForm form={form} onFinish={(values) => console.log(values)}>
+      <SchemaField schema={schema} />
+    </ProForm>
+  )
+}
+```
+
+### Array Fields
+
+Dynamic list of items with add/remove controls:
+
+```tsx
+<SchemaField.Array
+  name="users"
+  title="Team Members"
+  x-decorator="FormItem"
+  x-component="ArrayField"
+/>
+```
+
+### Object Fields
+
+Nested object grouping with optional card wrapper:
+
+```tsx
+<SchemaField.Object
+  name="address"
+  title="Address"
+  x-decorator="FormItem"
+  x-component="ObjectField"
+/>
+```
+
+### Field Description
+
+Add a `description` property to a schema field to display helper text below the input:
+
+```tsx
+<SchemaField>
+  <SchemaField.String
+    name="email"
+    title="Email"
+    required
+    description="We will never share your email with anyone."
+    x-decorator="FormItem"
+    x-component="Input"
+    x-component-props={{ placeholder: 'user@example.com' }}
+  />
+  <SchemaField.String
+    name="bio"
+    title="Bio"
+    description="Max 200 characters."
+    x-decorator="FormItem"
+    x-component="Textarea"
+  />
+  <SchemaField.Boolean
+    name="active"
+    title="Enable account"
+    description="Disabled accounts cannot sign in."
+    x-decorator="FormItem"
+    x-component="Switch"
+  />
+</SchemaField>
+```
+
+## API Reference
+
+### ProForm
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `form` | `Form` | internal form | Formily form instance created with `createForm()`. Omit to let `ProForm` create one. |
+| `formProps` | `IFormProps` | — | Options used when `ProForm` creates the internal form. |
+| `children` | `ReactNode` | — | Form fields and layout components. |
+| `onFinish` | `(values) => void \| Promise<void>` | — | Called after successful validation. |
+| `onFinishFailed` | `(errors) => void` | — | Called when validation fails on submit. |
+| `onReset` | `() => void \| Promise<void>` | — | Called after reset completes. |
+| `submitText` | `string` | `'Submit'` | Label for the submit button. |
+| `showReset` | `boolean` | `false` | Show a reset button alongside submit. |
+| `resetText` | `string` | `'Reset'` | Label for the reset button. |
+| `hideActions` | `boolean` | `false` | Hide the bottom action bar — place `<ProFormActions />` manually. |
+| `actionsAlign` | `'left' \| 'center' \| 'right'` | `'left'` | Alignment of the action bar. |
+| `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout. Wraps fields in `ProFormGrid` automatically. |
+| `className` | `string` | — | Additional className for the `<form>` element. |
+
+### ProFormGrid
+
+Multi-column grid container — fields inside are evenly distributed.
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `columns` | `1 \| 2 \| 3 \| 4` | `1` | Number of columns. |
+| `gap` | `string` | `'gap-4'` | Tailwind gap class. |
+| `className` | `string` | — | Additional className. |
+
+### ProFormActions
+
+Standalone action bar — use with `hideActions` to position it freely.
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `submitText` | `string` | `'Submit'` | Label for the submit button. |
+| `showReset` | `boolean` | `false` | Show a reset button. |
+| `resetText` | `string` | `'Reset'` | Label for the reset button. |
+| `onReset` | `() => void \| Promise<void>` | — | Reset callback. |
+| `loading` | `boolean` | `false` | Shows loading state on the submit button. |
+| `align` | `'left' \| 'center' \| 'right'` | `'left'` | Alignment of buttons. |
+| `children` | `ReactNode` | — | Extra buttons or content to render alongside actions. |

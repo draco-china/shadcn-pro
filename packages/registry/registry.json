@@ -1,0 +1,222 @@
+{
+  "version": "0.1.0",
+  "baseUrl": "https://raw.githubusercontent.com/draco-china/shadcn-pro/main/packages/registry",
+  "components": [
+    {
+      "name": "pro-fields",
+      "category": "form",
+      "description": "Shared field components for ProForm, including input, password, select, switch, checkbox, radio, textarea, date, numeric, upload, and tree/cascader fields.",
+      "dependencies": ["date-fns", "lucide-react"],
+      "registryDependencies": [
+        "input",
+        "button",
+        "select",
+        "switch",
+        "checkbox",
+        "textarea",
+        "label",
+        "card",
+        "calendar",
+        "popover",
+        "radio-group",
+        "collapsible",
+        "slider"
+      ],
+      "files": [
+        "pro/pro-fields/input.tsx",
+        "pro/pro-fields/password.tsx",
+        "pro/pro-fields/textarea.tsx",
+        "pro/pro-fields/select.tsx",
+        "pro/pro-fields/checkbox.tsx",
+        "pro/pro-fields/switch.tsx",
+        "pro/pro-fields/radio.tsx",
+        "pro/pro-fields/date-picker.tsx",
+        "pro/pro-fields/date-range-picker.tsx",
+        "pro/pro-fields/date-time-picker.tsx",
+        "pro/pro-fields/time-picker.tsx",
+        "pro/pro-fields/digit.tsx",
+        "pro/pro-fields/digit-range.tsx",
+        "pro/pro-fields/slider.tsx",
+        "pro/pro-fields/rate.tsx",
+        "pro/pro-fields/segmented.tsx",
+        "pro/pro-fields/cascader.tsx",
+        "pro/pro-fields/tree-select.tsx",
+        "pro/pro-fields/upload.tsx",
+        "pro/pro-fields/captcha.tsx",
+        "pro/pro-fields/money.tsx",
+        "pro/pro-fields/array-field.tsx",
+        "pro/pro-fields/object-field.tsx"
+      ]
+    },
+    {
+      "name": "pro-form",
+      "category": "form",
+      "description": "Formily + shadcn/ui driven form component",
+      "dependencies": [
+        "@formily/core",
+        "@formily/react",
+        "@formily/reactive",
+        "@formily/reactive-react",
+        "date-fns",
+        "lucide-react"
+      ],
+      "registryDependencies": ["pro-fields", "button", "label", "card", "collapsible", "tooltip"],
+      "files": [
+        "pro/pro-form/index.tsx",
+        "pro/pro-form/layout.tsx",
+        "pro/pro-form/form-item.tsx",
+        "pro/pro-form/formily-fields/index.tsx",
+        "pro/pro-form/formily-fields/utils.ts",
+        "pro/pro-form/formily-fields/text.tsx",
+        "pro/pro-form/formily-fields/choice.tsx",
+        "pro/pro-form/formily-fields/date.tsx",
+        "pro/pro-form/formily-fields/numeric.tsx",
+        "pro/pro-form/formily-fields/advanced.tsx",
+        "pro/pro-form/formily-fields/schema.tsx"
+      ]
+    },
+    {
+      "name": "pro-table",
+      "category": "table",
+      "description": "TanStack Table + shadcn/ui data table with search and pagination",
+      "dependencies": [
+        "@tanstack/react-table",
+        "@dnd-kit/core",
+        "@dnd-kit/sortable",
+        "@dnd-kit/utilities",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "pro-fields",
+        "button",
+        "table",
+        "input",
+        "select",
+        "checkbox",
+        "dropdown-menu",
+        "separator",
+        "skeleton",
+        "tooltip"
+      ],
+      "files": [
+        "pro/pro-table/index.tsx",
+        "pro/pro-table/types.ts",
+        "pro/pro-table/table/utils.ts",
+        "pro/pro-table/table/empty-state.tsx",
+        "pro/pro-table/table/skeleton.tsx",
+        "pro/pro-table/table/sortable-row.tsx",
+        "pro/pro-table/table/header.tsx",
+        "pro/pro-table/table/body.tsx",
+        "pro/pro-table/toolbar/index.tsx",
+        "pro/pro-table/toolbar/column-settings.tsx",
+        "pro/pro-table/toolbar/bulk-actions.tsx",
+        "pro/pro-table/columns.tsx",
+        "pro/pro-table/pagination/index.tsx",
+        "pro/pro-table/pagination/utils.ts",
+        "pro/pro-table/toolbar/search-form.tsx"
+      ]
+    },
+    {
+      "name": "pro-editor",
+      "category": "content",
+      "description": "Monaco-powered editor with controlled language, theme, view mode, and external preview slot.",
+      "dependencies": ["@monaco-editor/react", "lucide-react", "monaco-editor"],
+      "registryDependencies": ["button", "tooltip"],
+      "files": [
+        "pro/pro-editor/index.tsx",
+        "pro/pro-editor/toolbar/index.tsx",
+        "pro/pro-editor/preview/scroll-sync.ts",
+        "pro/pro-editor/preview/styles.ts",
+        "pro/pro-editor/language/index.ts",
+        "pro/pro-editor/types.ts",
+        "pro/pro-editor/monaco/index.ts",
+        "pro/pro-editor/monaco/github-themes.ts"
+      ]
+    },
+    {
+      "name": "pro-descriptions",
+      "category": "display",
+      "description": "Key-value display component for detail pages, supporting grid layout, bordered style, and horizontal/vertical modes",
+      "dependencies": [],
+      "registryDependencies": ["card"],
+      "files": ["pro/pro-descriptions/index.tsx"]
+    },
+    {
+      "name": "pro-input",
+      "category": "form",
+      "description": "Enhanced input built on shadcn/ui Input with prefix, suffix, clear button, and password visibility control.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["input", "button"],
+      "files": ["pro/pro-fields/input.tsx", "pro/pro-fields/password.tsx"]
+    },
+    {
+      "name": "code-viewer",
+      "category": "display",
+      "description": "Shiki-powered code viewer with GitHub themes, copy, line numbers, folding, and empty/error states.",
+      "dependencies": ["shiki", "lucide-react"],
+      "registryDependencies": ["button"],
+      "files": [
+        "pro/pro-viewer/code/index.tsx",
+        "pro/pro-viewer/code/header.tsx",
+        "pro/pro-viewer/code/table.tsx",
+        "pro/pro-viewer/code/lines.ts",
+        "pro/pro-viewer/code/syntax.ts"
+      ]
+    },
+    {
+      "name": "diff-viewer",
+      "category": "display",
+      "description": "Split and unified diff viewer with shared Shiki GitHub syntax highlighting.",
+      "dependencies": ["diff", "shiki"],
+      "registryDependencies": ["button"],
+      "files": [
+        "pro/pro-viewer/diff/index.tsx",
+        "pro/pro-viewer/diff/table.tsx",
+        "pro/pro-viewer/diff/utils.ts",
+        "pro/pro-viewer/code/syntax.ts"
+      ]
+    },
+    {
+      "name": "html-viewer",
+      "category": "display",
+      "description": "Sandboxed HTML preview surface.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": ["pro/pro-viewer/html/index.tsx"]
+    },
+    {
+      "name": "image-viewer",
+      "category": "display",
+      "description": "Fullscreen image viewer with zoom, pan, rotate, fullscreen, thumbnails, and keyboard navigation.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button"],
+      "files": [
+        "pro/pro-viewer/image/index.tsx",
+        "pro/pro-viewer/image/state.ts",
+        "pro/pro-viewer/image/toolbar.tsx",
+        "pro/pro-viewer/image/thumbnails.tsx"
+      ]
+    },
+    {
+      "name": "markdown-viewer",
+      "category": "display",
+      "description": "GitHub Flavored Markdown viewer with alerts, math, sanitized raw HTML, tables, and shared CodeViewer code blocks.",
+      "dependencies": [
+        "react-markdown",
+        "rehype-mathjax",
+        "rehype-raw",
+        "rehype-sanitize",
+        "remark-breaks",
+        "remark-gfm",
+        "remark-math",
+        "shiki"
+      ],
+      "registryDependencies": ["code-viewer"],
+      "files": [
+        "pro/pro-viewer/markdown/index.tsx",
+        "pro/pro-viewer/markdown/components.tsx",
+        "pro/pro-viewer/markdown/plugins.ts"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+---
+title: CodeViewer
+description: Read-only syntax-highlighted code viewer powered by Shiki — with GitHub themes, copy button, line numbers, folding, and empty/error states.
+---
+
+<ComponentPreview name="code-viewer-docs-demo" previewClassName="min-h-[340px] items-start p-4" align="start" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro add code-viewer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies.</Step>
+
+```bash
+npm install shiki lucide-react
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="code-viewer" title="components/pro/pro-viewer/code/index.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { CodeViewer } from "@/components/pro/pro-viewer/code"
+
+export default function Example() {
+  return (
+    <CodeViewer
+      code={`const hello = "world"`}
+      lang="typescript"
+      theme="github-dark"
+      showLineNumbers
+    />
+  )
+}
+```
+
+## API Reference
+
+### CodeViewer
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `code` | `string` | — | The source code string to display. |
+| `lang` | `string` | `"typescript"` | Language identifier for syntax highlighting (e.g. `"tsx"`, `"python"`). |
+| `theme` | `"github-light" \| "github-dark"` | `"github-dark"` | Shared GitHub syntax theme. |
+| `showLineNumbers` | `boolean` | `true` | Whether to display line numbers. |
+| `showHeader` | `boolean` | `true` | Whether to show the filename/language and copy toolbar. |
+| `surface` | `"code" \| "embedded"` | `"code"` | Use `"embedded"` when rendering inside another surface. |
+| `title` | `string` | — | Optional filename shown in the toolbar. |
+| `emptyText` | `string` | `"No code"` | Message shown when `code` is empty. |
+| `className` | `string` | — | Additional CSS class for the root element. |

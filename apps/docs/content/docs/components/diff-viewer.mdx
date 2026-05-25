@@ -1,0 +1,79 @@
+---
+title: DiffViewer
+description: Side-by-side and unified code diff viewer with added/removed line highlighting and shared GitHub syntax themes.
+---
+
+<ComponentPreview name="diff-viewer-docs-demo" previewClassName="min-h-[340px] items-start p-4" align="start" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro add diff-viewer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies.</Step>
+
+```bash
+npm install diff shiki
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="diff-viewer" title="components/pro/pro-viewer/diff/index.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { DiffViewer } from "@/components/pro/pro-viewer/diff"
+
+export default function Example() {
+  return (
+    <DiffViewer
+      oldCode={`const a = 1`}
+      newCode={`const a = 2`}
+      lang="typescript"
+      theme="github-dark"
+      oldTitle="Before"
+      newTitle="After"
+    />
+  )
+}
+```
+
+## API Reference
+
+### DiffViewer
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `oldCode` | `string` | — | The original (before) code. |
+| `newCode` | `string` | — | The modified (after) code. |
+| `lang` | `string` | `"typescript"` | Language for syntax highlighting. |
+| `theme` | `"github-light" \| "github-dark"` | `"github-dark"` | Shared GitHub syntax theme used by Shiki. |
+| `oldTitle` | `string` | `"Before"` | Label shown above the original code panel. |
+| `newTitle` | `string` | `"After"` | Label shown above the modified code panel. |
+| `defaultView` | `"split" \| "unified"` | `"split"` | Initial view mode. |
+| `className` | `string` | — | Additional CSS class for the root element. |

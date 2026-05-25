@@ -1,0 +1,163 @@
+---
+title: ProTable
+description: Feature-rich data table with search, filtering, sorting, density toggle, column visibility, and drag-to-sort — powered by TanStack Table and shadcn/ui.
+---
+
+<ComponentPreview name="pro-table-docs-demo" previewClassName="min-h-[460px]" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro add pro-table
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+bun add @tanstack/react-table @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="pro-table" title="components/pro/pro-table/index.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ProTable } from "@/components/pro/pro-table"
+
+const columns = [
+  {
+    accessorKey: "name",
+    header: "Name",
+    enableSorting: true,
+    meta: { pinned: "left" },
+  },
+  { accessorKey: "email", header: "Email" },
+  { accessorKey: "createdAt", header: "Created", meta: { pinned: "right" } },
+]
+
+export default function UsersTable() {
+  return (
+    <ProTable
+      columns={columns}
+      data={users}
+      searchKey="name"
+      searchPlaceholder="Search by name..."
+      header={<h2 className="text-lg font-semibold">Users</h2>}
+      stickyHeader
+      onRefresh={() => refetch()}
+    />
+  )
+}
+```
+
+## Examples
+
+### Pinned Columns and Sticky Header
+
+Use `meta.pinned` on column definitions to keep important columns visible during horizontal scroll. Users can also pin or unpin columns from the column settings menu. The table header is sticky by default; set `stickyHeader={false}` to disable it.
+
+```tsx
+const columns = [
+  { id: "select", size: 48, meta: { pinned: "left" } },
+  { accessorKey: "name", header: "Name", size: 180, meta: { pinned: "left" } },
+  { accessorKey: "email", header: "Email", size: 240 },
+  { accessorKey: "createdAt", header: "Created", size: 150, meta: { pinned: "right" } },
+]
+
+<ProTable columns={columns} data={users} />
+```
+
+### Bulk Actions
+
+Render bottom-floating bulk actions when rows are selected. The floating toolbar supports keyboard navigation and `Escape` clears the selection.
+
+```tsx
+<ProTable
+  columns={columns}
+  data={users}
+  bulkActionEntityName="user"
+  bulkActionRender={({ selectedRows }) => (
+    <Button size="sm" variant="outline">
+      Export {selectedRows.length}
+    </Button>
+  )}
+/>
+```
+
+### Drag-to-Sort
+
+Enable row drag-to-sort with the `dragSort` prop. Use `rowKey` to specify the unique identifier field and `onDragSortEnd` to receive the reordered data.
+
+Drag sorting reorders the backing `data` array by the currently rendered rows. When the table is filtered or paginated, the dragged row moves relative to the visible target row in the original data array.
+
+<ComponentPreview
+  name="pro-table-drag-sort-demo"
+  previewClassName="min-h-[520px]"
+/>
+
+```tsx
+<ProTable
+  columns={columns}
+  data={data}
+  dragSort
+  rowKey="id"
+  onDragSortEnd={(newData) => console.log(newData)}
+/>
+```
+
+## API Reference
+
+### ProTable
+
+| Prop                    | Type                                  | Default                      | Description                                                                                                    |
+| ----------------------- | ------------------------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `columns`               | `ColumnDef<T>[]`                      | —                            | TanStack Table column definitions.                                                                             |
+| `data`                  | `T[]`                                 | —                            | Table data array.                                                                                              |
+| `header`                | `ReactNode \| (context) => ReactNode` | —                            | Custom content rendered above the toolbar.                                                                     |
+| `searchKey`             | `string`                              | —                            | Column key to enable text filtering on.                                                                        |
+| `searchPlaceholder`     | `string`                              | `'Search...'`                | Placeholder text for the search input.                                                                         |
+| `filterRender`          | `ReactNode`                           | —                            | Custom filter controls rendered on the left side of the toolbar.                                               |
+| `toolBarRender`         | `() => ReactNode[]`                   | —                            | Extra action buttons rendered on the right side of the toolbar.                                                |
+| `bulkActionRender`      | `(context) => ReactNode`              | —                            | Actions shown in the bulk toolbar when rows are selected.                                                      |
+| `bulkActionEntityName`  | `string`                              | `'row'`                      | Singular entity name used in the bulk toolbar selection count.                                                 |
+| `showColumnToggle`      | `boolean`                             | `true`                       | Show the column visibility toggle button.                                                                      |
+| `onRefresh`             | `() => void`                          | —                            | Refresh callback — shows a refresh button when provided.                                                       |
+| `pageSizeOptions`       | `number[]`                            | `[10,20,50,100]`             | Page size options for the pagination control.                                                                  |
+| `dragSort`              | `boolean`                             | `false`                      | Enable row drag-to-sort (disables column header click-to-sort).                                                |
+| `rowKey`                | `keyof T`                             | —                            | Unique field used as the drag sort key (falls back to row index).                                              |
+| `onDragSortEnd`         | `(newData: T[]) => void`              | —                            | Called after drag sort completes with the reordered data.                                                      |
+| `loading`               | `boolean`                             | `false`                      | Shows a skeleton loading state.                                                                                |
+| `loadingRows`           | `number`                              | `5`                          | Number of skeleton rows to display.                                                                            |
+| `emptyText`             | `ReactNode`                           | `'No data'`                  | Empty state text or custom content.                                                                            |
+| `emptyIcon`             | `ReactNode`                           | inbox icon                   | Empty state icon.                                                                                              |
+| `showPagination`        | `boolean`                             | `true`                       | Show or hide the built-in pagination bar.                                                                      |
+| `layout`                | `'full' \| 'auto'`                    | `'full'`                     | Full layout fills the available height and keeps pagination at the bottom; auto layout follows content height. |
+| `stickyHeader`          | `boolean`                             | `true`                       | Keep the table header visible while the table body scrolls.                                                    |
+| `columnPinning`         | `ColumnPinningState`                  | from `columns[].meta.pinned` | Controlled column pinning state. Columns can also set `meta: { pinned: 'left' \| 'right' }`.                   |
+| `onColumnPinningChange` | `OnChangeFn<ColumnPinningState>`      | —                            | Called when column pinning changes.                                                                            |
+| `className`             | `string`                              | —                            | Additional className for the outer container.                                                                  |

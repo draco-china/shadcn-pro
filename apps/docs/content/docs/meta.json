@@ -1,0 +1,5 @@
+{
+  "root": true,
+  "title": "shadcn-pro",
+  "pages": ["index", "installation", "changelog", "...components"]
+}

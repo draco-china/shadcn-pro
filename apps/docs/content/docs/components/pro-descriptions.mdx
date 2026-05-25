@@ -1,0 +1,99 @@
+---
+title: ProDescriptions
+description: Structured key-value display for detail views — similar to Ant Design ProDescriptions, built with shadcn/ui.
+---
+
+<ComponentPreview name="pro-descriptions-docs-demo" previewClassName="min-h-[320px] items-start p-6" align="start" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro add pro-descriptions
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="pro-descriptions" title="components/ui/pro-descriptions.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ProDescriptions } from "@/components/ui/pro-descriptions"
+
+const columns = [
+  { label: "Name", dataIndex: "name" },
+  { label: "Email", dataIndex: "email" },
+  { label: "Role", dataIndex: "role" },
+  { label: "Created At", dataIndex: "createdAt", render: (v) => new Date(v).toLocaleDateString() },
+]
+
+export default function UserDetail({ user }) {
+  return <ProDescriptions columns={columns} dataSource={user} title="User Info" />
+}
+```
+
+## Examples
+
+### With Custom Render
+
+```tsx
+const columns = [
+  { label: "Status", dataIndex: "status", render: (v) => (
+    <Badge variant={v === "active" ? "default" : "secondary"}>{v}</Badge>
+  )},
+  { label: "Tags", dataIndex: "tags", render: (v) => (
+    <div className="flex gap-1">{v.map(t => <Badge key={t} variant="outline">{t}</Badge>)}</div>
+  )},
+]
+```
+
+### Multi-Column Layout
+
+```tsx
+<ProDescriptions columns={columns} dataSource={data} column={3} />
+```
+
+## API Reference
+
+### ProDescriptions
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `columns` | `DescriptionColumn[]` | — | Column definitions |
+| `dataSource` | `Record<string, any>` | — | Data object |
+| `title` | `string` | — | Section title |
+| `column` | `number` | `2` | Number of columns per row |
+| `bordered` | `boolean` | `false` | Show bordered style |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Cell padding size |
+
+### DescriptionColumn
+
+| Prop | Type | Description |
+|---|---|---|
+| `label` | `string` | Field label |
+| `dataIndex` | `string` | Key in dataSource |
+| `render` | `(value, record) => ReactNode` | Custom renderer |
+| `span` | `number` | Column span (default: 1) |

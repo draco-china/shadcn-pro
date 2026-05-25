@@ -1,0 +1,87 @@
+---
+title: ImageViewer
+description: Full-screen image previewer with zoom, rotate, drag, and multi-image navigation.
+---
+
+<ComponentPreview name="image-viewer-docs-demo" previewClassName="min-h-[340px] items-start p-4" align="start" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro add image-viewer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies.</Step>
+
+```bash
+npm install lucide-react
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="image-viewer" title="components/pro/pro-viewer/image/index.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ImageViewer } from "@/components/pro/pro-viewer/image"
+import { useState } from "react"
+
+export default function Example() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open</button>
+      <ImageViewer
+        images={["https://example.com/photo.jpg"]}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
+    </>
+  )
+}
+```
+
+## API Reference
+
+### ImageViewer
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `images` | `string \| string[]` | — | One or more image URLs to display. |
+| `open` | `boolean` | — | Controls whether the viewer is open. |
+| `onClose` | `() => void` | — | Called when the viewer is dismissed. |
+| `initialIndex` | `number` | `0` | Index of the image to show first. |
+| `alt` | `string` | `"Image"` | Alt text prefix applied to each image. |
+
+## Keyboard Shortcuts
+
+| Key | Action |
+| --- | --- |
+| `←` / `→` | Previous / Next image |
+| `Esc` | Close viewer |
+| `Scroll` | Zoom in / out |

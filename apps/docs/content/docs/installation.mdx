@@ -1,0 +1,81 @@
+---
+title: Installation
+description: Install shadcn-pro components into your project.
+---
+
+## Prerequisites
+
+Before installing shadcn-pro, make sure you have:
+
+- **Node.js 18+** (or Bun / pnpm)
+- A Next.js project (or any React framework) with **shadcn/ui already initialized**
+
+<Callout>
+  If you haven't set up shadcn/ui yet, follow the [shadcn/ui installation guide](https://ui.shadcn.com/docs/installation) first, then come back here.
+</Callout>
+
+## Initialization
+
+No global install needed — shadcn-pro uses the same `npx` CLI pattern as shadcn/ui. You can start adding components immediately:
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-form
+```
+
+This copies the component source code directly into your project under `components/pro/`.
+
+## Using the CLI
+
+The recommended way to add components is via the CLI:
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-fields
+```
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-form
+```
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-table
+```
+
+## Manual Installation
+
+### 1. Install dependencies
+
+For **ProFields** and **ProForm**:
+
+```bash
+bun add @formily/core @formily/react @formily/validator
+```
+
+For **ProTable**:
+
+```bash
+bun add @tanstack/react-table
+```
+
+### 2. Copy the component
+
+Browse the component source on GitHub and copy the files into your project:
+
+- `ProFields` → `components/pro/pro-fields/`
+- `ProForm` → `components/pro/pro-form.tsx`
+- `ProTable` → `components/pro/pro-table.tsx`
+
+### 3. Import and use
+
+```tsx
+import { FormilyInput } from "@/components/pro/pro-fields/input"
+import { ProForm } from "@/components/pro/pro-form"
+import { ProTable } from "@/components/pro/pro-table"
+```
+
+## TypeScript
+
+shadcn-pro is written in TypeScript. All components are fully typed.
+
+## Tailwind CSS
+
+shadcn-pro uses Tailwind CSS v4 classes and inherits your shadcn/ui theme tokens. No additional configuration is needed.

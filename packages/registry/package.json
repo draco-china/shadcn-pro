@@ -1,0 +1,17 @@
+{
+  "name": "registry",
+  "description": "Component registry for shadcn-pro",
+  "private": true,
+  "scripts": {
+    "validate": "bun run scripts/validate.ts"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@formily/core": "^2.3.7",
+    "@formily/react": "^2.3.7",
+    "@formily/reactive": "^2.3.7",
+    "@formily/reactive-react": "^2.3.7"
+  }
+}

@@ -1,0 +1,79 @@
+---
+title: MarkdownViewer
+description: GitHub-style Markdown renderer with GFM, alerts, footnotes, math, safe HTML, tables, task lists, and code blocks.
+---
+
+<ComponentPreview name="markdown-viewer-docs-demo" previewClassName="min-h-[380px] items-start p-4" align="start" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro add markdown-viewer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies.</Step>
+
+```bash
+npm install react-markdown remark-gfm remark-breaks remark-math rehype-raw rehype-sanitize rehype-mathjax shiki lucide-react
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="markdown-viewer" title="components/pro/pro-viewer/markdown/index.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { MarkdownViewer } from "@/components/pro/pro-viewer/markdown"
+
+export default function Example() {
+  return (
+    <MarkdownViewer
+      content="# Hello\n\n> [!NOTE]\n> GitHub-style markdown is supported."
+      theme="github-dark"
+    />
+  )
+}
+```
+
+## API Reference
+
+### MarkdownViewer
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `content` | `string` | — | Markdown string to render. |
+| `theme` | `"github-light" \| "github-dark"` | `"github-dark"` | Theme passed to embedded fenced code blocks. |
+| `emptyText` | `string` | `"No markdown content"` | Message shown when `content` is empty. |
+| `className` | `string` | — | Additional CSS class for the prose wrapper. |
+
+## Supported Syntax
+
+- CommonMark plus GitHub Flavored Markdown: tables, task lists, strikethrough, autolinks, and footnotes.
+- GitHub alerts: `NOTE`, `TIP`, `IMPORTANT`, `WARNING`, and `CAUTION`.
+- Raw HTML rendered through a sanitize pipeline.
+- Inline and block math rendered with MathJax.
+- Fenced code blocks rendered through `CodeViewer`, using the same GitHub theme contract.

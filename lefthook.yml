@@ -1,0 +1,11 @@
+pre-commit:
+  commands:
+    biome:
+      run: bun biome check --write {staged_files}
+      glob: "*.{ts,tsx,js,jsx,json}"
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    commitlint:
+      run: ./node_modules/.bin/commitlint --edit {1}

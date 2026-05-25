@@ -1,0 +1,26 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# build outputs
+dist
+out
+.next
+build
+
+# turbo
+.turbo
+
+# env
+.env
+.env.local
+.env*.local
+
+# misc
+.DS_Store
+*.log
+npm-debug.log*
+
+# bun
+bun.lockb

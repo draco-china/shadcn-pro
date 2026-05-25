@@ -1,0 +1,160 @@
+---
+title: ProEditor
+description: Monaco-powered editor with controlled language, theme, view mode, and external preview slot.
+---
+
+<ComponentPreview
+  name="pro-editor-docs-demo"
+  previewClassName="min-h-[400px] items-start p-4"
+  align="start"
+/>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro add pro-editor
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+bun add @monaco-editor/react monaco-editor lucide-react
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="pro-editor" title="components/pro/pro-editor/index.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { useState } from "react"
+
+import { ProEditor } from "@/components/pro/pro-editor"
+
+export default function EditorPage() {
+  const [value, setValue] = useState("")
+
+  return (
+    <ProEditor
+      language="tsx"
+      theme="github-dark"
+      value={value}
+      onChange={setValue}
+      height={400}
+    />
+  )
+}
+```
+
+`ProEditor` receives `language`, `theme`, and optionally `viewMode` as controlled props. Keep language, theme, and mode switchers in your page or demo state and pass the selected values into `ProEditor`; the built-in toolbar displays the current language but does not own those controls.
+
+`ProEditor` does not ship a built-in preview renderer. Pass `preview` from the outside when you want preview or split mode; omit it for edit-only usage.
+
+Omit `height` when the editor should fill its parent container; set an explicit parent height with CSS such as `h-[520px]`, `h-full`, or `flex-1`.
+
+The toolbar is part of `ProEditor`. Use `toolbarBefore`, `toolbarActions`, and `toolbarAfter` to extend it instead of installing separate toolbar components.
+
+## Examples
+
+### Markdown
+
+```tsx
+import { MarkdownViewer } from "@/components/pro/pro-viewer/markdown"
+
+<ProEditor
+  language="markdown"
+  theme="github-dark"
+  value={markdown}
+  onChange={setMarkdown}
+  preview={({ content }) => <MarkdownViewer content={content} theme="github-dark" className="p-4" />}
+  height={400}
+/>
+```
+
+### Without Preview
+
+```tsx
+<ProEditor language="typescript" theme="github-dark" value={code} onChange={setCode} />
+```
+
+### Controlled View Mode
+
+```tsx
+const [viewMode, setViewMode] = useState<"edit" | "preview" | "split">("split")
+const [theme, setTheme] = useState<"github-light" | "github-dark">("github-dark")
+
+<ProEditor
+  language="markdown"
+  theme={theme}
+  value={code}
+  onChange={setCode}
+  viewMode={viewMode}
+  onViewModeChange={setViewMode}
+  preview={({ content }) => <MarkdownViewer content={content} theme={theme} className="p-4" />}
+/>
+```
+
+### Toolbar Extension
+
+```tsx
+<ProEditor
+  language="typescript"
+  value={code}
+  onChange={setCode}
+  toolbarBefore={<span className="px-2 text-xs text-muted-foreground">Draft</span>}
+  toolbarActions={({ value }) => (
+    <button type="button" className="h-7 px-2 text-xs" onClick={() => runCode(value)}>
+      Run
+    </button>
+  )}
+  toolbarAfter={({ format }) => (
+    <button type="button" className="h-7 px-2 text-xs" onClick={format}>
+      Prettier
+    </button>
+  )}
+/>
+```
+
+## API Reference
+
+### ProEditor
+
+| Prop          | Type                                  | Default        | Description                                            |
+| ------------- | ------------------------------------- | -------------- | ------------------------------------------------------ |
+| `value`       | `string`                              | `""`           | Controlled editor content                              |
+| `onChange`    | `(value: string) => void`             | —              | Content change callback                                |
+| `language`    | `string`                              | Required       | Language id; use `tsx` for React/JSX snippets and `typescript` for plain TypeScript |
+| `theme`       | `'github-light' \| 'github-dark'`     | `'github-dark'` | Shared Monaco and Shiki syntax theme                   |
+| `height`      | `string \| number`                    | —              | Content height. When omitted, the editor fills its parent container. |
+| `showToolbar` | `boolean`                             | `true`         | Show preview, split, format, copy, and fullscreen controls when available |
+| `viewMode`    | `'edit' \| 'preview' \| 'split'`      | —              | Controlled pane mode                                   |
+| `defaultViewMode` | `'edit' \| 'preview' \| 'split'` | `'split'`      | Initial pane mode when uncontrolled                    |
+| `onViewModeChange` | `(viewMode) => void`             | —              | Called when toolbar requests a pane mode change        |
+| `toolbarBefore` | `ReactNode \| (context) => ReactNode` | —           | Custom content rendered before the toolbar language label |
+| `toolbarActions` | `ReactNode \| (context) => ReactNode` | —           | Extra toolbar actions rendered before format/copy/fullscreen |
+| `toolbarAfter` | `ReactNode \| (context) => ReactNode` | —           | Custom content rendered after the built-in toolbar actions |
+| `preview`     | `ComponentType<PreviewProps>`        | —              | External preview renderer; enables preview and split modes |

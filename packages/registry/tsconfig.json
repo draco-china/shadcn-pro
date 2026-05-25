@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "preserve",
+    "paths": {
+      "@/components/ui/*": ["../../apps/docs/components/ui/*"]
+    }
+  },
+  "include": ["components/**/*", "registry.json"]
+}

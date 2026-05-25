@@ -1,0 +1,57 @@
+---
+title: Introduction
+description: Pro-grade components built on shadcn/ui — schema-driven forms, data tables, rich editors, and more.
+---
+
+**shadcn-pro** is a collection of higher-level components built on top of [shadcn/ui](https://ui.shadcn.com), designed for complex admin and data-heavy interfaces.
+
+Inspired by [Ant Design Pro Components](https://procomponents.ant.design/), shadcn-pro brings the same productivity gains to the shadcn/ui ecosystem:
+
+- **ProFields** — Reusable Formily-connected field components (Input, Textarea, Select, Checkbox, Switch, Radio, DatePicker) you can use standalone or compose into any form.
+- **ProForm** — Schema-driven forms powered by [FormilyJS](https://formilyjs.org), with built-in validation, field linkage, and dynamic fields.
+- **ProTable** — Feature-rich data tables powered by [TanStack Table](https://tanstack.com/table), with search, pagination, sorting, and column management built in.
+- **ProEditor** — Rich text editor component with a clean toolbar UI.
+- **ProDescriptions** — Key-value detail cards for displaying structured record data.
+
+## Philosophy
+
+shadcn-pro follows the same principle as shadcn/ui: **the code is yours**. Components are copied into your project, not installed as a black-box library. You own every line — customize, extend, or replace as needed.
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-fields
+npx @draco-china/shadcn-pro@latest add pro-form
+npx @draco-china/shadcn-pro@latest add pro-table
+```
+
+## Key Features
+
+### Schema-Driven Forms
+Define entire forms with a JSON schema. ProForm uses FormilyJS under the hood for powerful field linkage, async data sources, and nested structures — without the boilerplate.
+
+### CLI Installation
+Add any component with a single command. The CLI copies source files directly into your project, respecting your existing folder structure.
+
+### ProFields — Reusable Field Primitives
+Each field component (e.g. `FormilyInput`, `FormilySelect`) is independently usable. Build custom forms or use them as the foundation for ProForm's schema renderer.
+
+## When to use
+
+| Scenario | Recommended |
+|---|---|
+| Simple one-off forms | shadcn/ui `<Form>` + react-hook-form |
+| Complex forms with dynamic fields, linkage, array/object nesting | **ProForm** |
+| Reusable field components for Formily-based forms | **ProFields** |
+| Simple lists | shadcn/ui `<Table>` |
+| Data tables with search, filter, pagination, column management | **ProTable** |
+
+## Get Started
+
+Ready to try it out? Follow the [installation guide](/docs/installation) to add shadcn-pro to your project.
+
+## Tech Stack
+
+- [shadcn/ui](https://ui.shadcn.com) — UI primitives
+- [FormilyJS](https://formilyjs.org) — Form state management (`@formily/react`, `@formily/core`)
+- [TanStack Table v8](https://tanstack.com/table) — Headless table engine
+- [Zod](https://zod.dev) — Schema validation
+- [Tailwind CSS v4](https://tailwindcss.com) — Styling

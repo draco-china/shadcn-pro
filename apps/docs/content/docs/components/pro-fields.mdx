@@ -1,0 +1,749 @@
+---
+title: ProFields
+description: Standalone field primitives for forms — Input, Password, Textarea, Digit, Select, DatePicker, Upload, Captcha, ArrayField, ObjectField, and more.
+---
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro add pro-fields
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+bun add date-fns lucide-react
+```
+
+<Step>
+  Copy and paste the component files into your project under
+  `components/pro/pro-fields/`.
+</Step>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+Every field is a plain React/shadcn component. Simple fields preserve the underlying shadcn/ui prop surface where practical; shadcn-pro adds only small behaviors such as `allowClear`, prefix/suffix slots, options mapping, and composed field layouts. Formily adapters live under `pro-form/formily-fields`, so schema-driven forms can use the same field primitives without making the base fields depend on Formily.
+
+```tsx
+import { Input } from "@/components/pro/pro-fields/input"
+
+export default function Example() {
+  return <Input placeholder="Enter username" allowClear />
+}
+```
+
+For schema-driven forms, install `pro-form` and import the Formily adapters from `pro-form/formily-fields`.
+
+```tsx
+import { createForm } from "@formily/core"
+import { Field, FormProvider } from "@formily/react"
+
+import { FormItem } from "@/components/pro/pro-form/form-item"
+import { FormilyInput } from "@/components/pro/pro-form/formily-fields"
+
+const form = createForm()
+
+export default function Example() {
+  return (
+    <FormProvider form={form}>
+      <Field
+        name="username"
+        title="Username"
+        decorator={[FormItem]}
+        component={[FormilyInput, { placeholder: "Enter username" }]}
+      />
+    </FormProvider>
+  )
+}
+```
+
+---
+
+## Slider
+
+<ComponentPreview
+  name="pro-fields-slider-demo"
+  previewClassName="min-h-[320px] items-start p-6"
+  align="start"
+/>
+
+### API Reference
+
+| Prop        | Type                      | Default | Description              |
+| ----------- | ------------------------- | ------- | ------------------------ |
+| `value`     | `number`                  | —       | Controlled value         |
+| `onChange`  | `(value: number) => void` | —       | Change handler           |
+| `min`       | `number`                  | `0`     | Minimum value            |
+| `max`       | `number`                  | `100`   | Maximum value            |
+| `step`      | `number`                  | `1`     | Step increment           |
+| `showValue` | `boolean`                 | `false` | Show current value badge |
+| `disabled`  | `boolean`                 | `false` | Disable interaction      |
+| `className` | `string`                  | —       | Additional CSS classes   |
+
+---
+
+## Rate
+
+<ComponentPreview
+  name="pro-fields-rate-demo"
+  previewClassName="min-h-[280px] items-start p-6"
+  align="start"
+/>
+
+### API Reference
+
+| Prop        | Type                      | Default | Description                |
+| ----------- | ------------------------- | ------- | -------------------------- |
+| `value`     | `number`                  | `0`     | Controlled value (0–count) |
+| `onChange`  | `(value: number) => void` | —       | Change handler             |
+| `count`     | `number`                  | `5`     | Total number of stars      |
+| `disabled`  | `boolean`                 | `false` | Disable interaction        |
+| `className` | `string`                  | —       | Additional CSS classes     |
+
+---
+
+## Segmented
+
+<ComponentPreview
+  name="pro-fields-segmented-demo"
+  previewClassName="min-h-[260px] items-start p-6"
+  align="start"
+/>
+
+### API Reference
+
+| Prop        | Type                                                     | Default | Description               |
+| ----------- | -------------------------------------------------------- | ------- | ------------------------- |
+| `value`     | `string`                                                 | —       | Controlled selected value |
+| `onChange`  | `(value: string) => void`                                | —       | Change handler            |
+| `options`   | `{ label: string; value: string; disabled?: boolean }[]` | `[]`    | Segment options           |
+| `disabled`  | `boolean`                                                | `false` | Disable all segments      |
+| `className` | `string`                                                 | —       | Additional CSS classes    |
+
+---
+
+## Cascader
+
+<ComponentPreview
+  name="pro-fields-cascader-demo"
+  previewClassName="min-h-[300px] items-start p-6"
+  align="start"
+/>
+
+### API Reference
+
+| Prop          | Type                        | Default       | Description            |
+| ------------- | --------------------------- | ------------- | ---------------------- |
+| `value`       | `string[]`                  | —             | Selected path values   |
+| `onChange`    | `(value: string[]) => void` | —             | Change handler         |
+| `options`     | `CascaderOption[]`          | `[]`          | Nested option tree     |
+| `placeholder` | `string`                    | `'Select...'` | Placeholder text       |
+| `disabled`    | `boolean`                   | `false`       | Disable interaction    |
+| `className`   | `string`                    | —             | Additional CSS classes |
+
+```ts
+interface CascaderOption {
+  label: string
+  value: string
+  disabled?: boolean
+  children?: CascaderOption[]
+}
+```
+
+---
+
+## TreeSelect
+
+<ComponentPreview
+  name="pro-fields-tree-select-demo"
+  previewClassName="min-h-[320px] items-start p-6"
+  align="start"
+/>
+
+### API Reference
+
+| Prop          | Type                        | Default       | Description                                                         |
+| ------------- | --------------------------- | ------------- | ------------------------------------------------------------------- |
+| `value`       | `string[]`                  | —             | Selected node values                                                |
+| `onChange`    | `(value: string[]) => void` | —             | Change handler                                                      |
+| `options`     | `TreeSelectOption[]`        | `[]`          | Nested tree data                                                    |
+| `placeholder` | `string`                    | `'Select...'` | Placeholder text                                                    |
+| `multiple`    | `boolean`                   | `false`       | Allow multiple selection                                            |
+| `allowClear`  | `boolean`                   | `false`       | Show a clear button when the field has a value and is not required. |
+| `disabled`    | `boolean`                   | `false`       | Disable interaction                                                 |
+| `className`   | `string`                    | —             | Additional CSS classes                                              |
+
+```ts
+interface TreeSelectOption {
+  label: string
+  value: string
+  disabled?: boolean
+  children?: TreeSelectOption[]
+}
+```
+
+---
+
+## Upload
+
+<ComponentPreview
+  name="pro-fields-upload-demo"
+  previewClassName="min-h-[320px] items-start p-6"
+  align="start"
+/>
+
+### API Reference
+
+| Prop          | Type                            | Default                     | Description          |
+| ------------- | ------------------------------- | --------------------------- | -------------------- |
+| `value`       | `UploadFile[]`                  | —                           | Controlled file list |
+| `onChange`    | `(files: UploadFile[]) => void` | —                           | Change handler       |
+| `accept`      | `string`                        | —                           | Accepted MIME types  |
+| `multiple`    | `boolean`                       | `false`                     | Allow multiple files |
+| `maxCount`    | `number`                        | —                           | Maximum file count   |
+| `disabled`    | `boolean`                       | `false`                     | Disable interaction  |
+| `placeholder` | `string`                        | `'Click or drag to upload'` | Drop zone label      |
+
+```ts
+interface UploadFile {
+  uid: string
+  name: string
+  url?: string
+  status?: "uploading" | "done" | "error"
+  size?: number
+}
+```
+
+---
+
+## Captcha
+
+<ComponentPreview
+  name="pro-fields-captcha-demo"
+  previewClassName="min-h-[260px] items-start p-6"
+  align="start"
+/>
+
+### API Reference
+
+| Prop              | Type          | Default           | Description                                                                                    |
+| ----------------- | ------------- | ----------------- | ---------------------------------------------------------------------------------------------- |
+| `value`           | `string`      | —                 | Controlled input value                                                                         |
+| `onChange`        | `(e) => void` | —                 | Input change handler                                                                           |
+| `onRefresh`       | `() => void`  | —                 | Called when refresh button clicked                                                             |
+| `captchaUrl`      | `string`      | —                 | Image URL for image captcha; when provided, the visual captcha is shown after the input.       |
+| `captchaText`     | `string`      | —                 | Text to display as visual captcha; when provided, the visual captcha is shown after the input. |
+| `buttonText`      | `string`      | `'Get code'`      | Text for the trailing send-code button when no visual captcha is provided.                     |
+| `countdown`       | `number`      | `60`              | Countdown seconds after clicking the trailing send-code button. Set `0` to disable countdown.  |
+| `placeholder`     | `string`      | `'Enter captcha'` | Input placeholder                                                                              |
+| `disabled`        | `boolean`     | `false`           | Disable interaction                                                                            |
+| `inputClassName`  | `string`      | —                 | Additional className for the input.                                                            |
+| `buttonClassName` | `string`      | —                 | Additional className for the trailing send-code button.                                        |
+| `className`       | `string`      | —                 | Additional CSS classes                                                                         |
+
+---
+
+## Money
+
+<ComponentPreview
+  name="pro-fields-money-demo"
+  previewClassName="min-h-[280px] items-start p-6"
+  align="start"
+/>
+
+### API Reference
+
+| Prop          | Type                                   | Default | Description              |
+| ------------- | -------------------------------------- | ------- | ------------------------ |
+| `value`       | `number`                               | —       | Controlled numeric value |
+| `onChange`    | `(value: number \| undefined) => void` | —       | Change handler           |
+| `currency`    | `string`                               | `'$'`   | Currency symbol prefix   |
+| `precision`   | `number`                               | `2`     | Decimal places           |
+| `placeholder` | `string`                               | —       | Input placeholder        |
+| `disabled`    | `boolean`                              | `false` | Disable interaction      |
+| `className`   | `string`                               | —       | Additional CSS classes   |
+
+---
+
+Use `FormilyCaptcha` for Formily schema integration.
+
+## Core Fields
+
+The following fields cover the full ProFields surface. Use the standalone field primitives directly, or use the matching Formily adapter from `pro-form/formily-fields` when building schema-driven forms.
+
+### Input
+
+<ComponentPreview
+  name="pro-fields-input-demo"
+  previewClassName="min-h-[160px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="email"
+  title="Email"
+  decorator={[FormItem]}
+  component={[
+    FormilyInput,
+    { placeholder: "you@example.com", type: "email", allowClear: true },
+  ]}
+/>
+```
+
+### Textarea
+
+<ComponentPreview
+  name="pro-fields-textarea-demo"
+  previewClassName="min-h-[200px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="bio"
+  title="Bio"
+  decorator={[FormItem]}
+  component={[
+    FormilyTextarea,
+    { rows: 4, placeholder: "Tell us about yourself" },
+  ]}
+/>
+```
+
+### Password
+
+<ComponentPreview
+  name="pro-fields-password-demo"
+  previewClassName="min-h-[160px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="password"
+  title="Password"
+  decorator={[FormItem]}
+  component={[FormilyPassword, { placeholder: "Enter password" }]}
+/>
+```
+
+### Digit
+
+<ComponentPreview
+  name="pro-fields-digit-demo"
+  previewClassName="min-h-[160px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="quantity"
+  title="Quantity"
+  decorator={[FormItem]}
+  component={[FormilyDigit, { min: 1, max: 999, allowClear: true }]}
+/>
+```
+
+### DigitRange
+
+<ComponentPreview
+  name="pro-fields-digit-range-demo"
+  previewClassName="min-h-[160px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="budgetRange"
+  title="Budget Range"
+  decorator={[FormItem]}
+  component={[
+    FormilyDigitRange,
+    { placeholder: ["Min budget", "Max budget"], allowClear: true },
+  ]}
+/>
+```
+
+### Money
+
+<ComponentPreview
+  name="pro-fields-money-demo"
+  previewClassName="min-h-[180px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="amount"
+  title="Amount"
+  decorator={[FormItem]}
+  component={[
+    FormilyMoney,
+    { currency: "$", precision: 2, placeholder: "0.00" },
+  ]}
+/>
+```
+
+### Select
+
+<ComponentPreview
+  name="pro-fields-select-demo"
+  previewClassName="min-h-[160px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="role"
+  title="Role"
+  decorator={[FormItem]}
+  component={[
+    FormilySelect,
+    {
+      allowClear: true,
+      options: [
+        { label: "Admin", value: "admin" },
+        { label: "User", value: "user" },
+      ],
+    },
+  ]}
+/>
+```
+
+`Input` and `Select` support `allowClear`. Clearing `Select` sends `undefined` so Formily can return to an empty value.
+
+### Checkbox
+
+<ComponentPreview
+  name="pro-fields-checkbox-demo"
+  previewClassName="min-h-[140px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="agree"
+  title="Agree to terms"
+  decorator={[FormItem]}
+  component={[FormilyCheckbox]}
+/>
+```
+
+### Switch
+
+<ComponentPreview
+  name="pro-fields-switch-demo"
+  previewClassName="min-h-[140px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="enabled"
+  title="Enable notifications"
+  decorator={[FormItem]}
+  component={[FormilySwitch]}
+/>
+```
+
+### Radio
+
+<ComponentPreview
+  name="pro-fields-radio-demo"
+  previewClassName="min-h-[190px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="gender"
+  title="Gender"
+  decorator={[FormItem]}
+  component={[
+    FormilyRadio,
+    {
+      options: [
+        { label: "Male", value: "male" },
+        { label: "Female", value: "female" },
+      ],
+    },
+  ]}
+/>
+```
+
+### Segmented
+
+<ComponentPreview
+  name="pro-fields-segmented-demo"
+  previewClassName="min-h-[160px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="billingCycle"
+  title="Billing Cycle"
+  decorator={[FormItem]}
+  component={[
+    FormilySegmented,
+    {
+      options: [
+        { label: "Monthly", value: "monthly" },
+        { label: "Yearly", value: "yearly" },
+      ],
+    },
+  ]}
+/>
+```
+
+### Slider
+
+<ComponentPreview
+  name="pro-fields-slider-demo"
+  previewClassName="min-h-[200px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="progress"
+  title="Progress"
+  decorator={[FormItem]}
+  component={[FormilySlider, { min: 0, max: 100, step: 5, showValue: true }]}
+/>
+```
+
+### Rate
+
+<ComponentPreview
+  name="pro-fields-rate-demo"
+  previewClassName="min-h-[180px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="score"
+  title="Score"
+  decorator={[FormItem]}
+  component={[FormilyRate, { count: 5 }]}
+/>
+```
+
+### DatePicker
+
+<ComponentPreview
+  name="pro-fields-date-picker-demo"
+  previewClassName="min-h-[160px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="birthday"
+  title="Birthday"
+  decorator={[FormItem]}
+  component={[FormilyDatePicker]}
+/>
+```
+
+### DateRangePicker
+
+<ComponentPreview
+  name="pro-fields-date-range-picker-demo"
+  previewClassName="min-h-[160px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="reservation"
+  title="Reservation"
+  decorator={[FormItem]}
+  component={[FormilyDateRangePicker, { allowClear: true }]}
+/>
+```
+
+### DateTimePicker
+
+<ComponentPreview
+  name="pro-fields-date-time-picker-demo"
+  previewClassName="min-h-[160px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="startsAt"
+  title="Starts At"
+  decorator={[FormItem]}
+  component={[FormilyDateTimePicker]}
+/>
+```
+
+### TimePicker
+
+<ComponentPreview
+  name="pro-fields-time-picker-demo"
+  previewClassName="min-h-[140px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="reminderTime"
+  title="Reminder Time"
+  decorator={[FormItem]}
+  component={[FormilyTimePicker, { allowClear: true }]}
+/>
+```
+
+### Cascader
+
+<ComponentPreview
+  name="pro-fields-cascader-demo"
+  previewClassName="min-h-[220px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="region"
+  title="Region"
+  decorator={[FormItem]}
+  component={[
+    FormilyCascader,
+    {
+      allowClear: true,
+      options: [
+        {
+          label: "China",
+          value: "china",
+          children: [{ label: "Shanghai", value: "shanghai" }],
+        },
+      ],
+    },
+  ]}
+/>
+```
+
+### TreeSelect
+
+<ComponentPreview
+  name="pro-fields-tree-select-demo"
+  previewClassName="min-h-[240px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="department"
+  title="Department"
+  decorator={[FormItem]}
+  component={[
+    FormilyTreeSelect,
+    {
+      allowClear: true,
+      options: [
+        {
+          label: "Engineering",
+          value: "engineering",
+          children: [{ label: "Frontend", value: "frontend" }],
+        },
+      ],
+    },
+  ]}
+/>
+```
+
+### Upload
+
+<ComponentPreview
+  name="pro-fields-upload-demo"
+  previewClassName="min-h-[240px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="attachments"
+  title="Attachments"
+  decorator={[FormItem]}
+  component={[FormilyUpload, { multiple: true, maxCount: 3 }]}
+/>
+```
+
+### Captcha
+
+<ComponentPreview
+  name="pro-fields-captcha-demo"
+  previewClassName="min-h-[180px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="captcha"
+  title="Verification Code"
+  decorator={[FormItem]}
+  component={[FormilyCaptcha, { buttonText: "Send code", countdown: 60 }]}
+/>
+```
+
+### ArrayField
+
+<ComponentPreview
+  name="pro-fields-array-field-demo"
+  previewClassName="min-h-[280px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="contacts"
+  title="Contacts"
+  decorator={[FormItem]}
+  component={[FormilyArrayField]}
+/>
+```
+
+### ObjectField
+
+<ComponentPreview
+  name="pro-fields-object-field-demo"
+  previewClassName="min-h-[260px] items-start p-6"
+  align="start"
+/>
+
+```tsx
+<Field
+  name="profile"
+  title="Profile"
+  decorator={[FormItem]}
+  component={[FormilyObjectField, { collapsible: true }]}
+/>
+```
