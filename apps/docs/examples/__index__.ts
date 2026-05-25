@@ -70,13 +70,7 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       filePath: 'registry/new-york-v4/examples/pro-form-linkage-demo.tsx',
       component: React.lazy(() => import('@/registry/new-york-v4/examples/pro-form-linkage-demo')),
     },
-    'pro-table-selection-demo': {
-      name: 'pro-table-selection-demo',
-      filePath: 'registry/new-york-v4/examples/pro-table-selection-demo.tsx',
-      component: React.lazy(
-        () => import('@/registry/new-york-v4/examples/pro-table-selection-demo'),
-      ),
-    },
+
     'pro-table-drag-sort-demo': {
       name: 'pro-table-drag-sort-demo',
       filePath: 'registry/new-york-v4/examples/pro-table-drag-sort-demo.tsx',
