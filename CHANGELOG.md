@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/draco-china/shadcn-pro/compare/v1.0.0...v1.0.1) (2026-05-25)
+
+
+### Bug Fixes
+
+* biome format __blocks-generated__.ts and use github.token in docs workflow ([2c33a5f](https://github.com/draco-china/shadcn-pro/commit/2c33a5f862129278522e8a15441029f9fde2d042))
+
 # 1.0.0 (2026-05-25)
 
 
