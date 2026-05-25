@@ -79,6 +79,7 @@
       "!**/.source",
       "!**/apps/docs/registry",
       "!**/apps/docs/styles",
+      "!**/apps/docs/lib/__blocks-generated__.ts",
       "!**/*.lockb",
       "!**/view/blocks"
     ]
