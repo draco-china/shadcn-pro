@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/draco-china/shadcn-pro/compare/v1.8.0...v1.9.0) (2026-05-29)
+
+
+### Features
+
+* **blocks:** comprehensive pro-fields and pro-form demos covering all field types ([9c7861c](https://github.com/draco-china/shadcn-pro/commit/9c7861c70571e3a2aa7a206abaa6a75743510dd9))
+
 # [1.8.0](https://github.com/draco-china/shadcn-pro/compare/v1.7.1...v1.8.0) (2026-05-29)
 
 
