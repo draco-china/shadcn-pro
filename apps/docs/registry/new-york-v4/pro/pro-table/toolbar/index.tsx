@@ -154,7 +154,7 @@ export function ProTableToolbar<TData>({
         </div>
 
         {/* Actions area — right-aligned, wraps internally */}
-        <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
+        <div className="ml-auto flex flex-1 flex-wrap items-center justify-end gap-2">
           {actions.map((action, i) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: static toolbar actions
             <React.Fragment key={i}>{action}</React.Fragment>
