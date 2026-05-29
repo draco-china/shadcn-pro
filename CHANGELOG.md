@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/draco-china/shadcn-pro/compare/v1.4.0...v1.5.0) (2026-05-29)
+
+
+### Features
+
+* **pro-fields:** add FacetedFilter (multi/single-select) + ProTable auto-filter integration ([3baf0fb](https://github.com/draco-china/shadcn-pro/commit/3baf0fbff010caba37a1e32ac17a1609271b1fad))
+
 # [1.4.0](https://github.com/draco-china/shadcn-pro/compare/v1.3.0...v1.4.0) (2026-05-29)
 
 
