@@ -10,8 +10,19 @@ export const cellPadding: Record<TableSize, string> = {
 
 export type ProTableColumnPinningPosition = 'left' | 'right'
 
+export interface ProTableFilterOption {
+  label: string
+  value: string
+}
+
 export interface ProTableColumnMeta {
   pinned?: ProTableColumnPinningPosition
+  /** Provide options to auto-render a Select filter in the toolbar and map value→label in cells */
+  filters?: ProTableFilterOption[]
+  /** Placeholder for the auto-rendered filter Select */
+  filterPlaceholder?: string
+  /** Cell display style when filters is set: 'badge' (default) | 'text' */
+  filterVariant?: 'badge' | 'text'
 }
 
 declare module '@tanstack/react-table' {

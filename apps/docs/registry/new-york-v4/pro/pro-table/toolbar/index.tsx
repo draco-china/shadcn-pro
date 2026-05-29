@@ -4,6 +4,7 @@ import type { ColumnPinningState, Table } from '@tanstack/react-table'
 import { AlignJustify, RefreshCw, SlidersHorizontal, X } from 'lucide-react'
 import type * as React from 'react'
 
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -14,6 +15,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import type { TableSize } from '../types'
@@ -59,6 +67,11 @@ export function ProTableToolbar<TData>({
     table.getState().columnFilters.length > 0 ||
     (searchKey && (table.getColumn(searchKey)?.getFilterValue() as string))
 
+  // Auto-collect columns with meta.filters for Select rendering
+  const filterColumns = table
+    .getAllColumns()
+    .filter((col) => (col.columnDef.meta as { filters?: unknown })?.filters)
+
   return (
     <TooltipProvider>
       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
@@ -72,6 +85,35 @@ export function ProTableToolbar<TData>({
               className="h-8 w-full sm:w-[200px]"
             />
           )}
+          {filterColumns.map((col) => {
+            const meta = col.columnDef.meta as {
+              filters: { label: string; value: string }[]
+              filterPlaceholder?: string
+            }
+            const currentValue = (col.getFilterValue() as string) ?? ''
+            return (
+              <Select
+                key={col.id}
+                value={currentValue || '__all__'}
+                onValueChange={(v) => col.setFilterValue(v === '__all__' ? undefined : v)}
+                disabled={disabled}
+              >
+                <SelectTrigger className="h-8 w-[140px]">
+                  <SelectValue placeholder={meta.filterPlaceholder ?? col.id} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="__all__">
+                    All {meta.filterPlaceholder ?? col.id}
+                  </SelectItem>
+                  {meta.filters.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )
+          })}
           {filterRender}
           {isFiltered && (
             <Button
@@ -197,4 +239,20 @@ function DensityMenu({
       </DropdownMenuContent>
     </DropdownMenu>
   )
+}
+
+/** Auto cell renderer used when column has meta.filters but no explicit cell defined */
+export function AutoFilterCell({
+  value,
+  filters,
+  variant = 'badge',
+}: {
+  value: string
+  filters: { label: string; value: string }[]
+  variant?: 'badge' | 'text'
+}) {
+  const option = filters.find((f) => f.value === value)
+  const label = option?.label ?? value
+  if (!label) return null
+  return variant === 'badge' ? <Badge variant="outline">{label}</Badge> : <span>{label}</span>
 }

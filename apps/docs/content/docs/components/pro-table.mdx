@@ -94,41 +94,46 @@ const columns = [
 
 ### Filtering with Reset
 
-Pass `filterRender` as a function to receive the `table` instance directly — use it to bind filter controls to column filter state. A **Reset** button appears automatically whenever any column filter (including `searchKey`) is active — clicking it clears all filters at once.
+Add `meta.filters` to any column — ProTable **automatically** renders a Select filter in the toolbar, maps `value → label` in cells (as a `Badge` by default), and shows a **Reset** button whenever any filter is active.
 
 <ComponentPreview name="pro-table-filter-demo" previewClassName="min-h-[460px]" />
 
 ```tsx
-function FilterControls({ table }: { table: Table<User> }) {
-  const roleValue = (table.getColumn("role")?.getFilterValue() as string) ?? ""
+const columns: ColumnDef<User>[] = [
+  { accessorKey: "name", header: "Name" },
+  {
+    accessorKey: "role",
+    header: "Role",
+    filterFn: "equals",
+    meta: {
+      filterPlaceholder: "Role",
+      filters: [
+        { label: "Admin", value: "admin" },
+        { label: "Editor", value: "editor" },
+        { label: "Viewer", value: "viewer" },
+      ],
+    },
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    filterFn: "equals",
+    meta: {
+      filterPlaceholder: "Status",
+      filterVariant: "text", // omit for 'badge' (default)
+      filters: [
+        { label: "Active", value: "active" },
+        { label: "Inactive", value: "inactive" },
+      ],
+    },
+  },
+]
 
-  return (
-    <Select
-      value={roleValue || "all"}
-      onValueChange={(v) =>
-        table.getColumn("role")?.setFilterValue(v === "all" ? undefined : v)
-      }
-    >
-      <SelectTrigger className="h-8 w-[120px]">
-        <SelectValue placeholder="Role" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="all">All roles</SelectItem>
-        <SelectItem value="admin">Admin</SelectItem>
-        <SelectItem value="editor">Editor</SelectItem>
-        <SelectItem value="viewer">Viewer</SelectItem>
-      </SelectContent>
-    </Select>
-  )
-}
-
-<ProTable
-  columns={columns}
-  data={data}
-  searchKey="name"
-  filterRender={(table) => <FilterControls table={table as Table<User>} />}
-/>
+// No filterRender needed — filters are auto-rendered from meta
+<ProTable columns={columns} data={data} searchKey="name" />
 ```
+
+You can still pass `filterRender` for fully custom controls, or combine both.
 
 ### Bulk Actions
 

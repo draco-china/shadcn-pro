@@ -1,15 +1,6 @@
 "use client"
 
-import type { ColumnDef, Table } from "@tanstack/react-table"
-
-import { Badge } from "@/registry/new-york-v4/ui/badge"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/registry/new-york-v4/ui/select"
+import type { ColumnDef } from "@tanstack/react-table"
 import { ProTable } from "@/registry/new-york-v4/pro/pro-table/index"
 
 type User = {
@@ -29,69 +20,35 @@ const data: User[] = [
 ]
 
 const columns: ColumnDef<User>[] = [
-  { accessorKey: "name", header: "Name", meta: { pinned: "left" } },
+  { accessorKey: "name", header: "Name" },
   { accessorKey: "email", header: "Email" },
   {
     accessorKey: "role",
     header: "Role",
-    cell: ({ row }) => <Badge variant="outline">{row.getValue("role")}</Badge>,
     filterFn: "equals",
+    meta: {
+      filterPlaceholder: "Role",
+      filters: [
+        { label: "Admin", value: "admin" },
+        { label: "Editor", value: "editor" },
+        { label: "Viewer", value: "viewer" },
+      ],
+    },
   },
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => {
-      const active = row.getValue("status") === "active"
-      return (
-        <Badge variant={active ? "default" : "secondary"}>
-          {row.getValue("status")}
-        </Badge>
-      )
-    },
     filterFn: "equals",
+    meta: {
+      filterPlaceholder: "Status",
+      filterVariant: "badge",
+      filters: [
+        { label: "Active", value: "active" },
+        { label: "Inactive", value: "inactive" },
+      ],
+    },
   },
 ]
-
-function FilterControls({ table }: { table: Table<User> }) {
-  const roleValue = (table.getColumn("role")?.getFilterValue() as string) ?? ""
-  const statusValue = (table.getColumn("status")?.getFilterValue() as string) ?? ""
-
-  return (
-    <div className="flex gap-2">
-      <Select
-        value={roleValue || "all"}
-        onValueChange={(v) =>
-          table.getColumn("role")?.setFilterValue(v === "all" ? undefined : v)
-        }
-      >
-        <SelectTrigger className="h-8 w-[120px]">
-          <SelectValue placeholder="Role" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">All roles</SelectItem>
-          <SelectItem value="admin">Admin</SelectItem>
-          <SelectItem value="editor">Editor</SelectItem>
-          <SelectItem value="viewer">Viewer</SelectItem>
-        </SelectContent>
-      </Select>
-      <Select
-        value={statusValue || "all"}
-        onValueChange={(v) =>
-          table.getColumn("status")?.setFilterValue(v === "all" ? undefined : v)
-        }
-      >
-        <SelectTrigger className="h-8 w-[120px]">
-          <SelectValue placeholder="Status" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">All statuses</SelectItem>
-          <SelectItem value="active">Active</SelectItem>
-          <SelectItem value="inactive">Inactive</SelectItem>
-        </SelectContent>
-      </Select>
-    </div>
-  )
-}
 
 export default function ProTableFilterDemo() {
   return (
@@ -101,9 +58,7 @@ export default function ProTableFilterDemo() {
         data={data}
         searchKey="name"
         searchPlaceholder="Search by name..."
-        header={<h3 className="text-base font-semibold">Team members</h3>}
         pageSizeOptions={[6, 10]}
-        filterRender={(table) => <FilterControls table={table as Table<User>} />}
       />
     </div>
   )
