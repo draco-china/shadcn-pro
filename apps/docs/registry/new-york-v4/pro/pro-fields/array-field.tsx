@@ -1,91 +1,239 @@
 'use client'
 
-import { ChevronDown, ChevronUp, Plus, Trash2 } from 'lucide-react'
-import type * as React from 'react'
+import {
+  closestCenter,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from '@dnd-kit/core'
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import { GripVertical, Plus, Trash2 } from 'lucide-react'
+import * as React from 'react'
+
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
 export interface ArrayFieldProps<TItem = unknown> {
+  /** Controlled value */
   value?: TItem[]
-  renderItem?: (item: TItem, index: number) => React.ReactNode
-  onAdd?: () => void
-  onRemove?: (index: number) => void
-  onMoveUp?: (index: number) => void
-  onMoveDown?: (index: number) => void
+  /** Called with the new array on any change */
+  onChange?: (value: TItem[]) => void
+  /** Default value for uncontrolled usage */
+  defaultValue?: TItem[]
+  /** Factory for a blank new item */
+  newItem?: () => TItem
+  /** Render the editable content of each item */
+  renderItem: (
+    item: TItem,
+    index: number,
+    helpers: {
+      update: (patch: Partial<TItem extends object ? TItem : never>) => void
+      remove: () => void
+    },
+  ) => React.ReactNode
+  /** Label for the Add button */
   addText?: React.ReactNode
+  /** Maximum number of items (Add button hidden when reached) */
+  max?: number
+  /** Minimum number of items (Remove button hidden when at min) */
+  min?: number
   disabled?: boolean
   className?: string
-  itemClassName?: string
+}
+
+interface SortableItemProps {
+  id: string
+  children: React.ReactNode
+  onRemove: () => void
+  disabled?: boolean
+  canRemove?: boolean
+}
+
+function SortableItem({ id, children, onRemove, disabled, canRemove = true }: SortableItemProps) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id })
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={{
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.5 : 1,
+      }}
+      className="group relative flex items-start gap-2 rounded-md border bg-card p-3"
+    >
+      {/* Drag handle */}
+      <button
+        type="button"
+        {...attributes}
+        {...listeners}
+        disabled={disabled}
+        className="mt-0.5 cursor-grab text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 active:cursor-grabbing disabled:cursor-not-allowed"
+        aria-label="Drag to reorder"
+      >
+        <GripVertical className="h-4 w-4" />
+      </button>
+
+      {/* Content */}
+      <div className="min-w-0 flex-1">{children}</div>
+
+      {/* Remove */}
+      {canRemove && (
+        <Button
+          type="button"
+          size="icon"
+          variant="ghost"
+          disabled={disabled}
+          className="h-7 w-7 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 hover:text-destructive"
+          onClick={onRemove}
+          aria-label="Remove item"
+        >
+          <Trash2 className="h-3.5 w-3.5" />
+        </Button>
+      )}
+    </div>
+  )
 }
 
 export function ArrayField<TItem = unknown>({
-  value = [],
+  value: valueProp,
+  onChange,
+  defaultValue,
+  newItem,
   renderItem,
-  onAdd,
-  onRemove,
-  onMoveUp,
-  onMoveDown,
-  addText = 'Add',
+  addText = 'Add item',
+  max,
+  min = 0,
   disabled,
   className,
-  itemClassName,
 }: ArrayFieldProps<TItem>) {
+  // Uncontrolled state fallback
+  const [internalValue, setInternalValue] = React.useState<TItem[]>(
+    defaultValue ?? [],
+  )
+  const isControlled = valueProp !== undefined
+  const value = isControlled ? valueProp : internalValue
+
+  const [ids, setIds] = React.useState<string[]>(() =>
+    value.map((_, i) => `item-${i}-${Math.random().toString(36).slice(2)}`),
+  )
+
+  // Keep ids in sync when value length changes externally
+  React.useEffect(() => {
+    setIds((prev) => {
+      if (prev.length === value.length) return prev
+      if (value.length > prev.length) {
+        return [
+          ...prev,
+          ...Array.from({ length: value.length - prev.length }, () =>
+            `item-${Math.random().toString(36).slice(2)}`,
+          ),
+        ]
+      }
+      return prev.slice(0, value.length)
+    })
+  }, [value.length])
+
+  function commit(next: TItem[]) {
+    if (!isControlled) setInternalValue(next)
+    onChange?.(next)
+  }
+
+  function handleAdd() {
+    const item = newItem ? newItem() : ('' as TItem)
+    const next = [...value, item]
+    const newId = `item-${Math.random().toString(36).slice(2)}`
+    setIds((prev) => [...prev, newId])
+    commit(next)
+  }
+
+  function handleRemove(index: number) {
+    commit(value.filter((_, i) => i !== index))
+    setIds((prev) => prev.filter((_, i) => i !== index))
+  }
+
+  function handleUpdate(index: number, patch: object) {
+    commit(
+      value.map((item, i) =>
+        i === index ? { ...(item as object), ...patch } : item,
+      ) as TItem[],
+    )
+  }
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+  )
+
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event
+    if (!over || active.id === over.id) return
+    const oldIndex = ids.indexOf(active.id as string)
+    const newIndex = ids.indexOf(over.id as string)
+    if (oldIndex === -1 || newIndex === -1) return
+    const nextIds = arrayMove(ids, oldIndex, newIndex)
+    const nextValue = arrayMove(value, oldIndex, newIndex)
+    setIds(nextIds)
+    commit(nextValue)
+  }
+
+  const atMax = max !== undefined && value.length >= max
+  const atMin = value.length <= min
+
   return (
-    <div className={cn('space-y-3', className)}>
-      {value.map((item, index) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: array field items are ordered by index
-        <Card key={index} className={cn('border', itemClassName)}>
-          <CardContent className="pt-4">
-            <div className="flex gap-2">
-              <div className="min-w-0 flex-1">{renderItem?.(item, index)}</div>
-              <div className="flex flex-col gap-1">
-                <Button
-                  type="button"
-                  size="icon"
-                  variant="ghost"
-                  disabled={disabled || index === 0}
-                  onClick={() => onMoveUp?.(index)}
-                  aria-label="Move item up"
-                >
-                  <ChevronUp className="h-4 w-4" />
-                </Button>
-                <Button
-                  type="button"
-                  size="icon"
-                  variant="ghost"
-                  disabled={disabled || index === value.length - 1}
-                  onClick={() => onMoveDown?.(index)}
-                  aria-label="Move item down"
-                >
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-                <Button
-                  type="button"
-                  size="icon"
-                  variant="ghost"
-                  disabled={disabled}
-                  className="text-destructive hover:text-destructive"
-                  onClick={() => onRemove?.(index)}
-                  aria-label="Remove item"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-      <Button
-        type="button"
-        variant="outline"
-        disabled={disabled}
-        onClick={onAdd}
-        className="w-full"
+    <div className={cn('space-y-2', className)}>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
       >
-        <Plus className="mr-2 h-4 w-4" />
-        {addText}
-      </Button>
+        <SortableContext items={ids} strategy={verticalListSortingStrategy}>
+          {value.map((item, index) => (
+            <SortableItem
+              key={ids[index]}
+              id={ids[index]}
+              onRemove={() => handleRemove(index)}
+              disabled={disabled}
+              canRemove={!atMin}
+            >
+              {renderItem(item, index, {
+                update: (patch) => handleUpdate(index, patch as object),
+                remove: () => handleRemove(index),
+              })}
+            </SortableItem>
+          ))}
+        </SortableContext>
+      </DndContext>
+
+      {!atMax && (
+        <Button
+          type="button"
+          variant="outline"
+          disabled={disabled}
+          onClick={handleAdd}
+          className="w-full border-dashed text-muted-foreground hover:text-foreground"
+        >
+          <Plus className="mr-2 h-4 w-4" />
+          {addText}
+        </Button>
+      )}
     </div>
   )
 }

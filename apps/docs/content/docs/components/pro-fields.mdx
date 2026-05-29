@@ -748,22 +748,29 @@ The following fields cover the full ProFields surface. Use the standalone field 
 
 ### ArrayField
 
+Drag-to-reorder list with built-in state management. Supports controlled (`value` + `onChange`) and uncontrolled (`defaultValue`) usage.
+
 <ComponentPreview
   name="pro-fields-array-field-demo"
   previewClassName="min-h-[280px] items-start p-6"
   align="start"
 />
 
-```tsx
-<Field
-  name="contacts"
-  title="Contacts"
-  decorator={[FormItem]}
-  component={[FormilyArrayField]}
-/>
-```
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `TItem[]` | — | Controlled array value |
+| `onChange` | `(value: TItem[]) => void` | — | Called on any change |
+| `defaultValue` | `TItem[]` | `[]` | Initial value (uncontrolled) |
+| `newItem` | `() => TItem` | `() => ''` | Factory for blank items |
+| `renderItem` | `(item, index, helpers) => ReactNode` | — | Render each item; helpers: `update`, `remove` |
+| `addText` | `ReactNode` | `'Add item'` | Add button label |
+| `max` | `number` | — | Hide Add button when reached |
+| `min` | `number` | `0` | Hide Remove button when at minimum |
+| `disabled` | `boolean` | `false` | Disables all controls |
 
 ### ObjectField
+
+Lightweight fieldset with title, description, action slot, collapsible support, and two visual variants.
 
 <ComponentPreview
   name="pro-fields-object-field-demo"
@@ -771,11 +778,12 @@ The following fields cover the full ProFields surface. Use the standalone field 
   align="start"
 />
 
-```tsx
-<Field
-  name="profile"
-  title="Profile"
-  decorator={[FormItem]}
-  component={[FormilyObjectField, { collapsible: true }]}
-/>
-```
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `ReactNode` | — | Section heading |
+| `description` | `ReactNode` | — | Helper text below title |
+| `action` | `ReactNode` | — | Element rendered to the right of the title |
+| `variant` | `'separated' \| 'bordered' \| 'none'` | `'separated'` | Visual style |
+| `collapsible` | `boolean` | `false` | Whether section can be toggled |
+| `defaultOpen` | `boolean` | `true` | Initial open state when collapsible |
+

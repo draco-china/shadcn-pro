@@ -1,13 +1,19 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import { Input } from "@/registry/new-york-v4/pro/pro-fields/input"
 import { ObjectField } from "@/registry/new-york-v4/pro/pro-fields/object-field"
 import { SelectBase } from "@/registry/new-york-v4/pro/pro-fields/select"
 
 export default function ProFieldsObjectFieldDemo() {
   return (
-    <div className="w-full max-w-md p-4">
-      <ObjectField title="Profile" collapsible contentClassName="space-y-3">
+    <div className="w-full max-w-md space-y-6 p-4">
+      {/* Default: separated variant */}
+      <ObjectField
+        title="Profile"
+        description="Your public display information."
+        action={<Button variant="ghost" size="sm" className="h-6 text-xs">Edit</Button>}
+      >
         <Input placeholder="Display name" />
         <SelectBase
           placeholder="Department"
@@ -16,6 +22,18 @@ export default function ProFieldsObjectFieldDemo() {
             { label: "Engineering", value: "engineering" },
           ]}
         />
+      </ObjectField>
+
+      {/* Bordered + collapsible */}
+      <ObjectField
+        title="Advanced settings"
+        description="Only change if you know what you're doing."
+        variant="bordered"
+        collapsible
+        defaultOpen={false}
+      >
+        <Input placeholder="Custom domain" />
+        <Input placeholder="Webhook URL" />
       </ObjectField>
     </div>
   )
