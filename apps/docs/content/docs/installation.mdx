@@ -16,7 +16,22 @@ Before installing shadcn-pro, make sure you have:
 
 ## Initialization
 
-No global install needed — shadcn-pro uses the same `npx` CLI pattern as shadcn/ui. You can start adding components immediately:
+shadcn-pro is published to **GitHub Packages**. Configure your project's `.npmrc` first:
+
+```bash
+# .npmrc (project root)
+@draco-china:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+You need a GitHub personal access token with **`read:packages`** scope.  
+Create one at [github.com/settings/tokens](https://github.com/settings/tokens), then set it as an environment variable:
+
+```bash
+export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
+```
+
+Once configured, add components with the CLI:
 
 ```bash
 npx @draco-china/shadcn-pro@latest add pro-form

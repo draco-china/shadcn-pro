@@ -2,7 +2,7 @@
 
 import type { ColumnPinningState, Table } from '@tanstack/react-table'
 import { AlignJustify, RefreshCw, SlidersHorizontal, X } from 'lucide-react'
-import type * as React from 'react'
+import * as React from 'react'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -15,23 +15,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import type { TableSize } from '../types'
+import { FacetedFilter } from '@/registry/new-york-v4/pro/pro-fields/faceted-filter'
+import type { ProTableFilterOption, TableSize } from '../types'
 import { ProTableColumnSettings } from './column-settings'
 
 interface ProTableToolbarProps<TData> {
   table: Table<TData>
   defaultColumnOrder: string[]
   defaultColumnPinning: ColumnPinningState
-  filterRender?: React.ReactNode
+  filterRender?: React.ReactNode | ((table: Table<TData>) => React.ReactNode)
   toolBarRender?: () => React.ReactNode[]
   searchKey?: string
   searchPlaceholder?: string
@@ -46,6 +40,38 @@ const DENSITY_LABELS: Record<TableSize, string> = {
   default: 'Comfortable',
   middle: 'Medium',
   compact: 'Compact',
+}
+
+/** Auto cell renderer for columns with meta.filters */
+export function AutoFilterCell({
+  value,
+  filters,
+  variant = 'badge',
+}: {
+  value: string | string[] | undefined
+  filters: ProTableFilterOption[]
+  variant?: 'badge' | 'text'
+}) {
+  const values = Array.isArray(value) ? value : value ? [value] : []
+  const labels = values.map(
+    (v) => filters.find((f) => f.value === v)?.label ?? v,
+  )
+
+  if (labels.length === 0) return <span className="text-muted-foreground">—</span>
+
+  if (variant === 'text') {
+    return <span>{labels.join(', ')}</span>
+  }
+
+  return (
+    <div className="flex flex-wrap gap-1">
+      {labels.map((label) => (
+        <Badge key={label} variant="secondary" className="rounded-sm font-normal">
+          {label}
+        </Badge>
+      ))}
+    </div>
+  )
 }
 
 export function ProTableToolbar<TData>({
@@ -63,14 +89,15 @@ export function ProTableToolbar<TData>({
   onTableSizeChange,
 }: ProTableToolbarProps<TData>) {
   const actions = toolBarRender?.() ?? []
-  const isFiltered =
-    table.getState().columnFilters.length > 0 ||
-    (searchKey && (table.getColumn(searchKey)?.getFilterValue() as string))
+  const isFiltered = table.getState().columnFilters.length > 0
 
-  // Auto-collect columns with meta.filters for Select rendering
-  const filterColumns = table
-    .getAllColumns()
-    .filter((col) => (col.columnDef.meta as { filters?: unknown })?.filters)
+  // Columns with meta.filters — auto-render FacetedFilter
+  const filterColumns = table.getAllColumns().filter(
+    (col) => (col.columnDef.meta as { filters?: unknown })?.filters,
+  )
+
+  const resolvedFilterRender =
+    typeof filterRender === 'function' ? filterRender(table) : filterRender
 
   return (
     <TooltipProvider>
@@ -80,179 +107,126 @@ export function ProTableToolbar<TData>({
             <Input
               placeholder={searchPlaceholder}
               value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ''}
-              onChange={(event) => table.getColumn(searchKey)?.setFilterValue(event.target.value)}
+              onChange={(e) =>
+                table.getColumn(searchKey)?.setFilterValue(e.target.value || undefined)
+              }
+              className="h-8 w-[200px] lg:w-[250px]"
               disabled={disabled}
-              className="h-8 w-full sm:w-[200px]"
             />
           )}
+
+          {/* Auto-rendered FacetedFilters from meta.filters */}
           {filterColumns.map((col) => {
             const meta = col.columnDef.meta as {
-              filters: { label: string; value: string }[]
+              filters: ProTableFilterOption[]
               filterPlaceholder?: string
+              filterMode?: 'single' | 'multi'
             }
-            const currentValue = (col.getFilterValue() as string) ?? ''
+            const currentValue = col.getFilterValue() as string | string[] | undefined
             return (
-              <Select
+              <FacetedFilter
                 key={col.id}
-                value={currentValue || '__all__'}
-                onValueChange={(v) => col.setFilterValue(v === '__all__' ? undefined : v)}
-                disabled={disabled}
-              >
-                <SelectTrigger className="h-8 w-[140px]">
-                  <SelectValue placeholder={meta.filterPlaceholder ?? col.id} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="__all__">
-                    All {meta.filterPlaceholder ?? col.id}
-                  </SelectItem>
-                  {meta.filters.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                options={meta.filters}
+                placeholder={meta.filterPlaceholder ?? col.id}
+                mode={meta.filterMode ?? 'multi'}
+                value={currentValue}
+                onChange={(val) => col.setFilterValue(val)}
+              />
             )
           })}
-          {filterRender}
+
+          {/* Custom filterRender */}
+          {resolvedFilterRender}
+
+          {/* Reset button */}
           {isFiltered && (
             <Button
               variant="ghost"
               size="sm"
-              className="h-8 px-2 lg:px-3"
+              className="h-8 px-2 text-muted-foreground"
               onClick={() => table.resetColumnFilters()}
             >
               Reset
-              <X size={14} className="ml-1" />
+              <X className="ml-1 h-4 w-4" />
             </Button>
           )}
         </div>
 
-        <div className="flex flex-wrap items-center justify-end gap-2">
-          {actions.length > 0 && (
-            <>
-              <div className="flex flex-wrap items-center gap-2">{actions}</div>
-              <Separator orientation="vertical" className="hidden h-5 sm:block" />
-            </>
-          )}
+        <div className="flex items-center gap-2">
+          {actions.map((action, i) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: static toolbar actions
+            <React.Fragment key={i}>{action}</React.Fragment>
+          ))}
+
           {onRefresh && (
-            <ToolbarIcon label="Refresh" disabled={disabled} onClick={onRefresh}>
-              <RefreshCw size={16} />
-            </ToolbarIcon>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-8 w-8 p-0"
+                  onClick={onRefresh}
+                  disabled={disabled}
+                  aria-label="Refresh"
+                >
+                  <RefreshCw className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Refresh</TooltipContent>
+            </Tooltip>
           )}
+
           {onTableSizeChange && (
-            <DensityMenu
-              disabled={disabled}
-              tableSize={tableSize}
-              onTableSizeChange={onTableSizeChange}
-            />
-          )}
-          {showColumnToggle && (
             <DropdownMenu>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8" disabled={disabled}>
-                      <SlidersHorizontal size={16} />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 w-8 p-0"
+                      disabled={disabled}
+                      aria-label="Density"
+                    >
+                      <AlignJustify className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
                 </TooltipTrigger>
-                <TooltipContent>Columns</TooltipContent>
+                <TooltipContent>Density</TooltipContent>
               </Tooltip>
-              <DropdownMenuContent align="end" className="w-[240px] p-0">
-                <ProTableColumnSettings
-                  table={table}
-                  defaultColumnOrder={defaultColumnOrder}
-                  defaultColumnPinning={defaultColumnPinning}
-                />
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Row density</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {(Object.keys(DENSITY_LABELS) as TableSize[]).map((size) => (
+                  <DropdownMenuCheckboxItem
+                    key={size}
+                    checked={tableSize === size}
+                    onCheckedChange={() => onTableSizeChange(size)}
+                  >
+                    {DENSITY_LABELS[size]}
+                  </DropdownMenuCheckboxItem>
+                ))}
               </DropdownMenuContent>
             </DropdownMenu>
+          )}
+
+          {showColumnToggle && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span>
+                  <ProTableColumnSettings
+                    table={table}
+                    defaultColumnOrder={defaultColumnOrder}
+                    defaultColumnPinning={defaultColumnPinning}
+                    disabled={disabled}
+                  />
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>Column settings</TooltipContent>
+            </Tooltip>
           )}
         </div>
       </div>
     </TooltipProvider>
   )
-}
-
-function ToolbarIcon({
-  label,
-  disabled,
-  onClick,
-  children,
-}: {
-  label: string
-  disabled?: boolean
-  onClick: () => void
-  children: React.ReactNode
-}) {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="h-8 w-8"
-          disabled={disabled}
-          onClick={onClick}
-        >
-          {children}
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>{label}</TooltipContent>
-    </Tooltip>
-  )
-}
-
-function DensityMenu({
-  disabled,
-  tableSize,
-  onTableSizeChange,
-}: {
-  disabled: boolean
-  tableSize: TableSize
-  onTableSizeChange: (size: TableSize) => void
-}) {
-  return (
-    <DropdownMenu>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="h-8 w-8" disabled={disabled}>
-              <AlignJustify size={16} />
-            </Button>
-          </DropdownMenuTrigger>
-        </TooltipTrigger>
-        <TooltipContent>Density</TooltipContent>
-      </Tooltip>
-      <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Table Density</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {(Object.keys(DENSITY_LABELS) as TableSize[]).map((size) => (
-          <DropdownMenuCheckboxItem
-            key={size}
-            checked={tableSize === size}
-            onCheckedChange={() => onTableSizeChange(size)}
-          >
-            {DENSITY_LABELS[size]}
-          </DropdownMenuCheckboxItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
-}
-
-/** Auto cell renderer used when column has meta.filters but no explicit cell defined */
-export function AutoFilterCell({
-  value,
-  filters,
-  variant = 'badge',
-}: {
-  value: string
-  filters: { label: string; value: string }[]
-  variant?: 'badge' | 'text'
-}) {
-  const option = filters.find((f) => f.value === value)
-  const label = option?.label ?? value
-  if (!label) return null
-  return variant === 'badge' ? <Badge variant="outline">{label}</Badge> : <span>{label}</span>
 }

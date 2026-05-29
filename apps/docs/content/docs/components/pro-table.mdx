@@ -94,23 +94,24 @@ const columns = [
 
 ### Filtering with Reset
 
-Add `meta.filters` to any column — ProTable **automatically** renders a Select filter in the toolbar, maps `value → label` in cells (as a `Badge` by default), and shows a **Reset** button whenever any filter is active.
+Add `meta.filters` to any column — ProTable **automatically** renders a `FacetedFilter` (Popover + Checkbox) in the toolbar, maps `value → label` in cells, and shows a **Reset** button whenever any filter is active.
+
+- Default mode is **multi-select** — use `filterFn: "multiValueFilter"` (built-in)
+- Set `meta.filterMode: "single"` for single-select (radio-like), use `filterFn: "equals"`
 
 <ComponentPreview name="pro-table-filter-demo" previewClassName="min-h-[460px]" />
 
 ```tsx
 const columns: ColumnDef<User>[] = [
-  { accessorKey: "name", header: "Name" },
   {
     accessorKey: "role",
     header: "Role",
-    filterFn: "equals",
+    filterFn: "multiValueFilter", // built-in, handles string[] filter value
     meta: {
       filterPlaceholder: "Role",
       filters: [
         { label: "Admin", value: "admin" },
         { label: "Editor", value: "editor" },
-        { label: "Viewer", value: "viewer" },
       ],
     },
   },
@@ -120,7 +121,8 @@ const columns: ColumnDef<User>[] = [
     filterFn: "equals",
     meta: {
       filterPlaceholder: "Status",
-      filterVariant: "text", // omit for 'badge' (default)
+      filterMode: "single",   // single-select
+      filterVariant: "text",  // cell renders as plain text (default: 'badge')
       filters: [
         { label: "Active", value: "active" },
         { label: "Inactive", value: "inactive" },
@@ -129,11 +131,11 @@ const columns: ColumnDef<User>[] = [
   },
 ]
 
-// No filterRender needed — filters are auto-rendered from meta
+// No filterRender needed — FacetedFilters are auto-rendered from meta
 <ProTable columns={columns} data={data} searchKey="name" />
 ```
 
-You can still pass `filterRender` for fully custom controls, or combine both.
+You can still pass `filterRender` (ReactNode or function) for fully custom controls.
 
 ### Bulk Actions
 
@@ -184,7 +186,9 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `header`                | `ReactNode \| (context) => ReactNode` | —                            | Custom content rendered above the toolbar.                                                                     |
 | `searchKey`             | `string`                              | —                            | Column key to enable text filtering on.                                                                        |
 | `searchPlaceholder`     | `string`                              | `'Search...'`                | Placeholder text for the search input.                                                                         |
-| `filterRender`          | `ReactNode \| (table) => ReactNode`   | —                            | Custom filter controls rendered after the search input. Pass a function to access the table instance. A Reset button appears automatically when any filter is active. |
+| `filterRender`          | `ReactNode \| (table) => ReactNode`   | —                            | Custom filter controls rendered after the auto filters. Pass a function to access the table instance. |
+| `filterMode` *(meta)*   | `'single' \| 'multi'`                 | `'multi'`                    | Column meta — selection mode for the auto-rendered FacetedFilter.                                    |
+| `filterVariant` *(meta)*| `'badge' \| 'text'`                   | `'badge'`                    | Column meta — cell display style when `meta.filters` is set.                                         |
 | `toolBarRender`         | `() => ReactNode[]`                   | —                            | Extra action buttons rendered on the right side of the toolbar.                                                |
 | `bulkActionRender`      | `(context) => ReactNode`              | —                            | Actions shown in the bulk toolbar when rows are selected.                                                      |
 | `bulkActionEntityName`  | `string`                              | `'row'`                      | Singular entity name used in the bulk toolbar selection count.                                                 |

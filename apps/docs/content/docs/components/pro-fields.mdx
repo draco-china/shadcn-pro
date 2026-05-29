@@ -82,6 +82,38 @@ export default function Example() {
 
 ---
 
+## FacetedFilter
+
+A Popover + Checkbox filter component designed for faceted search — auto-used by `ProTable` when `meta.filters` is set on a column, and available standalone for forms or custom toolbars. Supports single-select and multi-select modes.
+
+### API Reference
+
+| Prop          | Type                                | Default     | Description                                              |
+| ------------- | ----------------------------------- | ----------- | -------------------------------------------------------- |
+| `value`       | `string \| string[]`                | —           | Controlled selected value(s)                             |
+| `onChange`    | `(value: string \| string[] \| undefined) => void` | — | Change handler                              |
+| `options`     | `{ label: string; value: string; icon?: ComponentType }[]` | `[]` | Filter options                      |
+| `placeholder` | `string`                            | `'Filter...'` | Button label / search placeholder                      |
+| `mode`        | `'single' \| 'multi'`               | `'multi'`   | Single-select (radio-like) or multi-select (checkbox)    |
+| `className`   | `string`                            | —           | Additional CSS classes                                   |
+
+```tsx
+import { FacetedFilter } from "@/components/pro/pro-fields/faceted-filter"
+
+<FacetedFilter
+  placeholder="Status"
+  mode="multi"
+  options={[
+    { label: "Active", value: "active" },
+    { label: "Inactive", value: "inactive" },
+  ]}
+  value={selected}
+  onChange={setSelected}
+/>
+```
+
+---
+
 ## Slider
 
 <ComponentPreview

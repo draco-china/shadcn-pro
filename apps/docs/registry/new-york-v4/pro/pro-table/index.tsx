@@ -163,6 +163,13 @@ export function ProTable<TData, TValue>({
     data,
     columns,
     initialState: { pagination: { pageIndex: 0, pageSize: 10 } },
+    filterFns: {
+      // Multi-select: filter value is string[], cell value is string
+      multiValueFilter: (row, columnId, filterValue: string[]) => {
+        if (!filterValue?.length) return true
+        return filterValue.includes(String(row.getValue(columnId)))
+      },
+    },
     state: {
       sorting,
       columnVisibility,

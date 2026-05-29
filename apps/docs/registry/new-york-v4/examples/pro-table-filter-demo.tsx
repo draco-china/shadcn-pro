@@ -25,7 +25,7 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "role",
     header: "Role",
-    filterFn: "equals",
+    filterFn: "multiValueFilter",
     meta: {
       filterPlaceholder: "Role",
       filters: [
@@ -41,7 +41,8 @@ const columns: ColumnDef<User>[] = [
     filterFn: "equals",
     meta: {
       filterPlaceholder: "Status",
-      filterVariant: "badge",
+      filterVariant: "text",
+      filterMode: "single",
       filters: [
         { label: "Active", value: "active" },
         { label: "Inactive", value: "inactive" },

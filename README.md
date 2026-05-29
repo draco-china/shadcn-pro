@@ -31,9 +31,22 @@ Copy into your project. Own it completely. No runtime dependency, no version loc
 
 ## 🚀 Quick Start
 
+The CLI installs directly from GitHub Packages — add the registry first:
+
+```bash
+# .npmrc (project root)
+@draco-china:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+Then install any component:
+
 ```bash
 npx @draco-china/shadcn-pro add pro-form
 ```
+
+> **Note:** A GitHub personal access token with `read:packages` scope is required.  
+> Create one at https://github.com/settings/tokens and set it as `GITHUB_TOKEN`.
 
 ```tsx
 import { ProForm, SchemaField, createForm } from '@/components/pro/pro-form'

@@ -17,12 +17,14 @@ export interface ProTableFilterOption {
 
 export interface ProTableColumnMeta {
   pinned?: ProTableColumnPinningPosition
-  /** Provide options to auto-render a Select filter in the toolbar and map value→label in cells */
+  /** Provide options to auto-render a FacetedFilter in the toolbar and map value→label in cells */
   filters?: ProTableFilterOption[]
-  /** Placeholder for the auto-rendered filter Select */
+  /** Placeholder for the auto-rendered filter */
   filterPlaceholder?: string
   /** Cell display style when filters is set: 'badge' (default) | 'text' */
   filterVariant?: 'badge' | 'text'
+  /** Filter selection mode: 'multi' (default) | 'single' */
+  filterMode?: 'single' | 'multi'
 }
 
 declare module '@tanstack/react-table' {
