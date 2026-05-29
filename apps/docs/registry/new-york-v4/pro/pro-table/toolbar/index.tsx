@@ -212,19 +212,31 @@ export function ProTableToolbar<TData>({
           )}
 
           {showColumnToggle && (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span>
-                  <ProTableColumnSettings
-                    table={table}
-                    defaultColumnOrder={defaultColumnOrder}
-                    defaultColumnPinning={defaultColumnPinning}
-                    disabled={disabled}
-                  />
-                </span>
-              </TooltipTrigger>
-              <TooltipContent>Column settings</TooltipContent>
-            </Tooltip>
+            <DropdownMenu>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 w-8 p-0"
+                      disabled={disabled}
+                      aria-label="Column settings"
+                    >
+                      <SlidersHorizontal className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                </TooltipTrigger>
+                <TooltipContent>Column settings</TooltipContent>
+              </Tooltip>
+              <DropdownMenuContent align="end" className="w-52">
+                <ProTableColumnSettings
+                  table={table}
+                  defaultColumnOrder={defaultColumnOrder}
+                  defaultColumnPinning={defaultColumnPinning}
+                />
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
         </div>
       </div>
