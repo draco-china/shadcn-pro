@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/draco-china/shadcn-pro/compare/v1.6.2...v1.7.0) (2026-05-29)
+
+
+### Features
+
+* **pro-table:** toolbar flex-wrap — search row left, actions row right ([6e6a8bc](https://github.com/draco-china/shadcn-pro/commit/6e6a8bce922d690568e499db404095b76f7b5532))
+
 ## [1.6.2](https://github.com/draco-china/shadcn-pro/compare/v1.6.1...v1.6.2) (2026-05-29)
 
 
