@@ -4,7 +4,6 @@ import { type ColumnDef } from "@tanstack/react-table"
 import { Download, Plus, Trash2 } from "lucide-react"
 
 import { ProTable } from "@/registry/new-york-v4/pro/pro-table/index"
-import { Badge } from "@/registry/new-york-v4/ui/badge"
 import { Button } from "@/registry/new-york-v4/ui/button"
 import { Checkbox } from "@/registry/new-york-v4/ui/checkbox"
 
@@ -254,24 +253,30 @@ const columns: ColumnDef<User>[] = [
     accessorKey: "role",
     header: "Role",
     size: 140,
-    cell: ({ row }) => (
-      <Badge variant="outline" className="capitalize">
-        {row.getValue("role")}
-      </Badge>
-    ),
+    filterFn: "multiValueFilter" as never,
+    meta: {
+      filterPlaceholder: "Role",
+      filters: [
+        { label: "Admin", value: "admin" },
+        { label: "Editor", value: "editor" },
+        { label: "User", value: "user" },
+      ],
+      filterVariant: "badge" as const,
+    },
     enableSorting: true,
   },
   {
     accessorKey: "status",
     header: "Status",
     size: 140,
-    cell: ({ row }) => {
-      const active = row.getValue("status") === "active"
-      return (
-        <Badge variant={active ? "default" : "secondary"}>
-          {active ? "Active" : "Inactive"}
-        </Badge>
-      )
+    filterFn: "multiValueFilter" as never,
+    meta: {
+      filterPlaceholder: "Status",
+      filters: [
+        { label: "Active", value: "active" },
+        { label: "Inactive", value: "inactive" },
+      ],
+      filterVariant: "badge" as const,
     },
     enableSorting: true,
   },
