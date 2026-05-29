@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/draco-china/shadcn-pro/compare/v1.1.0...v1.2.0) (2026-05-29)
+
+
+### Features
+
+* **pro-table:** auto reset button when filters are active ([fdddf2e](https://github.com/draco-china/shadcn-pro/commit/fdddf2e498d7e7941481a0f1a756ffd2c7a533da))
+
 # [1.1.0](https://github.com/draco-china/shadcn-pro/compare/v1.0.1...v1.1.0) (2026-05-29)
 
 
