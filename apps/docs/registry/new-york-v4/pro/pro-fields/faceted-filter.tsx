@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { CheckIcon, PlusCircledIcon } from '@radix-ui/react-icons'
+import { Check, PlusCircle } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
@@ -83,7 +83,7 @@ export function FacetedFilter({
           size="sm"
           className={cn('h-8 border-dashed', className)}
         >
-          <PlusCircledIcon className="size-4" />
+          <PlusCircle className="size-4" />
           {placeholder}
           {selectedValues.size > 0 && (
             <>
@@ -141,7 +141,7 @@ export function FacetedFilter({
                           : 'opacity-50 [&_svg]:invisible',
                       )}
                     >
-                      <CheckIcon className="h-4 w-4 text-background" />
+                      <Check className="h-4 w-4 text-background" />
                     </div>
                     {option.icon && (
                       <option.icon className="size-4 text-muted-foreground" />
