@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/draco-china/shadcn-pro/compare/v1.6.1...v1.6.2) (2026-05-29)
+
+
+### Bug Fixes
+
+* **pro-table:** wrap ProTableColumnSettings in DropdownMenu (was rendering inline) ([4f6ddeb](https://github.com/draco-china/shadcn-pro/commit/4f6ddebb7094ec7d93ee9a28a63d575586bdd215))
+
 ## [1.6.1](https://github.com/draco-china/shadcn-pro/compare/v1.6.0...v1.6.1) (2026-05-29)
 
 
