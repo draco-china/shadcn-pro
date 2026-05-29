@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/draco-china/shadcn-pro/compare/v1.5.1...v1.5.2) (2026-05-29)
+
+
+### Bug Fixes
+
+* **pro-fields:** align FacetedFilter style with shadcn-admin (facet counts, CheckIcon, w-50, ms-auto) ([790f8c4](https://github.com/draco-china/shadcn-pro/commit/790f8c4d486d37d2ef91252fba71ab98763b7387))
+
 ## [1.5.1](https://github.com/draco-china/shadcn-pro/compare/v1.5.0...v1.5.1) (2026-05-29)
 
 
