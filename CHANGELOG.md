@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/draco-china/shadcn-pro/compare/v1.2.0...v1.3.0) (2026-05-29)
+
+
+### Features
+
+* **pro-table:** filterRender supports function (table accessor) + filter demo ([2497d65](https://github.com/draco-china/shadcn-pro/commit/2497d6510eed0d6ff28fece7aed9bd16f52b61cf))
+
 # [1.2.0](https://github.com/draco-china/shadcn-pro/compare/v1.1.0...v1.2.0) (2026-05-29)
 
 
