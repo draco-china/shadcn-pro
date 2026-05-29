@@ -130,6 +130,7 @@ export function ProTableToolbar<TData>({
                 placeholder={meta.filterPlaceholder ?? col.id}
                 mode={meta.filterMode ?? 'multi'}
                 value={currentValue}
+                facets={col.getFacetedUniqueValues()}
                 onChange={(val) => col.setFilterValue(val)}
               />
             )

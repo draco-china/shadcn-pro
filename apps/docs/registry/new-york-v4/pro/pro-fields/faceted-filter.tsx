@@ -36,6 +36,8 @@ export interface FacetedFilterProps {
   placeholder?: string
   /** 'single' shows radio-like behavior, 'multi' allows multiple selection (default) */
   mode?: 'single' | 'multi'
+  /** Facet counts from getFacetedUniqueValues() — shows count next to each option */
+  facets?: Map<string, number>
   className?: string
 }
 
@@ -45,6 +47,7 @@ export function FacetedFilter({
   options = [],
   placeholder = 'Filter...',
   mode = 'multi',
+  facets,
   className,
 }: FacetedFilterProps) {
   const selectedValues = React.useMemo(() => {
@@ -72,10 +75,6 @@ export function FacetedFilter({
     onChange?.(arr.length === 0 ? undefined : arr)
   }
 
-  function handleClear() {
-    onChange?.(undefined)
-  }
-
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -84,7 +83,7 @@ export function FacetedFilter({
           size="sm"
           className={cn('h-8 border-dashed', className)}
         >
-          <PlusCircledIcon className="mr-2 h-4 w-4" />
+          <PlusCircledIcon className="size-4" />
           {placeholder}
           {selectedValues.size > 0 && (
             <>
@@ -121,7 +120,7 @@ export function FacetedFilter({
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent className="w-50 p-0" align="start">
         <Command>
           <CommandInput placeholder={placeholder} />
           <CommandList>
@@ -136,18 +135,23 @@ export function FacetedFilter({
                   >
                     <div
                       className={cn(
-                        'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                        'flex size-4 items-center justify-center rounded-sm border border-primary',
                         isSelected
                           ? 'bg-primary text-primary-foreground'
                           : 'opacity-50 [&_svg]:invisible',
                       )}
                     >
-                      <CheckIcon className="h-4 w-4" />
+                      <CheckIcon className="h-4 w-4 text-background" />
                     </div>
                     {option.icon && (
-                      <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+                      <option.icon className="size-4 text-muted-foreground" />
                     )}
                     <span>{option.label}</span>
+                    {facets?.get(option.value) !== undefined && (
+                      <span className="ms-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
+                        {facets.get(option.value)}
+                      </span>
+                    )}
                   </CommandItem>
                 )
               })}
@@ -157,7 +161,7 @@ export function FacetedFilter({
                 <CommandSeparator />
                 <CommandGroup>
                   <CommandItem
-                    onSelect={handleClear}
+                    onSelect={() => onChange?.(undefined)}
                     className="justify-center text-center"
                   >
                     Clear filters
