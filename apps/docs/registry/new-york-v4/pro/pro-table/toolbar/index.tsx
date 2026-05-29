@@ -15,7 +15,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FacetedFilter } from '@/registry/new-york-v4/pro/pro-fields/faceted-filter'
 import type { ProTableFilterOption, TableSize } from '../types'
@@ -101,8 +100,9 @@ export function ProTableToolbar<TData>({
 
   return (
     <TooltipProvider>
-      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-        <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap gap-2">
+        {/* Search area — left-aligned, wraps internally */}
+        <div className="flex flex-1 flex-wrap items-center gap-2">
           {searchKey && (
             <Input
               placeholder={searchPlaceholder}
@@ -153,7 +153,8 @@ export function ProTableToolbar<TData>({
           )}
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Actions area — right-aligned, wraps internally */}
+        <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
           {actions.map((action, i) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: static toolbar actions
             <React.Fragment key={i}>{action}</React.Fragment>
