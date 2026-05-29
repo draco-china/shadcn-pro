@@ -81,9 +81,7 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
     'pro-table-filter-demo': {
       name: 'pro-table-filter-demo',
       filePath: 'registry/new-york-v4/examples/pro-table-filter-demo.tsx',
-      component: React.lazy(
-        () => import('@/registry/new-york-v4/examples/pro-table-filter-demo'),
-      ),
+      component: React.lazy(() => import('@/registry/new-york-v4/examples/pro-table-filter-demo')),
     },
     // P4 Viewer
     'image-viewer-demo': {
