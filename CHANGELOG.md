@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/draco-china/shadcn-pro/compare/v1.7.1...v1.8.0) (2026-05-29)
+
+
+### Features
+
+* **pro-fields:** redesign ArrayField (dnd, built-in state) + ObjectField (variants, description, action slot) ([c0f8be0](https://github.com/draco-china/shadcn-pro/commit/c0f8be02b95db841323e236e6f6619f63871c2fd))
+
 ## [1.7.1](https://github.com/draco-china/shadcn-pro/compare/v1.7.0...v1.7.1) (2026-05-29)
 
 
