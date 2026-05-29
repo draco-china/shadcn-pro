@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/draco-china/shadcn-pro/compare/v1.7.0...v1.7.1) (2026-05-29)
+
+
+### Bug Fixes
+
+* **pro-table:** actions area flex-1 to fill remaining width and stay right-aligned ([863ab4b](https://github.com/draco-china/shadcn-pro/commit/863ab4b02cb48c5cec0e1def044c0f7450687855))
+
 # [1.7.0](https://github.com/draco-china/shadcn-pro/compare/v1.6.2...v1.7.0) (2026-05-29)
 
 
