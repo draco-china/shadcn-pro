@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/draco-china/shadcn-pro/compare/v1.0.1...v1.1.0) (2026-05-29)
+
+
+### Features
+
+* **pro-table:** use Badge for selection count in bulk actions ([3e9e1d4](https://github.com/draco-china/shadcn-pro/commit/3e9e1d421b15959604fcbbb5427ac5b07720e1f7))
+
 ## [1.0.1](https://github.com/draco-china/shadcn-pro/compare/v1.0.0...v1.0.1) (2026-05-25)
 
 
