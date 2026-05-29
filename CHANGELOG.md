@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/draco-china/shadcn-pro/compare/v1.6.0...v1.6.1) (2026-05-29)
+
+
+### Bug Fixes
+
+* **pro-fields:** replace @radix-ui/react-icons with lucide-react (Check, PlusCircle) ([12e2aa0](https://github.com/draco-china/shadcn-pro/commit/12e2aa0cd86df76e89522f3e903fd98a3e4db39a))
+
 # [1.6.0](https://github.com/draco-china/shadcn-pro/compare/v1.5.2...v1.6.0) (2026-05-29)
 
 
