@@ -1,7 +1,7 @@
 'use client'
 
 import type { ColumnPinningState, Table } from '@tanstack/react-table'
-import { AlignJustify, RefreshCw, SlidersHorizontal } from 'lucide-react'
+import { AlignJustify, RefreshCw, SlidersHorizontal, X } from 'lucide-react'
 import type * as React from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -55,6 +55,9 @@ export function ProTableToolbar<TData>({
   onTableSizeChange,
 }: ProTableToolbarProps<TData>) {
   const actions = toolBarRender?.() ?? []
+  const isFiltered =
+    table.getState().columnFilters.length > 0 ||
+    (searchKey && (table.getColumn(searchKey)?.getFilterValue() as string))
 
   return (
     <TooltipProvider>
@@ -70,6 +73,17 @@ export function ProTableToolbar<TData>({
             />
           )}
           {filterRender}
+          {isFiltered && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-8 px-2 lg:px-3"
+              onClick={() => table.resetColumnFilters()}
+            >
+              Reset
+              <X size={14} className="ml-1" />
+            </Button>
+          )}
         </div>
 
         <div className="flex flex-wrap items-center justify-end gap-2">

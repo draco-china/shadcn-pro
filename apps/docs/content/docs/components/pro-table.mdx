@@ -1,6 +1,6 @@
 ---
 title: ProTable
-description: Feature-rich data table with search, filtering, sorting, density toggle, column visibility, and drag-to-sort — powered by TanStack Table and shadcn/ui.
+description: Feature-rich data table with search, filtering, reset, sorting, density toggle, column visibility, and drag-to-sort — powered by TanStack Table and shadcn/ui.
 ---
 
 <ComponentPreview name="pro-table-docs-demo" previewClassName="min-h-[460px]" />
@@ -92,6 +92,29 @@ const columns = [
 <ProTable columns={columns} data={users} />
 ```
 
+### Filtering with Reset
+
+Pass `filterRender` to add custom filter controls next to the search input. A **Reset** button appears automatically whenever any column filter (including `searchKey`) is active — clicking it clears all filters at once.
+
+```tsx
+<ProTable
+  columns={columns}
+  data={data}
+  searchKey="name"
+  filterRender={
+    <Select onValueChange={(v) => table.getColumn("status")?.setFilterValue(v)}>
+      <SelectTrigger className="h-8 w-[130px]">
+        <SelectValue placeholder="Status" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="active">Active</SelectItem>
+        <SelectItem value="inactive">Inactive</SelectItem>
+      </SelectContent>
+    </Select>
+  }
+/>
+```
+
 ### Bulk Actions
 
 Render bottom-floating bulk actions when rows are selected. The floating toolbar supports keyboard navigation and `Escape` clears the selection.
@@ -141,7 +164,7 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `header`                | `ReactNode \| (context) => ReactNode` | —                            | Custom content rendered above the toolbar.                                                                     |
 | `searchKey`             | `string`                              | —                            | Column key to enable text filtering on.                                                                        |
 | `searchPlaceholder`     | `string`                              | `'Search...'`                | Placeholder text for the search input.                                                                         |
-| `filterRender`          | `ReactNode`                           | —                            | Custom filter controls rendered on the left side of the toolbar.                                               |
+| `filterRender`          | `ReactNode`                           | —                            | Custom filter controls rendered after the search input. A Reset button appears automatically when any filter is active.                |
 | `toolBarRender`         | `() => ReactNode[]`                   | —                            | Extra action buttons rendered on the right side of the toolbar.                                                |
 | `bulkActionRender`      | `(context) => ReactNode`              | —                            | Actions shown in the bulk toolbar when rows are selected.                                                      |
 | `bulkActionEntityName`  | `string`                              | `'row'`                      | Singular entity name used in the bulk toolbar selection count.                                                 |
