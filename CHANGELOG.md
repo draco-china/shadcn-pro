@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/draco-china/shadcn-pro/compare/v1.3.0...v1.4.0) (2026-05-29)
+
+
+### Features
+
+* **pro-table:** auto filter select + cell render from meta.filters ([9110b07](https://github.com/draco-china/shadcn-pro/commit/9110b07811af509271aa93a0ba7e2e2c9f94ae6a))
+
 # [1.3.0](https://github.com/draco-china/shadcn-pro/compare/v1.2.0...v1.3.0) (2026-05-29)
 
 
