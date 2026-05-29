@@ -16,22 +16,14 @@ Before installing shadcn-pro, make sure you have:
 
 ## Initialization
 
-shadcn-pro is published to **GitHub Packages**. Configure your project's `.npmrc` first:
+shadcn-pro is published to **GitHub Packages**. Add the registry to your project's `.npmrc`:
 
 ```bash
 # .npmrc (project root)
 @draco-china:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
-You need a GitHub personal access token with **`read:packages`** scope.  
-Create one at [github.com/settings/tokens](https://github.com/settings/tokens), then set it as an environment variable:
-
-```bash
-export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
-```
-
-Once configured, add components with the CLI:
+Then add components with the CLI:
 
 ```bash
 npx @draco-china/shadcn-pro@latest add pro-form
