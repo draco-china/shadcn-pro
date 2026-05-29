@@ -6,6 +6,7 @@ import type { Table } from "@tanstack/react-table"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -151,26 +152,27 @@ export function ProTableBulkActions<TData>({
             className="flex items-center gap-x-1 text-sm"
             id="bulk-actions-description"
           >
-            <span className="inline-flex min-w-8 items-center justify-center rounded-lg bg-primary px-2 py-0.5 text-xs font-medium text-primary-foreground">
+            <Badge
+              variant="default"
+              className="min-w-8 rounded-lg"
+              aria-label={`${selectedCount} selected`}
+            >
               {selectedCount}
-            </span>
+            </Badge>{" "}
             <span className="hidden sm:inline">
               {entityName}
               {selectedCount === 1 ? "" : "s"}
-            </span>
+            </span>{" "}
             selected
           </div>
 
-          {children && (
-            <>
-              <Separator
-                className="h-5"
-                orientation="vertical"
-                aria-hidden="true"
-              />
-              {children}
-            </>
-          )}
+          <Separator
+            className="h-5"
+            orientation="vertical"
+            aria-hidden="true"
+          />
+
+          {children}
         </div>
       </div>
     </TooltipProvider>
