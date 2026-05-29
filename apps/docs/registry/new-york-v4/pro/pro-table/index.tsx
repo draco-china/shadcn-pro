@@ -61,7 +61,7 @@ export interface ProTableProps<TData, TValue> {
   header?:
     | React.ReactNode
     | ((context: ProTableRenderContext<TData>) => React.ReactNode)
-  filterRender?: React.ReactNode
+  filterRender?: React.ReactNode | ((table: TanStackTable<TData>) => React.ReactNode)
   toolBarRender?: () => React.ReactNode[]
   bulkActionRender?: (context: ProTableRenderContext<TData>) => React.ReactNode
   bulkActionEntityName?: string
@@ -222,6 +222,8 @@ export function ProTable<TData, TValue>({
     () => ({ table, rows, selectedRows }),
     [table, rows, selectedRows]
   )
+  const resolvedFilterRender =
+    typeof filterRender === "function" ? filterRender(table) : filterRender
   const isFullLayout = layout === "full"
   const headerContent =
     typeof header === "function" ? header(renderContext) : header
@@ -281,7 +283,7 @@ export function ProTable<TData, TValue>({
       <ProTableToolbar
         table={table}
         disabled={loading}
-        filterRender={filterRender}
+        filterRender={resolvedFilterRender}
         toolBarRender={toolBarRender}
         searchKey={searchKey}
         searchPlaceholder={searchPlaceholder}

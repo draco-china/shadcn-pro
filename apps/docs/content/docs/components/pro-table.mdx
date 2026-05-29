@@ -94,24 +94,39 @@ const columns = [
 
 ### Filtering with Reset
 
-Pass `filterRender` to add custom filter controls next to the search input. A **Reset** button appears automatically whenever any column filter (including `searchKey`) is active — clicking it clears all filters at once.
+Pass `filterRender` as a function to receive the `table` instance directly — use it to bind filter controls to column filter state. A **Reset** button appears automatically whenever any column filter (including `searchKey`) is active — clicking it clears all filters at once.
+
+<ComponentPreview name="pro-table-filter-demo" previewClassName="min-h-[460px]" />
 
 ```tsx
+function FilterControls({ table }: { table: Table<User> }) {
+  const roleValue = (table.getColumn("role")?.getFilterValue() as string) ?? ""
+
+  return (
+    <Select
+      value={roleValue || "all"}
+      onValueChange={(v) =>
+        table.getColumn("role")?.setFilterValue(v === "all" ? undefined : v)
+      }
+    >
+      <SelectTrigger className="h-8 w-[120px]">
+        <SelectValue placeholder="Role" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="all">All roles</SelectItem>
+        <SelectItem value="admin">Admin</SelectItem>
+        <SelectItem value="editor">Editor</SelectItem>
+        <SelectItem value="viewer">Viewer</SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}
+
 <ProTable
   columns={columns}
   data={data}
   searchKey="name"
-  filterRender={
-    <Select onValueChange={(v) => table.getColumn("status")?.setFilterValue(v)}>
-      <SelectTrigger className="h-8 w-[130px]">
-        <SelectValue placeholder="Status" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="active">Active</SelectItem>
-        <SelectItem value="inactive">Inactive</SelectItem>
-      </SelectContent>
-    </Select>
-  }
+  filterRender={(table) => <FilterControls table={table as Table<User>} />}
 />
 ```
 
@@ -164,7 +179,7 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `header`                | `ReactNode \| (context) => ReactNode` | —                            | Custom content rendered above the toolbar.                                                                     |
 | `searchKey`             | `string`                              | —                            | Column key to enable text filtering on.                                                                        |
 | `searchPlaceholder`     | `string`                              | `'Search...'`                | Placeholder text for the search input.                                                                         |
-| `filterRender`          | `ReactNode`                           | —                            | Custom filter controls rendered after the search input. A Reset button appears automatically when any filter is active.                |
+| `filterRender`          | `ReactNode \| (table) => ReactNode`   | —                            | Custom filter controls rendered after the search input. Pass a function to access the table instance. A Reset button appears automatically when any filter is active. |
 | `toolBarRender`         | `() => ReactNode[]`                   | —                            | Extra action buttons rendered on the right side of the toolbar.                                                |
 | `bulkActionRender`      | `(context) => ReactNode`              | —                            | Actions shown in the bulk toolbar when rows are selected.                                                      |
 | `bulkActionEntityName`  | `string`                              | `'row'`                      | Singular entity name used in the bulk toolbar selection count.                                                 |
