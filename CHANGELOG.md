@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/draco-china/shadcn-pro/compare/v1.5.0...v1.5.1) (2026-05-29)
+
+
+### Bug Fixes
+
+* **ci:** biome format __index__.ts React.lazy single line ([3382639](https://github.com/draco-china/shadcn-pro/commit/3382639e3e4b589324ef5bc9da93eff9ddceb608))
+
 # [1.5.0](https://github.com/draco-china/shadcn-pro/compare/v1.4.0...v1.5.0) (2026-05-29)
 
 
