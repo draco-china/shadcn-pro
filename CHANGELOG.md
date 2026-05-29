@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/draco-china/shadcn-pro/compare/v1.5.2...v1.6.0) (2026-05-29)
+
+
+### Features
+
+* **blocks:** upgrade pro-table-demo to use meta.filters + FacetedFilter auto-render ([7724ced](https://github.com/draco-china/shadcn-pro/commit/7724ced404890f16d65d0971c4c8ec3693e9590f))
+
 ## [1.5.2](https://github.com/draco-china/shadcn-pro/compare/v1.5.1...v1.5.2) (2026-05-29)
 
 
