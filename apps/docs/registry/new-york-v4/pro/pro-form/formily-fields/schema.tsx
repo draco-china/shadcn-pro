@@ -17,11 +17,9 @@ export const FormilyArrayField = observer(() => {
   return (
     <ArrayField
       value={value}
+      onChange={(next) => { field.setValue(next) }}
+      newItem={() => ({})}
       disabled={field.disabled}
-      onAdd={() => field.push({})}
-      onRemove={(index) => field.remove(index)}
-      onMoveUp={(index) => field.moveUp(index)}
-      onMoveDown={(index) => field.moveDown(index)}
       renderItem={(_, index) => (
         <RecursionField schema={schema.items as typeof schema} name={index} onlyRenderProperties />
       )}
