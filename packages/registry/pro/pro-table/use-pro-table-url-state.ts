@@ -1,17 +1,10 @@
+import type { ColumnFiltersState, OnChangeFn, PaginationState } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
-import type {
-  ColumnFiltersState,
-  OnChangeFn,
-  PaginationState,
-} from '@tanstack/react-table'
 
 type SearchRecord = Record<string, unknown>
 
 export type NavigateFn = (opts: {
-  search:
-    | true
-    | SearchRecord
-    | ((prev: SearchRecord) => Partial<SearchRecord> | SearchRecord)
+  search: true | SearchRecord | ((prev: SearchRecord) => Partial<SearchRecord> | SearchRecord)
   replace?: boolean
 }) => void
 
@@ -54,15 +47,10 @@ type UseProTableUrlStateReturn = {
   onColumnFiltersChange: OnChangeFn<ColumnFiltersState>
   pagination: PaginationState
   onPaginationChange: OnChangeFn<PaginationState>
-  ensurePageInRange: (
-    pageCount: number,
-    opts?: { resetTo?: 'first' | 'last' }
-  ) => void
+  ensurePageInRange: (pageCount: number, opts?: { resetTo?: 'first' | 'last' }) => void
 }
 
-export function useProTableUrlState(
-  params: UseProTableUrlStateParams
-): UseProTableUrlStateReturn {
+export function useProTableUrlState(params: UseProTableUrlStateParams): UseProTableUrlStateReturn {
   const {
     search,
     navigate,
@@ -100,15 +88,13 @@ export function useProTableUrlState(
     return collected
   }, [columnFiltersCfg, search])
 
-  const [columnFilters, setColumnFilters] =
-    useState<ColumnFiltersState>(initialColumnFilters)
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(initialColumnFilters)
 
   const pagination: PaginationState = useMemo(() => {
     const rawPage = (search as SearchRecord)[pageKey]
     const rawPageSize = (search as SearchRecord)[pageSizeKey]
     const pageNum = typeof rawPage === 'number' ? rawPage : defaultPage
-    const pageSizeNum =
-      typeof rawPageSize === 'number' ? rawPageSize : defaultPageSize
+    const pageSizeNum = typeof rawPageSize === 'number' ? rawPageSize : defaultPageSize
     return { pageIndex: Math.max(0, pageNum - 1), pageSize: pageSizeNum }
   }, [search, pageKey, pageSizeKey, defaultPage, defaultPageSize])
 
@@ -120,8 +106,7 @@ export function useProTableUrlState(
       search: (prev) => ({
         ...(prev as SearchRecord),
         [pageKey]: nextPage <= defaultPage ? undefined : nextPage,
-        [pageSizeKey]:
-          nextPageSize === defaultPageSize ? undefined : nextPageSize,
+        [pageSizeKey]: nextPageSize === defaultPageSize ? undefined : nextPageSize,
       }),
     })
   }
@@ -132,28 +117,23 @@ export function useProTableUrlState(
     return typeof raw === 'string' ? raw : ''
   })
 
-  const onGlobalFilterChange: OnChangeFn<string> | undefined =
-    globalFilterEnabled
-      ? (updater) => {
-          const next =
-            typeof updater === 'function'
-              ? updater(globalFilter ?? '')
-              : updater
-          const value = trimGlobal ? next.trim() : next
-          setGlobalFilter(value)
-          navigate({
-            search: (prev) => ({
-              ...(prev as SearchRecord),
-              [pageKey]: undefined,
-              [globalFilterKey]: value ? value : undefined,
-            }),
-          })
-        }
-      : undefined
+  const onGlobalFilterChange: OnChangeFn<string> | undefined = globalFilterEnabled
+    ? (updater) => {
+        const next = typeof updater === 'function' ? updater(globalFilter ?? '') : updater
+        const value = trimGlobal ? next.trim() : next
+        setGlobalFilter(value)
+        navigate({
+          search: (prev) => ({
+            ...(prev as SearchRecord),
+            [pageKey]: undefined,
+            [globalFilterKey]: value ? value : undefined,
+          }),
+        })
+      }
+    : undefined
 
   const onColumnFiltersChange: OnChangeFn<ColumnFiltersState> = (updater) => {
-    const next =
-      typeof updater === 'function' ? updater(columnFilters) : updater
+    const next = typeof updater === 'function' ? updater(columnFilters) : updater
     setColumnFilters(next)
 
     const patch: Record<string, unknown> = {}
@@ -162,14 +142,10 @@ export function useProTableUrlState(
       const found = next.find((f) => f.id === cfg.columnId)
       const serialize = cfg.serialize ?? ((v: unknown) => v)
       if (cfg.type === 'string') {
-        const value =
-          typeof found?.value === 'string' ? (found.value as string) : ''
-        patch[cfg.searchKey] =
-          value.trim() !== '' ? serialize(value) : undefined
+        const value = typeof found?.value === 'string' ? (found.value as string) : ''
+        patch[cfg.searchKey] = value.trim() !== '' ? serialize(value) : undefined
       } else {
-        const value = Array.isArray(found?.value)
-          ? (found!.value as unknown[])
-          : []
+        const value = Array.isArray(found?.value) ? (found?.value as unknown[]) : []
         patch[cfg.searchKey] = value.length > 0 ? serialize(value) : undefined
       }
     }
@@ -185,7 +161,7 @@ export function useProTableUrlState(
 
   const ensurePageInRange = (
     pageCount: number,
-    opts: { resetTo?: 'first' | 'last' } = { resetTo: 'first' }
+    opts: { resetTo?: 'first' | 'last' } = { resetTo: 'first' },
   ) => {
     const currentPage = (search as SearchRecord)[pageKey]
     const pageNum = typeof currentPage === 'number' ? currentPage : defaultPage
