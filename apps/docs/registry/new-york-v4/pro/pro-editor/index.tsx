@@ -24,7 +24,7 @@ export function ProEditor({
   value = '',
   onChange,
   language,
-  theme = 'github-dark',
+  theme = 'one-dark-pro-flat',
   className,
   height,
   showToolbar = true,

@@ -24,7 +24,7 @@ export function CodeViewerTable({
   theme,
   onToggleFold,
 }: CodeViewerTableProps) {
-  const isLight = theme === 'github-light'
+  const isLight = theme === 'github-light' || theme === 'one-light-pro-flat'
 
   return (
     <table className="w-full min-w-full border-collapse">
