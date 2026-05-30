@@ -1,3 +1,10 @@
+## [1.11.18](https://github.com/draco-china/shadcn-pro/compare/v1.11.17...v1.11.18) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** use canvas to resolve oklch CSS vars to hex for Monaco theme ([4e09f51](https://github.com/draco-china/shadcn-pro/commit/4e09f5114e70c379d362d0887a63a625f9631319))
+
 ## [1.11.17](https://github.com/draco-china/shadcn-pro/compare/v1.11.16...v1.11.17) (2026-05-30)
 
 
