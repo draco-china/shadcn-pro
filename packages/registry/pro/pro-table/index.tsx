@@ -166,14 +166,12 @@ export function ProTable<TData, TValue>({
     [onSortingChangeProp, sortingProp],
   )
   const manualPagination = paginationProp !== undefined
-  const manualSorting =
-    manualPagination && (sortingProp !== undefined || onSortingChangeProp !== undefined)
+  const manualSorting = sortingProp !== undefined || onSortingChangeProp !== undefined
   const manualFiltering =
-    manualPagination &&
-    (columnFiltersProp !== undefined ||
-      onColumnFiltersChangeProp !== undefined ||
-      globalFilterProp !== undefined ||
-      onGlobalFilterChange !== undefined)
+    columnFiltersProp !== undefined ||
+    onColumnFiltersChangeProp !== undefined ||
+    globalFilterProp !== undefined ||
+    onGlobalFilterChange !== undefined
 
   const [internalPagination, setInternalPagination] = React.useState<PaginationState>({
     pageIndex: 0,
