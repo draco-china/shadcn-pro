@@ -96,7 +96,7 @@ function SortableItem({ id, children, onRemove, disabled, canRemove = true }: So
           size="icon"
           variant="ghost"
           disabled={disabled}
-          className="h-7 w-7 shrink-0 text-muted-foreground hover:text-destructive"
+          className="h-7 w-7 shrink-0 text-destructive/60 hover:text-destructive"
           onClick={onRemove}
           aria-label="Remove item"
         >
