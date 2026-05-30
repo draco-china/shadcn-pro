@@ -1036,7 +1036,7 @@ export function Select({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>9:T546,'use client'
+<span class="line" data-line=""></span></code></pre>9:T5a0,'use client'
 
 import * as React from 'react'
 import { Checkbox as ShadcnCheckbox } from '@/components/ui/checkbox'
@@ -1045,12 +1045,13 @@ import { cn } from '@/lib/utils'
 
 export interface CheckboxBaseProps
   extends Omit<
-    React.ComponentProps<typeof Checkbox>,
+    React.ComponentProps<typeof ShadcnCheckbox>,
     'value' | 'defaultValue' | 'onChange' | 'checked' | 'defaultChecked' | 'onCheckedChange'
   > {
   value?: boolean
   defaultValue?: boolean
   onChange?: (checked: boolean) => void
+  label?: React.ReactNode
   children?: React.ReactNode
   labelClassName?: string
 }
@@ -1060,12 +1061,14 @@ export function Checkbox({
   defaultValue,
   onChange,
   disabled,
+  label,
   children,
   labelClassName,
   ...props
 }: CheckboxBaseProps) {
   const generatedId = React.useId()
   const checkboxId = props.id ?? generatedId
+  const labelContent = children ?? label
 
   return (
     <div className="flex items-center gap-2">
@@ -1077,7 +1080,7 @@ export function Checkbox({
         disabled={disabled}
         {...props}
       />
-      {children && (
+      {labelContent && (
         <Label
           htmlFor={checkboxId}
           className={cn(
@@ -1086,13 +1089,13 @@ export function Checkbox({
             labelClassName,
           )}
         >
-          {children}
+          {labelContent}
         </Label>
       )}
     </div>
   )
 }
-a:T413d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+a:T455c,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#0184BC;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Checkbox</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> ShadcnCheckbox</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/checkbox'</span></span>
@@ -1101,12 +1104,13 @@ a:T413d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> CheckboxBaseProps</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  extends</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Omit</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#E5C07B">    React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E5C07B">ComponentProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#0184BC;--shiki-dark:#C678DD">typeof</span><span style="color:#383A42;--shiki-dark:#E06C75"> Checkbox</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#E5C07B">    React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E5C07B">ComponentProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#0184BC;--shiki-dark:#C678DD">typeof</span><span style="color:#383A42;--shiki-dark:#E06C75"> ShadcnCheckbox</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>,</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">    'value'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'defaultValue'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'onChange'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'checked'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'defaultChecked'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'onCheckedChange'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  > {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  value</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  defaultValue</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">checked</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  label</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#E5C07B"> React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E5C07B">ReactNode</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  children</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#E5C07B"> React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E5C07B">ReactNode</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  labelClassName</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
@@ -1116,12 +1120,14 @@ a:T413d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  defaultValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  label</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  children</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  labelClassName</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  ...</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">props</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> CheckboxBaseProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> generatedId</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#E45649;--shiki-dark:#E5C07B"> React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">useId</span><span style="color:#383A42;--shiki-dark:#ABB2BF">()</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> checkboxId</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#E45649;--shiki-dark:#E5C07B"> props</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">id</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> generatedId</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> labelContent</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> children</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> label</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex items-center gap-2"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -1133,7 +1139,7 @@ a:T413d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#383A42;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">props</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">children</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">labelContent</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Label</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          htmlFor</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">checkboxId</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
@@ -1142,7 +1148,7 @@ a:T413d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            labelClassName</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">children</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">labelContent</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Label</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -1459,12 +1465,10 @@ export function DatePicker({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Popover</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>11:T1588,'use client'
+<span class="line" data-line=""></span></code></pre>11:T1486,'use client'
 
-import * as React from 'react'
 import { Check, PlusCircle } from 'lucide-react'
-
-import { cn } from '@/lib/utils'
+import * as React from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -1476,12 +1480,9 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
 
 export interface FacetedFilterOption {
   label: string
@@ -1539,28 +1540,18 @@ export function FacetedFilter({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className={cn('h-8 border-dashed', className)}
-        >
+        <Button variant="outline" size="sm" className={cn('h-8 border-dashed', className)}>
           <PlusCircle className="size-4" />
           {placeholder}
           {selectedValues.size > 0 && (
             <>
               <Separator orientation="vertical" className="mx-2 h-4" />
-              <Badge
-                variant="secondary"
-                className="rounded-sm px-1 font-normal lg:hidden"
-              >
+              <Badge variant="secondary" className="rounded-sm px-1 font-normal lg:hidden">
                 {selectedValues.size}
               </Badge>
               <div className="hidden space-x-1 lg:flex">
                 {selectedValues.size > 2 ? (
-                  <Badge
-                    variant="secondary"
-                    className="rounded-sm px-1 font-normal"
-                  >
+                  <Badge variant="secondary" className="rounded-sm px-1 font-normal">
                     {selectedValues.size} selected
                   </Badge>
                 ) : (
@@ -1590,10 +1581,7 @@ export function FacetedFilter({
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value)
                 return (
-                  <CommandItem
-                    key={option.value}
-                    onSelect={() => handleSelect(option.value)}
-                  >
+                  <CommandItem key={option.value} onSelect={() => handleSelect(option.value)}>
                     <div
                       className={cn(
                         'flex size-4 items-center justify-center rounded-sm border border-primary',
@@ -1604,9 +1592,7 @@ export function FacetedFilter({
                     >
                       <Check className="size-4 text-background" />
                     </div>
-                    {option.icon && (
-                      <option.icon className="size-4 text-muted-foreground" />
-                    )}
+                    {option.icon && <option.icon className="size-4 text-muted-foreground" />}
                     <span>{option.label}</span>
                     {facets?.get(option.value) !== undefined && (
                       <span className="ms-auto flex size-4 items-center justify-center font-mono text-xs">
@@ -1636,12 +1622,10 @@ export function FacetedFilter({
     </Popover>
   )
 }
-12:Td6b8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+12:Td202,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#0184BC;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Check</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">PlusCircle</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
-<span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#0184BC;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Badge</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/badge'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/button'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -1653,12 +1637,9 @@ export function FacetedFilter({
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  CommandList</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  CommandSeparator</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/command'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  Popover</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  PopoverContent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  PopoverTrigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/popover'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Popover</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">PopoverContent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">PopoverTrigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/popover'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Separator</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/separator'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> FacetedFilterOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
@@ -1716,28 +1697,18 @@ export function FacetedFilter({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Popover</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">PopoverTrigger</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> asChild</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"outline"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"sm"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'h-8 border-dashed'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"outline"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"sm"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'h-8 border-dashed'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">PlusCircle</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">placeholder</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Separator</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> orientation</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"vertical"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"mx-2 h-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"secondary"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"rounded-sm px-1 font-normal lg:hidden"</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"secondary"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"rounded-sm px-1 font-normal lg:hidden"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                {</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"hidden space-x-1 lg:flex"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                {</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 2</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"secondary"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"rounded-sm px-1 font-normal"</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"secondary"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"rounded-sm px-1 font-normal"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> selected</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                ) </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
@@ -1767,10 +1738,7 @@ export function FacetedFilter({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#E45649;--shiki-dark:#E5C07B">options</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">map</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">                const</span><span style="color:#986801;--shiki-dark:#E5C07B"> isSelected</span><span style="color:#383A42;--shiki-dark:#56B6C2"> =</span><span style="color:#E45649;--shiki-dark:#E5C07B"> selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">has</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">                return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CommandItem</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    key</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    onSelect</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> handleSelect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CommandItem</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> key</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onSelect</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> handleSelect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">                        'flex size-4 items-center justify-center rounded-sm border border-primary'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1781,9 +1749,7 @@ export function FacetedFilter({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Check</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 text-background"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">option.icon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 text-muted-foreground"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">option.icon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 text-muted-foreground"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">label</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#E45649;--shiki-dark:#E5C07B">facets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">get</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#383A42;--shiki-dark:#56B6C2">!==</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ms-auto flex size-4 items-center justify-center font-mono text-xs"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -1813,7 +1779,7 @@ export function FacetedFilter({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Popover</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-fields-demo",{"item":{"name":"pro-fields-demo","description":"Advanced field types: select, date, switch, and more.","iframeHeight":"388px","installName":"pro-fields"},"tree":[{"name":"examples","children":[{"name":"pro-fields-demo.tsx","path":"examples/pro-fields-demo.tsx"}]},{"name":"pro-fields","children":[{"name":"input.tsx","path":"pro-fields/input.tsx"},{"name":"select.tsx","path":"pro-fields/select.tsx"},{"name":"checkbox.tsx","path":"pro-fields/checkbox.tsx"},{"name":"switch.tsx","path":"pro-fields/switch.tsx"},{"name":"textarea.tsx","path":"pro-fields/textarea.tsx"},{"name":"radio.tsx","path":"pro-fields/radio.tsx"},{"name":"date-picker.tsx","path":"pro-fields/date-picker.tsx"},{"name":"faceted-filter.tsx","path":"pro-fields/faceted-filter.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-fields-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-fields/input.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-fields/select.tsx","content":"$7","highlightedContent":"$8"},{"target":"pro-fields/checkbox.tsx","content":"$9","highlightedContent":"$a"},{"target":"pro-fields/switch.tsx","content":"'use client'\n\nimport type * as React from 'react'\nimport { Switch as ShadcnSwitch } from '@/components/ui/switch'\n\nexport interface SwitchProps\n  extends Omit<\n    React.ComponentProps<typeof Switch>,\n    'checked' | 'onCheckedChange' | 'onChange' | 'value'\n  > {\n  value?: boolean\n  onChange?: (checked: boolean) => void\n}\n\nexport function Switch({ value, onChange, ...props }: SwitchProps) {\n  return <ShadcnSwitch {...props} checked={value} onCheckedChange={onChange} />\n}\n","highlightedContent":"$b"},{"target":"pro-fields/textarea.tsx","content":"'use client'\n\nimport type * as React from 'react'\nimport { Textarea as ShadcnTextarea } from '@/components/ui/textarea'\n\nexport type TextareaProps = React.ComponentProps<typeof Textarea>\n\nexport function Textarea(props: TextareaProps) {\n  return <ShadcnTextarea {...props} />\n}\n\nTextarea.displayName = 'Textarea'\n","highlightedContent":"$c"},{"target":"pro-fields/radio.tsx","content":"$d","highlightedContent":"$e"},{"target":"pro-fields/date-picker.tsx","content":"$f","highlightedContent":"$10"},{"target":"pro-fields/faceted-filter.tsx","content":"$11","highlightedContent":"$12"}]}],"$L13","$L14","$L15","$L16","$L17","$L18","$L19","$L1a","$L1b","$L1c"]}],["$L1d"],"$L1e"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"6sq7nnzNniI8Zk-71zUwy"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-fields-demo",{"item":{"name":"pro-fields-demo","description":"Advanced field types: select, date, switch, and more.","iframeHeight":"388px","installName":"pro-fields"},"tree":[{"name":"examples","children":[{"name":"pro-fields-demo.tsx","path":"examples/pro-fields-demo.tsx"}]},{"name":"pro-fields","children":[{"name":"input.tsx","path":"pro-fields/input.tsx"},{"name":"select.tsx","path":"pro-fields/select.tsx"},{"name":"checkbox.tsx","path":"pro-fields/checkbox.tsx"},{"name":"switch.tsx","path":"pro-fields/switch.tsx"},{"name":"textarea.tsx","path":"pro-fields/textarea.tsx"},{"name":"radio.tsx","path":"pro-fields/radio.tsx"},{"name":"date-picker.tsx","path":"pro-fields/date-picker.tsx"},{"name":"faceted-filter.tsx","path":"pro-fields/faceted-filter.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-fields-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-fields/input.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-fields/select.tsx","content":"$7","highlightedContent":"$8"},{"target":"pro-fields/checkbox.tsx","content":"$9","highlightedContent":"$a"},{"target":"pro-fields/switch.tsx","content":"'use client'\n\nimport type * as React from 'react'\nimport { Switch as ShadcnSwitch } from '@/components/ui/switch'\n\nexport interface SwitchProps\n  extends Omit<\n    React.ComponentProps<typeof Switch>,\n    'checked' | 'onCheckedChange' | 'onChange' | 'value'\n  > {\n  value?: boolean\n  onChange?: (checked: boolean) => void\n}\n\nexport function Switch({ value, onChange, ...props }: SwitchProps) {\n  return <ShadcnSwitch {...props} checked={value} onCheckedChange={onChange} />\n}\n","highlightedContent":"$b"},{"target":"pro-fields/textarea.tsx","content":"'use client'\n\nimport type * as React from 'react'\nimport { Textarea as ShadcnTextarea } from '@/components/ui/textarea'\n\nexport type TextareaProps = React.ComponentProps<typeof Textarea>\n\nexport function Textarea(props: TextareaProps) {\n  return <ShadcnTextarea {...props} />\n}\n\nTextarea.displayName = 'Textarea'\n","highlightedContent":"$c"},{"target":"pro-fields/radio.tsx","content":"$d","highlightedContent":"$e"},{"target":"pro-fields/date-picker.tsx","content":"$f","highlightedContent":"$10"},{"target":"pro-fields/faceted-filter.tsx","content":"$11","highlightedContent":"$12"}]}],"$L13","$L14","$L15","$L16","$L17","$L18","$L19","$L1a","$L1b","$L1c"]}],["$L1d"],"$L1e"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"TfRYknWvxrUk5xQWmLhuR"}
 1f:T1edd,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">AtSign</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Search</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> "lucide-react"</span></span>
@@ -2910,12 +2876,10 @@ export default function ProFieldsFacetedFilterDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>32:T1588,'use client'
+<span class="line" data-line=""></span></code></pre>32:T1486,'use client'
 
-import * as React from 'react'
 import { Check, PlusCircle } from 'lucide-react'
-
-import { cn } from '@/lib/utils'
+import * as React from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -2927,12 +2891,9 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
 
 export interface FacetedFilterOption {
   label: string
@@ -2990,28 +2951,18 @@ export function FacetedFilter({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className={cn('h-8 border-dashed', className)}
-        >
+        <Button variant="outline" size="sm" className={cn('h-8 border-dashed', className)}>
           <PlusCircle className="size-4" />
           {placeholder}
           {selectedValues.size > 0 && (
             <>
               <Separator orientation="vertical" className="mx-2 h-4" />
-              <Badge
-                variant="secondary"
-                className="rounded-sm px-1 font-normal lg:hidden"
-              >
+              <Badge variant="secondary" className="rounded-sm px-1 font-normal lg:hidden">
                 {selectedValues.size}
               </Badge>
               <div className="hidden space-x-1 lg:flex">
                 {selectedValues.size > 2 ? (
-                  <Badge
-                    variant="secondary"
-                    className="rounded-sm px-1 font-normal"
-                  >
+                  <Badge variant="secondary" className="rounded-sm px-1 font-normal">
                     {selectedValues.size} selected
                   </Badge>
                 ) : (
@@ -3041,10 +2992,7 @@ export function FacetedFilter({
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value)
                 return (
-                  <CommandItem
-                    key={option.value}
-                    onSelect={() => handleSelect(option.value)}
-                  >
+                  <CommandItem key={option.value} onSelect={() => handleSelect(option.value)}>
                     <div
                       className={cn(
                         'flex size-4 items-center justify-center rounded-sm border border-primary',
@@ -3055,9 +3003,7 @@ export function FacetedFilter({
                     >
                       <Check className="size-4 text-background" />
                     </div>
-                    {option.icon && (
-                      <option.icon className="size-4 text-muted-foreground" />
-                    )}
+                    {option.icon && <option.icon className="size-4 text-muted-foreground" />}
                     <span>{option.label}</span>
                     {facets?.get(option.value) !== undefined && (
                       <span className="ms-auto flex size-4 items-center justify-center font-mono text-xs">
@@ -3087,12 +3033,10 @@ export function FacetedFilter({
     </Popover>
   )
 }
-33:Td6b8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+33:Td202,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#0184BC;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Check</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">PlusCircle</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
-<span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#0184BC;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Badge</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/badge'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/button'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -3104,12 +3048,9 @@ export function FacetedFilter({
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  CommandList</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  CommandSeparator</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/command'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  Popover</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  PopoverContent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  PopoverTrigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/popover'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Popover</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">PopoverContent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">PopoverTrigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/popover'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Separator</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/separator'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> FacetedFilterOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
@@ -3167,28 +3108,18 @@ export function FacetedFilter({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Popover</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">PopoverTrigger</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> asChild</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"outline"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"sm"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'h-8 border-dashed'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"outline"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"sm"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'h-8 border-dashed'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">PlusCircle</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">placeholder</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Separator</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> orientation</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"vertical"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"mx-2 h-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"secondary"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"rounded-sm px-1 font-normal lg:hidden"</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"secondary"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"rounded-sm px-1 font-normal lg:hidden"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                {</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"hidden space-x-1 lg:flex"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                {</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 2</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"secondary"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"rounded-sm px-1 font-normal"</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"secondary"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"rounded-sm px-1 font-normal"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> selected</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Badge</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                ) </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
@@ -3218,10 +3149,7 @@ export function FacetedFilter({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#E45649;--shiki-dark:#E5C07B">options</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">map</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">                const</span><span style="color:#986801;--shiki-dark:#E5C07B"> isSelected</span><span style="color:#383A42;--shiki-dark:#56B6C2"> =</span><span style="color:#E45649;--shiki-dark:#E5C07B"> selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">has</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">                return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CommandItem</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    key</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    onSelect</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> handleSelect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CommandItem</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> key</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onSelect</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> handleSelect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">                        'flex size-4 items-center justify-center rounded-sm border border-primary'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -3232,9 +3160,7 @@ export function FacetedFilter({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Check</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 text-background"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">option.icon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 text-muted-foreground"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">option.icon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 text-muted-foreground"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">label</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#E45649;--shiki-dark:#E5C07B">facets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">get</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">option</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#383A42;--shiki-dark:#56B6C2">!==</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ms-auto flex size-4 items-center justify-center font-mono text-xs"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
