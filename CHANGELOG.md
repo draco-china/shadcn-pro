@@ -1,3 +1,10 @@
+## [1.11.10](https://github.com/draco-china/shadcn-pro/compare/v1.11.9...v1.11.10) (2026-05-30)
+
+
+### Bug Fixes
+
+* **docs:** use ComponentPreview for pro-form demos, register modal/drawer in __index__ ([c008ff1](https://github.com/draco-china/shadcn-pro/commit/c008ff16fe084927ca1fad66596ccf26ddfbc6d4))
+
 ## [1.11.9](https://github.com/draco-china/shadcn-pro/compare/v1.11.8...v1.11.9) (2026-05-30)
 
 
