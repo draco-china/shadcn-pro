@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/draco-china/shadcn-pro/compare/v1.9.0...v1.10.0) (2026-05-30)
+
+
+### Features
+
+* **pro-form:** add ModalForm and DrawerForm overlay variants ([0482f14](https://github.com/draco-china/shadcn-pro/commit/0482f14837139fbeeed0b94821654d0dcb4efcd5))
+
 # [1.9.0](https://github.com/draco-china/shadcn-pro/compare/v1.8.0...v1.9.0) (2026-05-29)
 
 
