@@ -1,5 +1,5 @@
 import type { Monaco } from '@monaco-editor/react'
-import type { EditorTheme } from '../types'
+import type { EditorTheme, EditorThemeMode } from '../types'
 import { githubDarkTheme, githubLightTheme } from './github-themes'
 import { oneDarkProFlatTheme, oneLightProFlatTheme } from './one-dark-pro-themes'
 
@@ -77,9 +77,9 @@ function cssVar(name: string): string {
   }
 }
 
-export function applyShadcnTheme(monaco: Monaco, theme: EditorTheme, isDark: boolean) {
-  const themeId = isDark ? `${theme}-dark` : `${theme}-light`
-  const base = isDark ? DARK_THEMES[theme] : LIGHT_THEMES[theme]
+export function applyShadcnTheme(monaco: Monaco, theme: EditorTheme, themeMode: EditorThemeMode) {
+  const themeId = `${theme}-${themeMode}`
+  const base = themeMode === 'dark' ? DARK_THEMES[theme] : LIGHT_THEMES[theme]
 
   const bg = cssVar('--background') || (base.colors?.['editor.background'] as string) || '#ffffff'
   const fg = cssVar('--foreground') || (base.colors?.['editor.foreground'] as string) || '#000000'

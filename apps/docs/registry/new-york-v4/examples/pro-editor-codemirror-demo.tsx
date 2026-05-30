@@ -35,6 +35,7 @@ export default function ProEditorCodemirrorDemo() {
       <ProEditor
         language="tsx"
         theme="one-dark-pro"
+        themeMode="dark"
         value={value}
         onChange={setValue}
         height={320}

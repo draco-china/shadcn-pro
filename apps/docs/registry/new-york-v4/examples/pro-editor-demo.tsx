@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState } from 'react'
+import { useTheme } from 'next-themes'
 import { ProEditor } from "@/registry/new-york-v4/pro/pro-editor/index"
 import type {
   EditorTheme,
@@ -61,6 +62,8 @@ export default function ProEditorDemo() {
   const [value, setValue] = useState(INITIAL_CODE)
   const [language, setLanguage] = useState("tsx")
   const [theme, setTheme] = useState<EditorTheme>("one-dark-pro")
+  const { resolvedTheme } = useTheme()
+  const themeMode = resolvedTheme === 'light' ? 'light' : 'dark'
   const [viewMode, setViewMode] = useState<EditorViewMode>("split")
 
   return (
@@ -106,6 +109,7 @@ export default function ProEditorDemo() {
       <ProEditor
         language={language}
         theme={theme}
+        themeMode={themeMode}
         value={value}
         onChange={setValue}
         viewMode={viewMode}

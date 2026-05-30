@@ -19,6 +19,7 @@ export default function ProEditorDocsDemo() {
       <ProEditor
         language="typescript"
         theme="one-dark-pro"
+        themeMode="dark"
         value={value}
         onChange={setValue}
         toolbarBefore={

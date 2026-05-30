@@ -20,6 +20,7 @@ export default function ProEditorMonacoDemo() {
       <ProEditor
         language="typescript"
         theme="one-dark-pro"
+        themeMode="dark"
         value={value}
         onChange={setValue}
       />
