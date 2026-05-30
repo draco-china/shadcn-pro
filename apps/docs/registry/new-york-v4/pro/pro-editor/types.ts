@@ -1,7 +1,18 @@
 import type MonacoEditor from '@monaco-editor/react'
 import type * as React from 'react'
 
-export type EditorTheme = 'github-light' | 'github-dark'
+export type EditorTheme =
+  | 'github-light'
+  | 'github-dark'
+  | 'one-dark-pro-flat'
+  | 'one-dark-pro-flat-light'
+
+export const EDITOR_THEMES: { value: EditorTheme; label: string }[] = [
+  { value: 'github-light', label: 'GitHub Light' },
+  { value: 'github-dark', label: 'GitHub Dark' },
+  { value: 'one-dark-pro-flat-light', label: 'One Dark Pro Light' },
+  { value: 'one-dark-pro-flat', label: 'One Dark Pro' },
+]
 
 /** Props passed to a custom preview component */
 export interface PreviewProps {
