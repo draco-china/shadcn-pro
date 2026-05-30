@@ -147,7 +147,16 @@ Dynamic list of items with add/remove controls:
   title="Team Members"
   x-decorator="FormItem"
   x-component="ArrayField"
-/>
+>
+  <SchemaField.Object>
+    <SchemaField.String
+      name="name"
+      title="Name"
+      x-decorator="FormItem"
+      x-component="Input"
+    />
+  </SchemaField.Object>
+</SchemaField.Array>
 ```
 
 ### Object Fields

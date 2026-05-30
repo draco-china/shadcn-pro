@@ -265,6 +265,7 @@ export default function ProFormDemo() {
         <SchemaField.Array
           name="contacts"
           title="Emergency Contacts"
+          description="Each contact item is an object with name and phone fields."
           x-decorator="FormItem"
           x-component="ArrayField"
           x-component-props={{ addText: 'Add contact', min: 1 }}
