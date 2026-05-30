@@ -87,6 +87,15 @@ function importsFor(content: string) {
   )
 }
 
+function includesDeprecatedArrayFieldAdapterProps(content: string) {
+  return (
+    content.includes('onAdd=') ||
+    content.includes('onRemove=') ||
+    content.includes('onMoveUp=') ||
+    content.includes('onMoveDown=')
+  )
+}
+
 for (const name of expectedComponents) {
   if (!componentNames.includes(name)) fail(`Missing public component: ${name}`)
 }
@@ -135,6 +144,14 @@ for (const component of components) {
     if (!existsSync(sourcePath)) continue
 
     const content = readFileSync(sourcePath, 'utf8')
+    if (
+      file.includes('/formily-fields/') &&
+      content.includes('<ArrayField') &&
+      includesDeprecatedArrayFieldAdapterProps(content)
+    ) {
+      fail(`${component.name} uses deprecated ArrayField adapter props in ${file}`)
+    }
+
     for (const specifier of importsFor(content)) {
       if (specifier.startsWith('@/components/ui/')) {
         const uiName = specifier.replace('@/components/ui/', '')

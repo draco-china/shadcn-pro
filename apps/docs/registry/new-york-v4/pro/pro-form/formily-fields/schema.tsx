@@ -17,7 +17,9 @@ export const FormilyArrayField = observer(() => {
   return (
     <ArrayField
       value={value}
-      onChange={(next) => { field.setValue(next) }}
+      onChange={(next) => {
+        field.setValue(next)
+      }}
       newItem={() => ({})}
       disabled={field.disabled}
       renderItem={(_, index) => (
