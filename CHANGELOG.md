@@ -1,3 +1,10 @@
+## [1.12.14](https://github.com/draco-china/shadcn-pro/compare/v1.12.13...v1.12.14) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-form:** pass object field descriptions ([3c88b1d](https://github.com/draco-china/shadcn-pro/commit/3c88b1dff2ad80154831fbe432ec55c07cdfe602))
+
 ## [1.12.13](https://github.com/draco-china/shadcn-pro/compare/v1.12.12...v1.12.13) (2026-05-30)
 
 
