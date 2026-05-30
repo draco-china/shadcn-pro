@@ -1,3 +1,10 @@
+## [1.12.10](https://github.com/draco-china/shadcn-pro/compare/v1.12.9...v1.12.10) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-viewer:** remove undefined themeMode reference, use isDark consistently ([559aca0](https://github.com/draco-china/shadcn-pro/commit/559aca05de1e5a9c0d18be51417dd869c0eaf32a))
+
 ## [1.12.9](https://github.com/draco-china/shadcn-pro/compare/v1.12.8...v1.12.9) (2026-05-30)
 
 
