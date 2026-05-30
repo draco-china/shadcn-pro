@@ -40,18 +40,18 @@ const DENSITY_LABELS: Record<TableSize, string> = {
   compact: 'Compact',
 }
 
-/** Auto cell renderer for columns with meta.filters */
+/** Auto cell renderer for columns with meta.filter */
 export function AutoFilterCell({
   value,
-  filters,
+  options,
   variant = 'badge',
 }: {
   value: string | string[] | undefined
-  filters: ProTableFilterOption[]
+  options: ProTableFilterOption[]
   variant?: 'badge' | 'text'
 }) {
   const values = Array.isArray(value) ? value : value ? [value] : []
-  const labels = values.map((v) => filters.find((filter) => filter.value === v)?.label ?? v)
+  const labels = values.map((v) => options.find((option) => option.value === v)?.label ?? v)
 
   if (labels.length === 0) return <span className="text-muted-foreground">—</span>
 
@@ -88,7 +88,7 @@ export function ProTableToolbar<TData>({
   const searchValue = (searchColumn?.getFilterValue() as string) ?? ''
   const searchPlaceholder = getSearchPlaceholder(search, searchMeta, searchColumn?.id)
   const isFiltered = table.getState().columnFilters.length > 0
-  const filterColumns = table.getAllColumns().filter((column) => getColumnMeta(column).filters)
+  const filterColumns = table.getAllColumns().filter((column) => getColumnMeta(column).filter)
 
   function handleSearchChange(value: string) {
     searchColumn?.setFilterValue(value || undefined)
@@ -109,15 +109,15 @@ export function ProTableToolbar<TData>({
           )}
           {filterColumns.map((column) => {
             const meta = getColumnMeta(column)
-            const filters = meta.filters
-            if (!filters) return null
+            const filter = meta.filter
+            if (!filter) return null
             const currentValue = column.getFilterValue() as string | string[] | undefined
             return (
               <FacetedFilter
                 key={column.id}
-                options={filters}
-                placeholder={meta.filterPlaceholder ?? column.id}
-                mode={meta.filterMode ?? 'multi'}
+                options={filter.options}
+                placeholder={filter.placeholder ?? column.id}
+                mode={filter.mode ?? 'multi'}
                 value={currentValue}
                 facets={column.getFacetedUniqueValues()}
                 onChange={(value) => column.setFilterValue(value)}
@@ -271,5 +271,5 @@ function getSearchPlaceholder(
 ) {
   if (typeof search === 'object' && search.placeholder) return search.placeholder
   if (typeof meta?.search === 'object' && meta.search.placeholder) return meta.search.placeholder
-  return meta?.searchPlaceholder ?? (columnId ? `Search ${columnId}...` : 'Search...')
+  return columnId ? `Search ${columnId}...` : 'Search...'
 }

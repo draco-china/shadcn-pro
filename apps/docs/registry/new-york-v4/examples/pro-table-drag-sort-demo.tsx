@@ -71,7 +71,6 @@ export default function ProTableDragSortDemo() {
         data={initialData}
         columns={columns}
         dragSort={{
-          enabled: true,
           rowKey: "id",
           onDragSortEnd: (newData) => setOrder(newData.map((d) => d.title)),
         }}

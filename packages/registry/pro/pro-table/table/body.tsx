@@ -69,10 +69,15 @@ function BodyRows<TData>({
       {rows.map((row) => {
         const cells = row.getVisibleCells().map((cell) => {
           const meta = cell.column.columnDef.meta as
-            | { filters?: { label: string; value: string }[]; filterVariant?: 'badge' | 'text' }
+            | {
+                filter?: {
+                  options: { label: string; value: string }[]
+                  variant?: 'badge' | 'text'
+                }
+              }
             | undefined
-          const filters = meta?.filters
-          const autoRender = filters && cell.column.columnDef.cell === undefined
+          const filter = meta?.filter
+          const autoRender = filter && cell.column.columnDef.cell === undefined
 
           return (
             <TableCell
@@ -83,8 +88,8 @@ function BodyRows<TData>({
               {autoRender ? (
                 <AutoFilterCell
                   value={cell.getValue() as string}
-                  filters={filters}
-                  variant={meta.filterVariant}
+                  options={filter.options}
+                  variant={filter.variant}
                 />
               ) : (
                 flexRender(cell.column.columnDef.cell, cell.getContext())

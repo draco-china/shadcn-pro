@@ -66,7 +66,7 @@ export default function UsersTable() {
       columns={columns}
       data={users}
       header={<h2 className="text-lg font-semibold">Users</h2>}
-      stickyHeader
+      table={{ stickyHeader: true }}
       toolbar={{ options: { refresh: () => refetch() } }}
     />
   )
@@ -77,7 +77,7 @@ export default function UsersTable() {
 
 ### Pinned Columns and Sticky Header
 
-Use `meta.pinned` on column definitions to keep important columns visible during horizontal scroll. Users can also pin or unpin columns from the column settings menu. The table header is sticky by default; set `stickyHeader={false}` to disable it.
+Use `meta.pinned` on column definitions to keep important columns visible during horizontal scroll. Users can also pin or unpin columns from the column settings menu. The table header is sticky by default; set `table={{ stickyHeader: false }}` to disable it.
 
 ```tsx
 const columns = [
@@ -92,10 +92,10 @@ const columns = [
 
 ### Filtering with Reset
 
-Add `meta.search` or `meta.filters` to columns — ProTable **automatically** renders the toolbar search input and `FacetedFilter` controls, maps `value → label` in cells, and shows a **Reset** button whenever any filter is active.
+Add `meta.search` or `meta.filter` to columns — ProTable **automatically** renders the toolbar search input and `FacetedFilter` controls, maps `value → label` in cells, and shows a **Reset** button whenever any filter is active.
 
-- Default mode is **multi-select** — use `filterFn: "multiValueFilter"` (built-in)
-- Set `meta.filterMode: "single"` for single-select (radio-like), use `filterFn: "equals"`
+- Default filter mode is **multi-select**.
+- Set `meta.filter.mode: "single"` for single-select filtering.
 
 <ComponentPreview name="pro-table-filter-demo" previewClassName="min-h-[460px]" />
 
@@ -111,27 +111,29 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "role",
     header: "Role",
-    filterFn: "multiValueFilter", // built-in, handles string[] filter value
     meta: {
-      filterPlaceholder: "Role",
-      filters: [
-        { label: "Admin", value: "admin" },
-        { label: "Editor", value: "editor" },
-      ],
+      filter: {
+        placeholder: "Role",
+        options: [
+          { label: "Admin", value: "admin" },
+          { label: "Editor", value: "editor" },
+        ],
+      },
     },
   },
   {
     accessorKey: "status",
     header: "Status",
-    filterFn: "equals",
     meta: {
-      filterPlaceholder: "Status",
-      filterMode: "single",   // single-select
-      filterVariant: "text",  // cell renders as plain text (default: 'badge')
-      filters: [
-        { label: "Active", value: "active" },
-        { label: "Inactive", value: "inactive" },
-      ],
+      filter: {
+        placeholder: "Status",
+        mode: "single",
+        variant: "text",
+        options: [
+          { label: "Active", value: "active" },
+          { label: "Inactive", value: "inactive" },
+        ],
+      },
     },
   },
 ]
@@ -181,7 +183,6 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
   columns={columns}
   data={data}
   dragSort={{
-    enabled: true,
     rowKey: "id",
     onDragSortEnd: (newData) => console.log(newData),
   }}
@@ -197,8 +198,8 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `columns`               | `ColumnDef<T>[]`                      | —                            | TanStack Table column definitions.                                                                             |
 | `data`                  | `T[]`                                 | `[]`                         | Table data array for local/client data.                                                                        |
 | `request`               | `(state) => Promise<{ data, total? }>`| —                            | Server request function. When provided, pagination, sorting, and filtering are sent through request params.     |
-| `defaultState`          | `Partial<ProTableState>`              | —                            | Initial pagination, sorting, and column filters. Useful for URL-derived initial state.                          |
-| `onStateChange`         | `(state) => void`                     | —                            | Called when pagination, sorting, or filters change. Useful for URL sync or manually loading data.               |
+| `initialState`          | `Partial<ProTableState>`              | —                            | Initial pagination, sorting, and column filters. Useful for URL-derived initial state.                          |
+| `onChange`              | `(state) => void`                     | —                            | Called when pagination, sorting, or filters change. Useful for URL sync or manually loading data.               |
 | `header`                | `ReactNode \| (context) => ReactNode` | —                            | Custom content rendered above the toolbar.                                                                     |
 | `toolbar`               | `false \| ProTableToolbarOptions<T>` | enabled                      | Toolbar config. Controls search, actions, and built-in options in one object.                                  |
 | `toolbar.search`        | `false \| string \| { columnId, placeholder? }` | from `columns[].meta.search` | Explicit toolbar search config. Writes to the target column filter.                                  |
@@ -206,26 +207,23 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `toolbar.actions`       | `ProTableAction<T>[]`                 | —                            | Configured action buttons rendered on the right side of the toolbar. Button props are passed directly on each action; use `tooltip` for tooltip content. |
 | `bulkToolbar`           | `false \| { entityName?, actions? }`  | —                            | Bulk toolbar config shown when rows are selected.                                                              |
 | `pagination`            | `false \| { pageSizeOptions? }`       | enabled                      | Pagination config. Set to `false` to hide pagination.                                                          |
-| `dragSort`              | `boolean \| { enabled?, rowKey?, onDragSortEnd? }` | `false`       | Drag sort config. Object form keeps row key and callback grouped.                                              |
-| `loading`               | `boolean`                             | `false`                      | Shows a skeleton loading state.                                                                                |
-| `loadingRows`           | `number`                              | `5`                          | Number of skeleton rows to display.                                                                            |
-| `emptyText`             | `ReactNode`                           | `'No data'`                  | Empty state text or custom content.                                                                            |
-| `emptyIcon`             | `ReactNode`                           | inbox icon                   | Empty state icon.                                                                                              |
+| `dragSort`              | `false \| { rowKey?, onDragSortEnd? }` | —                            | Drag sort config. Pass an object to enable row drag sorting.                                                   |
+| `loading`               | `boolean \| { rows? }`                | `false`                      | Shows a skeleton loading state. Object form configures skeleton rows.                                           |
+| `empty`                 | `ReactNode \| { text?, icon? }`       | `'No data'`                  | Empty state content. Object form configures text and icon together.                                             |
 | `layout`                | `'full' \| 'auto'`                    | `'full'`                     | Full layout fills the available height and keeps pagination at the bottom; auto layout follows content height. |
-| `stickyHeader`          | `boolean`                             | `true`                       | Keep the table header visible while the table body scrolls.                                                    |
-| `columnPinning`         | `ColumnPinningState`                  | from `columns[].meta.pinned` | Controlled column pinning state. Columns can also set `meta: { pinned: 'left' \| 'right' }`.                   |
-| `onColumnPinningChange` | `OnChangeFn<ColumnPinningState>`      | —                            | Called when column pinning changes.                                                                            |
+| `table`                 | `{ stickyHeader?, pinning? }`         | `{ stickyHeader: true }`     | Table behavior config. `pinning` can be controlled with `{ value, onChange(value) }` or disabled with `false`.  |
 | `className`             | `string`                              | —                            | Additional className for the outer container.                                                                  |
 
 ### Column Meta
 
 | Meta                    | Type                                  | Default                      | Description                                                                                                    |
 | ----------------------- | ------------------------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `search`                | `boolean \| object`                   | —                            | Enables the toolbar search input from this column.                                                             |
-| `searchPlaceholder`     | `string`                              | `Search {columnId}...`       | Placeholder for the auto-rendered search input.                                                                |
-| `filters`               | `{ label, value }[]`                  | —                            | Options used to auto-render a FacetedFilter and map values to labels in cells.                                  |
-| `filterMode`            | `'single' \| 'multi'`                 | `'multi'`                    | Selection mode for the auto-rendered FacetedFilter.                                                            |
-| `filterVariant`         | `'badge' \| 'text'`                   | `'badge'`                    | Cell display style when `filters` is set.                                                                      |
+| `search`                | `boolean \| { placeholder? }`         | —                            | Enables the toolbar search input from this column.                                                             |
+| `filter`                | `{ options, placeholder?, mode?, variant?, onFilter? }` | —          | Auto-renders a FacetedFilter and maps values to labels in cells.                                                |
+| `filter.options`        | `{ label, value }[]`                  | —                            | Options used by the auto-rendered FacetedFilter.                                                               |
+| `filter.mode`           | `'single' \| 'multi'`                 | `'multi'`                    | Selection mode for the auto-rendered FacetedFilter.                                                            |
+| `filter.variant`        | `'badge' \| 'text'`                   | `'badge'`                    | Cell display style when `filter.options` is set.                                                               |
+| `filter.onFilter`       | `(value, record) => boolean`          | auto                         | Custom matching function for advanced filter behavior.                                                         |
 | `pinned`                | `'left' \| 'right'`                   | —                            | Initial pinned position for the column.                                                                        |
 
 ### useProTableUrlState
@@ -259,9 +257,8 @@ const urlState = useProTableUrlState({
 
 | Key                    | Type                          | Description                               |
 | ---------------------- | ----------------------------- | ----------------------------------------- |
-| `defaultState`         | `Partial<ProTableState>`      | Pass to `<ProTable defaultState={...} />`. |
-| `onStateChange`        | `(state) => void`             | Pass to `<ProTable onStateChange={...} />`. |
-| `ensurePageInRange`    | `(pageCount: number) => void` | Call after data loads to clamp the page.  |
+| `initialState`         | `Partial<ProTableState>`      | Pass to `<ProTable initialState={...} />`. |
+| `onChange`             | `(state) => void`             | Pass to `<ProTable onChange={...} />`. |
 
 **Example with Next.js App Router:**
 

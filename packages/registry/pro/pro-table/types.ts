@@ -29,24 +29,24 @@ export type ProTableSearch =
       placeholder?: string
     }
 
-export interface ProTableColumnMeta {
+export interface ProTableColumnFilter<TData = unknown> {
+  options: ProTableFilterOption[]
+  placeholder?: string
+  mode?: 'single' | 'multi'
+  variant?: 'badge' | 'text'
+  onFilter?: (value: string, record: TData) => boolean
+}
+
+export interface ProTableColumnMeta<TData = unknown> {
   pinned?: ProTableColumnPinningPosition
   /** Enable the toolbar search input from this column. */
   search?: ProTableColumnSearch
-  /** Placeholder for the auto-rendered search input */
-  searchPlaceholder?: string
-  /** Provide options to auto-render a FacetedFilter in the toolbar and map value→label in cells */
-  filters?: ProTableFilterOption[]
-  /** Placeholder for the auto-rendered filter */
-  filterPlaceholder?: string
-  /** Cell display style when filters is set: 'badge' (default) | 'text' */
-  filterVariant?: 'badge' | 'text'
-  /** Filter selection mode: 'multi' (default) | 'single' */
-  filterMode?: 'single' | 'multi'
+  /** Auto-render a FacetedFilter in the toolbar and map value→label in cells. */
+  filter?: ProTableColumnFilter<TData>
 }
 
 declare module '@tanstack/react-table' {
-  interface ColumnMeta<TData, TValue> extends ProTableColumnMeta {}
+  interface ColumnMeta<TData, TValue> extends ProTableColumnMeta<TData> {}
 }
 
 export function createColumnPinningState(

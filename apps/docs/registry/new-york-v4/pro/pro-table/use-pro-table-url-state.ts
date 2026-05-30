@@ -38,9 +38,8 @@ type UseProTableUrlStateParams = {
 }
 
 type UseProTableUrlStateReturn = {
-  defaultState: Partial<ProTableState>
-  onStateChange: (state: ProTableState) => void
-  ensurePageInRange: (pageCount: number, opts?: { resetTo?: 'first' | 'last' }) => void
+  initialState: Partial<ProTableState>
+  onChange: (state: ProTableState) => void
 }
 
 export function useProTableUrlState(params: UseProTableUrlStateParams): UseProTableUrlStateReturn {
@@ -56,7 +55,7 @@ export function useProTableUrlState(params: UseProTableUrlStateParams): UseProTa
   const defaultPage = paginationCfg?.defaultPage ?? 1
   const defaultPageSize = paginationCfg?.defaultPageSize ?? 10
 
-  const defaultState = useMemo<Partial<ProTableState>>(
+  const initialState = useMemo<Partial<ProTableState>>(
     () => ({
       pagination: getPagination(search, pageKey, pageSizeKey, defaultPage, defaultPageSize),
       columnFilters: getColumnFilters(search, columnFiltersCfg),
@@ -64,7 +63,7 @@ export function useProTableUrlState(params: UseProTableUrlStateParams): UseProTa
     [search, pageKey, pageSizeKey, defaultPage, defaultPageSize, columnFiltersCfg],
   )
 
-  const onStateChange = (state: ProTableState) => {
+  const onChange = (state: ProTableState) => {
     const patch: Record<string, unknown> = {
       [pageKey]:
         state.pagination.pageIndex + 1 <= defaultPage ? undefined : state.pagination.pageIndex + 1,
@@ -94,23 +93,7 @@ export function useProTableUrlState(params: UseProTableUrlStateParams): UseProTa
     })
   }
 
-  const ensurePageInRange = (
-    pageCount: number,
-    opts: { resetTo?: 'first' | 'last' } = { resetTo: 'first' },
-  ) => {
-    const pageNum = getNumber(search[pageKey], defaultPage)
-    if (pageCount > 0 && pageNum > pageCount) {
-      navigate({
-        replace: true,
-        search: (prev) => ({
-          ...(prev as SearchRecord),
-          [pageKey]: opts.resetTo === 'last' ? pageCount : undefined,
-        }),
-      })
-    }
-  }
-
-  return { defaultState, onStateChange, ensurePageInRange }
+  return { initialState, onChange }
 }
 
 function getPagination(

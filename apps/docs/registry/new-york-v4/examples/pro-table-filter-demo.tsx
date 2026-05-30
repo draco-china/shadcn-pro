@@ -29,28 +29,30 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "role",
     header: "Role",
-    filterFn: "multiValueFilter",
     meta: {
-      filterPlaceholder: "Role",
-      filters: [
-        { label: "Admin", value: "admin" },
-        { label: "Editor", value: "editor" },
-        { label: "Viewer", value: "viewer" },
-      ],
+      filter: {
+        placeholder: "Role",
+        options: [
+          { label: "Admin", value: "admin" },
+          { label: "Editor", value: "editor" },
+          { label: "Viewer", value: "viewer" },
+        ],
+      },
     },
   },
   {
     accessorKey: "status",
     header: "Status",
-    filterFn: "equals",
     meta: {
-      filterPlaceholder: "Status",
-      filterVariant: "text",
-      filterMode: "single",
-      filters: [
-        { label: "Active", value: "active" },
-        { label: "Inactive", value: "inactive" },
-      ],
+      filter: {
+        placeholder: "Status",
+        variant: "text",
+        mode: "single",
+        options: [
+          { label: "Active", value: "active" },
+          { label: "Inactive", value: "inactive" },
+        ],
+      },
     },
   },
 ]

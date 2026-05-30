@@ -252,15 +252,16 @@ const columns: ColumnDef<User>[] = [
     accessorKey: "role",
     header: "Role",
     size: 140,
-    filterFn: "multiValueFilter" as never,
     meta: {
-      filterPlaceholder: "Role",
-      filters: [
-        { label: "Admin", value: "admin" },
-        { label: "Editor", value: "editor" },
-        { label: "User", value: "user" },
-      ],
-      filterVariant: "badge" as const,
+      filter: {
+        placeholder: "Role",
+        options: [
+          { label: "Admin", value: "admin" },
+          { label: "Editor", value: "editor" },
+          { label: "User", value: "user" },
+        ],
+        variant: "badge" as const,
+      },
     },
     enableSorting: true,
   },
@@ -268,14 +269,15 @@ const columns: ColumnDef<User>[] = [
     accessorKey: "status",
     header: "Status",
     size: 140,
-    filterFn: "multiValueFilter" as never,
     meta: {
-      filterPlaceholder: "Status",
-      filters: [
-        { label: "Active", value: "active" },
-        { label: "Inactive", value: "inactive" },
-      ],
-      filterVariant: "badge" as const,
+      filter: {
+        placeholder: "Status",
+        options: [
+          { label: "Active", value: "active" },
+          { label: "Inactive", value: "inactive" },
+        ],
+        variant: "badge" as const,
+      },
     },
     enableSorting: true,
   },

@@ -73,5 +73,5 @@ function getSearchPlaceholder(
 ) {
   if (typeof search === 'object' && search.placeholder) return search.placeholder
   if (typeof meta?.search === 'object' && meta.search.placeholder) return meta.search.placeholder
-  return meta?.searchPlaceholder ?? `Search ${columnId}...`
+  return `Search ${columnId}...`
 }

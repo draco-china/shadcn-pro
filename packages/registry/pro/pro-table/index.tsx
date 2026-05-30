@@ -14,6 +14,7 @@ import {
   type ColumnDef,
   type ColumnFiltersState,
   type ColumnPinningState,
+  type FilterFn,
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
@@ -40,7 +41,13 @@ import { ProTableHeader } from './table/header'
 import { getDefaultColumnPinning, getLeafColumnIds, reorderDataByRows } from './table/utils'
 import { ProTableToolbar } from './toolbar'
 import { ProTableBulkActions } from './toolbar/bulk-actions'
-import { cellPadding, type ProTableSearch, type TableSize } from './types'
+import {
+  cellPadding,
+  type ProTableColumnFilter,
+  type ProTableColumnMeta,
+  type ProTableSearch,
+  type TableSize,
+} from './types'
 
 const tableScrollbarClassName =
   '[scrollbar-gutter:auto] [scrollbar-width:thin] [scrollbar-color:transparent_transparent] hover:[scrollbar-color:rgba(148,163,184,0.45)_transparent] [&::-webkit-scrollbar]:size-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:shadow-none [&::-webkit-scrollbar-corner]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-0 [&::-webkit-scrollbar-thumb]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/35'
@@ -101,31 +108,47 @@ export interface ProTablePaginationOptions {
   pageSizeOptions?: number[]
 }
 
+export interface ProTableLoadingOptions {
+  rows?: number
+}
+
+export type ProTableEmptyOptions =
+  | React.ReactNode
+  | {
+      text?: React.ReactNode
+      icon?: React.ReactNode
+    }
+
 export interface ProTableDragSortOptions<TData> {
-  enabled?: boolean
   rowKey?: keyof TData
   onDragSortEnd?: (newData: TData[]) => void
+}
+
+export interface ProTableTableOptions {
+  stickyHeader?: boolean
+  pinning?:
+    | false
+    | {
+        value?: ColumnPinningState
+        onChange?: (value: ColumnPinningState) => void
+      }
 }
 
 export interface ProTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data?: TData[]
   request?: ProTableRequest<TData>
-  defaultState?: Partial<ProTableState>
-  onStateChange?: (state: ProTableState) => void
+  initialState?: Partial<ProTableState>
+  onChange?: (state: ProTableState) => void
   header?: React.ReactNode | ((context: ProTableRenderContext<TData>) => React.ReactNode)
   toolbar?: false | ProTableToolbarOptions<TData>
   bulkToolbar?: false | ProTableBulkToolbarOptions<TData>
   pagination?: false | ProTablePaginationOptions
-  dragSort?: boolean | ProTableDragSortOptions<TData>
-  loading?: boolean
-  loadingRows?: number
-  emptyText?: React.ReactNode
-  emptyIcon?: React.ReactNode
+  dragSort?: false | ProTableDragSortOptions<TData>
+  loading?: boolean | ProTableLoadingOptions
+  empty?: ProTableEmptyOptions
   layout?: ProTableLayout
-  stickyHeader?: boolean
-  columnPinning?: ColumnPinningState
-  onColumnPinningChange?: OnChangeFn<ColumnPinningState>
+  table?: ProTableTableOptions
   className?: string
 }
 
@@ -133,21 +156,17 @@ export function ProTable<TData, TValue>({
   columns,
   data: dataProp = [],
   request,
-  defaultState,
-  onStateChange,
+  initialState,
+  onChange,
   header,
   toolbar,
   bulkToolbar,
   pagination: paginationOptions,
   dragSort,
   loading = false,
-  loadingRows = 5,
-  emptyText = 'No data',
-  emptyIcon,
+  empty,
   layout = 'full',
-  stickyHeader = true,
-  columnPinning,
-  onColumnPinningChange,
+  table: tableOptions,
   className,
 }: ProTableProps<TData, TValue>) {
   const [data, setData] = React.useState<TData[]>(dataProp)
@@ -156,33 +175,39 @@ export function ProTable<TData, TValue>({
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    defaultState?.columnFilters ?? [],
+    initialState?.columnFilters ?? [],
   )
-  const [sorting, setSorting] = React.useState<SortingState>(defaultState?.sorting ?? [])
+  const [sorting, setSorting] = React.useState<SortingState>(initialState?.sorting ?? [])
   const manualPagination = Boolean(request)
   const manualSorting = Boolean(request)
   const manualFiltering = Boolean(request)
   const [pagination, setPagination] = React.useState<PaginationState>(
-    defaultState?.pagination ?? {
+    initialState?.pagination ?? {
       pageIndex: 0,
       pageSize: 10,
     },
   )
   const [tableSize, setTableSize] = React.useState<TableSize>('default')
-  const dragSortOptions = typeof dragSort === 'object' ? dragSort : undefined
-  const dragSortEnabled =
-    typeof dragSort === 'boolean' ? dragSort : (dragSortOptions?.enabled ?? false)
+  const dragSortEnabled = Boolean(dragSort)
+  const loadingEnabled = Boolean(loading)
+  const loadingRows = typeof loading === 'object' ? (loading.rows ?? 5) : 5
+  const emptyOptions = getEmptyOptions(empty)
   const paginationEnabled = paginationOptions !== false
   const pageSizeOptions =
     typeof paginationOptions === 'object' ? paginationOptions.pageSizeOptions : undefined
-  const defaultColumnOrder = React.useMemo(() => getLeafColumnIds(columns), [columns])
-  const defaultColumnPinning = React.useMemo(() => getDefaultColumnPinning(columns), [columns])
+  const tableColumns = React.useMemo(() => withAutoFilterFns(columns), [columns])
+  const defaultColumnOrder = React.useMemo(() => getLeafColumnIds(tableColumns), [tableColumns])
+  const defaultColumnPinning = React.useMemo(
+    () => getDefaultColumnPinning(tableColumns),
+    [tableColumns],
+  )
   const defaultColumnOrderKey = defaultColumnOrder.join('\0')
   const defaultColumnPinningKey = `${defaultColumnPinning.left?.join('\0') ?? ''}\u0001${defaultColumnPinning.right?.join('\0') ?? ''}`
   const [columnOrder, setColumnOrder] = React.useState<string[]>(defaultColumnOrder)
   const [internalColumnPinning, setInternalColumnPinning] =
     React.useState<ColumnPinningState>(defaultColumnPinning)
-  const currentColumnPinning = columnPinning ?? internalColumnPinning
+  const pinningOptions = tableOptions?.pinning === false ? undefined : tableOptions?.pinning
+  const currentColumnPinning = pinningOptions?.value ?? internalColumnPinning
 
   React.useEffect(() => {
     if (!request) setData(dataProp)
@@ -199,8 +224,8 @@ export function ProTable<TData, TValue>({
       mountedRef.current = true
       return
     }
-    onStateChange?.(tableState)
-  }, [onStateChange, tableState])
+    onChange?.(tableState)
+  }, [onChange, tableState])
 
   React.useEffect(() => {
     if (!request) return
@@ -227,16 +252,19 @@ export function ProTable<TData, TValue>({
     ])
   }, [defaultColumnOrderKey])
   React.useEffect(() => {
-    if (columnPinning) return
+    if (tableOptions?.pinning === false || pinningOptions?.value) return
     setInternalColumnPinning(defaultColumnPinning)
-  }, [columnPinning, defaultColumnPinningKey])
+  }, [tableOptions?.pinning, pinningOptions?.value, defaultColumnPinningKey])
 
   const handleColumnPinningChange = React.useCallback<OnChangeFn<ColumnPinningState>>(
     (updater) => {
-      setInternalColumnPinning(updater)
-      onColumnPinningChange?.(updater)
+      setInternalColumnPinning((current) => {
+        const next = typeof updater === 'function' ? updater(current) : updater
+        pinningOptions?.onChange?.(next)
+        return next
+      })
     },
-    [onColumnPinningChange],
+    [pinningOptions],
   )
   const resetToFirstPage = React.useCallback(() => {
     setPagination((current) => ({ ...current, pageIndex: 0 }))
@@ -257,7 +285,7 @@ export function ProTable<TData, TValue>({
   )
   const table = useReactTable({
     data,
-    columns,
+    columns: tableColumns,
     state: {
       sorting,
       columnVisibility,
@@ -286,10 +314,16 @@ export function ProTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-    getRowId: dragSortOptions?.rowKey
-      ? (row) => String((row as Record<string, unknown>)[dragSortOptions.rowKey as string])
+    getRowId: dragSort?.rowKey
+      ? (row) => String((row as Record<string, unknown>)[dragSort.rowKey as string])
       : undefined,
   })
+
+  const pageCount = table.getPageCount()
+  React.useEffect(() => {
+    if (!paginationEnabled || pageCount <= 0 || pagination.pageIndex < pageCount) return
+    setPagination((current) => ({ ...current, pageIndex: pageCount - 1 }))
+  }, [pageCount, pagination.pageIndex, paginationEnabled])
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -311,7 +345,7 @@ export function ProTable<TData, TValue>({
     if (nextData === data) return
 
     setData(nextData)
-    dragSortOptions?.onDragSortEnd?.(nextData)
+    dragSort?.onDragSortEnd?.(nextData)
   }
 
   const rows = table.getRowModel().rows
@@ -346,7 +380,7 @@ export function ProTable<TData, TValue>({
             <ProTableHeader
               headerGroups={table.getHeaderGroups()}
               dragSort={dragSortEnabled}
-              sticky={stickyHeader}
+              sticky={tableOptions?.stickyHeader ?? true}
             />
           </TableHeader>
           <TableBody>
@@ -356,11 +390,11 @@ export function ProTable<TData, TValue>({
               visibleColumns={visibleColumns}
               visibleColumnCount={visibleColumnCount}
               dragSort={dragSortEnabled}
-              loading={loading || requestLoading}
+              loading={loadingEnabled || requestLoading}
               loadingRows={loadingRows}
               paddingClass={cellPadding[tableSize]}
-              emptyIcon={emptyIcon}
-              emptyText={emptyText}
+              emptyIcon={emptyOptions.icon}
+              emptyText={emptyOptions.text}
             />
           </TableBody>
         </table>
@@ -381,7 +415,7 @@ export function ProTable<TData, TValue>({
       {toolbar !== false && (
         <ProTableToolbar
           table={table}
-          disabled={loading || requestLoading}
+          disabled={loadingEnabled || requestLoading}
           search={toolbarOptions?.search}
           actions={toolbarActionNodes}
           columns={toolbarBuiltInOptions?.columns ?? true}
@@ -407,6 +441,77 @@ export function ProTable<TData, TValue>({
       )}
     </div>
   )
+}
+
+function withAutoFilterFns<TData, TValue>(
+  columns: ColumnDef<TData, TValue>[],
+): ColumnDef<TData, TValue>[] {
+  return columns.map((column) => {
+    const columnDef = column as ColumnDef<TData, TValue> & {
+      columns?: ColumnDef<TData, TValue>[]
+      filterFn?: unknown
+      meta?: ProTableColumnMeta
+    }
+    const children = columnDef.columns ? withAutoFilterFns(columnDef.columns) : undefined
+    const filter = columnDef.meta?.filter
+    const shouldApplyFilter = filter && columnDef.filterFn === undefined
+
+    if (!children && !shouldApplyFilter) return column
+
+    return {
+      ...column,
+      ...(children ? { columns: children } : {}),
+      ...(shouldApplyFilter
+        ? {
+            filterFn: filter.onFilter
+              ? createFilterFn(filter.onFilter)
+              : getDefaultFilterFn<TData>(filter.mode),
+          }
+        : {}),
+    }
+  })
+}
+
+function getEmptyOptions(empty: ProTableEmptyOptions | undefined) {
+  if (
+    empty &&
+    typeof empty === 'object' &&
+    !React.isValidElement(empty) &&
+    !Array.isArray(empty) &&
+    ('text' in empty || 'icon' in empty)
+  ) {
+    return empty
+  }
+
+  return { text: empty }
+}
+
+function getDefaultFilterFn<TData>(mode: ProTableColumnFilter['mode']) {
+  return mode === 'single' ? 'equals' : (multiValueFilter as FilterFn<TData>)
+}
+
+function createFilterFn<TData>(
+  onFilter: NonNullable<ProTableColumnFilter['onFilter']>,
+): FilterFn<TData> {
+  return (row, _columnId, filterValue) => {
+    const values = Array.isArray(filterValue)
+      ? filterValue
+      : filterValue === undefined || filterValue === null || filterValue === ''
+        ? []
+        : [filterValue]
+
+    return values.length === 0 || values.some((value) => onFilter(String(value), row.original))
+  }
+}
+
+function multiValueFilter<TData>(row: Row<TData>, columnId: string, filterValue: unknown) {
+  const values = Array.isArray(filterValue)
+    ? filterValue
+    : filterValue === undefined || filterValue === null || filterValue === ''
+      ? []
+      : [filterValue]
+
+  return values.length === 0 || values.includes(row.getValue(columnId))
 }
 
 function renderActions<TData>(
