@@ -56,6 +56,7 @@ const proFormFiles = [
   'index.tsx',
   'layout.tsx',
   'form-item.tsx',
+  'overlay-form.tsx',
   'formily-fields/index.tsx',
   'formily-fields/utils.ts',
   'formily-fields/text.tsx',
@@ -145,6 +146,19 @@ export const CATEGORIES: Category[] = [
         description: 'Built-in Zod validation with real-time error messages.',
         iframeHeight: '500px',
         files: [demoFile('pro-form-validation-demo'), ...componentFiles('pro-form', proFormFiles)],
+      },
+      {
+        name: 'pro-form-modal-demo',
+        description: 'ModalForm — schema-driven form inside a Dialog, closes on successful submit.',
+        iframeHeight: '480px',
+        files: [demoFile('pro-form-modal-demo'), ...componentFiles('pro-form', proFormFiles)],
+      },
+      {
+        name: 'pro-form-drawer-demo',
+        description:
+          'DrawerForm — schema-driven form inside a Drawer panel, closes on successful submit.',
+        iframeHeight: '480px',
+        files: [demoFile('pro-form-drawer-demo'), ...componentFiles('pro-form', proFormFiles)],
       },
     ],
   },

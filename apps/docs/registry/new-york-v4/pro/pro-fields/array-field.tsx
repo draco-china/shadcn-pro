@@ -3,11 +3,11 @@
 import {
   closestCenter,
   DndContext,
+  type DragEndEvent,
   KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
-  type DragEndEvent,
 } from '@dnd-kit/core'
 import {
   arrayMove,
@@ -60,14 +60,9 @@ interface SortableItemProps {
 }
 
 function SortableItem({ id, children, onRemove, disabled, canRemove = true }: SortableItemProps) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id })
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id,
+  })
 
   return (
     <div
@@ -125,9 +120,7 @@ export function ArrayField<TItem = unknown>({
   className,
 }: ArrayFieldProps<TItem>) {
   // Uncontrolled state fallback
-  const [internalValue, setInternalValue] = React.useState<TItem[]>(
-    defaultValue ?? [],
-  )
+  const [internalValue, setInternalValue] = React.useState<TItem[]>(defaultValue ?? [])
   const isControlled = valueProp !== undefined
   const value = isControlled ? valueProp : internalValue
 
@@ -142,8 +135,9 @@ export function ArrayField<TItem = unknown>({
       if (value.length > prev.length) {
         return [
           ...prev,
-          ...Array.from({ length: value.length - prev.length }, () =>
-            `item-${Math.random().toString(36).slice(2)}`,
+          ...Array.from(
+            { length: value.length - prev.length },
+            () => `item-${Math.random().toString(36).slice(2)}`,
           ),
         ]
       }
@@ -171,9 +165,7 @@ export function ArrayField<TItem = unknown>({
 
   function handleUpdate(index: number, patch: object) {
     commit(
-      value.map((item, i) =>
-        i === index ? { ...(item as object), ...patch } : item,
-      ) as TItem[],
+      value.map((item, i) => (i === index ? { ...(item as object), ...patch } : item)) as TItem[],
     )
   }
 
@@ -199,11 +191,7 @@ export function ArrayField<TItem = unknown>({
 
   return (
     <div className={cn('space-y-2', className)}>
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={ids} strategy={verticalListSortingStrategy}>
           {value.map((item, index) => (
             <SortableItem

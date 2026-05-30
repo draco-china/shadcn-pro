@@ -23,89 +23,29 @@ var transformers = [
         node.properties.__raw__ = raw;
         if (raw.startsWith("npm install")) {
           node.properties.__npm__ = raw;
-          node.properties.__yarn__ = replaceCommandPrefix(
-            raw,
-            /^npm install\b/gm,
-            "yarn add"
-          );
-          node.properties.__pnpm__ = replaceCommandPrefix(
-            raw,
-            /^npm install\b/gm,
-            "pnpm add"
-          );
-          node.properties.__bun__ = replaceCommandPrefix(
-            raw,
-            /^npm install\b/gm,
-            "bun add"
-          );
+          node.properties.__yarn__ = replaceCommandPrefix(raw, /^npm install\b/gm, "yarn add");
+          node.properties.__pnpm__ = replaceCommandPrefix(raw, /^npm install\b/gm, "pnpm add");
+          node.properties.__bun__ = replaceCommandPrefix(raw, /^npm install\b/gm, "bun add");
         } else if (raw.startsWith("npx create-")) {
           node.properties.__npm__ = raw;
-          node.properties.__yarn__ = replaceCommandPrefix(
-            raw,
-            /^npx create-/gm,
-            "yarn create "
-          );
-          node.properties.__pnpm__ = replaceCommandPrefix(
-            raw,
-            /^npx create-/gm,
-            "pnpm create "
-          );
-          node.properties.__bun__ = replaceCommandPrefix(
-            raw,
-            /^npx\b/gm,
-            "bunx --bun"
-          );
+          node.properties.__yarn__ = replaceCommandPrefix(raw, /^npx create-/gm, "yarn create ");
+          node.properties.__pnpm__ = replaceCommandPrefix(raw, /^npx create-/gm, "pnpm create ");
+          node.properties.__bun__ = replaceCommandPrefix(raw, /^npx\b/gm, "bunx --bun");
         } else if (raw.startsWith("npm create")) {
           node.properties.__npm__ = raw;
-          node.properties.__yarn__ = replaceCommandPrefix(
-            raw,
-            /^npm create\b/gm,
-            "yarn create"
-          );
-          node.properties.__pnpm__ = replaceCommandPrefix(
-            raw,
-            /^npm create\b/gm,
-            "pnpm create"
-          );
-          node.properties.__bun__ = replaceCommandPrefix(
-            raw,
-            /^npm create\b/gm,
-            "bun create"
-          );
+          node.properties.__yarn__ = replaceCommandPrefix(raw, /^npm create\b/gm, "yarn create");
+          node.properties.__pnpm__ = replaceCommandPrefix(raw, /^npm create\b/gm, "pnpm create");
+          node.properties.__bun__ = replaceCommandPrefix(raw, /^npm create\b/gm, "bun create");
         } else if (raw.startsWith("npx")) {
           node.properties.__npm__ = raw;
-          node.properties.__yarn__ = replaceCommandPrefix(
-            raw,
-            /^npx\b/gm,
-            "yarn dlx"
-          );
-          node.properties.__pnpm__ = replaceCommandPrefix(
-            raw,
-            /^npx\b/gm,
-            "pnpm dlx"
-          );
-          node.properties.__bun__ = replaceCommandPrefix(
-            raw,
-            /^npx\b/gm,
-            "bunx --bun"
-          );
+          node.properties.__yarn__ = replaceCommandPrefix(raw, /^npx\b/gm, "yarn dlx");
+          node.properties.__pnpm__ = replaceCommandPrefix(raw, /^npx\b/gm, "pnpm dlx");
+          node.properties.__bun__ = replaceCommandPrefix(raw, /^npx\b/gm, "bunx --bun");
         } else if (raw.startsWith("npm run")) {
           node.properties.__npm__ = raw;
-          node.properties.__yarn__ = replaceCommandPrefix(
-            raw,
-            /^npm run\b/gm,
-            "yarn"
-          );
-          node.properties.__pnpm__ = replaceCommandPrefix(
-            raw,
-            /^npm run\b/gm,
-            "pnpm"
-          );
-          node.properties.__bun__ = replaceCommandPrefix(
-            raw,
-            /^npm run\b/gm,
-            "bun"
-          );
+          node.properties.__yarn__ = replaceCommandPrefix(raw, /^npm run\b/gm, "yarn");
+          node.properties.__pnpm__ = replaceCommandPrefix(raw, /^npm run\b/gm, "pnpm");
+          node.properties.__bun__ = replaceCommandPrefix(raw, /^npm run\b/gm, "bun");
         }
       }
     }

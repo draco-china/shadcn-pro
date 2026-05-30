@@ -403,6 +403,7 @@ export const Index: Record<string, Record<string, any>> = {
         { path: "registry/new-york-v4/pro/pro-form/index.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/pro-form/layout.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/pro-form/form-item.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/pro-form/overlay-form.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/pro-form/formily-fields/index.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/pro-form/formily-fields/utils.ts", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/pro-form/formily-fields/text.tsx", type: "registry:ui" },

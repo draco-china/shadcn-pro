@@ -50,12 +50,8 @@ export function ObjectField({
       )}
     >
       <div className="min-w-0 flex-1">
-        {title && (
-          <p className="text-sm font-medium leading-none">{title}</p>
-        )}
-        {description && (
-          <p className="mt-1 text-xs text-muted-foreground">{description}</p>
-        )}
+        {title && <p className="text-sm font-medium leading-none">{title}</p>}
+        {description && <p className="mt-1 text-xs text-muted-foreground">{description}</p>}
       </div>
       <div className="flex shrink-0 items-center gap-1">
         {action}
@@ -78,17 +74,10 @@ export function ObjectField({
     </div>
   )
 
-  const content = (
-    <div className={cn('space-y-4', contentClassName)}>{children}</div>
-  )
+  const content = <div className={cn('space-y-4', contentClassName)}>{children}</div>
 
   const inner = (
-    <div
-      className={cn(
-        variant === 'bordered' && 'border-l-2 border-border pl-4',
-        className,
-      )}
-    >
+    <div className={cn(variant === 'bordered' && 'border-l-2 border-border pl-4', className)}>
       {variant === 'separated' ? (
         <>
           {hasHeader && (
@@ -111,12 +100,7 @@ export function ObjectField({
   if (collapsible) {
     return (
       <Collapsible open={open} onOpenChange={setOpen}>
-        <div
-          className={cn(
-            variant === 'bordered' && 'border-l-2 border-border pl-4',
-            className,
-          )}
-        >
+        <div className={cn(variant === 'bordered' && 'border-l-2 border-border pl-4', className)}>
           {variant === 'separated' ? (
             <>
               {hasHeader && (

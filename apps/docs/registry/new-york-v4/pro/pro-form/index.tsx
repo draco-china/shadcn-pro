@@ -32,6 +32,8 @@ import {
 import { ProFormActions, ProFormGrid } from './layout'
 
 export type { ProFormActionsProps, ProFormLayoutProps } from './layout'
+export type { DrawerFormProps, ModalFormProps } from './overlay-form'
+export { DrawerForm, ModalForm } from './overlay-form'
 export type { Form, IFormProps }
 export { createForm, ProFormActions, ProFormGrid }
 

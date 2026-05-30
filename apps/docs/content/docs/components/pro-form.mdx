@@ -163,6 +163,18 @@ Nested object grouping with optional card wrapper:
 />
 ```
 
+### Modal Form
+
+Open a form inside a Dialog. Pass a `trigger` element — the dialog opens on click and closes automatically after a successful submit.
+
+<BlockViewer name="pro-form-modal-demo" className="min-h-[280px]" />
+
+### Drawer Form
+
+Same as Modal Form but rendered inside a side Drawer. Use the `side` prop to control which edge it slides in from.
+
+<BlockViewer name="pro-form-drawer-demo" className="min-h-[280px]" />
+
 ### Field Description
 
 Add a `description` property to a schema field to display helper text below the input:
@@ -238,3 +250,47 @@ Standalone action bar — use with `hideActions` to position it freely.
 | `loading` | `boolean` | `false` | Shows loading state on the submit button. |
 | `align` | `'left' \| 'center' \| 'right'` | `'left'` | Alignment of buttons. |
 | `children` | `ReactNode` | — | Extra buttons or content to render alongside actions. |
+
+### ModalForm
+
+A `ProForm` embedded inside a shadcn `Dialog`. The dialog opens when the `trigger` is clicked and closes automatically on successful submit.
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `trigger` | `ReactNode` | — | Element that opens the dialog on click. |
+| `title` | `string` | — | Dialog title. |
+| `description` | `string` | — | Optional subtitle shown below the title. |
+| `open` | `boolean` | — | Controlled open state. |
+| `onOpenChange` | `(open: boolean) => void` | — | Controlled open state handler. |
+| `onFinish` | `(values) => void \| Promise<void>` | — | Called after successful validation. Dialog closes on resolve. |
+| `onFinishFailed` | `(errors) => void` | — | Called when validation fails. Dialog stays open. |
+| `submitText` | `string` | `'Submit'` | Label for the submit button. |
+| `cancelText` | `string` | `'Cancel'` | Label for the cancel button. |
+| `form` | `Form` | internal | Formily form instance. |
+| `formProps` | `IFormProps` | — | Options when creating the internal form. |
+| `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout. |
+| `widthClass` | `string` | `'sm:max-w-[480px]'` | Tailwind class controlling dialog width. |
+| `className` | `string` | — | Additional className for the form element. |
+| `children` | `ReactNode` | — | Form fields (`SchemaField` nodes or layout components). |
+
+### DrawerForm
+
+Identical to `ModalForm` but renders inside a shadcn `Drawer` that slides in from a screen edge.
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `trigger` | `ReactNode` | — | Element that opens the drawer on click. |
+| `title` | `string` | — | Drawer title. |
+| `description` | `string` | — | Optional subtitle shown below the title. |
+| `side` | `'right' \| 'left' \| 'top' \| 'bottom'` | `'right'` | Which edge the drawer slides in from. |
+| `open` | `boolean` | — | Controlled open state. |
+| `onOpenChange` | `(open: boolean) => void` | — | Controlled open state handler. |
+| `onFinish` | `(values) => void \| Promise<void>` | — | Called after successful validation. Drawer closes on resolve. |
+| `onFinishFailed` | `(errors) => void` | — | Called when validation fails. Drawer stays open. |
+| `submitText` | `string` | `'Submit'` | Label for the submit button. |
+| `cancelText` | `string` | `'Cancel'` | Label for the cancel button. |
+| `form` | `Form` | internal | Formily form instance. |
+| `formProps` | `IFormProps` | — | Options when creating the internal form. |
+| `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout. |
+| `className` | `string` | — | Additional className for the form element. |
+| `children` | `ReactNode` | — | Form fields (`SchemaField` nodes or layout components). |
