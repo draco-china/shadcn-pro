@@ -309,9 +309,8 @@ export default function ProFormDemo() {
           required
           x-decorator="FormItem"
           x-component="Checkbox"
-        >
-          I agree to the Terms of Service and Privacy Policy
-        </SchemaField.Boolean>
+          x-content="I agree to the Terms of Service and Privacy Policy"
+        />
         </SchemaField>
       </ProForm>
 
