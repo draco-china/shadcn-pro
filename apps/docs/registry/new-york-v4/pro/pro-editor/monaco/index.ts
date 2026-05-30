@@ -53,20 +53,23 @@ const GITHUB_MONACO_THEMES: Record<EditorTheme, MonacoThemeData> = {
   'github-dark': githubDarkTheme as MonacoThemeData,
 }
 
-/** Read a shadcn CSS variable (e.g. '--background') and resolve it to a #rrggbb hex string. */
+/** Read a shadcn CSS variable and resolve it to a #rrggbb hex string via canvas. */
 function cssVar(name: string): string {
   if (typeof document === 'undefined') return ''
   const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
   if (!raw) return ''
-  const div = document.createElement('div')
-  div.style.color = `hsl(${raw})`
-  div.style.display = 'none'
-  document.body.appendChild(div)
-  const computed = getComputedStyle(div).color
-  document.body.removeChild(div)
-  const m = computed.match(/\d+/g)
-  if (!m || m.length < 3) return ''
-  return `#${[m[0], m[1], m[2]].map((n) => Number(n).toString(16).padStart(2, '0')).join('')}`
+  try {
+    const canvas = document.createElement('canvas')
+    canvas.width = canvas.height = 1
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return ''
+    ctx.fillStyle = raw
+    ctx.fillRect(0, 0, 1, 1)
+    const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data
+    return `#${[r, g, b].map((n) => n.toString(16).padStart(2, '0')).join('')}`
+  } catch {
+    return ''
+  }
 }
 
 export function applyShadcnTheme(monaco: Monaco, theme: EditorTheme) {
