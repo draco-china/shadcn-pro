@@ -1,3 +1,10 @@
+## [1.11.3](https://github.com/draco-china/shadcn-pro/compare/v1.11.2...v1.11.3) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-fields:** replace all remaining XxxBase refs in demos and formily-fields ([9f88339](https://github.com/draco-china/shadcn-pro/commit/9f883399c3f1ce81d9f266a00186bf116d25301a))
+
 ## [1.11.2](https://github.com/draco-china/shadcn-pro/compare/v1.11.1...v1.11.2) (2026-05-30)
 
 
