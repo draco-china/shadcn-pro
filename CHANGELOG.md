@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/draco-china/shadcn-pro/compare/v1.10.0...v1.11.0) (2026-05-30)
+
+
+### Features
+
+* **pro-table:** add URL state sync via useProTableUrlState hook ([47cb85c](https://github.com/draco-china/shadcn-pro/commit/47cb85c682d98a04ecbe2e0169b845a4b367f4fd))
+
 # [1.10.0](https://github.com/draco-china/shadcn-pro/compare/v1.9.0...v1.10.0) (2026-05-30)
 
 
