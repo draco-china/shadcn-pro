@@ -9,7 +9,7 @@ import { applyShadcnTheme, configureTypescript, fallbackMonacoTheme } from './mo
 import { useEditorPreviewScrollSync } from './preview/scroll-sync'
 import { scrollbarClassName } from './preview/styles'
 import { EditorToolbar, EditorToolbarButton } from './toolbar'
-import type { EditorProps, EditorThemeMode, EditorViewMode, MonacoEditorInstance } from './types'
+import type { EditorProps, EditorViewMode, MonacoEditorInstance } from './types'
 
 export type {
   EditorProps,

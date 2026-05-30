@@ -106,7 +106,7 @@ bun install
 bun dev              # start docs site
 bun turbo build      # build all packages
 bunx biome ci .      # lint & format check
-bun run --cwd packages/registry validate
+(cd packages/registry && bun run validate)
 ```
 
 ## 📄 License
