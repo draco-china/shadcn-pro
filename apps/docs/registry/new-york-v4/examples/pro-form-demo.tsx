@@ -35,7 +35,6 @@ export default function ProFormDemo() {
         <SchemaField.Object
           name="basic"
           title="Basic Information"
-          x-decorator="FormItem"
           x-component="ObjectField"
           x-component-props={{ variant: 'separated', collapsible: true }}
         >
@@ -88,7 +87,6 @@ export default function ProFormDemo() {
         <SchemaField.Object
           name="settings"
           title="Role & Settings"
-          x-decorator="FormItem"
           x-component="ObjectField"
           x-component-props={{ variant: 'separated', collapsible: true }}
         >
@@ -200,7 +198,6 @@ export default function ProFormDemo() {
         <SchemaField.Object
           name="numeric"
           title="Budget & Schedule"
-          x-decorator="FormItem"
           x-component="ObjectField"
           x-component-props={{ variant: 'separated', collapsible: true }}
         >

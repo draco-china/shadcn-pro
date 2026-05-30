@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { dirname, join, normalize, resolve } from 'node:path'
 
 interface RegistryItem {
@@ -16,6 +16,7 @@ const registryRoot = resolve(import.meta.dir, '..')
 const repoRoot = resolve(registryRoot, '..', '..')
 const docsRegistryRoot = join(repoRoot, 'apps/docs/registry/new-york-v4')
 const docsComponentsRoot = join(repoRoot, 'apps/docs/content/docs/components')
+const docsExamplesRoot = join(repoRoot, 'apps/docs/registry/new-york-v4/examples')
 const docsExamplesIndex = join(repoRoot, 'apps/docs/examples/__index__.ts')
 const docsMetaPath = join(docsComponentsRoot, 'meta.json')
 const registry = JSON.parse(readFileSync(join(registryRoot, 'registry.json'), 'utf8')) as Registry
@@ -94,6 +95,28 @@ function includesDeprecatedArrayFieldAdapterProps(content: string) {
     content.includes('onMoveUp=') ||
     content.includes('onMoveDown=')
   )
+}
+
+function sourceFilesIn(dir: string, extensions: string[]) {
+  const files: string[] = []
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = join(dir, entry.name)
+    if (entry.isDirectory()) {
+      files.push(...sourceFilesIn(fullPath, extensions))
+      continue
+    }
+    if (extensions.some((extension) => entry.name.endsWith(extension))) {
+      files.push(fullPath)
+    }
+  }
+  return files
+}
+
+function includesDecoratedObjectFieldComponent(content: string) {
+  return [...content.matchAll(/<SchemaField\.Object[\s\S]*?>/g)].some((match) => {
+    const tag = match[0]
+    return tag.includes('x-component="ObjectField"') && tag.includes('x-decorator="FormItem"')
+  })
 }
 
 for (const name of expectedComponents) {
@@ -197,6 +220,15 @@ for (const name of removedComponents) {
     readFileSync(docsExamplesIndex, 'utf8'),
   ].join('\n')
   if (activeText.includes(name)) fail(`Removed component still referenced: ${name}`)
+}
+
+for (const file of [
+  ...sourceFilesIn(docsExamplesRoot, ['.tsx']),
+  ...sourceFilesIn(docsComponentsRoot, ['.mdx']),
+]) {
+  if (includesDecoratedObjectFieldComponent(readFileSync(file, 'utf8'))) {
+    fail(`SchemaField.Object with ObjectField must not use FormItem decorator: ${file}`)
+  }
 }
 
 if (failures.length) {
