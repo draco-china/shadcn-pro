@@ -53,7 +53,66 @@ const GITHUB_MONACO_THEMES: Record<EditorTheme, MonacoThemeData> = {
   'github-dark': githubDarkTheme as MonacoThemeData,
 }
 
+/** Read a shadcn CSS variable (e.g. '--background') and resolve it to a #rrggbb hex string. */
+function cssVar(name: string): string {
+  if (typeof document === 'undefined') return ''
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+  if (!raw) return ''
+  const div = document.createElement('div')
+  div.style.color = `hsl(${raw})`
+  div.style.display = 'none'
+  document.body.appendChild(div)
+  const computed = getComputedStyle(div).color
+  document.body.removeChild(div)
+  const m = computed.match(/\d+/g)
+  if (!m || m.length < 3) return ''
+  return `#${[m[0], m[1], m[2]].map((n) => Number(n).toString(16).padStart(2, '0')).join('')}`
+}
+
 export function applyShadcnTheme(monaco: Monaco, theme: EditorTheme) {
-  monaco.editor.defineTheme(theme, GITHUB_MONACO_THEMES[theme])
+  const base = GITHUB_MONACO_THEMES[theme]
+
+  const bg = cssVar('--background') || (base.colors?.['editor.background'] as string) || '#ffffff'
+  const fg = cssVar('--foreground') || (base.colors?.['editor.foreground'] as string) || '#000000'
+  const muted = cssVar('--muted') || '#f4f4f5'
+  const mutedFg = cssVar('--muted-foreground') || '#71717a'
+  const border = cssVar('--border') || '#e4e4e7'
+  const accent = cssVar('--accent') || '#f4f4f5'
+  const primary = cssVar('--primary') || '#18181b'
+
+  const overrides: Record<string, string> = {
+    'editor.background': bg,
+    'editor.foreground': fg,
+    'editorLineNumber.foreground': mutedFg,
+    'editorLineNumber.activeForeground': fg,
+    'editor.lineHighlightBackground': muted,
+    'editor.selectionBackground': `${primary}33`,
+    'editor.inactiveSelectionBackground': `${primary}1a`,
+    'editorCursor.foreground': fg,
+    'editorWhitespace.foreground': border,
+    'editorIndentGuide.background1': border,
+    'editorIndentGuide.activeBackground1': mutedFg,
+    'editor.selectionHighlightBorder': border,
+    'editorWidget.background': bg,
+    'editorWidget.border': border,
+    'editorSuggestWidget.background': bg,
+    'editorSuggestWidget.border': border,
+    'editorSuggestWidget.foreground': fg,
+    'editorSuggestWidget.selectedBackground': accent,
+    'editorSuggestWidget.selectedForeground': fg,
+    'editorHoverWidget.background': bg,
+    'editorHoverWidget.border': border,
+    'editorGutter.background': bg,
+    'scrollbar.shadow': '#00000000',
+    'scrollbarSlider.background': `${mutedFg}40`,
+    'scrollbarSlider.hoverBackground': `${mutedFg}66`,
+    'scrollbarSlider.activeBackground': `${mutedFg}99`,
+    'minimap.background': bg,
+  }
+
+  monaco.editor.defineTheme(theme, {
+    ...base,
+    colors: { ...base.colors, ...overrides },
+  })
   monaco.editor.setTheme(theme)
 }
