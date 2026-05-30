@@ -5,12 +5,12 @@ export type EditorTheme =
   | 'github-light'
   | 'github-dark'
   | 'one-dark-pro-flat'
-  | 'one-dark-pro-flat-light'
+  | 'one-light-pro-flat'
 
 export const EDITOR_THEMES: { value: EditorTheme; label: string }[] = [
   { value: 'github-light', label: 'GitHub Light' },
   { value: 'github-dark', label: 'GitHub Dark' },
-  { value: 'one-dark-pro-flat-light', label: 'One Dark Pro Light' },
+  { value: 'one-light-pro-flat', label: 'One Dark Pro Light' },
   { value: 'one-dark-pro-flat', label: 'One Dark Pro' },
 ]
 

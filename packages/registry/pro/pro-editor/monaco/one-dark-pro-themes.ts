@@ -2003,7 +2003,7 @@ export const oneDarkProFlatTheme: MonacoThemeData = {
   ],
 }
 
-export const oneDarkProFlatLightTheme: MonacoThemeData = {
+export const oneLightProFlatTheme: MonacoThemeData = {
   base: 'vs',
   inherit: false,
   rules: [],

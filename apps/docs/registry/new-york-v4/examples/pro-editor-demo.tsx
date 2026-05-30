@@ -40,7 +40,7 @@ const LANGUAGE_OPTIONS = [
 
 const THEME_OPTIONS: { label: string; value: EditorTheme }[] = [
   { label: "One Dark Pro", value: "one-dark-pro-flat" },
-  { label: "One Dark Pro Light", value: "one-dark-pro-flat-light" },
+  { label: "One Dark Pro Light", value: "one-light-pro-flat" },
   { label: "GitHub Dark", value: "github-dark" },
   { label: "GitHub Light", value: "github-light" },
 ]

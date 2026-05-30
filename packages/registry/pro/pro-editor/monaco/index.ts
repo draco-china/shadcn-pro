@@ -1,7 +1,7 @@
 import type { Monaco } from '@monaco-editor/react'
 import type { EditorTheme } from '../types'
 import { githubDarkTheme, githubLightTheme } from './github-themes'
-import { oneDarkProFlatLightTheme, oneDarkProFlatTheme } from './one-dark-pro-themes'
+import { oneLightProFlatTheme, oneDarkProFlatTheme } from './one-dark-pro-themes'
 
 const TSX_REACT_TYPES = `
 declare namespace JSX {
@@ -53,7 +53,7 @@ const GITHUB_MONACO_THEMES: Record<string, MonacoThemeData> = {
   'github-light': githubLightTheme as MonacoThemeData,
   'github-dark': githubDarkTheme as MonacoThemeData,
   'one-dark-pro-flat': oneDarkProFlatTheme as MonacoThemeData,
-  'one-dark-pro-flat-light': oneDarkProFlatLightTheme as MonacoThemeData,
+  'one-light-pro-flat': oneLightProFlatTheme as MonacoThemeData,
 }
 
 /** Read a shadcn CSS variable and resolve it to a #rrggbb hex string via canvas. */
