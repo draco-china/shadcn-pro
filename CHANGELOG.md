@@ -1,3 +1,10 @@
+## [1.11.15](https://github.com/draco-china/shadcn-pro/compare/v1.11.14...v1.11.15) (2026-05-30)
+
+
+### Bug Fixes
+
+* **overlay-form:** fixed header/footer, scrollable body for Modal and Drawer ([ae1e2b6](https://github.com/draco-china/shadcn-pro/commit/ae1e2b6d51cf051c1fb0b88335245a7571a48aae))
+
 ## [1.11.14](https://github.com/draco-china/shadcn-pro/compare/v1.11.13...v1.11.14) (2026-05-30)
 
 
