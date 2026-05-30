@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/draco-china/shadcn-pro/compare/v1.13.0...v1.13.1) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro:** resolve docs and field layout issues ([df6e37c](https://github.com/draco-china/shadcn-pro/commit/df6e37c2713010bb7c1fe74273c65d57338f30d4))
+
 # [1.13.0](https://github.com/draco-china/shadcn-pro/compare/v1.12.16...v1.13.0) (2026-05-30)
 
 
