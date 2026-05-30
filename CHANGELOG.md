@@ -1,3 +1,11 @@
+## [1.11.9](https://github.com/draco-china/shadcn-pro/compare/v1.11.8...v1.11.9) (2026-05-30)
+
+
+### Bug Fixes
+
+* **docs:** replace BlockViewer with BlockPreview in pro-form.mdx ([ccc0bd7](https://github.com/draco-china/shadcn-pro/commit/ccc0bd7ff6091d4dfd58c5fdc1ea3bc64c0a07af))
+* **docs:** use BlockPreview for pro-form-demo to fix missing render ([8328429](https://github.com/draco-china/shadcn-pro/commit/8328429482bfb0baa8a3817e753e70e96d99a73c))
+
 ## [1.11.8](https://github.com/draco-china/shadcn-pro/compare/v1.11.7...v1.11.8) (2026-05-30)
 
 
