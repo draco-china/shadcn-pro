@@ -34,6 +34,7 @@ import { ProFormActions, ProFormGrid } from './layout'
 export type { ProFormActionsProps, ProFormLayoutProps } from './layout'
 export type { Form, IFormProps }
 export { createForm, ProFormActions, ProFormGrid }
+export { DrawerForm, ModalForm } from './overlay-form'
 
 const defaultComponents: SchemaReactComponents = {
   FormItem,
