@@ -1,3 +1,10 @@
+## [1.11.14](https://github.com/draco-china/shadcn-pro/compare/v1.11.13...v1.11.14) (2026-05-30)
+
+
+### Bug Fixes
+
+* **array-field:** delete button always destructive color ([80e9d72](https://github.com/draco-china/shadcn-pro/commit/80e9d72ff4f53095ac436024ac9ce9bf811988be))
+
 ## [1.11.13](https://github.com/draco-china/shadcn-pro/compare/v1.11.12...v1.11.13) (2026-05-30)
 
 
