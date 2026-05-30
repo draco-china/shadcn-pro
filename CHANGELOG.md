@@ -1,3 +1,10 @@
+## [1.12.8](https://github.com/draco-china/shadcn-pro/compare/v1.12.7...v1.12.8) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** rewrite One Dark Pro rules using actual Monaco tokenizer token names ([213eb81](https://github.com/draco-china/shadcn-pro/commit/213eb81f327357c731d01cb4e9a7be0862ee448c))
+
 ## [1.12.7](https://github.com/draco-china/shadcn-pro/compare/v1.12.6...v1.12.7) (2026-05-30)
 
 
