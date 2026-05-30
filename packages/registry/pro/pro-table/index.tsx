@@ -14,6 +14,7 @@ import {
   type ColumnDef,
   type ColumnFiltersState,
   type ColumnPinningState,
+  functionalUpdate,
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
@@ -82,7 +83,7 @@ export interface ProTableProps<TData, TValue> {
   /** Controlled pagination state. Pair with `onPaginationChange`. When provided, server-side pagination is assumed. */
   pagination?: ProTablePaginationState
   onPaginationChange?: OnChangeFn<ProTablePaginationState>
-  /** Controlled sorting state. Pair with `onSortingChange`. When provided, server-side sorting is assumed. */
+  /** Controlled sorting state. Pair with `onSortingChange`. */
   sorting?: SortingState
   onSortingChange?: OnChangeFn<SortingState>
   /** Controlled column filters state. Pair with `onColumnFiltersChange`. */
@@ -133,24 +134,61 @@ export function ProTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [internalColumnFilters, setInternalColumnFilters] = React.useState<ColumnFiltersState>([])
   const columnFilters = columnFiltersProp ?? internalColumnFilters
-  const setColumnFilters: OnChangeFn<ColumnFiltersState> =
-    onColumnFiltersChangeProp ?? setInternalColumnFilters
+  const setColumnFilters = React.useCallback<OnChangeFn<ColumnFiltersState>>(
+    (updater) => {
+      if (columnFiltersProp === undefined) {
+        setInternalColumnFilters((current) => functionalUpdate(updater, current))
+      }
+      onColumnFiltersChangeProp?.(updater)
+    },
+    [columnFiltersProp, onColumnFiltersChangeProp],
+  )
   const [internalGlobalFilter, setInternalGlobalFilter] = React.useState<string>('')
   const globalFilter = globalFilterProp ?? internalGlobalFilter
-  const setGlobalFilter: OnChangeFn<string> = onGlobalFilterChange ?? setInternalGlobalFilter
+  const setGlobalFilter = React.useCallback<OnChangeFn<string>>(
+    (updater) => {
+      if (globalFilterProp === undefined) {
+        setInternalGlobalFilter((current) => functionalUpdate(updater, current))
+      }
+      onGlobalFilterChange?.(updater)
+    },
+    [globalFilterProp, onGlobalFilterChange],
+  )
   const [internalSorting, setInternalSorting] = React.useState<SortingState>([])
   const sorting = sortingProp ?? internalSorting
-  const setSorting: OnChangeFn<SortingState> = onSortingChangeProp ?? setInternalSorting
+  const setSorting = React.useCallback<OnChangeFn<SortingState>>(
+    (updater) => {
+      if (sortingProp === undefined) {
+        setInternalSorting((current) => functionalUpdate(updater, current))
+      }
+      onSortingChangeProp?.(updater)
+    },
+    [onSortingChangeProp, sortingProp],
+  )
   const manualPagination = paginationProp !== undefined
-  const manualSorting = onSortingChangeProp !== undefined
+  const manualSorting =
+    manualPagination && (sortingProp !== undefined || onSortingChangeProp !== undefined)
+  const manualFiltering =
+    manualPagination &&
+    (columnFiltersProp !== undefined ||
+      onColumnFiltersChangeProp !== undefined ||
+      globalFilterProp !== undefined ||
+      onGlobalFilterChange !== undefined)
 
   const [internalPagination, setInternalPagination] = React.useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   })
   const pagination = paginationProp ?? internalPagination
-  const setPagination: OnChangeFn<ProTablePaginationState> =
-    onPaginationChange ?? setInternalPagination
+  const setPagination = React.useCallback<OnChangeFn<ProTablePaginationState>>(
+    (updater) => {
+      if (paginationProp === undefined) {
+        setInternalPagination((current) => functionalUpdate(updater, current))
+      }
+      onPaginationChange?.(updater)
+    },
+    [onPaginationChange, paginationProp],
+  )
   const [tableSize, setTableSize] = React.useState<TableSize>('default')
   const defaultColumnOrder = React.useMemo(() => getLeafColumnIds(columns), [columns])
   const defaultColumnPinning = React.useMemo(() => getDefaultColumnPinning(columns), [columns])
@@ -206,7 +244,8 @@ export function ProTable<TData, TValue>({
     onPaginationChange: setPagination,
     manualPagination,
     manualSorting,
-    rowCount: pagination.total,
+    manualFiltering,
+    rowCount: paginationProp?.total,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

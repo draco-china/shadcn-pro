@@ -41,7 +41,7 @@ export function ProTablePagination<TData>({
   const pageCount = table.getPageCount()
   const safePageCount = Math.max(pageCount, 1)
   const current = Math.min(pageIndex + 1, safePageCount)
-  const total = table.getFilteredRowModel().rows.length
+  const total = table.getRowCount()
   const pageSize = table.getState().pagination.pageSize
 
   const pageRange = getPageRange(current, safePageCount)
@@ -98,7 +98,7 @@ export function ProTablePagination<TData>({
               table.setPageIndex(0)
             }}
           >
-            <SelectTrigger className="h-8 w-[60px] sm:w-[70px] text-xs sm:text-sm">
+            <SelectTrigger className="h-8 w-15 sm:w-17.5 text-xs sm:text-sm">
               <SelectValue />
             </SelectTrigger>
             <SelectContent side="top">
