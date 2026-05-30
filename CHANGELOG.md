@@ -1,3 +1,10 @@
+## [1.12.4](https://github.com/draco-china/shadcn-pro/compare/v1.12.3...v1.12.4) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** use Monaco rules[] for One Dark Pro token highlighting ([267991e](https://github.com/draco-china/shadcn-pro/commit/267991e3311b80ea6fb00d5062ea1dd0c32db6f4))
+
 ## [1.12.3](https://github.com/draco-china/shadcn-pro/compare/v1.12.2...v1.12.3) (2026-05-30)
 
 
