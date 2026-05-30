@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/draco-china/shadcn-pro/compare/v1.11.0...v1.11.1) (2026-05-30)
+
+
+### Bug Fixes
+
+* resolve CI build failures and restructure workflow dependencies ([5dc930f](https://github.com/draco-china/shadcn-pro/commit/5dc930f131c6654acc97f90644c165b9798df938))
+
 # [1.11.0](https://github.com/draco-china/shadcn-pro/compare/v1.10.0...v1.11.0) (2026-05-30)
 
 
