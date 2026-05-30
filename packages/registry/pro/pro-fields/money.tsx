@@ -14,7 +14,7 @@ export interface MoneyProps
   precision?: number
 }
 
-export function MoneyBase({
+export function Money({
   value,
   onChange,
   currency = '$',
@@ -44,5 +44,3 @@ export function MoneyBase({
     />
   )
 }
-
-export { MoneyBase as Money }

@@ -3,9 +3,9 @@
 import { useState } from 'react'
 
 import { ArrayField } from '@/registry/new-york-v4/pro/pro-fields/array-field'
-import { CaptchaBase as Captcha } from '@/registry/new-york-v4/pro/pro-fields/captcha'
+import { Captcha as Captcha } from '@/registry/new-york-v4/pro/pro-fields/captcha'
 import { Cascader } from '@/registry/new-york-v4/pro/pro-fields/cascader'
-import { CheckboxBase } from '@/registry/new-york-v4/pro/pro-fields/checkbox'
+import { Checkbox } from '@/registry/new-york-v4/pro/pro-fields/checkbox'
 import { DatePicker } from '@/registry/new-york-v4/pro/pro-fields/date-picker'
 import { DateRangePicker } from '@/registry/new-york-v4/pro/pro-fields/date-range-picker'
 import { DateTimePicker } from '@/registry/new-york-v4/pro/pro-fields/date-time-picker'
@@ -15,12 +15,12 @@ import { Input } from '@/registry/new-york-v4/pro/pro-fields/input'
 import { Money } from '@/registry/new-york-v4/pro/pro-fields/money'
 import { ObjectField } from '@/registry/new-york-v4/pro/pro-fields/object-field'
 import { Password } from '@/registry/new-york-v4/pro/pro-fields/password'
-import { RadioBase } from '@/registry/new-york-v4/pro/pro-fields/radio'
+import { Radio } from '@/registry/new-york-v4/pro/pro-fields/radio'
 import { Rate } from '@/registry/new-york-v4/pro/pro-fields/rate'
 import { Segmented } from '@/registry/new-york-v4/pro/pro-fields/segmented'
-import { SelectBase } from '@/registry/new-york-v4/pro/pro-fields/select'
+import { Select } from '@/registry/new-york-v4/pro/pro-fields/select'
 import { Slider } from '@/registry/new-york-v4/pro/pro-fields/slider'
-import { SwitchBase } from '@/registry/new-york-v4/pro/pro-fields/switch'
+import { Switch } from '@/registry/new-york-v4/pro/pro-fields/switch'
 import { Textarea } from '@/registry/new-york-v4/pro/pro-fields/textarea'
 import { TimePicker } from '@/registry/new-york-v4/pro/pro-fields/time-picker'
 import { TreeSelect } from '@/registry/new-york-v4/pro/pro-fields/tree-select'
@@ -136,7 +136,7 @@ export default function ProFieldsDemo() {
       {/* Choice */}
       <Section title="Choice">
         <Field label="Select">
-          <SelectBase
+          <Select
             placeholder="Select a role"
             options={[
               { label: 'Admin', value: 'admin' },
@@ -146,7 +146,7 @@ export default function ProFieldsDemo() {
           />
         </Field>
         <Field label="Radio">
-          <RadioBase
+          <Radio
             options={[
               { label: 'High', value: 'high' },
               { label: 'Medium', value: 'medium' },
@@ -155,10 +155,10 @@ export default function ProFieldsDemo() {
           />
         </Field>
         <Field label="Checkbox">
-          <CheckboxBase>Accept Terms of Service</CheckboxBase>
+          <Checkbox>Accept Terms of Service</Checkbox>
         </Field>
         <Field label="Switch">
-          <SwitchBase defaultChecked />
+          <Switch defaultChecked />
         </Field>
         <Field label="Segmented">
           <Segmented
@@ -220,7 +220,7 @@ export default function ProFieldsDemo() {
             <Field label="First Name"><Input placeholder="First name" /></Field>
             <Field label="Last Name"><Input placeholder="Last name" /></Field>
             <Field label="Department">
-              <SelectBase
+              <Select
                 placeholder="Select department"
                 options={[
                   { label: 'Engineering', value: 'eng' },

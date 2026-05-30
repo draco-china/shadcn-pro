@@ -69,7 +69,7 @@ export interface DateTimePickerProps {
   className?: string
 }
 
-export function DateTimePickerBase({
+export function DateTimePicker({
   value,
   onChange,
   disabled,
@@ -126,5 +126,3 @@ export function DateTimePickerBase({
     </Popover>
   )
 }
-
-export { DateTimePickerBase as DateTimePicker }

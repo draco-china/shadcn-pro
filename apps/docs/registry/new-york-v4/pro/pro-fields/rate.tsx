@@ -11,7 +11,7 @@ export interface RateProps extends Omit<React.ComponentProps<'div'>, 'value' | '
   disabled?: boolean
 }
 
-export function RateBase({
+export function Rate({
   value = 0,
   onChange,
   count = 5,
@@ -54,4 +54,3 @@ export function RateBase({
   )
 }
 
-export { RateBase as Rate }

@@ -2,14 +2,14 @@
 
 import { useState } from "react"
 
-import { RadioBase } from "@/registry/new-york-v4/pro/pro-fields/radio"
+import { Radio } from "@/registry/new-york-v4/pro/pro-fields/radio"
 
 export default function ProFieldsRadioDemo() {
   const [value, setValue] = useState("medium")
 
   return (
     <div className="w-full p-4">
-      <RadioBase
+      <Radio
         value={value}
         onChange={setValue}
         options={[

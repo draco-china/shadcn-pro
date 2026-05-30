@@ -1,9 +1,9 @@
 'use client'
 
 import type * as React from 'react'
-import { Switch } from '@/components/ui/switch'
+import { Switch as ShadcnSwitch } from '@/components/ui/switch'
 
-export interface SwitchBaseProps
+export interface SwitchProps
   extends Omit<
     React.ComponentProps<typeof Switch>,
     'checked' | 'onCheckedChange' | 'onChange' | 'value'
@@ -12,6 +12,6 @@ export interface SwitchBaseProps
   onChange?: (checked: boolean) => void
 }
 
-export function SwitchBase({ value, onChange, ...props }: SwitchBaseProps) {
-  return <Switch {...props} checked={value} onCheckedChange={onChange} />
+export function Switch({ value, onChange, ...props }: SwitchProps) {
+  return <ShadcnSwitch {...props} checked={value} onCheckedChange={onChange} />
 }

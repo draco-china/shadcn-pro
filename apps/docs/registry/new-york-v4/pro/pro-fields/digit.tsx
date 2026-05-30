@@ -15,7 +15,7 @@ export interface DigitProps extends Omit<
   allowClear?: boolean
 }
 
-export function DigitBase({
+export function Digit({
   value,
   onChange,
   placeholder = "Enter number",
@@ -88,4 +88,3 @@ export function DigitBase({
   )
 }
 
-export { DigitBase as Digit }

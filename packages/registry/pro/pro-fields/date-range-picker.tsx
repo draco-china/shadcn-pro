@@ -1,17 +1,12 @@
-"use client"
+'use client'
 
-import type * as React from "react"
-import { format } from "date-fns"
-import { CalendarIcon, X } from "lucide-react"
-
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { format } from 'date-fns'
+import { CalendarIcon, X } from 'lucide-react'
+import type * as React from 'react'
+import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
 
 export interface DateRangeValue {
   from?: Date
@@ -27,25 +22,23 @@ export interface DateRangePickerProps {
   className?: string
 }
 
-export function DateRangePickerBase({
+export function DateRangePicker({
   value,
   onChange,
   disabled,
-  placeholder = "Pick date range",
+  placeholder = 'Pick date range',
   allowClear,
   className,
 }: DateRangePickerProps) {
   const label = value?.from
     ? value.to
-      ? `${format(value.from, "LLL dd, y")} – ${format(value.to, "LLL dd, y")}`
-      : format(value.from, "LLL dd, y")
+      ? `${format(value.from, 'LLL dd, y')} – ${format(value.to, 'LLL dd, y')}`
+      : format(value.from, 'LLL dd, y')
     : null
   const showClear = allowClear && label && !disabled
 
   function handleClear(
-    event:
-      | React.PointerEvent<HTMLButtonElement>
-      | React.MouseEvent<HTMLButtonElement>
+    event: React.PointerEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
   ) {
     event.preventDefault()
     event.stopPropagation()
@@ -54,21 +47,19 @@ export function DateRangePickerBase({
 
   return (
     <Popover>
-      <div className={cn("relative w-full", className)}>
+      <div className={cn('relative w-full', className)}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             disabled={disabled}
             className={cn(
-              "w-full justify-start text-left font-normal",
-              showClear && "pr-8",
-              !value?.from && "text-muted-foreground"
+              'w-full justify-start text-left font-normal',
+              showClear && 'pr-8',
+              !value?.from && 'text-muted-foreground',
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
-            <span className="min-w-0 flex-1 truncate text-left">
-              {label ?? placeholder}
-            </span>
+            <span className="min-w-0 flex-1 truncate text-left">{label ?? placeholder}</span>
           </Button>
         </PopoverTrigger>
         {showClear && (
@@ -88,14 +79,10 @@ export function DateRangePickerBase({
         <Calendar
           mode="range"
           selected={{ from: value?.from, to: value?.to }}
-          onSelect={(range) =>
-            onChange?.(range ? { from: range.from, to: range.to } : undefined)
-          }
+          onSelect={(range) => onChange?.(range ? { from: range.from, to: range.to } : undefined)}
           numberOfMonths={2}
         />
       </PopoverContent>
     </Popover>
   )
 }
-
-export { DateRangePickerBase as DateRangePicker }

@@ -11,14 +11,7 @@ export interface RateProps extends Omit<React.ComponentProps<'div'>, 'value' | '
   disabled?: boolean
 }
 
-export function RateBase({
-  value = 0,
-  onChange,
-  count = 5,
-  disabled,
-  className,
-  ...props
-}: RateProps) {
+export function Rate({ value = 0, onChange, count = 5, disabled, className, ...props }: RateProps) {
   const id = React.useId()
   const [hovered, setHovered] = React.useState<number | null>(null)
   const display = hovered ?? value
@@ -53,5 +46,3 @@ export function RateBase({
     </div>
   )
 }
-
-export { RateBase as Rate }

@@ -69,7 +69,7 @@ export interface DateTimePickerProps {
   className?: string
 }
 
-export function DateTimePickerBase({
+export function DateTimePicker({
   value,
   onChange,
   disabled,
@@ -127,4 +127,3 @@ export function DateTimePickerBase({
   )
 }
 
-export { DateTimePickerBase as DateTimePicker }

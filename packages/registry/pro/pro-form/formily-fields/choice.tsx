@@ -1,15 +1,15 @@
 'use client'
 
 import { connect, mapProps, mapReadPretty } from '@formily/react'
-import { CheckboxBase } from '../../pro-fields/checkbox'
-import { RadioBase, type RadioOption } from '../../pro-fields/radio'
+import { Checkbox } from '../../pro-fields/checkbox'
+import { Radio, type RadioOption } from '../../pro-fields/radio'
 import { SegmentedBase, type SegmentedOption } from '../../pro-fields/segmented'
-import { SelectBase, type SelectOption } from '../../pro-fields/select'
-import { SwitchBase } from '../../pro-fields/switch'
+import { Select, type SelectOption } from '../../pro-fields/select'
+import { Switch } from '../../pro-fields/switch'
 import { fieldDataSource, fieldPlaceholder, fieldValue } from './utils'
 
 export const FormilyCheckbox = connect(
-  CheckboxBase,
+  Checkbox,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
@@ -20,7 +20,7 @@ export const FormilyCheckbox = connect(
 FormilyCheckbox.displayName = 'FormilyCheckbox'
 
 export const FormilySwitch = connect(
-  SwitchBase,
+  Switch,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
@@ -31,7 +31,7 @@ export const FormilySwitch = connect(
 FormilySwitch.displayName = 'FormilySwitch'
 
 export const FormilyRadio = connect(
-  RadioBase,
+  Radio,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
@@ -47,7 +47,7 @@ export const FormilyRadio = connect(
 FormilyRadio.displayName = 'FormilyRadio'
 
 export const FormilySelect = connect(
-  SelectBase,
+  Select,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,

@@ -16,7 +16,7 @@ export interface SegmentedProps extends Omit<React.ComponentProps<'div'>, 'value
   disabled?: boolean
 }
 
-export function SegmentedBase({
+export function Segmented({
   value,
   onChange,
   options = [],
@@ -65,4 +65,3 @@ export function SegmentedBase({
   )
 }
 
-export { SegmentedBase as Segmented }

@@ -98,7 +98,7 @@ function CascaderPanel({
   )
 }
 
-export function CascaderBase({
+export function Cascader({
   value = [],
   onChange,
   options = [],
@@ -168,4 +168,3 @@ export function CascaderBase({
   )
 }
 
-export { CascaderBase as Cascader }

@@ -15,7 +15,7 @@ export interface SliderProps
   wrapperClassName?: string
 }
 
-export function SliderBase({
+export function Slider({
   value,
   defaultValue,
   onChange,
@@ -52,4 +52,3 @@ export function SliderBase({
   )
 }
 
-export { SliderBase as Slider }

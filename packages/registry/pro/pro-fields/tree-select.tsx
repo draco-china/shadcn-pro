@@ -1,16 +1,11 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { Check, ChevronDown, ChevronRight, X } from "lucide-react"
-
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Check, ChevronDown, ChevronRight, X } from 'lucide-react'
+import * as React from 'react'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
 
 export interface TreeSelectOption {
   label: string
@@ -40,7 +35,7 @@ function getLabels(options: TreeSelectOption[], values: string[]): string {
     }
   }
   traverse(options)
-  return labels.join(", ")
+  return labels.join(', ')
 }
 
 function TreeNode({
@@ -62,13 +57,13 @@ function TreeNode({
     <li>
       <div
         className={cn(
-          "flex items-center gap-1.5 rounded-sm px-2 py-1 text-sm",
-          option.disabled && "cursor-not-allowed opacity-50"
+          'flex items-center gap-1.5 rounded-sm px-2 py-1 text-sm',
+          option.disabled && 'cursor-not-allowed opacity-50',
         )}
       >
         <button
           type="button"
-          aria-label={expanded ? "Collapse" : "Expand"}
+          aria-label={expanded ? 'Collapse' : 'Expand'}
           className="flex h-4 w-4 shrink-0 items-center justify-center"
           onClick={() => hasChildren && setExpanded(!expanded)}
         >
@@ -92,13 +87,8 @@ function TreeNode({
               type="button"
               disabled={option.disabled}
               onClick={() => !option.disabled && onToggle(option.value)}
-              onKeyDown={(e) =>
-                e.key === "Enter" && !option.disabled && onToggle(option.value)
-              }
-              className={cn(
-                "flex-1 cursor-pointer text-left",
-                isSelected && "font-medium"
-              )}
+              onKeyDown={(e) => e.key === 'Enter' && !option.disabled && onToggle(option.value)}
+              className={cn('flex-1 cursor-pointer text-left', isSelected && 'font-medium')}
             >
               {option.label}
             </button>
@@ -109,8 +99,8 @@ function TreeNode({
             disabled={option.disabled}
             onClick={() => !option.disabled && onToggle(option.value)}
             className={cn(
-              "flex flex-1 cursor-pointer items-center justify-between rounded-sm px-1 py-0.5 text-left hover:bg-accent/50",
-              isSelected && "font-medium"
+              'flex flex-1 cursor-pointer items-center justify-between rounded-sm px-1 py-0.5 text-left hover:bg-accent/50',
+              isSelected && 'font-medium',
             )}
           >
             <span>{option.label}</span>
@@ -135,11 +125,11 @@ function TreeNode({
   )
 }
 
-export function TreeSelectBase({
+export function TreeSelect({
   value = [],
   onChange,
   options = [],
-  placeholder = "Select...",
+  placeholder = 'Select...',
   disabled,
   required,
   allowClear,
@@ -151,9 +141,7 @@ export function TreeSelectBase({
   const showClear = allowClear && label && !disabled && !required
 
   function handleClear(
-    event:
-      | React.PointerEvent<HTMLButtonElement>
-      | React.MouseEvent<HTMLButtonElement>
+    event: React.PointerEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
   ) {
     event.preventDefault()
     event.stopPropagation()
@@ -163,9 +151,7 @@ export function TreeSelectBase({
 
   function toggle(val: string) {
     if (multiple) {
-      const next = value.includes(val)
-        ? value.filter((v) => v !== val)
-        : [...value, val]
+      const next = value.includes(val) ? value.filter((v) => v !== val) : [...value, val]
       onChange?.(next)
     } else {
       onChange?.([val])
@@ -175,20 +161,18 @@ export function TreeSelectBase({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <div className={cn("relative w-full", className)}>
+      <div className={cn('relative w-full', className)}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             disabled={disabled}
             className={cn(
-              "w-full justify-start font-normal",
-              showClear && "pr-8",
-              !label && "text-muted-foreground"
+              'w-full justify-start font-normal',
+              showClear && 'pr-8',
+              !label && 'text-muted-foreground',
             )}
           >
-            <span className="flex-1 truncate text-left">
-              {label ?? placeholder}
-            </span>
+            <span className="flex-1 truncate text-left">{label ?? placeholder}</span>
           </Button>
         </PopoverTrigger>
         {showClear && (
@@ -220,5 +204,3 @@ export function TreeSelectBase({
     </Popover>
   )
 }
-
-export { TreeSelectBase as TreeSelect }

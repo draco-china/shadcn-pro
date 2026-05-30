@@ -135,7 +135,7 @@ function TreeNode({
   )
 }
 
-export function TreeSelectBase({
+export function TreeSelect({
   value = [],
   onChange,
   options = [],
@@ -221,4 +221,3 @@ export function TreeSelectBase({
   )
 }
 
-export { TreeSelectBase as TreeSelect }

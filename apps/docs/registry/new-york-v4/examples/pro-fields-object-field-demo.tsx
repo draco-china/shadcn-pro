@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/registry/new-york-v4/pro/pro-fields/input"
 import { ObjectField } from "@/registry/new-york-v4/pro/pro-fields/object-field"
-import { SelectBase } from "@/registry/new-york-v4/pro/pro-fields/select"
+import { Select } from "@/registry/new-york-v4/pro/pro-fields/select"
 
 export default function ProFieldsObjectFieldDemo() {
   return (
@@ -15,7 +15,7 @@ export default function ProFieldsObjectFieldDemo() {
         action={<Button variant="ghost" size="sm" className="h-6 text-xs">Edit</Button>}
       >
         <Input placeholder="Display name" />
-        <SelectBase
+        <Select
           placeholder="Department"
           options={[
             { label: "Product", value: "product" },

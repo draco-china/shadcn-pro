@@ -11,7 +11,7 @@ export interface RadioOption {
   disabled?: boolean
 }
 
-export interface RadioBaseProps
+export interface RadioProps
   extends Omit<
     React.ComponentProps<typeof RadioGroup>,
     'value' | 'defaultValue' | 'onChange' | 'onValueChange' | 'disabled'
@@ -25,7 +25,7 @@ export interface RadioBaseProps
   labelClassName?: string
 }
 
-export function RadioBase({
+export function Radio({
   value,
   defaultValue,
   onChange,
@@ -35,7 +35,7 @@ export function RadioBase({
   itemClassName,
   labelClassName,
   ...props
-}: RadioBaseProps) {
+}: RadioProps) {
   const generatedId = React.useId()
 
   return (

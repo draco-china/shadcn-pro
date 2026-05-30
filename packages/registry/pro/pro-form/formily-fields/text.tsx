@@ -1,10 +1,10 @@
 'use client'
 
 import { connect, mapProps, mapReadPretty } from '@formily/react'
-import { CaptchaBase } from '../../pro-fields/captcha'
+import { Captcha } from '../../pro-fields/captcha'
 import { Input } from '../../pro-fields/input'
 import { Password } from '../../pro-fields/password'
-import { TextareaBase } from '../../pro-fields/textarea'
+import { Textarea } from '../../pro-fields/textarea'
 import { fieldPlaceholder } from './utils'
 
 export const FormilyInput = connect(
@@ -34,7 +34,7 @@ export const FormilyPassword = connect(
 FormilyPassword.displayName = 'FormilyPassword'
 
 export const FormilyTextarea = connect(
-  TextareaBase,
+  Textarea,
   mapProps((props, field) => ({
     ...props,
     id: field.path.toString(),
@@ -47,7 +47,7 @@ export const FormilyTextarea = connect(
 FormilyTextarea.displayName = 'FormilyTextarea'
 
 export const FormilyCaptcha = connect(
-  CaptchaBase,
+  Captcha,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,

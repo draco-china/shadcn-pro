@@ -4,9 +4,9 @@ import { useState, type ReactNode } from "react"
 import { Search } from "lucide-react"
 
 import { ArrayField } from "@/registry/new-york-v4/pro/pro-fields/array-field"
-import { CaptchaBase } from "@/registry/new-york-v4/pro/pro-fields/captcha"
+import { Captcha } from "@/registry/new-york-v4/pro/pro-fields/captcha"
 import { CascaderBase } from "@/registry/new-york-v4/pro/pro-fields/cascader"
-import { CheckboxBase } from "@/registry/new-york-v4/pro/pro-fields/checkbox"
+import { Checkbox } from "@/registry/new-york-v4/pro/pro-fields/checkbox"
 import { DatePickerBase } from "@/registry/new-york-v4/pro/pro-fields/date-picker"
 import {
   DateRangePickerBase,
@@ -22,15 +22,15 @@ import { Input } from "@/registry/new-york-v4/pro/pro-fields/input"
 import { MoneyBase } from "@/registry/new-york-v4/pro/pro-fields/money"
 import { ObjectField } from "@/registry/new-york-v4/pro/pro-fields/object-field"
 import { Password } from "@/registry/new-york-v4/pro/pro-fields/password"
-import { RadioBase } from "@/registry/new-york-v4/pro/pro-fields/radio"
+import { Radio } from "@/registry/new-york-v4/pro/pro-fields/radio"
 import { RateBase } from "@/registry/new-york-v4/pro/pro-fields/rate"
 import { SegmentedBase } from "@/registry/new-york-v4/pro/pro-fields/segmented"
-import { SelectBase } from "@/registry/new-york-v4/pro/pro-fields/select"
+import { Select } from "@/registry/new-york-v4/pro/pro-fields/select"
 import { SliderBase } from "@/registry/new-york-v4/pro/pro-fields/slider"
-import { SwitchBase } from "@/registry/new-york-v4/pro/pro-fields/switch"
-import { TextareaBase } from "@/registry/new-york-v4/pro/pro-fields/textarea"
+import { Switch } from "@/registry/new-york-v4/pro/pro-fields/switch"
+import { Textarea } from "@/registry/new-york-v4/pro/pro-fields/textarea"
 import { TimePickerBase } from "@/registry/new-york-v4/pro/pro-fields/time-picker"
-import { TreeSelectBase } from "@/registry/new-york-v4/pro/pro-fields/tree-select"
+import { TreeSelect } from "@/registry/new-york-v4/pro/pro-fields/tree-select"
 import {
   UploadBase,
   type UploadFile,
@@ -139,7 +139,7 @@ export default function ProFieldsDocsDemo() {
         <Password placeholder="Enter password" />
       </FieldPreview>
       <FieldPreview title="Textarea">
-        <TextareaBase placeholder="Write a note" rows={2} />
+        <Textarea placeholder="Write a note" rows={2} />
       </FieldPreview>
       <FieldPreview title="Digit">
         <DigitBase value={quantity} onChange={setQuantity} allowClear />
@@ -151,7 +151,7 @@ export default function ProFieldsDocsDemo() {
         <MoneyBase value={amount} onChange={setAmount} currency="$" />
       </FieldPreview>
       <FieldPreview title="Select">
-        <SelectBase
+        <Select
           value={role}
           onChange={setRole}
           options={roleOptions}
@@ -159,18 +159,18 @@ export default function ProFieldsDocsDemo() {
         />
       </FieldPreview>
       <FieldPreview title="Checkbox">
-        <CheckboxBase value={checked} onChange={setChecked}>
+        <Checkbox value={checked} onChange={setChecked}>
           Accept terms
-        </CheckboxBase>
+        </Checkbox>
       </FieldPreview>
       <FieldPreview title="Switch">
         <label className="flex items-center gap-3 text-sm">
-          <SwitchBase value={enabled} onChange={setEnabled} />
+          <Switch value={enabled} onChange={setEnabled} />
           Enable notifications
         </label>
       </FieldPreview>
       <FieldPreview title="Radio">
-        <RadioBase
+        <Radio
           value={priority}
           onChange={setPriority}
           options={[
@@ -222,7 +222,7 @@ export default function ProFieldsDocsDemo() {
         />
       </FieldPreview>
       <FieldPreview title="TreeSelect">
-        <TreeSelectBase
+        <TreeSelect
           value={team}
           onChange={setTeam}
           options={teamOptions}
@@ -233,7 +233,7 @@ export default function ProFieldsDocsDemo() {
         <UploadBase value={files} onChange={setFiles} maxCount={2} />
       </FieldPreview>
       <FieldPreview title="Captcha">
-        <CaptchaBase
+        <Captcha
           buttonText="Send code"
           countdown={30}
           placeholder="Verification code"
@@ -271,7 +271,7 @@ export default function ProFieldsDocsDemo() {
       <FieldPreview title="ObjectField">
         <ObjectField title="Profile" collapsible contentClassName="space-y-2">
           <Input placeholder="Display name" />
-          <SelectBase placeholder="Department" options={roleOptions} />
+          <Select placeholder="Department" options={roleOptions} />
         </ObjectField>
       </FieldPreview>
     </div>

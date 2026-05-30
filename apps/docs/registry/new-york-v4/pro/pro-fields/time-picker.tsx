@@ -14,7 +14,7 @@ export interface TimePickerProps {
   allowClear?: boolean
 }
 
-export function TimePickerBase({
+export function TimePicker({
   value,
   onChange,
   disabled,
@@ -104,4 +104,3 @@ export function TimePickerBase({
   )
 }
 
-export { TimePickerBase as TimePicker }

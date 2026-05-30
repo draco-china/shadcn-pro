@@ -1,6 +1,6 @@
 'use client'
 
-import { File, Upload, X } from 'lucide-react'
+import { File, Upload as UploadIcon, X } from 'lucide-react'
 import * as React from 'react'
 import { cn } from '@/lib/utils'
 
@@ -23,7 +23,7 @@ export interface UploadProps {
   className?: string
 }
 
-export function UploadBase({
+export function Upload({
   value = [],
   onChange,
   accept,
@@ -84,7 +84,7 @@ export function UploadBase({
             if (!disabled) addFiles(e.dataTransfer.files)
           }}
         >
-          <Upload className="h-6 w-6" />
+          <UploadIcon className="h-6 w-6" />
           <span>{placeholder}</span>
         </button>
       )}
@@ -122,5 +122,3 @@ export function UploadBase({
     </div>
   )
 }
-
-export { UploadBase as Upload }

@@ -20,7 +20,7 @@ export interface DigitRangeProps {
   allowClear?: boolean
 }
 
-export function DigitRangeBase({
+export function DigitRange({
   value,
   onChange,
   placeholder = ["Min", "Max"],
@@ -98,4 +98,3 @@ export function DigitRangeBase({
   )
 }
 
-export { DigitRangeBase as DigitRange }

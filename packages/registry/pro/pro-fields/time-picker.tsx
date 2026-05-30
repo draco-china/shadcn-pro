@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import type * as React from "react"
-import { X } from "lucide-react"
+import { X } from 'lucide-react'
+import type * as React from 'react'
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
 
 export interface TimePickerProps {
   value?: string // HH:mm:ss
@@ -14,15 +14,9 @@ export interface TimePickerProps {
   allowClear?: boolean
 }
 
-export function TimePickerBase({
-  value,
-  onChange,
-  disabled,
-  className,
-  allowClear,
-}: TimePickerProps) {
-  const pad = (n: number) => String(n).padStart(2, "0")
-  const parts = value ? value.split(":") : []
+export function TimePicker({ value, onChange, disabled, className, allowClear }: TimePickerProps) {
+  const pad = (n: number) => String(n).padStart(2, '0')
+  const parts = value ? value.split(':') : []
   const hour = parts[0] ? Number(parts[0]) : 0
   const minute = parts[1] ? Number(parts[1]) : 0
   const second = parts[2] ? Number(parts[2]) : 0
@@ -32,9 +26,7 @@ export function TimePickerBase({
   }
 
   function handleClear(
-    event:
-      | React.PointerEvent<HTMLButtonElement>
-      | React.MouseEvent<HTMLButtonElement>
+    event: React.PointerEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
   ) {
     event.preventDefault()
     event.stopPropagation()
@@ -44,10 +36,10 @@ export function TimePickerBase({
   return (
     <div
       className={cn(
-        "flex h-9 w-fit items-center gap-1 rounded-md border border-input bg-transparent px-3 shadow-xs",
-        allowClear && value && !disabled && "pr-8",
-        "relative",
-        className
+        'flex h-9 w-fit items-center gap-1 rounded-md border border-input bg-transparent px-3 shadow-xs',
+        allowClear && value && !disabled && 'pr-8',
+        'relative',
+        className,
       )}
     >
       <select
@@ -103,5 +95,3 @@ export function TimePickerBase({
     </div>
   )
 }
-
-export { TimePickerBase as TimePicker }

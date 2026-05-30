@@ -3,11 +3,11 @@
 import { X } from 'lucide-react'
 import * as React from 'react'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  Select as ShadcnSelect,
+  SelectContent as ShadcnSelectContent,
+  SelectItem as ShadcnSelectItem,
+  SelectTrigger as ShadcnSelectTrigger,
+  SelectValue as ShadcnSelectValue,
 } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
 
@@ -17,9 +17,9 @@ export interface SelectOption {
   disabled?: boolean
 }
 
-export interface SelectBaseProps
+export interface SelectProps
   extends Omit<
-    React.ComponentProps<typeof Select>,
+    React.ComponentProps<typeof ShadcnSelect>,
     'value' | 'defaultValue' | 'onValueChange' | 'disabled'
   > {
   value?: string
@@ -35,7 +35,7 @@ export interface SelectBaseProps
   contentClassName?: string
 }
 
-export function SelectBase({
+export function Select({
   value,
   defaultValue,
   onChange,
@@ -48,7 +48,7 @@ export function SelectBase({
   triggerClassName,
   contentClassName,
   ...props
-}: SelectBaseProps) {
+}: SelectProps) {
   const isControlled = value !== undefined
   const [internalValue, setInternalValue] = React.useState<string | undefined>(defaultValue)
   const currentValue = isControlled ? value : internalValue
@@ -70,32 +70,32 @@ export function SelectBase({
 
   return (
     <div className={cn('relative flex w-full items-center', className)}>
-      <Select
+      <ShadcnSelect
         value={currentValue}
         onValueChange={handleChange}
         disabled={disabled}
         required={required}
         {...props}
       >
-        <SelectTrigger
+        <ShadcnSelectTrigger
           className={cn('w-full', showClear && '*:data-[slot=select-value]:pr-8', triggerClassName)}
         >
-          <SelectValue placeholder={placeholder ?? 'Select...'}>
+          <ShadcnSelectValue placeholder={placeholder ?? 'Select...'}>
             {currentValue ? (
               <span className="line-clamp-1 flex flex-1 items-center gap-2 text-left">
                 {selectedLabel}
               </span>
             ) : undefined}
-          </SelectValue>
-        </SelectTrigger>
-        <SelectContent className={contentClassName}>
+          </ShadcnSelectValue>
+        </ShadcnSelectTrigger>
+        <ShadcnSelectContent className={contentClassName}>
           {options.map((opt) => (
-            <SelectItem key={opt.value} value={opt.value} disabled={opt.disabled}>
+            <ShadcnSelectItem key={opt.value} value={opt.value} disabled={opt.disabled}>
               {opt.label}
-            </SelectItem>
+            </ShadcnSelectItem>
           ))}
-        </SelectContent>
-      </Select>
+        </ShadcnSelectContent>
+      </ShadcnSelect>
       {showClear && (
         <button
           type="button"

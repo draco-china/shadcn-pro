@@ -1,12 +1,12 @@
 'use client'
 
 import type * as React from 'react'
-import { Textarea } from '@/components/ui/textarea'
+import { Textarea as ShadcnTextarea } from '@/components/ui/textarea'
 
-export type TextareaBaseProps = React.ComponentProps<typeof Textarea>
+export type TextareaProps = React.ComponentProps<typeof Textarea>
 
-export function TextareaBase(props: TextareaBaseProps) {
-  return <Textarea {...props} />
+export function Textarea(props: TextareaProps) {
+  return <ShadcnTextarea {...props} />
 }
 
-TextareaBase.displayName = 'TextareaBase'
+Textarea.displayName = 'Textarea'

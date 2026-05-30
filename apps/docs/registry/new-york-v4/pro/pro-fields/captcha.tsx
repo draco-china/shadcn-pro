@@ -21,7 +21,7 @@ export interface CaptchaProps
   buttonClassName?: string
 }
 
-export function CaptchaBase({
+export function Captcha({
   value,
   onChange,
   onRefresh,

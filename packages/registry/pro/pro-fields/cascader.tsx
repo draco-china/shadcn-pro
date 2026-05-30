@@ -1,15 +1,10 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { ChevronRight, X } from "lucide-react"
-
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { ChevronRight, X } from 'lucide-react'
+import * as React from 'react'
+import { Button } from '@/components/ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
 
 export interface CascaderOption {
   label: string
@@ -38,7 +33,7 @@ function getLabel(options: CascaderOption[], path: string[]): string {
     labels.push(found.label)
     current = found.children ?? []
   }
-  return labels.join(" / ")
+  return labels.join(' / ')
 }
 
 function CascaderPanel({
@@ -69,10 +64,7 @@ function CascaderPanel({
     <div className="flex divide-x">
       {cols.map((col, colIdx) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: column index represents depth level, stable
-        <ul
-          key={colIdx}
-          className="max-h-48 min-w-[120px] overflow-y-auto py-1"
-        >
+        <ul key={colIdx} className="max-h-48 min-w-[120px] overflow-y-auto py-1">
           {col.map((opt) => (
             <li key={opt.value}>
               <button
@@ -80,15 +72,13 @@ function CascaderPanel({
                 disabled={opt.disabled}
                 onClick={() => handleClick(opt, colIdx)}
                 className={cn(
-                  "flex w-full items-center justify-between px-3 py-1.5 text-sm",
-                  "hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50",
-                  selected[colIdx] === opt.value && "bg-accent font-medium"
+                  'flex w-full items-center justify-between px-3 py-1.5 text-sm',
+                  'hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50',
+                  selected[colIdx] === opt.value && 'bg-accent font-medium',
                 )}
               >
                 {opt.label}
-                {opt.children?.length ? (
-                  <ChevronRight className="ml-2 h-3 w-3 opacity-60" />
-                ) : null}
+                {opt.children?.length ? <ChevronRight className="ml-2 h-3 w-3 opacity-60" /> : null}
               </button>
             </li>
           ))}
@@ -98,11 +88,11 @@ function CascaderPanel({
   )
 }
 
-export function CascaderBase({
+export function Cascader({
   value = [],
   onChange,
   options = [],
-  placeholder = "Select...",
+  placeholder = 'Select...',
   disabled,
   required,
   allowClear,
@@ -113,9 +103,7 @@ export function CascaderBase({
   const showClear = allowClear && label && !disabled && !required
 
   function handleClear(
-    event:
-      | React.PointerEvent<HTMLButtonElement>
-      | React.MouseEvent<HTMLButtonElement>
+    event: React.PointerEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
   ) {
     event.preventDefault()
     event.stopPropagation()
@@ -125,20 +113,18 @@ export function CascaderBase({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <div className={cn("relative w-full", className)}>
+      <div className={cn('relative w-full', className)}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             disabled={disabled}
             className={cn(
-              "w-full justify-start font-normal",
-              showClear && "pr-8",
-              !label && "text-muted-foreground"
+              'w-full justify-start font-normal',
+              showClear && 'pr-8',
+              !label && 'text-muted-foreground',
             )}
           >
-            <span className="flex-1 truncate text-left">
-              {label ?? placeholder}
-            </span>
+            <span className="flex-1 truncate text-left">{label ?? placeholder}</span>
           </Button>
         </PopoverTrigger>
         {showClear && (
@@ -167,5 +153,3 @@ export function CascaderBase({
     </Popover>
   )
 }
-
-export { CascaderBase as Cascader }

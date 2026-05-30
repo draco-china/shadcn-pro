@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Checkbox } from '@/components/ui/checkbox'
+import { Checkbox as ShadcnCheckbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 
@@ -17,7 +17,7 @@ export interface CheckboxBaseProps
   labelClassName?: string
 }
 
-export function CheckboxBase({
+export function Checkbox({
   value,
   defaultValue,
   onChange,
@@ -31,7 +31,7 @@ export function CheckboxBase({
 
   return (
     <div className="flex items-center gap-2">
-      <Checkbox
+      <ShadcnCheckbox
         id={checkboxId}
         checked={value}
         defaultChecked={defaultValue}

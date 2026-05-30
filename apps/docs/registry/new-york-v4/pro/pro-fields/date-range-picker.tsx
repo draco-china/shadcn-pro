@@ -27,7 +27,7 @@ export interface DateRangePickerProps {
   className?: string
 }
 
-export function DateRangePickerBase({
+export function DateRangePicker({
   value,
   onChange,
   disabled,
@@ -98,4 +98,3 @@ export function DateRangePickerBase({
   )
 }
 
-export { DateRangePickerBase as DateRangePicker }
