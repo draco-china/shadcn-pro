@@ -18,7 +18,7 @@ export default function ProEditorDocsDemo() {
     <div className="h-[360px] w-full p-4">
       <ProEditor
         language="typescript"
-        theme="github-dark"
+        theme="one-dark-pro-flat"
         value={value}
         onChange={setValue}
         toolbarBefore={

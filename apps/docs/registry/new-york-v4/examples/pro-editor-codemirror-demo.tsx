@@ -34,7 +34,7 @@ export default function ProEditorCodemirrorDemo() {
     <div className="w-full p-4">
       <ProEditor
         language="tsx"
-        theme="github-dark"
+        theme="one-dark-pro-flat"
         value={value}
         onChange={setValue}
         height={320}
