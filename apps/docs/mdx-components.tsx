@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
-import { BlockViewer } from '@/components/block-viewer'
+import { BlockPreview } from '@/components/block-preview'
 import { Callout } from '@/components/callout'
 import { CodeBlockCommand } from '@/components/code-block-command'
 import { CodeCollapsibleWrapper } from '@/components/code-collapsible-wrapper'
@@ -374,7 +374,8 @@ export const mdxComponents = {
   Tab: ({ className, ...props }: React.ComponentProps<'div'>) => (
     <div className={cn(className)} {...props} />
   ),
-  BlockViewer,
+  BlockPreview,
+  BlockViewer: BlockPreview,
   Button,
   Callout,
   Accordion,
