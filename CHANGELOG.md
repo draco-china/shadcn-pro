@@ -1,3 +1,10 @@
+## [1.12.16](https://github.com/draco-china/shadcn-pro/compare/v1.12.15...v1.12.16) (2026-05-30)
+
+
+### Bug Fixes
+
+* **docs:** avoid duplicate object field labels ([154db7d](https://github.com/draco-china/shadcn-pro/commit/154db7d33572b36ba698160d6a3990be9a4d2596))
+
 ## [1.12.15](https://github.com/draco-china/shadcn-pro/compare/v1.12.14...v1.12.15) (2026-05-30)
 
 
