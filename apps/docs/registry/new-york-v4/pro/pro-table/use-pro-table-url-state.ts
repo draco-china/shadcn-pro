@@ -1,15 +1,15 @@
 import type { ColumnFiltersState, PaginationState } from '@tanstack/react-table'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import type { ProTableState } from './index'
 
-type SearchRecord = Record<string, unknown>
+export type SearchRecord = Record<string, unknown>
 
 export type NavigateFn = (opts: {
   search: true | SearchRecord | ((prev: SearchRecord) => Partial<SearchRecord> | SearchRecord)
   replace?: boolean
 }) => void
 
-type ColumnFilterConfig =
+export type ColumnFilterConfig =
   | {
       columnId: string
       searchKey: string
@@ -25,7 +25,7 @@ type ColumnFilterConfig =
       deserialize?: (value: unknown) => unknown
     }
 
-type UseProTableUrlStateParams = {
+export type UseProTableUrlStateParams = {
   search: SearchRecord
   navigate: NavigateFn
   pagination?: {
@@ -37,7 +37,7 @@ type UseProTableUrlStateParams = {
   columnFilters?: ColumnFilterConfig[]
 }
 
-type UseProTableUrlStateReturn = {
+export type UseProTableUrlStateReturn = {
   initialState: Partial<ProTableState>
   onChange: (state: ProTableState) => void
 }
@@ -63,35 +63,40 @@ export function useProTableUrlState(params: UseProTableUrlStateParams): UseProTa
     [search, pageKey, pageSizeKey, defaultPage, defaultPageSize, columnFiltersCfg],
   )
 
-  const onChange = (state: ProTableState) => {
-    const patch: Record<string, unknown> = {
-      [pageKey]:
-        state.pagination.pageIndex + 1 <= defaultPage ? undefined : state.pagination.pageIndex + 1,
-      [pageSizeKey]:
-        state.pagination.pageSize === defaultPageSize ? undefined : state.pagination.pageSize,
-    }
-
-    for (const cfg of columnFiltersCfg) {
-      const found = state.columnFilters.find((filter) => filter.id === cfg.columnId)
-      const serialize = cfg.serialize ?? ((value: unknown) => value)
-
-      if (cfg.type === 'array') {
-        const value = Array.isArray(found?.value) ? (found.value as unknown[]) : []
-        patch[cfg.searchKey] = value.length > 0 ? serialize(value) : undefined
-        continue
+  const onChange = useCallback(
+    (state: ProTableState) => {
+      const patch: Record<string, unknown> = {
+        [pageKey]:
+          state.pagination.pageIndex + 1 <= defaultPage
+            ? undefined
+            : state.pagination.pageIndex + 1,
+        [pageSizeKey]:
+          state.pagination.pageSize === defaultPageSize ? undefined : state.pagination.pageSize,
       }
 
-      const value = typeof found?.value === 'string' ? found.value : ''
-      patch[cfg.searchKey] = value.trim() !== '' ? serialize(value) : undefined
-    }
+      for (const cfg of columnFiltersCfg) {
+        const found = state.columnFilters.find((filter) => filter.id === cfg.columnId)
+        const serialize = cfg.serialize ?? ((value: unknown) => value)
 
-    navigate({
-      search: (prev) => ({
-        ...(prev as SearchRecord),
-        ...patch,
-      }),
-    })
-  }
+        if (cfg.type === 'array') {
+          const value = Array.isArray(found?.value) ? (found.value as unknown[]) : []
+          patch[cfg.searchKey] = value.length > 0 ? serialize(value) : undefined
+          continue
+        }
+
+        const value = typeof found?.value === 'string' ? found.value : ''
+        patch[cfg.searchKey] = value.trim() !== '' ? serialize(value) : undefined
+      }
+
+      navigate({
+        search: (prev) => ({
+          ...(prev as SearchRecord),
+          ...patch,
+        }),
+      })
+    },
+    [columnFiltersCfg, defaultPage, defaultPageSize, navigate, pageKey, pageSizeKey],
+  )
 
   return { initialState, onChange }
 }

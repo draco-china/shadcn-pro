@@ -42,35 +42,35 @@ export function ObjectField({
   const hasHeader = title || description || action
 
   const header = hasHeader && (
-    <div
-      className={cn(
-        'flex items-start justify-between gap-2',
-        variant === 'bordered' && 'mb-3',
-        variant === 'separated' && 'mb-3',
+    <div className="space-y-1">
+      <div className="flex items-center justify-between gap-2">
+        <div className="min-w-0 flex-1">
+          {title && <p className="text-sm font-medium leading-none">{title}</p>}
+        </div>
+        <div className="flex shrink-0 items-center gap-1">
+          {action}
+          {collapsible && (
+            <CollapsibleTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="size-6 text-muted-foreground"
+                aria-label={open ? 'Collapse' : 'Expand'}
+              >
+                <ChevronDown
+                  className={cn('size-4 transition-transform duration-200', open && 'rotate-180')}
+                />
+              </Button>
+            </CollapsibleTrigger>
+          )}
+        </div>
+      </div>
+      {description && (
+        <div className="min-w-0">
+          <p className="text-xs text-muted-foreground">{description}</p>
+        </div>
       )}
-    >
-      <div className="min-w-0 flex-1">
-        {title && <p className="text-sm font-medium leading-none">{title}</p>}
-        {description && <p className="mt-1 text-xs text-muted-foreground">{description}</p>}
-      </div>
-      <div className="flex shrink-0 items-center gap-1">
-        {action}
-        {collapsible && (
-          <CollapsibleTrigger asChild>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="size-6 text-muted-foreground"
-              aria-label={open ? 'Collapse' : 'Expand'}
-            >
-              <ChevronDown
-                className={cn('size-4 transition-transform duration-200', open && 'rotate-180')}
-              />
-            </Button>
-          </CollapsibleTrigger>
-        )}
-      </div>
     </div>
   )
 

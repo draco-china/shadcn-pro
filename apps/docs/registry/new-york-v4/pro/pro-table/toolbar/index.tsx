@@ -254,7 +254,7 @@ function DensityMenu({
 }
 
 function getColumnMeta<TData>(column: Column<TData, unknown>) {
-  return column.columnDef.meta as ProTableColumnMeta
+  return (column.columnDef.meta ?? {}) as ProTableColumnMeta
 }
 
 function getSearchColumn<TData>(table: Table<TData>, search: ProTableSearch | undefined) {
