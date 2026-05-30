@@ -1,3 +1,10 @@
+## [1.12.2](https://github.com/draco-china/shadcn-pro/compare/v1.12.1...v1.12.2) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** sort import names for biome ([c5fb61c](https://github.com/draco-china/shadcn-pro/commit/c5fb61cfd5a82818f9385c57e38761f216bafbf0))
+
 ## [1.12.1](https://github.com/draco-china/shadcn-pro/compare/v1.12.0...v1.12.1) (2026-05-30)
 
 
