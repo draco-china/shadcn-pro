@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/draco-china/shadcn-pro/compare/v1.12.0...v1.12.1) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** default theme to one-dark-pro-flat in all demos ([866b45a](https://github.com/draco-china/shadcn-pro/commit/866b45ad66a6ca657ce3f1882ac6b85edca61ed2))
+
 # [1.12.0](https://github.com/draco-china/shadcn-pro/compare/v1.11.18...v1.12.0) (2026-05-30)
 
 
