@@ -1,3 +1,10 @@
+## [1.12.7](https://github.com/draco-china/shadcn-pro/compare/v1.12.6...v1.12.7) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** align One Dark Pro token rules with Dracula structure + ODP colors ([c29b038](https://github.com/draco-china/shadcn-pro/commit/c29b038e034cc0f24b745a0eaefeb2f6b9f6b23d))
+
 ## [1.12.6](https://github.com/draco-china/shadcn-pro/compare/v1.12.5...v1.12.6) (2026-05-30)
 
 
