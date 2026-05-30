@@ -1,3 +1,15 @@
+# [1.12.0](https://github.com/draco-china/shadcn-pro/compare/v1.11.18...v1.12.0) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** biome format one-dark-pro-themes.ts ([4913a0b](https://github.com/draco-china/shadcn-pro/commit/4913a0b971ceefa09b251e33b526c55d454741f9))
+
+
+### Features
+
+* **pro-editor:** add One Dark Pro Flat light/dark themes; theme via external prop ([75a1d0f](https://github.com/draco-china/shadcn-pro/commit/75a1d0fd4758bd75a7b58e73abec7c3fbea3d4f8))
+
 ## [1.11.18](https://github.com/draco-china/shadcn-pro/compare/v1.11.17...v1.11.18) (2026-05-30)
 
 
