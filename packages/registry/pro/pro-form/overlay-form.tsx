@@ -45,7 +45,7 @@ interface OverlayFormProps {
   onFinishFailed?: (errors: unknown) => void
   /** Submit button label */
   submitText?: string
-  /** Cancel button label */
+  /** Cancel button label — omit to hide the cancel button */
   cancelText?: string
   /** Formily Form instance (created internally if not provided) */
   form?: Form
@@ -150,8 +150,8 @@ export function ModalForm({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className={cn(widthClass, 'flex flex-col max-h-[90vh]')}>
-        <DialogHeader>
+      <DialogContent className={cn(widthClass, 'flex max-h-[90vh] flex-col')}>
+        <DialogHeader className="shrink-0">
           <DialogTitle>{title}</DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
@@ -161,13 +161,15 @@ export function ModalForm({
               e.preventDefault()
               handleSubmit()
             }}
-            className={className}
+            className={cn('flex flex-1 flex-col overflow-hidden', className)}
           >
             <div className="flex-1 overflow-y-auto px-1 py-2">{body}</div>
             <DialogFooter className="shrink-0 pt-4">
-              <Button type="button" variant="outline" onClick={handleCancel} disabled={loading}>
-                {cancelText}
-              </Button>
+              {cancelText && (
+                <Button type="button" variant="outline" onClick={handleCancel} disabled={loading}>
+                  {cancelText}
+                </Button>
+              )}
               <Button type="submit" disabled={loading}>
                 {loading ? 'Submitting…' : submitText}
               </Button>
@@ -232,16 +234,26 @@ export function DrawerForm({
               e.preventDefault()
               handleSubmit()
             }}
-            className={cn('flex flex-col flex-1 overflow-hidden', className)}
+            className={cn('flex flex-1 flex-col overflow-hidden', className)}
           >
             <div className="flex-1 overflow-y-auto px-4 py-2">{body}</div>
             <DrawerFooter className="shrink-0">
-              <Button type="submit" disabled={loading}>
-                {loading ? 'Submitting…' : submitText}
-              </Button>
-              <Button type="button" variant="outline" onClick={handleCancel} disabled={loading}>
-                {cancelText}
-              </Button>
+              <div className="flex gap-2">
+                <Button type="submit" className="flex-1" disabled={loading}>
+                  {loading ? 'Submitting…' : submitText}
+                </Button>
+                {cancelText && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="flex-1"
+                    onClick={handleCancel}
+                    disabled={loading}
+                  >
+                    {cancelText}
+                  </Button>
+                )}
+              </div>
             </DrawerFooter>
           </form>
         </FormProvider>
