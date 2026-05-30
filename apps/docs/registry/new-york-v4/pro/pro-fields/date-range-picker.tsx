@@ -97,3 +97,5 @@ export function DateRangePickerBase({
     </Popover>
   )
 }
+
+export { DateRangePickerBase as DateRangePicker }

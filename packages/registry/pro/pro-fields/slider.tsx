@@ -51,3 +51,5 @@ export function SliderBase({
     </div>
   )
 }
+
+export { SliderBase as Slider }

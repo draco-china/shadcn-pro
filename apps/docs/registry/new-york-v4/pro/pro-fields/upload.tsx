@@ -122,3 +122,5 @@ export function UploadBase({
     </div>
   )
 }
+
+export { UploadBase as Upload }

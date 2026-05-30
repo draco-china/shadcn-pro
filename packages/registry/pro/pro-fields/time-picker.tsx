@@ -1,8 +1,9 @@
-'use client'
+"use client"
 
-import { X } from 'lucide-react'
-import type * as React from 'react'
-import { cn } from '@/lib/utils'
+import type * as React from "react"
+import { X } from "lucide-react"
+
+import { cn } from "@/lib/utils"
 
 export interface TimePickerProps {
   value?: string // HH:mm:ss
@@ -20,8 +21,8 @@ export function TimePickerBase({
   className,
   allowClear,
 }: TimePickerProps) {
-  const pad = (n: number) => String(n).padStart(2, '0')
-  const parts = value ? value.split(':') : []
+  const pad = (n: number) => String(n).padStart(2, "0")
+  const parts = value ? value.split(":") : []
   const hour = parts[0] ? Number(parts[0]) : 0
   const minute = parts[1] ? Number(parts[1]) : 0
   const second = parts[2] ? Number(parts[2]) : 0
@@ -31,7 +32,9 @@ export function TimePickerBase({
   }
 
   function handleClear(
-    event: React.PointerEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
+    event:
+      | React.PointerEvent<HTMLButtonElement>
+      | React.MouseEvent<HTMLButtonElement>
   ) {
     event.preventDefault()
     event.stopPropagation()
@@ -41,10 +44,10 @@ export function TimePickerBase({
   return (
     <div
       className={cn(
-        'flex h-9 w-fit items-center gap-1 rounded-md border border-input bg-transparent px-3 shadow-xs',
-        allowClear && value && !disabled && 'pr-8',
-        'relative',
-        className,
+        "flex h-9 w-fit items-center gap-1 rounded-md border border-input bg-transparent px-3 shadow-xs",
+        allowClear && value && !disabled && "pr-8",
+        "relative",
+        className
       )}
     >
       <select
@@ -92,7 +95,7 @@ export function TimePickerBase({
           aria-label="Clear time"
           onPointerDown={handleClear}
           onClick={handleClear}
-          className="-translate-y-1/2 absolute top-1/2 right-2 z-10 flex h-5 w-5 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+          className="absolute top-1/2 right-2 z-10 flex h-5 w-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
         >
           <X size={14} />
         </button>
@@ -100,3 +103,5 @@ export function TimePickerBase({
     </div>
   )
 }
+
+export { TimePickerBase as TimePicker }

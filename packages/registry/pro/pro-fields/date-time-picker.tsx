@@ -126,3 +126,5 @@ export function DateTimePickerBase({
     </Popover>
   )
 }
+
+export { DateTimePickerBase as DateTimePicker }

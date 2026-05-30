@@ -82,3 +82,5 @@ export function DatePickerBase({
     </Popover>
   )
 }
+
+export { DatePickerBase as DatePicker }

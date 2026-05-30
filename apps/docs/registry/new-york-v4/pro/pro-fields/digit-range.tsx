@@ -97,3 +97,5 @@ export function DigitRangeBase({
     </div>
   )
 }
+
+export { DigitRangeBase as DigitRange }

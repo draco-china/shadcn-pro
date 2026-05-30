@@ -64,3 +64,5 @@ export function SegmentedBase({
     </div>
   )
 }
+
+export { SegmentedBase as Segmented }

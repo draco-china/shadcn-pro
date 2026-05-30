@@ -87,3 +87,5 @@ export function DigitBase({
     </div>
   )
 }
+
+export { DigitBase as Digit }

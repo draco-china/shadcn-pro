@@ -1,12 +1,17 @@
-'use client'
+"use client"
 
-import { format } from 'date-fns'
-import { CalendarIcon, X } from 'lucide-react'
-import type * as React from 'react'
-import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { cn } from '@/lib/utils'
+import type * as React from "react"
+import { format } from "date-fns"
+import { CalendarIcon, X } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 export interface DatePickerBaseProps {
   value?: Date
@@ -22,15 +27,17 @@ export function DatePickerBase({
   value,
   onChange,
   disabled,
-  placeholder = 'Pick a date',
-  dateFormat = 'PPP',
+  placeholder = "Pick a date",
+  dateFormat = "PPP",
   allowClear,
   className,
 }: DatePickerBaseProps) {
   const showClear = allowClear && value && !disabled
 
   function handleClear(
-    event: React.PointerEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
+    event:
+      | React.PointerEvent<HTMLButtonElement>
+      | React.MouseEvent<HTMLButtonElement>
   ) {
     event.preventDefault()
     event.stopPropagation()
@@ -39,15 +46,15 @@ export function DatePickerBase({
 
   return (
     <Popover>
-      <div className={cn('relative w-full', className)}>
+      <div className={cn("relative w-full", className)}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             disabled={disabled}
             className={cn(
-              'w-full justify-start text-left font-normal',
-              showClear && 'pr-8',
-              !value && 'text-muted-foreground',
+              "w-full justify-start text-left font-normal",
+              showClear && "pr-8",
+              !value && "text-muted-foreground"
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
@@ -63,7 +70,7 @@ export function DatePickerBase({
             aria-label="Clear date"
             onPointerDown={handleClear}
             onClick={handleClear}
-            className="-translate-y-1/2 absolute top-1/2 right-2 z-10 flex h-5 w-5 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+            className="absolute top-1/2 right-2 z-10 flex h-5 w-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
           >
             <X size={14} />
           </button>
@@ -75,3 +82,5 @@ export function DatePickerBase({
     </Popover>
   )
 }
+
+export { DatePickerBase as DatePicker }

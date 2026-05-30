@@ -44,3 +44,5 @@ export function MoneyBase({
     />
   )
 }
+
+export { MoneyBase as Money }

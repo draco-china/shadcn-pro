@@ -53,3 +53,5 @@ export function RateBase({
     </div>
   )
 }
+
+export { RateBase as Rate }

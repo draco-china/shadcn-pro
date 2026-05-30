@@ -220,3 +220,5 @@ export function TreeSelectBase({
     </Popover>
   )
 }
+
+export { TreeSelectBase as TreeSelect }

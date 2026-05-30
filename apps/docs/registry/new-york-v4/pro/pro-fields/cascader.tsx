@@ -167,3 +167,5 @@ export function CascaderBase({
     </Popover>
   )
 }
+
+export { CascaderBase as Cascader }
