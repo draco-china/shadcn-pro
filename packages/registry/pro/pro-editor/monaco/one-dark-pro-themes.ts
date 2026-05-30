@@ -10,7 +10,7 @@ type MonacoThemeData = editor.IStandaloneThemeData
 
 export const oneDarkProFlatTheme: MonacoThemeData = {
   base: 'vs-dark',
-  inherit: false,
+  inherit: true,
   rules: [
     { token: 'meta.embedded', foreground: 'abb2bf' },
     {
@@ -463,7 +463,7 @@ export const oneDarkProFlatTheme: MonacoThemeData = {
 
 export const oneLightProFlatTheme: MonacoThemeData = {
   base: 'vs',
-  inherit: false,
+  inherit: true,
   rules: [
     { token: 'meta.embedded', foreground: '383a42' },
     {
