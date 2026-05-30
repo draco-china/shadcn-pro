@@ -1,3 +1,10 @@
+## [1.12.9](https://github.com/draco-china/shadcn-pro/compare/v1.12.8...v1.12.9) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** use ref for themeMode/theme in onMount closure ([1e49cdb](https://github.com/draco-china/shadcn-pro/commit/1e49cdbcc7e950e0a69d8d3d77b37a0d25ff7dd3))
+
 ## [1.12.8](https://github.com/draco-china/shadcn-pro/compare/v1.12.7...v1.12.8) (2026-05-30)
 
 
