@@ -1,3 +1,10 @@
+## [1.12.6](https://github.com/draco-china/shadcn-pro/compare/v1.12.5...v1.12.6) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** rewrite One Dark Pro rules with precise semantic Monaco tokens ([b1a9524](https://github.com/draco-china/shadcn-pro/commit/b1a952475820da9acee04466856aa0dcf5b5b3c6))
+
 ## [1.12.5](https://github.com/draco-china/shadcn-pro/compare/v1.12.4...v1.12.5) (2026-05-30)
 
 
