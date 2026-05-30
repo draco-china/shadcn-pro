@@ -208,13 +208,14 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `columnPinning`         | `ColumnPinningState`                  | from `columns[].meta.pinned` | Controlled column pinning state. Columns can also set `meta: { pinned: 'left' \| 'right' }`.                   |
 | `onColumnPinningChange` | `OnChangeFn<ColumnPinningState>`      | —                            | Called when column pinning changes.                                                                            |
 | `className`             | `string`                              | —                            | Additional className for the outer container.                                                                  |
-| `pagination`            | `PaginationState`                     | internal                     | Controlled pagination state (`{ pageIndex, pageSize }`). Pair with `onPaginationChange`. |
-| `onPaginationChange`    | `OnChangeFn<PaginationState>`         | —                            | Called when page or page size changes.                                                   |
-| `sorting`               | `SortingState`                        | internal                     | Controlled sorting state. Pair with `onSortingChange`.                                   |
+| `pagination`            | `ProTablePaginationState`             | internal                     | Controlled pagination state (`{ pageIndex, pageSize, total? }`). `total` is the server-side row count used to compute page count. Pair with `onPaginationChange`. When provided, server-side pagination is assumed. |
+| `onPaginationChange`    | `OnChangeFn<ProTablePaginationState>` | —                            | Called when page or page size changes.                                                   |
+| `sorting`               | `SortingState`                        | internal                     | Controlled sorting state. Pair with `onSortingChange`. When provided, server-side sorting is assumed. |
 | `onSortingChange`       | `OnChangeFn<SortingState>`            | —                            | Called when sort column or direction changes.                                             |
-| `total`                 | `number`                              | —                            | Total row count for server-side pagination (used to compute page count).                 |
-| `manualPagination`      | `boolean`                             | `false`                      | Disable client-side pagination — fetch data for the current page yourself.               |
-| `manualSorting`         | `boolean`                             | `false`                      | Disable client-side sorting — sort data on the server.                                   |
+| `columnFilters`         | `ColumnFiltersState`                  | internal                     | Controlled column filters state. Pair with `onColumnFiltersChange`.                      |
+| `onColumnFiltersChange` | `OnChangeFn<ColumnFiltersState>`      | —                            | Called when column filters change.                                                       |
+| `globalFilter`          | `string`                              | internal                     | Controlled global filter value. Pair with `onGlobalFilterChange`.                        |
+| `onGlobalFilterChange`  | `OnChangeFn<string>`                  | —                            | Called when the global filter changes.                                                   |
 
 ### useProTableUrlState
 
