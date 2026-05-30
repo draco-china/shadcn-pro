@@ -1,3 +1,10 @@
+## [1.11.12](https://github.com/draco-china/shadcn-pro/compare/v1.11.11...v1.11.12) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-form:** wrap SchemaField.* children with <SchemaField> root in all demos ([fbc84ac](https://github.com/draco-china/shadcn-pro/commit/fbc84ac26bacc0e6abe30ae05f17ae80dc630dbc))
+
 ## [1.11.11](https://github.com/draco-china/shadcn-pro/compare/v1.11.10...v1.11.11) (2026-05-30)
 
 
