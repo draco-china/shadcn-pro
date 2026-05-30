@@ -5,6 +5,7 @@ import { FormProvider } from '@formily/react'
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import {
   Dialog,
   DialogContent,
@@ -149,7 +150,7 @@ export function ModalForm({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className={widthClass}>
+      <DialogContent className={cn(widthClass, 'flex flex-col max-h-[90vh]')}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
@@ -162,8 +163,8 @@ export function ModalForm({
             }}
             className={className}
           >
-            <div className="py-2">{body}</div>
-            <DialogFooter className="pt-4">
+            <div className="flex-1 overflow-y-auto px-1 py-2">{body}</div>
+            <DialogFooter className="shrink-0 pt-4">
               <Button type="button" variant="outline" onClick={handleCancel} disabled={loading}>
                 {cancelText}
               </Button>
@@ -220,8 +221,8 @@ export function DrawerForm({
   return (
     <Drawer open={open} onOpenChange={setOpen} direction={side}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
+        <DrawerContent className="flex flex-col">
+        <DrawerHeader className="shrink-0">
           <DrawerTitle>{title}</DrawerTitle>
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
@@ -231,10 +232,10 @@ export function DrawerForm({
               e.preventDefault()
               handleSubmit()
             }}
-            className={className}
+            className={cn('flex flex-col flex-1 overflow-hidden', className)}
           >
-            <div className="overflow-y-auto px-4 py-2 flex-1">{body}</div>
-            <DrawerFooter>
+            <div className="flex-1 overflow-y-auto px-4 py-2">{body}</div>
+            <DrawerFooter className="shrink-0">
               <Button type="submit" disabled={loading}>
                 {loading ? 'Submitting…' : submitText}
               </Button>
