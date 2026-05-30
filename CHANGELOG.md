@@ -1,3 +1,10 @@
+## [1.11.17](https://github.com/draco-china/shadcn-pro/compare/v1.11.16...v1.11.17) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** apply shadcn CSS vars to Monaco editor chrome colors ([ddf5303](https://github.com/draco-china/shadcn-pro/commit/ddf53030ddcb4eb243b031a62a6831a9fbcf04a2))
+
 ## [1.11.16](https://github.com/draco-china/shadcn-pro/compare/v1.11.15...v1.11.16) (2026-05-30)
 
 
