@@ -3,7 +3,7 @@
 import { connect, mapProps, mapReadPretty } from '@formily/react'
 import { Checkbox } from '../../pro-fields/checkbox'
 import { Radio, type RadioOption } from '../../pro-fields/radio'
-import { SegmentedBase, type SegmentedOption } from '../../pro-fields/segmented'
+import { Segmented, type SegmentedOption } from '../../pro-fields/segmented'
 import { Select, type SelectOption } from '../../pro-fields/select'
 import { Switch } from '../../pro-fields/switch'
 import { fieldDataSource, fieldPlaceholder, fieldValue } from './utils'
@@ -63,7 +63,7 @@ export const FormilySelect = connect(
 FormilySelect.displayName = 'FormilySelect'
 
 export const FormilySegmented = connect(
-  SegmentedBase,
+  Segmented,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,

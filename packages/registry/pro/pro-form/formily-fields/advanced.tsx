@@ -1,9 +1,9 @@
 'use client'
 
 import { connect, mapProps, mapReadPretty } from '@formily/react'
-import { CascaderBase, type CascaderOption } from '../../pro-fields/cascader'
+import { Cascader, type CascaderOption } from '../../pro-fields/cascader'
 import { TreeSelect, type TreeSelectOption } from '../../pro-fields/tree-select'
-import { UploadBase, type UploadFile } from '../../pro-fields/upload'
+import { Upload, type UploadFile } from '../../pro-fields/upload'
 import {
   fieldDataSource,
   fieldPlaceholder,
@@ -13,7 +13,7 @@ import {
 } from './utils'
 
 export const FormilyCascader = connect(
-  CascaderBase,
+  Cascader,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
@@ -47,7 +47,7 @@ export const FormilyTreeSelect = connect(
 FormilyTreeSelect.displayName = 'FormilyTreeSelect'
 
 export const FormilyUpload = connect(
-  UploadBase,
+  Upload,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,

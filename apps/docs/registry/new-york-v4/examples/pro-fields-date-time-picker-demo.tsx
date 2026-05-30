@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { DateTimePickerBase } from "@/registry/new-york-v4/pro/pro-fields/date-time-picker"
+import { DateTimePicker } from "@/registry/new-york-v4/pro/pro-fields/date-time-picker"
 
 export default function ProFieldsDateTimePickerDemo() {
   const [value, setValue] = useState<Date | undefined>(
@@ -11,7 +11,7 @@ export default function ProFieldsDateTimePickerDemo() {
 
   return (
     <div className="w-full max-w-sm p-4">
-      <DateTimePickerBase value={value} onChange={setValue} />
+      <DateTimePicker value={value} onChange={setValue} />
     </div>
   )
 }

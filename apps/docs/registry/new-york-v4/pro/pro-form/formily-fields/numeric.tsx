@@ -3,15 +3,15 @@
 import { connect, mapProps, mapReadPretty } from '@formily/react'
 import { Star } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { DigitBase } from '../../pro-fields/digit'
-import { DigitRangeBase, type DigitRangeValue } from '../../pro-fields/digit-range'
-import { MoneyBase } from '../../pro-fields/money'
-import { RateBase } from '../../pro-fields/rate'
-import { SliderBase } from '../../pro-fields/slider'
+import { Digit } from '../../pro-fields/digit'
+import { DigitRange, type DigitRangeValue } from '../../pro-fields/digit-range'
+import { Money } from '../../pro-fields/money'
+import { Rate } from '../../pro-fields/rate'
+import { Slider } from '../../pro-fields/slider'
 import { fieldPlaceholder, fieldValue, formatMoney } from './utils'
 
 export const FormilyDigit = connect(
-  DigitBase,
+  Digit,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
@@ -23,7 +23,7 @@ export const FormilyDigit = connect(
 FormilyDigit.displayName = 'FormilyDigit'
 
 export const FormilyDigitRange = connect(
-  DigitRangeBase,
+  DigitRange,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
@@ -39,7 +39,7 @@ export const FormilyDigitRange = connect(
 FormilyDigitRange.displayName = 'FormilyDigitRange'
 
 export const FormilySlider = connect(
-  SliderBase,
+  Slider,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
@@ -50,7 +50,7 @@ export const FormilySlider = connect(
 FormilySlider.displayName = 'FormilySlider'
 
 export const FormilyRate = connect(
-  RateBase,
+  Rate,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
@@ -73,7 +73,7 @@ export const FormilyRate = connect(
 FormilyRate.displayName = 'FormilyRate'
 
 export const FormilyMoney = connect(
-  MoneyBase,
+  Money,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,

@@ -5,34 +5,34 @@ import { Search } from "lucide-react"
 
 import { ArrayField } from "@/registry/new-york-v4/pro/pro-fields/array-field"
 import { Captcha } from "@/registry/new-york-v4/pro/pro-fields/captcha"
-import { CascaderBase } from "@/registry/new-york-v4/pro/pro-fields/cascader"
+import { Cascader } from "@/registry/new-york-v4/pro/pro-fields/cascader"
 import { Checkbox } from "@/registry/new-york-v4/pro/pro-fields/checkbox"
-import { DatePickerBase } from "@/registry/new-york-v4/pro/pro-fields/date-picker"
+import { DatePicker } from "@/registry/new-york-v4/pro/pro-fields/date-picker"
 import {
-  DateRangePickerBase,
+  DateRangePicker,
   type DateRangeValue,
 } from "@/registry/new-york-v4/pro/pro-fields/date-range-picker"
-import { DateTimePickerBase } from "@/registry/new-york-v4/pro/pro-fields/date-time-picker"
-import { DigitBase } from "@/registry/new-york-v4/pro/pro-fields/digit"
+import { DateTimePicker } from "@/registry/new-york-v4/pro/pro-fields/date-time-picker"
+import { Digit } from "@/registry/new-york-v4/pro/pro-fields/digit"
 import {
-  DigitRangeBase,
+  DigitRange,
   type DigitRangeValue,
 } from "@/registry/new-york-v4/pro/pro-fields/digit-range"
 import { Input } from "@/registry/new-york-v4/pro/pro-fields/input"
-import { MoneyBase } from "@/registry/new-york-v4/pro/pro-fields/money"
+import { Money } from "@/registry/new-york-v4/pro/pro-fields/money"
 import { ObjectField } from "@/registry/new-york-v4/pro/pro-fields/object-field"
 import { Password } from "@/registry/new-york-v4/pro/pro-fields/password"
 import { Radio } from "@/registry/new-york-v4/pro/pro-fields/radio"
-import { RateBase } from "@/registry/new-york-v4/pro/pro-fields/rate"
-import { SegmentedBase } from "@/registry/new-york-v4/pro/pro-fields/segmented"
+import { Rate } from "@/registry/new-york-v4/pro/pro-fields/rate"
+import { Segmented } from "@/registry/new-york-v4/pro/pro-fields/segmented"
 import { Select } from "@/registry/new-york-v4/pro/pro-fields/select"
-import { SliderBase } from "@/registry/new-york-v4/pro/pro-fields/slider"
+import { Slider } from "@/registry/new-york-v4/pro/pro-fields/slider"
 import { Switch } from "@/registry/new-york-v4/pro/pro-fields/switch"
 import { Textarea } from "@/registry/new-york-v4/pro/pro-fields/textarea"
-import { TimePickerBase } from "@/registry/new-york-v4/pro/pro-fields/time-picker"
+import { TimePicker } from "@/registry/new-york-v4/pro/pro-fields/time-picker"
 import { TreeSelect } from "@/registry/new-york-v4/pro/pro-fields/tree-select"
 import {
-  UploadBase,
+  Upload,
   type UploadFile,
 } from "@/registry/new-york-v4/pro/pro-fields/upload"
 
@@ -142,13 +142,13 @@ export default function ProFieldsDocsDemo() {
         <Textarea placeholder="Write a note" rows={2} />
       </FieldPreview>
       <FieldPreview title="Digit">
-        <DigitBase value={quantity} onChange={setQuantity} allowClear />
+        <Digit value={quantity} onChange={setQuantity} allowClear />
       </FieldPreview>
       <FieldPreview title="DigitRange">
-        <DigitRangeBase value={range} onChange={setRange} allowClear />
+        <DigitRange value={range} onChange={setRange} allowClear />
       </FieldPreview>
       <FieldPreview title="Money">
-        <MoneyBase value={amount} onChange={setAmount} currency="$" />
+        <Money value={amount} onChange={setAmount} currency="$" />
       </FieldPreview>
       <FieldPreview title="Select">
         <Select
@@ -181,7 +181,7 @@ export default function ProFieldsDocsDemo() {
         />
       </FieldPreview>
       <FieldPreview title="Segmented">
-        <SegmentedBase
+        <Segmented
           value={segment}
           onChange={setSegment}
           options={[
@@ -192,29 +192,29 @@ export default function ProFieldsDocsDemo() {
         />
       </FieldPreview>
       <FieldPreview title="Slider">
-        <SliderBase defaultValue={64} showValue />
+        <Slider defaultValue={64} showValue />
       </FieldPreview>
       <FieldPreview title="Rate">
-        <RateBase value={score} onChange={setScore} />
+        <Rate value={score} onChange={setScore} />
       </FieldPreview>
       <FieldPreview title="DatePicker">
-        <DatePickerBase value={date} onChange={setDate} allowClear />
+        <DatePicker value={date} onChange={setDate} allowClear />
       </FieldPreview>
       <FieldPreview title="DateRangePicker">
-        <DateRangePickerBase
+        <DateRangePicker
           value={dateRange}
           onChange={setDateRange}
           allowClear
         />
       </FieldPreview>
       <FieldPreview title="DateTimePicker">
-        <DateTimePickerBase value={dateTime} onChange={setDateTime} />
+        <DateTimePicker value={dateTime} onChange={setDateTime} />
       </FieldPreview>
       <FieldPreview title="TimePicker">
-        <TimePickerBase value={time} onChange={setTime} allowClear />
+        <TimePicker value={time} onChange={setTime} allowClear />
       </FieldPreview>
       <FieldPreview title="Cascader">
-        <CascaderBase
+        <Cascader
           value={region}
           onChange={setRegion}
           options={regionOptions}
@@ -230,7 +230,7 @@ export default function ProFieldsDocsDemo() {
         />
       </FieldPreview>
       <FieldPreview title="Upload">
-        <UploadBase value={files} onChange={setFiles} maxCount={2} />
+        <Upload value={files} onChange={setFiles} maxCount={2} />
       </FieldPreview>
       <FieldPreview title="Captcha">
         <Captcha

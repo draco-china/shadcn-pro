@@ -2,14 +2,14 @@
 
 import { useState } from "react"
 
-import { DigitBase } from "@/registry/new-york-v4/pro/pro-fields/digit"
+import { Digit } from "@/registry/new-york-v4/pro/pro-fields/digit"
 
 export default function ProFieldsDigitDemo() {
   const [value, setValue] = useState<number | undefined>(12)
 
   return (
     <div className="w-full max-w-sm p-4">
-      <DigitBase
+      <Digit
         value={value}
         onChange={setValue}
         min={1}

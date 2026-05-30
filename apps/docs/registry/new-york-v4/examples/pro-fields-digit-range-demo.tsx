@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 import {
-  DigitRangeBase,
+  DigitRange,
   type DigitRangeValue,
 } from "@/registry/new-york-v4/pro/pro-fields/digit-range"
 
@@ -15,7 +15,7 @@ export default function ProFieldsDigitRangeDemo() {
 
   return (
     <div className="w-full max-w-sm p-4">
-      <DigitRangeBase value={value} onChange={setValue} allowClear />
+      <DigitRange value={value} onChange={setValue} allowClear />
     </div>
   )
 }

@@ -2,14 +2,14 @@
 
 import { connect, mapProps, mapReadPretty } from '@formily/react'
 import { format } from 'date-fns'
-import { DatePickerBase } from '../../pro-fields/date-picker'
-import { DateRangePickerBase, type DateRangeValue } from '../../pro-fields/date-range-picker'
-import { DateTimePickerBase } from '../../pro-fields/date-time-picker'
-import { TimePickerBase } from '../../pro-fields/time-picker'
+import { DatePicker } from '../../pro-fields/date-picker'
+import { DateRangePicker, type DateRangeValue } from '../../pro-fields/date-range-picker'
+import { DateTimePicker } from '../../pro-fields/date-time-picker'
+import { TimePicker } from '../../pro-fields/time-picker'
 import { fieldPlaceholder, fieldValue, toDate } from './utils'
 
 export const FormilyDatePicker = connect(
-  DatePickerBase,
+  DatePicker,
   mapProps((props, field) => ({
     ...props,
     value: toDate(props.value ?? fieldValue<Date | string>(field)),
@@ -23,7 +23,7 @@ export const FormilyDatePicker = connect(
 FormilyDatePicker.displayName = 'FormilyDatePicker'
 
 export const FormilyDateRangePicker = connect(
-  DateRangePickerBase,
+  DateRangePicker,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
@@ -44,7 +44,7 @@ export const FormilyDateRangePicker = connect(
 FormilyDateRangePicker.displayName = 'FormilyDateRangePicker'
 
 export const FormilyDateTimePicker = connect(
-  DateTimePickerBase,
+  DateTimePicker,
   mapProps((props, field) => ({
     ...props,
     value: toDate(props.value ?? fieldValue<Date | string>(field)),
@@ -58,7 +58,7 @@ export const FormilyDateTimePicker = connect(
 FormilyDateTimePicker.displayName = 'FormilyDateTimePicker'
 
 export const FormilyTimePicker = connect(
-  TimePickerBase,
+  TimePicker,
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
