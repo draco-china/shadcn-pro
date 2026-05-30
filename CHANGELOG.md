@@ -1,3 +1,10 @@
+## [1.12.12](https://github.com/draco-china/shadcn-pro/compare/v1.12.11...v1.12.12) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-table:** preserve local controlled state updates ([3f48acf](https://github.com/draco-china/shadcn-pro/commit/3f48acfb02cdf04d625b27fa287ee62b184840a5))
+
 ## [1.12.11](https://github.com/draco-china/shadcn-pro/compare/v1.12.10...v1.12.11) (2026-05-30)
 
 
