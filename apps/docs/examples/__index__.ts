@@ -21,6 +21,16 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       filePath: 'registry/new-york-v4/examples/pro-form-demo.tsx',
       component: React.lazy(() => import('@/registry/new-york-v4/examples/pro-form-demo')),
     },
+    'pro-form-modal-demo': {
+      name: 'pro-form-modal-demo',
+      filePath: 'registry/new-york-v4/examples/pro-form-modal-demo.tsx',
+      component: React.lazy(() => import('@/registry/new-york-v4/examples/pro-form-modal-demo')),
+    },
+    'pro-form-drawer-demo': {
+      name: 'pro-form-drawer-demo',
+      filePath: 'registry/new-york-v4/examples/pro-form-drawer-demo.tsx',
+      component: React.lazy(() => import('@/registry/new-york-v4/examples/pro-form-drawer-demo')),
+    },
     'pro-form-docs-demo': {
       name: 'pro-form-docs-demo',
       filePath: 'registry/new-york-v4/examples/pro-form-docs-demo.tsx',
