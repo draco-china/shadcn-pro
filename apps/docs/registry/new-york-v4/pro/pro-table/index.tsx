@@ -51,6 +51,8 @@ export interface ProTableRenderContext<TData> {
 
 export type ProTableLayout = 'full' | 'auto'
 
+export type ProTablePaginationState = PaginationState & { total?: number }
+
 export interface ProTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
@@ -77,21 +79,19 @@ export interface ProTableProps<TData, TValue> {
   columnPinning?: ColumnPinningState
   onColumnPinningChange?: OnChangeFn<ColumnPinningState>
   className?: string
-  /** Controlled pagination state. Pair with `onPaginationChange`. */
-  pagination?: PaginationState
-  onPaginationChange?: OnChangeFn<PaginationState>
-  /** Controlled sorting state. Pair with `onSortingChange`. */
+  /** Controlled pagination state. Pair with `onPaginationChange`. When provided, server-side pagination is assumed. */
+  pagination?: ProTablePaginationState
+  onPaginationChange?: OnChangeFn<ProTablePaginationState>
+  /** Controlled sorting state. Pair with `onSortingChange`. When provided, server-side sorting is assumed. */
   sorting?: SortingState
   onSortingChange?: OnChangeFn<SortingState>
-  /**
-   * Total row count for server-side pagination.
-   * Required when using URL state or server-side data fetching.
-   */
-  total?: number
-  /** Enable server-side pagination (disables client-side row model pagination). */
-  manualPagination?: boolean
-  /** Enable server-side sorting (disables client-side row model sorting). */
-  manualSorting?: boolean
+  /** Controlled column filters state. Pair with `onColumnFiltersChange`. */
+  columnFilters?: ColumnFiltersState
+  onColumnFiltersChange?: OnChangeFn<ColumnFiltersState>
+  /** Controlled global filter value. Pair with `onGlobalFilterChange`. */
+  globalFilter?: string
+  onGlobalFilterChange?: OnChangeFn<string>
+
 }
 
 export function ProTable<TData, TValue>({
@@ -124,24 +124,32 @@ export function ProTable<TData, TValue>({
   onPaginationChange,
   sorting: sortingProp,
   onSortingChange: onSortingChangeProp,
-  total,
-  manualPagination = false,
-  manualSorting = false,
+  columnFilters: columnFiltersProp,
+  onColumnFiltersChange: onColumnFiltersChangeProp,
+  globalFilter: globalFilterProp,
+  onGlobalFilterChange,
 }: ProTableProps<TData, TValue>) {
   const [data, setData] = React.useState<TData[]>(initialData)
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+  const [internalColumnFilters, setInternalColumnFilters] = React.useState<ColumnFiltersState>([])
+  const columnFilters = columnFiltersProp ?? internalColumnFilters
+  const setColumnFilters: OnChangeFn<ColumnFiltersState> = onColumnFiltersChangeProp ?? setInternalColumnFilters
+  const [internalGlobalFilter, setInternalGlobalFilter] = React.useState<string>('')
+  const globalFilter = globalFilterProp ?? internalGlobalFilter
+  const setGlobalFilter: OnChangeFn<string> = onGlobalFilterChange ?? setInternalGlobalFilter
   const [internalSorting, setInternalSorting] = React.useState<SortingState>([])
   const sorting = sortingProp ?? internalSorting
   const setSorting: OnChangeFn<SortingState> = onSortingChangeProp ?? setInternalSorting
+  const manualPagination = paginationProp !== undefined
+  const manualSorting = onSortingChangeProp !== undefined
 
   const [internalPagination, setInternalPagination] = React.useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   })
   const pagination = paginationProp ?? internalPagination
-  const setPagination: OnChangeFn<PaginationState> = onPaginationChange ?? setInternalPagination
+  const setPagination: OnChangeFn<ProTablePaginationState> = onPaginationChange ?? setInternalPagination
   const [tableSize, setTableSize] = React.useState<TableSize>('default')
   const defaultColumnOrder = React.useMemo(() => getLeafColumnIds(columns), [columns])
   const defaultColumnPinning = React.useMemo(() => getDefaultColumnPinning(columns), [columns])
@@ -180,6 +188,7 @@ export function ProTable<TData, TValue>({
       columnVisibility,
       rowSelection,
       columnFilters,
+      globalFilter,
       columnOrder,
       columnPinning: currentColumnPinning,
       pagination,
@@ -189,13 +198,14 @@ export function ProTable<TData, TValue>({
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
     onColumnVisibilityChange: setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
     onColumnPinningChange: handleColumnPinningChange,
     onPaginationChange: setPagination,
     manualPagination,
     manualSorting,
-    rowCount: manualPagination && total !== undefined ? total : undefined,
+    rowCount: pagination.total,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
