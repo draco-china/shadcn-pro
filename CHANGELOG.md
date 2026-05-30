@@ -1,3 +1,11 @@
+## [1.11.11](https://github.com/draco-china/shadcn-pro/compare/v1.11.10...v1.11.11) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-form:** export ModalForm and DrawerForm from index ([5932db6](https://github.com/draco-china/shadcn-pro/commit/5932db6c4f20146dd49e4ba027ba52cf6f189347))
+* **pro-form:** fix biome export sort order ([ac0556e](https://github.com/draco-china/shadcn-pro/commit/ac0556ee25317a162955f95e48266c3f449161fd))
+
 ## [1.11.10](https://github.com/draco-china/shadcn-pro/compare/v1.11.9...v1.11.10) (2026-05-30)
 
 
