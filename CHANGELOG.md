@@ -1,3 +1,10 @@
+## [1.11.13](https://github.com/draco-china/shadcn-pro/compare/v1.11.12...v1.11.13) (2026-05-30)
+
+
+### Bug Fixes
+
+* **array-field:** always show drag/delete controls, fix inner field spacing ([2325982](https://github.com/draco-china/shadcn-pro/commit/2325982199e314923034c1267b9818b862d16acb))
+
 ## [1.11.12](https://github.com/draco-china/shadcn-pro/compare/v1.11.11...v1.11.12) (2026-05-30)
 
 
