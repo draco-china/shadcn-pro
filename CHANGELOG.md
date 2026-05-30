@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/draco-china/shadcn-pro/compare/v1.12.16...v1.13.0) (2026-05-30)
+
+
+### Features
+
+* **pro-table:** simplify configuration api ([3b7eb3f](https://github.com/draco-china/shadcn-pro/commit/3b7eb3f575a5fadd2e48f5f081c4051a0be8a09e))
+
 ## [1.12.16](https://github.com/draco-china/shadcn-pro/compare/v1.12.15...v1.12.16) (2026-05-30)
 
 
