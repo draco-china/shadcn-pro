@@ -80,14 +80,14 @@ function SortableItem({ id, children, onRemove, disabled, canRemove = true }: So
         {...attributes}
         {...listeners}
         disabled={disabled}
-        className="mt-0.5 cursor-grab text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 active:cursor-grabbing disabled:cursor-not-allowed"
+        className="mt-1 cursor-grab text-muted-foreground active:cursor-grabbing disabled:cursor-not-allowed"
         aria-label="Drag to reorder"
       >
         <GripVertical className="h-4 w-4" />
       </button>
 
       {/* Content */}
-      <div className="min-w-0 flex-1">{children}</div>
+      <div className="min-w-0 flex-1 space-y-3">{children}</div>
 
       {/* Remove */}
       {canRemove && (
@@ -96,7 +96,7 @@ function SortableItem({ id, children, onRemove, disabled, canRemove = true }: So
           size="icon"
           variant="ghost"
           disabled={disabled}
-          className="h-7 w-7 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 hover:text-destructive"
+          className="h-7 w-7 shrink-0 text-muted-foreground hover:text-destructive"
           onClick={onRemove}
           aria-label="Remove item"
         >
