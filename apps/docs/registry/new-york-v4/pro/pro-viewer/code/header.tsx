@@ -20,7 +20,7 @@ export function CodeViewerHeader({
   theme,
   onCopy,
 }: CodeViewerHeaderProps) {
-  const isLight = themeMode === 'light'
+  const isLight = !isDark
 
   return (
     <div className="flex h-7 shrink-0 items-center justify-between px-3">
