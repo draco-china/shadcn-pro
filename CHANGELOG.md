@@ -1,3 +1,10 @@
+## [1.11.6](https://github.com/draco-china/shadcn-pro/compare/v1.11.5...v1.11.6) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-table:** fix biome import sort and non-null assertion in url-state hook ([5960a93](https://github.com/draco-china/shadcn-pro/commit/5960a936c11a6aaf6aa9b07cc727f8586f569c55))
+
 ## [1.11.5](https://github.com/draco-china/shadcn-pro/compare/v1.11.4...v1.11.5) (2026-05-30)
 
 
