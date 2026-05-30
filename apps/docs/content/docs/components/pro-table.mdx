@@ -218,71 +218,76 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 
 ### useProTableUrlState
 
-Sync pagination, sorting, and search to URL query params via `nuqs`. Returns props you can spread directly onto `<ProTable />`.
+Sync pagination, global filter, and column filters to URL search params — framework-agnostic via a `search` + `navigate` interface (compatible with TanStack Router, Next.js App Router, React Router, etc.).
 
 ```tsx
 import { useProTableUrlState } from '@/components/ui/pro-table/use-pro-table-url-state'
 
-const urlState = useProTableUrlState({ defaultPageSize: 20 })
-
-// URL: ?page=2&pageSize=20&sort=name&order=asc&search=alice
+const tableState = useProTableUrlState({
+  search: { page: 2, filter: 'alice' },  // current URL search params
+  navigate: ({ search }) => { /* push new params to router */ },
+})
 ```
 
-| Option            | Type     | Default | Description                                                     |
-| ----------------- | -------- | ------- | --------------------------------------------------------------- |
-| `defaultPageSize` | `number` | `10`    | Initial page size.                                              |
-| `prefix`          | `string` | `''`    | URL param prefix — use when multiple tables share a page.       |
+**Parameters:**
 
-The hook returns:
+| Option          | Type            | Default      | Description                                      |
+| --------------- | --------------- | ------------ | ------------------------------------------------ |
+| `search`        | `SearchRecord`  | —            | Current URL search params as a plain object.     |
+| `navigate`      | `NavigateFn`    | —            | Called with updated params to push to the router.|
+| `pagination.pageKey`      | `string` | `'page'`    | URL key for current page.            |
+| `pagination.pageSizeKey`  | `string` | `'pageSize'`| URL key for page size.               |
+| `pagination.defaultPage`  | `number` | `1`         | Default page (omitted from URL).     |
+| `pagination.defaultPageSize` | `number` | `10`     | Default page size (omitted from URL).|
+| `globalFilter.enabled`    | `boolean`| `true`      | Enable global filter state.          |
+| `globalFilter.key`        | `string` | `'filter'`  | URL key for the global filter.       |
+| `columnFilters` | `Array<ColumnFilterConfig>` | `[]`  | Column filter definitions with URL key mapping. |
 
-| Key                 | Type                          | Description                              |
-| ------------------- | ----------------------------- | ---------------------------------------- |
-| `pagination`        | `PaginationState`             | Pass to `<ProTable pagination={...} />`. |
-| `onPaginationChange`| `OnChangeFn<PaginationState>` | Pass to `<ProTable onPaginationChange={...} />`. |
-| `sorting`           | `SortingState`                | Pass to `<ProTable sorting={...} />`.    |
-| `onSortingChange`   | `OnChangeFn<SortingState>`    | Pass to `<ProTable onSortingChange={...} />`. |
-| `search`            | `string`                      | Current search term from the URL.        |
-| `setSearch`         | `(value: string) => void`     | Update search and reset to page 1.       |
+**Returns:**
 
-**Server-side example:**
+| Key                    | Type                          | Description                               |
+| ---------------------- | ----------------------------- | ----------------------------------------- |
+| `pagination`           | `PaginationState`             | Pass to `<ProTable pagination={...} />`.  |
+| `onPaginationChange`   | `OnChangeFn<PaginationState>` | Pass to `<ProTable onPaginationChange={...} />`. |
+| `globalFilter`         | `string`                      | Pass to `<ProTable globalFilter={...} />`. |
+| `onGlobalFilterChange` | `OnChangeFn<string>`          | Pass to `<ProTable onGlobalFilterChange={...} />`. |
+| `columnFilters`        | `ColumnFiltersState`          | Pass to `<ProTable columnFilters={...} />`. |
+| `onColumnFiltersChange`| `OnChangeFn<ColumnFiltersState>` | Pass to `<ProTable onColumnFiltersChange={...} />`. |
+| `ensurePageInRange`    | `(pageCount: number) => void` | Call after data loads to clamp the page.  |
+
+**Example with Next.js App Router:**
 
 ```tsx
 'use client'
 
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useProTableUrlState } from '@/components/ui/pro-table/use-pro-table-url-state'
 import { ProTable } from '@/components/ui/pro-table'
-import useSWR from 'swr'
 
 export default function UsersTable() {
-  const urlState = useProTableUrlState()
-  const { pagination, sorting, search } = urlState
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
-  const { data, isLoading } = useSWR(
-    ['/api/users', pagination, sorting, search],
-    () => fetchUsers({ pagination, sorting, search }),
-  )
+  const search = Object.fromEntries(searchParams.entries())
+
+  const tableState = useProTableUrlState({
+    search,
+    navigate: ({ search: next }) => {
+      const params = new URLSearchParams()
+      const resolved = typeof next === 'function' ? next(search) : next
+      for (const [k, v] of Object.entries(resolved)) {
+        if (v !== undefined) params.set(k, String(v))
+      }
+      router.push(`?${params.toString()}`)
+    },
+  })
 
   return (
     <ProTable
-      {...urlState}
+      {...tableState}
       columns={columns}
-      data={data?.rows ?? []}
-      total={data?.total}
-      loading={isLoading}
-      manualPagination
-      manualSorting
+      data={data}
     />
   )
-}
-```
-
-**NuqsAdapter** is required at the app level for `nuqs` to work:
-
-```tsx
-// app/layout.tsx
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
-
-export default function RootLayout({ children }) {
-  return <NuqsAdapter>{children}</NuqsAdapter>
 }
 ```
