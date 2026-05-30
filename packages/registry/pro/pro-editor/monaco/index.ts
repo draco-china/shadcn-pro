@@ -49,11 +49,13 @@ export function configureTypescript(monaco: Monaco) {
 }
 
 type MonacoThemeData = Parameters<Monaco['editor']['defineTheme']>[1]
-const GITHUB_MONACO_THEMES: Record<string, MonacoThemeData> = {
-  'github-light': githubLightTheme as MonacoThemeData,
-  'github-dark': githubDarkTheme as MonacoThemeData,
-  'one-dark-pro-flat': oneDarkProFlatTheme as MonacoThemeData,
-  'one-light-pro-flat': oneLightProFlatTheme as MonacoThemeData,
+const LIGHT_THEMES: Record<string, MonacoThemeData> = {
+  github: githubLightTheme as MonacoThemeData,
+  'one-dark-pro': oneLightProFlatTheme as MonacoThemeData,
+}
+const DARK_THEMES: Record<string, MonacoThemeData> = {
+  github: githubDarkTheme as MonacoThemeData,
+  'one-dark-pro': oneDarkProFlatTheme as MonacoThemeData,
 }
 
 /** Read a shadcn CSS variable and resolve it to a #rrggbb hex string via canvas. */
@@ -75,8 +77,9 @@ function cssVar(name: string): string {
   }
 }
 
-export function applyShadcnTheme(monaco: Monaco, theme: EditorTheme) {
-  const base = GITHUB_MONACO_THEMES[theme]
+export function applyShadcnTheme(monaco: Monaco, theme: EditorTheme, isDark: boolean) {
+  const themeId = isDark ? `${theme}-dark` : `${theme}-light`
+  const base = isDark ? DARK_THEMES[theme] : LIGHT_THEMES[theme]
 
   const bg = cssVar('--background') || (base.colors?.['editor.background'] as string) || '#ffffff'
   const fg = cssVar('--foreground') || (base.colors?.['editor.foreground'] as string) || '#000000'
@@ -116,9 +119,9 @@ export function applyShadcnTheme(monaco: Monaco, theme: EditorTheme) {
     'minimap.background': bg,
   }
 
-  monaco.editor.defineTheme(theme, {
+  monaco.editor.defineTheme(themeId, {
     ...base,
     colors: { ...base.colors, ...overrides },
   })
-  monaco.editor.setTheme(theme)
+  monaco.editor.setTheme(themeId)
 }

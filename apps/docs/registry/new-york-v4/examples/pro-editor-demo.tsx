@@ -39,10 +39,8 @@ const LANGUAGE_OPTIONS = [
 ]
 
 const THEME_OPTIONS: { label: string; value: EditorTheme }[] = [
-  { label: "One Dark Pro", value: "one-dark-pro-flat" },
-  { label: "One Dark Pro Light", value: "one-light-pro-flat" },
-  { label: "GitHub Dark", value: "github-dark" },
-  { label: "GitHub Light", value: "github-light" },
+  { label: "One Dark Pro", value: "one-dark-pro" },
+  { label: "GitHub", value: "github" },
 ]
 
 const VIEW_MODE_OPTIONS: { label: string; value: EditorViewMode }[] = [
@@ -62,7 +60,7 @@ function PlainPreview({ content, language }: PreviewProps) {
 export default function ProEditorDemo() {
   const [value, setValue] = useState(INITIAL_CODE)
   const [language, setLanguage] = useState("tsx")
-  const [theme, setTheme] = useState<EditorTheme>("one-dark-pro-flat")
+  const [theme, setTheme] = useState<EditorTheme>("one-dark-pro")
   const [viewMode, setViewMode] = useState<EditorViewMode>("split")
 
   return (

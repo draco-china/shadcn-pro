@@ -2,8 +2,8 @@
 
 import MonacoEditor, { type Monaco } from '@monaco-editor/react'
 import { Columns2, Eye, EyeOff } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import * as React from 'react'
-
 import { cn } from '@/lib/utils'
 import { getEditorPath, getMonacoLanguage } from './language'
 import { applyShadcnTheme, configureTypescript } from './monaco'
@@ -24,7 +24,7 @@ export function ProEditor({
   value = '',
   onChange,
   language,
-  theme = 'one-dark-pro-flat',
+  theme = 'one-dark-pro',
   className,
   height,
   showToolbar = true,
@@ -41,6 +41,8 @@ export function ProEditor({
   const [fullscreen, setFullscreen] = React.useState(false)
   const [uncontrolledViewMode, setUncontrolledViewMode] =
     React.useState<EditorViewMode>(defaultViewMode)
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === 'dark'
   const editorRef = React.useRef<MonacoEditorInstance | null>(null)
   const monacoRef = React.useRef<Monaco | null>(null)
   const {
@@ -67,7 +69,7 @@ export function ProEditor({
       monacoRef.current = monaco
       scrollDisposableRef.current?.dispose()
       scrollDisposableRef.current = editor.onDidScrollChange(() => syncPreviewFromEditor(editor))
-      applyShadcnTheme(monaco, theme)
+      applyShadcnTheme(monaco, theme, isDark)
       configureTypescript(monaco)
     },
     [syncPreviewFromEditor, theme],

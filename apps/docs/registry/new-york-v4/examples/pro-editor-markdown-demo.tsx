@@ -5,7 +5,7 @@ import { ProEditor } from "@/registry/new-york-v4/pro/pro-editor/index"
 import type { PreviewProps } from "@/registry/new-york-v4/pro/pro-editor/index"
 import { MarkdownViewer } from "@/registry/new-york-v4/pro/pro-viewer/markdown"
 
-const EDITOR_THEME = "one-dark-pro-flat" as const
+const EDITOR_THEME = "one-dark-pro" as const
 
 const INITIAL = `# Getting Started
 
