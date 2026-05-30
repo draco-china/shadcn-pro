@@ -7,7 +7,7 @@ import type {
 import { RecursionField, useField, useFieldSchema } from '@formily/react'
 import { observer } from '@formily/reactive-react'
 import { ArrayField } from '../../pro-fields/array-field'
-import { ObjectField } from '../../pro-fields/object-field'
+import { ObjectField, type ObjectFieldProps } from '../../pro-fields/object-field'
 
 export const FormilyArrayField = observer(() => {
   const field = useField<FormilyArrayFieldModel>()
@@ -32,15 +32,22 @@ export const FormilyObjectField = observer(
   ({
     collapsible = false,
     defaultOpen = true,
+    ...props
   }: {
     collapsible?: boolean
     defaultOpen?: boolean
-  }) => {
+  } & Omit<ObjectFieldProps, 'children' | 'collapsible' | 'defaultOpen'>) => {
     const field = useField<FormilyObjectFieldModel>()
     const schema = useFieldSchema()
 
     return (
-      <ObjectField title={field.title} collapsible={collapsible} defaultOpen={defaultOpen}>
+      <ObjectField
+        {...props}
+        title={props.title ?? field.title}
+        description={props.description ?? field.description}
+        collapsible={collapsible}
+        defaultOpen={defaultOpen}
+      >
         <RecursionField schema={schema} onlyRenderProperties />
       </ObjectField>
     )
