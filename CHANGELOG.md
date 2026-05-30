@@ -1,3 +1,10 @@
+## [1.12.15](https://github.com/draco-china/shadcn-pro/compare/v1.12.14...v1.12.15) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-form:** sync array field adapter api ([5acab2d](https://github.com/draco-china/shadcn-pro/commit/5acab2defbc63fdbdd53e44029d32090126e6d5e))
+
 ## [1.12.14](https://github.com/draco-china/shadcn-pro/compare/v1.12.13...v1.12.14) (2026-05-30)
 
 
