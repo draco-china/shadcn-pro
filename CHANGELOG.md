@@ -1,3 +1,10 @@
+## [1.12.5](https://github.com/draco-china/shadcn-pro/compare/v1.12.4...v1.12.5) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** use inherit:true for One Dark Pro Monaco theme ([48d6e08](https://github.com/draco-china/shadcn-pro/commit/48d6e0884ba77697b8a5688f1232955d892d72ce))
+
 ## [1.12.4](https://github.com/draco-china/shadcn-pro/compare/v1.12.3...v1.12.4) (2026-05-30)
 
 
