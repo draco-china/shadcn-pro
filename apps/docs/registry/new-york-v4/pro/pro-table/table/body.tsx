@@ -1,11 +1,9 @@
-"use client"
+'use client'
 
-import type * as React from 'react'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { flexRender, type Row } from '@tanstack/react-table'
-
+import type * as React from 'react'
 import { TableCell, TableRow } from '@/components/ui/table'
-
 import { AutoFilterCell } from '../toolbar'
 import { ProTableEmptyState } from './empty-state'
 import { ProTableSkeletonRows } from './skeleton'
@@ -26,7 +24,7 @@ export function ProTableBody<TData>({
 }: {
   rows: Row<TData>[]
   rowIds: string[]
-  visibleColumns: ReturnType<Row<TData>["getVisibleCells"]>[number]["column"][]
+  visibleColumns: ReturnType<Row<TData>['getVisibleCells']>[number]['column'][]
   visibleColumnCount: number
   dragSort: boolean
   loading: boolean
@@ -36,13 +34,7 @@ export function ProTableBody<TData>({
   emptyText?: React.ReactNode
 }) {
   if (loading) {
-    return (
-      <ProTableSkeletonRows
-        rows={loadingRows}
-        columns={visibleColumns}
-        dragSort={dragSort}
-      />
-    )
+    return <ProTableSkeletonRows rows={loadingRows} columns={visibleColumns} dragSort={dragSort} />
   }
 
   if (dragSort) {
@@ -50,11 +42,7 @@ export function ProTableBody<TData>({
       <SortableContext items={rowIds} strategy={verticalListSortingStrategy}>
         <BodyRows rows={rows} dragSort paddingClass={paddingClass} />
         {rows.length === 0 && (
-          <EmptyRow
-            colSpan={visibleColumnCount}
-            icon={emptyIcon}
-            text={emptyText}
-          />
+          <EmptyRow colSpan={visibleColumnCount} icon={emptyIcon} text={emptyText} />
         )}
       </SortableContext>
     )
@@ -83,8 +71,9 @@ function BodyRows<TData>({
           const meta = cell.column.columnDef.meta as
             | { filters?: { label: string; value: string }[]; filterVariant?: 'badge' | 'text' }
             | undefined
-          const autoRender =
-            meta?.filters && cell.column.columnDef.cell === undefined
+          const filters = meta?.filters
+          const autoRender = filters && cell.column.columnDef.cell === undefined
+
           return (
             <TableCell
               key={cell.id}
@@ -92,11 +81,11 @@ function BodyRows<TData>({
               style={getPinnedColumnStyle(cell.column)}
             >
               {autoRender ? (
-                <AutoFilterCell
-                  value={cell.getValue() as string}
-                  filters={meta!.filters!}
-                  variant={meta?.filterVariant}
-                />
+                  <AutoFilterCell
+                    value={cell.getValue() as string}
+                    filters={filters}
+                    variant={meta.filterVariant}
+                  />
               ) : (
                 flexRender(cell.column.columnDef.cell, cell.getContext())
               )}
@@ -109,11 +98,7 @@ function BodyRows<TData>({
             {cells}
           </SortableRow>
         ) : (
-          <TableRow
-            key={row.id}
-            data-state={row.getIsSelected() && "selected"}
-            className="group"
-          >
+          <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'} className="group">
             {cells}
           </TableRow>
         )
@@ -133,10 +118,7 @@ function EmptyRow({
 }) {
   return (
     <TableRow>
-      <TableCell
-        colSpan={colSpan}
-        className="h-32 text-center text-muted-foreground"
-      >
+      <TableCell colSpan={colSpan} className="h-32 text-center text-muted-foreground">
         <ProTableEmptyState icon={icon} text={text} />
       </TableCell>
     </TableRow>

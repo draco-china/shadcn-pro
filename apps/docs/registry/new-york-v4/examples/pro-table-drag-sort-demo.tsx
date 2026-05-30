@@ -70,10 +70,12 @@ export default function ProTableDragSortDemo() {
       <ProTable
         data={initialData}
         columns={columns}
-        dragSort
-        rowKey="id"
-        onDragSortEnd={(newData) => setOrder(newData.map((d) => d.title))}
-        pageSizeOptions={[5, 10]}
+        dragSort={{
+          enabled: true,
+          rowKey: "id",
+          onDragSortEnd: (newData) => setOrder(newData.map((d) => d.title)),
+        }}
+        pagination={{ pageSizeOptions: [5, 10] }}
       />
       {order.length > 0 && (
         <p className="text-xs text-muted-foreground px-1">

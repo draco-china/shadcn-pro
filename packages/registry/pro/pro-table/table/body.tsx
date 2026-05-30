@@ -4,6 +4,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { flexRender, type Row } from '@tanstack/react-table'
 import type * as React from 'react'
 import { TableCell, TableRow } from '@/components/ui/table'
+import { AutoFilterCell } from '../toolbar'
 import { ProTableEmptyState } from './empty-state'
 import { ProTableSkeletonRows } from './skeleton'
 import { SortableRow } from './sortable-row'
@@ -66,15 +67,31 @@ function BodyRows<TData>({
   return (
     <>
       {rows.map((row) => {
-        const cells = row.getVisibleCells().map((cell) => (
-          <TableCell
-            key={cell.id}
-            className={getPinnedColumnClassName(cell.column, paddingClass)}
-            style={getPinnedColumnStyle(cell.column)}
-          >
-            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-          </TableCell>
-        ))
+        const cells = row.getVisibleCells().map((cell) => {
+          const meta = cell.column.columnDef.meta as
+            | { filters?: { label: string; value: string }[]; filterVariant?: 'badge' | 'text' }
+            | undefined
+          const filters = meta?.filters
+          const autoRender = filters && cell.column.columnDef.cell === undefined
+
+          return (
+            <TableCell
+              key={cell.id}
+              className={getPinnedColumnClassName(cell.column, paddingClass)}
+              style={getPinnedColumnStyle(cell.column)}
+            >
+              {autoRender ? (
+                <AutoFilterCell
+                  value={cell.getValue() as string}
+                  filters={filters}
+                  variant={meta.filterVariant}
+                />
+              ) : (
+                flexRender(cell.column.columnDef.cell, cell.getContext())
+              )}
+            </TableCell>
+          )
+        })
 
         return dragSort ? (
           <SortableRow key={row.id} row={row} paddingClass={paddingClass}>

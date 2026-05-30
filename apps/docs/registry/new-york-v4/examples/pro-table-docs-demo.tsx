@@ -19,7 +19,11 @@ const data: User[] = [
 ]
 
 const columns: ColumnDef<User>[] = [
-  { accessorKey: "name", header: "Name", meta: { pinned: "left" } },
+  {
+    accessorKey: "name",
+    header: "Name",
+    meta: { pinned: "left", search: { placeholder: "Search name..." } },
+  },
   { accessorKey: "email", header: "Email" },
   {
     accessorKey: "role",
@@ -34,9 +38,8 @@ export default function ProTableDocsDemo() {
       <ProTable
         columns={columns}
         data={data}
-        searchKey="name"
         header={<h3 className="text-base font-semibold">Team members</h3>}
-        pageSizeOptions={[4, 10]}
+        pagination={{ pageSizeOptions: [4, 10] }}
       />
     </div>
   )

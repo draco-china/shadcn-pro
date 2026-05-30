@@ -14,7 +14,6 @@ import {
   type ColumnDef,
   type ColumnFiltersState,
   type ColumnPinningState,
-  functionalUpdate,
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
@@ -31,7 +30,9 @@ import {
 } from '@tanstack/react-table'
 import * as React from 'react'
 
+import { Button } from '@/components/ui/button'
 import { TableBody, TableHeader } from '@/components/ui/table'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { ProTablePagination } from './pagination'
 import { ProTableBody } from './table/body'
@@ -39,7 +40,7 @@ import { ProTableHeader } from './table/header'
 import { getDefaultColumnPinning, getLeafColumnIds, reorderDataByRows } from './table/utils'
 import { ProTableToolbar } from './toolbar'
 import { ProTableBulkActions } from './toolbar/bulk-actions'
-import { cellPadding, type TableSize } from './types'
+import { cellPadding, type ProTableSearch, type TableSize } from './types'
 
 const tableScrollbarClassName =
   '[scrollbar-gutter:auto] [scrollbar-width:thin] [scrollbar-color:transparent_transparent] hover:[scrollbar-color:rgba(148,163,184,0.45)_transparent] [&::-webkit-scrollbar]:size-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:shadow-none [&::-webkit-scrollbar-corner]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-0 [&::-webkit-scrollbar-thumb]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/35'
@@ -50,144 +51,128 @@ export interface ProTableRenderContext<TData> {
   selectedRows: Row<TData>[]
 }
 
+export type ProTableActionContent<TData> =
+  | React.ReactNode
+  | ((context: ProTableRenderContext<TData>) => React.ReactNode)
+
+export interface ProTableAction<TData>
+  extends Omit<React.ComponentProps<typeof Button>, 'children' | 'disabled' | 'onClick'> {
+  key: string
+  label: ProTableActionContent<TData>
+  icon?: ProTableActionContent<TData>
+  tooltip?: ProTableActionContent<TData>
+  disabled?: boolean | ((context: ProTableRenderContext<TData>) => boolean)
+  hidden?: boolean | ((context: ProTableRenderContext<TData>) => boolean)
+  onClick?: (context: ProTableRenderContext<TData>) => void
+}
+
 export type ProTableLayout = 'full' | 'auto'
 
-export type ProTablePaginationState = PaginationState & { total?: number }
+export interface ProTableState {
+  pagination: PaginationState
+  sorting: SortingState
+  columnFilters: ColumnFiltersState
+}
+
+export interface ProTableRequestParams extends ProTableState {}
+
+export type ProTableRequest<TData> = (
+  params: ProTableRequestParams,
+) => Promise<{ data: TData[]; total?: number }> | { data: TData[]; total?: number }
+
+export interface ProTableToolbarOptions<TData> {
+  search?: ProTableSearch
+  actions?: ProTableAction<TData>[]
+  options?:
+    | false
+    | {
+        refresh?: false | (() => void)
+        density?: boolean
+        columns?: boolean
+      }
+}
+
+export interface ProTableBulkToolbarOptions<TData> {
+  actions?: ProTableAction<TData>[]
+  entityName?: string
+}
+
+export interface ProTablePaginationOptions {
+  pageSizeOptions?: number[]
+}
+
+export interface ProTableDragSortOptions<TData> {
+  enabled?: boolean
+  rowKey?: keyof TData
+  onDragSortEnd?: (newData: TData[]) => void
+}
 
 export interface ProTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  data?: TData[]
+  request?: ProTableRequest<TData>
+  defaultState?: Partial<ProTableState>
+  onStateChange?: (state: ProTableState) => void
   header?: React.ReactNode | ((context: ProTableRenderContext<TData>) => React.ReactNode)
-  filterRender?: React.ReactNode
-  toolBarRender?: () => React.ReactNode[]
-  bulkActionRender?: (context: ProTableRenderContext<TData>) => React.ReactNode
-  bulkActionEntityName?: string
-  searchKey?: string
-  searchPlaceholder?: string
-  showColumnToggle?: boolean
-  onRefresh?: () => void
-  pageSizeOptions?: number[]
-  dragSort?: boolean
-  onDragSortEnd?: (newData: TData[]) => void
-  rowKey?: keyof TData
+  toolbar?: false | ProTableToolbarOptions<TData>
+  bulkToolbar?: false | ProTableBulkToolbarOptions<TData>
+  pagination?: false | ProTablePaginationOptions
+  dragSort?: boolean | ProTableDragSortOptions<TData>
   loading?: boolean
   loadingRows?: number
   emptyText?: React.ReactNode
   emptyIcon?: React.ReactNode
-  showPagination?: boolean
   layout?: ProTableLayout
   stickyHeader?: boolean
   columnPinning?: ColumnPinningState
   onColumnPinningChange?: OnChangeFn<ColumnPinningState>
   className?: string
-  /** Controlled pagination state. Pair with `onPaginationChange`. When provided, server-side pagination is assumed. */
-  pagination?: ProTablePaginationState
-  onPaginationChange?: OnChangeFn<ProTablePaginationState>
-  /** Controlled sorting state. Pair with `onSortingChange`. */
-  sorting?: SortingState
-  onSortingChange?: OnChangeFn<SortingState>
-  /** Controlled column filters state. Pair with `onColumnFiltersChange`. */
-  columnFilters?: ColumnFiltersState
-  onColumnFiltersChange?: OnChangeFn<ColumnFiltersState>
-  /** Controlled global filter value. Pair with `onGlobalFilterChange`. */
-  globalFilter?: string
-  onGlobalFilterChange?: OnChangeFn<string>
 }
 
 export function ProTable<TData, TValue>({
   columns,
-  data: initialData,
+  data: dataProp = [],
+  request,
+  defaultState,
+  onStateChange,
   header,
-  filterRender,
-  toolBarRender,
-  bulkActionRender,
-  bulkActionEntityName,
-  searchKey,
-  searchPlaceholder = 'Search...',
-  showColumnToggle = true,
-  onRefresh,
-  pageSizeOptions,
-  dragSort = false,
-  onDragSortEnd,
-  rowKey,
+  toolbar,
+  bulkToolbar,
+  pagination: paginationOptions,
+  dragSort,
   loading = false,
   loadingRows = 5,
   emptyText = 'No data',
   emptyIcon,
-  showPagination = true,
   layout = 'full',
   stickyHeader = true,
   columnPinning,
   onColumnPinningChange,
   className,
-  pagination: paginationProp,
-  onPaginationChange,
-  sorting: sortingProp,
-  onSortingChange: onSortingChangeProp,
-  columnFilters: columnFiltersProp,
-  onColumnFiltersChange: onColumnFiltersChangeProp,
-  globalFilter: globalFilterProp,
-  onGlobalFilterChange,
 }: ProTableProps<TData, TValue>) {
-  const [data, setData] = React.useState<TData[]>(initialData)
+  const [data, setData] = React.useState<TData[]>(dataProp)
+  const [requestLoading, setRequestLoading] = React.useState(false)
+  const [requestTotal, setRequestTotal] = React.useState<number>()
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-  const [internalColumnFilters, setInternalColumnFilters] = React.useState<ColumnFiltersState>([])
-  const columnFilters = columnFiltersProp ?? internalColumnFilters
-  const setColumnFilters = React.useCallback<OnChangeFn<ColumnFiltersState>>(
-    (updater) => {
-      if (columnFiltersProp === undefined) {
-        setInternalColumnFilters((current) => functionalUpdate(updater, current))
-      }
-      onColumnFiltersChangeProp?.(updater)
-    },
-    [columnFiltersProp, onColumnFiltersChangeProp],
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    defaultState?.columnFilters ?? [],
   )
-  const [internalGlobalFilter, setInternalGlobalFilter] = React.useState<string>('')
-  const globalFilter = globalFilterProp ?? internalGlobalFilter
-  const setGlobalFilter = React.useCallback<OnChangeFn<string>>(
-    (updater) => {
-      if (globalFilterProp === undefined) {
-        setInternalGlobalFilter((current) => functionalUpdate(updater, current))
-      }
-      onGlobalFilterChange?.(updater)
+  const [sorting, setSorting] = React.useState<SortingState>(defaultState?.sorting ?? [])
+  const manualPagination = Boolean(request)
+  const manualSorting = Boolean(request)
+  const manualFiltering = Boolean(request)
+  const [pagination, setPagination] = React.useState<PaginationState>(
+    defaultState?.pagination ?? {
+      pageIndex: 0,
+      pageSize: 10,
     },
-    [globalFilterProp, onGlobalFilterChange],
-  )
-  const [internalSorting, setInternalSorting] = React.useState<SortingState>([])
-  const sorting = sortingProp ?? internalSorting
-  const setSorting = React.useCallback<OnChangeFn<SortingState>>(
-    (updater) => {
-      if (sortingProp === undefined) {
-        setInternalSorting((current) => functionalUpdate(updater, current))
-      }
-      onSortingChangeProp?.(updater)
-    },
-    [onSortingChangeProp, sortingProp],
-  )
-  const manualPagination = paginationProp !== undefined
-  const manualSorting = sortingProp !== undefined || onSortingChangeProp !== undefined
-  const manualFiltering =
-    columnFiltersProp !== undefined ||
-    onColumnFiltersChangeProp !== undefined ||
-    globalFilterProp !== undefined ||
-    onGlobalFilterChange !== undefined
-
-  const [internalPagination, setInternalPagination] = React.useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  })
-  const pagination = paginationProp ?? internalPagination
-  const setPagination = React.useCallback<OnChangeFn<ProTablePaginationState>>(
-    (updater) => {
-      if (paginationProp === undefined) {
-        setInternalPagination((current) => functionalUpdate(updater, current))
-      }
-      onPaginationChange?.(updater)
-    },
-    [onPaginationChange, paginationProp],
   )
   const [tableSize, setTableSize] = React.useState<TableSize>('default')
+  const dragSortOptions = typeof dragSort === 'object' ? dragSort : undefined
+  const dragSortEnabled = typeof dragSort === 'boolean' ? dragSort : (dragSortOptions?.enabled ?? false)
+  const paginationEnabled = paginationOptions !== false
+  const pageSizeOptions = typeof paginationOptions === 'object' ? paginationOptions.pageSizeOptions : undefined
   const defaultColumnOrder = React.useMemo(() => getLeafColumnIds(columns), [columns])
   const defaultColumnPinning = React.useMemo(() => getDefaultColumnPinning(columns), [columns])
   const defaultColumnOrderKey = defaultColumnOrder.join('\0')
@@ -197,7 +182,42 @@ export function ProTable<TData, TValue>({
     React.useState<ColumnPinningState>(defaultColumnPinning)
   const currentColumnPinning = columnPinning ?? internalColumnPinning
 
-  React.useEffect(() => setData(initialData), [initialData])
+  React.useEffect(() => {
+    if (!request) setData(dataProp)
+  }, [dataProp, request])
+
+  const tableState = React.useMemo<ProTableState>(
+    () => ({ pagination, sorting, columnFilters }),
+    [pagination, sorting, columnFilters],
+  )
+
+  const mountedRef = React.useRef(false)
+  React.useEffect(() => {
+    if (!mountedRef.current) {
+      mountedRef.current = true
+      return
+    }
+    onStateChange?.(tableState)
+  }, [onStateChange, tableState])
+
+  React.useEffect(() => {
+    if (!request) return
+    let canceled = false
+    setRequestLoading(true)
+    Promise.resolve(request(tableState))
+      .then((result) => {
+        if (canceled) return
+        setData(result.data)
+        setRequestTotal(result.total)
+      })
+      .finally(() => {
+        if (!canceled) setRequestLoading(false)
+      })
+    return () => {
+      canceled = true
+    }
+  }, [request, tableState])
+
   React.useEffect(() => {
     setColumnOrder((current) => [
       ...current.filter((id) => defaultColumnOrder.includes(id)),
@@ -216,7 +236,23 @@ export function ProTable<TData, TValue>({
     },
     [onColumnPinningChange],
   )
-
+  const resetToFirstPage = React.useCallback(() => {
+    setPagination((current) => ({ ...current, pageIndex: 0 }))
+  }, [])
+  const handleSortingChange = React.useCallback<OnChangeFn<SortingState>>(
+    (updater) => {
+      setSorting(updater)
+      resetToFirstPage()
+    },
+    [resetToFirstPage],
+  )
+  const handleColumnFiltersChange = React.useCallback<OnChangeFn<ColumnFiltersState>>(
+    (updater) => {
+      setColumnFilters(updater)
+      resetToFirstPage()
+    },
+    [resetToFirstPage],
+  )
   const table = useReactTable({
     data,
     columns,
@@ -225,7 +261,6 @@ export function ProTable<TData, TValue>({
       columnVisibility,
       rowSelection,
       columnFilters,
-      globalFilter,
       columnOrder,
       columnPinning: currentColumnPinning,
       pagination,
@@ -233,9 +268,8 @@ export function ProTable<TData, TValue>({
     enableRowSelection: true,
     enableColumnPinning: true,
     onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setGlobalFilter,
+    onSortingChange: handleSortingChange,
+    onColumnFiltersChange: handleColumnFiltersChange,
     onColumnVisibilityChange: setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
     onColumnPinningChange: handleColumnPinningChange,
@@ -243,15 +277,15 @@ export function ProTable<TData, TValue>({
     manualPagination,
     manualSorting,
     manualFiltering,
-    rowCount: paginationProp?.total,
+    rowCount: request ? requestTotal : undefined,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-    getRowId: rowKey
-      ? (row) => String((row as Record<string, unknown>)[rowKey as string])
+    getRowId: dragSortOptions?.rowKey
+      ? (row) => String((row as Record<string, unknown>)[dragSortOptions.rowKey as string])
       : undefined,
   })
 
@@ -275,21 +309,27 @@ export function ProTable<TData, TValue>({
     if (nextData === data) return
 
     setData(nextData)
-    onDragSortEnd?.(nextData)
+    dragSortOptions?.onDragSortEnd?.(nextData)
   }
 
   const rows = table.getRowModel().rows
   const rowIds = rows.map((row) => row.id)
   const selectedRows = table.getFilteredSelectedRowModel().rows
   const visibleColumns = table.getVisibleLeafColumns()
-  const visibleColumnCount = visibleColumns.length + (dragSort ? 1 : 0)
+  const visibleColumnCount = visibleColumns.length + (dragSortEnabled ? 1 : 0)
   const renderContext = React.useMemo<ProTableRenderContext<TData>>(
     () => ({ table, rows, selectedRows }),
     [table, rows, selectedRows],
   )
   const isFullLayout = layout === 'full'
   const headerContent = typeof header === 'function' ? header(renderContext) : header
-  const bulkActions = bulkActionRender?.(renderContext)
+  const toolbarOptions = toolbar === false ? undefined : toolbar
+  const toolbarBuiltInOptions =
+    toolbarOptions?.options === false ? undefined : toolbarOptions?.options
+  const bulkToolbarOptions = bulkToolbar === false ? undefined : bulkToolbar
+  const toolbarActionNodes = renderActions(toolbarOptions?.actions, renderContext)
+  const bulkActionNodes = renderActions(bulkToolbarOptions?.actions, renderContext)
+  const hasBulkActions = bulkActionNodes.length > 0
   const content = (
     <>
       <div
@@ -303,7 +343,7 @@ export function ProTable<TData, TValue>({
           <TableHeader>
             <ProTableHeader
               headerGroups={table.getHeaderGroups()}
-              dragSort={dragSort}
+              dragSort={dragSortEnabled}
               sticky={stickyHeader}
             />
           </TableHeader>
@@ -313,8 +353,8 @@ export function ProTable<TData, TValue>({
               rowIds={rowIds}
               visibleColumns={visibleColumns}
               visibleColumnCount={visibleColumnCount}
-              dragSort={dragSort}
-              loading={loading}
+              dragSort={dragSortEnabled}
+              loading={loading || requestLoading}
               loadingRows={loadingRows}
               paddingClass={cellPadding[tableSize]}
               emptyIcon={emptyIcon}
@@ -323,7 +363,7 @@ export function ProTable<TData, TValue>({
           </TableBody>
         </table>
       </div>
-      {showPagination && (
+      {paginationEnabled && (
         <div className={cn(isFullLayout && 'shrink-0')}>
           <ProTablePagination table={table} pageSizeOptions={pageSizeOptions} />
         </div>
@@ -336,32 +376,84 @@ export function ProTable<TData, TValue>({
       className={cn(isFullLayout ? 'flex h-full min-h-0 flex-col gap-3' : 'space-y-3', className)}
     >
       {headerContent && <div className="shrink-0">{headerContent}</div>}
-      <ProTableToolbar
-        table={table}
-        disabled={loading}
-        filterRender={filterRender}
-        toolBarRender={toolBarRender}
-        searchKey={searchKey}
-        searchPlaceholder={searchPlaceholder}
-        showColumnToggle={showColumnToggle}
-        onRefresh={onRefresh}
-        tableSize={tableSize}
-        onTableSizeChange={setTableSize}
-        defaultColumnOrder={defaultColumnOrder}
-        defaultColumnPinning={defaultColumnPinning}
-      />
-      {dragSort && !loading ? (
+      {toolbar !== false && (
+        <ProTableToolbar
+          table={table}
+          disabled={loading || requestLoading}
+          search={toolbarOptions?.search}
+          actions={toolbarActionNodes}
+          columns={toolbarBuiltInOptions?.columns ?? true}
+          density={toolbarBuiltInOptions?.density ?? true}
+          refresh={toolbarBuiltInOptions?.refresh || undefined}
+          tableSize={tableSize}
+          onTableSizeChange={setTableSize}
+          defaultColumnOrder={defaultColumnOrder}
+          defaultColumnPinning={defaultColumnPinning}
+        />
+      )}
+      {dragSortEnabled && !loading && !requestLoading ? (
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           {content}
         </DndContext>
       ) : (
         content
       )}
-      {bulkActionRender && (
-        <ProTableBulkActions table={table} entityName={bulkActionEntityName}>
-          {bulkActions}
+      {hasBulkActions && (
+        <ProTableBulkActions table={table} entityName={bulkToolbarOptions?.entityName}>
+          {bulkActionNodes}
         </ProTableBulkActions>
       )}
     </div>
   )
+}
+
+function renderActions<TData>(
+  actions: ProTableAction<TData>[] | undefined,
+  context: ProTableRenderContext<TData>,
+) {
+  return (actions ?? [])
+    .filter((action) => !resolveActionState(action.hidden, context))
+    .map((action) => {
+      const { key, label, icon, tooltip, disabled, hidden, onClick, ...buttonProps } = action
+      void hidden
+
+      const tooltipContent = resolveActionContent(tooltip, context)
+      const button = (
+        <Button
+          key={key}
+          type="button"
+          variant="outline"
+          size="sm"
+          {...buttonProps}
+          disabled={resolveActionState(disabled, context)}
+          onClick={() => onClick?.(context)}
+        >
+          {resolveActionContent(icon, context)}
+          {resolveActionContent(label, context)}
+        </Button>
+      )
+
+      if (!tooltipContent) return button
+
+      return (
+        <Tooltip key={key}>
+          <TooltipTrigger asChild>{button}</TooltipTrigger>
+          <TooltipContent>{tooltipContent}</TooltipContent>
+        </Tooltip>
+      )
+    })
+}
+
+function resolveActionState<TData>(
+  value: boolean | ((context: ProTableRenderContext<TData>) => boolean) | undefined,
+  context: ProTableRenderContext<TData>,
+) {
+  return typeof value === 'function' ? value(context) : Boolean(value)
+}
+
+function resolveActionContent<TData>(
+  value: ProTableActionContent<TData> | undefined,
+  context: ProTableRenderContext<TData>,
+) {
+  return typeof value === 'function' ? value(context) : value
 }

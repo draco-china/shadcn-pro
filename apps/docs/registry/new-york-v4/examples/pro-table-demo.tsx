@@ -4,7 +4,6 @@ import { type ColumnDef } from "@tanstack/react-table"
 import { Download, Plus, Trash2 } from "lucide-react"
 
 import { ProTable } from "@/registry/new-york-v4/pro/pro-table/index"
-import { Button } from "@/registry/new-york-v4/ui/button"
 import { Checkbox } from "@/registry/new-york-v4/ui/checkbox"
 
 type User = {
@@ -245,7 +244,7 @@ const columns: ColumnDef<User>[] = [
     accessorKey: "name",
     header: "Name",
     size: 180,
-    meta: { pinned: "left" },
+    meta: { pinned: "left", search: { placeholder: "Search name..." } },
     enableSorting: true,
   },
   { accessorKey: "email", header: "Email", size: 240, enableSorting: true },
@@ -305,43 +304,47 @@ export default function ProTableDemo() {
             </div>
           </div>
         )}
-        searchKey="name"
-        searchPlaceholder="Search name..."
-        pageSizeOptions={[5, 10, 25]}
-        bulkActionEntityName="user"
-        bulkActionRender={({ selectedRows, table }) => (
-          <>
-            <Button
-              size="sm"
-              variant="outline"
-              className="h-8"
-              onClick={() => table.resetRowSelection()}
-            >
-              <Download size={16} />
-              Export {selectedRows.length}
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              className="h-8 text-destructive hover:text-destructive"
-              onClick={() => table.resetRowSelection()}
-            >
-              <Trash2 size={16} />
-              Delete
-            </Button>
-          </>
-        )}
-        toolBarRender={() => [
-          <Button key="add" size="sm">
-            <Plus size={16} />
-            New
-          </Button>,
-          <Button key="export" size="sm" variant="outline">
-            <Download size={16} />
-            Export
-          </Button>,
-        ]}
-        onRefresh={() => {}}
+        pagination={{ pageSizeOptions: [5, 10, 25] }}
+        bulkToolbar={{
+          entityName: "user",
+          actions: [
+            {
+              key: "export-selected",
+              label: ({ selectedRows }) => `Export ${selectedRows.length}`,
+              icon: <Download size={16} />,
+              tooltip: "Export selected users",
+              onClick: ({ table }) => table.resetRowSelection(),
+            },
+            {
+              key: "delete-selected",
+              label: "Delete",
+              icon: <Trash2 size={16} />,
+              className: "h-8 text-destructive hover:text-destructive",
+              tooltip: "Delete selected users",
+              onClick: ({ table }) => table.resetRowSelection(),
+            },
+          ],
+        }}
+        toolbar={{
+          options: {
+            refresh: () => {},
+          },
+          actions: [
+            {
+              key: "add",
+              label: "New",
+              icon: <Plus size={16} />,
+              variant: "default",
+              tooltip: "Create user",
+            },
+            {
+              key: "export",
+              label: "Export",
+              icon: <Download size={16} />,
+              tooltip: "Export users",
+            },
+          ],
+        }}
       />
     </div>
   )

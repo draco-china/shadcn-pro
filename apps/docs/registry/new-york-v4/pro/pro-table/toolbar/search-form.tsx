@@ -1,48 +1,44 @@
 'use client'
 
-import type { Table } from '@tanstack/react-table'
+import type { Column, Table } from '@tanstack/react-table'
 import { Search, X } from 'lucide-react'
 import type * as React from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import type { ProTableColumnMeta, ProTableSearch } from '../types'
 
 interface ProTableSearchFormProps<TData> {
   table: Table<TData>
-  searchKey?: string
-  searchPlaceholder?: string
+  search?: ProTableSearch
 }
 
 /**
- * A standalone search form that can be used separately from the toolbar.
- * Useful when you want to place the search outside the table container.
+ * Standalone search form driven by the first column with `meta.search`.
  */
-export function ProTableSearchForm<TData>({
-  table,
-  searchKey,
-  searchPlaceholder = 'Search...',
-}: ProTableSearchFormProps<TData>) {
-  const column = searchKey ? table.getColumn(searchKey) : undefined
+export function ProTableSearchForm<TData>({ table, search }: ProTableSearchFormProps<TData>) {
+  const column = getSearchColumn(table, search)
+  const meta = column ? getColumnMeta(column) : undefined
   const value = (column?.getFilterValue() as string) ?? ''
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    column?.setFilterValue(e.target.value)
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    column?.setFilterValue(event.target.value || undefined)
   }
 
   const handleClear = () => {
-    column?.setFilterValue('')
+    column?.setFilterValue(undefined)
   }
 
-  if (!searchKey) return null
+  if (!column) return null
 
   return (
     <div className="relative flex items-center">
       <Search className="absolute left-3 size-4 text-muted-foreground" />
       <Input
-        placeholder={searchPlaceholder}
+        placeholder={getSearchPlaceholder(search, meta, column.id)}
         value={value}
         onChange={handleChange}
-        className="h-9 pl-9 pr-9 w-[200px] lg:w-[300px]"
+        className="h-9 w-[200px] pl-9 pr-9 lg:w-[300px]"
       />
       {value && (
         <Button
@@ -57,4 +53,25 @@ export function ProTableSearchForm<TData>({
       )}
     </div>
   )
+}
+
+function getColumnMeta<TData>(column: Column<TData, unknown>) {
+  return column.columnDef.meta as ProTableColumnMeta
+}
+
+function getSearchColumn<TData>(table: Table<TData>, search: ProTableSearch | undefined) {
+  if (search === false) return undefined
+  if (typeof search === 'string') return table.getColumn(search)
+  if (typeof search === 'object') return table.getColumn(search.columnId)
+  return table.getAllLeafColumns().find((column) => Boolean(getColumnMeta(column).search))
+}
+
+function getSearchPlaceholder(
+  search: ProTableSearch | undefined,
+  meta: ProTableColumnMeta | undefined,
+  columnId: string,
+) {
+  if (typeof search === 'object' && search.placeholder) return search.placeholder
+  if (typeof meta?.search === 'object' && meta.search.placeholder) return meta.search.placeholder
+  return meta?.searchPlaceholder ?? `Search ${columnId}...`
 }

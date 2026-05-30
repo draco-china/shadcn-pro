@@ -20,7 +20,11 @@ const data: User[] = [
 ]
 
 const columns: ColumnDef<User>[] = [
-  { accessorKey: "name", header: "Name" },
+  {
+    accessorKey: "name",
+    header: "Name",
+    meta: { search: { placeholder: "Search by name..." } },
+  },
   { accessorKey: "email", header: "Email" },
   {
     accessorKey: "role",
@@ -54,13 +58,7 @@ const columns: ColumnDef<User>[] = [
 export default function ProTableFilterDemo() {
   return (
     <div className="h-[460px] w-full p-4">
-      <ProTable
-        columns={columns}
-        data={data}
-        searchKey="name"
-        searchPlaceholder="Search by name..."
-        pageSizeOptions={[6, 10]}
-      />
+      <ProTable columns={columns} data={data} pagination={{ pageSizeOptions: [6, 10] }} />
     </div>
   )
 }

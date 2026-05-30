@@ -15,8 +15,26 @@ export interface ProTableFilterOption {
   value: string
 }
 
+export type ProTableColumnSearch =
+  | boolean
+  | {
+      placeholder?: string
+    }
+
+export type ProTableSearch =
+  | false
+  | string
+  | {
+      columnId: string
+      placeholder?: string
+    }
+
 export interface ProTableColumnMeta {
   pinned?: ProTableColumnPinningPosition
+  /** Enable the toolbar search input from this column. */
+  search?: ProTableColumnSearch
+  /** Placeholder for the auto-rendered search input */
+  searchPlaceholder?: string
   /** Provide options to auto-render a FacetedFilter in the toolbar and map value→label in cells */
   filters?: ProTableFilterOption[]
   /** Placeholder for the auto-rendered filter */

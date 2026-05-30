@@ -10,8 +10,39 @@ export const cellPadding: Record<TableSize, string> = {
 
 export type ProTableColumnPinningPosition = 'left' | 'right'
 
+export interface ProTableFilterOption {
+  label: string
+  value: string
+}
+
+export type ProTableColumnSearch =
+  | boolean
+  | {
+      placeholder?: string
+    }
+
+export type ProTableSearch =
+  | false
+  | string
+  | {
+      columnId: string
+      placeholder?: string
+    }
+
 export interface ProTableColumnMeta {
   pinned?: ProTableColumnPinningPosition
+  /** Enable the toolbar search input from this column. */
+  search?: ProTableColumnSearch
+  /** Placeholder for the auto-rendered search input */
+  searchPlaceholder?: string
+  /** Provide options to auto-render a FacetedFilter in the toolbar and map value→label in cells */
+  filters?: ProTableFilterOption[]
+  /** Placeholder for the auto-rendered filter */
+  filterPlaceholder?: string
+  /** Cell display style when filters is set: 'badge' (default) | 'text' */
+  filterVariant?: 'badge' | 'text'
+  /** Filter selection mode: 'multi' (default) | 'single' */
+  filterMode?: 'single' | 'multi'
 }
 
 declare module '@tanstack/react-table' {
