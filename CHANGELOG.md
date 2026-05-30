@@ -1,3 +1,11 @@
+## [1.11.7](https://github.com/draco-china/shadcn-pro/compare/v1.11.6...v1.11.7) (2026-05-30)
+
+
+### Bug Fixes
+
+* **docs:** remove nuqs, rewrite use-search-registry with next/navigation ([97c9950](https://github.com/draco-china/shadcn-pro/commit/97c995052e9e98b2faf2882eef83c49b89aa370b))
+* **docs:** restore nuqs dependency removed by mistake ([209c682](https://github.com/draco-china/shadcn-pro/commit/209c682d2ed2b2cec16188ddfdbf1452094ba932))
+
 ## [1.11.6](https://github.com/draco-china/shadcn-pro/compare/v1.11.5...v1.11.6) (2026-05-30)
 
 
