@@ -1,3 +1,10 @@
+## [1.12.11](https://github.com/draco-china/shadcn-pro/compare/v1.12.10...v1.12.11) (2026-05-30)
+
+
+### Bug Fixes
+
+* render pro form checkbox content ([481d414](https://github.com/draco-china/shadcn-pro/commit/481d414f61a22bdbf62ef355072a58f077f426d9))
+
 ## [1.12.10](https://github.com/draco-china/shadcn-pro/compare/v1.12.9...v1.12.10) (2026-05-30)
 
 
