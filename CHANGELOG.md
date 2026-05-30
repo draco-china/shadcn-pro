@@ -1,3 +1,10 @@
+## [1.12.3](https://github.com/draco-china/shadcn-pro/compare/v1.12.2...v1.12.3) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-editor:** default theme one-dark-pro-flat; isLight covers all light variants ([b9962dc](https://github.com/draco-china/shadcn-pro/commit/b9962dcf2dde2f6136df604507cf74e4fa4436ee))
+
 ## [1.12.2](https://github.com/draco-china/shadcn-pro/compare/v1.12.1...v1.12.2) (2026-05-30)
 
 
