@@ -1,3 +1,10 @@
+## [1.11.16](https://github.com/draco-china/shadcn-pro/compare/v1.11.15...v1.11.16) (2026-05-30)
+
+
+### Bug Fixes
+
+* **overlay-form:** modal footer inside scroll container, drawer footer row layout, cancel optional ([8d1c2b6](https://github.com/draco-china/shadcn-pro/commit/8d1c2b6f46184ebadf506e9393803c522ab341ef))
+
 ## [1.11.15](https://github.com/draco-china/shadcn-pro/compare/v1.11.14...v1.11.15) (2026-05-30)
 
 
