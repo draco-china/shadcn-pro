@@ -1,14 +1,13 @@
 1:"$Sreact.fragment"
-2:I[625209,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0rvjgknnyh.53.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/08h1m9ntorp2m.js","/shadcn-pro/_next/static/chunks/0my2l8xwkx8_r.js","/shadcn-pro/_next/static/chunks/0rnsg5fcuj37p.js","/shadcn-pro/_next/static/chunks/09oi6l6z2mrwm.js"],"BlockViewer"]
-3f:I[80196,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0rvjgknnyh.53.js"],"OutletBoundary"]
-40:"$Sreact.suspense"
-3:T1ce0,"use client"
+2:I[625209,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0rvjgknnyh.53.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/11q4x.d01tm9~.js","/shadcn-pro/_next/static/chunks/0~xcxr4alrz-1.js","/shadcn-pro/_next/static/chunks/0h1qoztw6v_1h.js"],"BlockViewer"]
+3e:I[80196,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0rvjgknnyh.53.js"],"OutletBoundary"]
+3f:"$Sreact.suspense"
+3:T1d62,"use client"
 
 import { type ColumnDef } from "@tanstack/react-table"
 import { Download, Plus, Trash2 } from "lucide-react"
 
 import { ProTable } from "@/registry/new-york-v4/pro/pro-table/index"
-import { Badge } from "@/registry/new-york-v4/ui/badge"
 import { Button } from "@/registry/new-york-v4/ui/button"
 import { Checkbox } from "@/registry/new-york-v4/ui/checkbox"
 
@@ -258,24 +257,30 @@ const columns: ColumnDef<User>[] = [
     accessorKey: "role",
     header: "Role",
     size: 140,
-    cell: ({ row }) => (
-      <Badge variant="outline" className="capitalize">
-        {row.getValue("role")}
-      </Badge>
-    ),
+    filterFn: "multiValueFilter" as never,
+    meta: {
+      filterPlaceholder: "Role",
+      filters: [
+        { label: "Admin", value: "admin" },
+        { label: "Editor", value: "editor" },
+        { label: "User", value: "user" },
+      ],
+      filterVariant: "badge" as const,
+    },
     enableSorting: true,
   },
   {
     accessorKey: "status",
     header: "Status",
     size: 140,
-    cell: ({ row }) => {
-      const active = row.getValue("status") === "active"
-      return (
-        <Badge variant={active ? "default" : "secondary"}>
-          {active ? "Active" : "Inactive"}
-        </Badge>
-      )
+    filterFn: "multiValueFilter" as never,
+    meta: {
+      filterPlaceholder: "Status",
+      filters: [
+        { label: "Active", value: "active" },
+        { label: "Inactive", value: "inactive" },
+      ],
+      filterVariant: "badge" as const,
     },
     enableSorting: true,
   },
@@ -345,13 +350,12 @@ export default function ProTableDemo() {
     </div>
   )
 }
-4:T12e00,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">"use client"</span></span>
+4:T12d71,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">"use client"</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> ColumnDef } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "@tanstack/react-table"</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Download, Plus, Trash2 } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "lucide-react"</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ProTable } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "@/registry/new-york-v4/pro/pro-table/index"</span></span>
-<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Badge } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "@/registry/new-york-v4/ui/badge"</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Button } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "@/registry/new-york-v4/ui/button"</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Checkbox } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "@/registry/new-york-v4/ui/checkbox"</span></span>
 <span class="line" data-line=""></span>
@@ -601,24 +605,30 @@ export default function ProTableDemo() {
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    accessorKey: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"role"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    header: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"Role"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    size: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">140</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
-<span class="line" data-line=""><span style="color:#6F42C1;--shiki-dark:#B392F0">    cell</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: ({ </span><span style="color:#E36209;--shiki-dark:#FFAB70">row</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> }) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#24292E;--shiki-dark:#E1E4E8"> (</span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      &#x3C;</span><span style="color:#005CC5;--shiki-dark:#79B8FF">Badge</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> variant</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"outline"</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> className</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"capitalize"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        {row.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">getValue</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"role"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)}</span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      &#x3C;/</span><span style="color:#005CC5;--shiki-dark:#79B8FF">Badge</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    ),</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    filterFn: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"multiValueFilter"</span><span style="color:#D73A49;--shiki-dark:#F97583"> as</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> never</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    meta: {</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      filterPlaceholder: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"Role"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      filters: [</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        { label: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"Admin"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, value: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"admin"</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> },</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        { label: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"Editor"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, value: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"editor"</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> },</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        { label: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"User"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, value: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"user"</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> },</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      ],</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      filterVariant: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"badge"</span><span style="color:#D73A49;--shiki-dark:#F97583"> as</span><span style="color:#D73A49;--shiki-dark:#F97583"> const</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    },</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    enableSorting: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">true</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  },</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  {</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    accessorKey: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"status"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    header: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"Status"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    size: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">140</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
-<span class="line" data-line=""><span style="color:#6F42C1;--shiki-dark:#B392F0">    cell</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: ({ </span><span style="color:#E36209;--shiki-dark:#FFAB70">row</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> }) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
-<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">      const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> active</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> row.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">getValue</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"status"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">===</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "active"</span></span>
-<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">      return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> (</span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        &#x3C;</span><span style="color:#005CC5;--shiki-dark:#79B8FF">Badge</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> variant</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#24292E;--shiki-dark:#E1E4E8">{active </span><span style="color:#D73A49;--shiki-dark:#F97583">?</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "default"</span><span style="color:#D73A49;--shiki-dark:#F97583"> :</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "secondary"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">}></span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">          {active </span><span style="color:#D73A49;--shiki-dark:#F97583">?</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "Active"</span><span style="color:#D73A49;--shiki-dark:#F97583"> :</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "Inactive"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        &#x3C;/</span><span style="color:#005CC5;--shiki-dark:#79B8FF">Badge</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      )</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    filterFn: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"multiValueFilter"</span><span style="color:#D73A49;--shiki-dark:#F97583"> as</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> never</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    meta: {</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      filterPlaceholder: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"Status"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      filters: [</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        { label: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"Active"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, value: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"active"</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> },</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        { label: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"Inactive"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, value: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"inactive"</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> },</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      ],</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      filterVariant: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"badge"</span><span style="color:#D73A49;--shiki-dark:#F97583"> as</span><span style="color:#D73A49;--shiki-dark:#F97583"> const</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    },</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    enableSorting: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">true</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  },</span></span>
@@ -688,7 +698,7 @@ export default function ProTableDemo() {
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>5:T2290,'use client'
+<span class="line" data-line=""></span></code></pre>5:T2508,'use client'
 
 import {
   closestCenter,
@@ -728,6 +738,9 @@ import { getDefaultColumnPinning, getLeafColumnIds, reorderDataByRows } from './
 import { ProTableToolbar } from './toolbar'
 import { ProTableBulkActions } from './toolbar/bulk-actions'
 import { cellPadding, type TableSize } from './types'
+
+const tableScrollbarClassName =
+  '[scrollbar-gutter:auto] [scrollbar-width:thin] [scrollbar-color:transparent_transparent] hover:[scrollbar-color:rgba(148,163,184,0.45)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:shadow-none [&::-webkit-scrollbar-corner]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-0 [&::-webkit-scrollbar-thumb]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/35'
 
 export interface ProTableRenderContext<TData> {
   table: TanStackTable<TData>
@@ -895,7 +908,13 @@ export function ProTable<TData, TValue>({
   const bulkActions = bulkActionRender?.(renderContext)
   const content = (
     <>
-      <div className={cn('rounded-md border overflow-auto', isFullLayout && 'min-h-0 flex-1')}>
+      <div
+        className={cn(
+          'overflow-auto rounded-md border',
+          tableScrollbarClassName,
+          isFullLayout && 'min-h-0 flex-1',
+        )}
+      >
         <table data-slot="table" className="w-full min-w-max caption-bottom text-sm">
           <TableHeader>
             <ProTableHeader
@@ -962,7 +981,7 @@ export function ProTable<TData, TValue>({
     </div>
   )
 }
-6:T12e14,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+6:T133d8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  closestCenter,</span></span>
@@ -1002,6 +1021,9 @@ export function ProTable<TData, TValue>({
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ProTableToolbar } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ProTableBulkActions } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './toolbar/bulk-actions'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { cellPadding, </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> TableSize } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './types'</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> tableScrollbarClassName</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span></span>
+<span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">  '[scrollbar-gutter:auto] [scrollbar-width:thin] [scrollbar-color:transparent_transparent] hover:[scrollbar-color:rgba(148,163,184,0.45)_transparent] [&#x26;::-webkit-scrollbar]:h-2 [&#x26;::-webkit-scrollbar]:w-2 [&#x26;::-webkit-scrollbar-track]:bg-transparent [&#x26;::-webkit-scrollbar-track]:shadow-none [&#x26;::-webkit-scrollbar-corner]:bg-transparent [&#x26;::-webkit-scrollbar-thumb]:rounded-full [&#x26;::-webkit-scrollbar-thumb]:border-0 [&#x26;::-webkit-scrollbar-thumb]:bg-transparent hover:[&#x26;::-webkit-scrollbar-thumb]:bg-muted-foreground/35'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> interface</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ProTableRenderContext</span><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#6F42C1;--shiki-dark:#B392F0">TData</span><span style="color:#24292E;--shiki-dark:#E1E4E8">> {</span></span>
 <span class="line" data-line=""><span style="color:#E36209;--shiki-dark:#FFAB70">  table</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> TanStackTable</span><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#6F42C1;--shiki-dark:#B392F0">TData</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
@@ -1169,7 +1191,13 @@ export function ProTable<TData, TValue>({
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> bulkActions</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> bulkActionRender</span><span style="color:#24292E;--shiki-dark:#E1E4E8">?.(renderContext)</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> content</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> (</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;></span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> className</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span><span style="color:#6F42C1;--shiki-dark:#B392F0">cn</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#032F62;--shiki-dark:#9ECBFF">'rounded-md border overflow-auto'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, isFullLayout </span><span style="color:#D73A49;--shiki-dark:#F97583">&#x26;&#x26;</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'min-h-0 flex-1'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)}></span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span></span>
+<span class="line" data-line=""><span style="color:#6F42C1;--shiki-dark:#B392F0">        className</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span><span style="color:#6F42C1;--shiki-dark:#B392F0">cn</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span></span>
+<span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">          'overflow-auto rounded-md border'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">          tableScrollbarClassName,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">          isFullLayout </span><span style="color:#D73A49;--shiki-dark:#F97583">&#x26;&#x26;</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'min-h-0 flex-1'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        )}</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      ></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">table</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> data-slot</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"table"</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> className</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"w-full min-w-max caption-bottom text-sm"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">          &#x3C;</span><span style="color:#005CC5;--shiki-dark:#79B8FF">TableHeader</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">            &#x3C;</span><span style="color:#005CC5;--shiki-dark:#79B8FF">ProTableHeader</span></span>
@@ -2423,7 +2451,7 @@ function DensityMenu({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#005CC5;--shiki-dark:#79B8FF">DropdownMenu</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>16:T1455,'use client'
+<span class="line" data-line=""></span></code></pre>16:T14b4,'use client'
 
 import {
   closestCenter,
@@ -2461,15 +2489,14 @@ export function ProTableColumnSettings<TData>({
   const columnOrder = table.getState().columnOrder.length
     ? table.getState().columnOrder
     : defaultColumnOrder
+  const SYSTEM_COLUMN_IDS = ['select', 'drag']
   const orderedColumns = [
     ...columnOrder.map((id) => columns.find((column) => column.id === id)).filter(Boolean),
     ...columns.filter((column) => !columnOrder.includes(column.id)),
-  ] as Column<TData, unknown>[]
+  ].filter((column) => !SYSTEM_COLUMN_IDS.includes(column.id)) as Column<TData, unknown>[]
   const sensors = useSensors(
     useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   )
 
   function handleColumnDragEnd(event: DragEndEvent) {
@@ -2594,7 +2621,7 @@ function ColumnPinningToggle<TData>({
     </Button>
   )
 }
-17:Tc29b,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+17:Tc653,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  closestCenter,</span></span>
@@ -2632,15 +2659,14 @@ function ColumnPinningToggle<TData>({
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> columnOrder</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> table.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">getState</span><span style="color:#24292E;--shiki-dark:#E1E4E8">().columnOrder.</span><span style="color:#005CC5;--shiki-dark:#79B8FF">length</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">    ?</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> table.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">getState</span><span style="color:#24292E;--shiki-dark:#E1E4E8">().columnOrder</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">    :</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> defaultColumnOrder</span></span>
+<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> SYSTEM_COLUMN_IDS</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="color:#032F62;--shiki-dark:#9ECBFF">'select'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#032F62;--shiki-dark:#9ECBFF">'drag'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">]</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> orderedColumns</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> [</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">    ...</span><span style="color:#24292E;--shiki-dark:#E1E4E8">columnOrder.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">map</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#E36209;--shiki-dark:#FFAB70">id</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#24292E;--shiki-dark:#E1E4E8"> columns.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">find</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#E36209;--shiki-dark:#FFAB70">column</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#24292E;--shiki-dark:#E1E4E8"> column.id </span><span style="color:#D73A49;--shiki-dark:#F97583">===</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> id)).</span><span style="color:#6F42C1;--shiki-dark:#B392F0">filter</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(Boolean),</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">    ...</span><span style="color:#24292E;--shiki-dark:#E1E4E8">columns.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">filter</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#E36209;--shiki-dark:#FFAB70">column</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#D73A49;--shiki-dark:#F97583"> !</span><span style="color:#24292E;--shiki-dark:#E1E4E8">columnOrder.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">includes</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(column.id)),</span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  ] </span><span style="color:#D73A49;--shiki-dark:#F97583">as</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> Column</span><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#6F42C1;--shiki-dark:#B392F0">TData</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#005CC5;--shiki-dark:#79B8FF">unknown</span><span style="color:#24292E;--shiki-dark:#E1E4E8">>[]</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  ].</span><span style="color:#6F42C1;--shiki-dark:#B392F0">filter</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#E36209;--shiki-dark:#FFAB70">column</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#D73A49;--shiki-dark:#F97583"> !</span><span style="color:#005CC5;--shiki-dark:#79B8FF">SYSTEM_COLUMN_IDS</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">includes</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(column.id)) </span><span style="color:#D73A49;--shiki-dark:#F97583">as</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> Column</span><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#6F42C1;--shiki-dark:#B392F0">TData</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#005CC5;--shiki-dark:#79B8FF">unknown</span><span style="color:#24292E;--shiki-dark:#E1E4E8">>[]</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> sensors</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> useSensors</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span></span>
 <span class="line" data-line=""><span style="color:#6F42C1;--shiki-dark:#B392F0">    useSensor</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(PointerSensor),</span></span>
-<span class="line" data-line=""><span style="color:#6F42C1;--shiki-dark:#B392F0">    useSensor</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(KeyboardSensor, {</span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      coordinateGetter: sortableKeyboardCoordinates,</span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    }),</span></span>
+<span class="line" data-line=""><span style="color:#6F42C1;--shiki-dark:#B392F0">    useSensor</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  function</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> handleColumnDragEnd</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#E36209;--shiki-dark:#FFAB70">event</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> DragEndEvent</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) {</span></span>
@@ -3634,8 +3660,8 @@ export function ProTablePagination<TData>({
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> items</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-table-demo",{"item":{"name":"pro-table-demo","description":"Full-featured data table with filtering, sorting, and pagination.","iframeHeight":"676px","installName":"pro-table"},"tree":[{"name":"examples","children":[{"name":"pro-table-demo.tsx","path":"examples/pro-table-demo.tsx"}]},{"name":"pro-table","children":[{"name":"index.tsx","path":"pro-table/index.tsx"},{"name":"types.ts","path":"pro-table/types.ts"},{"name":"table","children":[{"name":"utils.ts","path":"pro-table/table/utils.ts"},{"name":"empty-state.tsx","path":"pro-table/table/empty-state.tsx"},{"name":"skeleton.tsx","path":"pro-table/table/skeleton.tsx"},{"name":"sortable-row.tsx","path":"pro-table/table/sortable-row.tsx"},{"name":"header.tsx","path":"pro-table/table/header.tsx"},{"name":"body.tsx","path":"pro-table/table/body.tsx"}]},{"name":"columns.tsx","path":"pro-table/columns.tsx"},{"name":"toolbar","children":[{"name":"index.tsx","path":"pro-table/toolbar/index.tsx"},{"name":"column-settings.tsx","path":"pro-table/toolbar/column-settings.tsx"},{"name":"bulk-actions.tsx","path":"pro-table/toolbar/bulk-actions.tsx"},{"name":"search-form.tsx","path":"pro-table/toolbar/search-form.tsx"}]},{"name":"pagination","children":[{"name":"index.tsx","path":"pro-table/pagination/index.tsx"},{"name":"utils.ts","path":"pro-table/pagination/utils.ts"}]}]}],"highlightedFiles":[{"target":"examples/pro-table-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-table/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-table/types.ts","content":"import type { ColumnPinningState } from '@tanstack/react-table'\n\nexport type TableSize = 'default' | 'middle' | 'compact'\n\nexport const cellPadding: Record<TableSize, string> = {\n  default: 'py-3',\n  middle: 'py-2',\n  compact: 'py-1',\n}\n\nexport type ProTableColumnPinningPosition = 'left' | 'right'\n\nexport interface ProTableColumnMeta {\n  pinned?: ProTableColumnPinningPosition\n}\n\ndeclare module '@tanstack/react-table' {\n  interface ColumnMeta<TData, TValue> extends ProTableColumnMeta {}\n}\n\nexport function createColumnPinningState(\n  left: string[] = [],\n  right: string[] = [],\n): ColumnPinningState {\n  return { left, right }\n}\n","highlightedContent":"$7"},{"target":"pro-table/table/utils.ts","content":"$8","highlightedContent":"$9"},{"target":"pro-table/table/empty-state.tsx","content":"import { Inbox } from 'lucide-react'\nimport type * as React from 'react'\n\nexport interface ProTableEmptyStateProps {\n  icon?: React.ReactNode\n  text?: React.ReactNode\n}\n\nexport function ProTableEmptyState({ icon, text = 'No data' }: ProTableEmptyStateProps) {\n  return (\n    <div className=\"flex flex-col items-center gap-2\">\n      {icon ?? <Inbox className=\"h-8 w-8 opacity-40\" />}\n      <span className=\"text-sm\">{text}</span>\n    </div>\n  )\n}\n","highlightedContent":"$a"},{"target":"pro-table/table/skeleton.tsx","content":"$b","highlightedContent":"$c"},{"target":"pro-table/table/sortable-row.tsx","content":"$d","highlightedContent":"$e"},{"target":"pro-table/table/header.tsx","content":"$f","highlightedContent":"$10"},{"target":"pro-table/table/body.tsx","content":"$11","highlightedContent":"$12"},{"target":"pro-table/columns.tsx","content":"'use client'\n\nimport type { ColumnDef } from '@tanstack/react-table'\n\nimport { Checkbox } from '@/components/ui/checkbox'\n\n/**\n * Helper to create a selection column for ProTable.\n * Usage: columns = [selectionColumn(), ...yourColumns]\n */\nexport function selectionColumn<TData>(): ColumnDef<TData> {\n  return {\n    id: 'select',\n    header: ({ table }) => (\n      <Checkbox\n        checked={\n          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')\n        }\n        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}\n        aria-label=\"Select all\"\n        className=\"translate-y-[2px]\"\n      />\n    ),\n    cell: ({ row }) => (\n      <Checkbox\n        checked={row.getIsSelected()}\n        onCheckedChange={(value) => row.toggleSelected(!!value)}\n        aria-label=\"Select row\"\n        className=\"translate-y-[2px]\"\n      />\n    ),\n    enableSorting: false,\n    enableHiding: false,\n  }\n}\n","highlightedContent":"$13"},{"target":"pro-table/toolbar/index.tsx","content":"$14","highlightedContent":"$15"},{"target":"pro-table/toolbar/column-settings.tsx","content":"$16","highlightedContent":"$17"},{"target":"pro-table/toolbar/bulk-actions.tsx","content":"$18","highlightedContent":"$19"},{"target":"pro-table/toolbar/search-form.tsx","content":"$1a","highlightedContent":"$1b"},{"target":"pro-table/pagination/index.tsx","content":"$1c","highlightedContent":"$1d"},{"target":"pro-table/pagination/utils.ts","content":"export function getPageRange(current: number, total: number): (number | '...')[] {\n  if (total <= 5) return Array.from({ length: total }, (_, index) => index + 1)\n\n  const items: (number | '...')[] = [1]\n\n  if (current <= 3) {\n    for (let page = 2; page <= 4; page++) items.push(page)\n    items.push('...', total)\n  } else if (current >= total - 2) {\n    items.push('...')\n    for (let page = total - 3; page <= total; page++) items.push(page)\n  } else {\n    items.push('...')\n    for (let page = current - 1; page <= current + 1; page++) items.push(page)\n    items.push('...', total)\n  }\n\n  return items\n}\n","highlightedContent":"$1e"}]}],"$L1f"]}],["$L20","$L21"],"$L22"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"rsrDAAggbgOBb0TbX0kub"}
-23:T9d8,'use client'
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-table-demo",{"item":{"name":"pro-table-demo","description":"Full-featured data table with filtering, sorting, and pagination.","iframeHeight":"676px","installName":"pro-table"},"tree":[{"name":"examples","children":[{"name":"pro-table-demo.tsx","path":"examples/pro-table-demo.tsx"}]},{"name":"pro-table","children":[{"name":"index.tsx","path":"pro-table/index.tsx"},{"name":"types.ts","path":"pro-table/types.ts"},{"name":"table","children":[{"name":"utils.ts","path":"pro-table/table/utils.ts"},{"name":"empty-state.tsx","path":"pro-table/table/empty-state.tsx"},{"name":"skeleton.tsx","path":"pro-table/table/skeleton.tsx"},{"name":"sortable-row.tsx","path":"pro-table/table/sortable-row.tsx"},{"name":"header.tsx","path":"pro-table/table/header.tsx"},{"name":"body.tsx","path":"pro-table/table/body.tsx"}]},{"name":"columns.tsx","path":"pro-table/columns.tsx"},{"name":"toolbar","children":[{"name":"index.tsx","path":"pro-table/toolbar/index.tsx"},{"name":"column-settings.tsx","path":"pro-table/toolbar/column-settings.tsx"},{"name":"bulk-actions.tsx","path":"pro-table/toolbar/bulk-actions.tsx"},{"name":"search-form.tsx","path":"pro-table/toolbar/search-form.tsx"}]},{"name":"pagination","children":[{"name":"index.tsx","path":"pro-table/pagination/index.tsx"},{"name":"utils.ts","path":"pro-table/pagination/utils.ts"}]}]}],"highlightedFiles":[{"target":"examples/pro-table-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-table/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-table/types.ts","content":"import type { ColumnPinningState } from '@tanstack/react-table'\n\nexport type TableSize = 'default' | 'middle' | 'compact'\n\nexport const cellPadding: Record<TableSize, string> = {\n  default: 'py-3',\n  middle: 'py-2',\n  compact: 'py-1',\n}\n\nexport type ProTableColumnPinningPosition = 'left' | 'right'\n\nexport interface ProTableColumnMeta {\n  pinned?: ProTableColumnPinningPosition\n}\n\ndeclare module '@tanstack/react-table' {\n  interface ColumnMeta<TData, TValue> extends ProTableColumnMeta {}\n}\n\nexport function createColumnPinningState(\n  left: string[] = [],\n  right: string[] = [],\n): ColumnPinningState {\n  return { left, right }\n}\n","highlightedContent":"$7"},{"target":"pro-table/table/utils.ts","content":"$8","highlightedContent":"$9"},{"target":"pro-table/table/empty-state.tsx","content":"import { Inbox } from 'lucide-react'\nimport type * as React from 'react'\n\nexport interface ProTableEmptyStateProps {\n  icon?: React.ReactNode\n  text?: React.ReactNode\n}\n\nexport function ProTableEmptyState({ icon, text = 'No data' }: ProTableEmptyStateProps) {\n  return (\n    <div className=\"flex flex-col items-center gap-2\">\n      {icon ?? <Inbox className=\"h-8 w-8 opacity-40\" />}\n      <span className=\"text-sm\">{text}</span>\n    </div>\n  )\n}\n","highlightedContent":"$a"},{"target":"pro-table/table/skeleton.tsx","content":"$b","highlightedContent":"$c"},{"target":"pro-table/table/sortable-row.tsx","content":"$d","highlightedContent":"$e"},{"target":"pro-table/table/header.tsx","content":"$f","highlightedContent":"$10"},{"target":"pro-table/table/body.tsx","content":"$11","highlightedContent":"$12"},{"target":"pro-table/columns.tsx","content":"'use client'\n\nimport type { ColumnDef } from '@tanstack/react-table'\n\nimport { Checkbox } from '@/components/ui/checkbox'\n\n/**\n * Helper to create a selection column for ProTable.\n * Usage: columns = [selectionColumn(), ...yourColumns]\n */\nexport function selectionColumn<TData>(): ColumnDef<TData> {\n  return {\n    id: 'select',\n    header: ({ table }) => (\n      <Checkbox\n        checked={\n          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')\n        }\n        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}\n        aria-label=\"Select all\"\n        className=\"translate-y-[2px]\"\n      />\n    ),\n    cell: ({ row }) => (\n      <Checkbox\n        checked={row.getIsSelected()}\n        onCheckedChange={(value) => row.toggleSelected(!!value)}\n        aria-label=\"Select row\"\n        className=\"translate-y-[2px]\"\n      />\n    ),\n    enableSorting: false,\n    enableHiding: false,\n  }\n}\n","highlightedContent":"$13"},{"target":"pro-table/toolbar/index.tsx","content":"$14","highlightedContent":"$15"},{"target":"pro-table/toolbar/column-settings.tsx","content":"$16","highlightedContent":"$17"},{"target":"pro-table/toolbar/bulk-actions.tsx","content":"$18","highlightedContent":"$19"},{"target":"pro-table/toolbar/search-form.tsx","content":"$1a","highlightedContent":"$1b"},{"target":"pro-table/pagination/index.tsx","content":"$1c","highlightedContent":"$1d"},{"target":"pro-table/pagination/utils.ts","content":"export function getPageRange(current: number, total: number): (number | '...')[] {\n  if (total <= 5) return Array.from({ length: total }, (_, index) => index + 1)\n\n  const items: (number | '...')[] = [1]\n\n  if (current <= 3) {\n    for (let page = 2; page <= 4; page++) items.push(page)\n    items.push('...', total)\n  } else if (current >= total - 2) {\n    items.push('...')\n    for (let page = total - 3; page <= total; page++) items.push(page)\n  } else {\n    items.push('...')\n    for (let page = current - 1; page <= current + 1; page++) items.push(page)\n    items.push('...', total)\n  }\n\n  return items\n}\n","highlightedContent":"$1e"}]}],"$L1f"]}],["$L20"],"$L21"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Weuvby2LBkGddmsVKBCXE"}
+22:T9d8,'use client'
 
 import * as React from 'react'
 import { type ColumnDef } from '@tanstack/react-table'
@@ -3720,7 +3746,7 @@ export default function ProTableDragSortDemo() {
     </div>
   )
 }
-24:T691a,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+23:T691a,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> *</span><span style="color:#D73A49;--shiki-dark:#F97583"> as</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> React </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> ColumnDef } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
@@ -3805,7 +3831,7 @@ export default function ProTableDragSortDemo() {
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>25:T2290,'use client'
+<span class="line" data-line=""></span></code></pre>24:T2508,'use client'
 
 import {
   closestCenter,
@@ -3845,6 +3871,9 @@ import { getDefaultColumnPinning, getLeafColumnIds, reorderDataByRows } from './
 import { ProTableToolbar } from './toolbar'
 import { ProTableBulkActions } from './toolbar/bulk-actions'
 import { cellPadding, type TableSize } from './types'
+
+const tableScrollbarClassName =
+  '[scrollbar-gutter:auto] [scrollbar-width:thin] [scrollbar-color:transparent_transparent] hover:[scrollbar-color:rgba(148,163,184,0.45)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:shadow-none [&::-webkit-scrollbar-corner]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-0 [&::-webkit-scrollbar-thumb]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/35'
 
 export interface ProTableRenderContext<TData> {
   table: TanStackTable<TData>
@@ -4012,7 +4041,13 @@ export function ProTable<TData, TValue>({
   const bulkActions = bulkActionRender?.(renderContext)
   const content = (
     <>
-      <div className={cn('rounded-md border overflow-auto', isFullLayout && 'min-h-0 flex-1')}>
+      <div
+        className={cn(
+          'overflow-auto rounded-md border',
+          tableScrollbarClassName,
+          isFullLayout && 'min-h-0 flex-1',
+        )}
+      >
         <table data-slot="table" className="w-full min-w-max caption-bottom text-sm">
           <TableHeader>
             <ProTableHeader
@@ -4079,7 +4114,7 @@ export function ProTable<TData, TValue>({
     </div>
   )
 }
-26:T12e14,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+25:T133d8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  closestCenter,</span></span>
@@ -4119,6 +4154,9 @@ export function ProTable<TData, TValue>({
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ProTableToolbar } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ProTableBulkActions } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './toolbar/bulk-actions'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { cellPadding, </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> TableSize } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './types'</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> tableScrollbarClassName</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span></span>
+<span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">  '[scrollbar-gutter:auto] [scrollbar-width:thin] [scrollbar-color:transparent_transparent] hover:[scrollbar-color:rgba(148,163,184,0.45)_transparent] [&#x26;::-webkit-scrollbar]:h-2 [&#x26;::-webkit-scrollbar]:w-2 [&#x26;::-webkit-scrollbar-track]:bg-transparent [&#x26;::-webkit-scrollbar-track]:shadow-none [&#x26;::-webkit-scrollbar-corner]:bg-transparent [&#x26;::-webkit-scrollbar-thumb]:rounded-full [&#x26;::-webkit-scrollbar-thumb]:border-0 [&#x26;::-webkit-scrollbar-thumb]:bg-transparent hover:[&#x26;::-webkit-scrollbar-thumb]:bg-muted-foreground/35'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> interface</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ProTableRenderContext</span><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#6F42C1;--shiki-dark:#B392F0">TData</span><span style="color:#24292E;--shiki-dark:#E1E4E8">> {</span></span>
 <span class="line" data-line=""><span style="color:#E36209;--shiki-dark:#FFAB70">  table</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> TanStackTable</span><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#6F42C1;--shiki-dark:#B392F0">TData</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
@@ -4286,7 +4324,13 @@ export function ProTable<TData, TValue>({
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> bulkActions</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> bulkActionRender</span><span style="color:#24292E;--shiki-dark:#E1E4E8">?.(renderContext)</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> content</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> (</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;></span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> className</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span><span style="color:#6F42C1;--shiki-dark:#B392F0">cn</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#032F62;--shiki-dark:#9ECBFF">'rounded-md border overflow-auto'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, isFullLayout </span><span style="color:#D73A49;--shiki-dark:#F97583">&#x26;&#x26;</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'min-h-0 flex-1'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)}></span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span></span>
+<span class="line" data-line=""><span style="color:#6F42C1;--shiki-dark:#B392F0">        className</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span><span style="color:#6F42C1;--shiki-dark:#B392F0">cn</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span></span>
+<span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">          'overflow-auto rounded-md border'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">          tableScrollbarClassName,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">          isFullLayout </span><span style="color:#D73A49;--shiki-dark:#F97583">&#x26;&#x26;</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'min-h-0 flex-1'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        )}</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      ></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">        &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">table</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> data-slot</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"table"</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> className</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"w-full min-w-max caption-bottom text-sm"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">          &#x3C;</span><span style="color:#005CC5;--shiki-dark:#79B8FF">TableHeader</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">            &#x3C;</span><span style="color:#005CC5;--shiki-dark:#79B8FF">ProTableHeader</span></span>
@@ -4353,7 +4397,7 @@ export function ProTable<TData, TValue>({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>27:T1b39,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ColumnPinningState } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
+<span class="line" data-line=""></span></code></pre>26:T1b39,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ColumnPinningState } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> TableSize</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'default'</span><span style="color:#D73A49;--shiki-dark:#F97583"> |</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'middle'</span><span style="color:#D73A49;--shiki-dark:#F97583"> |</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'compact'</span></span>
 <span class="line" data-line=""></span>
@@ -4379,7 +4423,7 @@ export function ProTable<TData, TValue>({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">)</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ColumnPinningState</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { left, right }</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>28:Tc70,import { arrayMove } from '@dnd-kit/sortable'
+<span class="line" data-line=""></span></code></pre>27:Tc70,import { arrayMove } from '@dnd-kit/sortable'
 import type { Column, ColumnDef, ColumnPinningState, Header, Row } from '@tanstack/react-table'
 import type * as React from 'react'
 
@@ -4485,7 +4529,7 @@ export function reorderDataByRows<TData>(
 
   return arrayMove(data, oldDataIndex, newDataIndex)
 }
-29:T8628,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { arrayMove } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@dnd-kit/sortable'</span></span>
+28:T8628,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { arrayMove } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@dnd-kit/sortable'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Column, ColumnDef, ColumnPinningState, Header, Row } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> *</span><span style="color:#D73A49;--shiki-dark:#F97583"> as</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> React </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'react'</span></span>
 <span class="line" data-line=""></span>
@@ -4591,7 +4635,7 @@ export function reorderDataByRows<TData>(
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  return</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> arrayMove</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(data, oldDataIndex, newDataIndex)</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>2a:T146e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Inbox } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'lucide-react'</span></span>
+<span class="line" data-line=""></span></code></pre>29:T146e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Inbox } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> *</span><span style="color:#D73A49;--shiki-dark:#F97583"> as</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> React </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'react'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> interface</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ProTableEmptyStateProps</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
@@ -4607,7 +4651,7 @@ export function reorderDataByRows<TData>(
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>2b:T42a,import type { Column } from '@tanstack/react-table'
+<span class="line" data-line=""></span></code></pre>2a:T42a,import type { Column } from '@tanstack/react-table'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { getPinnedColumnClassName, getPinnedColumnStyle } from './utils'
@@ -4643,7 +4687,7 @@ export function ProTableSkeletonRows<TData>({
     </TableRow>
   ))
 }
-2c:T27a3,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Column } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
+2b:T27a3,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Column } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Skeleton } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/components/ui/skeleton'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { TableCell, TableRow } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/components/ui/table'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { getPinnedColumnClassName, getPinnedColumnStyle } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './utils'</span></span>
@@ -4679,7 +4723,7 @@ export function ProTableSkeletonRows<TData>({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#005CC5;--shiki-dark:#79B8FF">TableRow</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  ))</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>2d:T573,'use client'
+<span class="line" data-line=""></span></code></pre>2c:T573,'use client'
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -4730,7 +4774,7 @@ export function SortableRow<TData>({
     </TableRow>
   )
 }
-2e:T34fe,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+2d:T34fe,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { useSortable } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@dnd-kit/sortable'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { CSS } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@dnd-kit/utilities'</span></span>
@@ -4781,7 +4825,7 @@ export function SortableRow<TData>({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#005CC5;--shiki-dark:#79B8FF">TableRow</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>2f:T90e,'use client'
+<span class="line" data-line=""></span></code></pre>2e:T90e,'use client'
 
 import { flexRender, type HeaderGroup } from '@tanstack/react-table'
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react'
@@ -4848,7 +4892,7 @@ export function ProTableHeader<TData>({
     </>
   )
 }
-30:T4a80,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+2f:T4a80,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { flexRender, </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> HeaderGroup } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ArrowDown, ArrowUp, ArrowUpDown } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'lucide-react'</span></span>
@@ -4915,7 +4959,7 @@ export function ProTableHeader<TData>({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>31:Taf5,'use client'
+<span class="line" data-line=""></span></code></pre>30:Taf5,'use client'
 
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { flexRender, type Row } from '@tanstack/react-table'
@@ -5024,7 +5068,7 @@ function EmptyRow({
     </TableRow>
   )
 }
-32:T7135,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+31:T7135,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { SortableContext, verticalListSortingStrategy } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@dnd-kit/sortable'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { flexRender, </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Row } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
@@ -5133,7 +5177,7 @@ function EmptyRow({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#005CC5;--shiki-dark:#79B8FF">TableRow</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>33:T22bd,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+<span class="line" data-line=""></span></code></pre>32:T22bd,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ColumnDef } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
 <span class="line" data-line=""></span>
@@ -5168,7 +5212,7 @@ function EmptyRow({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    enableHiding: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">false</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  }</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>34:T1561,'use client'
+<span class="line" data-line=""></span></code></pre>33:T1561,'use client'
 
 import type { ColumnPinningState, Table } from '@tanstack/react-table'
 import { AlignJustify, RefreshCw, SlidersHorizontal } from 'lucide-react'
@@ -5354,7 +5398,7 @@ function DensityMenu({
     </DropdownMenu>
   )
 }
-35:Tbe87,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+34:Tbe87,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ColumnPinningState, Table } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { AlignJustify, RefreshCw, SlidersHorizontal } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'lucide-react'</span></span>
@@ -5540,7 +5584,7 @@ function DensityMenu({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#005CC5;--shiki-dark:#79B8FF">DropdownMenu</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>36:T1455,'use client'
+<span class="line" data-line=""></span></code></pre>35:T14b4,'use client'
 
 import {
   closestCenter,
@@ -5578,15 +5622,14 @@ export function ProTableColumnSettings<TData>({
   const columnOrder = table.getState().columnOrder.length
     ? table.getState().columnOrder
     : defaultColumnOrder
+  const SYSTEM_COLUMN_IDS = ['select', 'drag']
   const orderedColumns = [
     ...columnOrder.map((id) => columns.find((column) => column.id === id)).filter(Boolean),
     ...columns.filter((column) => !columnOrder.includes(column.id)),
-  ] as Column<TData, unknown>[]
+  ].filter((column) => !SYSTEM_COLUMN_IDS.includes(column.id)) as Column<TData, unknown>[]
   const sensors = useSensors(
     useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   )
 
   function handleColumnDragEnd(event: DragEndEvent) {
@@ -5711,7 +5754,7 @@ function ColumnPinningToggle<TData>({
     </Button>
   )
 }
-37:Tc29b,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+36:Tc653,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  closestCenter,</span></span>
@@ -5749,15 +5792,14 @@ function ColumnPinningToggle<TData>({
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> columnOrder</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> table.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">getState</span><span style="color:#24292E;--shiki-dark:#E1E4E8">().columnOrder.</span><span style="color:#005CC5;--shiki-dark:#79B8FF">length</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">    ?</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> table.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">getState</span><span style="color:#24292E;--shiki-dark:#E1E4E8">().columnOrder</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">    :</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> defaultColumnOrder</span></span>
+<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> SYSTEM_COLUMN_IDS</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="color:#032F62;--shiki-dark:#9ECBFF">'select'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#032F62;--shiki-dark:#9ECBFF">'drag'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">]</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> orderedColumns</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> [</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">    ...</span><span style="color:#24292E;--shiki-dark:#E1E4E8">columnOrder.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">map</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#E36209;--shiki-dark:#FFAB70">id</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#24292E;--shiki-dark:#E1E4E8"> columns.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">find</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#E36209;--shiki-dark:#FFAB70">column</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#24292E;--shiki-dark:#E1E4E8"> column.id </span><span style="color:#D73A49;--shiki-dark:#F97583">===</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> id)).</span><span style="color:#6F42C1;--shiki-dark:#B392F0">filter</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(Boolean),</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">    ...</span><span style="color:#24292E;--shiki-dark:#E1E4E8">columns.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">filter</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#E36209;--shiki-dark:#FFAB70">column</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#D73A49;--shiki-dark:#F97583"> !</span><span style="color:#24292E;--shiki-dark:#E1E4E8">columnOrder.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">includes</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(column.id)),</span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  ] </span><span style="color:#D73A49;--shiki-dark:#F97583">as</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> Column</span><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#6F42C1;--shiki-dark:#B392F0">TData</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#005CC5;--shiki-dark:#79B8FF">unknown</span><span style="color:#24292E;--shiki-dark:#E1E4E8">>[]</span></span>
+<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  ].</span><span style="color:#6F42C1;--shiki-dark:#B392F0">filter</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#E36209;--shiki-dark:#FFAB70">column</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#D73A49;--shiki-dark:#F97583"> !</span><span style="color:#005CC5;--shiki-dark:#79B8FF">SYSTEM_COLUMN_IDS</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">includes</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(column.id)) </span><span style="color:#D73A49;--shiki-dark:#F97583">as</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> Column</span><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#6F42C1;--shiki-dark:#B392F0">TData</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#005CC5;--shiki-dark:#79B8FF">unknown</span><span style="color:#24292E;--shiki-dark:#E1E4E8">>[]</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> sensors</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> useSensors</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span></span>
 <span class="line" data-line=""><span style="color:#6F42C1;--shiki-dark:#B392F0">    useSensor</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(PointerSensor),</span></span>
-<span class="line" data-line=""><span style="color:#6F42C1;--shiki-dark:#B392F0">    useSensor</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(KeyboardSensor, {</span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">      coordinateGetter: sortableKeyboardCoordinates,</span></span>
-<span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    }),</span></span>
+<span class="line" data-line=""><span style="color:#6F42C1;--shiki-dark:#B392F0">    useSensor</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  function</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> handleColumnDragEnd</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#E36209;--shiki-dark:#FFAB70">event</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> DragEndEvent</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) {</span></span>
@@ -5882,7 +5924,7 @@ function ColumnPinningToggle<TData>({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#005CC5;--shiki-dark:#79B8FF">Button</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>38:T13b4,'use client'
+<span class="line" data-line=""></span></code></pre>37:T13b4,'use client'
 
 import type { Table } from '@tanstack/react-table'
 import { X } from 'lucide-react'
@@ -6035,7 +6077,7 @@ export function ProTableBulkActions<TData>({
     </TooltipProvider>
   )
 }
-39:Ta27b,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+38:Ta27b,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Table } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { X } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'lucide-react'</span></span>
@@ -6188,7 +6230,7 @@ export function ProTableBulkActions<TData>({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#005CC5;--shiki-dark:#79B8FF">TooltipProvider</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>3a:T648,'use client'
+<span class="line" data-line=""></span></code></pre>39:T648,'use client'
 
 import type { Table } from '@tanstack/react-table'
 import { Search, X } from 'lucide-react'
@@ -6248,7 +6290,7 @@ export function ProTableSearchForm<TData>({
     </div>
   )
 }
-3b:T3b73,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+3a:T3b73,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Table } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Search, X } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'lucide-react'</span></span>
@@ -6308,7 +6350,7 @@ export function ProTableSearchForm<TData>({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>3c:T1b82,'use client'
+<span class="line" data-line=""></span></code></pre>3b:T1b82,'use client'
 
 import type { Table } from '@tanstack/react-table'
 import {
@@ -6520,7 +6562,7 @@ export function ProTablePagination<TData>({
     </div>
   )
 }
-3d:Tee10,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+3c:Tee10,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Table } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@tanstack/react-table'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
@@ -6732,7 +6774,7 @@ export function ProTablePagination<TData>({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>3e:T2465,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> function</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> getPageRange</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#E36209;--shiki-dark:#FFAB70">current</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> number</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#E36209;--shiki-dark:#FFAB70">total</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> number</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="color:#005CC5;--shiki-dark:#79B8FF">number</span><span style="color:#D73A49;--shiki-dark:#F97583"> |</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '...'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)[] {</span></span>
+<span class="line" data-line=""></span></code></pre>3d:T2465,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> function</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> getPageRange</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#E36209;--shiki-dark:#FFAB70">current</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> number</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#E36209;--shiki-dark:#FFAB70">total</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> number</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="color:#005CC5;--shiki-dark:#79B8FF">number</span><span style="color:#D73A49;--shiki-dark:#F97583"> |</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '...'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)[] {</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  if</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> (total </span><span style="color:#D73A49;--shiki-dark:#F97583">&#x3C;=</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> 5</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Array.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">from</span><span style="color:#24292E;--shiki-dark:#E1E4E8">({ length: total }, (</span><span style="color:#E36209;--shiki-dark:#FFAB70">_</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#E36209;--shiki-dark:#FFAB70">index</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#24292E;--shiki-dark:#E1E4E8"> index </span><span style="color:#D73A49;--shiki-dark:#F97583">+</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> 1</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  const</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> items</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="color:#005CC5;--shiki-dark:#79B8FF">number</span><span style="color:#D73A49;--shiki-dark:#F97583"> |</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '...'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)[] </span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="color:#005CC5;--shiki-dark:#79B8FF">1</span><span style="color:#24292E;--shiki-dark:#E1E4E8">]</span></span>
@@ -6751,8 +6793,7 @@ export function ProTablePagination<TData>({
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> items</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>1f:["$","$L2","pro-table-drag-sort-demo",{"item":{"name":"pro-table-drag-sort-demo","description":"Drag-and-drop row reordering with dnd-kit.","iframeHeight":"536px","installName":"pro-table"},"tree":[{"name":"examples","children":[{"name":"pro-table-drag-sort-demo.tsx","path":"examples/pro-table-drag-sort-demo.tsx"}]},{"name":"pro-table","children":[{"name":"index.tsx","path":"pro-table/index.tsx"},{"name":"types.ts","path":"pro-table/types.ts"},{"name":"table","children":[{"name":"utils.ts","path":"pro-table/table/utils.ts"},{"name":"empty-state.tsx","path":"pro-table/table/empty-state.tsx"},{"name":"skeleton.tsx","path":"pro-table/table/skeleton.tsx"},{"name":"sortable-row.tsx","path":"pro-table/table/sortable-row.tsx"},{"name":"header.tsx","path":"pro-table/table/header.tsx"},{"name":"body.tsx","path":"pro-table/table/body.tsx"}]},{"name":"columns.tsx","path":"pro-table/columns.tsx"},{"name":"toolbar","children":[{"name":"index.tsx","path":"pro-table/toolbar/index.tsx"},{"name":"column-settings.tsx","path":"pro-table/toolbar/column-settings.tsx"},{"name":"bulk-actions.tsx","path":"pro-table/toolbar/bulk-actions.tsx"},{"name":"search-form.tsx","path":"pro-table/toolbar/search-form.tsx"}]},{"name":"pagination","children":[{"name":"index.tsx","path":"pro-table/pagination/index.tsx"},{"name":"utils.ts","path":"pro-table/pagination/utils.ts"}]}]}],"highlightedFiles":[{"target":"examples/pro-table-drag-sort-demo.tsx","content":"$23","highlightedContent":"$24"},{"target":"pro-table/index.tsx","content":"$25","highlightedContent":"$26"},{"target":"pro-table/types.ts","content":"import type { ColumnPinningState } from '@tanstack/react-table'\n\nexport type TableSize = 'default' | 'middle' | 'compact'\n\nexport const cellPadding: Record<TableSize, string> = {\n  default: 'py-3',\n  middle: 'py-2',\n  compact: 'py-1',\n}\n\nexport type ProTableColumnPinningPosition = 'left' | 'right'\n\nexport interface ProTableColumnMeta {\n  pinned?: ProTableColumnPinningPosition\n}\n\ndeclare module '@tanstack/react-table' {\n  interface ColumnMeta<TData, TValue> extends ProTableColumnMeta {}\n}\n\nexport function createColumnPinningState(\n  left: string[] = [],\n  right: string[] = [],\n): ColumnPinningState {\n  return { left, right }\n}\n","highlightedContent":"$27"},{"target":"pro-table/table/utils.ts","content":"$28","highlightedContent":"$29"},{"target":"pro-table/table/empty-state.tsx","content":"import { Inbox } from 'lucide-react'\nimport type * as React from 'react'\n\nexport interface ProTableEmptyStateProps {\n  icon?: React.ReactNode\n  text?: React.ReactNode\n}\n\nexport function ProTableEmptyState({ icon, text = 'No data' }: ProTableEmptyStateProps) {\n  return (\n    <div className=\"flex flex-col items-center gap-2\">\n      {icon ?? <Inbox className=\"h-8 w-8 opacity-40\" />}\n      <span className=\"text-sm\">{text}</span>\n    </div>\n  )\n}\n","highlightedContent":"$2a"},{"target":"pro-table/table/skeleton.tsx","content":"$2b","highlightedContent":"$2c"},{"target":"pro-table/table/sortable-row.tsx","content":"$2d","highlightedContent":"$2e"},{"target":"pro-table/table/header.tsx","content":"$2f","highlightedContent":"$30"},{"target":"pro-table/table/body.tsx","content":"$31","highlightedContent":"$32"},{"target":"pro-table/columns.tsx","content":"'use client'\n\nimport type { ColumnDef } from '@tanstack/react-table'\n\nimport { Checkbox } from '@/components/ui/checkbox'\n\n/**\n * Helper to create a selection column for ProTable.\n * Usage: columns = [selectionColumn(), ...yourColumns]\n */\nexport function selectionColumn<TData>(): ColumnDef<TData> {\n  return {\n    id: 'select',\n    header: ({ table }) => (\n      <Checkbox\n        checked={\n          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')\n        }\n        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}\n        aria-label=\"Select all\"\n        className=\"translate-y-[2px]\"\n      />\n    ),\n    cell: ({ row }) => (\n      <Checkbox\n        checked={row.getIsSelected()}\n        onCheckedChange={(value) => row.toggleSelected(!!value)}\n        aria-label=\"Select row\"\n        className=\"translate-y-[2px]\"\n      />\n    ),\n    enableSorting: false,\n    enableHiding: false,\n  }\n}\n","highlightedContent":"$33"},{"target":"pro-table/toolbar/index.tsx","content":"$34","highlightedContent":"$35"},{"target":"pro-table/toolbar/column-settings.tsx","content":"$36","highlightedContent":"$37"},{"target":"pro-table/toolbar/bulk-actions.tsx","content":"$38","highlightedContent":"$39"},{"target":"pro-table/toolbar/search-form.tsx","content":"$3a","highlightedContent":"$3b"},{"target":"pro-table/pagination/index.tsx","content":"$3c","highlightedContent":"$3d"},{"target":"pro-table/pagination/utils.ts","content":"export function getPageRange(current: number, total: number): (number | '...')[] {\n  if (total <= 5) return Array.from({ length: total }, (_, index) => index + 1)\n\n  const items: (number | '...')[] = [1]\n\n  if (current <= 3) {\n    for (let page = 2; page <= 4; page++) items.push(page)\n    items.push('...', total)\n  } else if (current >= total - 2) {\n    items.push('...')\n    for (let page = total - 3; page <= total; page++) items.push(page)\n  } else {\n    items.push('...')\n    for (let page = current - 1; page <= current + 1; page++) items.push(page)\n    items.push('...', total)\n  }\n\n  return items\n}\n","highlightedContent":"$3e"}]}]
-20:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0rnsg5fcuj37p.js","async":true}]
-21:["$","script","script-1",{"src":"/shadcn-pro/_next/static/chunks/09oi6l6z2mrwm.js","async":true}]
-22:["$","$L3f",null,{"children":["$","$40",null,{"name":"Next.MetadataOutlet","children":"$@41"}]}]
-41:null
+<span class="line" data-line=""></span></code></pre>1f:["$","$L2","pro-table-drag-sort-demo",{"item":{"name":"pro-table-drag-sort-demo","description":"Drag-and-drop row reordering with dnd-kit.","iframeHeight":"536px","installName":"pro-table"},"tree":[{"name":"examples","children":[{"name":"pro-table-drag-sort-demo.tsx","path":"examples/pro-table-drag-sort-demo.tsx"}]},{"name":"pro-table","children":[{"name":"index.tsx","path":"pro-table/index.tsx"},{"name":"types.ts","path":"pro-table/types.ts"},{"name":"table","children":[{"name":"utils.ts","path":"pro-table/table/utils.ts"},{"name":"empty-state.tsx","path":"pro-table/table/empty-state.tsx"},{"name":"skeleton.tsx","path":"pro-table/table/skeleton.tsx"},{"name":"sortable-row.tsx","path":"pro-table/table/sortable-row.tsx"},{"name":"header.tsx","path":"pro-table/table/header.tsx"},{"name":"body.tsx","path":"pro-table/table/body.tsx"}]},{"name":"columns.tsx","path":"pro-table/columns.tsx"},{"name":"toolbar","children":[{"name":"index.tsx","path":"pro-table/toolbar/index.tsx"},{"name":"column-settings.tsx","path":"pro-table/toolbar/column-settings.tsx"},{"name":"bulk-actions.tsx","path":"pro-table/toolbar/bulk-actions.tsx"},{"name":"search-form.tsx","path":"pro-table/toolbar/search-form.tsx"}]},{"name":"pagination","children":[{"name":"index.tsx","path":"pro-table/pagination/index.tsx"},{"name":"utils.ts","path":"pro-table/pagination/utils.ts"}]}]}],"highlightedFiles":[{"target":"examples/pro-table-drag-sort-demo.tsx","content":"$22","highlightedContent":"$23"},{"target":"pro-table/index.tsx","content":"$24","highlightedContent":"$25"},{"target":"pro-table/types.ts","content":"import type { ColumnPinningState } from '@tanstack/react-table'\n\nexport type TableSize = 'default' | 'middle' | 'compact'\n\nexport const cellPadding: Record<TableSize, string> = {\n  default: 'py-3',\n  middle: 'py-2',\n  compact: 'py-1',\n}\n\nexport type ProTableColumnPinningPosition = 'left' | 'right'\n\nexport interface ProTableColumnMeta {\n  pinned?: ProTableColumnPinningPosition\n}\n\ndeclare module '@tanstack/react-table' {\n  interface ColumnMeta<TData, TValue> extends ProTableColumnMeta {}\n}\n\nexport function createColumnPinningState(\n  left: string[] = [],\n  right: string[] = [],\n): ColumnPinningState {\n  return { left, right }\n}\n","highlightedContent":"$26"},{"target":"pro-table/table/utils.ts","content":"$27","highlightedContent":"$28"},{"target":"pro-table/table/empty-state.tsx","content":"import { Inbox } from 'lucide-react'\nimport type * as React from 'react'\n\nexport interface ProTableEmptyStateProps {\n  icon?: React.ReactNode\n  text?: React.ReactNode\n}\n\nexport function ProTableEmptyState({ icon, text = 'No data' }: ProTableEmptyStateProps) {\n  return (\n    <div className=\"flex flex-col items-center gap-2\">\n      {icon ?? <Inbox className=\"h-8 w-8 opacity-40\" />}\n      <span className=\"text-sm\">{text}</span>\n    </div>\n  )\n}\n","highlightedContent":"$29"},{"target":"pro-table/table/skeleton.tsx","content":"$2a","highlightedContent":"$2b"},{"target":"pro-table/table/sortable-row.tsx","content":"$2c","highlightedContent":"$2d"},{"target":"pro-table/table/header.tsx","content":"$2e","highlightedContent":"$2f"},{"target":"pro-table/table/body.tsx","content":"$30","highlightedContent":"$31"},{"target":"pro-table/columns.tsx","content":"'use client'\n\nimport type { ColumnDef } from '@tanstack/react-table'\n\nimport { Checkbox } from '@/components/ui/checkbox'\n\n/**\n * Helper to create a selection column for ProTable.\n * Usage: columns = [selectionColumn(), ...yourColumns]\n */\nexport function selectionColumn<TData>(): ColumnDef<TData> {\n  return {\n    id: 'select',\n    header: ({ table }) => (\n      <Checkbox\n        checked={\n          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')\n        }\n        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}\n        aria-label=\"Select all\"\n        className=\"translate-y-[2px]\"\n      />\n    ),\n    cell: ({ row }) => (\n      <Checkbox\n        checked={row.getIsSelected()}\n        onCheckedChange={(value) => row.toggleSelected(!!value)}\n        aria-label=\"Select row\"\n        className=\"translate-y-[2px]\"\n      />\n    ),\n    enableSorting: false,\n    enableHiding: false,\n  }\n}\n","highlightedContent":"$32"},{"target":"pro-table/toolbar/index.tsx","content":"$33","highlightedContent":"$34"},{"target":"pro-table/toolbar/column-settings.tsx","content":"$35","highlightedContent":"$36"},{"target":"pro-table/toolbar/bulk-actions.tsx","content":"$37","highlightedContent":"$38"},{"target":"pro-table/toolbar/search-form.tsx","content":"$39","highlightedContent":"$3a"},{"target":"pro-table/pagination/index.tsx","content":"$3b","highlightedContent":"$3c"},{"target":"pro-table/pagination/utils.ts","content":"export function getPageRange(current: number, total: number): (number | '...')[] {\n  if (total <= 5) return Array.from({ length: total }, (_, index) => index + 1)\n\n  const items: (number | '...')[] = [1]\n\n  if (current <= 3) {\n    for (let page = 2; page <= 4; page++) items.push(page)\n    items.push('...', total)\n  } else if (current >= total - 2) {\n    items.push('...')\n    for (let page = total - 3; page <= total; page++) items.push(page)\n  } else {\n    items.push('...')\n    for (let page = current - 1; page <= current + 1; page++) items.push(page)\n    items.push('...', total)\n  }\n\n  return items\n}\n","highlightedContent":"$3d"}]}]
+20:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0h1qoztw6v_1h.js","async":true}]
+21:["$","$L3e",null,{"children":["$","$3f",null,{"name":"Next.MetadataOutlet","children":"$@40"}]}]
+40:null

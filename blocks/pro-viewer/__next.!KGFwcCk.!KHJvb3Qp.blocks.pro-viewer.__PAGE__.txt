@@ -1,7 +1,7 @@
 1:"$Sreact.fragment"
-2:I[625209,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0rvjgknnyh.53.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/08h1m9ntorp2m.js","/shadcn-pro/_next/static/chunks/0my2l8xwkx8_r.js","/shadcn-pro/_next/static/chunks/0rnsg5fcuj37p.js","/shadcn-pro/_next/static/chunks/09oi6l6z2mrwm.js"],"BlockViewer"]
-3c:I[80196,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0rvjgknnyh.53.js"],"OutletBoundary"]
-3d:"$Sreact.suspense"
+2:I[625209,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0rvjgknnyh.53.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/11q4x.d01tm9~.js","/shadcn-pro/_next/static/chunks/0~xcxr4alrz-1.js","/shadcn-pro/_next/static/chunks/0h1qoztw6v_1h.js"],"BlockViewer"]
+3b:I[80196,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0rvjgknnyh.53.js"],"OutletBoundary"]
+3c:"$Sreact.suspense"
 3:T75d,'use client'
 
 import { MarkdownViewer } from '@/registry/new-york-v4/pro/pro-viewer/markdown'
@@ -843,9 +843,8 @@ a:Ta9c9,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 import { type Ref, type UIEventHandler, useCallback, useEffect, useMemo, useState } from 'react'
 import type { ThemedToken } from 'shiki'
 import { cn } from '@/lib/utils'
-import { buildCodeLines, getHiddenCodeLines } from './lines'
 import { CodeViewerHeader } from './header'
-import { CodeViewerTable } from './table'
+import { buildCodeLines, getHiddenCodeLines } from './lines'
 import {
   codeToTokenLines,
   DEFAULT_VIEWER_THEME,
@@ -853,6 +852,7 @@ import {
   type ViewerTheme,
   viewerSurfaceClass,
 } from './syntax'
+import { CodeViewerTable } from './table'
 
 export interface CodeViewerProps {
   code: string
@@ -986,9 +986,8 @@ c:T9627,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Ref, </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> UIEventHandler, useCallback, useEffect, useMemo, useState } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ThemedToken } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'shiki'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { cn } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/lib/utils'</span></span>
-<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { buildCodeLines, getHiddenCodeLines } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './lines'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { CodeViewerHeader } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './header'</span></span>
-<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { CodeViewerTable } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './table'</span></span>
+<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { buildCodeLines, getHiddenCodeLines } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './lines'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  codeToTokenLines,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  DEFAULT_VIEWER_THEME,</span></span>
@@ -996,6 +995,7 @@ c:T9627,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> ViewerTheme,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  viewerSurfaceClass,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">} </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './syntax'</span></span>
+<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { CodeViewerTable } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './table'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> interface</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> CodeViewerProps</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#E36209;--shiki-dark:#FFAB70">  code</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> string</span></span>
@@ -1618,8 +1618,8 @@ export function viewerSurfaceClass(theme: ViewerTheme, _embedded?: boolean) {
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> function</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> viewerSurfaceClass</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#E36209;--shiki-dark:#FFAB70">theme</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ViewerTheme</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#E36209;--shiki-dark:#FFAB70">_embedded</span><span style="color:#D73A49;--shiki-dark:#F97583">?:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> boolean</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) {</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> theme </span><span style="color:#D73A49;--shiki-dark:#F97583">===</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'github-light'</span><span style="color:#D73A49;--shiki-dark:#F97583"> ?</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'bg-[#f6f8fa] text-[#24292f]'</span><span style="color:#D73A49;--shiki-dark:#F97583"> :</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'bg-[#0d1117] text-[#e6edf3]'</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","markdown-viewer-demo",{"item":{"name":"markdown-viewer-demo","description":"Render Markdown with GFM syntax, tables, and code blocks.","iframeHeight":"674px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"markdown-viewer-demo.tsx","path":"examples/markdown-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"markdown","children":[{"name":"index.tsx","path":"pro-viewer/markdown/index.tsx"},{"name":"components.tsx","path":"pro-viewer/markdown/components.tsx"},{"name":"plugins.ts","path":"pro-viewer/markdown/plugins.ts"}]},{"name":"code","children":[{"name":"index.tsx","path":"pro-viewer/code/index.tsx"},{"name":"header.tsx","path":"pro-viewer/code/header.tsx"},{"name":"table.tsx","path":"pro-viewer/code/table.tsx"},{"name":"lines.ts","path":"pro-viewer/code/lines.ts"},{"name":"syntax.ts","path":"pro-viewer/code/syntax.ts"}]}]}],"highlightedFiles":[{"target":"examples/markdown-viewer-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-viewer/markdown/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-viewer/markdown/components.tsx","content":"$7","highlightedContent":"$8"},{"target":"pro-viewer/markdown/plugins.ts","content":"$9","highlightedContent":"$a"},{"target":"pro-viewer/code/index.tsx","content":"$b","highlightedContent":"$c"},{"target":"pro-viewer/code/header.tsx","content":"$d","highlightedContent":"$e"},{"target":"pro-viewer/code/table.tsx","content":"$f","highlightedContent":"$10"},{"target":"pro-viewer/code/lines.ts","content":"$11","highlightedContent":"$12"},{"target":"pro-viewer/code/syntax.ts","content":"$13","highlightedContent":"$14"}]}],"$L15","$L16","$L17","$L18"]}],["$L19","$L1a"],"$L1b"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"rsrDAAggbgOBb0TbX0kub"}
-1c:T4fc,'use client'
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","markdown-viewer-demo",{"item":{"name":"markdown-viewer-demo","description":"Render Markdown with GFM syntax, tables, and code blocks.","iframeHeight":"674px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"markdown-viewer-demo.tsx","path":"examples/markdown-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"markdown","children":[{"name":"index.tsx","path":"pro-viewer/markdown/index.tsx"},{"name":"components.tsx","path":"pro-viewer/markdown/components.tsx"},{"name":"plugins.ts","path":"pro-viewer/markdown/plugins.ts"}]},{"name":"code","children":[{"name":"index.tsx","path":"pro-viewer/code/index.tsx"},{"name":"header.tsx","path":"pro-viewer/code/header.tsx"},{"name":"table.tsx","path":"pro-viewer/code/table.tsx"},{"name":"lines.ts","path":"pro-viewer/code/lines.ts"},{"name":"syntax.ts","path":"pro-viewer/code/syntax.ts"}]}]}],"highlightedFiles":[{"target":"examples/markdown-viewer-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-viewer/markdown/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-viewer/markdown/components.tsx","content":"$7","highlightedContent":"$8"},{"target":"pro-viewer/markdown/plugins.ts","content":"$9","highlightedContent":"$a"},{"target":"pro-viewer/code/index.tsx","content":"$b","highlightedContent":"$c"},{"target":"pro-viewer/code/header.tsx","content":"$d","highlightedContent":"$e"},{"target":"pro-viewer/code/table.tsx","content":"$f","highlightedContent":"$10"},{"target":"pro-viewer/code/lines.ts","content":"$11","highlightedContent":"$12"},{"target":"pro-viewer/code/syntax.ts","content":"$13","highlightedContent":"$14"}]}],"$L15","$L16","$L17","$L18"]}],["$L19"],"$L1a"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Weuvby2LBkGddmsVKBCXE"}
+1b:T4fc,'use client'
 
 import { CodeViewer } from '@/registry/new-york-v4/pro/pro-viewer/code'
 
@@ -1672,7 +1672,7 @@ export default function CodeViewerDemo() {
     </div>
   )
 }
-1d:T22a8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+1c:T22a8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { CodeViewer } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/registry/new-york-v4/pro/pro-viewer/code'</span></span>
 <span class="line" data-line=""></span>
@@ -1725,14 +1725,13 @@ export default function CodeViewerDemo() {
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>1e:Tec2,'use client'
+<span class="line" data-line=""></span></code></pre>1d:Tec2,'use client'
 
 import { type Ref, type UIEventHandler, useCallback, useEffect, useMemo, useState } from 'react'
 import type { ThemedToken } from 'shiki'
 import { cn } from '@/lib/utils'
-import { buildCodeLines, getHiddenCodeLines } from './lines'
 import { CodeViewerHeader } from './header'
-import { CodeViewerTable } from './table'
+import { buildCodeLines, getHiddenCodeLines } from './lines'
 import {
   codeToTokenLines,
   DEFAULT_VIEWER_THEME,
@@ -1740,6 +1739,7 @@ import {
   type ViewerTheme,
   viewerSurfaceClass,
 } from './syntax'
+import { CodeViewerTable } from './table'
 
 export interface CodeViewerProps {
   code: string
@@ -1868,14 +1868,13 @@ export function CodeViewer({
     </div>
   )
 }
-1f:T9627,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+1e:T9627,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Ref, </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> UIEventHandler, useCallback, useEffect, useMemo, useState } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ThemedToken } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'shiki'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { cn } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/lib/utils'</span></span>
-<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { buildCodeLines, getHiddenCodeLines } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './lines'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { CodeViewerHeader } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './header'</span></span>
-<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { CodeViewerTable } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './table'</span></span>
+<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { buildCodeLines, getHiddenCodeLines } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './lines'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  codeToTokenLines,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  DEFAULT_VIEWER_THEME,</span></span>
@@ -1883,6 +1882,7 @@ export function CodeViewer({
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> ViewerTheme,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  viewerSurfaceClass,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">} </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './syntax'</span></span>
+<span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { CodeViewerTable } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './table'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> interface</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> CodeViewerProps</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#E36209;--shiki-dark:#FFAB70">  code</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> string</span></span>
@@ -2011,7 +2011,7 @@ export function CodeViewer({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>20:T795,'use client'
+<span class="line" data-line=""></span></code></pre>1f:T795,'use client'
 
 import { Check, Copy } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -2075,7 +2075,7 @@ export function CodeViewerHeader({
     </div>
   )
 }
-21:T3d1f,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+20:T3d1f,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Check, Copy } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Button } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/components/ui/button'</span></span>
@@ -2139,7 +2139,7 @@ export function CodeViewerHeader({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>22:Td2d,'use client'
+<span class="line" data-line=""></span></code></pre>21:Td2d,'use client'
 
 import { ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -2239,7 +2239,7 @@ export function CodeViewerTable({
     </table>
   )
 }
-23:T6272,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+22:T6272,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ChevronRight } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { cn } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/lib/utils'</span></span>
@@ -2339,7 +2339,7 @@ export function CodeViewerTable({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">table</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>24:T5c0,import type { ThemedToken } from 'shiki'
+<span class="line" data-line=""></span></code></pre>23:T5c0,import type { ThemedToken } from 'shiki'
 
 export interface CodeLine {
   index: number
@@ -2392,7 +2392,7 @@ export function getHiddenCodeLines(collapsed: Set<number>, lines: CodeLine[]) {
   }
   return hidden
 }
-25:T4526,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ThemedToken } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'shiki'</span></span>
+24:T4526,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ThemedToken } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'shiki'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> interface</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> CodeLine</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#E36209;--shiki-dark:#FFAB70">  index</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> number</span></span>
@@ -2445,7 +2445,7 @@ export function getHiddenCodeLines(collapsed: Set<number>, lines: CodeLine[]) {
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  }</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> hidden</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>26:T554,import { codeToTokensBase, type ThemedToken } from 'shiki'
+<span class="line" data-line=""></span></code></pre>25:T554,import { codeToTokensBase, type ThemedToken } from 'shiki'
 
 export type ViewerTheme = 'github-light' | 'github-dark'
 
@@ -2475,7 +2475,7 @@ export async function codeToTokenLines(code: string, lang: string, theme: Viewer
 export function viewerSurfaceClass(theme: ViewerTheme, _embedded?: boolean) {
   return theme === 'github-light' ? 'bg-[#f6f8fa] text-[#24292f]' : 'bg-[#0d1117] text-[#e6edf3]'
 }
-27:T317e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { codeToTokensBase, </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> ThemedToken } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'shiki'</span></span>
+26:T317e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { codeToTokensBase, </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> ThemedToken } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'shiki'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ViewerTheme</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'github-light'</span><span style="color:#D73A49;--shiki-dark:#F97583"> |</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'github-dark'</span></span>
 <span class="line" data-line=""></span>
@@ -2505,8 +2505,8 @@ export function viewerSurfaceClass(theme: ViewerTheme, _embedded?: boolean) {
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> function</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> viewerSurfaceClass</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#E36209;--shiki-dark:#FFAB70">theme</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ViewerTheme</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#E36209;--shiki-dark:#FFAB70">_embedded</span><span style="color:#D73A49;--shiki-dark:#F97583">?:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> boolean</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) {</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> theme </span><span style="color:#D73A49;--shiki-dark:#F97583">===</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'github-light'</span><span style="color:#D73A49;--shiki-dark:#F97583"> ?</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'bg-[#f6f8fa] text-[#24292f]'</span><span style="color:#D73A49;--shiki-dark:#F97583"> :</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'bg-[#0d1117] text-[#e6edf3]'</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>15:["$","$L2","code-viewer-demo",{"item":{"name":"code-viewer-demo","description":"Syntax-highlighted code viewer with copy button.","iframeHeight":"775px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"code-viewer-demo.tsx","path":"examples/code-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"code","children":[{"name":"index.tsx","path":"pro-viewer/code/index.tsx"},{"name":"header.tsx","path":"pro-viewer/code/header.tsx"},{"name":"table.tsx","path":"pro-viewer/code/table.tsx"},{"name":"lines.ts","path":"pro-viewer/code/lines.ts"},{"name":"syntax.ts","path":"pro-viewer/code/syntax.ts"}]}]}],"highlightedFiles":[{"target":"examples/code-viewer-demo.tsx","content":"$1c","highlightedContent":"$1d"},{"target":"pro-viewer/code/index.tsx","content":"$1e","highlightedContent":"$1f"},{"target":"pro-viewer/code/header.tsx","content":"$20","highlightedContent":"$21"},{"target":"pro-viewer/code/table.tsx","content":"$22","highlightedContent":"$23"},{"target":"pro-viewer/code/lines.ts","content":"$24","highlightedContent":"$25"},{"target":"pro-viewer/code/syntax.ts","content":"$26","highlightedContent":"$27"}]}]
-28:T243c,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+<span class="line" data-line=""></span></code></pre>15:["$","$L2","code-viewer-demo",{"item":{"name":"code-viewer-demo","description":"Syntax-highlighted code viewer with copy button.","iframeHeight":"775px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"code-viewer-demo.tsx","path":"examples/code-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"code","children":[{"name":"index.tsx","path":"pro-viewer/code/index.tsx"},{"name":"header.tsx","path":"pro-viewer/code/header.tsx"},{"name":"table.tsx","path":"pro-viewer/code/table.tsx"},{"name":"lines.ts","path":"pro-viewer/code/lines.ts"},{"name":"syntax.ts","path":"pro-viewer/code/syntax.ts"}]}]}],"highlightedFiles":[{"target":"examples/code-viewer-demo.tsx","content":"$1b","highlightedContent":"$1c"},{"target":"pro-viewer/code/index.tsx","content":"$1d","highlightedContent":"$1e"},{"target":"pro-viewer/code/header.tsx","content":"$1f","highlightedContent":"$20"},{"target":"pro-viewer/code/table.tsx","content":"$21","highlightedContent":"$22"},{"target":"pro-viewer/code/lines.ts","content":"$23","highlightedContent":"$24"},{"target":"pro-viewer/code/syntax.ts","content":"$25","highlightedContent":"$26"}]}]
+27:T243c,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { CodeViewer } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/registry/new-york-v4/pro/pro-viewer/code'</span></span>
 <span class="line" data-line=""></span>
@@ -2548,8 +2548,8 @@ export function viewerSurfaceClass(theme: ViewerTheme, _embedded?: boolean) {
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>16:["$","$L2","json-viewer-demo",{"item":{"name":"json-viewer-demo","description":"Collapsible JSON tree viewer with search and copy.","iframeHeight":"719px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"json-viewer-demo.tsx","path":"examples/json-viewer-demo.tsx"}]}],"highlightedFiles":[{"target":"examples/json-viewer-demo.tsx","content":"'use client'\n\nimport { CodeViewer } from '@/registry/new-york-v4/pro/pro-viewer/code'\n\nconst SAMPLE_DATA = {\n  name: 'shadcn-pro',\n  version: '1.0.0',\n  description: 'Pro components for shadcn/ui',\n  stats: {\n    components: 20,\n    downloads: 4832,\n    stars: 312,\n    forks: 41,\n  },\n  tags: ['react', 'shadcn', 'tailwind', 'typescript'],\n  author: {\n    name: 'draco-china',\n    url: 'https://github.com/draco-china',\n    verified: true,\n  },\n  dependencies: {\n    react: '^18.3.0',\n    'react-dom': '^18.3.0',\n    shiki: '^3.0.0',\n    diff: '^9.0.0',\n  },\n  license: 'MIT',\n  published: true,\n}\n\nexport default function JsonViewerDemo() {\n  return (\n    <div className=\"w-full p-4\">\n      <CodeViewer\n        code={JSON.stringify(SAMPLE_DATA, null, 2)}\n        lang=\"json\"\n        title=\"package.json\"\n        showLineNumbers\n      />\n    </div>\n  )\n}\n","highlightedContent":"$28"}]}]
-29:T6a0,'use client'
+<span class="line" data-line=""></span></code></pre>16:["$","$L2","json-viewer-demo",{"item":{"name":"json-viewer-demo","description":"Collapsible JSON tree viewer with search and copy.","iframeHeight":"719px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"json-viewer-demo.tsx","path":"examples/json-viewer-demo.tsx"}]}],"highlightedFiles":[{"target":"examples/json-viewer-demo.tsx","content":"'use client'\n\nimport { CodeViewer } from '@/registry/new-york-v4/pro/pro-viewer/code'\n\nconst SAMPLE_DATA = {\n  name: 'shadcn-pro',\n  version: '1.0.0',\n  description: 'Pro components for shadcn/ui',\n  stats: {\n    components: 20,\n    downloads: 4832,\n    stars: 312,\n    forks: 41,\n  },\n  tags: ['react', 'shadcn', 'tailwind', 'typescript'],\n  author: {\n    name: 'draco-china',\n    url: 'https://github.com/draco-china',\n    verified: true,\n  },\n  dependencies: {\n    react: '^18.3.0',\n    'react-dom': '^18.3.0',\n    shiki: '^3.0.0',\n    diff: '^9.0.0',\n  },\n  license: 'MIT',\n  published: true,\n}\n\nexport default function JsonViewerDemo() {\n  return (\n    <div className=\"w-full p-4\">\n      <CodeViewer\n        code={JSON.stringify(SAMPLE_DATA, null, 2)}\n        lang=\"json\"\n        title=\"package.json\"\n        showLineNumbers\n      />\n    </div>\n  )\n}\n","highlightedContent":"$27"}]}]
+28:T6a0,'use client'
 
 import { ImageViewer } from '@/registry/new-york-v4/pro/pro-viewer/image'
 import { useState } from 'react'
@@ -2605,7 +2605,7 @@ export default function ImageViewerDemo() {
     </div>
   )
 }
-2a:T3a45,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+29:T3a45,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ImageViewer } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/registry/new-york-v4/pro/pro-viewer/image'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { useState } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'react'</span></span>
@@ -2661,7 +2661,7 @@ export default function ImageViewerDemo() {
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>2b:T1b65,'use client'
+<span class="line" data-line=""></span></code></pre>2a:T1b65,'use client'
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -2891,7 +2891,7 @@ function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick:
     </Button>
   )
 }
-2c:T1116d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+2b:T1116d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { ChevronLeft, ChevronRight } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { useCallback, useEffect, useRef, useState } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'react'</span></span>
@@ -3121,7 +3121,7 @@ function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick:
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#005CC5;--shiki-dark:#79B8FF">Button</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>2d:T18cd,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> interface</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ImageTransform</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
+<span class="line" data-line=""></span></code></pre>2c:T18cd,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> interface</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ImageTransform</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
 <span class="line" data-line=""><span style="color:#E36209;--shiki-dark:#FFAB70">  scale</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> number</span></span>
 <span class="line" data-line=""><span style="color:#E36209;--shiki-dark:#FFAB70">  rotate</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> number</span></span>
 <span class="line" data-line=""><span style="color:#E36209;--shiki-dark:#FFAB70">  x</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> number</span></span>
@@ -3140,7 +3140,7 @@ function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick:
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> function</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> clampScale</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#E36209;--shiki-dark:#FFAB70">scale</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> number</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) {</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Math.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">min</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#005CC5;--shiki-dark:#79B8FF">MAX_IMAGE_SCALE</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, Math.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">max</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#005CC5;--shiki-dark:#79B8FF">MIN_IMAGE_SCALE</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, scale))</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>2e:Tb01,'use client'
+<span class="line" data-line=""></span></code></pre>2d:Tb01,'use client'
 
 import { Maximize, Minimize, RotateCcw, RotateCw, X, ZoomIn, ZoomOut } from 'lucide-react'
 import type * as React from 'react'
@@ -3255,7 +3255,7 @@ function ToolbarButton({
 function Separator() {
   return <div className="mx-2 h-4 w-px bg-white/20" />
 }
-2f:T70ad,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+2e:T70ad,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Maximize, Minimize, RotateCcw, RotateCw, X, ZoomIn, ZoomOut } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> *</span><span style="color:#D73A49;--shiki-dark:#F97583"> as</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> React </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'react'</span></span>
@@ -3370,7 +3370,7 @@ function Separator() {
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">function</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> Separator</span><span style="color:#24292E;--shiki-dark:#E1E4E8">() {</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> &#x3C;</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> className</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"mx-2 h-4 w-px bg-white/20"</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> /></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>30:T42b,'use client'
+<span class="line" data-line=""></span></code></pre>2f:T42b,'use client'
 
 import { cn } from '@/lib/utils'
 
@@ -3413,7 +3413,7 @@ export function ImageViewerThumbnails({
     </div>
   )
 }
-31:T2c0d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+30:T2c0d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { cn } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/lib/utils'</span></span>
 <span class="line" data-line=""></span>
@@ -3456,8 +3456,8 @@ export function ImageViewerThumbnails({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>17:["$","$L2","image-viewer-demo",{"item":{"name":"image-viewer-demo","description":"Image viewer with zoom, pan, rotate, and fullscreen.","iframeHeight":"653px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"image-viewer-demo.tsx","path":"examples/image-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"image","children":[{"name":"index.tsx","path":"pro-viewer/image/index.tsx"},{"name":"state.ts","path":"pro-viewer/image/state.ts"},{"name":"toolbar.tsx","path":"pro-viewer/image/toolbar.tsx"},{"name":"thumbnails.tsx","path":"pro-viewer/image/thumbnails.tsx"}]}]}],"highlightedFiles":[{"target":"examples/image-viewer-demo.tsx","content":"$29","highlightedContent":"$2a"},{"target":"pro-viewer/image/index.tsx","content":"$2b","highlightedContent":"$2c"},{"target":"pro-viewer/image/state.ts","content":"export interface ImageTransform {\n  scale: number\n  rotate: number\n  x: number\n  y: number\n}\n\nexport const DEFAULT_IMAGE_TRANSFORM: ImageTransform = { scale: 1, rotate: 0, x: 0, y: 0 }\nexport const MIN_IMAGE_SCALE = 0.1\nexport const MAX_IMAGE_SCALE = 5\nexport const IMAGE_SCALE_STEP = 0.25\n\nexport function normalizeImages(images: string | string[]) {\n  return Array.isArray(images) ? images : [images]\n}\n\nexport function clampScale(scale: number) {\n  return Math.min(MAX_IMAGE_SCALE, Math.max(MIN_IMAGE_SCALE, scale))\n}\n","highlightedContent":"$2d"},{"target":"pro-viewer/image/toolbar.tsx","content":"$2e","highlightedContent":"$2f"},{"target":"pro-viewer/image/thumbnails.tsx","content":"$30","highlightedContent":"$31"}]}]
-32:T6c9,'use client'
+<span class="line" data-line=""></span></code></pre>17:["$","$L2","image-viewer-demo",{"item":{"name":"image-viewer-demo","description":"Image viewer with zoom, pan, rotate, and fullscreen.","iframeHeight":"653px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"image-viewer-demo.tsx","path":"examples/image-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"image","children":[{"name":"index.tsx","path":"pro-viewer/image/index.tsx"},{"name":"state.ts","path":"pro-viewer/image/state.ts"},{"name":"toolbar.tsx","path":"pro-viewer/image/toolbar.tsx"},{"name":"thumbnails.tsx","path":"pro-viewer/image/thumbnails.tsx"}]}]}],"highlightedFiles":[{"target":"examples/image-viewer-demo.tsx","content":"$28","highlightedContent":"$29"},{"target":"pro-viewer/image/index.tsx","content":"$2a","highlightedContent":"$2b"},{"target":"pro-viewer/image/state.ts","content":"export interface ImageTransform {\n  scale: number\n  rotate: number\n  x: number\n  y: number\n}\n\nexport const DEFAULT_IMAGE_TRANSFORM: ImageTransform = { scale: 1, rotate: 0, x: 0, y: 0 }\nexport const MIN_IMAGE_SCALE = 0.1\nexport const MAX_IMAGE_SCALE = 5\nexport const IMAGE_SCALE_STEP = 0.25\n\nexport function normalizeImages(images: string | string[]) {\n  return Array.isArray(images) ? images : [images]\n}\n\nexport function clampScale(scale: number) {\n  return Math.min(MAX_IMAGE_SCALE, Math.max(MIN_IMAGE_SCALE, scale))\n}\n","highlightedContent":"$2c"},{"target":"pro-viewer/image/toolbar.tsx","content":"$2d","highlightedContent":"$2e"},{"target":"pro-viewer/image/thumbnails.tsx","content":"$2f","highlightedContent":"$30"}]}]
+31:T6c9,'use client'
 
 import { DiffViewer } from '@/registry/new-york-v4/pro/pro-viewer/diff'
 
@@ -3524,7 +3524,7 @@ export default function DiffViewerDemo() {
     </div>
   )
 }
-33:T2adc,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+32:T2adc,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { DiffViewer } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/registry/new-york-v4/pro/pro-viewer/diff'</span></span>
 <span class="line" data-line=""></span>
@@ -3591,7 +3591,7 @@ export default function DiffViewerDemo() {
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>34:Tc3d,'use client'
+<span class="line" data-line=""></span></code></pre>33:Tc3d,'use client'
 
 import { useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -3691,7 +3691,7 @@ export function DiffViewer({
     </div>
   )
 }
-35:T7ad8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+34:T7ad8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { useEffect, useMemo, useState } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { Button } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/components/ui/button'</span></span>
@@ -3791,7 +3791,7 @@ export function DiffViewer({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>36:Tc0e,'use client'
+<span class="line" data-line=""></span></code></pre>35:Tc0e,'use client'
 
 import { cn } from '@/lib/utils'
 import type { DiffLine } from './utils'
@@ -3897,7 +3897,7 @@ export function SplitDiffPane({
     </div>
   )
 }
-37:T7939,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
+36:T7939,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#032F62;--shiki-dark:#9ECBFF">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { cn } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> '@/lib/utils'</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { DiffLine } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> './utils'</span></span>
@@ -4003,7 +4003,7 @@ export function SplitDiffPane({
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8">></span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  )</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>38:T62c,import { diffLines } from 'diff'
+<span class="line" data-line=""></span></code></pre>37:T62c,import { diffLines } from 'diff'
 
 export type DiffView = 'split' | 'unified'
 
@@ -4060,7 +4060,7 @@ export function countDiffLines(lines: DiffLine[]) {
     removed: lines.filter((line) => line.type === 'removed').length,
   }
 }
-39:T47b2,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { diffLines } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'diff'</span></span>
+38:T47b2,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { diffLines } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'diff'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> DiffView</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'split'</span><span style="color:#D73A49;--shiki-dark:#F97583"> |</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'unified'</span></span>
 <span class="line" data-line=""></span>
@@ -4117,7 +4117,7 @@ export function countDiffLines(lines: DiffLine[]) {
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">    removed: lines.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">filter</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#E36209;--shiki-dark:#FFAB70">line</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) </span><span style="color:#D73A49;--shiki-dark:#F97583">=></span><span style="color:#24292E;--shiki-dark:#E1E4E8"> line.type </span><span style="color:#D73A49;--shiki-dark:#F97583">===</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'removed'</span><span style="color:#24292E;--shiki-dark:#E1E4E8">).</span><span style="color:#005CC5;--shiki-dark:#79B8FF">length</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">  }</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>3a:T554,import { codeToTokensBase, type ThemedToken } from 'shiki'
+<span class="line" data-line=""></span></code></pre>39:T554,import { codeToTokensBase, type ThemedToken } from 'shiki'
 
 export type ViewerTheme = 'github-light' | 'github-dark'
 
@@ -4147,7 +4147,7 @@ export async function codeToTokenLines(code: string, lang: string, theme: Viewer
 export function viewerSurfaceClass(theme: ViewerTheme, _embedded?: boolean) {
   return theme === 'github-light' ? 'bg-[#f6f8fa] text-[#24292f]' : 'bg-[#0d1117] text-[#e6edf3]'
 }
-3b:T317e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { codeToTokensBase, </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> ThemedToken } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'shiki'</span></span>
+3a:T317e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">import</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> { codeToTokensBase, </span><span style="color:#D73A49;--shiki-dark:#F97583">type</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> ThemedToken } </span><span style="color:#D73A49;--shiki-dark:#F97583">from</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'shiki'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> type</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ViewerTheme</span><span style="color:#D73A49;--shiki-dark:#F97583"> =</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'github-light'</span><span style="color:#D73A49;--shiki-dark:#F97583"> |</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'github-dark'</span></span>
 <span class="line" data-line=""></span>
@@ -4177,8 +4177,7 @@ export function viewerSurfaceClass(theme: ViewerTheme, _embedded?: boolean) {
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">export</span><span style="color:#D73A49;--shiki-dark:#F97583"> function</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> viewerSurfaceClass</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#E36209;--shiki-dark:#FFAB70">theme</span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> ViewerTheme</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, </span><span style="color:#E36209;--shiki-dark:#FFAB70">_embedded</span><span style="color:#D73A49;--shiki-dark:#F97583">?:</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> boolean</span><span style="color:#24292E;--shiki-dark:#E1E4E8">) {</span></span>
 <span class="line" data-line=""><span style="color:#D73A49;--shiki-dark:#F97583">  return</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> theme </span><span style="color:#D73A49;--shiki-dark:#F97583">===</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'github-light'</span><span style="color:#D73A49;--shiki-dark:#F97583"> ?</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'bg-[#f6f8fa] text-[#24292f]'</span><span style="color:#D73A49;--shiki-dark:#F97583"> :</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> 'bg-[#0d1117] text-[#e6edf3]'</span></span>
 <span class="line" data-line=""><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span>
-<span class="line" data-line=""></span></code></pre>18:["$","$L2","diff-viewer-demo",{"item":{"name":"diff-viewer-demo","description":"Side-by-side diff viewer with line-level highlighting.","iframeHeight":"766px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"diff-viewer-demo.tsx","path":"examples/diff-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"diff","children":[{"name":"index.tsx","path":"pro-viewer/diff/index.tsx"},{"name":"table.tsx","path":"pro-viewer/diff/table.tsx"},{"name":"utils.ts","path":"pro-viewer/diff/utils.ts"}]},{"name":"code","children":[{"name":"syntax.ts","path":"pro-viewer/code/syntax.ts"}]}]}],"highlightedFiles":[{"target":"examples/diff-viewer-demo.tsx","content":"$32","highlightedContent":"$33"},{"target":"pro-viewer/diff/index.tsx","content":"$34","highlightedContent":"$35"},{"target":"pro-viewer/diff/table.tsx","content":"$36","highlightedContent":"$37"},{"target":"pro-viewer/diff/utils.ts","content":"$38","highlightedContent":"$39"},{"target":"pro-viewer/code/syntax.ts","content":"$3a","highlightedContent":"$3b"}]}]
-19:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0rnsg5fcuj37p.js","async":true}]
-1a:["$","script","script-1",{"src":"/shadcn-pro/_next/static/chunks/09oi6l6z2mrwm.js","async":true}]
-1b:["$","$L3c",null,{"children":["$","$3d",null,{"name":"Next.MetadataOutlet","children":"$@3e"}]}]
-3e:null
+<span class="line" data-line=""></span></code></pre>18:["$","$L2","diff-viewer-demo",{"item":{"name":"diff-viewer-demo","description":"Side-by-side diff viewer with line-level highlighting.","iframeHeight":"766px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"diff-viewer-demo.tsx","path":"examples/diff-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"diff","children":[{"name":"index.tsx","path":"pro-viewer/diff/index.tsx"},{"name":"table.tsx","path":"pro-viewer/diff/table.tsx"},{"name":"utils.ts","path":"pro-viewer/diff/utils.ts"}]},{"name":"code","children":[{"name":"syntax.ts","path":"pro-viewer/code/syntax.ts"}]}]}],"highlightedFiles":[{"target":"examples/diff-viewer-demo.tsx","content":"$31","highlightedContent":"$32"},{"target":"pro-viewer/diff/index.tsx","content":"$33","highlightedContent":"$34"},{"target":"pro-viewer/diff/table.tsx","content":"$35","highlightedContent":"$36"},{"target":"pro-viewer/diff/utils.ts","content":"$37","highlightedContent":"$38"},{"target":"pro-viewer/code/syntax.ts","content":"$39","highlightedContent":"$3a"}]}]
+19:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0h1qoztw6v_1h.js","async":true}]
+1a:["$","$L3b",null,{"children":["$","$3c",null,{"name":"Next.MetadataOutlet","children":"$@3d"}]}]
+3d:null
