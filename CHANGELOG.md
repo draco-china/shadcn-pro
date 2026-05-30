@@ -1,3 +1,10 @@
+## [1.11.2](https://github.com/draco-china/shadcn-pro/compare/v1.11.1...v1.11.2) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-fields:** add clean alias exports to match demo imports ([28df948](https://github.com/draco-china/shadcn-pro/commit/28df9481758a53b9a4c0042362c15f4175bdef49))
+
 ## [1.11.1](https://github.com/draco-china/shadcn-pro/compare/v1.11.0...v1.11.1) (2026-05-30)
 
 
