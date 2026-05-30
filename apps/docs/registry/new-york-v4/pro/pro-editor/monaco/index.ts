@@ -1,7 +1,7 @@
 import type { Monaco } from '@monaco-editor/react'
 import type { EditorTheme } from '../types'
 import { githubDarkTheme, githubLightTheme } from './github-themes'
-import { oneLightProFlatTheme, oneDarkProFlatTheme } from './one-dark-pro-themes'
+import { oneDarkProFlatTheme, oneLightProFlatTheme } from './one-dark-pro-themes'
 
 const TSX_REACT_TYPES = `
 declare namespace JSX {
