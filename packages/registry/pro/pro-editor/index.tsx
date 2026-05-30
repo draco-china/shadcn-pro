@@ -41,6 +41,14 @@ export function ProEditor({
   const [fullscreen, setFullscreen] = React.useState(false)
   const [uncontrolledViewMode, setUncontrolledViewMode] =
     React.useState<EditorViewMode>(defaultViewMode)
+  const themeModeRef = React.useRef(themeMode)
+  const themeRef = React.useRef(theme)
+  React.useEffect(() => {
+    themeModeRef.current = themeMode
+  }, [themeMode])
+  React.useEffect(() => {
+    themeRef.current = theme
+  }, [theme])
   const editorRef = React.useRef<MonacoEditorInstance | null>(null)
   const monacoRef = React.useRef<Monaco | null>(null)
   const {
@@ -67,7 +75,7 @@ export function ProEditor({
       monacoRef.current = monaco
       scrollDisposableRef.current?.dispose()
       scrollDisposableRef.current = editor.onDidScrollChange(() => syncPreviewFromEditor(editor))
-      applyShadcnTheme(monaco, theme, themeMode)
+      applyShadcnTheme(monaco, themeRef.current, themeModeRef.current)
       configureTypescript(monaco)
     },
     [syncPreviewFromEditor, theme],
@@ -75,7 +83,7 @@ export function ProEditor({
 
   React.useEffect(() => {
     const monaco = monacoRef.current
-    if (monaco) applyShadcnTheme(monaco, theme)
+    if (monaco) applyShadcnTheme(monaco, theme, themeMode)
   }, [theme])
 
   const handleCopy = async () => {
