@@ -1036,7 +1036,7 @@ export function Select({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>9:T5a0,'use client'
+<span class="line" data-line=""></span></code></pre>9:T546,'use client'
 
 import * as React from 'react'
 import { Checkbox as ShadcnCheckbox } from '@/components/ui/checkbox'
@@ -1045,13 +1045,12 @@ import { cn } from '@/lib/utils'
 
 export interface CheckboxBaseProps
   extends Omit<
-    React.ComponentProps<typeof ShadcnCheckbox>,
+    React.ComponentProps<typeof Checkbox>,
     'value' | 'defaultValue' | 'onChange' | 'checked' | 'defaultChecked' | 'onCheckedChange'
   > {
   value?: boolean
   defaultValue?: boolean
   onChange?: (checked: boolean) => void
-  label?: React.ReactNode
   children?: React.ReactNode
   labelClassName?: string
 }
@@ -1061,14 +1060,12 @@ export function Checkbox({
   defaultValue,
   onChange,
   disabled,
-  label,
   children,
   labelClassName,
   ...props
 }: CheckboxBaseProps) {
   const generatedId = React.useId()
   const checkboxId = props.id ?? generatedId
-  const labelContent = children ?? label
 
   return (
     <div className="flex items-center gap-2">
@@ -1080,7 +1077,7 @@ export function Checkbox({
         disabled={disabled}
         {...props}
       />
-      {labelContent && (
+      {children && (
         <Label
           htmlFor={checkboxId}
           className={cn(
@@ -1089,13 +1086,13 @@ export function Checkbox({
             labelClassName,
           )}
         >
-          {labelContent}
+          {children}
         </Label>
       )}
     </div>
   )
 }
-a:T455c,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+a:T413d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#0184BC;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Checkbox</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> ShadcnCheckbox</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/checkbox'</span></span>
@@ -1104,13 +1101,12 @@ a:T455c,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> CheckboxBaseProps</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  extends</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Omit</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#E5C07B">    React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E5C07B">ComponentProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#0184BC;--shiki-dark:#C678DD">typeof</span><span style="color:#383A42;--shiki-dark:#E06C75"> ShadcnCheckbox</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#E5C07B">    React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E5C07B">ComponentProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#0184BC;--shiki-dark:#C678DD">typeof</span><span style="color:#383A42;--shiki-dark:#E06C75"> Checkbox</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>,</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">    'value'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'defaultValue'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'onChange'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'checked'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'defaultChecked'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'onCheckedChange'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  > {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  value</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  defaultValue</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">checked</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  label</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#E5C07B"> React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E5C07B">ReactNode</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  children</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#E5C07B"> React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E5C07B">ReactNode</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  labelClassName</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
@@ -1120,14 +1116,12 @@ a:T455c,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  defaultValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  label</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  children</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  labelClassName</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  ...</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">props</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> CheckboxBaseProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> generatedId</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#E45649;--shiki-dark:#E5C07B"> React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">useId</span><span style="color:#383A42;--shiki-dark:#ABB2BF">()</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> checkboxId</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#E45649;--shiki-dark:#E5C07B"> props</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">id</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> generatedId</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> labelContent</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> children</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> label</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex items-center gap-2"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -1139,7 +1133,7 @@ a:T455c,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#383A42;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">props</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">labelContent</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">children</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Label</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          htmlFor</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">checkboxId</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
@@ -1148,7 +1142,7 @@ a:T455c,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            labelClassName</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">labelContent</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">children</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Label</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -1779,7 +1773,7 @@ export function FacetedFilter({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Popover</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-fields-demo",{"item":{"name":"pro-fields-demo","description":"Advanced field types: select, date, switch, and more.","iframeHeight":"388px","installName":"pro-fields"},"tree":[{"name":"examples","children":[{"name":"pro-fields-demo.tsx","path":"examples/pro-fields-demo.tsx"}]},{"name":"pro-fields","children":[{"name":"input.tsx","path":"pro-fields/input.tsx"},{"name":"select.tsx","path":"pro-fields/select.tsx"},{"name":"checkbox.tsx","path":"pro-fields/checkbox.tsx"},{"name":"switch.tsx","path":"pro-fields/switch.tsx"},{"name":"textarea.tsx","path":"pro-fields/textarea.tsx"},{"name":"radio.tsx","path":"pro-fields/radio.tsx"},{"name":"date-picker.tsx","path":"pro-fields/date-picker.tsx"},{"name":"faceted-filter.tsx","path":"pro-fields/faceted-filter.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-fields-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-fields/input.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-fields/select.tsx","content":"$7","highlightedContent":"$8"},{"target":"pro-fields/checkbox.tsx","content":"$9","highlightedContent":"$a"},{"target":"pro-fields/switch.tsx","content":"'use client'\n\nimport type * as React from 'react'\nimport { Switch as ShadcnSwitch } from '@/components/ui/switch'\n\nexport interface SwitchProps\n  extends Omit<\n    React.ComponentProps<typeof Switch>,\n    'checked' | 'onCheckedChange' | 'onChange' | 'value'\n  > {\n  value?: boolean\n  onChange?: (checked: boolean) => void\n}\n\nexport function Switch({ value, onChange, ...props }: SwitchProps) {\n  return <ShadcnSwitch {...props} checked={value} onCheckedChange={onChange} />\n}\n","highlightedContent":"$b"},{"target":"pro-fields/textarea.tsx","content":"'use client'\n\nimport type * as React from 'react'\nimport { Textarea as ShadcnTextarea } from '@/components/ui/textarea'\n\nexport type TextareaProps = React.ComponentProps<typeof Textarea>\n\nexport function Textarea(props: TextareaProps) {\n  return <ShadcnTextarea {...props} />\n}\n\nTextarea.displayName = 'Textarea'\n","highlightedContent":"$c"},{"target":"pro-fields/radio.tsx","content":"$d","highlightedContent":"$e"},{"target":"pro-fields/date-picker.tsx","content":"$f","highlightedContent":"$10"},{"target":"pro-fields/faceted-filter.tsx","content":"$11","highlightedContent":"$12"}]}],"$L13","$L14","$L15","$L16","$L17","$L18","$L19","$L1a","$L1b","$L1c"]}],["$L1d"],"$L1e"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"TfRYknWvxrUk5xQWmLhuR"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-fields-demo",{"item":{"name":"pro-fields-demo","description":"Advanced field types: select, date, switch, and more.","iframeHeight":"388px","installName":"pro-fields"},"tree":[{"name":"examples","children":[{"name":"pro-fields-demo.tsx","path":"examples/pro-fields-demo.tsx"}]},{"name":"pro-fields","children":[{"name":"input.tsx","path":"pro-fields/input.tsx"},{"name":"select.tsx","path":"pro-fields/select.tsx"},{"name":"checkbox.tsx","path":"pro-fields/checkbox.tsx"},{"name":"switch.tsx","path":"pro-fields/switch.tsx"},{"name":"textarea.tsx","path":"pro-fields/textarea.tsx"},{"name":"radio.tsx","path":"pro-fields/radio.tsx"},{"name":"date-picker.tsx","path":"pro-fields/date-picker.tsx"},{"name":"faceted-filter.tsx","path":"pro-fields/faceted-filter.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-fields-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-fields/input.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-fields/select.tsx","content":"$7","highlightedContent":"$8"},{"target":"pro-fields/checkbox.tsx","content":"$9","highlightedContent":"$a"},{"target":"pro-fields/switch.tsx","content":"'use client'\n\nimport type * as React from 'react'\nimport { Switch as ShadcnSwitch } from '@/components/ui/switch'\n\nexport interface SwitchProps\n  extends Omit<\n    React.ComponentProps<typeof Switch>,\n    'checked' | 'onCheckedChange' | 'onChange' | 'value'\n  > {\n  value?: boolean\n  onChange?: (checked: boolean) => void\n}\n\nexport function Switch({ value, onChange, ...props }: SwitchProps) {\n  return <ShadcnSwitch {...props} checked={value} onCheckedChange={onChange} />\n}\n","highlightedContent":"$b"},{"target":"pro-fields/textarea.tsx","content":"'use client'\n\nimport type * as React from 'react'\nimport { Textarea as ShadcnTextarea } from '@/components/ui/textarea'\n\nexport type TextareaProps = React.ComponentProps<typeof Textarea>\n\nexport function Textarea(props: TextareaProps) {\n  return <ShadcnTextarea {...props} />\n}\n\nTextarea.displayName = 'Textarea'\n","highlightedContent":"$c"},{"target":"pro-fields/radio.tsx","content":"$d","highlightedContent":"$e"},{"target":"pro-fields/date-picker.tsx","content":"$f","highlightedContent":"$10"},{"target":"pro-fields/faceted-filter.tsx","content":"$11","highlightedContent":"$12"}]}],"$L13","$L14","$L15","$L16","$L17","$L18","$L19","$L1a","$L1b","$L1c"]}],["$L1d"],"$L1e"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Z-6Uo4TL_zwFWiwp6W_9T"}
 1f:T1edd,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">AtSign</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Search</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> "lucide-react"</span></span>
