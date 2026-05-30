@@ -1,3 +1,10 @@
+## [1.11.4](https://github.com/draco-china/shadcn-pro/compare/v1.11.3...v1.11.4) (2026-05-30)
+
+
+### Bug Fixes
+
+* **docs:** register BlockViewer in mdx-components ([5d53df1](https://github.com/draco-china/shadcn-pro/commit/5d53df1f0fe69828b3c713c33c8c8aa8281bf4fd))
+
 ## [1.11.3](https://github.com/draco-china/shadcn-pro/compare/v1.11.2...v1.11.3) (2026-05-30)
 
 
