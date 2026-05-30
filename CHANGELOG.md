@@ -1,3 +1,10 @@
+## [1.11.5](https://github.com/draco-china/shadcn-pro/compare/v1.11.4...v1.11.5) (2026-05-30)
+
+
+### Bug Fixes
+
+* **docs:** add BlockPreview server component for MDX usage ([8824deb](https://github.com/draco-china/shadcn-pro/commit/8824deb1c9c1c46218e346110d5019e8819728c5))
+
 ## [1.11.4](https://github.com/draco-china/shadcn-pro/compare/v1.11.3...v1.11.4) (2026-05-30)
 
 
