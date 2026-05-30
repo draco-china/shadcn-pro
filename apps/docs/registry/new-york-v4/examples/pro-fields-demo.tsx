@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 import { ArrayField } from '@/registry/new-york-v4/pro/pro-fields/array-field'
-import { Captcha } from '@/registry/new-york-v4/pro/pro-fields/captcha'
+import { CaptchaBase as Captcha } from '@/registry/new-york-v4/pro/pro-fields/captcha'
 import { Cascader } from '@/registry/new-york-v4/pro/pro-fields/cascader'
 import { CheckboxBase } from '@/registry/new-york-v4/pro/pro-fields/checkbox'
 import { DatePicker } from '@/registry/new-york-v4/pro/pro-fields/date-picker'
