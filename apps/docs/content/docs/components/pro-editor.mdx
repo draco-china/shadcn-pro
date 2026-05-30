@@ -14,7 +14,7 @@ description: Monaco-powered editor with controlled language, theme, view mode, a
 <CodeTabs>
 
 <TabsList>
-  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
 
@@ -33,7 +33,7 @@ npx @draco-china/shadcn-pro add pro-editor
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add @monaco-editor/react monaco-editor lucide-react
+bun add @monaco-editor/react @shikijs/monaco monaco-editor shiki lucide-react
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -61,7 +61,7 @@ export default function EditorPage() {
   return (
     <ProEditor
       language="tsx"
-      theme="one-dark-pro"
+      themeMode="dark"
       value={value}
       onChange={setValue}
       height={400}
@@ -70,7 +70,7 @@ export default function EditorPage() {
 }
 ```
 
-`ProEditor` receives `language`, `theme`, and optionally `viewMode` as controlled props. Keep language, theme, and mode switchers in your page or demo state and pass the selected values into `ProEditor`; the built-in toolbar displays the current language but does not own those controls.
+`ProEditor` receives `language`, `themeMode`, and optionally `viewMode` as controlled props. Keep language, theme mode, and mode switchers in your page or demo state and pass the selected values into `ProEditor`; the built-in toolbar displays the current language but does not own those controls.
 
 `ProEditor` does not ship a built-in preview renderer. Pass `preview` from the outside when you want preview or split mode; omit it for edit-only usage.
 
@@ -87,10 +87,10 @@ import { MarkdownViewer } from "@/components/pro/pro-viewer/markdown"
 
 <ProEditor
   language="markdown"
-  theme="one-dark-pro"
+  themeMode="dark"
   value={markdown}
   onChange={setMarkdown}
-  preview={({ content }) => <MarkdownViewer content={content} theme="one-dark-pro" className="p-4" />}
+  preview={({ content }) => <MarkdownViewer content={content} theme="dark" className="p-4" />}
   height={400}
 />
 ```
@@ -98,23 +98,23 @@ import { MarkdownViewer } from "@/components/pro/pro-viewer/markdown"
 ### Without Preview
 
 ```tsx
-<ProEditor language="typescript" theme="one-dark-pro" value={code} onChange={setCode} />
+<ProEditor language="typescript" themeMode="dark" value={code} onChange={setCode} />
 ```
 
 ### Controlled View Mode
 
 ```tsx
 const [viewMode, setViewMode] = useState<"edit" | "preview" | "split">("split")
-const [theme, setTheme] = useState<EditorTheme>("one-dark-pro")
+const [themeMode, setThemeMode] = useState<"light" | "dark">("dark")
 
 <ProEditor
   language="markdown"
-  theme={theme}
+  themeMode={themeMode}
   value={code}
   onChange={setCode}
   viewMode={viewMode}
   onViewModeChange={setViewMode}
-  preview={({ content }) => <MarkdownViewer content={content} theme={theme} className="p-4" />}
+  preview={({ content }) => <MarkdownViewer content={content} theme={themeMode} className="p-4" />}
 />
 ```
 
@@ -148,7 +148,8 @@ const [theme, setTheme] = useState<EditorTheme>("one-dark-pro")
 | `value`       | `string`                              | `""`           | Controlled editor content                              |
 | `onChange`    | `(value: string) => void`             | —              | Content change callback                                |
 | `language`    | `string`                              | Required       | Language id; use `tsx` for React/JSX snippets and `typescript` for plain TypeScript |
-| `theme`       | `'one-dark-pro' \| 'github'` | `'one-dark-pro'` | Editor syntax theme — dark/light variant auto-selected based on system theme |
+| `themeMode`   | `'light' \| 'dark'`          | `'dark'`         | Editor theme mode. Internally maps to One Light / One Dark Pro syntax themes. |
+| `className`   | `string`                              | —              | Additional CSS class for the editor root. |
 | `height`      | `string \| number`                    | —              | Content height. When omitted, the editor fills its parent container. |
 | `showToolbar` | `boolean`                             | `true`         | Show preview, split, format, copy, and fullscreen controls when available |
 | `viewMode`    | `'edit' \| 'preview' \| 'split'`      | —              | Controlled pane mode                                   |

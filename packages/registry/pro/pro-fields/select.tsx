@@ -105,7 +105,7 @@ export function Select({
             handleClear(event)
           }}
           onClick={handleClear}
-          className="absolute top-1/2 right-8 z-10 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          className="absolute top-1/2 right-8 z-10 flex size-5 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
         >
           <X size={14} />
         </button>

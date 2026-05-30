@@ -148,7 +148,7 @@ export function ProTableToolbar<TData>({
               onClick={() => table.resetColumnFilters()}
             >
               Reset
-              <X className="ml-1 h-4 w-4" />
+              <X className="ml-1 size-4" />
             </Button>
           )}
         </div>
@@ -166,12 +166,12 @@ export function ProTableToolbar<TData>({
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-8 w-8 p-0"
+                  className="size-8 p-0"
                   onClick={onRefresh}
                   disabled={disabled}
                   aria-label="Refresh"
                 >
-                  <RefreshCw className="h-4 w-4" />
+                  <RefreshCw className="size-4" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>Refresh</TooltipContent>
@@ -186,11 +186,11 @@ export function ProTableToolbar<TData>({
                     <Button
                       variant="outline"
                       size="sm"
-                      className="h-8 w-8 p-0"
+                      className="size-8 p-0"
                       disabled={disabled}
                       aria-label="Density"
                     >
-                      <AlignJustify className="h-4 w-4" />
+                      <AlignJustify className="size-4" />
                     </Button>
                   </DropdownMenuTrigger>
                 </TooltipTrigger>
@@ -220,11 +220,11 @@ export function ProTableToolbar<TData>({
                     <Button
                       variant="outline"
                       size="sm"
-                      className="h-8 w-8 p-0"
+                      className="size-8 p-0"
                       disabled={disabled}
                       aria-label="Column settings"
                     >
-                      <SlidersHorizontal className="h-4 w-4" />
+                      <SlidersHorizontal className="size-4" />
                     </Button>
                   </DropdownMenuTrigger>
                 </TooltipTrigger>

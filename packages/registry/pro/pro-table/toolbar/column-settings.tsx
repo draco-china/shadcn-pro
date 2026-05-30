@@ -154,7 +154,7 @@ function ColumnPinningToggle<TData>({
       type="button"
       variant={active ? 'secondary' : 'ghost'}
       size="icon"
-      className={cn('h-6 w-6 shrink-0', !active && 'text-muted-foreground')}
+      className={cn('size-6 shrink-0', !active && 'text-muted-foreground')}
       aria-pressed={active}
       aria-label={active ? `Unpin ${position}` : label}
       title={active ? `Unpin ${position}` : label}

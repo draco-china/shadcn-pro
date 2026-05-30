@@ -5,8 +5,6 @@ import { ProEditor } from "@/registry/new-york-v4/pro/pro-editor/index"
 import type { PreviewProps } from "@/registry/new-york-v4/pro/pro-editor/index"
 import { MarkdownViewer } from "@/registry/new-york-v4/pro/pro-viewer/markdown"
 
-const EDITOR_THEME = "one-dark-pro" as const
-
 const INITIAL = `# Getting Started
 
 Welcome to **ProEditor** — Monaco-powered markdown editing with live preview.
@@ -29,7 +27,7 @@ Welcome to **ProEditor** — Monaco-powered markdown editing with live preview.
 `
 
 function MarkdownPreview({ content }: PreviewProps) {
-  return <MarkdownViewer content={content} theme={EDITOR_THEME} className="p-4" />
+  return <MarkdownViewer content={content} className="p-4" />
 }
 
 export default function ProEditorMarkdownDemo() {
@@ -39,7 +37,6 @@ export default function ProEditorMarkdownDemo() {
     <div className="w-full p-4">
       <ProEditor
         language="markdown"
-        theme={EDITOR_THEME}
         value={value}
         onChange={setValue}
         preview={MarkdownPreview}

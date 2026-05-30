@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useTheme } from 'next-themes'
 import { ProEditor } from "@/registry/new-york-v4/pro/pro-editor/index"
 import type {
-  EditorTheme,
   EditorViewMode,
   PreviewProps,
 } from "@/registry/new-york-v4/pro/pro-editor/index"
@@ -39,11 +38,6 @@ const LANGUAGE_OPTIONS = [
   { label: "JSON", value: "json" },
 ]
 
-const THEME_OPTIONS: { label: string; value: EditorTheme }[] = [
-  { label: "One Dark Pro", value: "one-dark-pro" },
-  { label: "GitHub", value: "github" },
-]
-
 const VIEW_MODE_OPTIONS: { label: string; value: EditorViewMode }[] = [
   { label: "Edit", value: "edit" },
   { label: "Preview", value: "preview" },
@@ -61,7 +55,6 @@ function PlainPreview({ content, language }: PreviewProps) {
 export default function ProEditorDemo() {
   const [value, setValue] = useState(INITIAL_CODE)
   const [language, setLanguage] = useState("tsx")
-  const [theme, setTheme] = useState<EditorTheme>("one-dark-pro")
   const { resolvedTheme } = useTheme()
   const themeMode = resolvedTheme === 'light' ? 'light' : 'dark'
   const [viewMode, setViewMode] = useState<EditorViewMode>("split")
@@ -82,18 +75,6 @@ export default function ProEditorDemo() {
           ))}
         </select>
         <select
-          value={theme}
-          onChange={(event) => setTheme(event.target.value as EditorTheme)}
-          className="h-9 rounded-md border border-input bg-background px-3 text-sm shadow-xs"
-          aria-label="Editor theme"
-        >
-          {THEME_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <select
           value={viewMode}
           onChange={(event) => setViewMode(event.target.value as EditorViewMode)}
           className="h-9 rounded-md border border-input bg-background px-3 text-sm shadow-xs"
@@ -108,7 +89,6 @@ export default function ProEditorDemo() {
       </div>
       <ProEditor
         language={language}
-        theme={theme}
         themeMode={themeMode}
         value={value}
         onChange={setValue}

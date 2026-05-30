@@ -66,7 +66,7 @@ export default function ProTableDragSortDemo() {
   const [order, setOrder] = React.useState<string[]>([])
 
   return (
-    <div className="h-full w-full space-y-3 p-4">
+    <div className="size-full space-y-3 p-4">
       <ProTable
         data={initialData}
         columns={columns}

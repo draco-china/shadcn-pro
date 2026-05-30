@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD033 MD041 -->
+
 <div align="center">
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&pause=1000&color=00B8D9&center=true&vCenter=true&width=600&lines=shadcn-pro;Pro+components+for+shadcn%2Fui;Copy+%26+own.+No+lock-in.)](https://git.io/typing-svg)
@@ -7,27 +9,26 @@
 [![docs](https://img.shields.io/badge/docs-online-00B8D9?style=for-the-badge&logo=gitbook&logoColor=white)](https://draco-china.github.io/shadcn-pro)
 [![license](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](https://github.com/draco-china/shadcn-pro/blob/main/LICENSE)
 
-Production-ready pro components for [shadcn/ui](https://ui.shadcn.com) — inspired by Ant Design Pro, rebuilt for the modern stack.  
-Copy into your project. Own it completely. No runtime dependency, no version lock-in.
+Production-ready pro components for [shadcn/ui](https://ui.shadcn.com) — inspired by Ant Design Pro, rebuilt for the modern stack.
+Copy into your project. Own it completely. No shadcn-pro runtime dependency, no version lock-in.
 
 </div>
 
 ## ✨ Components
 
 | Component | Stack | Description |
-|---|---|---|
+| --- | --- | --- |
 | `pro-form` | Formily + shadcn/ui | Schema-driven forms with validation, linkage & dynamic fields |
 | `pro-table` | TanStack Table + shadcn/ui | Headless data table with search, filters, sort & pagination |
-| `pro-fields` | Formily + shadcn/ui | Individual form field components (Input, Select, DatePicker…) |
+| `pro-fields` | shadcn/ui | Standalone field primitives (Input, Select, DatePicker, Upload, Captcha, FacetedFilter…) |
 | `pro-input` | shadcn/ui | Enhanced input with prefix, suffix, clear, and password helpers |
 | `pro-editor` | Monaco | Code and markdown editor with controlled language, theme, and view mode |
 | `pro-descriptions` | shadcn/ui | Key-value description panels |
 | `image-viewer` | shadcn/ui | Full-screen image viewer with zoom, rotate & multi-image navigation |
 | `code-viewer` | Shiki | Syntax-highlighted read-only code viewer |
-| `diff-viewer` | shadcn/ui | Side-by-side and unified code diff viewer |
+| `diff-viewer` | Diff + Shiki | Side-by-side and unified code diff viewer |
 | `html-viewer` | shadcn/ui | Sandboxed HTML preview surface |
-| `markdown-viewer` | shadcn/ui | GitHub Flavored Markdown renderer |
-
+| `markdown-viewer` | React Markdown + CodeViewer | GitHub Flavored Markdown renderer with shared code blocks |
 
 ## 🚀 Quick Start
 
@@ -41,7 +42,7 @@ shadcn-pro is published to **GitHub Packages**. Add the registry to your project
 Then install any component:
 
 ```bash
-npx @draco-china/shadcn-pro add pro-form
+npx @draco-china/shadcn-pro@latest add pro-form
 ```
 
 ```tsx
@@ -105,6 +106,7 @@ bun install
 bun dev              # start docs site
 bun turbo build      # build all packages
 bunx biome ci .      # lint & format check
+bun run --cwd packages/registry validate
 ```
 
 ## 📄 License

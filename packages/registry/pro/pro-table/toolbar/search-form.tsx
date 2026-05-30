@@ -37,7 +37,7 @@ export function ProTableSearchForm<TData>({
 
   return (
     <div className="relative flex items-center">
-      <Search className="absolute left-3 h-4 w-4 text-muted-foreground" />
+      <Search className="absolute left-3 size-4 text-muted-foreground" />
       <Input
         placeholder={searchPlaceholder}
         value={value}
@@ -48,10 +48,10 @@ export function ProTableSearchForm<TData>({
         <Button
           variant="ghost"
           size="sm"
-          className="absolute right-1 h-7 w-7 p-0"
+          className="absolute right-1 size-7 p-0"
           onClick={handleClear}
         >
-          <X className="h-4 w-4" />
+          <X className="size-4" />
           <span className="sr-only">Clear search</span>
         </Button>
       )}

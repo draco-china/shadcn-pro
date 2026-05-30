@@ -9,7 +9,7 @@ export interface ProTableEmptyStateProps {
 export function ProTableEmptyState({ icon, text = 'No data' }: ProTableEmptyStateProps) {
   return (
     <div className="flex flex-col items-center gap-2">
-      {icon ?? <Inbox className="h-8 w-8 opacity-40" />}
+      {icon ?? <Inbox className="size-8 opacity-40" />}
       <span className="text-sm">{text}</span>
     </div>
   )

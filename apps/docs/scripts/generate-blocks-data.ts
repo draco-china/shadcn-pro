@@ -16,7 +16,7 @@ const OUT = path.join(CWD, 'lib/__blocks-generated__.ts')
 async function highlight(code: string, lang = 'tsx'): Promise<string> {
   return codeToHtml(code, {
     lang,
-    themes: { dark: 'github-dark', light: 'github-light' },
+    themes: { dark: 'one-dark-pro', light: 'one-light' },
     transformers: [
       {
         pre(node) {

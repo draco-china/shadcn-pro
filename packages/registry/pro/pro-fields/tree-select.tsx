@@ -64,14 +64,14 @@ function TreeNode({
         <button
           type="button"
           aria-label={expanded ? 'Collapse' : 'Expand'}
-          className="flex h-4 w-4 shrink-0 items-center justify-center"
+          className="flex size-4 shrink-0 items-center justify-center"
           onClick={() => hasChildren && setExpanded(!expanded)}
         >
           {hasChildren ? (
             expanded ? (
-              <ChevronDown className="h-3 w-3" />
+              <ChevronDown className="size-3" />
             ) : (
-              <ChevronRight className="h-3 w-3" />
+              <ChevronRight className="size-3" />
             )
           ) : null}
         </button>
@@ -104,7 +104,7 @@ function TreeNode({
             )}
           >
             <span>{option.label}</span>
-            {isSelected && <Check className="h-3.5 w-3.5 text-primary" />}
+            {isSelected && <Check className="size-3.5 text-primary" />}
           </button>
         )}
       </div>
@@ -182,7 +182,7 @@ export function TreeSelect({
             aria-label="Clear selection"
             onPointerDown={handleClear}
             onClick={handleClear}
-            className="absolute top-1/2 right-2 z-10 flex h-5 w-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+            className="absolute top-1/2 right-2 z-10 flex size-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
           >
             <X size={14} />
           </button>

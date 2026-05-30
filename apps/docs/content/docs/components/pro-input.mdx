@@ -1,5 +1,5 @@
 ---
-title: Input
+title: ProInput
 description: Enhanced input component built on top of shadcn/ui Input — with prefix/suffix decorators, one-click clear, and password visibility toggle.
 ---
 
@@ -10,7 +10,7 @@ description: Enhanced input component built on top of shadcn/ui Input — with p
 <CodeTabs>
 
 <TabsList>
-  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
 
@@ -29,12 +29,13 @@ npx @draco-china/shadcn-pro add pro-input
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add @formily/core @formily/react lucide-react
+bun add lucide-react
 ```
 
-<Step>Copy and paste the following file into your project under `components/pro/pro-fields/`.</Step>
+<Step>Copy and paste the following files into your project under `components/pro/pro-fields/`.</Step>
 
 - `components/pro/pro-fields/input.tsx`
+- `components/pro/pro-fields/password.tsx`
 
 </Steps>
 
@@ -59,7 +60,11 @@ export default function Demo() {
 }
 ```
 
-## Props
+## API Reference
+
+`Input` and `Password` preserve the native shadcn/ui input props except where noted below.
+
+### Input
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
@@ -67,4 +72,10 @@ export default function Demo() {
 | `suffix` | `ReactNode` | — | Content to render after the input (icon or text). |
 | `allowClear` | `boolean` | `false` | Show a clear button when the input has a value. |
 | `onClear` | `() => void` | — | Called when the clear button is clicked. |
+
+### Password
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `suffix` | `ReactNode` | — | Content rendered before the visibility toggle. |
 | `inputClassName` | `string` | — | CSS class passed to the inner shadcn Input when using `Password`. |

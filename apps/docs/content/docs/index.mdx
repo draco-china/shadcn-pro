@@ -7,11 +7,17 @@ description: Pro-grade components built on shadcn/ui — schema-driven forms, da
 
 Inspired by [Ant Design Pro Components](https://procomponents.ant.design/), shadcn-pro brings the same productivity gains to the shadcn/ui ecosystem:
 
-- **ProFields** — Reusable Formily-connected field components (Input, Textarea, Select, Checkbox, Switch, Radio, DatePicker) you can use standalone or compose into any form.
+- **ProFields** — Standalone field primitives (Input, Textarea, Select, Checkbox, Switch, Radio, DatePicker, Upload, Captcha, and more) you can use directly or compose into forms.
 - **ProForm** — Schema-driven forms powered by [FormilyJS](https://formilyjs.org), with built-in validation, field linkage, and dynamic fields.
 - **ProTable** — Feature-rich data tables powered by [TanStack Table](https://tanstack.com/table), with search, pagination, sorting, and column management built in.
-- **ProEditor** — Rich text editor component with a clean toolbar UI.
-- **ProDescriptions** — Key-value detail cards for displaying structured record data.
+- **ProEditor** — Monaco-powered editor with controlled language, theme, view mode, and external preview slots.
+- **ProDescriptions** — Key-value detail panels for displaying structured record data.
+- **ProInput** — Enhanced shadcn/ui input and password fields with prefix/suffix slots, clear actions, and visibility controls.
+- **CodeViewer** — Shiki-powered read-only code viewer with copy, line numbers, folding, and loading/error states.
+- **DiffViewer** — Split and unified code diff viewer with shared Shiki highlighting.
+- **HtmlViewer** — Sandboxed HTML preview surface for rendering raw HTML in an iframe.
+- **ImageViewer** — Full-screen image previewer with zoom, pan, rotate, thumbnails, and keyboard navigation.
+- **MarkdownViewer** — GitHub Flavored Markdown renderer with sanitized HTML, math, alerts, and CodeViewer-powered code blocks.
 
 ## Philosophy
 
@@ -21,6 +27,7 @@ shadcn-pro follows the same principle as shadcn/ui: **the code is yours**. Compo
 npx @draco-china/shadcn-pro@latest add pro-fields
 npx @draco-china/shadcn-pro@latest add pro-form
 npx @draco-china/shadcn-pro@latest add pro-table
+npx @draco-china/shadcn-pro@latest add markdown-viewer
 ```
 
 ## Key Features
@@ -32,7 +39,7 @@ Define entire forms with a JSON schema. ProForm uses FormilyJS under the hood fo
 Add any component with a single command. The CLI copies source files directly into your project, respecting your existing folder structure.
 
 ### ProFields — Reusable Field Primitives
-Each field component (e.g. `FormilyInput`, `FormilySelect`) is independently usable. Build custom forms or use them as the foundation for ProForm's schema renderer.
+Each field primitive (for example `Input`, `Select`, or `DatePicker`) is independently usable. Install `pro-form` when you need the Formily adapters for schema rendering.
 
 ## When to use
 
@@ -40,9 +47,11 @@ Each field component (e.g. `FormilyInput`, `FormilySelect`) is independently usa
 |---|---|
 | Simple one-off forms | shadcn/ui `<Form>` + react-hook-form |
 | Complex forms with dynamic fields, linkage, array/object nesting | **ProForm** |
-| Reusable field components for Formily-based forms | **ProFields** |
+| Standalone inputs and reusable field primitives | **ProFields** or **ProInput** |
 | Simple lists | shadcn/ui `<Table>` |
 | Data tables with search, filter, pagination, column management | **ProTable** |
+| Read-only code, diffs, markdown, HTML, or image previews | **CodeViewer**, **DiffViewer**, **MarkdownViewer**, **HtmlViewer**, or **ImageViewer** |
+| Structured detail sections | **ProDescriptions** |
 
 ## Get Started
 

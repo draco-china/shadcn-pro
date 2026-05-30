@@ -64,19 +64,19 @@ export function DiffViewer({
   }, [unified, lang, theme])
 
   return (
-    <div className={cn('overflow-hidden rounded-lg border bg-[#0d1117] text-[#e6edf3]', className)}>
-      <div className="flex items-center justify-between border-b border-white/10 px-4 py-2">
+    <div className={cn('overflow-hidden rounded-lg border bg-muted text-foreground', className)}>
+      <div className="flex items-center justify-between border-b border-border px-4 py-2">
         <div className="flex items-center gap-3">
-          <span className="font-mono text-xs text-green-400">+{added}</span>
-          <span className="font-mono text-xs text-red-400">-{removed}</span>
+          <span className="font-mono text-xs text-primary">+{added}</span>
+          <span className="font-mono text-xs text-destructive">-{removed}</span>
         </div>
-        <div className="flex gap-1 rounded-md border border-white/10 p-0.5">
+        <div className="flex gap-1 rounded-md border border-border p-0.5">
           {(['split', 'unified'] as const).map((nextView) => (
             <Button
               key={nextView}
               variant={view === nextView ? 'secondary' : 'ghost'}
               size="sm"
-              className="h-6 px-2 text-xs text-white hover:text-white"
+              className="h-6 px-2 text-xs"
               onClick={() => setView(nextView)}
             >
               {nextView === 'split' ? 'Split' : 'Unified'}
@@ -90,7 +90,7 @@ export function DiffViewer({
           <UnifiedDiffTable lines={unified} htmlMap={htmlMap} />
         </div>
       ) : (
-        <div className="grid grid-cols-2 divide-x divide-white/10 overflow-auto">
+        <div className="grid grid-cols-2 divide-x divide-border overflow-auto">
           <SplitDiffPane title={oldTitle} lines={left} side="old" htmlMap={htmlMap} />
           <SplitDiffPane title={newTitle} lines={right} side="new" htmlMap={htmlMap} />
         </div>

@@ -278,6 +278,13 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
         () => import('@/registry/new-york-v4/examples/pro-fields-segmented-demo'),
       ),
     },
+    'pro-fields-faceted-filter-demo': {
+      name: 'pro-fields-faceted-filter-demo',
+      filePath: 'registry/new-york-v4/examples/pro-fields-faceted-filter-demo.tsx',
+      component: React.lazy(
+        () => import('@/registry/new-york-v4/examples/pro-fields-faceted-filter-demo'),
+      ),
+    },
     'pro-fields-cascader-demo': {
       name: 'pro-fields-cascader-demo',
       filePath: 'registry/new-york-v4/examples/pro-fields-cascader-demo.tsx',

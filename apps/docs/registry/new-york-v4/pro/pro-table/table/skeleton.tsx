@@ -19,7 +19,7 @@ export function ProTableSkeletonRows<TData>({
     <TableRow key={index}>
       {dragSort && (
         <TableCell className="w-8 pr-0">
-          <Skeleton className="h-4 w-4" />
+          <Skeleton className="size-4" />
         </TableCell>
       )}
       {columns.map((column) => (

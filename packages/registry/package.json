@@ -11,7 +11,6 @@
   "dependencies": {
     "@formily/core": "^2.3.7",
     "@formily/react": "^2.3.7",
-    "@formily/reactive": "^2.3.7",
     "@formily/reactive-react": "^2.3.7"
   }
 }

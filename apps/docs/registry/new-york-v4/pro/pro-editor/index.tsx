@@ -5,7 +5,7 @@ import { Columns2, Eye, EyeOff } from 'lucide-react'
 import * as React from 'react'
 import { cn } from '@/lib/utils'
 import { getEditorPath, getMonacoLanguage } from './language'
-import { applyShadcnTheme, configureTypescript } from './monaco'
+import { applyShadcnTheme, configureTypescript, fallbackMonacoTheme } from './monaco'
 import { useEditorPreviewScrollSync } from './preview/scroll-sync'
 import { scrollbarClassName } from './preview/styles'
 import { EditorToolbar, EditorToolbarButton } from './toolbar'
@@ -13,7 +13,6 @@ import type { EditorProps, EditorThemeMode, EditorViewMode, MonacoEditorInstance
 
 export type {
   EditorProps,
-  EditorTheme,
   EditorToolbarActionContext,
   EditorViewMode,
   PreviewProps,
@@ -23,7 +22,6 @@ export function ProEditor({
   value = '',
   onChange,
   language,
-  theme = 'one-dark-pro',
   themeMode = 'dark',
   className,
   height,
@@ -42,13 +40,9 @@ export function ProEditor({
   const [uncontrolledViewMode, setUncontrolledViewMode] =
     React.useState<EditorViewMode>(defaultViewMode)
   const themeModeRef = React.useRef(themeMode)
-  const themeRef = React.useRef(theme)
   React.useEffect(() => {
     themeModeRef.current = themeMode
   }, [themeMode])
-  React.useEffect(() => {
-    themeRef.current = theme
-  }, [theme])
   const editorRef = React.useRef<MonacoEditorInstance | null>(null)
   const monacoRef = React.useRef<Monaco | null>(null)
   const {
@@ -75,16 +69,16 @@ export function ProEditor({
       monacoRef.current = monaco
       scrollDisposableRef.current?.dispose()
       scrollDisposableRef.current = editor.onDidScrollChange(() => syncPreviewFromEditor(editor))
-      applyShadcnTheme(monaco, themeRef.current, themeModeRef.current)
       configureTypescript(monaco)
+      void applyShadcnTheme(monaco, themeModeRef.current)
     },
-    [syncPreviewFromEditor, theme],
+    [syncPreviewFromEditor],
   )
 
   React.useEffect(() => {
     const monaco = monacoRef.current
-    if (monaco) applyShadcnTheme(monaco, theme, themeMode)
-  }, [theme])
+    if (monaco) void applyShadcnTheme(monaco, themeMode)
+  }, [themeMode])
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(localValue)
@@ -126,7 +120,7 @@ export function ProEditor({
   const toolbarContext = {
     value: localValue,
     language,
-    theme,
+    themeMode,
     viewMode: effectiveViewMode,
     hasPreview,
     isSplitView,
@@ -196,13 +190,13 @@ export function ProEditor({
         >
           {showEditorPane && (
             <div className={cn('flex-1 min-w-0', isSplitView ? 'w-1/2' : 'w-full')}>
-              <React.Suspense fallback={<div className="h-full w-full bg-muted animate-pulse" />}>
+              <React.Suspense fallback={<div className="size-full bg-muted animate-pulse" />}>
                 <MonacoEditor
                   height="100%"
                   language={getMonacoLanguage(language)}
                   path={getEditorPath(language)}
                   value={localValue}
-                  theme={theme}
+                  theme={fallbackMonacoTheme(themeMode)}
                   onMount={handleMount}
                   onChange={(nextValue) => handleChange(nextValue ?? '')}
                   options={{

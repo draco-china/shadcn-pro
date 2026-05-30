@@ -22,7 +22,7 @@ export function HtmlViewer({
     <iframe
       srcDoc={content}
       sandbox={sandbox}
-      className={cn('w-full h-full border-0 bg-white', className)}
+      className={cn('size-full border-0 bg-background', className)}
       title={title}
     />
   )

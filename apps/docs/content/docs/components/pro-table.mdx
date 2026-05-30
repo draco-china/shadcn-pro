@@ -10,7 +10,7 @@ description: Feature-rich data table with search, filtering, reset, sorting, den
 <CodeTabs>
 
 <TabsList>
-  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
 
@@ -29,7 +29,7 @@ npx @draco-china/shadcn-pro add pro-table
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add @tanstack/react-table @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
+bun add @tanstack/react-table @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -135,7 +135,7 @@ const columns: ColumnDef<User>[] = [
 <ProTable columns={columns} data={data} searchKey="name" />
 ```
 
-You can still pass `filterRender` (ReactNode or function) for fully custom controls.
+You can still pass `filterRender` for fully custom controls.
 
 ### Bulk Actions
 
@@ -186,7 +186,7 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `header`                | `ReactNode \| (context) => ReactNode` | —                            | Custom content rendered above the toolbar.                                                                     |
 | `searchKey`             | `string`                              | —                            | Column key to enable text filtering on.                                                                        |
 | `searchPlaceholder`     | `string`                              | `'Search...'`                | Placeholder text for the search input.                                                                         |
-| `filterRender`          | `ReactNode \| (table) => ReactNode`   | —                            | Custom filter controls rendered after the auto filters. Pass a function to access the table instance. |
+| `filterRender`          | `ReactNode`                           | —                            | Custom filter controls rendered after the auto filters. |
 | `filterMode` *(meta)*   | `'single' \| 'multi'`                 | `'multi'`                    | Column meta — selection mode for the auto-rendered FacetedFilter.                                    |
 | `filterVariant` *(meta)*| `'badge' \| 'text'`                   | `'badge'`                    | Column meta — cell display style when `meta.filters` is set.                                         |
 | `toolBarRender`         | `() => ReactNode[]`                   | —                            | Extra action buttons rendered on the right side of the toolbar.                                                |
@@ -222,7 +222,7 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 Sync pagination, global filter, and column filters to URL search params — framework-agnostic via a `search` + `navigate` interface (compatible with TanStack Router, Next.js App Router, React Router, etc.).
 
 ```tsx
-import { useProTableUrlState } from '@/components/ui/pro-table/use-pro-table-url-state'
+import { useProTableUrlState } from '@/components/pro/pro-table/use-pro-table-url-state'
 
 const tableState = useProTableUrlState({
   search: { page: 2, filter: 'alice' },  // current URL search params
@@ -262,8 +262,8 @@ const tableState = useProTableUrlState({
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useProTableUrlState } from '@/components/ui/pro-table/use-pro-table-url-state'
-import { ProTable } from '@/components/ui/pro-table'
+import { useProTableUrlState } from '@/components/pro/pro-table/use-pro-table-url-state'
+import { ProTable } from '@/components/pro/pro-table'
 
 export default function UsersTable() {
   const router = useRouter()

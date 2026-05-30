@@ -83,7 +83,7 @@ function SortableItem({ id, children, onRemove, disabled, canRemove = true }: So
         className="mt-1 cursor-grab text-muted-foreground active:cursor-grabbing disabled:cursor-not-allowed"
         aria-label="Drag to reorder"
       >
-        <GripVertical className="h-4 w-4" />
+        <GripVertical className="size-4" />
       </button>
 
       {/* Content */}
@@ -96,11 +96,11 @@ function SortableItem({ id, children, onRemove, disabled, canRemove = true }: So
           size="icon"
           variant="ghost"
           disabled={disabled}
-          className="h-7 w-7 shrink-0 text-destructive/60 hover:text-destructive"
+          className="size-7 shrink-0 text-destructive/60 hover:text-destructive"
           onClick={onRemove}
           aria-label="Remove item"
         >
-          <Trash2 className="h-3.5 w-3.5" />
+          <Trash2 className="size-3.5" />
         </Button>
       )}
     </div>
@@ -218,7 +218,7 @@ export function ArrayField<TItem = unknown>({
           onClick={handleAdd}
           className="w-full border-dashed text-muted-foreground hover:text-foreground"
         >
-          <Plus className="mr-2 h-4 w-4" />
+          <Plus className="mr-2 size-4" />
           {addText}
         </Button>
       )}

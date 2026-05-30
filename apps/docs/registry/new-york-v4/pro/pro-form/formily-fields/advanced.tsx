@@ -57,7 +57,7 @@ export const FormilyUpload = connect(
     <div className="flex flex-wrap gap-1">
       {(value as UploadFile[]).length === 0 && <span className="text-sm">-</span>}
       {(value as UploadFile[]).map((file) => (
-        <span key={file.uid} className="text-sm text-blue-600 underline">
+        <span key={file.uid} className="text-sm text-primary underline">
           {file.url ? (
             <a href={file.url} target="_blank" rel="noopener noreferrer">
               {file.name}

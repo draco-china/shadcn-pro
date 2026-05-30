@@ -23,11 +23,17 @@ const TOP_LEVEL_SECTIONS = [
 ]
 
 const COMPONENTS = [
+  { name: 'ProDescriptions', href: '/docs/components/pro-descriptions' },
+  { name: 'ProEditor', href: '/docs/components/pro-editor' },
   { name: 'ProFields', href: '/docs/components/pro-fields' },
   { name: 'ProForm', href: '/docs/components/pro-form' },
   { name: 'ProTable', href: '/docs/components/pro-table' },
-  { name: 'ProEditor', href: '/docs/components/pro-editor' },
-  { name: 'ProDescriptions', href: '/docs/components/pro-descriptions' },
+  { name: 'ProInput', href: '/docs/components/pro-input' },
+  { name: 'CodeViewer', href: '/docs/components/code-viewer' },
+  { name: 'DiffViewer', href: '/docs/components/diff-viewer' },
+  { name: 'HtmlViewer', href: '/docs/components/html-viewer' },
+  { name: 'ImageViewer', href: '/docs/components/image-viewer' },
+  { name: 'MarkdownViewer', href: '/docs/components/markdown-viewer' },
 ]
 
 export function DocsSidebar({
@@ -58,7 +64,7 @@ export function DocsSidebar({
                   <SidebarMenuButton
                     asChild
                     isActive={href === '/docs' ? pathname === href : pathname.startsWith(href)}
-                    className="relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
+                    className="relative h-7.5 w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
                   >
                     <Link href={href}>
                       <span className="absolute inset-0 flex w-(--sidebar-menu-width) bg-transparent" />
@@ -86,7 +92,7 @@ export function DocsSidebar({
                   <SidebarMenuButton
                     asChild
                     isActive={pathname === href || pathname.startsWith(`${href}/`)}
-                    className="relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
+                    className="relative h-7.5 w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
                   >
                     <Link href={href}>
                       <span className="absolute inset-0 flex w-(--sidebar-menu-width) bg-transparent" />

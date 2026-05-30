@@ -33,7 +33,13 @@ This copies the component source code directly into your project under `componen
 
 ## Using the CLI
 
-The recommended way to add components is via the CLI:
+The recommended way to add components is via the CLI. List available components first when you are exploring:
+
+```bash
+npx @draco-china/shadcn-pro@latest list
+```
+
+Then add any component by name:
 
 ```bash
 npx @draco-china/shadcn-pro@latest add pro-fields
@@ -47,29 +53,52 @@ npx @draco-china/shadcn-pro@latest add pro-form
 npx @draco-china/shadcn-pro@latest add pro-table
 ```
 
+```bash
+npx @draco-china/shadcn-pro@latest add markdown-viewer
+```
+
 ## Manual Installation
 
 ### 1. Install dependencies
 
-For **ProFields** and **ProForm**:
+Install the dependencies for the component you copy:
+
+| Component | Dependencies |
+| --- | --- |
+| `pro-fields` | `@dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities date-fns lucide-react` |
+| `pro-form` | `@formily/core @formily/react @formily/reactive-react date-fns lucide-react` |
+| `pro-table` | `@tanstack/react-table @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react` |
+| `pro-editor` | `@monaco-editor/react @shikijs/monaco monaco-editor shiki lucide-react` |
+| `pro-descriptions` | None |
+| `pro-input` | `lucide-react` |
+| `code-viewer` | `shiki lucide-react` |
+| `diff-viewer` | `diff shiki` |
+| `html-viewer` | None |
+| `image-viewer` | `lucide-react` |
+| `markdown-viewer` | `react-markdown shiki lucide-react remark-gfm remark-breaks remark-math remark-toc rehype-raw rehype-sanitize rehype-mathjax` |
+
+For example:
 
 ```bash
-bun add @formily/core @formily/react @formily/validator
-```
-
-For **ProTable**:
-
-```bash
-bun add @tanstack/react-table
+bun add react-markdown shiki lucide-react remark-gfm remark-breaks remark-math remark-toc rehype-raw rehype-sanitize rehype-mathjax
 ```
 
 ### 2. Copy the component
 
-Browse the component source on GitHub and copy the files into your project:
+Browse the component source on GitHub and copy each component folder into your project:
 
 - `ProFields` → `components/pro/pro-fields/`
-- `ProForm` → `components/pro/pro-form.tsx`
-- `ProTable` → `components/pro/pro-table.tsx`
+- `ProForm` → `components/pro/pro-form/`
+- `ProTable` → `components/pro/pro-table/`
+- `ProEditor` → `components/pro/pro-editor/`
+- `ProDescriptions` → `components/pro/pro-descriptions/`
+- `CodeViewer` → `components/pro/pro-viewer/code/`
+- `DiffViewer` → `components/pro/pro-viewer/diff/`
+- `HtmlViewer` → `components/pro/pro-viewer/html/`
+- `ImageViewer` → `components/pro/pro-viewer/image/`
+- `MarkdownViewer` → `components/pro/pro-viewer/markdown/index.tsx` and `components/pro/pro-viewer/code/`
+
+`ProInput` is a focused subset of ProFields. Copy `components/pro/pro-fields/input.tsx` and `components/pro/pro-fields/password.tsx`.
 
 ### 3. Import and use
 

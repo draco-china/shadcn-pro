@@ -61,11 +61,11 @@ export function ObjectField({
               type="button"
               variant="ghost"
               size="icon"
-              className="h-6 w-6 text-muted-foreground"
+              className="size-6 text-muted-foreground"
               aria-label={open ? 'Collapse' : 'Expand'}
             >
               <ChevronDown
-                className={cn('h-4 w-4 transition-transform duration-200', open && 'rotate-180')}
+                className={cn('size-4 transition-transform duration-200', open && 'rotate-180')}
               />
             </Button>
           </CollapsibleTrigger>

@@ -35,33 +35,29 @@ export function ImageViewerToolbar({
   onClose,
 }: ImageViewerToolbarProps) {
   return (
-    <div className={cn('flex items-center justify-between px-4 py-3 text-white', className)}>
+    <div className={cn('flex items-center justify-between px-4 py-3 text-foreground', className)}>
       <div className="flex items-center gap-1">
-        <ToolbarButton
-          label="Zoom out"
-          onClick={onZoomOut}
-          icon={<ZoomOut className="h-4 w-4" />}
-        />
+        <ToolbarButton label="Zoom out" onClick={onZoomOut} icon={<ZoomOut className="size-4" />} />
         <span className="min-w-[48px] text-center text-sm tabular-nums">
           {Math.round(scale * 100)}%
         </span>
-        <ToolbarButton label="Zoom in" onClick={onZoomIn} icon={<ZoomIn className="h-4 w-4" />} />
+        <ToolbarButton label="Zoom in" onClick={onZoomIn} icon={<ZoomIn className="size-4" />} />
         <Separator />
         <ToolbarButton
           label="Rotate counterclockwise"
           onClick={onRotateCcw}
-          icon={<RotateCcw className="h-4 w-4" />}
+          icon={<RotateCcw className="size-4" />}
         />
         <ToolbarButton
           label="Rotate clockwise"
           onClick={onRotateCw}
-          icon={<RotateCw className="h-4 w-4" />}
+          icon={<RotateCw className="size-4" />}
         />
         <Separator />
         <Button
           variant="ghost"
           size="icon"
-          className="text-white hover:bg-white/10 hover:text-white"
+          className="text-foreground hover:bg-accent hover:text-accent-foreground"
           onClick={onReset}
         >
           <span className="text-xs">Reset</span>
@@ -69,21 +65,17 @@ export function ImageViewerToolbar({
         <ToolbarButton
           label={fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
           onClick={onToggleFullscreen}
-          icon={fullscreen ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}
+          icon={fullscreen ? <Minimize className="size-4" /> : <Maximize className="size-4" />}
         />
       </div>
 
       {count > 1 && (
-        <span className="text-sm text-white/70">
+        <span className="text-sm text-muted-foreground">
           {index + 1} / {count}
         </span>
       )}
 
-      <ToolbarButton
-        label="Close image viewer"
-        onClick={onClose}
-        icon={<X className="h-5 w-5" />}
-      />
+      <ToolbarButton label="Close image viewer" onClick={onClose} icon={<X className="size-5" />} />
     </div>
   )
 }
@@ -101,7 +93,7 @@ function ToolbarButton({
     <Button
       variant="ghost"
       size="icon"
-      className="text-white hover:bg-white/10 hover:text-white"
+      className="text-foreground hover:bg-accent hover:text-accent-foreground"
       onClick={onClick}
       aria-label={label}
     >
@@ -111,5 +103,5 @@ function ToolbarButton({
 }
 
 function Separator() {
-  return <div className="mx-2 h-4 w-px bg-white/20" />
+  return <div className="mx-2 h-4 w-px bg-border" />
 }

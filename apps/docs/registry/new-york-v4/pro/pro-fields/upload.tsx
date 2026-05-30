@@ -84,7 +84,7 @@ export function Upload({
             if (!disabled) addFiles(e.dataTransfer.files)
           }}
         >
-          <UploadIcon className="h-6 w-6" />
+          <UploadIcon className="size-6" />
           <span>{placeholder}</span>
         </button>
       )}
@@ -103,7 +103,7 @@ export function Upload({
               key={f.uid}
               className="flex items-center gap-2 rounded-md border px-3 py-1.5 text-sm"
             >
-              <File className="h-4 w-4 shrink-0 text-muted-foreground" />
+              <File className="size-4 shrink-0 text-muted-foreground" />
               <span className="flex-1 truncate">{f.name}</span>
               {!disabled && (
                 <button
@@ -112,7 +112,7 @@ export function Upload({
                   onClick={() => removeFile(f.uid)}
                   className="text-muted-foreground hover:text-foreground"
                 >
-                  <X className="h-3.5 w-3.5" />
+                  <X className="size-3.5" />
                 </button>
               )}
             </li>

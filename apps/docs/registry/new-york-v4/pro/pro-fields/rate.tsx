@@ -41,8 +41,8 @@ export function Rate({
             />
             <Star
               className={cn(
-                'h-5 w-5 transition-colors',
-                star <= display ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground',
+                'size-5 transition-colors',
+                star <= display ? 'fill-primary text-primary' : 'text-muted-foreground',
               )}
               onMouseEnter={() => !disabled && setHovered(star)}
               onMouseLeave={() => setHovered(null)}

@@ -280,7 +280,7 @@ function BlockViewerView() {
               src={iframeSrc}
               height={item.iframeHeight ?? 930}
               loading="lazy"
-              className="relative z-20 h-full w-full bg-background"
+              className="relative z-20 size-full bg-background"
             />
           </ResizablePanel>
           <ResizableHandle className="relative hidden w-3 bg-transparent p-0 after:absolute after:top-1/2 after:right-0 after:h-8 after:w-[6px] after:translate-x-[-1px] after:-translate-y-1/2 after:rounded-full after:bg-border after:transition-all after:hover:h-10 md:block" />
@@ -369,7 +369,7 @@ function Tree({ item, index }: { item: FileTree; index: number }) {
           style={{ '--index': `${index * 1.2}rem` } as React.CSSProperties}
         >
           <ChevronRight className="invisible" />
-          <File className="h-4 w-4" />
+          <File className="size-4" />
           {item.name}
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -442,7 +442,7 @@ function BlockViewerMobile() {
           height={item.iframeHeight ?? 930}
           loading="lazy"
           style={{ height: item.iframeHeight ?? '930px' }}
-          className="h-full w-full bg-background"
+          className="size-full bg-background"
         />
       </div>
     </div>

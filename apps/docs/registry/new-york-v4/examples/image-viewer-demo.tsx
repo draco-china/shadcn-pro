@@ -38,7 +38,7 @@ export default function ImageViewerDemo() {
             <img
               src={src}
               alt={`Photo ${i + 1}`}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </button>
         ))}

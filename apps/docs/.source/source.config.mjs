@@ -61,8 +61,8 @@ var source_config_default = defineConfig({
         rehypePrettyCode,
         {
           theme: {
-            dark: "github-dark",
-            light: "github-light-default"
+            dark: "one-dark-pro",
+            light: "one-light"
           },
           transformers
         }

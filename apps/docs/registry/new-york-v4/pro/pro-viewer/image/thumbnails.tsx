@@ -26,15 +26,15 @@ export function ImageViewerThumbnails({
           key={src}
           type="button"
           onClick={() => onSelect(imageIndex)}
-          className={`h-12 w-12 overflow-hidden rounded border-2 transition-colors ${
-            imageIndex === index ? 'border-white' : 'border-transparent opacity-50 hover:opacity-80'
+          className={`size-12 overflow-hidden rounded border-2 transition-colors ${
+            imageIndex === index ? 'border-primary' : 'border-transparent opacity-50 hover:opacity-80'
           }`}
           aria-label={`Open ${alt} ${imageIndex + 1}`}
         >
           <img
             src={src}
             alt={`${alt} thumbnail ${imageIndex + 1}`}
-            className="h-full w-full object-cover"
+            className="size-full object-cover"
           />
         </button>
       ))}

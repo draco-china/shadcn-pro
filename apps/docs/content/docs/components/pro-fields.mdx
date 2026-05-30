@@ -8,7 +8,7 @@ description: Standalone field primitives for forms — Input, Password, Textarea
 <CodeTabs>
 
 <TabsList>
-  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
 
@@ -27,7 +27,7 @@ npx @draco-china/shadcn-pro add pro-fields
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add date-fns lucide-react
+bun add @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities date-fns lucide-react
 ```
 
 <Step>
@@ -86,6 +86,12 @@ export default function Example() {
 
 A Popover + Checkbox filter component designed for faceted search — auto-used by `ProTable` when `meta.filters` is set on a column, and available standalone for forms or custom toolbars. Supports single-select and multi-select modes.
 
+<ComponentPreview
+  name="pro-fields-faceted-filter-demo"
+  previewClassName="min-h-[260px] items-start p-6"
+  align="start"
+/>
+
 ### API Reference
 
 | Prop          | Type                                | Default     | Description                                              |
@@ -95,6 +101,7 @@ A Popover + Checkbox filter component designed for faceted search — auto-used 
 | `options`     | `{ label: string; value: string; icon?: ComponentType }[]` | `[]` | Filter options                      |
 | `placeholder` | `string`                            | `'Filter...'` | Button label / search placeholder                      |
 | `mode`        | `'single' \| 'multi'`               | `'multi'`   | Single-select (radio-like) or multi-select (checkbox)    |
+| `facets`      | `Map<string, number>`               | —           | Optional count map, usually from TanStack Table's `getFacetedUniqueValues()`. |
 | `className`   | `string`                            | —           | Additional CSS classes                                   |
 
 ```tsx

@@ -24,7 +24,8 @@ export function CodeViewerTable({
   theme,
   onToggleFold,
 }: CodeViewerTableProps) {
-  const isLight = !isDark
+  const isLight = theme === 'light'
+  const rowHoverClass = isLight ? 'hover:bg-accent/60' : 'hover:bg-accent/40'
 
   return (
     <table className="w-full min-w-full border-collapse">
@@ -35,18 +36,11 @@ export function CodeViewerTable({
           const hiddenCount = isFolded ? line.foldEnd - line.index : 0
 
           return (
-            <tr
-              key={line.index}
-              className={cn(
-                'group/line leading-6',
-                isLight ? 'hover:bg-black/[0.03]' : 'hover:bg-white/[0.03]',
-              )}
-            >
+            <tr key={line.index} className={cn('group/line leading-6', rowHoverClass)}>
               {showLineNumbers && (
                 <td
                   className={cn(
-                    'w-10 select-none border-r py-0 pl-2 pr-3 text-right font-mono text-xs',
-                    isLight ? 'border-black/10 text-[#57606a]' : 'border-white/5 text-white/20',
+                    'w-10 select-none border-r border-border py-0 pl-2 pr-3 text-right font-mono text-xs text-muted-foreground',
                   )}
                 >
                   {line.index + 1}
@@ -58,15 +52,12 @@ export function CodeViewerTable({
                     type="button"
                     onClick={() => onToggleFold(line.index)}
                     className={cn(
-                      'flex h-full w-4 items-center justify-center',
-                      isLight
-                        ? 'text-[#57606a] hover:text-[#24292f]'
-                        : 'text-white/25 hover:text-white/70',
+                      'flex h-full w-4 items-center justify-center text-muted-foreground hover:text-foreground',
                     )}
                     aria-label={isFolded ? 'Expand' : 'Collapse'}
                   >
                     <ChevronRight
-                      className={cn('h-3 w-3 transition-transform', !isFolded && 'rotate-90')}
+                      className={cn('size-3 transition-transform', !isFolded && 'rotate-90')}
                     />
                   </button>
                 ) : null}
@@ -81,10 +72,7 @@ export function CodeViewerTable({
                     type="button"
                     onClick={() => onToggleFold(line.index)}
                     className={cn(
-                      'ml-1 rounded border px-1.5 py-0 text-xs',
-                      isLight
-                        ? 'border-black/10 text-[#57606a] hover:bg-black/5 hover:text-[#24292f]'
-                        : 'border-white/10 text-white/35 hover:bg-white/10 hover:text-white/70',
+                      'ml-1 rounded border border-border px-1.5 py-0 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground',
                     )}
                   >
                     {hiddenCount} lines

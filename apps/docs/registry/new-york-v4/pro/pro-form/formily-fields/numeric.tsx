@@ -62,8 +62,8 @@ export const FormilyRate = connect(
         <Star
           key={star}
           className={cn(
-            'h-4 w-4',
-            star <= (value as number) ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground',
+            'size-4',
+            star <= (value as number) ? 'fill-primary text-primary' : 'text-muted-foreground',
           )}
         />
       ))}

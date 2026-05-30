@@ -291,7 +291,7 @@ const columns: ColumnDef<User>[] = [
 
 export default function ProTableDemo() {
   return (
-    <div className="h-full w-full p-4">
+    <div className="size-full p-4">
       <ProTable
         data={data}
         columns={columns}

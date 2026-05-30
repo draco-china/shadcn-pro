@@ -96,7 +96,7 @@ export function ProTableToolbar<TData>({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8" disabled={disabled}>
+                    <Button variant="ghost" size="icon" className="size-8" disabled={disabled}>
                       <SlidersHorizontal size={16} />
                     </Button>
                   </DropdownMenuTrigger>
@@ -135,7 +135,7 @@ function ToolbarIcon({
         <Button
           variant="ghost"
           size="icon"
-          className="h-8 w-8"
+          className="size-8"
           disabled={disabled}
           onClick={onClick}
         >
@@ -161,7 +161,7 @@ function DensityMenu({
       <Tooltip>
         <TooltipTrigger asChild>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="h-8 w-8" disabled={disabled}>
+            <Button variant="ghost" size="icon" className="size-8" disabled={disabled}>
               <AlignJustify size={16} />
             </Button>
           </DropdownMenuTrigger>

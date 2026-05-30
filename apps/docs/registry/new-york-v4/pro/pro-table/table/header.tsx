@@ -25,6 +25,14 @@ export function ProTableHeader<TData>({
           {headerGroup.headers.map((header) => {
             const canSort = !dragSort && header.column.getCanSort()
             const sorted = header.column.getIsSorted()
+            const sortHandler = canSort ? header.column.getToggleSortingHandler() : undefined
+            const ariaSort = canSort
+              ? sorted === 'asc'
+                ? 'ascending'
+                : sorted === 'desc'
+                  ? 'descending'
+                  : 'none'
+              : undefined
 
             return (
               <TableHead
@@ -39,13 +47,24 @@ export function ProTableHeader<TData>({
                   canSort && 'cursor-pointer select-none',
                 )}
                 style={getHeaderStyle(header)}
-                onClick={canSort ? header.column.getToggleSortingHandler() : undefined}
+                aria-sort={ariaSort}
+                tabIndex={canSort ? 0 : undefined}
+                onClick={sortHandler}
+                onKeyDown={
+                  canSort
+                    ? (event) => {
+                        if (event.key !== 'Enter' && event.key !== ' ') return
+                        event.preventDefault()
+                        sortHandler?.(event)
+                      }
+                    : undefined
+                }
               >
                 {header.isPlaceholder ? null : (
                   <div className="flex items-center gap-1.5">
                     {flexRender(header.column.columnDef.header, header.getContext())}
                     {canSort && (
-                      <span className="text-muted-foreground">
+                      <span className="text-muted-foreground" aria-hidden="true">
                         {sorted === 'asc' ? (
                           <ArrowUp size={14} />
                         ) : sorted === 'desc' ? (

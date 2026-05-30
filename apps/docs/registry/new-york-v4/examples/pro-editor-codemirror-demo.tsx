@@ -34,7 +34,6 @@ export default function ProEditorCodemirrorDemo() {
     <div className="w-full p-4">
       <ProEditor
         language="tsx"
-        theme="one-dark-pro"
         themeMode="dark"
         value={value}
         onChange={setValue}

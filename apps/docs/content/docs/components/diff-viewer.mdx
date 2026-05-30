@@ -1,6 +1,6 @@
 ---
 title: DiffViewer
-description: Side-by-side and unified code diff viewer with added/removed line highlighting and shared GitHub syntax themes.
+description: Side-by-side and unified code diff viewer with added/removed line highlighting and shared One syntax themes.
 ---
 
 <ComponentPreview name="diff-viewer-docs-demo" previewClassName="min-h-[340px] items-start p-4" align="start" />
@@ -29,7 +29,7 @@ npx @draco-china/shadcn-pro add diff-viewer
 <Step>Install the following dependencies.</Step>
 
 ```bash
-npm install diff shiki
+bun add diff shiki
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -55,7 +55,7 @@ export default function Example() {
       oldCode={`const a = 1`}
       newCode={`const a = 2`}
       lang="typescript"
-      theme="github-dark"
+      theme="dark"
       oldTitle="Before"
       newTitle="After"
     />
@@ -72,7 +72,7 @@ export default function Example() {
 | `oldCode` | `string` | — | The original (before) code. |
 | `newCode` | `string` | — | The modified (after) code. |
 | `lang` | `string` | `"typescript"` | Language for syntax highlighting. |
-| `theme` | `"github-light" \| "github-dark"` | `"github-dark"` | Shared GitHub syntax theme used by Shiki. |
+| `theme` | `"light" \| "dark"` | `"dark"` | Shared One syntax theme used by Shiki. |
 | `oldTitle` | `string` | `"Before"` | Label shown above the original code panel. |
 | `newTitle` | `string` | `"After"` | Label shown above the modified code panel. |
 | `defaultView` | `"split" \| "unified"` | `"split"` | Initial view mode. |

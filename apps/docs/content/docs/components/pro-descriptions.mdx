@@ -10,7 +10,7 @@ description: Structured key-value display for detail views — similar to Ant De
 <CodeTabs>
 
 <TabsList>
-  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
 
@@ -26,9 +26,11 @@ npx @draco-china/shadcn-pro add pro-descriptions
 
 <Steps className="mb-0 pt-2">
 
+<Step>No additional package dependencies are required.</Step>
+
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="pro-descriptions" title="components/ui/pro-descriptions.tsx" />
+<ComponentSource name="pro-descriptions" title="components/pro/pro-descriptions/index.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -41,17 +43,17 @@ npx @draco-china/shadcn-pro add pro-descriptions
 ## Usage
 
 ```tsx
-import { ProDescriptions } from "@/components/ui/pro-descriptions"
+import { ProDescriptions } from "@/components/pro/pro-descriptions"
 
-const columns = [
-  { label: "Name", dataIndex: "name" },
-  { label: "Email", dataIndex: "email" },
-  { label: "Role", dataIndex: "role" },
-  { label: "Created At", dataIndex: "createdAt", render: (v) => new Date(v).toLocaleDateString() },
+const items = [
+  { label: "Name", value: "Alice Wang" },
+  { label: "Email", value: "alice@example.com" },
+  { label: "Role", value: "Admin" },
+  { label: "Created At", value: new Date("2026-05-31").toLocaleDateString() },
 ]
 
-export default function UserDetail({ user }) {
-  return <ProDescriptions columns={columns} dataSource={user} title="User Info" />
+export default function UserDetail() {
+  return <ProDescriptions items={items} title="User Info" bordered />
 }
 ```
 
@@ -60,12 +62,14 @@ export default function UserDetail({ user }) {
 ### With Custom Render
 
 ```tsx
-const columns = [
-  { label: "Status", dataIndex: "status", render: (v) => (
-    <Badge variant={v === "active" ? "default" : "secondary"}>{v}</Badge>
+const items = [
+  { label: "Status", value: (
+    <Badge variant="default">Active</Badge>
   )},
-  { label: "Tags", dataIndex: "tags", render: (v) => (
-    <div className="flex gap-1">{v.map(t => <Badge key={t} variant="outline">{t}</Badge>)}</div>
+  { label: "Tags", value: (
+    <div className="flex gap-1">
+      {tags.map((tag) => <Badge key={tag} variant="outline">{tag}</Badge>)}
+    </div>
   )},
 ]
 ```
@@ -73,7 +77,7 @@ const columns = [
 ### Multi-Column Layout
 
 ```tsx
-<ProDescriptions columns={columns} dataSource={data} column={3} />
+<ProDescriptions items={items} columns={3} />
 ```
 
 ## API Reference
@@ -82,18 +86,20 @@ const columns = [
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `columns` | `DescriptionColumn[]` | — | Column definitions |
-| `dataSource` | `Record<string, any>` | — | Data object |
-| `title` | `string` | — | Section title |
-| `column` | `number` | `2` | Number of columns per row |
+| `items` | `DescriptionsItem[]` | — | Description items to render. |
+| `title` | `ReactNode` | — | Section title. |
+| `columns` | `1 \| 2 \| 3 \| 4` | `2` | Number of columns per row. |
 | `bordered` | `boolean` | `false` | Show bordered style |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Cell padding size |
+| `layout` | `"horizontal" \| "vertical"` | `"horizontal"` | Label/value layout. |
+| `className` | `string` | — | Root class name. |
+| `labelClassName` | `string` | — | Class name for every label cell. |
+| `valueClassName` | `string` | — | Class name for every value cell. |
 
-### DescriptionColumn
+### DescriptionsItem
 
 | Prop | Type | Description |
 |---|---|---|
-| `label` | `string` | Field label |
-| `dataIndex` | `string` | Key in dataSource |
-| `render` | `(value, record) => ReactNode` | Custom renderer |
+| `label` | `ReactNode` | Item label. |
+| `value` | `ReactNode` | Item value. Empty values render a muted dash. |
 | `span` | `number` | Column span (default: 1) |
+| `className` | `string` | Class name for this item. |

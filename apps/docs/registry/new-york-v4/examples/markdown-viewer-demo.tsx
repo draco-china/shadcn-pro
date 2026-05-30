@@ -8,6 +8,8 @@ A GitHub-style markdown renderer with **GFM**, raw HTML sanitization, alerts, fo
 
 Autolinks work: https://github.com/draco-china/shadcn-pro
 
+## Contents
+
 ## GitHub Alerts
 
 > [!NOTE]
@@ -83,7 +85,7 @@ export default function MarkdownViewerDemo() {
         </p>
       </div>
       <div className="rounded-lg border p-6">
-        <MarkdownViewer content={SAMPLE_MD} />
+        <MarkdownViewer content={SAMPLE_MD} theme="dark" />
       </div>
     </div>
   )

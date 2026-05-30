@@ -27,7 +27,7 @@ export default function ImageViewerDocsDemo() {
               setOpen(true)
             }}
           >
-            <img src={src} alt={`Preview ${currentIndex + 1}`} className="h-full w-full object-cover" />
+            <img src={src} alt={`Preview ${currentIndex + 1}`} className="size-full object-cover" />
           </button>
         ))}
       </div>

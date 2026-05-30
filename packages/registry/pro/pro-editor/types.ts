@@ -1,13 +1,7 @@
 import type MonacoEditor from '@monaco-editor/react'
 import type * as React from 'react'
 
-export type EditorTheme = 'github' | 'one-dark-pro'
 export type EditorThemeMode = 'light' | 'dark'
-
-export const EDITOR_THEMES: { value: EditorTheme; label: string }[] = [
-  { value: 'one-dark-pro', label: 'One Dark Pro' },
-  { value: 'github', label: 'GitHub' },
-]
 
 /** Props passed to a custom preview component */
 export interface PreviewProps {
@@ -22,8 +16,6 @@ export interface EditorProps {
   onChange?: (value: string) => void
   /** Language id (e.g. tsx, typescript, javascript, python, markdown) */
   language: string
-  /** Syntax theme palette (default: 'one-dark-pro') */
-  theme?: EditorTheme
   /** Force light or dark variant — defaults to system/page theme via next-themes */
   themeMode?: EditorThemeMode
   className?: string
@@ -62,7 +54,6 @@ export type EditorToolbarRender =
 export interface EditorToolbarActionContext {
   value: string
   language: string
-  theme: EditorTheme
   themeMode: EditorThemeMode
   viewMode: EditorViewMode
   hasPreview: boolean

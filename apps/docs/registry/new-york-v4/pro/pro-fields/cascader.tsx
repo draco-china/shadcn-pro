@@ -87,7 +87,7 @@ function CascaderPanel({
               >
                 {opt.label}
                 {opt.children?.length ? (
-                  <ChevronRight className="ml-2 h-3 w-3 opacity-60" />
+                  <ChevronRight className="ml-2 size-3 opacity-60" />
                 ) : null}
               </button>
             </li>
@@ -148,7 +148,7 @@ export function Cascader({
             aria-label="Clear selection"
             onPointerDown={handleClear}
             onClick={handleClear}
-            className="absolute top-1/2 right-2 z-10 flex h-5 w-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+            className="absolute top-1/2 right-2 z-10 flex size-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
           >
             <X size={14} />
           </button>

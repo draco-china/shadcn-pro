@@ -29,7 +29,7 @@ npx @draco-china/shadcn-pro add image-viewer
 <Step>Install the following dependencies.</Step>
 
 ```bash
-npm install lucide-react
+bun add lucide-react
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -75,8 +75,14 @@ export default function Example() {
 | `images` | `string \| string[]` | — | One or more image URLs to display. |
 | `open` | `boolean` | — | Controls whether the viewer is open. |
 | `onClose` | `() => void` | — | Called when the viewer is dismissed. |
+| `index` | `number` | — | Controlled image index. Use with `onIndexChange`. |
 | `initialIndex` | `number` | `0` | Index of the image to show first. |
+| `onIndexChange` | `(index: number) => void` | — | Called when navigation changes the active image. |
 | `alt` | `string` | `"Image"` | Alt text prefix applied to each image. |
+| `container` | `Element \| DocumentFragment \| null` | `document.body` | Portal target. Pass `null` or a custom element to control where the viewer renders. |
+| `className` | `string` | — | Additional CSS class for the fullscreen overlay. |
+| `toolbarClassName` | `string` | — | Additional CSS class for the toolbar. |
+| `thumbnailsClassName` | `string` | — | Additional CSS class for the thumbnails strip. |
 
 ## Keyboard Shortcuts
 

@@ -87,9 +87,9 @@ export function Captcha({
             disabled={disabled}
             aria-label="Refresh captcha"
             onClick={onRefresh}
-            className="h-9 w-9"
+            className="size-9"
           >
-            <RefreshCw className="h-4 w-4" />
+            <RefreshCw className="size-4" />
           </Button>
         </div>
       )}

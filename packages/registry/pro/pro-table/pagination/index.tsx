@@ -117,7 +117,7 @@ export function ProTablePagination<TData>({
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8"
+            className="size-8"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
             aria-label="First page"
@@ -127,7 +127,7 @@ export function ProTablePagination<TData>({
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8"
+            className="size-8"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
             aria-label="Previous page"
@@ -142,7 +142,7 @@ export function ProTablePagination<TData>({
                 <span
                   // biome-ignore lint/suspicious/noArrayIndexKey: ellipsis positions are stable
                   key={`ellipsis-${i}`}
-                  className="flex h-8 w-8 items-center justify-center text-muted-foreground"
+                  className="flex size-8 items-center justify-center text-muted-foreground"
                 >
                   <MoreHorizontal size={14} />
                 </span>
@@ -151,7 +151,7 @@ export function ProTablePagination<TData>({
                   key={page}
                   variant={page === current ? 'default' : 'outline'}
                   size="icon"
-                  className={cn('h-8 w-8', page === current && 'pointer-events-none')}
+                  className={cn('size-8', page === current && 'pointer-events-none')}
                   onClick={() => table.setPageIndex((page as number) - 1)}
                   aria-label={`Page ${page}`}
                   aria-current={page === current ? 'page' : undefined}
@@ -171,7 +171,7 @@ export function ProTablePagination<TData>({
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8"
+            className="size-8"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
             aria-label="Next page"
@@ -181,7 +181,7 @@ export function ProTablePagination<TData>({
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8"
+            className="size-8"
             onClick={() => table.setPageIndex(safePageCount - 1)}
             disabled={!table.getCanNextPage()}
             aria-label="Last page"

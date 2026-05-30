@@ -141,14 +141,14 @@ export function FacetedFilter({
                           : 'opacity-50 [&_svg]:invisible',
                       )}
                     >
-                      <Check className="h-4 w-4 text-background" />
+                      <Check className="size-4 text-background" />
                     </div>
                     {option.icon && (
                       <option.icon className="size-4 text-muted-foreground" />
                     )}
                     <span>{option.label}</span>
                     {facets?.get(option.value) !== undefined && (
-                      <span className="ms-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
+                      <span className="ms-auto flex size-4 items-center justify-center font-mono text-xs">
                         {facets.get(option.value)}
                       </span>
                     )}

@@ -10,7 +10,7 @@ description: Schema-driven forms with dynamic fields, validation, and field link
 <CodeTabs>
 
 <TabsList>
-  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
 
@@ -29,12 +29,12 @@ npx @draco-china/shadcn-pro add pro-form
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add @formily/core @formily/react @formily/validator
+bun add @formily/core @formily/react @formily/reactive-react date-fns lucide-react
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="pro-form" title="components/ui/pro-form.tsx" />
+<ComponentSource name="pro-form" title="components/pro/pro-form/index.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -47,7 +47,7 @@ bun add @formily/core @formily/react @formily/validator
 ## Usage
 
 ```tsx
-import { createForm, ProForm, SchemaField } from "@/components/ui/pro-form"
+import { createForm, ProForm, SchemaField } from "@/components/pro/pro-form"
 
 const form = createForm()
 
@@ -96,7 +96,7 @@ Show or hide fields dynamically based on other field values.
 Define your entire form with a JSON schema:
 
 ```tsx
-import { createForm, ProForm, SchemaField } from "@/components/ui/pro-form"
+import { createForm, ProForm, SchemaField } from "@/components/pro/pro-form"
 
 const schema = {
   type: "object",

@@ -1,6 +1,6 @@
 ---
 title: CodeViewer
-description: Read-only syntax-highlighted code viewer powered by Shiki — with GitHub themes, copy button, line numbers, folding, and empty/error states.
+description: Read-only syntax-highlighted code viewer powered by Shiki — with One themes, copy button, line numbers, folding, and empty/error states.
 ---
 
 <ComponentPreview name="code-viewer-docs-demo" previewClassName="min-h-[340px] items-start p-4" align="start" />
@@ -29,7 +29,7 @@ npx @draco-china/shadcn-pro add code-viewer
 <Step>Install the following dependencies.</Step>
 
 ```bash
-npm install shiki lucide-react
+bun add shiki lucide-react
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -54,7 +54,7 @@ export default function Example() {
     <CodeViewer
       code={`const hello = "world"`}
       lang="typescript"
-      theme="github-dark"
+      theme="dark"
       showLineNumbers
     />
   )
@@ -69,10 +69,12 @@ export default function Example() {
 | --- | --- | --- | --- |
 | `code` | `string` | — | The source code string to display. |
 | `lang` | `string` | `"typescript"` | Language identifier for syntax highlighting (e.g. `"tsx"`, `"python"`). |
-| `theme` | `"github-light" \| "github-dark"` | `"github-dark"` | Shared GitHub syntax theme. |
+| `theme` | `"light" \| "dark"` | `"dark"` | Shared One syntax theme. |
 | `showLineNumbers` | `boolean` | `true` | Whether to display line numbers. |
 | `showHeader` | `boolean` | `true` | Whether to show the filename/language and copy toolbar. |
 | `surface` | `"code" \| "embedded"` | `"code"` | Use `"embedded"` when rendering inside another surface. |
 | `title` | `string` | — | Optional filename shown in the toolbar. |
 | `emptyText` | `string` | `"No code"` | Message shown when `code` is empty. |
+| `scrollRef` | `Ref<HTMLDivElement>` | — | Ref forwarded to the scrollable code viewport. |
+| `onScroll` | `UIEventHandler<HTMLDivElement>` | — | Scroll handler for synchronizing with another viewer. |
 | `className` | `string` | — | Additional CSS class for the root element. |

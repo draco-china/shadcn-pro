@@ -11,6 +11,7 @@ import { DateRangePicker } from '@/registry/new-york-v4/pro/pro-fields/date-rang
 import { DateTimePicker } from '@/registry/new-york-v4/pro/pro-fields/date-time-picker'
 import { Digit } from '@/registry/new-york-v4/pro/pro-fields/digit'
 import { DigitRange } from '@/registry/new-york-v4/pro/pro-fields/digit-range'
+import { FacetedFilter } from '@/registry/new-york-v4/pro/pro-fields/faceted-filter'
 import { Input } from '@/registry/new-york-v4/pro/pro-fields/input'
 import { Money } from '@/registry/new-york-v4/pro/pro-fields/money'
 import { ObjectField } from '@/registry/new-york-v4/pro/pro-fields/object-field'
@@ -88,6 +89,18 @@ const treeOptions = [
   },
 ]
 
+const statusOptions = [
+  { label: 'Backlog', value: 'backlog' },
+  { label: 'In progress', value: 'in-progress' },
+  { label: 'Done', value: 'done' },
+]
+
+const statusFacets = new Map([
+  ['backlog', 12],
+  ['in-progress', 8],
+  ['done', 24],
+])
+
 export default function ProFieldsDemo() {
   const [date, setDate] = useState<Date>()
   const [dateTime, setDateTime] = useState<Date>()
@@ -97,6 +110,7 @@ export default function ProFieldsDemo() {
   const [money, setMoney] = useState<number>()
   const [digit, setDigit] = useState<number>()
   const [digitRange, setDigitRange] = useState<[number, number]>()
+  const [statusFilter, setStatusFilter] = useState<string[]>(['in-progress'])
   const [contacts, setContacts] = useState([{ name: 'Alice', email: 'alice@example.com' }])
 
   return (
@@ -168,6 +182,17 @@ export default function ProFieldsDemo() {
               { label: 'Month', value: 'month' },
             ]}
             defaultValue="week"
+          />
+        </Field>
+        <Field label="Faceted Filter">
+          <FacetedFilter
+            placeholder="Status"
+            value={statusFilter}
+            options={statusOptions}
+            facets={statusFacets}
+            onChange={(nextValue) => {
+              setStatusFilter(Array.isArray(nextValue) ? nextValue : nextValue ? [nextValue] : [])
+            }}
           />
         </Field>
       </Section>

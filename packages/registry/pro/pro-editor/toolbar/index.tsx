@@ -47,7 +47,7 @@ export function EditorToolbar({
             <WandSparkles size={14} />
           </EditorToolbarButton>
           <EditorToolbarButton label="Copy" tooltip={copied ? 'Copied!' : 'Copy'} onClick={onCopy}>
-            {copied ? <Check size={14} className="text-green-500" /> : <Clipboard size={14} />}
+            {copied ? <Check size={14} className="text-primary" /> : <Clipboard size={14} />}
           </EditorToolbarButton>
           <EditorToolbarButton
             label={fullscreen ? 'Exit fullscreen' : 'Fullscreen'}
@@ -82,7 +82,7 @@ export function EditorToolbarButton({
         <Button
           variant={active ? 'secondary' : 'ghost'}
           size="icon"
-          className="h-7 w-7"
+          className="size-7"
           onClick={onClick}
           aria-label={label}
         >

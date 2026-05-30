@@ -29,10 +29,10 @@ npx @draco-china/shadcn-pro add markdown-viewer
 <Step>Install the following dependencies.</Step>
 
 ```bash
-npm install react-markdown remark-gfm remark-breaks remark-math rehype-raw rehype-sanitize rehype-mathjax shiki lucide-react
+bun add react-markdown shiki lucide-react remark-gfm remark-breaks remark-math remark-toc rehype-raw rehype-sanitize rehype-mathjax
 ```
 
-<Step>Copy and paste the following code into your project.</Step>
+<Step>Copy and paste the MarkdownViewer file and the shared CodeViewer files into your project.</Step>
 
 <ComponentSource name="markdown-viewer" title="components/pro/pro-viewer/markdown/index.tsx" />
 
@@ -53,7 +53,6 @@ export default function Example() {
   return (
     <MarkdownViewer
       content="# Hello\n\n> [!NOTE]\n> GitHub-style markdown is supported."
-      theme="github-dark"
     />
   )
 }
@@ -66,7 +65,7 @@ export default function Example() {
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `content` | `string` | — | Markdown string to render. |
-| `theme` | `"github-light" \| "github-dark"` | `"github-dark"` | Theme passed to embedded fenced code blocks. |
+| `theme` | `"light" \| "dark"` | `"dark"` | Code block surface theme. Pass this from your app theme when needed. |
 | `emptyText` | `string` | `"No markdown content"` | Message shown when `content` is empty. |
 | `className` | `string` | — | Additional CSS class for the prose wrapper. |
 
@@ -74,6 +73,7 @@ export default function Example() {
 
 - CommonMark plus GitHub Flavored Markdown: tables, task lists, strikethrough, autolinks, and footnotes.
 - GitHub alerts: `NOTE`, `TIP`, `IMPORTANT`, `WARNING`, and `CAUTION`.
+- Table of contents generation from `## Contents`, `## Table of Contents`, or `## TOC` headings.
 - Raw HTML rendered through a sanitize pipeline.
 - Inline and block math rendered with MathJax.
-- Fenced code blocks rendered through `CodeViewer`, using the same GitHub theme contract.
+- Fenced code blocks rendered through CodeViewer, including shared Shiki themes, copy controls, line numbers, folding, and empty/error states.

@@ -95,7 +95,7 @@ export function TimePicker({
           aria-label="Clear time"
           onPointerDown={handleClear}
           onClick={handleClear}
-          className="absolute top-1/2 right-2 z-10 flex h-5 w-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+          className="absolute top-1/2 right-2 z-10 flex size-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
         >
           <X size={14} />
         </button>

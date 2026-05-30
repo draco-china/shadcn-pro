@@ -7,9 +7,38 @@ description: Render HTML content in a sandboxed iframe with live preview.
 
 ## Installation
 
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
 ```bash
 npx @draco-china/shadcn-pro add html-viewer
 ```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>No additional package dependencies are required.</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="html-viewer" title="components/pro/pro-viewer/html/index.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
@@ -33,4 +62,6 @@ export default function Example() {
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `content` | `string` | — | Raw HTML string to render inside the sandboxed iframe. |
+| `sandbox` | `IframeHTMLAttributes<HTMLIFrameElement>["sandbox"]` | `"allow-scripts"` | Sandbox policy for the iframe. Pass a stricter value when rendering untrusted HTML. |
+| `title` | `string` | `"HTML preview"` | Accessible title for the iframe. |
 | `className` | `string` | `undefined` | Additional CSS classes applied to the iframe element. |

@@ -1,4 +1,16 @@
 {
   "title": "Components",
-  "pages": ["pro-descriptions", "pro-editor", "pro-fields", "pro-form", "pro-table"]
+  "pages": [
+    "pro-descriptions",
+    "pro-editor",
+    "pro-fields",
+    "pro-form",
+    "pro-table",
+    "pro-input",
+    "code-viewer",
+    "diff-viewer",
+    "html-viewer",
+    "image-viewer",
+    "markdown-viewer"
+  ]
 }

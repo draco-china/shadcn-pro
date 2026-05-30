@@ -5,11 +5,19 @@
     {
       "name": "pro-fields",
       "category": "form",
-      "description": "Shared field components for ProForm, including input, password, select, switch, checkbox, radio, textarea, date, numeric, upload, and tree/cascader fields.",
-      "dependencies": ["date-fns", "lucide-react"],
+      "description": "Shared field components for ProForm, including input, password, select, switch, checkbox, radio, textarea, date, numeric, upload, faceted filter, and tree/cascader fields.",
+      "dependencies": [
+        "@dnd-kit/core",
+        "@dnd-kit/sortable",
+        "@dnd-kit/utilities",
+        "date-fns",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "input",
+        "badge",
         "button",
+        "command",
         "select",
         "switch",
         "checkbox",
@@ -20,7 +28,8 @@
         "popover",
         "radio-group",
         "collapsible",
-        "slider"
+        "slider",
+        "separator"
       ],
       "files": [
         "pro/pro-fields/input.tsx",
@@ -45,7 +54,8 @@
         "pro/pro-fields/captcha.tsx",
         "pro/pro-fields/money.tsx",
         "pro/pro-fields/array-field.tsx",
-        "pro/pro-fields/object-field.tsx"
+        "pro/pro-fields/object-field.tsx",
+        "pro/pro-fields/faceted-filter.tsx"
       ]
     },
     {
@@ -55,14 +65,23 @@
       "dependencies": [
         "@formily/core",
         "@formily/react",
-        "@formily/reactive",
         "@formily/reactive-react",
         "date-fns",
         "lucide-react"
       ],
-      "registryDependencies": ["pro-fields", "button", "label", "card", "collapsible", "tooltip"],
+      "registryDependencies": [
+        "pro-fields",
+        "button",
+        "label",
+        "card",
+        "collapsible",
+        "tooltip",
+        "dialog",
+        "drawer"
+      ],
       "files": [
         "pro/pro-form/index.tsx",
+        "pro/pro-form/overlay-form.tsx",
         "pro/pro-form/layout.tsx",
         "pro/pro-form/form-item.tsx",
         "pro/pro-form/formily-fields/index.tsx",
@@ -120,7 +139,13 @@
       "name": "pro-editor",
       "category": "content",
       "description": "Monaco-powered editor with controlled language, theme, view mode, and external preview slot.",
-      "dependencies": ["@monaco-editor/react", "lucide-react", "monaco-editor"],
+      "dependencies": [
+        "@monaco-editor/react",
+        "@shikijs/monaco",
+        "lucide-react",
+        "monaco-editor",
+        "shiki"
+      ],
       "registryDependencies": ["button", "tooltip"],
       "files": [
         "pro/pro-editor/index.tsx",
@@ -129,8 +154,7 @@
         "pro/pro-editor/preview/styles.ts",
         "pro/pro-editor/language/index.ts",
         "pro/pro-editor/types.ts",
-        "pro/pro-editor/monaco/index.ts",
-        "pro/pro-editor/monaco/github-themes.ts"
+        "pro/pro-editor/monaco/index.ts"
       ]
     },
     {
@@ -152,7 +176,7 @@
     {
       "name": "code-viewer",
       "category": "display",
-      "description": "Shiki-powered code viewer with GitHub themes, copy, line numbers, folding, and empty/error states.",
+      "description": "Shiki-powered code viewer with One themes, copy, line numbers, folding, and empty/error states.",
       "dependencies": ["shiki", "lucide-react"],
       "registryDependencies": ["button"],
       "files": [
@@ -166,7 +190,7 @@
     {
       "name": "diff-viewer",
       "category": "display",
-      "description": "Split and unified diff viewer with shared Shiki GitHub syntax highlighting.",
+      "description": "Split and unified diff viewer with shared Shiki One syntax highlighting.",
       "dependencies": ["diff", "shiki"],
       "registryDependencies": ["button"],
       "files": [
@@ -200,22 +224,27 @@
     {
       "name": "markdown-viewer",
       "category": "display",
-      "description": "GitHub Flavored Markdown viewer with alerts, math, sanitized raw HTML, tables, and shared CodeViewer code blocks.",
+      "description": "GitHub Flavored Markdown viewer with alerts, math, sanitized raw HTML, tables, and shared CodeViewer-powered code blocks.",
       "dependencies": [
         "react-markdown",
+        "shiki",
+        "lucide-react",
         "rehype-mathjax",
         "rehype-raw",
         "rehype-sanitize",
         "remark-breaks",
         "remark-gfm",
         "remark-math",
-        "shiki"
+        "remark-toc"
       ],
-      "registryDependencies": ["code-viewer"],
+      "registryDependencies": ["button"],
       "files": [
         "pro/pro-viewer/markdown/index.tsx",
-        "pro/pro-viewer/markdown/components.tsx",
-        "pro/pro-viewer/markdown/plugins.ts"
+        "pro/pro-viewer/code/index.tsx",
+        "pro/pro-viewer/code/header.tsx",
+        "pro/pro-viewer/code/table.tsx",
+        "pro/pro-viewer/code/lines.ts",
+        "pro/pro-viewer/code/syntax.ts"
       ]
     }
   ]

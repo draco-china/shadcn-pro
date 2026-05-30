@@ -55,6 +55,7 @@ export function ImageViewer({
     ty: number
   } | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLImageElement>(null)
   const index = Math.min(
     Math.max(isControlled ? controlledIndex : uncontrolledIndex, 0),
     list.length - 1,
@@ -114,6 +115,13 @@ export function ImageViewer({
     reset()
   }, [open, initialIndex, isControlled, reset])
 
+  useEffect(() => {
+    const image = imageRef.current
+    if (!image) return
+    image.style.transform = `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale}) rotate(${transform.rotate}deg)`
+    image.style.transition = dragging ? 'none' : 'transform 0.15s ease'
+  }, [dragging, transform])
+
   const handleMouseDown = useCallback(
     (event: React.MouseEvent) => {
       setDragging(true)
@@ -150,7 +158,10 @@ export function ImageViewer({
   const content = (
     <div
       ref={containerRef}
-      className={cn('fixed inset-0 z-50 flex flex-col bg-black/90', className)}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image viewer"
+      className={cn('fixed inset-0 z-50 flex flex-col bg-background/95 text-foreground', className)}
       onWheel={(event) => {
         event.preventDefault()
         zoomBy(event.deltaY > 0 ? -IMAGE_SCALE_STEP : IMAGE_SCALE_STEP)
@@ -171,10 +182,16 @@ export function ImageViewer({
         onClose={onClose}
       />
 
+      <span className="sr-only" aria-live="polite" aria-atomic="true">
+        Image {index + 1} of {list.length}
+      </span>
+
       <div
         role="none"
-        className="relative flex flex-1 items-center justify-center overflow-hidden"
-        style={{ cursor: dragging ? 'grabbing' : 'grab' }}
+        className={cn(
+          'relative flex flex-1 items-center justify-center overflow-hidden',
+          dragging ? 'cursor-grabbing' : 'cursor-grab',
+        )}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={stopDrag}
@@ -182,14 +199,11 @@ export function ImageViewer({
       >
         {list.length > 1 && <ImageNav direction="prev" onClick={prev} />}
         <img
+          ref={imageRef}
           src={list[index]}
           alt={`${alt} ${index + 1}`}
           draggable={false}
           className="max-h-full max-w-full select-none object-contain"
-          style={{
-            transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale}) rotate(${transform.rotate}deg)`,
-            transition: dragging ? 'none' : 'transform 0.15s ease',
-          }}
         />
         {list.length > 1 && <ImageNav direction="next" onClick={next} />}
       </div>
@@ -215,7 +229,7 @@ function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick:
     <Button
       variant="ghost"
       size="icon"
-      className={`absolute z-10 h-10 w-10 rounded-full bg-black/40 text-white hover:bg-black/60 hover:text-white ${
+      className={`absolute z-10 size-10 rounded-full bg-background/70 text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground ${
         direction === 'prev' ? 'left-4' : 'right-4'
       }`}
       onClick={(event) => {
@@ -224,7 +238,7 @@ function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick:
       }}
       aria-label={direction === 'prev' ? 'Previous image' : 'Next image'}
     >
-      <Icon className="h-5 w-5" />
+      <Icon className="size-5" />
     </Button>
   )
 }

@@ -76,7 +76,6 @@ const proEditorFiles = [
   'language/index.ts',
   'types.ts',
   'monaco/index.ts',
-  'monaco/github-themes.ts',
 ]
 
 const codeViewerFiles = [
@@ -87,12 +86,7 @@ const codeViewerFiles = [
   'code/syntax.ts',
 ]
 
-const markdownViewerFiles = [
-  'markdown/index.tsx',
-  'markdown/components.tsx',
-  'markdown/plugins.ts',
-  ...codeViewerFiles,
-]
+const markdownViewerFiles = ['markdown/index.tsx', ...codeViewerFiles]
 
 const imageViewerFiles = [
   'image/index.tsx',
@@ -102,6 +96,8 @@ const imageViewerFiles = [
 ]
 
 const diffViewerFiles = ['diff/index.tsx', 'diff/table.tsx', 'diff/utils.ts', 'code/syntax.ts']
+
+const htmlViewerFiles = ['html/index.tsx']
 
 export const CATEGORIES: Category[] = [
   {
@@ -247,6 +243,12 @@ export const CATEGORIES: Category[] = [
         iframeHeight: '766px',
         files: [demoFile('diff-viewer-demo'), ...componentFiles('pro-viewer', diffViewerFiles)],
       },
+      {
+        name: 'html-viewer-demo',
+        description: 'Sandboxed HTML preview surface for rendering raw HTML snippets.',
+        iframeHeight: '360px',
+        files: [demoFile('html-viewer-demo'), ...componentFiles('pro-viewer', htmlViewerFiles)],
+      },
     ],
   },
   {
@@ -267,6 +269,7 @@ export const CATEGORIES: Category[] = [
             'textarea.tsx',
             'radio.tsx',
             'date-picker.tsx',
+            'faceted-filter.tsx',
           ]),
         ],
       },
@@ -301,6 +304,15 @@ export const CATEGORIES: Category[] = [
         files: [
           demoFile('pro-fields-segmented-demo'),
           ...componentFiles('pro-fields', ['segmented.tsx']),
+        ],
+      },
+      {
+        name: 'pro-fields-faceted-filter-demo',
+        description: 'Faceted filter with single-select, multi-select, and facet counts.',
+        iframeHeight: '224px',
+        files: [
+          demoFile('pro-fields-faceted-filter-demo'),
+          ...componentFiles('pro-fields', ['faceted-filter.tsx']),
         ],
       },
       {

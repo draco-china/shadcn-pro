@@ -109,7 +109,7 @@ export function DateTimePicker({
             className,
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4" />
+          <CalendarIcon className="mr-2 size-4" />
           {value ? format(value, 'PPP HH:mm:ss') : placeholder}
         </Button>
       </PopoverTrigger>

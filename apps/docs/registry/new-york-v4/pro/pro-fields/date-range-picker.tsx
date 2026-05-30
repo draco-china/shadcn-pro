@@ -65,7 +65,7 @@ export function DateRangePicker({
               !value?.from && "text-muted-foreground"
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <CalendarIcon className="mr-2 size-4" />
             <span className="min-w-0 flex-1 truncate text-left">
               {label ?? placeholder}
             </span>
@@ -78,7 +78,7 @@ export function DateRangePicker({
             aria-label="Clear date range"
             onPointerDown={handleClear}
             onClick={handleClear}
-            className="absolute top-1/2 right-2 z-10 flex h-5 w-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+            className="absolute top-1/2 right-2 z-10 flex size-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
           >
             <X size={14} />
           </button>
