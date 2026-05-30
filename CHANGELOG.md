@@ -1,3 +1,10 @@
+## [1.11.8](https://github.com/draco-china/shadcn-pro/compare/v1.11.7...v1.11.8) (2026-05-30)
+
+
+### Bug Fixes
+
+* **docs:** remove NuqsAdapter from layout ([d11b966](https://github.com/draco-china/shadcn-pro/commit/d11b9668ccbaf26ca578cea1e17e8c2850f1c1ab))
+
 ## [1.11.7](https://github.com/draco-china/shadcn-pro/compare/v1.11.6...v1.11.7) (2026-05-30)
 
 
