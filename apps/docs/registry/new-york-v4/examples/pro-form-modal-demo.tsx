@@ -19,6 +19,7 @@ export default function ProFormModalDemo() {
           setResult(values)
         }}
       >
+        <SchemaField>
         <SchemaField.String
           name="name"
           title="Name"
@@ -58,6 +59,7 @@ export default function ProFormModalDemo() {
           x-decorator="FormItem"
           x-component="Switch"
         />
+        </SchemaField>
       </ModalForm>
 
       {result && (

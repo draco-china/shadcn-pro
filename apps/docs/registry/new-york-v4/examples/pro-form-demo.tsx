@@ -30,6 +30,7 @@ export default function ProFormDemo() {
         submitText="Submit"
         resetText="Reset"
       >
+        <SchemaField>
         {/* Basic info — ObjectField */}
         <SchemaField.Object
           name="basic"
@@ -311,6 +312,7 @@ export default function ProFormDemo() {
         >
           I agree to the Terms of Service and Privacy Policy
         </SchemaField.Boolean>
+        </SchemaField>
       </ProForm>
 
       {result && (

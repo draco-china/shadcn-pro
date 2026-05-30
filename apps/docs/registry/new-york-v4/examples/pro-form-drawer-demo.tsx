@@ -20,6 +20,7 @@ export default function ProFormDrawerDemo() {
           setResult(values)
         }}
       >
+        <SchemaField>
         <SchemaField.String
           name="name"
           title="Full Name"
@@ -72,6 +73,7 @@ export default function ProFormDrawerDemo() {
           x-decorator="FormItem"
           x-component="Switch"
         />
+        </SchemaField>
       </DrawerForm>
 
       {result && (
