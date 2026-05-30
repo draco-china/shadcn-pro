@@ -1,3 +1,10 @@
+## [1.12.13](https://github.com/draco-china/shadcn-pro/compare/v1.12.12...v1.12.13) (2026-05-30)
+
+
+### Bug Fixes
+
+* **pro-table:** decouple manual sorting and filtering ([0100118](https://github.com/draco-china/shadcn-pro/commit/0100118c951569d0693a7d76d13bfc93f87cbf81))
+
 ## [1.12.12](https://github.com/draco-china/shadcn-pro/compare/v1.12.11...v1.12.12) (2026-05-30)
 
 
