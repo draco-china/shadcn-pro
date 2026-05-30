@@ -208,3 +208,81 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `columnPinning`         | `ColumnPinningState`                  | from `columns[].meta.pinned` | Controlled column pinning state. Columns can also set `meta: { pinned: 'left' \| 'right' }`.                   |
 | `onColumnPinningChange` | `OnChangeFn<ColumnPinningState>`      | —                            | Called when column pinning changes.                                                                            |
 | `className`             | `string`                              | —                            | Additional className for the outer container.                                                                  |
+| `pagination`            | `PaginationState`                     | internal                     | Controlled pagination state (`{ pageIndex, pageSize }`). Pair with `onPaginationChange`. |
+| `onPaginationChange`    | `OnChangeFn<PaginationState>`         | —                            | Called when page or page size changes.                                                   |
+| `sorting`               | `SortingState`                        | internal                     | Controlled sorting state. Pair with `onSortingChange`.                                   |
+| `onSortingChange`       | `OnChangeFn<SortingState>`            | —                            | Called when sort column or direction changes.                                             |
+| `total`                 | `number`                              | —                            | Total row count for server-side pagination (used to compute page count).                 |
+| `manualPagination`      | `boolean`                             | `false`                      | Disable client-side pagination — fetch data for the current page yourself.               |
+| `manualSorting`         | `boolean`                             | `false`                      | Disable client-side sorting — sort data on the server.                                   |
+
+### useProTableUrlState
+
+Sync pagination, sorting, and search to URL query params via `nuqs`. Returns props you can spread directly onto `<ProTable />`.
+
+```tsx
+import { useProTableUrlState } from '@/components/ui/pro-table/use-pro-table-url-state'
+
+const urlState = useProTableUrlState({ defaultPageSize: 20 })
+
+// URL: ?page=2&pageSize=20&sort=name&order=asc&search=alice
+```
+
+| Option            | Type     | Default | Description                                                     |
+| ----------------- | -------- | ------- | --------------------------------------------------------------- |
+| `defaultPageSize` | `number` | `10`    | Initial page size.                                              |
+| `prefix`          | `string` | `''`    | URL param prefix — use when multiple tables share a page.       |
+
+The hook returns:
+
+| Key                 | Type                          | Description                              |
+| ------------------- | ----------------------------- | ---------------------------------------- |
+| `pagination`        | `PaginationState`             | Pass to `<ProTable pagination={...} />`. |
+| `onPaginationChange`| `OnChangeFn<PaginationState>` | Pass to `<ProTable onPaginationChange={...} />`. |
+| `sorting`           | `SortingState`                | Pass to `<ProTable sorting={...} />`.    |
+| `onSortingChange`   | `OnChangeFn<SortingState>`    | Pass to `<ProTable onSortingChange={...} />`. |
+| `search`            | `string`                      | Current search term from the URL.        |
+| `setSearch`         | `(value: string) => void`     | Update search and reset to page 1.       |
+
+**Server-side example:**
+
+```tsx
+'use client'
+
+import { useProTableUrlState } from '@/components/ui/pro-table/use-pro-table-url-state'
+import { ProTable } from '@/components/ui/pro-table'
+import useSWR from 'swr'
+
+export default function UsersTable() {
+  const urlState = useProTableUrlState()
+  const { pagination, sorting, search } = urlState
+
+  const { data, isLoading } = useSWR(
+    ['/api/users', pagination, sorting, search],
+    () => fetchUsers({ pagination, sorting, search }),
+  )
+
+  return (
+    <ProTable
+      {...urlState}
+      columns={columns}
+      data={data?.rows ?? []}
+      total={data?.total}
+      loading={isLoading}
+      manualPagination
+      manualSorting
+    />
+  )
+}
+```
+
+**NuqsAdapter** is required at the app level for `nuqs` to work:
+
+```tsx
+// app/layout.tsx
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+
+export default function RootLayout({ children }) {
+  return <NuqsAdapter>{children}</NuqsAdapter>
+}
+```

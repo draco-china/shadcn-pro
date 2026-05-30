@@ -21,6 +21,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   type OnChangeFn,
+  type PaginationState,
   type Row,
   type SortingState,
   type Table as TanStackTable,
@@ -76,6 +77,21 @@ export interface ProTableProps<TData, TValue> {
   columnPinning?: ColumnPinningState
   onColumnPinningChange?: OnChangeFn<ColumnPinningState>
   className?: string
+  /** Controlled pagination state. Pair with `onPaginationChange`. */
+  pagination?: PaginationState
+  onPaginationChange?: OnChangeFn<PaginationState>
+  /** Controlled sorting state. Pair with `onSortingChange`. */
+  sorting?: SortingState
+  onSortingChange?: OnChangeFn<SortingState>
+  /**
+   * Total row count for server-side pagination.
+   * Required when using URL state or server-side data fetching.
+   */
+  total?: number
+  /** Enable server-side pagination (disables client-side row model pagination). */
+  manualPagination?: boolean
+  /** Enable server-side sorting (disables client-side row model sorting). */
+  manualSorting?: boolean
 }
 
 export function ProTable<TData, TValue>({
@@ -104,12 +120,28 @@ export function ProTable<TData, TValue>({
   columnPinning,
   onColumnPinningChange,
   className,
+  pagination: paginationProp,
+  onPaginationChange,
+  sorting: sortingProp,
+  onSortingChange: onSortingChangeProp,
+  total,
+  manualPagination = false,
+  manualSorting = false,
 }: ProTableProps<TData, TValue>) {
   const [data, setData] = React.useState<TData[]>(initialData)
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [internalSorting, setInternalSorting] = React.useState<SortingState>([])
+  const sorting = sortingProp ?? internalSorting
+  const setSorting: OnChangeFn<SortingState> = onSortingChangeProp ?? setInternalSorting
+
+  const [internalPagination, setInternalPagination] = React.useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  })
+  const pagination = paginationProp ?? internalPagination
+  const setPagination: OnChangeFn<PaginationState> = onPaginationChange ?? setInternalPagination
   const [tableSize, setTableSize] = React.useState<TableSize>('default')
   const defaultColumnOrder = React.useMemo(() => getLeafColumnIds(columns), [columns])
   const defaultColumnPinning = React.useMemo(() => getDefaultColumnPinning(columns), [columns])
@@ -143,7 +175,6 @@ export function ProTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
-    initialState: { pagination: { pageIndex: 0, pageSize: 10 } },
     state: {
       sorting,
       columnVisibility,
@@ -151,6 +182,7 @@ export function ProTable<TData, TValue>({
       columnFilters,
       columnOrder,
       columnPinning: currentColumnPinning,
+      pagination,
     },
     enableRowSelection: true,
     enableColumnPinning: true,
@@ -160,6 +192,10 @@ export function ProTable<TData, TValue>({
     onColumnVisibilityChange: setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
     onColumnPinningChange: handleColumnPinningChange,
+    onPaginationChange: setPagination,
+    manualPagination,
+    manualSorting,
+    rowCount: manualPagination && total !== undefined ? total : undefined,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

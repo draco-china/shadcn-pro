@@ -393,6 +393,7 @@ export const Index: Record<string, Record<string, any>> = {
         { path: "registry/new-york-v4/pro/pro-table/toolbar/search-form.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/pro-table/toolbar/index.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/pro-table/toolbar/column-settings.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/pro-table/use-pro-table-url-state.ts", type: "registry:ui" },
       ],
       component: React.lazy(() => import("@/registry/new-york-v4/pro/pro-table/index")),
     },

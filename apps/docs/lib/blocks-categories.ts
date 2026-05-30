@@ -50,6 +50,7 @@ const proTableFiles = [
   'toolbar/search-form.tsx',
   'pagination/index.tsx',
   'pagination/utils.ts',
+  'use-pro-table-url-state.ts',
 ]
 
 const proFormFiles = [
