@@ -63,7 +63,10 @@ export type ProTableActionContent<TData> =
   | ((context: ProTableRenderContext<TData>) => React.ReactNode)
 
 export interface ProTableAction<TData>
-  extends Omit<React.ComponentProps<typeof Button>, 'children' | 'disabled' | 'onClick'> {
+  extends Omit<
+    React.ComponentProps<typeof Button>,
+    'children' | 'disabled' | 'hidden' | 'onClick'
+  > {
   key: string
   label: ProTableActionContent<TData>
   icon?: ProTableActionContent<TData>
@@ -120,7 +123,7 @@ export type ProTableEmptyOptions =
     }
 
 export interface ProTableDragSortOptions<TData> {
-  rowKey?: keyof TData
+  rowKey?: Extract<keyof TData, string | number>
   onDragSortEnd?: (newData: TData[]) => void
 }
 
@@ -188,7 +191,9 @@ export function ProTable<TData, TValue>({
     },
   )
   const [tableSize, setTableSize] = React.useState<TableSize>('default')
-  const dragSortEnabled = Boolean(dragSort)
+  const dragSortOptions = dragSort === false ? undefined : dragSort
+  const dragSortEnabled = Boolean(dragSortOptions)
+  const dragSortRowKey = dragSortOptions?.rowKey
   const loadingEnabled = Boolean(loading)
   const loadingRows = typeof loading === 'object' ? (loading.rows ?? 5) : 5
   const emptyOptions = getEmptyOptions(empty)
@@ -314,9 +319,7 @@ export function ProTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-    getRowId: dragSort?.rowKey
-      ? (row) => String((row as Record<string, unknown>)[dragSort.rowKey as string])
-      : undefined,
+    getRowId: dragSortRowKey !== undefined ? (row) => String(row[dragSortRowKey]) : undefined,
   })
 
   const pageCount = table.getPageCount()
@@ -345,7 +348,7 @@ export function ProTable<TData, TValue>({
     if (nextData === data) return
 
     setData(nextData)
-    dragSort?.onDragSortEnd?.(nextData)
+    dragSortOptions?.onDragSortEnd?.(nextData)
   }
 
   const rows = table.getRowModel().rows
