@@ -1,3 +1,10 @@
+## [1.15.3](https://github.com/draco-china/shadcn-pro/compare/v1.15.2...v1.15.3) (2026-05-31)
+
+
+### Bug Fixes
+
+* **pro-table:** remove column size handling ([e1f806d](https://github.com/draco-china/shadcn-pro/commit/e1f806dbcd03a0584a66d2a941433aa094e625d3))
+
 ## [1.15.2](https://github.com/draco-china/shadcn-pro/compare/v1.15.1...v1.15.2) (2026-05-31)
 
 
