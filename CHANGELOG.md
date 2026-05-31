@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/draco-china/shadcn-pro/compare/v1.15.3...v1.16.0) (2026-05-31)
+
+
+### Features
+
+* add shared pro toolbar infrastructure ([a274c04](https://github.com/draco-china/shadcn-pro/commit/a274c0490dd782753e737ebe91c451294be8a809))
+
 ## [1.15.3](https://github.com/draco-china/shadcn-pro/compare/v1.15.2...v1.15.3) (2026-05-31)
 
 
