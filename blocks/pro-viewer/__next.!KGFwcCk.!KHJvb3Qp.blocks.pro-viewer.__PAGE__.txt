@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-2:I[625209,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/0syno9r8zku0s.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/14w~suk8yijz0.js","/shadcn-pro/_next/static/chunks/0mcm3qz-ccv-t.js","/shadcn-pro/_next/static/chunks/0vmbse~v1uie9.js"],"BlockViewer"]
-3a:I[80196,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/0syno9r8zku0s.js"],"OutletBoundary"]
+2:I[625209,["/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/0mwmxnyupennj.js","/shadcn-pro/_next/static/chunks/0_xcdjh6h7f3i.js","/shadcn-pro/_next/static/chunks/0z_6pcpt78t92.js"],"BlockViewer"]
+3a:I[80196,["/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js"],"OutletBoundary"]
 3b:"$Sreact.suspense"
 3:T777,'use client'
 
@@ -1312,7 +1312,7 @@ function getTableAlignClass(align?: string) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">align</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'right'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-right'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-left'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>7:Tec2,'use client'
+<span class="line" data-line=""></span></code></pre>7:Td85,'use client'
 
 import { type Ref, type UIEventHandler, useCallback, useEffect, useMemo, useState } from 'react'
 import type { ThemedToken } from 'shiki'
@@ -1358,7 +1358,6 @@ export function CodeViewer({
   const [tokenLines, setTokenLines] = useState<ThemedToken[][]>([])
   const [loading, setLoading] = useState(true)
   const [failed, setFailed] = useState(false)
-  const [copied, setCopied] = useState(false)
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set())
 
   const rawLines = useMemo(() => (code ? code.split('\n') : []), [code])
@@ -1407,13 +1406,6 @@ export function CodeViewer({
     })
   }, [])
 
-  const copy = useCallback(async () => {
-    if (!code) return
-    await navigator.clipboard.writeText(code)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 2000)
-  }, [code])
-
   return (
     <div
       className={cn(
@@ -1423,13 +1415,7 @@ export function CodeViewer({
       )}
     >
       {showHeader && (
-        <CodeViewerHeader
-          title={title ?? lang}
-          copied={copied}
-          embedded={embedded}
-          theme={theme}
-          onCopy={copy}
-        />
+        <CodeViewerHeader title={title ?? lang} code={code} embedded={embedded} theme={theme} />
       )}
       <div
         ref={scrollRef}
@@ -1455,7 +1441,7 @@ export function CodeViewer({
     </div>
   )
 }
-8:Tbcc2,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+8:Tac73,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Ref</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> UIEventHandler</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useCallback</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useEffect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useMemo</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ThemedToken</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'shiki'</span></span>
@@ -1501,7 +1487,6 @@ export function CodeViewer({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">tokenLines</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setTokenLines</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ThemedToken</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[][]>([])</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">loading</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setLoading</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">failed</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setFailed</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">copied</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setCopied</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">collapsed</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setCollapsed</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Set</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">number</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>>(</span><span style="color:#A626A4;--shiki-dark:#C678DD">new</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Set</span><span style="color:#383A42;--shiki-dark:#ABB2BF">())</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> rawLines</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useMemo</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#E45649;--shiki-dark:#E5C07B"> code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">split</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'</span><span style="color:#0184BC;--shiki-dark:#56B6C2">\n</span><span style="color:#50A14F;--shiki-dark:#98C379">'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> []), [</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
@@ -1550,13 +1535,6 @@ export function CodeViewer({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    })</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }, [])</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> copy</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useCallback</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#A626A4;--shiki-dark:#C678DD">async</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#0184BC;--shiki-dark:#56B6C2">!</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    await</span><span style="color:#E45649;--shiki-dark:#E5C07B"> navigator</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E5C07B">clipboard</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">writeText</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    setCopied</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">    window</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setTimeout</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> setCopied</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">), </span><span style="color:#986801;--shiki-dark:#D19A66">2000</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }, [</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
-<span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
@@ -1566,13 +1544,7 @@ export function CodeViewer({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">showHeader</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CodeViewerHeader</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> lang</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          copied</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">copied</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          embedded</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">embedded</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          theme</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">theme</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          onCopy</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">copy</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CodeViewerHeader</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> lang</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> code</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> embedded</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">embedded</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> theme</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">theme</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        ref</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">scrollRef</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -1598,28 +1570,21 @@ export function CodeViewer({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>9:T780,'use client'
+<span class="line" data-line=""></span></code></pre>9:T74b,'use client'
 
-import { Check, Copy } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Copy } from 'lucide-react'
+import { ProButton } from '@/components/pro/pro-base'
 import { cn } from '@/lib/utils'
 import type { ViewerTheme } from './syntax'
 
 export interface CodeViewerHeaderProps {
   title: string
-  copied: boolean
+  code: string
   embedded: boolean
   theme: ViewerTheme
-  onCopy: () => void
 }
 
-export function CodeViewerHeader({
-  title,
-  copied,
-  embedded,
-  theme,
-  onCopy,
-}: CodeViewerHeaderProps) {
+export function CodeViewerHeader({ title, code, embedded, theme }: CodeViewerHeaderProps) {
   const isLight = theme === 'light'
 
   return (
@@ -1639,9 +1604,12 @@ export function CodeViewerHeader({
           {title}
         </span>
       </div>
-      <Button
+      <ProButton
         variant="ghost"
-        size="icon"
+        size="icon-xs"
+        icon={<Copy className="size-3.5" />}
+        tooltip="Copy code"
+        copy={{ text: code, success: 'Copied' }}
         className={cn(
           'size-6 opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100',
           embedded
@@ -1650,36 +1618,26 @@ export function CodeViewerHeader({
               ? 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
               : 'text-muted-foreground hover:bg-accent/70 hover:text-foreground',
         )}
-        onClick={onCopy}
         aria-label="Copy code"
-      >
-        {copied ? <Check className="size-3.5 text-primary" /> : <Copy className="size-3.5" />}
-      </Button>
+      />
     </div>
   )
 }
-a:T43d1,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+a:T4089,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Check</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/button'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-base'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ViewerTheme</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './syntax'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> CodeViewerHeaderProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  copied</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  code</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  embedded</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  theme</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ViewerTheme</span></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onCopy</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> CodeViewerHeader</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  copied</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  embedded</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  theme</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onCopy</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> CodeViewerHeaderProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> CodeViewerHeader</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({ </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">embedded</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">theme</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> CodeViewerHeaderProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> isLight</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> theme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'light'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
@@ -1699,9 +1657,12 @@ a:T43d1,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon-xs"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Copy code"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        copy</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">success</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Copied'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'size-6 opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">          embedded</span></span>
@@ -1710,11 +1671,8 @@ a:T43d1,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground hover:bg-accent/70 hover:text-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onCopy</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        aria-label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Copy code"</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#383A42;--shiki-dark:#E06C75">copied</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Check</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5 text-primary"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
@@ -2066,7 +2024,7 @@ export function viewerSurfaceClass(theme: ViewerTheme, _embedded?: boolean) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> viewerSurfaceClass</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">theme</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ViewerTheme</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">_embedded</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> theme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'light'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'bg-muted/40 text-foreground'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'bg-muted text-foreground'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","markdown-viewer-demo",{"item":{"name":"markdown-viewer-demo","description":"Render Markdown with GFM syntax, tables, and code blocks.","iframeHeight":"674px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"markdown-viewer-demo.tsx","path":"examples/markdown-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"markdown","children":[{"name":"index.tsx","path":"pro-viewer/markdown/index.tsx"}]},{"name":"code","children":[{"name":"index.tsx","path":"pro-viewer/code/index.tsx"},{"name":"header.tsx","path":"pro-viewer/code/header.tsx"},{"name":"table.tsx","path":"pro-viewer/code/table.tsx"},{"name":"lines.ts","path":"pro-viewer/code/lines.ts"},{"name":"syntax.ts","path":"pro-viewer/code/syntax.ts"}]}]}],"highlightedFiles":[{"target":"examples/markdown-viewer-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-viewer/markdown/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-viewer/code/index.tsx","content":"$7","highlightedContent":"$8"},{"target":"pro-viewer/code/header.tsx","content":"$9","highlightedContent":"$a"},{"target":"pro-viewer/code/table.tsx","content":"$b","highlightedContent":"$c"},{"target":"pro-viewer/code/lines.ts","content":"$d","highlightedContent":"$e"},{"target":"pro-viewer/code/syntax.ts","content":"$f","highlightedContent":"$10"}]}],"$L11","$L12","$L13","$L14","$L15"]}],["$L16"],"$L17"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"dR10URorEe42IXP7ru98q"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","markdown-viewer-demo",{"item":{"name":"markdown-viewer-demo","description":"Render Markdown with GFM syntax, tables, and code blocks.","iframeHeight":"674px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"markdown-viewer-demo.tsx","path":"examples/markdown-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"markdown","children":[{"name":"index.tsx","path":"pro-viewer/markdown/index.tsx"}]},{"name":"code","children":[{"name":"index.tsx","path":"pro-viewer/code/index.tsx"},{"name":"header.tsx","path":"pro-viewer/code/header.tsx"},{"name":"table.tsx","path":"pro-viewer/code/table.tsx"},{"name":"lines.ts","path":"pro-viewer/code/lines.ts"},{"name":"syntax.ts","path":"pro-viewer/code/syntax.ts"}]}]}],"highlightedFiles":[{"target":"examples/markdown-viewer-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-viewer/markdown/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-viewer/code/index.tsx","content":"$7","highlightedContent":"$8"},{"target":"pro-viewer/code/header.tsx","content":"$9","highlightedContent":"$a"},{"target":"pro-viewer/code/table.tsx","content":"$b","highlightedContent":"$c"},{"target":"pro-viewer/code/lines.ts","content":"$d","highlightedContent":"$e"},{"target":"pro-viewer/code/syntax.ts","content":"$f","highlightedContent":"$10"}]}],"$L11","$L12","$L13","$L14","$L15"]}],["$L16"],"$L17"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"5IhmkxdsztGXdyQhhf9QA"}
 18:T4fc,'use client'
 
 import { CodeViewer } from '@/registry/new-york-v4/pro/pro-viewer/code'
@@ -2173,7 +2131,7 @@ export default function CodeViewerDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>1a:Tec2,'use client'
+<span class="line" data-line=""></span></code></pre>1a:Td85,'use client'
 
 import { type Ref, type UIEventHandler, useCallback, useEffect, useMemo, useState } from 'react'
 import type { ThemedToken } from 'shiki'
@@ -2219,7 +2177,6 @@ export function CodeViewer({
   const [tokenLines, setTokenLines] = useState<ThemedToken[][]>([])
   const [loading, setLoading] = useState(true)
   const [failed, setFailed] = useState(false)
-  const [copied, setCopied] = useState(false)
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set())
 
   const rawLines = useMemo(() => (code ? code.split('\n') : []), [code])
@@ -2268,13 +2225,6 @@ export function CodeViewer({
     })
   }, [])
 
-  const copy = useCallback(async () => {
-    if (!code) return
-    await navigator.clipboard.writeText(code)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 2000)
-  }, [code])
-
   return (
     <div
       className={cn(
@@ -2284,13 +2234,7 @@ export function CodeViewer({
       )}
     >
       {showHeader && (
-        <CodeViewerHeader
-          title={title ?? lang}
-          copied={copied}
-          embedded={embedded}
-          theme={theme}
-          onCopy={copy}
-        />
+        <CodeViewerHeader title={title ?? lang} code={code} embedded={embedded} theme={theme} />
       )}
       <div
         ref={scrollRef}
@@ -2316,7 +2260,7 @@ export function CodeViewer({
     </div>
   )
 }
-1b:Tbcc2,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+1b:Tac73,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Ref</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> UIEventHandler</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useCallback</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useEffect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useMemo</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ThemedToken</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'shiki'</span></span>
@@ -2362,7 +2306,6 @@ export function CodeViewer({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">tokenLines</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setTokenLines</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ThemedToken</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[][]>([])</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">loading</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setLoading</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">failed</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setFailed</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">copied</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setCopied</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">collapsed</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setCollapsed</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Set</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">number</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>>(</span><span style="color:#A626A4;--shiki-dark:#C678DD">new</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Set</span><span style="color:#383A42;--shiki-dark:#ABB2BF">())</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> rawLines</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useMemo</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#E45649;--shiki-dark:#E5C07B"> code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">split</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'</span><span style="color:#0184BC;--shiki-dark:#56B6C2">\n</span><span style="color:#50A14F;--shiki-dark:#98C379">'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> []), [</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
@@ -2411,13 +2354,6 @@ export function CodeViewer({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    })</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }, [])</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> copy</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useCallback</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#A626A4;--shiki-dark:#C678DD">async</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#0184BC;--shiki-dark:#56B6C2">!</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    await</span><span style="color:#E45649;--shiki-dark:#E5C07B"> navigator</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E5C07B">clipboard</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">writeText</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    setCopied</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">    window</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setTimeout</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> setCopied</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">), </span><span style="color:#986801;--shiki-dark:#D19A66">2000</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }, [</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
-<span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
@@ -2427,13 +2363,7 @@ export function CodeViewer({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">showHeader</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CodeViewerHeader</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> lang</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          copied</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">copied</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          embedded</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">embedded</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          theme</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">theme</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          onCopy</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">copy</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CodeViewerHeader</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> lang</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> code</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> embedded</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">embedded</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> theme</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">theme</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        ref</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">scrollRef</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -2459,28 +2389,21 @@ export function CodeViewer({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>1c:T780,'use client'
+<span class="line" data-line=""></span></code></pre>1c:T74b,'use client'
 
-import { Check, Copy } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Copy } from 'lucide-react'
+import { ProButton } from '@/components/pro/pro-base'
 import { cn } from '@/lib/utils'
 import type { ViewerTheme } from './syntax'
 
 export interface CodeViewerHeaderProps {
   title: string
-  copied: boolean
+  code: string
   embedded: boolean
   theme: ViewerTheme
-  onCopy: () => void
 }
 
-export function CodeViewerHeader({
-  title,
-  copied,
-  embedded,
-  theme,
-  onCopy,
-}: CodeViewerHeaderProps) {
+export function CodeViewerHeader({ title, code, embedded, theme }: CodeViewerHeaderProps) {
   const isLight = theme === 'light'
 
   return (
@@ -2500,9 +2423,12 @@ export function CodeViewerHeader({
           {title}
         </span>
       </div>
-      <Button
+      <ProButton
         variant="ghost"
-        size="icon"
+        size="icon-xs"
+        icon={<Copy className="size-3.5" />}
+        tooltip="Copy code"
+        copy={{ text: code, success: 'Copied' }}
         className={cn(
           'size-6 opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100',
           embedded
@@ -2511,36 +2437,26 @@ export function CodeViewerHeader({
               ? 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
               : 'text-muted-foreground hover:bg-accent/70 hover:text-foreground',
         )}
-        onClick={onCopy}
         aria-label="Copy code"
-      >
-        {copied ? <Check className="size-3.5 text-primary" /> : <Copy className="size-3.5" />}
-      </Button>
+      />
     </div>
   )
 }
-1d:T43d1,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+1d:T4089,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Check</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/button'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-base'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ViewerTheme</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './syntax'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> CodeViewerHeaderProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  copied</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  code</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  embedded</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  theme</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ViewerTheme</span></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onCopy</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> CodeViewerHeader</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  copied</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  embedded</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  theme</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onCopy</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> CodeViewerHeaderProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> CodeViewerHeader</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({ </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">embedded</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">theme</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> CodeViewerHeaderProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> isLight</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> theme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'light'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
@@ -2560,9 +2476,12 @@ export function CodeViewerHeader({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon-xs"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Copy code"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        copy</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> code</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">success</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Copied'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'size-6 opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">          embedded</span></span>
@@ -2571,11 +2490,8 @@ export function CodeViewerHeader({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground hover:bg-accent/70 hover:text-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onCopy</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        aria-label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Copy code"</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#383A42;--shiki-dark:#E06C75">copied</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Check</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5 text-primary"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
@@ -3083,12 +2999,12 @@ export default function ImageViewerDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>27:T1d18,'use client'
+<span class="line" data-line=""></span></code></pre>27:T1d1b,'use client'
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Button } from '@/components/ui/button'
+import { ProButton } from '@/components/pro/pro-base'
 import { cn } from '@/lib/utils'
 import {
   clampScale,
@@ -3311,9 +3227,10 @@ export function ImageViewer({
 function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick: () => void }) {
   const Icon = direction === 'prev' ? ChevronLeft : ChevronRight
   return (
-    <Button
+    <ProButton
       variant="ghost"
       size="icon"
+      icon={<Icon className="size-5" />}
       className={`absolute z-10 size-10 rounded-full bg-background/70 text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground ${
         direction === 'prev' ? 'left-4' : 'right-4'
       }`}
@@ -3322,17 +3239,15 @@ function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick:
         onClick()
       }}
       aria-label={direction === 'prev' ? 'Previous image' : 'Next image'}
-    >
-      <Icon className="size-5" />
-    </Button>
+    />
   )
 }
-28:T178ec,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+28:T1793b,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronLeft</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronRight</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useCallback</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useEffect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useRef</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createPortal</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react-dom'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/button'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-base'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  clampScale</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -3555,9 +3470,10 @@ function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick:
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ImageNav</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({ </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">direction</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">direction</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'prev'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'next'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">; </span><span style="color:#4078F2;--shiki-dark:#61AFEF">onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> Icon</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> direction</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'prev'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#E06C75"> ChevronLeft</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#383A42;--shiki-dark:#E06C75"> ChevronRight</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Icon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#50A14F;--shiki-dark:#98C379">`absolute z-10 size-10 rounded-full bg-background/70 text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground </span><span style="color:#50A14F;--shiki-dark:#C678DD">${</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">        direction</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'prev'</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'left-4'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'right-4'</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#C678DD">      }</span><span style="color:#50A14F;--shiki-dark:#98C379">`</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -3566,9 +3482,7 @@ function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick:
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">        onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">()</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      aria-label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">direction</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'prev'</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Previous image'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Next image'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Icon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span></code></pre>29:T1d40,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ImageTransform</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -3590,11 +3504,10 @@ function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick:
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> clampScale</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">scale</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E5C07B"> Math</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">min</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#E5C07B">MAX_IMAGE_SCALE</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E5C07B">Math</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">max</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#E5C07B">MIN_IMAGE_SCALE</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">scale</span><span style="color:#383A42;--shiki-dark:#ABB2BF">))</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>2a:Tadf,'use client'
+<span class="line" data-line=""></span></code></pre>2a:Tf14,'use client'
 
 import { Maximize, Minimize, RotateCcw, RotateCw, X, ZoomIn, ZoomOut } from 'lucide-react'
-import type * as React from 'react'
-import { Button } from '@/components/ui/button'
+import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 
 export interface ImageViewerToolbarProps {
@@ -3626,82 +3539,115 @@ export function ImageViewerToolbar({
   onToggleFullscreen,
   onClose,
 }: ImageViewerToolbarProps) {
-  return (
-    <div className={cn('flex items-center justify-between px-4 py-3 text-foreground', className)}>
-      <div className="flex items-center gap-1">
-        <ToolbarButton label="Zoom out" onClick={onZoomOut} icon={<ZoomOut className="size-4" />} />
+  const leftItems: ProToolbarItem[] = [
+    {
+      key: 'zoom-out',
+      icon: <ZoomOut className="size-4" />,
+      tooltip: 'Zoom out',
+      'aria-label': 'Zoom out',
+      variant: 'ghost',
+      size: 'icon-sm',
+      className: 'text-foreground hover:bg-accent hover:text-accent-foreground',
+      onClick: onZoomOut,
+    },
+    {
+      key: 'scale',
+      render: () => (
         <span className="min-w-[48px] text-center text-sm tabular-nums">
           {Math.round(scale * 100)}%
         </span>
-        <ToolbarButton label="Zoom in" onClick={onZoomIn} icon={<ZoomIn className="size-4" />} />
-        <Separator />
-        <ToolbarButton
-          label="Rotate counterclockwise"
-          onClick={onRotateCcw}
-          icon={<RotateCcw className="size-4" />}
-        />
-        <ToolbarButton
-          label="Rotate clockwise"
-          onClick={onRotateCw}
-          icon={<RotateCw className="size-4" />}
-        />
-        <Separator />
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-foreground hover:bg-accent hover:text-accent-foreground"
-          onClick={onReset}
-        >
-          <span className="text-xs">Reset</span>
-        </Button>
-        <ToolbarButton
-          label={fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
-          onClick={onToggleFullscreen}
-          icon={fullscreen ? <Minimize className="size-4" /> : <Maximize className="size-4" />}
-        />
-      </div>
+      ),
+    },
+    {
+      key: 'zoom-in',
+      icon: <ZoomIn className="size-4" />,
+      tooltip: 'Zoom in',
+      'aria-label': 'Zoom in',
+      variant: 'ghost',
+      size: 'icon-sm',
+      className: 'text-foreground hover:bg-accent hover:text-accent-foreground',
+      onClick: onZoomIn,
+    },
+    { key: 'zoom-separator', separator: true },
+    {
+      key: 'rotate-ccw',
+      icon: <RotateCcw className="size-4" />,
+      tooltip: 'Rotate counterclockwise',
+      'aria-label': 'Rotate counterclockwise',
+      variant: 'ghost',
+      size: 'icon-sm',
+      className: 'text-foreground hover:bg-accent hover:text-accent-foreground',
+      onClick: onRotateCcw,
+    },
+    {
+      key: 'rotate-cw',
+      icon: <RotateCw className="size-4" />,
+      tooltip: 'Rotate clockwise',
+      'aria-label': 'Rotate clockwise',
+      variant: 'ghost',
+      size: 'icon-sm',
+      className: 'text-foreground hover:bg-accent hover:text-accent-foreground',
+      onClick: onRotateCw,
+    },
+    { key: 'rotate-separator', separator: true },
+    {
+      key: 'reset',
+      label: <span className="text-xs">Reset</span>,
+      variant: 'ghost',
+      size: 'icon-sm',
+      className: 'text-foreground hover:bg-accent hover:text-accent-foreground',
+      onClick: onReset,
+    },
+    {
+      key: 'fullscreen',
+      icon: fullscreen ? <Minimize className="size-4" /> : <Maximize className="size-4" />,
+      tooltip: fullscreen ? 'Exit fullscreen' : 'Enter fullscreen',
+      'aria-label': fullscreen ? 'Exit fullscreen' : 'Enter fullscreen',
+      variant: 'ghost',
+      size: 'icon-sm',
+      className: 'text-foreground hover:bg-accent hover:text-accent-foreground',
+      onClick: onToggleFullscreen,
+    },
+  ]
+  const centerItems: ProToolbarItem[] =
+    count > 1
+      ? [
+          {
+            key: 'count',
+            render: () => (
+              <span className="text-sm text-muted-foreground">
+                {index + 1} / {count}
+              </span>
+            ),
+          },
+        ]
+      : []
+  const rightItems: ProToolbarItem[] = [
+    {
+      key: 'close',
+      icon: <X className="size-5" />,
+      tooltip: 'Close image viewer',
+      'aria-label': 'Close image viewer',
+      variant: 'ghost',
+      size: 'icon-sm',
+      className: 'text-foreground hover:bg-accent hover:text-accent-foreground',
+      onClick: onClose,
+    },
+  ]
 
-      {count > 1 && (
-        <span className="text-sm text-muted-foreground">
-          {index + 1} / {count}
-        </span>
-      )}
-
-      <ToolbarButton label="Close image viewer" onClick={onClose} icon={<X className="size-5" />} />
-    </div>
-  )
-}
-
-function ToolbarButton({
-  label,
-  icon,
-  onClick,
-}: {
-  label: string
-  icon: React.ReactNode
-  onClick: () => void
-}) {
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      className="text-foreground hover:bg-accent hover:text-accent-foreground"
-      onClick={onClick}
-      aria-label={label}
-    >
-      {icon}
-    </Button>
+    <ProToolbar
+      className={cn('px-4 py-3 text-foreground', className)}
+      left={{ options: leftItems, className: 'gap-1' }}
+      center={{ options: centerItems }}
+      right={{ options: rightItems }}
+    />
   )
 }
-
-function Separator() {
-  return <div className="mx-2 h-4 w-px bg-border" />
-}
-2b:T8c2e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+2b:Ta650,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Maximize</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Minimize</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">RotateCcw</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">RotateCw</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">X</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ZoomIn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ZoomOut</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#0184BC;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/button'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ImageViewerToolbarProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -3733,76 +3679,110 @@ function Separator() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onToggleFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onClose</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ImageViewerToolbarProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'flex items-center justify-between px-4 py-3 text-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex items-center gap-1"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ToolbarButton</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Zoom out"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onZoomOut</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ZoomOut</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> leftItems</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'zoom-out'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ZoomOut</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      tooltip</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Zoom out'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'aria-label'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Zoom out'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      size</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'icon-sm'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-foreground hover:bg-accent hover:text-accent-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> onZoomOut</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'scale'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      render</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"min-w-[48px] text-center text-sm tabular-nums"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#E45649;--shiki-dark:#E5C07B">Math</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">round</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">scale</span><span style="color:#383A42;--shiki-dark:#56B6C2"> *</span><span style="color:#986801;--shiki-dark:#D19A66"> 100</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">%</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#C18401;--shiki-dark:#E5C07B">Math</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">round</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">scale</span><span style="color:#383A42;--shiki-dark:#56B6C2"> *</span><span style="color:#986801;--shiki-dark:#D19A66"> 100</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">%</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ToolbarButton</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Zoom in"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onZoomIn</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ZoomIn</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Separator</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ToolbarButton</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Rotate counterclockwise"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onRotateCcw</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">RotateCcw</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ToolbarButton</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Rotate clockwise"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onRotateCw</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">RotateCw</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Separator</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-foreground hover:bg-accent hover:text-accent-foreground"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onReset</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-xs"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>Reset&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ToolbarButton</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Exit fullscreen'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Enter fullscreen'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onToggleFullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Minimize</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Maximize</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      ),</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'zoom-in'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ZoomIn</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      tooltip</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Zoom in'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'aria-label'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Zoom in'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      size</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'icon-sm'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-foreground hover:bg-accent hover:text-accent-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> onZoomIn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    { </span><span style="color:#383A42;--shiki-dark:#E06C75">key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'zoom-separator'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">separator</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'rotate-ccw'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">RotateCcw</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      tooltip</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Rotate counterclockwise'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'aria-label'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Rotate counterclockwise'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      size</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'icon-sm'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-foreground hover:bg-accent hover:text-accent-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> onRotateCcw</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'rotate-cw'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">RotateCw</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      tooltip</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Rotate clockwise'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'aria-label'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Rotate clockwise'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      size</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'icon-sm'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-foreground hover:bg-accent hover:text-accent-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> onRotateCw</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    { </span><span style="color:#383A42;--shiki-dark:#E06C75">key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'rotate-separator'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">separator</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-xs"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>Reset&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      size</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'icon-sm'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-foreground hover:bg-accent hover:text-accent-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> onReset</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'fullscreen'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> fullscreen</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Minimize</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#0184BC;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Maximize</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      tooltip</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> fullscreen</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Exit fullscreen'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Enter fullscreen'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'aria-label'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> fullscreen</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Exit fullscreen'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Enter fullscreen'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      size</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'icon-sm'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-foreground hover:bg-accent hover:text-accent-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> onToggleFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  ]</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> centerItems</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    count</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">      ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'count'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">            render</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-sm text-muted-foreground"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                {</span><span style="color:#383A42;--shiki-dark:#E06C75">index</span><span style="color:#383A42;--shiki-dark:#56B6C2"> +</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> / </span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">count</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ),</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        ]</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">      :</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> []</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> rightItems</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'close'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">X</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      tooltip</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Close image viewer'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'aria-label'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Close image viewer'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      size</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'icon-sm'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-foreground hover:bg-accent hover:text-accent-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> onClose</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  ]</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">count</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-sm text-muted-foreground"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">index</span><span style="color:#383A42;--shiki-dark:#56B6C2"> +</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> / </span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">count</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ToolbarButton</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Close image viewer"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onClose</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">X</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ToolbarButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  label</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#E5C07B"> React</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E5C07B">ReactNode</span></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-foreground hover:bg-accent hover:text-accent-foreground"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      aria-label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">label</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbar</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'px-4 py-3 text-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      left</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> leftItems</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'gap-1'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      center</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> centerItems</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      right</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> rightItems</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Separator</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"mx-2 h-4 w-px bg-border"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span></code></pre>2c:T443,'use client'
 
@@ -4029,10 +4009,10 @@ export default function DiffViewerDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>30:Tc1a,'use client'
+<span class="line" data-line=""></span></code></pre>30:Tc26,'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { ProButton } from '@/components/pro/pro-base'
 import { cn } from '@/lib/utils'
 import {
   codeToTokenLines,
@@ -4103,7 +4083,7 @@ export function DiffViewer({
         </div>
         <div className="flex gap-1 rounded-md border border-border p-0.5">
           {(['split', 'unified'] as const).map((nextView) => (
-            <Button
+            <ProButton
               key={nextView}
               variant={view === nextView ? 'secondary' : 'ghost'}
               size="sm"
@@ -4111,7 +4091,7 @@ export function DiffViewer({
               onClick={() => setView(nextView)}
             >
               {nextView === 'split' ? 'Split' : 'Unified'}
-            </Button>
+            </ProButton>
           ))}
         </div>
       </div>
@@ -4129,10 +4109,10 @@ export function DiffViewer({
     </div>
   )
 }
-31:T9bf8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+31:T9c04,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useEffect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useMemo</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/ui/button'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-base'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  codeToTokenLines</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -4203,7 +4183,7 @@ export function DiffViewer({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex gap-1 rounded-md border border-border p-0.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#ABB2BF">([</span><span style="color:#50A14F;--shiki-dark:#98C379">'split'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'unified'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#383A42;--shiki-dark:#C678DD">as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">).</span><span style="color:#4078F2;--shiki-dark:#61AFEF">map</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">nextView</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              key</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">nextView</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">view</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#383A42;--shiki-dark:#E06C75"> nextView</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'secondary'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"sm"</span></span>
@@ -4211,7 +4191,7 @@ export function DiffViewer({
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> setView</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextView</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">nextView</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'split'</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Split'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Unified'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          ))</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -4682,6 +4662,6 @@ export function viewerSurfaceClass(theme: ViewerTheme, _embedded?: boolean) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span></code></pre>15:["$","$L2","html-viewer-demo",{"item":{"name":"html-viewer-demo","description":"Sandboxed HTML preview surface for rendering raw HTML snippets.","iframeHeight":"360px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"html-viewer-demo.tsx","path":"examples/html-viewer-demo.tsx"}]},{"name":"pro-viewer","children":[{"name":"html","children":[{"name":"index.tsx","path":"pro-viewer/html/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/html-viewer-demo.tsx","content":"'use client'\n\nimport { HtmlViewer } from '@/registry/new-york-v4/pro/pro-viewer/html'\n\nconst DEMO_HTML = `<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <style>\n    body { font-family: sans-serif; padding: 24px; margin: 0; background: #fff; color: #111; }\n    h1 { font-size: 1.5rem; margin-bottom: 8px; }\n    p { color: #555; line-height: 1.6; }\n    button { margin-top: 12px; padding: 8px 16px; background: #111; color: #fff; border: none; border-radius: 6px; cursor: pointer; }\n    button:hover { background: #333; }\n  </style>\n</head>\n<body>\n  <h1>Hello from HtmlViewer</h1>\n  <p>This HTML is rendered in a sandboxed iframe. Scripts are isolated from the host page.</p>\n  <button onclick=\"alert('Hello!')\">Click me</button>\n</body>\n</html>`\n\nexport default function HtmlViewerDemo() {\n  return <HtmlViewer content={DEMO_HTML} className=\"h-64 w-full rounded-lg border\" />\n}\n","highlightedContent":"$38"},{"target":"pro-viewer/html/index.tsx","content":"'use client'\n\nimport type * as React from 'react'\nimport { cn } from '@/lib/utils'\n\nexport const DEFAULT_HTML_VIEWER_SANDBOX = 'allow-scripts'\n\nexport interface HtmlViewerProps {\n  content: string\n  sandbox?: React.IframeHTMLAttributes<HTMLIFrameElement>['sandbox']\n  title?: string\n  className?: string\n}\n\nexport function HtmlViewer({\n  content,\n  sandbox = DEFAULT_HTML_VIEWER_SANDBOX,\n  title = 'HTML preview',\n  className,\n}: HtmlViewerProps) {\n  return (\n    <iframe\n      srcDoc={content}\n      sandbox={sandbox}\n      className={cn('size-full border-0 bg-background', className)}\n      title={title}\n    />\n  )\n}\n","highlightedContent":"$39"}]}]
-16:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0vmbse~v1uie9.js","async":true}]
+16:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0z_6pcpt78t92.js","async":true}]
 17:["$","$L3a",null,{"children":["$","$3b",null,{"name":"Next.MetadataOutlet","children":"$@3c"}]}]
 3c:null

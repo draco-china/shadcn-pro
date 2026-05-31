@@ -1,8 +1,8 @@
 1:"$Sreact.fragment"
-2:I[625209,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/0syno9r8zku0s.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/14w~suk8yijz0.js","/shadcn-pro/_next/static/chunks/0mcm3qz-ccv-t.js","/shadcn-pro/_next/static/chunks/0vmbse~v1uie9.js"],"BlockViewer"]
-9:I[80196,["/shadcn-pro/_next/static/chunks/10m30qhgw9zb_.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/0syno9r8zku0s.js"],"OutletBoundary"]
+2:I[625209,["/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/0mwmxnyupennj.js","/shadcn-pro/_next/static/chunks/0_xcdjh6h7f3i.js","/shadcn-pro/_next/static/chunks/0z_6pcpt78t92.js"],"BlockViewer"]
+9:I[80196,["/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js"],"OutletBoundary"]
 a:"$Sreact.suspense"
-3:T1466,"use client"
+3:T13d3,"use client"
 
 import { createForm } from "@formily/core"
 import { useMemo, useState } from "react"
@@ -11,7 +11,6 @@ import { Button } from "@/registry/new-york-v4/ui/button"
 import { ProDescriptions } from "@/registry/new-york-v4/pro/pro-descriptions/index"
 import {
   ProForm,
-  ProFormActions,
   SchemaField,
 } from "@/registry/new-york-v4/pro/pro-form/index"
 
@@ -107,7 +106,14 @@ export default function ProDescriptionsDemo() {
       {mode === "view" ? (
         <ProDescriptions items={items} columns={2} bordered />
       ) : (
-        <ProForm form={form} onFinish={handleFinish} hideActions>
+        <ProForm
+          form={form}
+          onFinish={handleFinish}
+          submitter={{
+            submit: { text: "Save" },
+            cancel: { text: "Cancel", onClick: () => setMode("view") },
+          }}
+        >
           <SchemaField>
             <SchemaField.String
               name="name"
@@ -164,22 +170,12 @@ export default function ProDescriptionsDemo() {
               x-component-props={{ placeholder: "Short bio" }}
             />
           </SchemaField>
-          <div className="flex gap-2 pt-2">
-            <Button type="submit">Save</Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setMode("view")}
-            >
-              Cancel
-            </Button>
-          </div>
         </ProForm>
       )}
     </div>
   )
 }
-4:Te0c0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
+4:Tdaeb,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> "@formily/core"</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useMemo</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> "react"</span></span>
@@ -188,7 +184,6 @@ export default function ProDescriptionsDemo() {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProDescriptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> "@/registry/new-york-v4/pro/pro-descriptions/index"</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> "@/registry/new-york-v4/pro/pro-form/index"</span></span>
 <span class="line" data-line=""></span>
@@ -284,7 +279,14 @@ export default function ProDescriptionsDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">mode</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> "view"</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProDescriptions</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> items</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">items</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> columns</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">2</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> bordered</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      ) </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProForm</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> form</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">form</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onFinish</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">handleFinish</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> hideActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProForm</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          form</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">form</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          onFinish</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">handleFinish</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          submitter</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            submit</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> "Save"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            cancel</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> "Cancel"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#4078F2;--shiki-dark:#61AFEF">onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">"view"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) },</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">SchemaField.String</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              name</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"name"</span></span>
@@ -341,16 +343,6 @@ export default function ProDescriptionsDemo() {
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              x-component-props</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">placeholder</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> "Short bio"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex gap-2 pt-2"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> type</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"submit"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>Save&#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              type</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"button"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"outline"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">"view"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              Cancel</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">Button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -548,7 +540,7 @@ export function ProDescriptions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-descriptions-demo",{"item":{"name":"pro-descriptions-demo","description":"Structured key-value descriptions with inline view/edit mode switching.","iframeHeight":"336px","installName":"pro-descriptions"},"tree":[{"name":"examples","children":[{"name":"pro-descriptions-demo.tsx","path":"examples/pro-descriptions-demo.tsx"}]},{"name":"pro-descriptions","children":[{"name":"index.tsx","path":"pro-descriptions/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-descriptions-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-descriptions/index.tsx","content":"$5","highlightedContent":"$6"}]}]]}],["$L7"],"$L8"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"dR10URorEe42IXP7ru98q"}
-7:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0vmbse~v1uie9.js","async":true}]
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-descriptions-demo",{"item":{"name":"pro-descriptions-demo","description":"Structured key-value descriptions with inline view/edit mode switching.","iframeHeight":"336px","installName":"pro-descriptions"},"tree":[{"name":"examples","children":[{"name":"pro-descriptions-demo.tsx","path":"examples/pro-descriptions-demo.tsx"}]},{"name":"pro-descriptions","children":[{"name":"index.tsx","path":"pro-descriptions/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-descriptions-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-descriptions/index.tsx","content":"$5","highlightedContent":"$6"}]}]]}],["$L7"],"$L8"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"5IhmkxdsztGXdyQhhf9QA"}
+7:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0z_6pcpt78t92.js","async":true}]
 8:["$","$L9",null,{"children":["$","$a",null,{"name":"Next.MetadataOutlet","children":"$@b"}]}]
 b:null
