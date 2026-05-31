@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/draco-china/shadcn-pro/compare/v1.14.0...v1.15.0) (2026-05-31)
+
+
+### Features
+
+* **pro-table:** support column alignment and system pinning ([c9770e8](https://github.com/draco-china/shadcn-pro/commit/c9770e891b96eb2a5447878a737133b6886d614e))
+
 # [1.14.0](https://github.com/draco-china/shadcn-pro/compare/v1.13.2...v1.14.0) (2026-05-31)
 
 
