@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/draco-china/shadcn-pro/compare/v1.13.1...v1.13.2) (2026-05-31)
+
+
+### Bug Fixes
+
+* **pro-table:** tighten action and drag sort types ([9ea91d1](https://github.com/draco-china/shadcn-pro/commit/9ea91d1598d1356885ae4bb21c1c311e30d53030))
+
 ## [1.13.1](https://github.com/draco-china/shadcn-pro/compare/v1.13.0...v1.13.1) (2026-05-30)
 
 
