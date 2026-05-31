@@ -1,7 +1,11 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
+import {
+  ProToolbar,
+  type ProToolbarButtonItem,
+  type ProToolbarItem,
+} from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 
 export interface ProFormLayoutProps {
@@ -17,6 +21,8 @@ const colsClass: Record<number, string> = {
   3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
   4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 }
+
+export type ProFormActionVariant = NonNullable<ProToolbarButtonItem<unknown>['variant']>
 
 export function ProFormGrid({
   children,
@@ -38,6 +44,7 @@ export interface ProFormSubmitActionProps {
   disabled?: boolean
   loading?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
 }
 
 export interface ProFormCancelActionProps {
@@ -45,6 +52,7 @@ export interface ProFormCancelActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -53,6 +61,7 @@ export interface ProFormResetActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -91,7 +100,7 @@ export function ProFormActions({
             key: 'cancel',
             label: cancelOptions.text ?? 'Cancel',
             icon: cancelOptions.icon,
-            variant: 'outline' as const,
+            variant: cancelOptions.variant ?? 'outline',
             disabled: cancelOptions.disabled ?? isSubmitting,
             onClick: cancelOptions.onClick,
           },
@@ -103,7 +112,7 @@ export function ProFormActions({
             key: 'reset',
             label: resetOptions.text ?? 'Reset',
             icon: resetOptions.icon,
-            variant: 'outline' as const,
+            variant: resetOptions.variant ?? 'ghost',
             disabled: resetOptions.disabled ?? isSubmitting,
             onClick: resetOptions.onClick,
           },
@@ -118,6 +127,7 @@ export function ProFormActions({
               ? (submitOptions?.submittingText ?? 'Submitting...')
               : (submitOptions?.text ?? 'Submit'),
             icon: submitOptions?.icon,
+            variant: submitOptions?.variant ?? 'default',
             loading: isSubmitting,
             disabled: submitOptions?.disabled || isSubmitting,
             htmlType: 'submit' as const,

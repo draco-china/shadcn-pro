@@ -1,7 +1,5 @@
 'use client'
 
-import type * as React from 'react'
-
 import { Separator } from '@/components/ui/separator'
 import type { ProToolbarDropdownItem, ProToolbarItem, ProToolbarMenuItem } from '../types'
 import { ToolbarButtonItem } from './button'
@@ -15,28 +13,22 @@ export function ProToolbarItemView<TContext>({
   item: ProToolbarItem<TContext>
   context: TContext
 }) {
-  const hidden = typeof item.hidden === 'function' ? item.hidden(context) : item.hidden
-  if (hidden) return null
-
-  let defaultNode: React.ReactNode
   if ('render' in item) {
-    defaultNode = item.render(context)
-  } else if ('separator' in item) {
-    defaultNode = (
+    return item.render(context)
+  }
+
+  if ('separator' in item) {
+    return (
       <Separator
         orientation="vertical"
         className="mx-1 hidden h-5 data-[orientation=vertical]:h-5 sm:block"
       />
     )
-  } else if (isToolbarDropdownItem(item)) {
-    defaultNode = <ToolbarDropdownItem item={item} context={context} />
-  } else if (isToolbarMenuItem(item)) {
-    defaultNode = <ToolbarMenuItem item={item} context={context} />
-  } else {
-    defaultNode = <ToolbarButtonItem item={item} context={context} />
   }
 
-  return defaultNode
+  if (isToolbarDropdownItem(item)) return <ToolbarDropdownItem item={item} context={context} />
+  if (isToolbarMenuItem(item)) return <ToolbarMenuItem item={item} context={context} />
+  return <ToolbarButtonItem item={item} context={context} />
 }
 
 function isToolbarDropdownItem<TContext>(

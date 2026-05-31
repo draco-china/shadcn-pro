@@ -319,6 +319,8 @@ Same as Modal Form but rendered inside a side Drawer. Use the `side` prop to con
 
 Object config for the built-in submit/cancel/reset area. `header` renders above the form and `footer` renders below it; both receive the default actions node.
 
+Default action priority is explicit and uses the underlying button variants directly: submit defaults to `default`, cancel defaults to `outline`, and reset defaults to `ghost`. Override each button with `submit.variant`, `cancel.variant`, or `reset.variant`.
+
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `position` | `'header' \| 'footer'` | `'footer'` | Where default actions render when no `header` slot is provided. |

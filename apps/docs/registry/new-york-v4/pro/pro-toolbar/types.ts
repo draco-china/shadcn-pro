@@ -91,6 +91,8 @@ export interface ProToolbarMenuItem<TContext>
   items:
     | ProToolbarMenuOption<TContext>[]
     | ((context: TContext) => ProToolbarMenuOption<TContext>[])
+  align?: 'start' | 'center' | 'end'
+  side?: 'top' | 'right' | 'bottom' | 'left'
 }
 
 export interface ProToolbarDropdownItem<TContext>

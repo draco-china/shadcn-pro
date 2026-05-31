@@ -26,7 +26,7 @@ export function ToolbarDropdownItem<TContext>({
   const loading = typeof item.loading === 'function' ? item.loading(context) : item.loading
   const itemDisabled = typeof item.disabled === 'function' ? item.disabled(context) : item.disabled
   const iconOnly = Boolean(icon) && !label
-  const itemSize = item.size ?? 'sm'
+  const itemSize = item.size
   const {
     key,
     label: _label,
@@ -57,7 +57,6 @@ export function ToolbarDropdownItem<TContext>({
   const trigger = (
     <ProButton
       type="button"
-      variant="outline"
       {...buttonProps}
       size={itemSize}
       icon={icon}

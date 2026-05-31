@@ -32,12 +32,15 @@ import { ProToolbar } from "@/components/pro/pro-toolbar"
         key: "columns",
         icon: <SlidersHorizontal />,
         tooltip: "Columns",
+        variant: "ghost",
         contentClassName: "w-56 p-2",
         content: (context) => <ColumnSettings table={context.table} />,
       },
       {
         key: "more",
         label: "More",
+        variant: "outline",
+        align: "end",
         items: [
           { key: "archive", label: "Archive" },
           { key: "delete", label: "Delete", danger: true, separator: "left" },
@@ -59,6 +62,8 @@ Use `items` for simple menu actions, and `content` for custom dropdown panels su
 - `options` is always an array.
 - Items are shape-based: `render` is custom content, `separator: true` is a separator, `items` is a menu, `content` is a custom dropdown panel, otherwise the item renders as a button.
 - `context` is generic and is passed to item callbacks, labels, icons, tooltips, disabled/loading/hidden states, copy config, menu options, and dropdown content.
+- `ProToolbar` does not force button `variant` or `size`. Use scenario wrappers such as `ProTableToolbar` to apply compact density, or pass `variant` / `size` on individual items.
+- Regions with only hidden items are not rendered, so hidden filters/actions do not leave layout gaps.
 - The toolbar wraps responsively. When a region wraps on small screens, region class names can make filters/search occupy a full row with `w-full sm:w-auto`.
 
 ## Item Types
@@ -70,6 +75,7 @@ Use `items` for simple menu actions, and `content` for custom dropdown panels su
   key: "refresh",
   icon: <RefreshCw />,
   tooltip: "Refresh",
+  variant: "ghost",
   loading: ({ loading }) => loading,
   onClick: ({ refresh }) => refresh(),
 }
@@ -81,6 +87,9 @@ Use `items` for simple menu actions, and `content` for custom dropdown panels su
 {
   key: "more",
   label: "More",
+  variant: "outline",
+  align: "end",
+  side: "bottom",
   items: [
     { key: "archive", label: "Archive" },
     { key: "duplicate", label: "Duplicate", shortcut: "⌘D" },
@@ -125,3 +134,13 @@ Use `render` when an option needs to return arbitrary controls or business-speci
 | `center` | `{ options, className? }` | — | Center region. |
 | `right` | `{ options, className? }` | — | Right region. |
 | `className` | `string` | — | Root toolbar className. |
+
+### Item Options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `variant` | `ProButton variant` | Button visual style. No toolbar-level default is applied. |
+| `size` | `ProButton size` | Button size. No toolbar-level default is applied. |
+| `hidden` | `boolean \| (context) => boolean` | Hide an item without leaving an empty region. |
+| `align` | `'start' \| 'center' \| 'end'` | Menu or dropdown panel alignment. |
+| `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | Menu or dropdown panel side. |

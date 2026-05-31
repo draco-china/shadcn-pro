@@ -60,7 +60,11 @@ function ProToolbarRegionView<TContext>({
   context: TContext
   className?: string
 }) {
-  const itemNodes = options?.map((item) => (
+  const visibleOptions = options?.filter((item) => {
+    const hidden = typeof item.hidden === 'function' ? item.hidden(context) : item.hidden
+    return !hidden
+  })
+  const itemNodes = visibleOptions?.map((item) => (
     <ProToolbarItemView key={item.key} item={item} context={context} />
   ))
 

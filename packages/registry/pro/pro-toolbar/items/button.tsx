@@ -18,7 +18,7 @@ export function ToolbarButtonItem<TContext>({
   const icon = renderToolbarContent(item.icon, context)
   const tooltip = renderToolbarContent(item.tooltip, context)
   const copy = resolveToolbarCopy(item.copy, context)
-  const itemSize = item.size ?? 'sm'
+  const itemSize = item.size
   const {
     key,
     label: _label,
@@ -46,7 +46,6 @@ export function ToolbarButtonItem<TContext>({
   return (
     <ProButton
       type={htmlType ?? 'button'}
-      variant="outline"
       {...buttonProps}
       size={itemSize}
       icon={icon}

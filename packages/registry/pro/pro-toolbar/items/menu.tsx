@@ -30,7 +30,7 @@ export function ToolbarMenuItem<TContext>({
   const loading = typeof item.loading === 'function' ? item.loading(context) : item.loading
   const itemDisabled = typeof item.disabled === 'function' ? item.disabled(context) : item.disabled
   const iconOnly = Boolean(icon) && !label
-  const itemSize = item.size ?? 'sm'
+  const itemSize = item.size
   const options = typeof item.items === 'function' ? item.items(context) : item.items
   const {
     key,
@@ -43,6 +43,8 @@ export function ToolbarMenuItem<TContext>({
     copy: _copy,
     items,
     size: _size,
+    align = 'end',
+    side = 'bottom',
     ...buttonProps
   } = item
   void key
@@ -59,7 +61,6 @@ export function ToolbarMenuItem<TContext>({
   const trigger = (
     <ProButton
       type="button"
-      variant="outline"
       {...buttonProps}
       size={itemSize}
       icon={icon}
@@ -86,7 +87,7 @@ export function ToolbarMenuItem<TContext>({
       ) : (
         <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
       )}
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align={align} side={side}>
         {options
           .filter((option) => {
             const hidden =
