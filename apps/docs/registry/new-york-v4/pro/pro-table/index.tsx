@@ -368,6 +368,7 @@ export function ProTable<TData, TValue>({
   const toolbarActionNodes = renderActions(toolbarOptions?.actions, renderContext)
   const bulkActionNodes = renderActions(bulkToolbarOptions?.actions, renderContext)
   const hasBulkActions = bulkActionNodes.length > 0
+  const fillEmptyTable = isFullLayout && rows.length === 0 && !loadingEnabled && !requestLoading
   const content = (
     <>
       <div
@@ -377,7 +378,10 @@ export function ProTable<TData, TValue>({
           isFullLayout && 'min-h-0 flex-1',
         )}
       >
-        <table data-slot="table" className="w-full min-w-max caption-bottom text-sm">
+        <table
+          data-slot="table"
+          className={cn('w-full min-w-max caption-bottom text-sm', fillEmptyTable && 'h-full')}
+        >
           <TableHeader>
             <ProTableHeader
               headerGroups={table.getHeaderGroups()}
@@ -392,6 +396,7 @@ export function ProTable<TData, TValue>({
               visibleColumns={visibleColumns}
               visibleColumnCount={visibleColumnCount}
               dragSort={dragSortEnabled}
+              fillEmpty={fillEmptyTable}
               loading={loadingEnabled || requestLoading}
               loadingRows={loadingRows}
               paddingClass={cellPadding[tableSize]}

@@ -16,6 +16,7 @@ export function ProTableBody<TData>({
   visibleColumns,
   visibleColumnCount,
   dragSort,
+  fillEmpty,
   loading,
   loadingRows,
   paddingClass,
@@ -27,6 +28,7 @@ export function ProTableBody<TData>({
   visibleColumns: ReturnType<Row<TData>['getVisibleCells']>[number]['column'][]
   visibleColumnCount: number
   dragSort: boolean
+  fillEmpty: boolean
   loading: boolean
   loadingRows: number
   paddingClass: string
@@ -42,7 +44,12 @@ export function ProTableBody<TData>({
       <SortableContext items={rowIds} strategy={verticalListSortingStrategy}>
         <BodyRows rows={rows} dragSort paddingClass={paddingClass} />
         {rows.length === 0 && (
-          <EmptyRow colSpan={visibleColumnCount} icon={emptyIcon} text={emptyText} />
+          <EmptyRow
+            colSpan={visibleColumnCount}
+            fill={fillEmpty}
+            icon={emptyIcon}
+            text={emptyText}
+          />
         )}
       </SortableContext>
     )
@@ -51,7 +58,7 @@ export function ProTableBody<TData>({
   return rows.length ? (
     <BodyRows rows={rows} paddingClass={paddingClass} />
   ) : (
-    <EmptyRow colSpan={visibleColumnCount} icon={emptyIcon} text={emptyText} />
+    <EmptyRow colSpan={visibleColumnCount} fill={fillEmpty} icon={emptyIcon} text={emptyText} />
   )
 }
 
@@ -114,16 +121,21 @@ function BodyRows<TData>({
 
 function EmptyRow({
   colSpan,
+  fill,
   icon,
   text,
 }: {
   colSpan: number
+  fill: boolean
   icon?: React.ReactNode
   text?: React.ReactNode
 }) {
   return (
-    <TableRow>
-      <TableCell colSpan={colSpan} className="h-32 text-center text-muted-foreground">
+    <TableRow className={fill ? 'h-full' : undefined}>
+      <TableCell
+        colSpan={colSpan}
+        className={cn('h-32 text-center text-muted-foreground', fill && 'h-full')}
+      >
         <ProTableEmptyState icon={icon} text={text} />
       </TableCell>
     </TableRow>
