@@ -1,3 +1,15 @@
+# [1.14.0](https://github.com/draco-china/shadcn-pro/compare/v1.13.2...v1.14.0) (2026-05-31)
+
+
+### Bug Fixes
+
+* **pro-table:** fill empty table height ([2a5ba3b](https://github.com/draco-china/shadcn-pro/commit/2a5ba3b1b02d83757bd62381781b536408b5d24b))
+
+
+### Features
+
+* **pro-editor:** configure toolbar and preview ([c168e0f](https://github.com/draco-china/shadcn-pro/commit/c168e0fb5cbeb8d61f4516afc9bd99fd01a49d32))
+
 ## [1.13.2](https://github.com/draco-china/shadcn-pro/compare/v1.13.1...v1.13.2) (2026-05-31)
 
 
