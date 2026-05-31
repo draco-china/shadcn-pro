@@ -497,7 +497,9 @@ function withProTableColumnDefaults<TData, TValue>(
   })
 }
 
-function getEmptyOptions(empty: ProTableEmptyOptions | undefined) {
+function getEmptyOptions(
+  empty: ProTableEmptyOptions | undefined,
+): { text?: React.ReactNode; icon?: React.ReactNode } {
   if (
     empty &&
     typeof empty === 'object' &&
@@ -508,7 +510,7 @@ function getEmptyOptions(empty: ProTableEmptyOptions | undefined) {
     return empty
   }
 
-  return { text: empty }
+  return { text: empty as React.ReactNode }
 }
 
 function getDefaultFilterFn<TData>(mode: ProTableColumnFilter['mode']) {

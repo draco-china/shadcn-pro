@@ -82,9 +82,9 @@ Use `meta.pinned` on column definitions to keep important columns visible during
 ```tsx
 const columns = [
   { id: "select" },
-  { accessorKey: "name", header: "Name", size: 180, meta: { pinned: "left" } },
-  { accessorKey: "email", header: "Email", size: 240 },
-  { accessorKey: "createdAt", header: "Created", size: 150, meta: { pinned: "right" } },
+  { accessorKey: "name", header: "Name", meta: { pinned: "left", className: "w-44" } },
+  { accessorKey: "email", header: "Email", meta: { className: "w-60" } },
+  { accessorKey: "createdAt", header: "Created", meta: { pinned: "right", className: "w-36" } },
 ]
 
 <ProTable columns={columns} data={users} />

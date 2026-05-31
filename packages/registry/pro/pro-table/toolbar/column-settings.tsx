@@ -38,7 +38,9 @@ export function ProTableColumnSettings<TData>({
     ? table.getState().columnOrder
     : defaultColumnOrder
   const orderedColumns = [
-    ...columnOrder.map((id) => columns.find((column) => column.id === id)).filter(Boolean),
+    ...columnOrder
+      .map((id) => columns.find((column) => column.id === id))
+      .filter((column): column is Column<TData, unknown> => Boolean(column)),
     ...columns.filter((column) => !columnOrder.includes(column.id)),
   ].filter(
     (column) =>
@@ -46,7 +48,7 @@ export function ProTableColumnSettings<TData>({
       !PRO_TABLE_SYSTEM_COLUMN_IDS.includes(
         column.id as (typeof PRO_TABLE_SYSTEM_COLUMN_IDS)[number],
       ),
-  ) as Column<TData, unknown>[]
+  )
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),

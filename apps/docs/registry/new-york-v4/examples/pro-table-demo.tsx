@@ -240,16 +240,24 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
     header: "Name",
-    size: 180,
-    meta: { pinned: "left", search: { placeholder: "Search name..." } },
+    meta: {
+      pinned: "left",
+      className: "w-44",
+      search: { placeholder: "Search name..." },
+    },
     enableSorting: true,
   },
-  { accessorKey: "email", header: "Email", size: 240, enableSorting: true },
+  {
+    accessorKey: "email",
+    header: "Email",
+    meta: { className: "w-60" },
+    enableSorting: true,
+  },
   {
     accessorKey: "role",
     header: "Role",
-    size: 140,
     meta: {
+      className: "w-32",
       filter: {
         placeholder: "Role",
         options: [
@@ -265,8 +273,8 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    size: 140,
     meta: {
+      className: "w-32",
       filter: {
         placeholder: "Status",
         options: [
@@ -281,8 +289,7 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "createdAt",
     header: "Created",
-    size: 150,
-    meta: { pinned: "right" },
+    meta: { pinned: "right", className: "w-36" },
     enableSorting: true,
   },
 ]

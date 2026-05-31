@@ -101,16 +101,20 @@ export function getColumnAlignClassName<TData>(
   column: Column<TData, unknown>,
   target: "header" | "cell"
 ) {
-  const align = getColumnMeta(column)?.align
+  const pinned = column.getIsPinned()
+  const align =
+    getColumnMeta(column)?.align ?? (pinned === "right" ? "right" : pinned || undefined)
 
   if (target === "header") {
     if (align === "center") return "text-center [&>div]:justify-center"
     if (align === "right") return "text-right [&>div]:justify-end"
+    if (align === "left") return "text-left [&>div]:justify-start"
     return undefined
   }
 
   if (align === "center") return "text-center"
   if (align === "right") return "text-right"
+  if (align === "left") return "text-left"
   return undefined
 }
 
@@ -119,17 +123,7 @@ export function getPinnedColumnStyle<TData>(
   leftOffset = 0
 ): React.CSSProperties {
   const pinned = column.getIsPinned()
-  const columnDef = column.columnDef
-  const hasExplicitSize =
-    columnDef.size !== undefined ||
-    columnDef.minSize !== undefined ||
-    columnDef.maxSize !== undefined
   const style: React.CSSProperties = {}
-
-  if (hasExplicitSize) {
-    style.width = column.getSize()
-    style.minWidth = column.getSize()
-  }
 
   if (pinned === "left") {
     style.left = `${column.getStart("left") + leftOffset}px`
