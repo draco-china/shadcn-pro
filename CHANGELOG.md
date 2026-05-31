@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/draco-china/shadcn-pro/compare/v1.16.0...v1.16.1) (2026-05-31)
+
+
+### Bug Fixes
+
+* inherit form action variants ([22b7800](https://github.com/draco-china/shadcn-pro/commit/22b7800eea4be6b7acc92e00a1cb9fdc483e380e))
+
 # [1.16.0](https://github.com/draco-china/shadcn-pro/compare/v1.15.3...v1.16.0) (2026-05-31)
 
 
