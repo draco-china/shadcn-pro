@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useTheme } from 'next-themes'
+import { Focus, RotateCcw } from 'lucide-react'
 import { ProEditor } from "@/registry/new-york-v4/pro/pro-editor/index"
 import type {
   EditorViewMode,
@@ -56,8 +57,8 @@ export default function ProEditorDemo() {
   const [value, setValue] = useState(INITIAL_CODE)
   const [language, setLanguage] = useState("tsx")
   const { resolvedTheme } = useTheme()
-  const themeMode = resolvedTheme === 'light' ? 'light' : 'dark'
-  const [viewMode, setViewMode] = useState<EditorViewMode>("split")
+  const theme = resolvedTheme === 'light' ? 'light' : 'dark'
+  const [mode, setMode] = useState<EditorViewMode>("split")
 
   return (
     <div className="w-full space-y-3 p-4">
@@ -75,8 +76,8 @@ export default function ProEditorDemo() {
           ))}
         </select>
         <select
-          value={viewMode}
-          onChange={(event) => setViewMode(event.target.value as EditorViewMode)}
+          value={mode}
+          onChange={(event) => setMode(event.target.value as EditorViewMode)}
           className="h-9 rounded-md border border-input bg-background px-3 text-sm shadow-xs"
           aria-label="Editor view mode"
         >
@@ -89,35 +90,31 @@ export default function ProEditorDemo() {
       </div>
       <ProEditor
         language={language}
-        themeMode={themeMode}
+        theme={theme}
         value={value}
         onChange={setValue}
-        viewMode={viewMode}
-        onViewModeChange={setViewMode}
-        toolbarBefore={
-          <span className="rounded-sm bg-background px-2 py-0.5 text-xs text-muted-foreground">
-            Demo
-          </span>
-        }
-        toolbarActions={({ editor }) => (
-          <button
-            type="button"
-            className="h-7 rounded-md px-2 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-            onClick={() => editor?.focus()}
-          >
-            Focus
-          </button>
-        )}
-        toolbarAfter={
-          <button
-            type="button"
-            className="h-7 rounded-md px-2 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-            onClick={() => setValue(INITIAL_CODE)}
-          >
-            Reset
-          </button>
-        }
-        preview={PlainPreview}
+        toolbar={{
+          actions: [
+            {
+              key: "focus",
+              label: "Focus editor",
+              icon: <Focus size={14} />,
+              onClick: ({ editor }) => editor?.focus(),
+            },
+            {
+              key: "reset",
+              label: "Reset",
+              icon: <RotateCcw size={14} />,
+              position: "after",
+              onClick: () => setValue(INITIAL_CODE),
+            },
+          ],
+        }}
+        preview={{
+          component: PlainPreview,
+          mode,
+          onModeChange: setMode,
+        }}
         height={380}
       />
     </div>

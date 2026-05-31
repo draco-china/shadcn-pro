@@ -1,7 +1,7 @@
 import type MonacoEditor from '@monaco-editor/react'
 import type * as React from 'react'
 
-export type EditorThemeMode = 'light' | 'dark'
+export type EditorTheme = 'light' | 'dark'
 
 /** Props passed to a custom preview component */
 export interface PreviewProps {
@@ -17,28 +17,38 @@ export interface EditorProps {
   /** Language id (e.g. tsx, typescript, javascript, python, markdown) */
   language: string
   /** Force light or dark variant — defaults to system/page theme via next-themes */
-  themeMode?: EditorThemeMode
+  theme?: EditorTheme
   className?: string
   height?: string | number
-  /** Show the integrated toolbar (default: true) */
-  showToolbar?: boolean
-  /** Controlled view mode */
-  viewMode?: EditorViewMode
-  /** Initial view mode for uncontrolled usage */
-  defaultViewMode?: EditorViewMode
-  /** Called when the toolbar requests a mode change */
-  onViewModeChange?: (viewMode: EditorViewMode) => void
-  /** Custom content rendered before the toolbar language label */
-  toolbarBefore?: EditorToolbarRender
-  /** Extra toolbar actions rendered before the built-in format/copy/fullscreen actions */
-  toolbarActions?: EditorToolbarRender
-  /** Custom content rendered after the built-in toolbar actions */
-  toolbarAfter?: EditorToolbarRender
+  /** Integrated toolbar config. Pass `false` to hide the toolbar. */
+  toolbar?: false | EditorToolbarOptions
   /**
-   * Preview component rendered in the right pane. Receives `{ content, language }`.
-   * Pass a component to enable preview/split mode. When omitted, the editor renders edit-only mode.
+   * Preview config. Pass a component to enable preview/split mode.
+   * When omitted, the editor renders edit-only mode.
    */
-  preview?: React.ComponentType<PreviewProps>
+  preview?: EditorPreviewOptions
+}
+
+export interface EditorPreviewOptions {
+  component: React.ComponentType<PreviewProps>
+  /** Controlled preview pane mode */
+  mode?: EditorViewMode
+  /** Initial preview pane mode for uncontrolled usage */
+  defaultMode?: EditorViewMode
+  /** Called when the toolbar requests a preview pane mode change */
+  onModeChange?: (mode: EditorViewMode) => void
+}
+
+export interface EditorToolbarOptions {
+  actions?: EditorToolbarAction[]
+  options?:
+    | false
+    | {
+        mode?: boolean
+        format?: boolean
+        copy?: boolean
+        fullscreen?: boolean
+      }
 }
 
 export type MonacoEditorInstance = Parameters<
@@ -47,15 +57,30 @@ export type MonacoEditorInstance = Parameters<
 
 export type EditorViewMode = 'edit' | 'preview' | 'split'
 
-export type EditorToolbarRender =
+export type EditorToolbarActionContent =
   | React.ReactNode
   | ((context: EditorToolbarActionContext) => React.ReactNode)
+
+export interface EditorToolbarAction
+  extends Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    'children' | 'disabled' | 'hidden' | 'onClick'
+  > {
+  key: string
+  label: string
+  icon?: EditorToolbarActionContent
+  tooltip?: string
+  position?: 'start' | 'before' | 'after'
+  disabled?: boolean | ((context: EditorToolbarActionContext) => boolean)
+  hidden?: boolean | ((context: EditorToolbarActionContext) => boolean)
+  onClick?: (context: EditorToolbarActionContext) => void
+}
 
 export interface EditorToolbarActionContext {
   value: string
   language: string
-  themeMode: EditorThemeMode
-  viewMode: EditorViewMode
+  theme: EditorTheme
+  mode: EditorViewMode
   hasPreview: boolean
   isSplitView: boolean
   copied: boolean
@@ -63,6 +88,6 @@ export interface EditorToolbarActionContext {
   editor: MonacoEditorInstance | null
   format: () => void
   copy: () => Promise<void>
-  setViewMode: (viewMode: EditorViewMode) => void
+  setMode: (mode: EditorViewMode) => void
   setFullscreen: React.Dispatch<React.SetStateAction<boolean>>
 }

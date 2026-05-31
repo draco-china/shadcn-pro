@@ -9,11 +9,21 @@ import { applyShadcnTheme, configureTypescript, fallbackMonacoTheme } from './mo
 import { useEditorPreviewScrollSync } from './preview/scroll-sync'
 import { scrollbarClassName } from './preview/styles'
 import { EditorToolbar, EditorToolbarButton } from './toolbar'
-import type { EditorProps, EditorViewMode, MonacoEditorInstance } from './types'
+import type {
+  EditorProps,
+  EditorToolbarAction,
+  EditorToolbarActionContent,
+  EditorToolbarActionContext,
+  EditorViewMode,
+  MonacoEditorInstance,
+} from './types'
 
 export type {
+  EditorPreviewOptions,
   EditorProps,
+  EditorToolbarAction,
   EditorToolbarActionContext,
+  EditorToolbarOptions,
   EditorViewMode,
   PreviewProps,
 } from './types'
@@ -22,27 +32,21 @@ export function ProEditor({
   value = '',
   onChange,
   language,
-  themeMode = 'dark',
+  theme = 'dark',
   className,
   height,
-  showToolbar = true,
-  viewMode: controlledViewMode,
-  defaultViewMode = 'split',
-  onViewModeChange,
-  toolbarBefore,
-  toolbarActions,
-  toolbarAfter,
+  toolbar,
   preview,
 }: EditorProps) {
   const [localValue, setLocalValue] = React.useState(value)
   const [copied, setCopied] = React.useState(false)
   const [fullscreen, setFullscreen] = React.useState(false)
-  const [uncontrolledViewMode, setUncontrolledViewMode] =
-    React.useState<EditorViewMode>(defaultViewMode)
-  const themeModeRef = React.useRef(themeMode)
+  const defaultMode = preview?.defaultMode ?? 'split'
+  const [uncontrolledMode, setUncontrolledMode] = React.useState<EditorViewMode>(defaultMode)
+  const themeRef = React.useRef(theme)
   React.useEffect(() => {
-    themeModeRef.current = themeMode
-  }, [themeMode])
+    themeRef.current = theme
+  }, [theme])
   const editorRef = React.useRef<MonacoEditorInstance | null>(null)
   const monacoRef = React.useRef<Monaco | null>(null)
   const {
@@ -70,15 +74,15 @@ export function ProEditor({
       scrollDisposableRef.current?.dispose()
       scrollDisposableRef.current = editor.onDidScrollChange(() => syncPreviewFromEditor(editor))
       configureTypescript(monaco)
-      void applyShadcnTheme(monaco, themeModeRef.current)
+      void applyShadcnTheme(monaco, themeRef.current)
     },
     [syncPreviewFromEditor],
   )
 
   React.useEffect(() => {
     const monaco = monacoRef.current
-    if (monaco) void applyShadcnTheme(monaco, themeMode)
-  }, [themeMode])
+    if (monaco) void applyShadcnTheme(monaco, theme)
+  }, [theme])
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(localValue)
@@ -95,33 +99,35 @@ export function ProEditor({
     typeof height === 'number' ? `${height}px` : hasExplicitHeight ? height : undefined
   const contentStyle = hasExplicitHeight && !fullscreen ? { height: contentHeight } : undefined
   const contentFillsParent = fullscreen || !hasExplicitHeight
+  const rootStyle = fullscreen && hasExplicitHeight ? { height: contentHeight } : undefined
 
-  const PreviewComponent = preview ?? null
+  const PreviewComponent = preview?.component ?? null
   const hasPreview = PreviewComponent !== null
-  const viewMode = controlledViewMode ?? uncontrolledViewMode
-  const effectiveViewMode = hasPreview ? viewMode : 'edit'
-  const showEditorPane = effectiveViewMode !== 'preview'
-  const showPreviewPane = hasPreview && effectiveViewMode !== 'edit'
+  const controlledMode = preview?.mode
+  const mode = controlledMode ?? uncontrolledMode
+  const effectiveMode = hasPreview ? mode : 'edit'
+  const showEditorPane = effectiveMode !== 'preview'
+  const showPreviewPane = hasPreview && effectiveMode !== 'edit'
   const isSplitView = showEditorPane && showPreviewPane
 
-  const setViewMode = React.useCallback(
-    (nextViewMode: EditorViewMode) => {
-      const next = hasPreview ? nextViewMode : 'edit'
-      if (controlledViewMode === undefined) setUncontrolledViewMode(next)
-      onViewModeChange?.(next)
+  const setMode = React.useCallback(
+    (nextMode: EditorViewMode) => {
+      const next = hasPreview ? nextMode : 'edit'
+      if (controlledMode === undefined) setUncontrolledMode(next)
+      preview?.onModeChange?.(next)
     },
-    [controlledViewMode, hasPreview, onViewModeChange],
+    [controlledMode, hasPreview, preview],
   )
 
   React.useEffect(() => {
     setSyncEnabled(isSplitView)
   }, [isSplitView, setSyncEnabled])
 
-  const toolbarContext = {
+  const toolbarContext: EditorToolbarActionContext = {
     value: localValue,
     language,
-    themeMode,
-    viewMode: effectiveViewMode,
+    theme,
+    mode: effectiveMode,
     hasPreview,
     isSplitView,
     copied,
@@ -129,15 +135,29 @@ export function ProEditor({
     editor: editorRef.current,
     format: handleFormat,
     copy: handleCopy,
-    setViewMode,
+    setMode,
     setFullscreen,
   }
-  const renderToolbarSlot = (
-    slot: React.ReactNode | ((context: typeof toolbarContext) => React.ReactNode),
-  ) => (typeof slot === 'function' ? slot(toolbarContext) : slot)
+  const toolbarOptions = toolbar === false ? undefined : toolbar
+  const toolbarBuiltInOptions = toolbarOptions?.options
+  const showBuiltInToolbarOptions = toolbarBuiltInOptions !== false
+  const startToolbarActionNodes = renderToolbarActions(
+    toolbarOptions?.actions,
+    toolbarContext,
+    'start',
+  )
+  const toolbarActionNodes = renderToolbarActions(toolbarOptions?.actions, toolbarContext, 'before')
+  const afterToolbarActionNodes = renderToolbarActions(
+    toolbarOptions?.actions,
+    toolbarContext,
+    'after',
+  )
 
   return (
-    <div className={cn(fullscreen ? 'contents' : 'h-full min-h-0', className)}>
+    <div
+      className={cn('min-h-0', (!hasExplicitHeight || fullscreen) && 'h-full', className)}
+      style={rootStyle}
+    >
       <div
         className={cn(
           'rounded-md border border-input overflow-hidden flex flex-col',
@@ -145,33 +165,38 @@ export function ProEditor({
           fullscreen && 'fixed inset-0 z-50 h-full rounded-none border-0',
         )}
       >
-        {showToolbar && (
+        {toolbar !== false && (
           <EditorToolbar
             language={language}
             copied={copied}
             fullscreen={fullscreen}
-            before={renderToolbarSlot(toolbarBefore)}
-            actions={renderToolbarSlot(toolbarActions)}
-            after={renderToolbarSlot(toolbarAfter)}
+            startActions={startToolbarActionNodes}
+            actions={toolbarActionNodes}
+            afterActions={afterToolbarActionNodes}
+            format={showBuiltInToolbarOptions && (toolbarBuiltInOptions?.format ?? true)}
+            copy={showBuiltInToolbarOptions && (toolbarBuiltInOptions?.copy ?? true)}
+            fullscreenControl={
+              showBuiltInToolbarOptions && (toolbarBuiltInOptions?.fullscreen ?? true)
+            }
             onFormat={handleFormat}
             onCopy={handleCopy}
             onFullscreenChange={setFullscreen}
           >
-            {hasPreview && (
+            {hasPreview && showBuiltInToolbarOptions && (toolbarBuiltInOptions?.mode ?? true) && (
               <>
                 <EditorToolbarButton
-                  active={effectiveViewMode === 'preview'}
-                  label={effectiveViewMode === 'preview' ? 'Hide preview' : 'Show preview'}
-                  tooltip={effectiveViewMode === 'preview' ? 'Hide Preview' : 'Preview'}
-                  onClick={() => setViewMode(effectiveViewMode === 'preview' ? 'edit' : 'preview')}
+                  active={effectiveMode === 'preview'}
+                  label={effectiveMode === 'preview' ? 'Hide preview' : 'Show preview'}
+                  tooltip={effectiveMode === 'preview' ? 'Hide Preview' : 'Preview'}
+                  onClick={() => setMode(effectiveMode === 'preview' ? 'edit' : 'preview')}
                 >
-                  {effectiveViewMode === 'preview' ? <EyeOff size={14} /> : <Eye size={14} />}
+                  {effectiveMode === 'preview' ? <EyeOff size={14} /> : <Eye size={14} />}
                 </EditorToolbarButton>
                 <EditorToolbarButton
                   active={isSplitView}
                   label="Split view"
                   tooltip="Split View"
-                  onClick={() => setViewMode(effectiveViewMode === 'split' ? 'edit' : 'split')}
+                  onClick={() => setMode(effectiveMode === 'split' ? 'edit' : 'split')}
                 >
                   <Columns2 size={14} />
                 </EditorToolbarButton>
@@ -196,7 +221,7 @@ export function ProEditor({
                   language={getMonacoLanguage(language)}
                   path={getEditorPath(language)}
                   value={localValue}
-                  theme={fallbackMonacoTheme(themeMode)}
+                  theme={fallbackMonacoTheme(theme)}
                   onMount={handleMount}
                   onChange={(nextValue) => handleChange(nextValue ?? '')}
                   options={{
@@ -250,4 +275,60 @@ export function ProEditor({
       </div>
     </div>
   )
+}
+
+function renderToolbarActions(
+  actions: EditorToolbarAction[] | undefined,
+  context: EditorToolbarActionContext,
+  position: NonNullable<EditorToolbarAction['position']>,
+) {
+  return (actions ?? [])
+    .filter((action) => (action.position ?? 'before') === position)
+    .filter((action) => !resolveToolbarActionState(action.hidden, context))
+    .map((action) => {
+      const {
+        key,
+        label,
+        icon,
+        tooltip,
+        position,
+        disabled,
+        hidden,
+        onClick,
+        className,
+        ...buttonProps
+      } = action
+      void position
+      void hidden
+
+      const iconContent = resolveToolbarActionContent(icon, context)
+
+      return (
+        <EditorToolbarButton
+          key={key}
+          label={label}
+          tooltip={tooltip ?? label}
+          disabled={resolveToolbarActionState(disabled, context)}
+          className={cn(!iconContent && 'w-auto px-2', className)}
+          onClick={() => onClick?.(context)}
+          {...buttonProps}
+        >
+          {iconContent ?? label}
+        </EditorToolbarButton>
+      )
+    })
+}
+
+function resolveToolbarActionState(
+  value: boolean | ((context: EditorToolbarActionContext) => boolean) | undefined,
+  context: EditorToolbarActionContext,
+) {
+  return typeof value === 'function' ? value(context) : Boolean(value)
+}
+
+function resolveToolbarActionContent(
+  value: EditorToolbarActionContent | undefined,
+  context: EditorToolbarActionContext,
+) {
+  return typeof value === 'function' ? value(context) : value
 }

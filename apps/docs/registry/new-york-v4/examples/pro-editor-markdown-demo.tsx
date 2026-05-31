@@ -39,7 +39,7 @@ export default function ProEditorMarkdownDemo() {
         language="markdown"
         value={value}
         onChange={setValue}
-        preview={MarkdownPreview}
+        preview={{ component: MarkdownPreview }}
         height={380}
       />
     </div>

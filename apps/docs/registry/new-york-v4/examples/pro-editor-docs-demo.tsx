@@ -18,14 +18,9 @@ export default function ProEditorDocsDemo() {
     <div className="h-[360px] w-full p-4">
       <ProEditor
         language="typescript"
-        themeMode="dark"
+        theme="dark"
         value={value}
         onChange={setValue}
-        toolbarBefore={
-          <span className="rounded-sm bg-background px-2 py-0.5 text-xs text-muted-foreground">
-            TypeScript
-          </span>
-        }
       />
     </div>
   )

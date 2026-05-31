@@ -1,12 +1,12 @@
 // Shiki-powered syntax highlighting for Monaco (VS Code-grade TextMate grammars).
-// Themes: One Dark Pro / One Light, selected by `themeMode`.
+// Themes: One Dark Pro / One Light, selected by `theme`.
 // Editor chrome (background, gutters, scrollbars, widgets) is injected at runtime
 // from shadcn CSS variables so the editor blends with the surrounding theme.
 
 import type { Monaco } from '@monaco-editor/react'
 import { shikiToMonaco, textmateThemeToMonacoTheme } from '@shikijs/monaco'
 import { createHighlighter, type Highlighter } from 'shiki'
-import type { EditorThemeMode } from '../types'
+import type { EditorTheme } from '../types'
 
 /** Shiki theme ids loaded into Monaco. */
 const SHIKI_THEMES = ['one-dark-pro', 'one-light'] as const
@@ -38,13 +38,13 @@ const LANG_ALIAS: Record<string, string> = {
   javascript: 'jsx',
 }
 
-function themeId(themeMode: EditorThemeMode): (typeof SHIKI_THEMES)[number] {
-  return themeMode === 'dark' ? 'one-dark-pro' : 'one-light'
+function themeId(theme: EditorTheme): (typeof SHIKI_THEMES)[number] {
+  return theme === 'dark' ? 'one-dark-pro' : 'one-light'
 }
 
 /** Built-in Monaco theme used as a placeholder until the Shiki theme is ready. */
-export function fallbackMonacoTheme(themeMode: EditorThemeMode): 'vs' | 'vs-dark' {
-  return themeMode === 'dark' ? 'vs-dark' : 'vs'
+export function fallbackMonacoTheme(theme: EditorTheme): 'vs' | 'vs-dark' {
+  return theme === 'dark' ? 'vs-dark' : 'vs'
 }
 
 let highlighterPromise: Promise<Highlighter> | null = null
@@ -142,9 +142,9 @@ function cssVar(name: string): string {
  * Pro / One Light Shiki theme; editor chrome is overridden with shadcn CSS
  * variables so the editor matches the surrounding UI. Async: waits for the highlighter.
  */
-export async function applyShadcnTheme(monaco: Monaco, themeMode: EditorThemeMode) {
+export async function applyShadcnTheme(monaco: Monaco, theme: EditorTheme) {
   const highlighter = await ensureShiki(monaco)
-  const name = themeId(themeMode)
+  const name = themeId(theme)
   const base = textmateThemeToMonacoTheme(highlighter.getTheme(name))
   const baseColors = (base as { colors?: Record<string, string> }).colors
 
