@@ -1,3 +1,10 @@
+## [1.15.2](https://github.com/draco-china/shadcn-pro/compare/v1.15.1...v1.15.2) (2026-05-31)
+
+
+### Bug Fixes
+
+* **pro-table:** import cn in table body ([47572f1](https://github.com/draco-china/shadcn-pro/commit/47572f1f3c114d35c096179faf931a8f702c2baf))
+
 ## [1.15.1](https://github.com/draco-china/shadcn-pro/compare/v1.15.0...v1.15.1) (2026-05-31)
 
 
