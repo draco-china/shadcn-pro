@@ -38,7 +38,12 @@ import { cn } from '@/lib/utils'
 import { ProTablePagination } from './pagination'
 import { ProTableBody } from './table/body'
 import { ProTableHeader } from './table/header'
-import { getDefaultColumnPinning, getLeafColumnIds, reorderDataByRows } from './table/utils'
+import {
+  getDefaultColumnPinning,
+  getLeafColumnIds,
+  getProTableSystemColumnDefaults,
+  reorderDataByRows,
+} from './table/utils'
 import { ProTableToolbar } from './toolbar'
 import { ProTableBulkActions } from './toolbar/bulk-actions'
 import {
@@ -464,19 +469,20 @@ function withProTableColumnDefaults<TData, TValue>(
     const filter = columnDef.meta?.filter
     const shouldApplyFilter = filter && columnDef.filterFn === undefined
     const id = 'id' in columnDef && typeof columnDef.id === 'string' ? columnDef.id : undefined
-    const isSelectionColumn = id === 'select'
+    const systemDefaults = getProTableSystemColumnDefaults(id)
 
-    if (!children && !shouldApplyFilter && !isSelectionColumn) return column
+    if (!children && !shouldApplyFilter && !systemDefaults) return column
 
     return {
       ...column,
       ...(children ? { columns: children } : {}),
-      ...(isSelectionColumn
+      ...(systemDefaults
         ? {
             enableHiding: columnDef.enableHiding ?? false,
             meta: {
+              pinned: systemDefaults.pinned,
               ...columnDef.meta,
-              className: columnDef.meta?.className ?? 'w-8',
+              className: cn(systemDefaults.className, columnDef.meta?.className),
             },
           }
         : {}),

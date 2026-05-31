@@ -77,7 +77,7 @@ export default function UsersTable() {
 
 ### Pinned Columns and Sticky Header
 
-Use `meta.pinned` on column definitions to keep important columns visible during horizontal scroll. Users can also pin or unpin columns from the column settings menu. System columns (`select`, `drag`, `actions`, `operation`) are pinned by default and hidden from column settings; columns with `enableHiding: false` are also omitted from column settings. The table header is sticky by default; set `table={{ stickyHeader: false }}` to disable it.
+Use `meta.pinned` on column definitions to keep important columns visible during horizontal scroll. Users can also pin or unpin columns from the column settings menu. System columns (`select`, `drag`, `actions`, `operation`) are pinned by default, use `w-8` by default, and are hidden from column settings; columns with `enableHiding: false` are also omitted from column settings. The table header is sticky by default; set `table={{ stickyHeader: false }}` to disable it.
 
 ```tsx
 const columns = [

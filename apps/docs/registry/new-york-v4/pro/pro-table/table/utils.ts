@@ -17,9 +17,15 @@ export const PRO_TABLE_SYSTEM_COLUMN_IDS = [
   "operation",
 ] as const
 
-function getSystemColumnPinning(columnId: string) {
-  if (columnId === "select") return "left"
-  if (columnId === "actions" || columnId === "operation") return "right"
+export function getProTableSystemColumnDefaults(
+  columnId: string | undefined
+): Pick<ProTableColumnMeta, "pinned" | "className"> | undefined {
+  if (columnId === "select" || columnId === "drag") {
+    return { pinned: "left", className: "w-8" }
+  }
+  if (columnId === "actions" || columnId === "operation") {
+    return { pinned: "right", className: "w-8" }
+  }
   return undefined
 }
 
@@ -57,7 +63,7 @@ export function getDefaultColumnPinning<TData, TValue>(
       }
 
       const id = getColumnDefId(column, index)
-      const pinned = column.meta?.pinned ?? getSystemColumnPinning(id)
+      const pinned = column.meta?.pinned ?? getProTableSystemColumnDefaults(id)?.pinned
       if (!pinned) return
 
       if (pinned === "left") left.push(id)
