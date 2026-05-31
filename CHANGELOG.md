@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/draco-china/shadcn-pro/compare/v1.15.0...v1.15.1) (2026-05-31)
+
+
+### Bug Fixes
+
+* **pro-table:** normalize system column defaults ([2798f21](https://github.com/draco-china/shadcn-pro/commit/2798f2194380b31c07501271e2ae6720cdcfd705))
+
 # [1.15.0](https://github.com/draco-china/shadcn-pro/compare/v1.14.0...v1.15.0) (2026-05-31)
 
 
