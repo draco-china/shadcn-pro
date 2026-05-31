@@ -334,6 +334,19 @@ Default action priority is explicit and uses the underlying button variants dire
 | `header` | `ReactNode \| (actions, context) => ReactNode` | — | Custom header submitter slot. |
 | `footer` | `ReactNode \| (actions, context) => ReactNode` | default footer renderer | Custom footer submitter slot. |
 
+### Action Config
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `text` | `string` | action default | Button text. |
+| `variant` | `ProFormActionVariant` | submit: `default`, cancel: `outline`, reset: `ghost` | Button variant inherited from the underlying `ProButton`. |
+| `hidden` | `boolean` | `false` | Hide the action. |
+| `disabled` | `boolean` | `false` | Disable the action. |
+| `icon` | `ReactNode` | — | Optional button icon. |
+| `submittingText` | `string` | `'Submitting...'` | Submit-only text shown while submitting. |
+| `loading` | `boolean` | — | Submit-only loading override. |
+| `onClick` | `() => void \| Promise<void>` | — | Cancel/reset click handler. |
+
 ### ProFormGrid
 
 Multi-column grid container — fields inside are evenly distributed.

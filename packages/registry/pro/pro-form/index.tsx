@@ -7,7 +7,14 @@ import * as React from 'react'
 import { ProFormActions, type ProFormActionsProps, ProFormGrid } from './layout'
 import { createSchemaFieldWithComponents, type ProFormSchema, SchemaField } from './schema'
 
-export type { ProFormActionsProps, ProFormLayoutProps } from './layout'
+export type {
+  ProFormActionsProps,
+  ProFormActionVariant,
+  ProFormCancelActionProps,
+  ProFormLayoutProps,
+  ProFormResetActionProps,
+  ProFormSubmitActionProps,
+} from './layout'
 export { DrawerForm, ModalForm } from './overlay-form'
 export type { Form, IFormProps }
 export { createForm, createSchemaFieldWithComponents, ProFormActions, ProFormGrid, SchemaField }

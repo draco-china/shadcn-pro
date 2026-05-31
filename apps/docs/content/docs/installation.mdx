@@ -14,14 +14,39 @@ Before installing shadcn-pro, make sure you have:
   If you haven't set up shadcn/ui yet, follow the [shadcn/ui installation guide](https://ui.shadcn.com/docs/installation) first, then come back here.
 </Callout>
 
-## Initialization
+## Authentication
 
-shadcn-pro is published to **GitHub Packages**. Add the registry to your project's `.npmrc`:
+shadcn-pro is published to **GitHub Packages**, so installing the CLI requires a GitHub token that can read packages.
+
+Create a GitHub personal access token with the `read:packages` scope. If the package or repository is private, the token must also have access to that repository.
+
+Export the token in your shell:
+
+```bash
+export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
+```
+
+Then add the GitHub Packages registry and auth token to your project's `.npmrc`:
 
 ```bash
 # .npmrc (project root)
 @draco-china:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
+
+<Callout>
+  Do not commit a real token into `.npmrc`. Keep the file using the `${GITHUB_TOKEN}` environment variable, or use your package manager's local/user-level auth configuration.
+</Callout>
+
+You can also authenticate with npm directly:
+
+```bash
+npm login --scope=@draco-china --registry=https://npm.pkg.github.com
+```
+
+Use your GitHub username and the token as the password.
+
+## Initialization
 
 Then add components with the CLI:
 
