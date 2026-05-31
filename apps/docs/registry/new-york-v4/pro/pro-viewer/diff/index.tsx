@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { ProButton } from '@/registry/new-york-v4/pro/pro-base'
 import { cn } from '@/lib/utils'
 import {
   codeToTokenLines,
@@ -72,7 +72,7 @@ export function DiffViewer({
         </div>
         <div className="flex gap-1 rounded-md border border-border p-0.5">
           {(['split', 'unified'] as const).map((nextView) => (
-            <Button
+            <ProButton
               key={nextView}
               variant={view === nextView ? 'secondary' : 'ghost'}
               size="sm"
@@ -80,7 +80,7 @@ export function DiffViewer({
               onClick={() => setView(nextView)}
             >
               {nextView === 'split' ? 'Split' : 'Unified'}
-            </Button>
+            </ProButton>
           ))}
         </div>
       </div>

@@ -1,37 +1,49 @@
 'use client'
 
-import type { Column, ColumnPinningState, Table } from '@tanstack/react-table'
+import type { Column, ColumnPinningState, Row, Table } from '@tanstack/react-table'
 import { AlignJustify, RefreshCw, SlidersHorizontal, X } from 'lucide-react'
-import type * as React from 'react'
 import { FacetedFilter } from '@/components/pro/pro-fields/faceted-filter'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+  ProToolbar,
+  type ProToolbarItem,
+  type ProToolbarRegion,
+} from '@/components/pro/pro-toolbar'
+import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import type { ProTableColumnMeta, ProTableFilterOption, ProTableSearch, TableSize } from '../types'
 import { ProTableColumnSettings } from './column-settings'
+
+export interface ProTableToolbarLabels {
+  search?: string
+  reset?: string
+  refresh?: string
+  columns?: string
+  density?: string
+  densityOptions?: Partial<Record<TableSize, string>>
+}
+
+export interface ProTableToolbarContext<TData> {
+  table: Table<TData>
+  rows: Row<TData>[]
+  selectedRows: Row<TData>[]
+  tableSize: TableSize
+}
 
 interface ProTableToolbarProps<TData> {
   table: Table<TData>
   defaultColumnOrder: string[]
   defaultColumnPinning: ColumnPinningState
   search?: ProTableSearch
-  actions?: React.ReactNode[]
+  filters?: ProToolbarItem<ProTableToolbarContext<TData>>[]
+  actions?: ProToolbarItem<ProTableToolbarContext<TData>>[]
   columns?: boolean
   density?: boolean
   refresh?: () => void
   disabled?: boolean
   tableSize?: TableSize
   onTableSizeChange?: (size: TableSize) => void
+  labels?: ProTableToolbarLabels
+  context: ProTableToolbarContext<TData>
 }
 
 const DENSITY_LABELS: Record<TableSize, string> = {
@@ -75,6 +87,7 @@ export function ProTableToolbar<TData>({
   defaultColumnOrder,
   defaultColumnPinning,
   search,
+  filters,
   actions,
   columns = true,
   density = true,
@@ -82,175 +95,152 @@ export function ProTableToolbar<TData>({
   disabled = false,
   tableSize = 'default',
   onTableSizeChange,
+  labels,
+  context,
 }: ProTableToolbarProps<TData>) {
   const searchColumn = getSearchColumn(table, search)
   const searchMeta = searchColumn ? getColumnMeta(searchColumn) : undefined
   const searchValue = (searchColumn?.getFilterValue() as string) ?? ''
-  const searchPlaceholder = getSearchPlaceholder(search, searchMeta, searchColumn?.id)
+  const searchPlaceholder = getSearchPlaceholder(search, searchMeta, searchColumn?.id, labels)
   const isFiltered = table.getState().columnFilters.length > 0
   const filterColumns = table.getAllColumns().filter((column) => getColumnMeta(column).filter)
+  const toolbarContext = { ...context, tableSize }
 
   function handleSearchChange(value: string) {
     searchColumn?.setFilterValue(value || undefined)
   }
 
-  return (
-    <TooltipProvider>
-      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-        <div className="flex flex-wrap items-center gap-2">
-          {searchColumn && (
-            <Input
-              placeholder={searchPlaceholder}
-              value={searchValue}
-              onChange={(event) => handleSearchChange(event.target.value)}
-              disabled={disabled}
-              className="h-8 w-full sm:w-[200px]"
-            />
-          )}
-          {filterColumns.map((column) => {
-            const meta = getColumnMeta(column)
-            const filter = meta.filter
-            if (!filter) return null
-            const currentValue = column.getFilterValue() as string | string[] | undefined
-            return (
-              <FacetedFilter
-                key={column.id}
-                options={filter.options}
-                placeholder={filter.placeholder ?? column.id}
-                mode={filter.mode ?? 'multi'}
-                value={currentValue}
-                facets={column.getFacetedUniqueValues()}
-                onChange={(value) => column.setFilterValue(value)}
+  const leftItems: ProToolbarItem<ProTableToolbarContext<TData>>[] = [
+    ...(searchColumn
+      ? [
+          {
+            key: 'search',
+            render: () => (
+              <Input
+                placeholder={searchPlaceholder}
+                value={searchValue}
+                onChange={(event) => handleSearchChange(event.target.value)}
+                disabled={disabled}
+                className="h-8 w-full md:w-[200px]"
               />
-            )
-          })}
-          {isFiltered && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-8 px-2 text-muted-foreground"
-              onClick={() => {
-                table.resetColumnFilters()
-              }}
-              disabled={disabled}
-            >
-              Reset
-              <X className="ml-1 size-4" />
-            </Button>
-          )}
-        </div>
-
-        <div className="flex flex-wrap items-center justify-end gap-2">
-          {actions && actions.length > 0 && (
-            <>
-              <div className="flex flex-wrap items-center gap-2">{actions}</div>
-              <Separator orientation="vertical" className="hidden h-5 sm:block" />
-            </>
-          )}
-          {refresh && (
-            <ToolbarIcon label="Refresh" disabled={disabled} onClick={refresh}>
-              <RefreshCw size={16} />
-            </ToolbarIcon>
-          )}
-          {density && onTableSizeChange && (
-            <DensityMenu
-              disabled={disabled}
-              tableSize={tableSize}
-              onTableSizeChange={onTableSizeChange}
+            ),
+          },
+        ]
+      : []),
+    ...filterColumns.map((column) => {
+      const meta = getColumnMeta(column)
+      const filter = meta.filter
+      return {
+        key: `filter-${column.id}`,
+        hidden: !filter,
+        render: () => {
+          if (!filter) return null
+          const currentValue = column.getFilterValue() as string | string[] | undefined
+          return (
+            <FacetedFilter
+              options={filter.options}
+              placeholder={filter.placeholder ?? column.id}
+              multiple={filter.multiple}
+              value={currentValue}
+              facets={column.getFacetedUniqueValues()}
+              onChange={(value) => column.setFilterValue(value)}
+              className="w-full justify-start md:w-auto"
             />
-          )}
-          {columns && (
-            <DropdownMenu>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="size-8" disabled={disabled}>
-                      <SlidersHorizontal size={16} />
-                    </Button>
-                  </DropdownMenuTrigger>
-                </TooltipTrigger>
-                <TooltipContent>Columns</TooltipContent>
-              </Tooltip>
-              <DropdownMenuContent align="end" className="w-[240px] p-0">
-                <ProTableColumnSettings
-                  table={table}
-                  defaultColumnOrder={defaultColumnOrder}
-                  defaultColumnPinning={defaultColumnPinning}
-                />
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
-        </div>
-      </div>
-    </TooltipProvider>
+          )
+        },
+      }
+    }),
+    ...(isFiltered
+      ? [
+          {
+            key: 'reset',
+            label: labels?.reset ?? 'Reset',
+            icon: <X className="size-4" />,
+            variant: 'ghost' as const,
+            className: 'h-8 px-2 text-muted-foreground',
+            disabled,
+            onClick: () => {
+              table.resetColumnFilters()
+            },
+          },
+        ]
+      : []),
+  ]
+
+  const rightItems: ProToolbarItem<ProTableToolbarContext<TData>>[] = [
+    ...(actions && actions.length > 0
+      ? [...actions, { key: 'actions-separator', separator: true as const }]
+      : []),
+    ...(refresh
+      ? [
+          {
+            key: 'refresh',
+            icon: <RefreshCw size={16} />,
+            tooltip: labels?.refresh ?? 'Refresh',
+            variant: 'ghost' as const,
+            disabled,
+            onClick: refresh,
+          },
+        ]
+      : []),
+    ...(density && onTableSizeChange
+      ? [
+          {
+            key: 'density',
+            icon: <AlignJustify size={16} />,
+            tooltip: labels?.density ?? 'Density',
+            variant: 'ghost' as const,
+            disabled,
+            items: (Object.keys(DENSITY_LABELS) as TableSize[]).map((size) => ({
+              key: size,
+              label: labels?.densityOptions?.[size] ?? DENSITY_LABELS[size],
+              onClick: () => onTableSizeChange(size),
+            })),
+          },
+        ]
+      : []),
+    ...(columns
+      ? [
+          {
+            key: 'columns',
+            icon: <SlidersHorizontal size={16} />,
+            tooltip: labels?.columns ?? 'Columns',
+            'aria-label': labels?.columns ?? 'Columns',
+            variant: 'ghost' as const,
+            size: 'icon-sm' as const,
+            className: 'size-8',
+            disabled,
+            contentClassName: 'w-[240px] p-0',
+            content: () => (
+              <ProTableColumnSettings
+                table={table}
+                defaultColumnOrder={defaultColumnOrder}
+                defaultColumnPinning={defaultColumnPinning}
+              />
+            ),
+          },
+        ]
+      : []),
+  ]
+
+  return (
+    <ProToolbar
+      context={toolbarContext}
+      left={mergeToolbarRegion(leftItems, filters)}
+      right={{ options: rightItems }}
+      className="items-start md:items-center"
+    />
   )
 }
 
-function ToolbarIcon({
-  label,
-  disabled,
-  onClick,
-  children,
-}: {
-  label: string
-  disabled?: boolean
-  onClick: () => void
-  children: React.ReactNode
-}) {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="size-8"
-          disabled={disabled}
-          onClick={onClick}
-        >
-          {children}
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>{label}</TooltipContent>
-    </Tooltip>
-  )
-}
-
-function DensityMenu({
-  disabled,
-  tableSize,
-  onTableSizeChange,
-}: {
-  disabled: boolean
-  tableSize: TableSize
-  onTableSizeChange: (size: TableSize) => void
-}) {
-  return (
-    <DropdownMenu>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="size-8" disabled={disabled}>
-              <AlignJustify size={16} />
-            </Button>
-          </DropdownMenuTrigger>
-        </TooltipTrigger>
-        <TooltipContent>Density</TooltipContent>
-      </Tooltip>
-      <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Table Density</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {(Object.keys(DENSITY_LABELS) as TableSize[]).map((size) => (
-          <DropdownMenuCheckboxItem
-            key={size}
-            checked={tableSize === size}
-            onCheckedChange={() => onTableSizeChange(size)}
-          >
-            {DENSITY_LABELS[size]}
-          </DropdownMenuCheckboxItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
+function mergeToolbarRegion<TData>(
+  items: ProToolbarItem<ProTableToolbarContext<TData>>[],
+  filters?: ProToolbarItem<ProTableToolbarContext<TData>>[],
+): ProToolbarRegion<ProTableToolbarContext<TData>> {
+  return {
+    className: 'min-w-0 md:flex-1',
+    options: [...items, ...(filters ?? [])],
+  }
 }
 
 function getColumnMeta<TData>(column: Column<TData, unknown>) {
@@ -268,8 +258,10 @@ function getSearchPlaceholder(
   search: ProTableSearch | undefined,
   meta: ProTableColumnMeta | undefined,
   columnId: string | undefined,
+  labels?: ProTableToolbarLabels,
 ) {
   if (typeof search === 'object' && search.placeholder) return search.placeholder
   if (typeof meta?.search === 'object' && meta.search.placeholder) return meta.search.placeholder
+  if (labels?.search) return labels.search
   return columnId ? `Search ${columnId}...` : 'Search...'
 }

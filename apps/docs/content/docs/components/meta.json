@@ -1,6 +1,8 @@
 {
   "title": "Components",
   "pages": [
+    "pro-base",
+    "pro-toolbar",
     "pro-descriptions",
     "pro-editor",
     "pro-fields",

@@ -25,7 +25,7 @@ export function SortableRow<TData>({
     <TableRow
       ref={setNodeRef}
       data-state={row.getIsSelected() && 'selected'}
-      className="group"
+      className="group transition-colors duration-150 hover:bg-muted data-[state=selected]:bg-muted"
       style={{
         transform: CSS.Transform.toString(transform),
         transition,
@@ -37,7 +37,7 @@ export function SortableRow<TData>({
       <TableCell
         className={cn(
           paddingClass,
-          'sticky left-0 z-20 w-8 bg-background pr-0 group-data-[state=selected]:bg-muted group-hover:bg-muted',
+          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 group-data-[state=selected]:bg-muted group-hover:bg-muted',
         )}
       >
         <button

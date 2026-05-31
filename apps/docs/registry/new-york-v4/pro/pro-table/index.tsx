@@ -31,11 +31,10 @@ import {
 } from '@tanstack/react-table'
 import * as React from 'react'
 
-import { Button } from '@/components/ui/button'
+import { ProToolbar, type ProToolbarItem } from '@/registry/new-york-v4/pro/pro-toolbar'
 import { TableBody, TableHeader } from '@/components/ui/table'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
-import { ProTablePagination } from './pagination'
+import { ProTablePagination, type ProTablePaginationLabels } from './pagination'
 import { ProTableBody } from './table/body'
 import { ProTableHeader } from './table/header'
 import {
@@ -43,7 +42,9 @@ import {
   getLeafColumnIds,
   getProTableSystemColumnDefaults,
   reorderDataByRows,
+  useProTablePinnedColumnOffsets,
 } from './table/utils'
+import type { ProTableToolbarLabels } from './toolbar'
 import { ProTableToolbar } from './toolbar'
 import { ProTableBulkActions } from './toolbar/bulk-actions'
 import {
@@ -61,25 +62,10 @@ export interface ProTableRenderContext<TData> {
   table: TanStackTable<TData>
   rows: Row<TData>[]
   selectedRows: Row<TData>[]
+  tableSize: TableSize
 }
 
-export type ProTableActionContent<TData> =
-  | React.ReactNode
-  | ((context: ProTableRenderContext<TData>) => React.ReactNode)
-
-export interface ProTableAction<TData>
-  extends Omit<
-    React.ComponentProps<typeof Button>,
-    'children' | 'disabled' | 'hidden' | 'onClick'
-  > {
-  key: string
-  label: ProTableActionContent<TData>
-  icon?: ProTableActionContent<TData>
-  tooltip?: ProTableActionContent<TData>
-  disabled?: boolean | ((context: ProTableRenderContext<TData>) => boolean)
-  hidden?: boolean | ((context: ProTableRenderContext<TData>) => boolean)
-  onClick?: (context: ProTableRenderContext<TData>) => void
-}
+export type ProTableAction<TData> = ProToolbarItem<ProTableRenderContext<TData>>
 
 export type ProTableLayout = 'full' | 'auto'
 
@@ -97,6 +83,7 @@ export type ProTableRequest<TData> = (
 
 export interface ProTableToolbarOptions<TData> {
   search?: ProTableSearch
+  filters?: ProToolbarItem<ProTableRenderContext<TData>>[]
   actions?: ProTableAction<TData>[]
   options?:
     | false
@@ -105,6 +92,7 @@ export interface ProTableToolbarOptions<TData> {
         density?: boolean
         columns?: boolean
       }
+  labels?: ProTableToolbarLabels
 }
 
 export interface ProTableBulkToolbarOptions<TData> {
@@ -114,6 +102,7 @@ export interface ProTableBulkToolbarOptions<TData> {
 
 export interface ProTablePaginationOptions {
   pageSizeOptions?: number[]
+  labels?: ProTablePaginationLabels
 }
 
 export interface ProTableLoadingOptions {
@@ -196,6 +185,7 @@ export function ProTable<TData, TValue>({
     },
   )
   const [tableSize, setTableSize] = React.useState<TableSize>('default')
+  const tableRef = React.useRef<HTMLTableElement>(null)
   const dragSortOptions = dragSort === false ? undefined : dragSort
   const dragSortEnabled = Boolean(dragSortOptions)
   const dragSortRowKey = dragSortOptions?.rowKey
@@ -203,7 +193,10 @@ export function ProTable<TData, TValue>({
   const loadingRows = typeof loading === 'object' ? (loading.rows ?? 5) : 5
   const emptyOptions = getEmptyOptions(empty)
   const paginationEnabled = paginationOptions !== false
-  const pageSizeOptions = typeof paginationOptions === 'object' ? paginationOptions.pageSizeOptions : undefined
+  const pageSizeOptions =
+    typeof paginationOptions === 'object' ? paginationOptions.pageSizeOptions : undefined
+  const paginationLabels =
+    typeof paginationOptions === 'object' ? paginationOptions.labels : undefined
   const tableColumns = React.useMemo(() => withProTableColumnDefaults(columns), [columns])
   const defaultColumnOrder = React.useMemo(() => getLeafColumnIds(tableColumns), [tableColumns])
   const defaultColumnPinning = React.useMemo(
@@ -356,13 +349,14 @@ export function ProTable<TData, TValue>({
   }
 
   const rows = table.getRowModel().rows
+  const pinnedOffsets = useProTablePinnedColumnOffsets(table, tableRef, dragSortEnabled)
   const rowIds = rows.map((row) => row.id)
   const selectedRows = table.getFilteredSelectedRowModel().rows
   const visibleColumns = table.getVisibleLeafColumns()
   const visibleColumnCount = visibleColumns.length + (dragSortEnabled ? 1 : 0)
   const renderContext = React.useMemo<ProTableRenderContext<TData>>(
-    () => ({ table, rows, selectedRows }),
-    [table, rows, selectedRows],
+    () => ({ table, rows, selectedRows, tableSize }),
+    [table, rows, selectedRows, tableSize],
   )
   const isFullLayout = layout === 'full'
   const headerContent = typeof header === 'function' ? header(renderContext) : header
@@ -370,20 +364,17 @@ export function ProTable<TData, TValue>({
   const toolbarBuiltInOptions =
     toolbarOptions?.options === false ? undefined : toolbarOptions?.options
   const bulkToolbarOptions = bulkToolbar === false ? undefined : bulkToolbar
-  const toolbarActionNodes = renderActions(toolbarOptions?.actions, renderContext)
-  const bulkActionNodes = renderActions(bulkToolbarOptions?.actions, renderContext)
-  const hasBulkActions = bulkActionNodes.length > 0
-  const fillEmptyTable = isFullLayout && rows.length === 0 && !loadingEnabled && !requestLoading
+  const toolbarActionItems = toolbarOptions?.actions ?? []
+  const bulkActionItems = bulkToolbarOptions?.actions ?? []
+  const hasBulkActions = bulkActionItems.length > 0
+  const fillEmptyTable = false
   const content = (
     <>
       <div
-        className={cn(
-          'overflow-auto rounded-md border',
-          tableScrollbarClassName,
-          isFullLayout && 'min-h-0 flex-1',
-        )}
+        className={cn('w-full max-w-full overflow-auto rounded-md border', tableScrollbarClassName)}
       >
         <table
+          ref={tableRef}
           data-slot="table"
           className={cn('w-full min-w-max caption-bottom text-sm', fillEmptyTable && 'h-full')}
         >
@@ -392,6 +383,7 @@ export function ProTable<TData, TValue>({
               headerGroups={table.getHeaderGroups()}
               dragSort={dragSortEnabled}
               sticky={tableOptions?.stickyHeader ?? true}
+              pinnedOffsets={pinnedOffsets}
             />
           </TableHeader>
           <TableBody>
@@ -407,13 +399,19 @@ export function ProTable<TData, TValue>({
               paddingClass={cellPadding[tableSize]}
               emptyIcon={emptyOptions.icon}
               emptyText={emptyOptions.text}
+              pinnedOffsets={pinnedOffsets}
             />
           </TableBody>
         </table>
       </div>
+      {isFullLayout && <div className="min-h-0 flex-1" aria-hidden="true" />}
       {paginationEnabled && (
         <div className={cn(isFullLayout && 'shrink-0')}>
-          <ProTablePagination table={table} pageSizeOptions={pageSizeOptions} />
+          <ProTablePagination
+            table={table}
+            pageSizeOptions={pageSizeOptions}
+            labels={paginationLabels}
+          />
         </div>
       )}
     </>
@@ -421,7 +419,11 @@ export function ProTable<TData, TValue>({
 
   return (
     <div
-      className={cn(isFullLayout ? 'flex h-full min-h-0 flex-col gap-3' : 'space-y-3', className)}
+      className={cn(
+        'max-w-full',
+        isFullLayout ? 'flex h-full min-h-0 flex-col gap-3' : 'space-y-3',
+        className,
+      )}
     >
       {headerContent && <div className="shrink-0">{headerContent}</div>}
       {toolbar !== false && (
@@ -429,7 +431,8 @@ export function ProTable<TData, TValue>({
           table={table}
           disabled={loadingEnabled || requestLoading}
           search={toolbarOptions?.search}
-          actions={toolbarActionNodes}
+          filters={toolbarOptions?.filters}
+          actions={toolbarActionItems}
           columns={toolbarBuiltInOptions?.columns ?? true}
           density={toolbarBuiltInOptions?.density ?? true}
           refresh={toolbarBuiltInOptions?.refresh || undefined}
@@ -437,6 +440,8 @@ export function ProTable<TData, TValue>({
           onTableSizeChange={setTableSize}
           defaultColumnOrder={defaultColumnOrder}
           defaultColumnPinning={defaultColumnPinning}
+          labels={toolbarOptions?.labels}
+          context={renderContext}
         />
       )}
       {dragSortEnabled && !loading && !requestLoading ? (
@@ -448,7 +453,7 @@ export function ProTable<TData, TValue>({
       )}
       {hasBulkActions && (
         <ProTableBulkActions table={table} entityName={bulkToolbarOptions?.entityName}>
-          {bulkActionNodes}
+          <ProToolbar context={renderContext} right={{ options: bulkActionItems }} />
         </ProTableBulkActions>
       )}
     </div>
@@ -490,16 +495,17 @@ function withProTableColumnDefaults<TData, TValue>(
         ? {
             filterFn: filter.onFilter
               ? createFilterFn(filter.onFilter)
-              : getDefaultFilterFn<TData>(filter.mode),
+              : getDefaultFilterFn<TData>(filter.multiple),
           }
         : {}),
     }
   })
 }
 
-function getEmptyOptions(
-  empty: ProTableEmptyOptions | undefined,
-): { text?: React.ReactNode; icon?: React.ReactNode } {
+function getEmptyOptions(empty: ProTableEmptyOptions | undefined): {
+  text?: React.ReactNode
+  icon?: React.ReactNode
+} {
   if (
     empty &&
     typeof empty === 'object' &&
@@ -513,8 +519,8 @@ function getEmptyOptions(
   return { text: empty as React.ReactNode }
 }
 
-function getDefaultFilterFn<TData>(mode: ProTableColumnFilter['mode']) {
-  return mode === 'single' ? 'equals' : (multiValueFilter as FilterFn<TData>)
+function getDefaultFilterFn<TData>(multiple: ProTableColumnFilter['multiple']) {
+  return multiple ? (multiValueFilter as FilterFn<TData>) : 'equals'
 }
 
 function createFilterFn<TData>(
@@ -539,55 +545,4 @@ function multiValueFilter<TData>(row: Row<TData>, columnId: string, filterValue:
       : [filterValue]
 
   return values.length === 0 || values.includes(row.getValue(columnId))
-}
-
-function renderActions<TData>(
-  actions: ProTableAction<TData>[] | undefined,
-  context: ProTableRenderContext<TData>,
-) {
-  return (actions ?? [])
-    .filter((action) => !resolveActionState(action.hidden, context))
-    .map((action) => {
-      const { key, label, icon, tooltip, disabled, hidden, onClick, ...buttonProps } = action
-      void hidden
-
-      const tooltipContent = resolveActionContent(tooltip, context)
-      const button = (
-        <Button
-          key={key}
-          type="button"
-          variant="outline"
-          size="sm"
-          {...buttonProps}
-          disabled={resolveActionState(disabled, context)}
-          onClick={() => onClick?.(context)}
-        >
-          {resolveActionContent(icon, context)}
-          {resolveActionContent(label, context)}
-        </Button>
-      )
-
-      if (!tooltipContent) return button
-
-      return (
-        <Tooltip key={key}>
-          <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent>{tooltipContent}</TooltipContent>
-        </Tooltip>
-      )
-    })
-}
-
-function resolveActionState<TData>(
-  value: boolean | ((context: ProTableRenderContext<TData>) => boolean) | undefined,
-  context: ProTableRenderContext<TData>,
-) {
-  return typeof value === 'function' ? value(context) : Boolean(value)
-}
-
-function resolveActionContent<TData>(
-  value: ProTableActionContent<TData> | undefined,
-  context: ProTableRenderContext<TData>,
-) {
-  return typeof value === 'function' ? value(context) : value
 }

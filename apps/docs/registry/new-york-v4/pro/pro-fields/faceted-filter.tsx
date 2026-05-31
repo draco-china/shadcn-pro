@@ -1,9 +1,7 @@
 'use client'
 
-import * as React from 'react'
 import { Check, PlusCircle } from 'lucide-react'
-
-import { cn } from '@/lib/utils'
+import * as React from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,12 +13,9 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
 
 export interface FacetedFilterOption {
   label: string
@@ -29,13 +24,13 @@ export interface FacetedFilterOption {
 }
 
 export interface FacetedFilterProps {
-  /** Selected value(s). Single mode: string | undefined. Multi mode: string[] */
+  /** Selected value(s). Single select: string | undefined. Multiple select: string[] */
   value?: string | string[]
   onChange?: (value: string | string[] | undefined) => void
   options?: FacetedFilterOption[]
   placeholder?: string
-  /** 'single' shows radio-like behavior, 'multi' allows multiple selection (default) */
-  mode?: 'single' | 'multi'
+  /** Allows multiple selection by returning string[] values. */
+  multiple?: boolean
   /** Facet counts from getFacetedUniqueValues() — shows count next to each option */
   facets?: Map<string, number>
   className?: string
@@ -46,7 +41,7 @@ export function FacetedFilter({
   onChange,
   options = [],
   placeholder = 'Filter...',
-  mode = 'multi',
+  multiple = false,
   facets,
   className,
 }: FacetedFilterProps) {
@@ -57,7 +52,7 @@ export function FacetedFilter({
   }, [value])
 
   function handleSelect(optionValue: string) {
-    if (mode === 'single') {
+    if (!multiple) {
       if (selectedValues.has(optionValue)) {
         onChange?.(undefined)
       } else {
@@ -78,28 +73,18 @@ export function FacetedFilter({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className={cn('h-8 border-dashed', className)}
-        >
+        <Button variant="outline" size="sm" className={cn('h-8 border-dashed', className)}>
           <PlusCircle className="size-4" />
           {placeholder}
           {selectedValues.size > 0 && (
             <>
               <Separator orientation="vertical" className="mx-2 h-4" />
-              <Badge
-                variant="secondary"
-                className="rounded-sm px-1 font-normal lg:hidden"
-              >
+              <Badge variant="secondary" className="rounded-sm px-1 font-normal lg:hidden">
                 {selectedValues.size}
               </Badge>
               <div className="hidden space-x-1 lg:flex">
                 {selectedValues.size > 2 ? (
-                  <Badge
-                    variant="secondary"
-                    className="rounded-sm px-1 font-normal"
-                  >
+                  <Badge variant="secondary" className="rounded-sm px-1 font-normal">
                     {selectedValues.size} selected
                   </Badge>
                 ) : (
@@ -129,10 +114,7 @@ export function FacetedFilter({
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value)
                 return (
-                  <CommandItem
-                    key={option.value}
-                    onSelect={() => handleSelect(option.value)}
-                  >
+                  <CommandItem key={option.value} onSelect={() => handleSelect(option.value)}>
                     <div
                       className={cn(
                         'flex size-4 items-center justify-center rounded-sm border border-primary',
@@ -143,9 +125,7 @@ export function FacetedFilter({
                     >
                       <Check className="size-4 text-background" />
                     </div>
-                    {option.icon && (
-                      <option.icon className="size-4 text-muted-foreground" />
-                    )}
+                    {option.icon && <option.icon className="size-4 text-muted-foreground" />}
                     <span>{option.label}</span>
                     {facets?.get(option.value) !== undefined && (
                       <span className="ms-auto flex size-4 items-center justify-center font-mono text-xs">

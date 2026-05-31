@@ -84,7 +84,7 @@ export default function Example() {
 
 ## FacetedFilter
 
-A Popover + Checkbox filter component designed for faceted search — auto-used by `ProTable` when `meta.filter.options` is set on a column, and available standalone for forms or custom toolbars. Supports single-select and multi-select modes.
+A Popover + Checkbox filter component designed for faceted search — auto-used by `ProTable` when `meta.filter.options` is set on a column, and available standalone for forms or custom toolbars. Supports single-select and multi-select behavior with `multiple`.
 
 <ComponentPreview
   name="pro-fields-faceted-filter-demo"
@@ -100,7 +100,7 @@ A Popover + Checkbox filter component designed for faceted search — auto-used 
 | `onChange`    | `(value: string \| string[] \| undefined) => void` | — | Change handler                              |
 | `options`     | `{ label: string; value: string; icon?: ComponentType }[]` | `[]` | Filter options                      |
 | `placeholder` | `string`                            | `'Filter...'` | Button label / search placeholder                      |
-| `mode`        | `'single' \| 'multi'`               | `'multi'`   | Single-select (radio-like) or multi-select (checkbox)    |
+| `multiple`    | `boolean`                           | `false`     | Return `string[]` values when true; return a single `string` when false |
 | `facets`      | `Map<string, number>`               | —           | Optional count map, usually from TanStack Table's `getFacetedUniqueValues()`. |
 | `className`   | `string`                            | —           | Additional CSS classes                                   |
 
@@ -109,7 +109,7 @@ import { FacetedFilter } from "@/components/pro/pro-fields/faceted-filter"
 
 <FacetedFilter
   placeholder="Status"
-  mode="multi"
+  multiple
   options={[
     { label: "Active", value: "active" },
     { label: "Inactive", value: "inactive" },
@@ -464,9 +464,18 @@ The following fields cover the full ProFields surface. Use the standalone field 
     FormilySelect,
     {
       allowClear: true,
+      searchable: true,
       options: [
-        { label: "Admin", value: "admin" },
-        { label: "User", value: "user" },
+        {
+          label: "Admin",
+          value: "admin",
+          description: "Full access to team settings.",
+        },
+        {
+          label: "User",
+          value: "user",
+          description: "Can view and update assigned work.",
+        },
       ],
     },
   ]}
@@ -474,6 +483,28 @@ The following fields cover the full ProFields surface. Use the standalone field 
 ```
 
 `Input` and `Select` support `allowClear`. Clearing `Select` sends `undefined` so Formily can return to an empty value.
+
+`Select`, `Radio`, and grouped `Checkbox` options support `description` for consistent option help text. `Select` also supports `searchable` and `multiple`; multiple mode uses a `string[]` value.
+
+```tsx
+<Field
+  name="roles"
+  title="Roles"
+  decorator={[FormItem]}
+  component={[
+    FormilySelect,
+    {
+      multiple: true,
+      searchable: true,
+      placeholder: "Select roles",
+      options: [
+        { label: "Admin", value: "admin", description: "Full access." },
+        { label: "Editor", value: "editor", description: "Can edit content." },
+      ],
+    },
+  ]}
+/>
+```
 
 ### Checkbox
 
@@ -489,6 +520,33 @@ The following fields cover the full ProFields surface. Use the standalone field 
   title="Agree to terms"
   decorator={[FormItem]}
   component={[FormilyCheckbox]}
+/>
+```
+
+Use `options` for checkbox group mode. In group mode the value is `string[]`; without `options`, Checkbox uses boolean switch semantics.
+
+```tsx
+<Field
+  name="roles"
+  title="Roles"
+  decorator={[FormItem]}
+  component={[
+    FormilyCheckbox,
+    {
+      options: [
+        {
+          label: "Admin",
+          value: "admin",
+          description: "Can manage workspace settings.",
+        },
+        {
+          label: "Editor",
+          value: "editor",
+          description: "Can edit shared content.",
+        },
+      ],
+    },
+  ]}
 />
 ```
 
@@ -526,8 +584,8 @@ The following fields cover the full ProFields surface. Use the standalone field 
     FormilyRadio,
     {
       options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
+        { label: "Personal", value: "personal", description: "For individual accounts." },
+        { label: "Company", value: "company", description: "For organizations and teams." },
       ],
     },
   ]}

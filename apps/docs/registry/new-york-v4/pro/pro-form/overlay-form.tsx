@@ -1,10 +1,9 @@
 'use client'
 
 import { createForm, type Form, type IFormProps } from '@formily/core'
-import { FormProvider } from '@formily/react'
+import { FormProvider, type SchemaReactComponents } from '@formily/react'
 import * as React from 'react'
 
-import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -24,29 +23,30 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { cn } from '@/lib/utils'
-import { ProFormGrid } from './layout'
+import { ProFormActions, type ProFormActionsProps, ProFormGrid } from './layout'
+import { createSchemaFieldWithComponents, type ProFormSchema } from './schema'
 
 // ─── Shared types ──────────────────────────────────────────────────────────────
 
 interface OverlayFormProps {
   /** The element that opens the form (e.g. a Button) */
-  trigger: React.ReactNode
+  trigger?: React.ReactNode
   /** Dialog / Drawer title */
   title: string
   /** Dialog / Drawer description */
   description?: string
   /** Form contents */
   children?: React.ReactNode
+  schema?: ProFormSchema
+  schemaComponents?: SchemaReactComponents
   /** Controlled open state */
   open?: boolean
   onOpenChange?: (open: boolean) => void
   /** Called after validation passes — return/resolve to close, throw to keep open */
   onFinish?: (values: Record<string, unknown>) => void | Promise<void>
   onFinishFailed?: (errors: unknown) => void
-  /** Submit button label */
-  submitText?: string
-  /** Cancel button label — omit to hide the cancel button */
-  cancelText?: string
+  onCancel?: () => void | Promise<void>
+  submitter?: false | OverlayFormSubmitterProps
   /** Formily Form instance (created internally if not provided) */
   form?: Form
   formProps?: IFormProps
@@ -54,6 +54,15 @@ interface OverlayFormProps {
   columns?: 1 | 2 | 3 | 4
   className?: string
 }
+
+export interface OverlayFormSubmitterContext {
+  form: Form
+  submitting: boolean
+  submit: () => void | Promise<void>
+  cancel: () => void | Promise<void>
+}
+
+export interface OverlayFormSubmitterProps extends ProFormActionsProps {}
 
 // ─── Shared hook ──────────────────────────────────────────────────────────────
 
@@ -64,9 +73,10 @@ function useOverlayForm({
   onOpenChange: controlledOnOpenChange,
   onFinish,
   onFinishFailed,
+  onCancel,
 }: Pick<
   OverlayFormProps,
-  'form' | 'formProps' | 'open' | 'onOpenChange' | 'onFinish' | 'onFinishFailed'
+  'form' | 'formProps' | 'open' | 'onOpenChange' | 'onFinish' | 'onFinishFailed' | 'onCancel'
 >) {
   const [internalOpen, setInternalOpen] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
@@ -100,9 +110,10 @@ function useOverlayForm({
     }
   }
 
-  function handleCancel() {
+  async function handleCancel() {
     setOpen(false)
     activeForm.reset()
+    await onCancel?.()
   }
 
   return { activeForm, open, setOpen, loading, handleSubmit, handleCancel }
@@ -120,12 +131,14 @@ export function ModalForm({
   title,
   description,
   children,
+  schema,
+  schemaComponents,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
   onFinish,
   onFinishFailed,
-  submitText = 'Submit',
-  cancelText = 'Cancel',
+  onCancel,
+  submitter,
   form,
   formProps,
   columns,
@@ -139,17 +152,33 @@ export function ModalForm({
     onOpenChange: controlledOnOpenChange,
     onFinish,
     onFinishFailed,
+    onCancel: getSubmitterCancelHandler(submitter) ?? onCancel,
   })
+  const actions = renderOverlaySubmitter({
+    loading,
+    submitter,
+    onCancel: handleCancel,
+  })
+  const ActiveSchemaField = React.useMemo(
+    () => createSchemaFieldWithComponents(schemaComponents),
+    [schemaComponents],
+  )
+  const formContent = (
+    <>
+      {schema && <ActiveSchemaField schema={schema} />}
+      {children}
+    </>
+  )
 
   const body = columns ? (
-    <ProFormGrid columns={columns}>{children}</ProFormGrid>
+    <ProFormGrid columns={columns}>{formContent}</ProFormGrid>
   ) : (
-    <div className="space-y-4">{children}</div>
+    <div className="space-y-4">{formContent}</div>
   )
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent className={cn(widthClass, 'flex max-h-[90vh] flex-col')}>
         <DialogHeader className="shrink-0">
           <DialogTitle>{title}</DialogTitle>
@@ -164,16 +193,7 @@ export function ModalForm({
             className={cn('flex flex-1 flex-col overflow-hidden', className)}
           >
             <div className="flex-1 overflow-y-auto px-1 py-2">{body}</div>
-            <DialogFooter className="shrink-0 pt-4">
-              {cancelText && (
-                <Button type="button" variant="outline" onClick={handleCancel} disabled={loading}>
-                  {cancelText}
-                </Button>
-              )}
-              <Button type="submit" disabled={loading}>
-                {loading ? 'Submitting…' : submitText}
-              </Button>
-            </DialogFooter>
+            {actions && <DialogFooter className="shrink-0 pt-4">{actions}</DialogFooter>}
           </form>
         </FormProvider>
       </DialogContent>
@@ -193,12 +213,14 @@ export function DrawerForm({
   title,
   description,
   children,
+  schema,
+  schemaComponents,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
   onFinish,
   onFinishFailed,
-  submitText = 'Submit',
-  cancelText = 'Cancel',
+  onCancel,
+  submitter,
   form,
   formProps,
   columns,
@@ -212,17 +234,33 @@ export function DrawerForm({
     onOpenChange: controlledOnOpenChange,
     onFinish,
     onFinishFailed,
+    onCancel: getSubmitterCancelHandler(submitter) ?? onCancel,
   })
+  const actions = renderOverlaySubmitter({
+    loading,
+    submitter,
+    onCancel: handleCancel,
+  })
+  const ActiveSchemaField = React.useMemo(
+    () => createSchemaFieldWithComponents(schemaComponents),
+    [schemaComponents],
+  )
+  const formContent = (
+    <>
+      {schema && <ActiveSchemaField schema={schema} />}
+      {children}
+    </>
+  )
 
   const body = columns ? (
-    <ProFormGrid columns={columns}>{children}</ProFormGrid>
+    <ProFormGrid columns={columns}>{formContent}</ProFormGrid>
   ) : (
-    <div className="space-y-4">{children}</div>
+    <div className="space-y-4">{formContent}</div>
   )
 
   return (
     <Drawer open={open} onOpenChange={setOpen} direction={side}>
-      <DrawerTrigger asChild>{trigger}</DrawerTrigger>
+      {trigger && <DrawerTrigger asChild>{trigger}</DrawerTrigger>}
       <DrawerContent className="flex flex-col">
         <DrawerHeader className="shrink-0">
           <DrawerTitle>{title}</DrawerTitle>
@@ -237,27 +275,51 @@ export function DrawerForm({
             className={cn('flex flex-1 flex-col overflow-hidden', className)}
           >
             <div className="flex-1 overflow-y-auto px-4 py-2">{body}</div>
-            <DrawerFooter className="shrink-0">
-              <div className="flex gap-2">
-                <Button type="submit" className="flex-1" disabled={loading}>
-                  {loading ? 'Submitting…' : submitText}
-                </Button>
-                {cancelText && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="flex-1"
-                    onClick={handleCancel}
-                    disabled={loading}
-                  >
-                    {cancelText}
-                  </Button>
-                )}
-              </div>
-            </DrawerFooter>
+            {actions && <DrawerFooter className="shrink-0">{actions}</DrawerFooter>}
           </form>
         </FormProvider>
       </DrawerContent>
     </Drawer>
   )
+}
+
+function renderOverlaySubmitter({
+  loading,
+  submitter,
+  onCancel,
+}: {
+  loading: boolean
+  submitter?: false | OverlayFormSubmitterProps
+  onCancel: () => void | Promise<void>
+}) {
+  if (submitter === false) return null
+
+  const submitterActions = submitter ?? {}
+  const submitting = submitterActions.submitting ?? loading
+  const cancelOptions = submitterActions.cancel
+  const cancel =
+    cancelOptions === false
+      ? false
+      : {
+          text: 'Cancel',
+          ...cancelOptions,
+          onClick: onCancel,
+        }
+  return (
+    <ProFormActions
+      {...submitterActions}
+      cancel={cancel}
+      submitting={submitting}
+      actionsVariant="overlay"
+      align="right"
+      className={cn('w-full border-t-0 pt-0', submitterActions.className)}
+    />
+  )
+}
+
+function getSubmitterCancelHandler(submitter: false | OverlayFormSubmitterProps | undefined) {
+  if (submitter === false || submitter === undefined) return undefined
+  const cancel = submitter.cancel
+  if (cancel === false || cancel === undefined) return undefined
+  return cancel.onClick
 }

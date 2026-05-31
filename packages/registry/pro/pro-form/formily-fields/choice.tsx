@@ -1,7 +1,8 @@
 'use client'
 
 import { connect, mapProps, mapReadPretty } from '@formily/react'
-import { Checkbox } from '../../pro-fields/checkbox'
+import { Fragment } from 'react'
+import { Checkbox, type CheckboxOption } from '../../pro-fields/checkbox'
 import { Radio, type RadioOption } from '../../pro-fields/radio'
 import { Segmented, type SegmentedOption } from '../../pro-fields/segmented'
 import { Select, type SelectOption } from '../../pro-fields/select'
@@ -13,9 +14,30 @@ export const FormilyCheckbox = connect(
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
-    value: props.value ?? fieldValue<boolean>(field),
+    value: props.value ?? fieldValue<boolean | string[]>(field),
+    options: props.options ?? fieldDataSource<CheckboxOption>(field) ?? props.options,
   })),
-  mapReadPretty(({ value }) => <span className="text-sm">{value ? 'Yes' : 'No'}</span>),
+  mapReadPretty(({ value, options = [] }) => {
+    if (Array.isArray(value)) {
+      const selectedOptions = (options as CheckboxOption[]).filter((item) =>
+        value.includes(item.value),
+      )
+      return (
+        <span className="text-sm">
+          {selectedOptions.length
+            ? selectedOptions.map((option, index) => (
+                <Fragment key={option.value}>
+                  {index > 0 ? ', ' : null}
+                  {option.label}
+                </Fragment>
+              ))
+            : '-'}
+        </span>
+      )
+    }
+
+    return <span className="text-sm">{value ? 'Yes' : 'No'}</span>
+  }),
 )
 FormilyCheckbox.displayName = 'FormilyCheckbox'
 
@@ -51,11 +73,30 @@ export const FormilySelect = connect(
   mapProps((props, field) => ({
     ...props,
     disabled: field.disabled,
-    value: props.value ?? fieldValue<string>(field),
+    value: props.value ?? fieldValue<string | string[]>(field),
     options: props.options ?? fieldDataSource<SelectOption>(field) ?? [],
     placeholder: props.placeholder ?? fieldPlaceholder(field),
   })),
   mapReadPretty(({ value, options = [] }) => {
+    if (Array.isArray(value)) {
+      const selectedOptions = (options as SelectOption[]).filter((item) =>
+        value.includes(item.value),
+      )
+
+      return (
+        <span className="text-sm">
+          {selectedOptions.length
+            ? selectedOptions.map((option, index) => (
+                <Fragment key={option.value}>
+                  {index > 0 ? ', ' : null}
+                  {option.label}
+                </Fragment>
+              ))
+            : '-'}
+        </span>
+      )
+    }
+
     const option = (options as SelectOption[]).find((item) => item.value === value)
     return <span className="text-sm">{option?.label ?? value ?? '-'}</span>
   }),

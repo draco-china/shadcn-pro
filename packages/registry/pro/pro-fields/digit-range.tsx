@@ -60,7 +60,7 @@ export function DigitRange({
           onChange={handleMinChange}
           placeholder={placeholder[0]}
           disabled={disabled}
-          className="h-auto min-w-0 flex-1 border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
+          className="h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
         />
       </div>
       <span className="shrink-0 text-muted-foreground">~</span>
@@ -76,7 +76,7 @@ export function DigitRange({
           onChange={handleMaxChange}
           placeholder={placeholder[1]}
           disabled={disabled}
-          className="h-auto min-w-0 flex-1 border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
+          className="h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
         />
       </div>
       {allowClear && hasValue && (

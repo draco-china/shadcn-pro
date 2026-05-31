@@ -3,7 +3,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Button } from '@/components/ui/button'
+import { ProButton } from '@/components/pro/pro-base'
 import { cn } from '@/lib/utils'
 import {
   clampScale,
@@ -226,9 +226,10 @@ export function ImageViewer({
 function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick: () => void }) {
   const Icon = direction === 'prev' ? ChevronLeft : ChevronRight
   return (
-    <Button
+    <ProButton
       variant="ghost"
       size="icon"
+      icon={<Icon className="size-5" />}
       className={`absolute z-10 size-10 rounded-full bg-background/70 text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground ${
         direction === 'prev' ? 'left-4' : 'right-4'
       }`}
@@ -237,8 +238,6 @@ function ImageNav({ direction, onClick }: { direction: 'prev' | 'next'; onClick:
         onClick()
       }}
       aria-label={direction === 'prev' ? 'Previous image' : 'Next image'}
-    >
-      <Icon className="size-5" />
-    </Button>
+    />
   )
 }

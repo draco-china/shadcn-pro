@@ -6,15 +6,9 @@ import type { Table } from "@tanstack/react-table"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { ProButton } from "@/registry/new-york-v4/pro/pro-base"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 
 export interface ProTableBulkActionsProps<TData> {
   table: Table<TData>
@@ -102,7 +96,7 @@ export function ProTableBulkActions<TData>({
   if (selectedCount === 0) return null
 
   return (
-    <TooltipProvider>
+    <>
       <div
         aria-live="polite"
         aria-atomic="true"
@@ -125,22 +119,16 @@ export function ProTableBulkActions<TData>({
         )}
       >
         <div className="flex items-center gap-x-2 overflow-x-auto rounded-xl border bg-background/95 p-2 shadow-xl backdrop-blur-lg supports-backdrop-filter:bg-background/60">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="size-6 rounded-full"
-                aria-label="Clear selection"
-                title="Clear selection (Escape)"
-                onClick={handleClearSelection}
-              >
-                <X size={14} />
-                <span className="sr-only">Clear selection</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Clear selection (Escape)</TooltipContent>
-          </Tooltip>
+          <ProButton
+            variant="outline"
+            size="icon-xs"
+            icon={<X size={14} />}
+            className="size-6 rounded-full"
+            aria-label="Clear selection"
+            title="Clear selection (Escape)"
+            tooltip="Clear selection (Escape)"
+            onClick={handleClearSelection}
+          />
 
           <Separator
             className="h-5"
@@ -175,6 +163,6 @@ export function ProTableBulkActions<TData>({
           {children}
         </div>
       </div>
-    </TooltipProvider>
+    </>
   )
 }

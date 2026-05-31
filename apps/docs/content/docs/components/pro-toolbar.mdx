@@ -1,0 +1,127 @@
+---
+title: ProToolbar
+description: Generic three-region toolbar infrastructure for tables, editors, forms, and page actions.
+---
+
+<ComponentPreview name="pro-toolbar-demo" previewClassName="min-h-[220px]" />
+
+## Installation
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-toolbar
+```
+
+## Usage
+
+```tsx
+import { Plus, RefreshCw, SlidersHorizontal } from "lucide-react"
+import { ProToolbar } from "@/components/pro/pro-toolbar"
+
+<ProToolbar
+  context={{ table }}
+  left={{
+    className: "w-full sm:w-auto",
+    options: [
+      { key: "search", render: () => <input placeholder="Search..." /> },
+    ],
+  }}
+  right={{
+    options: [
+      { key: "refresh", icon: <RefreshCw />, tooltip: "Refresh" },
+      {
+        key: "columns",
+        icon: <SlidersHorizontal />,
+        tooltip: "Columns",
+        contentClassName: "w-56 p-2",
+        content: (context) => <ColumnSettings table={context.table} />,
+      },
+      {
+        key: "more",
+        label: "More",
+        items: [
+          { key: "archive", label: "Archive" },
+          { key: "delete", label: "Delete", danger: true, separator: "left" },
+        ],
+      },
+      { key: "create", label: "Create", icon: <Plus /> },
+    ],
+  }}
+/>
+```
+
+`ProToolbar` only exposes `left`, `center`, and `right` regions. Scenario components such as `ProTableToolbar` can add semantic slots like `filters` or `actions` on top.
+
+Use `items` for simple menu actions, and `content` for custom dropdown panels such as column settings.
+
+## Design
+
+- Regions are configured as objects: `{ options, className }`.
+- `options` is always an array.
+- Items are shape-based: `render` is custom content, `separator: true` is a separator, `items` is a menu, `content` is a custom dropdown panel, otherwise the item renders as a button.
+- `context` is generic and is passed to item callbacks, labels, icons, tooltips, disabled/loading/hidden states, copy config, menu options, and dropdown content.
+- The toolbar wraps responsively. When a region wraps on small screens, region class names can make filters/search occupy a full row with `w-full sm:w-auto`.
+
+## Item Types
+
+### Button
+
+```tsx
+{
+  key: "refresh",
+  icon: <RefreshCw />,
+  tooltip: "Refresh",
+  loading: ({ loading }) => loading,
+  onClick: ({ refresh }) => refresh(),
+}
+```
+
+### Menu
+
+```tsx
+{
+  key: "more",
+  label: "More",
+  items: [
+    { key: "archive", label: "Archive" },
+    { key: "duplicate", label: "Duplicate", shortcut: "⌘D" },
+    { key: "delete", label: "Delete", danger: true, separator: "left" },
+  ],
+}
+```
+
+Use `separator: "left"`, `"right"`, or `"both"` on menu options.
+
+### Custom Render
+
+```tsx
+{
+  key: "date-range",
+  render: (context) => (
+    <DateRangePicker value={context.range} onChange={context.setRange} />
+  ),
+}
+```
+
+Use `render` when an option needs to return arbitrary controls or business-specific content.
+
+### Dropdown Panel
+
+```tsx
+{
+  key: "columns",
+  icon: <SlidersHorizontal />,
+  tooltip: "Columns",
+  contentClassName: "w-56 p-2",
+  content: ({ table }) => <ColumnSettings table={table} />,
+}
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `context` | `TContext` | — | Generic context passed to item callbacks. |
+| `left` | `{ options, className? }` | — | Left region. |
+| `center` | `{ options, className? }` | — | Center region. |
+| `right` | `{ options, className? }` | — | Right region. |
+| `className` | `string` | — | Root toolbar className. |

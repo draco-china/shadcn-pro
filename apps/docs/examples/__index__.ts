@@ -6,6 +6,16 @@ export const Index: Record<string, any> = {}
 // biome-ignore lint/suspicious/noExplicitAny: dynamic registry index
 export const ExamplesIndex: Record<string, Record<string, any>> = {
   'new-york-v4': {
+    'pro-base-demo': {
+      name: 'pro-base-demo',
+      filePath: 'registry/new-york-v4/examples/pro-base-demo.tsx',
+      component: React.lazy(() => import('@/registry/new-york-v4/examples/pro-base-demo')),
+    },
+    'pro-toolbar-demo': {
+      name: 'pro-toolbar-demo',
+      filePath: 'registry/new-york-v4/examples/pro-toolbar-demo.tsx',
+      component: React.lazy(() => import('@/registry/new-york-v4/examples/pro-toolbar-demo')),
+    },
     'pro-fields-demo': {
       name: 'pro-fields-demo',
       filePath: 'registry/new-york-v4/examples/pro-fields-demo.tsx',

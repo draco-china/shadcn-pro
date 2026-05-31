@@ -4,8 +4,8 @@ import { useField } from '@formily/react'
 import { observer } from '@formily/reactive-react'
 import { InfoIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
-import { Label } from '@/components/ui/label'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { Label } from '@/registry/new-york-v4/ui/label'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/registry/new-york-v4/ui/tooltip'
 import { cn } from '@/lib/utils'
 
 export interface FormItemProps {
@@ -20,7 +20,7 @@ export interface FormItemProps {
    */
   required?: boolean
   /**
-   * Extra description below the field
+   * Field description. Falls back to field.description and renders as the label tooltip.
    */
   description?: ReactNode
   /**
@@ -45,8 +45,8 @@ export const FormItem = observer(
     const fieldLabel = label ?? formField.title
     const fieldRequired = required ?? formField.required
     const errors = formField.selfErrors ?? []
-    const fieldDescription = description ?? formField.description
-    const fieldTooltip = tooltip
+    const fieldTooltip = tooltip ?? description ?? formField.description
+    const fieldExtra = extra
 
     return (
       <div className={cn('space-y-1.5', className)}>
@@ -83,15 +83,13 @@ export const FormItem = observer(
 
         {children}
 
-        {fieldDescription && <p className="text-xs text-muted-foreground">{fieldDescription}</p>}
-
         {errors.length > 0 && (
           <p className="text-xs text-destructive" role="alert">
             {errors.join(', ')}
           </p>
         )}
 
-        {extra && <div className="text-xs text-muted-foreground">{extra}</div>}
+        {fieldExtra && <div className="text-xs text-muted-foreground">{fieldExtra}</div>}
       </div>
     )
   },

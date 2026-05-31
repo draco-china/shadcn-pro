@@ -32,6 +32,7 @@ const columns: ColumnDef<User>[] = [
     meta: {
       filter: {
         placeholder: "Role",
+        multiple: true,
         options: [
           { label: "Admin", value: "admin" },
           { label: "Editor", value: "editor" },
@@ -47,7 +48,6 @@ const columns: ColumnDef<User>[] = [
       filter: {
         placeholder: "Status",
         variant: "text",
-        mode: "single",
         options: [
           { label: "Active", value: "active" },
           { label: "Inactive", value: "inactive" },

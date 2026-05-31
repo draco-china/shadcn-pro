@@ -1,7 +1,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { Button } from '@/components/ui/button'
+import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 
 export interface ProFormLayoutProps {
@@ -31,44 +31,114 @@ export function ProFormGrid({
   )
 }
 
-export interface ProFormActionsProps {
-  submitText?: string
-  resetText?: string
-  showReset?: boolean
-  onReset?: () => void | Promise<void>
+export interface ProFormSubmitActionProps {
+  text?: string
+  submittingText?: string
+  hidden?: boolean
+  disabled?: boolean
   loading?: boolean
+  icon?: ReactNode
+}
+
+export interface ProFormCancelActionProps {
+  text?: string
+  hidden?: boolean
+  disabled?: boolean
+  icon?: ReactNode
+  onClick?: () => void | Promise<void>
+}
+
+export interface ProFormResetActionProps {
+  text?: string
+  hidden?: boolean
+  disabled?: boolean
+  icon?: ReactNode
+  onClick?: () => void | Promise<void>
+}
+
+export interface ProFormActionsProps {
+  submitting?: boolean
+  loading?: boolean
+  submit?: ProFormSubmitActionProps | false
+  cancel?: ProFormCancelActionProps | false
+  reset?: ProFormResetActionProps | false
+  actionsVariant?: 'page' | 'inline' | 'overlay'
   align?: 'left' | 'center' | 'right'
   className?: string
   children?: ReactNode
 }
 
-const alignClass: Record<string, string> = {
-  left: 'justify-start',
-  center: 'justify-center',
-  right: 'justify-end',
-}
-
 export function ProFormActions({
-  submitText = 'Submit',
-  resetText = 'Reset',
-  showReset = false,
-  onReset,
+  submitting,
   loading = false,
+  submit,
+  cancel,
+  reset,
+  actionsVariant = 'inline',
   align = 'left',
   className,
   children,
 }: ProFormActionsProps) {
+  const submitOptions = submit === false ? undefined : (submit ?? {})
+  const cancelOptions = cancel === false ? undefined : cancel
+  const resetOptions = reset === false ? undefined : reset
+  const isSubmitting =
+    submitOptions?.loading !== undefined ? submitOptions.loading : (submitting ?? loading)
+  const items: ProToolbarItem[] = [
+    ...(cancelOptions && !cancelOptions.hidden
+      ? [
+          {
+            key: 'cancel',
+            label: cancelOptions.text ?? 'Cancel',
+            icon: cancelOptions.icon,
+            variant: 'outline' as const,
+            disabled: cancelOptions.disabled ?? isSubmitting,
+            onClick: cancelOptions.onClick,
+          },
+        ]
+      : []),
+    ...(resetOptions && !resetOptions.hidden
+      ? [
+          {
+            key: 'reset',
+            label: resetOptions.text ?? 'Reset',
+            icon: resetOptions.icon,
+            variant: 'outline' as const,
+            disabled: resetOptions.disabled ?? isSubmitting,
+            onClick: resetOptions.onClick,
+          },
+        ]
+      : []),
+    ...(submitOptions?.hidden
+      ? []
+      : [
+          {
+            key: 'submit',
+            label: isSubmitting
+              ? (submitOptions?.submittingText ?? 'Submitting...')
+              : (submitOptions?.text ?? 'Submit'),
+            icon: submitOptions?.icon,
+            loading: isSubmitting,
+            disabled: submitOptions?.disabled || isSubmitting,
+            htmlType: 'submit' as const,
+          },
+        ]),
+  ]
+
+  const toolbarClassName = cn(
+    actionsVariant === 'overlay' && 'border-t pt-4',
+    actionsVariant === 'page' && 'border-b pb-3',
+    'pt-2',
+    className,
+  )
+  const actionItems = children ? [...items, { key: 'children', render: () => children }] : items
+
   return (
-    <div className={cn('flex items-center gap-2 pt-2', alignClass[align], className)}>
-      <Button type="submit" disabled={loading}>
-        {loading ? 'Submitting...' : submitText}
-      </Button>
-      {showReset && (
-        <Button type="button" variant="outline" onClick={onReset}>
-          {resetText}
-        </Button>
-      )}
-      {children}
-    </div>
+    <ProToolbar
+      left={align === 'left' ? { options: actionItems } : undefined}
+      center={align === 'center' ? { options: actionItems } : undefined}
+      right={align === 'right' ? { options: actionItems } : undefined}
+      className={toolbarClassName}
+    />
   )
 }

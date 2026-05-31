@@ -10,7 +10,10 @@ import { DatePicker } from '@/registry/new-york-v4/pro/pro-fields/date-picker'
 import { DateRangePicker } from '@/registry/new-york-v4/pro/pro-fields/date-range-picker'
 import { DateTimePicker } from '@/registry/new-york-v4/pro/pro-fields/date-time-picker'
 import { Digit } from '@/registry/new-york-v4/pro/pro-fields/digit'
-import { DigitRange } from '@/registry/new-york-v4/pro/pro-fields/digit-range'
+import {
+  DigitRange,
+  type DigitRangeValue,
+} from '@/registry/new-york-v4/pro/pro-fields/digit-range'
 import { FacetedFilter } from '@/registry/new-york-v4/pro/pro-fields/faceted-filter'
 import { Input } from '@/registry/new-york-v4/pro/pro-fields/input'
 import { Money } from '@/registry/new-york-v4/pro/pro-fields/money'
@@ -105,11 +108,11 @@ export default function ProFieldsDemo() {
   const [date, setDate] = useState<Date>()
   const [dateTime, setDateTime] = useState<Date>()
   const [dateRange, setDateRange] = useState<{ from?: Date; to?: Date }>()
-  const [slider, setSlider] = useState([40])
+  const [slider, setSlider] = useState(40)
   const [rate, setRate] = useState(3)
   const [money, setMoney] = useState<number>()
   const [digit, setDigit] = useState<number>()
-  const [digitRange, setDigitRange] = useState<[number, number]>()
+  const [digitRange, setDigitRange] = useState<DigitRangeValue>()
   const [statusFilter, setStatusFilter] = useState<string[]>(['in-progress'])
   const [contacts, setContacts] = useState([{ name: 'Alice', email: 'alice@example.com' }])
 
@@ -121,7 +124,11 @@ export default function ProFieldsDemo() {
         <Field label="Password"><Password placeholder="Enter password" /></Field>
         <Field label="Textarea"><Textarea placeholder="Enter multi-line text" rows={3} /></Field>
         <Field label="Captcha">
-          <Captcha placeholder="Enter code" onSend={async () => { await new Promise(r => setTimeout(r, 1000)) }} />
+          <Captcha
+            placeholder="Enter code"
+            buttonText="Send code"
+            onRefresh={() => {}}
+          />
         </Field>
       </Section>
 
@@ -131,15 +138,15 @@ export default function ProFieldsDemo() {
           <Digit value={digit} onChange={setDigit} placeholder="0" min={0} max={100} />
         </Field>
         <Field label="Digit Range">
-          <DigitRange value={digitRange} onChange={setDigitRange} min={0} max={100} />
+          <DigitRange value={digitRange} onChange={setDigitRange} />
         </Field>
         <Field label="Money">
           <Money value={money} onChange={setMoney} placeholder="0.00" currency="USD" />
         </Field>
         <Field label="Slider">
           <div className="pt-2">
-            <Slider value={slider} onValueChange={setSlider} min={0} max={100} step={1} />
-            <p className="mt-1 text-xs text-muted-foreground">Value: {slider[0]}</p>
+            <Slider value={slider} onChange={setSlider} min={0} max={100} step={1} />
+            <p className="mt-1 text-xs text-muted-foreground">Value: {slider}</p>
           </div>
         </Field>
         <Field label="Rate">
@@ -172,7 +179,7 @@ export default function ProFieldsDemo() {
           <Checkbox>Accept Terms of Service</Checkbox>
         </Field>
         <Field label="Switch">
-          <Switch defaultChecked />
+          <Switch value />
         </Field>
         <Field label="Segmented">
           <Segmented
@@ -223,7 +230,7 @@ export default function ProFieldsDemo() {
         </Field>
         <div className="sm:col-span-2">
           <Field label="Upload">
-            <Upload accept="image/*" maxFiles={3} />
+            <Upload accept="image/*" maxCount={3} />
           </Field>
         </div>
       </Section>

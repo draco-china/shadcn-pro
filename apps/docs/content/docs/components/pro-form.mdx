@@ -47,35 +47,41 @@ bun add @formily/core @formily/react @formily/reactive-react date-fns lucide-rea
 ## Usage
 
 ```tsx
-import { createForm, ProForm, SchemaField } from "@/components/pro/pro-form"
+import { createForm, ProForm } from "@/components/pro/pro-form"
 
 const form = createForm()
+const schema = {
+  type: "object",
+  properties: {
+    username: {
+      type: "string",
+      title: "Username",
+      required: true,
+      "x-component-props": { placeholder: "Enter username" },
+    },
+    email: {
+      type: "string",
+      title: "Email",
+      required: true,
+      "x-component-props": { type: "email", placeholder: "user@example.com" },
+    },
+  },
+}
 
 export default function BasicForm() {
   return (
-    <ProForm form={form} onFinish={(values) => console.log(values)}>
-      <SchemaField>
-        <SchemaField.String
-          name="username"
-          title="Username"
-          required
-          x-decorator="FormItem"
-          x-component="Input"
-          x-component-props={{ placeholder: "Enter username" }}
-        />
-        <SchemaField.String
-          name="email"
-          title="Email"
-          required
-          x-decorator="FormItem"
-          x-component="Input"
-          x-component-props={{ type: "email", placeholder: "user@example.com" }}
-        />
-      </SchemaField>
-    </ProForm>
+    <ProForm form={form} schema={schema} onFinish={(values) => console.log(values)} />
   )
 }
 ```
+
+`ProForm` renders `schema` through the built-in `SchemaField`, so regular JSON schema forms do not need to import or render `<SchemaField>` manually. The schema renderer automatically fills common defaults:
+
+- `string` → `Input`
+- `number` / `integer` → `Digit`
+- `boolean` → `Switch`
+- `enum` → `Select`
+- field schemas get `x-decorator: "FormItem"` unless explicitly configured
 
 ## Examples
 
@@ -93,10 +99,10 @@ Show or hide fields dynamically based on other field values.
 
 ### Schema-Driven
 
-Define your entire form with a JSON schema:
+Define your entire form with a JSON schema. You can pass the schema directly to `ProForm`:
 
 ```tsx
-import { createForm, ProForm, SchemaField } from "@/components/pro/pro-form"
+import { ProForm } from "@/components/pro/pro-form"
 
 const schema = {
   type: "object",
@@ -105,13 +111,11 @@ const schema = {
       type: "string",
       title: "Username",
       required: true,
-      "x-component": "Input",
       "x-validator": [{ required: true, message: "Username is required" }],
     },
     role: {
       type: "string",
       title: "Role",
-      "x-component": "Select",
       enum: [
         { label: "Admin", value: "admin" },
         { label: "User", value: "user" },
@@ -121,59 +125,135 @@ const schema = {
     notifications: {
       type: "boolean",
       title: "Enable notifications",
-      "x-component": "Switch",
     },
   },
 }
 
-const form = createForm()
-
 export default function SchemaForm() {
   return (
-    <ProForm form={form} onFinish={(values) => console.log(values)}>
-      <SchemaField schema={schema} />
-    </ProForm>
+    <ProForm schema={schema} onFinish={(values) => console.log(values)} />
   )
 }
 ```
+
+Use `schemaComponents` when a schema references project-specific components:
+
+```tsx
+<ProForm
+  schema={schema}
+  schemaComponents={{
+    UserPicker,
+  }}
+/>
+```
+
+### Reactions
+
+Formily `x-reactions` are passed through unchanged, so conditional visibility and linkage can live in schema instead of React conditionals:
+
+```tsx
+const schema = {
+  type: "object",
+  properties: {
+    type: {
+      type: "string",
+      title: "Type",
+      enum: ["personal", "company"],
+    },
+    companyName: {
+      type: "string",
+      title: "Company Name",
+      "x-reactions": {
+        dependencies: ["type"],
+        fulfill: {
+          state: {
+            visible: "{{$deps[0] === 'company'}}",
+          },
+        },
+      },
+    },
+  },
+}
+```
+
+### Header Submitter
+
+```tsx
+<ProForm
+  submitter={{
+    submit: { text: "保存", submittingText: "保存中..." },
+    cancel: { text: "取消", onClick: () => router.back() },
+    header: (actions) => (
+      <div className="flex items-start justify-between border-b pb-4">
+        <div>
+          <h1 className="text-lg font-semibold">新增套餐</h1>
+          <p className="text-sm text-muted-foreground">
+            配置套餐基础信息、价格周期和节点授权。
+          </p>
+        </div>
+        {actions}
+      </div>
+    ),
+  }}
+  onFinish={async (values) => {
+    await createPackage(values)
+  }}
+>
+  {/* fields */}
+</ProForm>
+```
+
+`submitter.header` and `submitter.footer` receive the default actions node. Use them when a page needs title, description, tabs, status, or any custom layout around the built-in submit/cancel/reset buttons.
 
 ### Array Fields
 
 Dynamic list of items with add/remove controls:
 
-```tsx
-<SchemaField.Array
-  name="users"
-  title="Team Members"
-  x-decorator="FormItem"
-  x-component="ArrayField"
->
-  <SchemaField.Object>
-    <SchemaField.String
-      name="name"
-      title="Name"
-      x-decorator="FormItem"
-      x-component="Input"
-    />
-  </SchemaField.Object>
-</SchemaField.Array>
+```ts
+const schema = {
+  type: "object",
+  properties: {
+    users: {
+      type: "array",
+      title: "Team Members",
+      "x-component": "ArrayField",
+      items: {
+        type: "object",
+        properties: {
+          name: {
+            type: "string",
+            title: "Name",
+          },
+        },
+      },
+    },
+  },
+}
 ```
 
 ### Object Fields
 
 Nested object grouping with optional card wrapper:
 
-```tsx
-<SchemaField.Object
-  name="address"
-  title="Address"
-  x-component="ObjectField"
-/>
+```ts
+const schema = {
+  type: "object",
+  properties: {
+    address: {
+      type: "object",
+      title: "Address",
+      "x-component": "ObjectField",
+      properties: {
+        city: { type: "string", title: "City" },
+      },
+    },
+  },
+}
 ```
 
 ### Modal Form
 
-Open a form inside a Dialog. Pass a `trigger` element — the dialog opens on click and closes automatically after a successful submit.
+Open a form inside a Dialog. Pass a `trigger` element for uncontrolled usage, or omit `trigger` and control it with `open` / `onOpenChange`. `schema` and `schemaComponents` are supported the same way as `ProForm`.
 
 <ComponentPreview name="pro-form-modal-demo" previewClassName="min-h-[280px]" />
 
@@ -183,37 +263,39 @@ Same as Modal Form but rendered inside a side Drawer. Use the `side` prop to con
 
 <ComponentPreview name="pro-form-drawer-demo" previewClassName="min-h-[280px]" />
 
-### Field Description
+### Field Tooltip and Extra
 
-Add a `description` property to a schema field to display helper text below the input:
+`FormItem` follows Formily's decorator semantics: `tooltip` renders as the info icon beside the label, while `extra` renders helper text below the field. Schema `description` also renders as the label tooltip, and an explicit `tooltip` takes priority.
 
 ```tsx
-<SchemaField>
-  <SchemaField.String
-    name="email"
-    title="Email"
-    required
-    description="We will never share your email with anyone."
-    x-decorator="FormItem"
-    x-component="Input"
-    x-component-props={{ placeholder: 'user@example.com' }}
-  />
-  <SchemaField.String
-    name="bio"
-    title="Bio"
-    description="Max 200 characters."
-    x-decorator="FormItem"
-    x-component="Textarea"
-  />
-  <SchemaField.Boolean
-    name="active"
-    title="Enable account"
-    description="Disabled accounts cannot sign in."
-    x-decorator="FormItem"
-    x-component="Switch"
-  />
-</SchemaField>
+<ProForm
+  schema={{
+    type: "object",
+    properties: {
+      email: {
+        type: "string",
+        title: "Email",
+        required: true,
+        description: "We will never share your email with anyone.",
+        "x-component-props": { placeholder: "user@example.com" },
+      },
+      bio: {
+        type: "string",
+        title: "Bio",
+        "x-component": "Textarea",
+        "x-decorator-props": {
+          tooltip: "Shown on your public profile.",
+          extra: "Max 200 characters.",
+        },
+      },
+    },
+  }}
+/>
 ```
+
+### Manual SchemaField
+
+`SchemaField` is still exported for advanced JSX composition or local recursive rendering. Prefer `ProForm schema={schema}` for normal JSON schema forms.
 
 ## API Reference
 
@@ -223,17 +305,32 @@ Add a `description` property to a schema field to display helper text below the 
 |---|---|---|---|
 | `form` | `Form` | internal form | Formily form instance created with `createForm()`. Omit to let `ProForm` create one. |
 | `formProps` | `IFormProps` | — | Options used when `ProForm` creates the internal form. |
+| `schema` | `ISchema` | — | JSON schema rendered by the built-in schema field. Defaults are inferred for common field types. |
+| `schemaComponents` | `SchemaReactComponents` | — | Extra components available to JSON schema. |
 | `children` | `ReactNode` | — | Form fields and layout components. |
 | `onFinish` | `(values) => void \| Promise<void>` | — | Called after successful validation. |
 | `onFinishFailed` | `(errors) => void` | — | Called when validation fails on submit. |
 | `onReset` | `() => void \| Promise<void>` | — | Called after reset completes. |
-| `submitText` | `string` | `'Submit'` | Label for the submit button. |
-| `showReset` | `boolean` | `false` | Show a reset button alongside submit. |
-| `resetText` | `string` | `'Reset'` | Label for the reset button. |
-| `hideActions` | `boolean` | `false` | Hide the bottom action bar — place `<ProFormActions />` manually. |
-| `actionsAlign` | `'left' \| 'center' \| 'right'` | `'left'` | Alignment of the action bar. |
+| `submitter` | `false \| ProFormSubmitterProps` | `{}` | Built-in submitter config. Set to `false` to hide actions. |
 | `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout. Wraps fields in `ProFormGrid` automatically. |
 | `className` | `string` | — | Additional className for the `<form>` element. |
+
+### ProFormSubmitter
+
+Object config for the built-in submit/cancel/reset area. `header` renders above the form and `footer` renders below it; both receive the default actions node.
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `position` | `'header' \| 'footer'` | `'footer'` | Where default actions render when no `header` slot is provided. |
+| `submit` | `false \| ProFormSubmitActionProps` | `{}` | Submit button config. Set `false` or `hidden: true` to hide it. |
+| `cancel` | `false \| ProFormCancelActionProps` | — | Cancel button config. Omit to hide it. |
+| `reset` | `false \| ProFormResetActionProps` | — | Reset button config. Omit to hide it. |
+| `submitting` | `boolean` | — | Controlled submitting state for default actions. |
+| `loading` | `boolean` | `false` | Fallback loading state for default actions. |
+| `actionsVariant` | `'page' \| 'inline' \| 'overlay'` | header: `'page'`, footer: `'inline'` | Visual variant for actions. |
+| `align` | `'left' \| 'center' \| 'right'` | header: `'right'`, footer: `'left'` | Alignment of default actions. |
+| `header` | `ReactNode \| (actions, context) => ReactNode` | — | Custom header submitter slot. |
+| `footer` | `ReactNode \| (actions, context) => ReactNode` | default footer renderer | Custom footer submitter slot. |
 
 ### ProFormGrid
 
@@ -247,15 +344,16 @@ Multi-column grid container — fields inside are evenly distributed.
 
 ### ProFormActions
 
-Standalone action bar — use with `hideActions` to position it freely.
+Standalone action bar — use directly when a page needs to compose actions outside `ProForm`.
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `submitText` | `string` | `'Submit'` | Label for the submit button. |
-| `showReset` | `boolean` | `false` | Show a reset button. |
-| `resetText` | `string` | `'Reset'` | Label for the reset button. |
-| `onReset` | `() => void \| Promise<void>` | — | Reset callback. |
-| `loading` | `boolean` | `false` | Shows loading state on the submit button. |
+| `submit` | `false \| ProFormSubmitActionProps` | `{}` | Submit button config. |
+| `cancel` | `false \| ProFormCancelActionProps` | — | Cancel button config. |
+| `reset` | `false \| ProFormResetActionProps` | — | Reset button config. |
+| `submitting` | `boolean` | — | Controlled submitting state. |
+| `loading` | `boolean` | `false` | Fallback loading state. |
+| `actionsVariant` | `'page' \| 'inline' \| 'overlay'` | `'inline'` | Visual variant for page header, inline, or overlay footer actions. |
 | `align` | `'left' \| 'center' \| 'right'` | `'left'` | Alignment of buttons. |
 | `children` | `ReactNode` | — | Extra buttons or content to render alongside actions. |
 
@@ -265,19 +363,20 @@ A `ProForm` embedded inside a shadcn `Dialog`. The dialog opens when the `trigge
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `trigger` | `ReactNode` | — | Element that opens the dialog on click. |
+| `trigger` | `ReactNode` | — | Optional element that opens the dialog on click. Omit for controlled open mode. |
 | `title` | `string` | — | Dialog title. |
 | `description` | `string` | — | Optional subtitle shown below the title. |
+| `schema` | `ISchema` | — | JSON schema rendered inside the form. |
+| `schemaComponents` | `SchemaReactComponents` | — | Extra schema components. |
 | `open` | `boolean` | — | Controlled open state. |
 | `onOpenChange` | `(open: boolean) => void` | — | Controlled open state handler. |
 | `onFinish` | `(values) => void \| Promise<void>` | — | Called after successful validation. Dialog closes on resolve. |
 | `onFinishFailed` | `(errors) => void` | — | Called when validation fails. Dialog stays open. |
-| `submitText` | `string` | `'Submit'` | Label for the submit button. |
-| `cancelText` | `string` | `'Cancel'` | Label for the cancel button. |
+| `submitter` | `false \| OverlayFormSubmitterProps` | `{}` | Submitter config. Set `false` to hide footer actions. |
 | `form` | `Form` | internal | Formily form instance. |
 | `formProps` | `IFormProps` | — | Options when creating the internal form. |
 | `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout. |
-| `widthClass` | `string` | `'sm:max-w-[480px]'` | Tailwind class controlling dialog width. |
+| `widthClass` | `string` | `'sm:max-w-lg'` | Tailwind class controlling dialog width. |
 | `className` | `string` | — | Additional className for the form element. |
 | `children` | `ReactNode` | — | Form fields (`SchemaField` nodes or layout components). |
 
@@ -287,16 +386,17 @@ Identical to `ModalForm` but renders inside a shadcn `Drawer` that slides in fro
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `trigger` | `ReactNode` | — | Element that opens the drawer on click. |
+| `trigger` | `ReactNode` | — | Optional element that opens the drawer on click. Omit for controlled open mode. |
 | `title` | `string` | — | Drawer title. |
 | `description` | `string` | — | Optional subtitle shown below the title. |
+| `schema` | `ISchema` | — | JSON schema rendered inside the form. |
+| `schemaComponents` | `SchemaReactComponents` | — | Extra schema components. |
 | `side` | `'right' \| 'left' \| 'top' \| 'bottom'` | `'right'` | Which edge the drawer slides in from. |
 | `open` | `boolean` | — | Controlled open state. |
 | `onOpenChange` | `(open: boolean) => void` | — | Controlled open state handler. |
 | `onFinish` | `(values) => void \| Promise<void>` | — | Called after successful validation. Drawer closes on resolve. |
 | `onFinishFailed` | `(errors) => void` | — | Called when validation fails. Drawer stays open. |
-| `submitText` | `string` | `'Submit'` | Label for the submit button. |
-| `cancelText` | `string` | `'Cancel'` | Label for the cancel button. |
+| `submitter` | `false \| OverlayFormSubmitterProps` | `{}` | Submitter config. Set `false` to hide footer actions. |
 | `form` | `Form` | internal | Formily form instance. |
 | `formProps` | `IFormProps` | — | Options when creating the internal form. |
 | `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout. |

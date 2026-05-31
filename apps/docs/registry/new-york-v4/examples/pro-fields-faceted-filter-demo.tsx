@@ -39,6 +39,7 @@ export default function ProFieldsFacetedFilterDemo() {
         <Label className="text-xs text-muted-foreground">Multi-select</Label>
         <FacetedFilter
           placeholder="Status"
+          multiple
           value={status}
           options={statusOptions}
           facets={statusFacets}
@@ -51,7 +52,6 @@ export default function ProFieldsFacetedFilterDemo() {
         <Label className="text-xs text-muted-foreground">Single-select</Label>
         <FacetedFilter
           placeholder="Priority"
-          mode="single"
           value={priority}
           options={priorityOptions}
           facets={priorityFacets}

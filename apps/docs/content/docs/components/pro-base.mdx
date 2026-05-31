@@ -1,0 +1,115 @@
+---
+title: ProBase
+description: Shared low-level primitives used by Pro components.
+---
+
+<ComponentPreview name="pro-base-demo" previewClassName="min-h-[160px]" />
+
+## Installation
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-base
+```
+
+## Usage
+
+```tsx
+import { Copy, RefreshCw } from "lucide-react"
+import { ProButton } from "@/components/pro/pro-base"
+
+<ProButton
+  icon={<Copy />}
+  tooltip="Copy link"
+  copy={{
+    text: () => window.location.href,
+    success: "Copied",
+    error: "Copy failed",
+  }}
+/>
+```
+
+`ProButton` centralizes Button + Tooltip + loading + copy feedback for higher-level Pro components. Copy behavior is configured through the `copy` object. When copy succeeds, the icon temporarily changes to a green check; failed copy shows an error icon and error tooltip.
+
+`useProFullscreen` centralizes controlled/uncontrolled fullscreen behavior for components such as editors, viewers, previews, and panels.
+
+## Examples
+
+### Async Action
+
+```tsx
+<ProButton
+  icon={<RefreshCw />}
+  tooltip="Refresh"
+  loading={isRefreshing}
+  onClick={() => refresh()}
+>
+  Refresh
+</ProButton>
+```
+
+`onClick` can be sync or async. Sync handlers run as normal. Promise-like handlers automatically enter a temporary loading state and ignore repeated clicks until settled.
+
+### Copy
+
+```tsx
+<ProButton
+  icon={<Copy />}
+  tooltip="Copy API key"
+  copy={{
+    text: apiKey,
+    success: "Copied",
+    error: "Copy failed",
+  }}
+/>
+```
+
+### Fullscreen
+
+```tsx
+import { useProFullscreen } from "@/components/pro/pro-base"
+
+function PreviewPanel() {
+  const {
+    ref,
+    fullscreen,
+    isFixedFullscreen,
+    isScreenFullscreen,
+    setFullscreen,
+  } = useProFullscreen<HTMLDivElement>({
+    mode: "screen",
+  })
+
+  return (
+    <div ref={ref}>
+      <button onClick={() => setFullscreen(!fullscreen)}>
+        {fullscreen ? "Exit" : "Fullscreen"}
+      </button>
+      <div>{isFixedFullscreen || isScreenFullscreen ? "Fullscreen" : "Inline"}</div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `icon` | `ReactNode` | — | Optional leading icon. |
+| `tooltip` | `ReactNode` | — | Tooltip content. If omitted, a normal shadcn `Button` is rendered without tooltip wrappers. |
+| `copy` | `{ text, success?, error?, resetDuration?, onSuccess?, onError? }` | — | Copy configuration. `text` can be a string or async function. |
+| `loading` | `boolean` | `false` | Forces loading state. |
+| `disabled` | `boolean` | `false` | Disables the button. Loading also disables it. |
+| `onClick` | `(event) => void \| Promise<void>` | — | Click handler. Sync handlers are not wrapped in async state. |
+| `children` | `ReactNode` | — | Button label/content. |
+
+All other props are passed to the underlying shadcn/ui `Button`.
+
+### useProFullscreen
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fullscreen` | `boolean` | — | Controlled fullscreen state. |
+| `defaultFullscreen` | `boolean` | `false` | Initial uncontrolled fullscreen state. |
+| `onFullscreenChange` | `(fullscreen: boolean) => void` | — | Called when fullscreen state changes. |
+| `mode` | `'fixed' \| 'screen'` | `'fixed'` | Fixed-position simulated fullscreen or browser Fullscreen API. |
+| `ref` | `RefObject<HTMLElement>` | internal ref | Optional target element ref. |

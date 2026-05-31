@@ -24,13 +24,13 @@ export interface FacetedFilterOption {
 }
 
 export interface FacetedFilterProps {
-  /** Selected value(s). Single mode: string | undefined. Multi mode: string[] */
+  /** Selected value(s). Single select: string | undefined. Multiple select: string[] */
   value?: string | string[]
   onChange?: (value: string | string[] | undefined) => void
   options?: FacetedFilterOption[]
   placeholder?: string
-  /** 'single' shows radio-like behavior, 'multi' allows multiple selection (default) */
-  mode?: 'single' | 'multi'
+  /** Allows multiple selection by returning string[] values. */
+  multiple?: boolean
   /** Facet counts from getFacetedUniqueValues() — shows count next to each option */
   facets?: Map<string, number>
   className?: string
@@ -41,7 +41,7 @@ export function FacetedFilter({
   onChange,
   options = [],
   placeholder = 'Filter...',
-  mode = 'multi',
+  multiple = false,
   facets,
   className,
 }: FacetedFilterProps) {
@@ -52,7 +52,7 @@ export function FacetedFilter({
   }, [value])
 
   function handleSelect(optionValue: string) {
-    if (mode === 'single') {
+    if (!multiple) {
       if (selectedValues.has(optionValue)) {
         onChange?.(undefined)
       } else {

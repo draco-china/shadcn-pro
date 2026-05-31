@@ -1,25 +1,18 @@
 'use client'
 
-import { Check, Copy } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Copy } from 'lucide-react'
+import { ProButton } from '@/components/pro/pro-base'
 import { cn } from '@/lib/utils'
 import type { ViewerTheme } from './syntax'
 
 export interface CodeViewerHeaderProps {
   title: string
-  copied: boolean
+  code: string
   embedded: boolean
   theme: ViewerTheme
-  onCopy: () => void
 }
 
-export function CodeViewerHeader({
-  title,
-  copied,
-  embedded,
-  theme,
-  onCopy,
-}: CodeViewerHeaderProps) {
+export function CodeViewerHeader({ title, code, embedded, theme }: CodeViewerHeaderProps) {
   const isLight = theme === 'light'
 
   return (
@@ -39,9 +32,12 @@ export function CodeViewerHeader({
           {title}
         </span>
       </div>
-      <Button
+      <ProButton
         variant="ghost"
-        size="icon"
+        size="icon-xs"
+        icon={<Copy className="size-3.5" />}
+        tooltip="Copy code"
+        copy={{ text: code, success: 'Copied' }}
         className={cn(
           'size-6 opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100',
           embedded
@@ -50,11 +46,8 @@ export function CodeViewerHeader({
               ? 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
               : 'text-muted-foreground hover:bg-accent/70 hover:text-foreground',
         )}
-        onClick={onCopy}
         aria-label="Copy code"
-      >
-        {copied ? <Check className="size-3.5 text-primary" /> : <Copy className="size-3.5" />}
-      </Button>
+      />
     </div>
   )
 }

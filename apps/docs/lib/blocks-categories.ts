@@ -56,6 +56,7 @@ const proTableFiles = [
 const proFormFiles = [
   'index.tsx',
   'layout.tsx',
+  'schema.tsx',
   'form-item.tsx',
   'overlay-form.tsx',
   'formily-fields/index.tsx',
@@ -66,6 +67,18 @@ const proFormFiles = [
   'formily-fields/numeric.tsx',
   'formily-fields/advanced.tsx',
   'formily-fields/schema.tsx',
+]
+
+const proBaseFiles = ['index.ts', 'button.tsx', 'copy.ts', 'fullscreen.ts']
+
+const proToolbarFiles = [
+  'index.tsx',
+  'types.ts',
+  'items/index.tsx',
+  'items/button.tsx',
+  'items/menu.tsx',
+  'items/dropdown.tsx',
+  'items/utils.ts',
 ]
 
 const proEditorFiles = [
@@ -100,6 +113,31 @@ const diffViewerFiles = ['diff/index.tsx', 'diff/table.tsx', 'diff/utils.ts', 'c
 const htmlViewerFiles = ['html/index.tsx']
 
 export const CATEGORIES: Category[] = [
+  {
+    id: 'pro-base',
+    label: 'ProBase',
+    blocks: [
+      {
+        name: 'pro-base-demo',
+        description: 'Shared primitives for button, copy feedback, loading, and fullscreen state.',
+        iframeHeight: '240px',
+        files: [demoFile('pro-base-demo'), ...componentFiles('pro-base', proBaseFiles)],
+      },
+    ],
+  },
+  {
+    id: 'pro-toolbar',
+    label: 'ProToolbar',
+    blocks: [
+      {
+        name: 'pro-toolbar-demo',
+        description:
+          'Generic three-region toolbar with buttons, menus, dropdown panels, and custom controls.',
+        iframeHeight: '300px',
+        files: [demoFile('pro-toolbar-demo'), ...componentFiles('pro-toolbar', proToolbarFiles)],
+      },
+    ],
+  },
   {
     id: 'pro-table',
     label: 'ProTable',

@@ -187,7 +187,11 @@ function DirectoryListContent() {
 
   return (
     <>
-      <SearchDirectory query={query} registriesCount={registries.length} setQuery={setQuery} />
+      <SearchDirectory
+        query={query}
+        registriesCount={registries.length}
+        setQuery={(value) => setQuery(value ?? '')}
+      />
       <ItemGroup className="my-8">
         {paginatedRegistries.map((registry, index) => (
           <React.Fragment key={registry.name}>

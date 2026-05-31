@@ -1,4 +1,4 @@
-import type { ColumnFiltersState, PaginationState } from '@tanstack/react-table'
+import type { ColumnFiltersState, PaginationState, SortingState } from '@tanstack/react-table'
 import { useCallback, useMemo } from 'react'
 import type { ProTableState } from './index'
 
@@ -34,6 +34,10 @@ export type UseProTableUrlStateParams = {
     defaultPage?: number
     defaultPageSize?: number
   }
+  sorting?: {
+    sortKey?: string
+    orderKey?: string
+  }
   columnFilters?: ColumnFilterConfig[]
 }
 
@@ -47,6 +51,7 @@ export function useProTableUrlState(params: UseProTableUrlStateParams): UseProTa
     search,
     navigate,
     pagination: paginationCfg,
+    sorting: sortingCfg,
     columnFilters: columnFiltersCfg = [],
   } = params
 
@@ -54,17 +59,30 @@ export function useProTableUrlState(params: UseProTableUrlStateParams): UseProTa
   const pageSizeKey = paginationCfg?.pageSizeKey ?? 'pageSize'
   const defaultPage = paginationCfg?.defaultPage ?? 1
   const defaultPageSize = paginationCfg?.defaultPageSize ?? 10
+  const sortKey = sortingCfg?.sortKey ?? 'sort'
+  const orderKey = sortingCfg?.orderKey ?? 'order'
 
   const initialState = useMemo<Partial<ProTableState>>(
     () => ({
       pagination: getPagination(search, pageKey, pageSizeKey, defaultPage, defaultPageSize),
+      sorting: getSorting(search, sortKey, orderKey),
       columnFilters: getColumnFilters(search, columnFiltersCfg),
     }),
-    [search, pageKey, pageSizeKey, defaultPage, defaultPageSize, columnFiltersCfg],
+    [
+      search,
+      pageKey,
+      pageSizeKey,
+      defaultPage,
+      defaultPageSize,
+      sortKey,
+      orderKey,
+      columnFiltersCfg,
+    ],
   )
 
   const onChange = useCallback(
     (state: ProTableState) => {
+      const sorting = state.sorting[0]
       const patch: Record<string, unknown> = {
         [pageKey]:
           state.pagination.pageIndex + 1 <= defaultPage
@@ -72,6 +90,8 @@ export function useProTableUrlState(params: UseProTableUrlStateParams): UseProTa
             : state.pagination.pageIndex + 1,
         [pageSizeKey]:
           state.pagination.pageSize === defaultPageSize ? undefined : state.pagination.pageSize,
+        [sortKey]: sorting?.id,
+        [orderKey]: sorting ? (sorting.desc ? 'desc' : 'asc') : undefined,
       }
 
       for (const cfg of columnFiltersCfg) {
@@ -95,7 +115,16 @@ export function useProTableUrlState(params: UseProTableUrlStateParams): UseProTa
         }),
       })
     },
-    [columnFiltersCfg, defaultPage, defaultPageSize, navigate, pageKey, pageSizeKey],
+    [
+      columnFiltersCfg,
+      defaultPage,
+      defaultPageSize,
+      navigate,
+      orderKey,
+      pageKey,
+      pageSizeKey,
+      sortKey,
+    ],
   )
 
   return { initialState, onChange }
@@ -131,6 +160,18 @@ function getColumnFilters(search: SearchRecord, configs: ColumnFilterConfig[]): 
     }
   }
   return filters
+}
+
+function getSorting(search: SearchRecord, sortKey: string, orderKey: string): SortingState {
+  const id = search[sortKey]
+  if (typeof id !== 'string' || id.trim() === '') return []
+
+  return [
+    {
+      id,
+      desc: search[orderKey] === 'desc',
+    },
+  ]
 }
 
 function getNumber(value: unknown, fallback: number) {

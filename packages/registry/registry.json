@@ -3,6 +3,35 @@
   "baseUrl": "https://raw.githubusercontent.com/draco-china/shadcn-pro/main/packages/registry",
   "components": [
     {
+      "name": "pro-base",
+      "category": "base",
+      "description": "Shared low-level primitives for Pro components.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "tooltip"],
+      "files": [
+        "pro/pro-base/index.ts",
+        "pro/pro-base/copy.ts",
+        "pro/pro-base/fullscreen.ts",
+        "pro/pro-base/button.tsx"
+      ]
+    },
+    {
+      "name": "pro-toolbar",
+      "category": "layout",
+      "description": "Generic three-region toolbar infrastructure with typed action items, async loading, menus, tooltips, separators, and custom controls.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["pro-base", "button", "dropdown-menu", "separator", "tooltip"],
+      "files": [
+        "pro/pro-toolbar/index.tsx",
+        "pro/pro-toolbar/types.ts",
+        "pro/pro-toolbar/items/index.tsx",
+        "pro/pro-toolbar/items/utils.ts",
+        "pro/pro-toolbar/items/button.tsx",
+        "pro/pro-toolbar/items/dropdown.tsx",
+        "pro/pro-toolbar/items/menu.tsx"
+      ]
+    },
+    {
       "name": "pro-fields",
       "category": "form",
       "description": "Shared field components for ProForm, including input, password, select, switch, checkbox, radio, textarea, date, numeric, upload, faceted filter, and tree/cascader fields.",
@@ -71,6 +100,7 @@
       ],
       "registryDependencies": [
         "pro-fields",
+        "pro-toolbar",
         "badge",
         "button",
         "label",
@@ -82,6 +112,7 @@
       ],
       "files": [
         "pro/pro-form/index.tsx",
+        "pro/pro-form/schema.tsx",
         "pro/pro-form/overlay-form.tsx",
         "pro/pro-form/layout.tsx",
         "pro/pro-form/form-item.tsx",
@@ -108,6 +139,7 @@
       ],
       "registryDependencies": [
         "pro-fields",
+        "pro-toolbar",
         "badge",
         "button",
         "table",
@@ -134,7 +166,8 @@
         "pro/pro-table/columns.tsx",
         "pro/pro-table/pagination/index.tsx",
         "pro/pro-table/pagination/utils.ts",
-        "pro/pro-table/toolbar/search-form.tsx"
+        "pro/pro-table/toolbar/search-form.tsx",
+        "pro/pro-table/use-pro-table-url-state.ts"
       ]
     },
     {
@@ -148,7 +181,7 @@
         "monaco-editor",
         "shiki"
       ],
-      "registryDependencies": ["button", "tooltip"],
+      "registryDependencies": ["pro-base", "pro-toolbar"],
       "files": [
         "pro/pro-editor/index.tsx",
         "pro/pro-editor/toolbar/index.tsx",
@@ -180,7 +213,7 @@
       "category": "display",
       "description": "Shiki-powered code viewer with One themes, copy, line numbers, folding, and empty/error states.",
       "dependencies": ["shiki", "lucide-react"],
-      "registryDependencies": ["button"],
+      "registryDependencies": ["pro-base"],
       "files": [
         "pro/pro-viewer/code/index.tsx",
         "pro/pro-viewer/code/header.tsx",
@@ -194,7 +227,7 @@
       "category": "display",
       "description": "Split and unified diff viewer with shared Shiki One syntax highlighting.",
       "dependencies": ["diff", "shiki"],
-      "registryDependencies": ["button"],
+      "registryDependencies": ["pro-base"],
       "files": [
         "pro/pro-viewer/diff/index.tsx",
         "pro/pro-viewer/diff/table.tsx",
@@ -215,7 +248,7 @@
       "category": "display",
       "description": "Fullscreen image viewer with zoom, pan, rotate, fullscreen, thumbnails, and keyboard navigation.",
       "dependencies": ["lucide-react"],
-      "registryDependencies": ["button"],
+      "registryDependencies": ["pro-toolbar", "pro-base"],
       "files": [
         "pro/pro-viewer/image/index.tsx",
         "pro/pro-viewer/image/state.ts",
@@ -239,7 +272,7 @@
         "remark-math",
         "remark-toc"
       ],
-      "registryDependencies": ["button"],
+      "registryDependencies": ["pro-base"],
       "files": [
         "pro/pro-viewer/markdown/index.tsx",
         "pro/pro-viewer/code/index.tsx",

@@ -30,7 +30,7 @@ const Password = React.forwardRef<HTMLInputElement, PasswordProps>(
           ref={ref}
           type={visible ? 'text' : 'password'}
           className={cn(
-            'h-auto min-w-0 flex-1 border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent',
+            'h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent',
             inputClassName,
           )}
           {...props}

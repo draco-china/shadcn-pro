@@ -24,15 +24,31 @@ import { getPageRange } from './utils'
 interface ProTablePaginationProps<TData> {
   table: Table<TData>
   pageSizeOptions?: number[]
+  labels?: ProTablePaginationLabels
   /** Show total row count */
   showTotal?: boolean
   /** Show quick jump input */
   showQuickJump?: boolean
 }
 
+export interface ProTablePaginationLabels {
+  total?: (total: number) => React.ReactNode
+  selected?: (selected: number) => React.ReactNode
+  rows?: string
+  rowsShort?: (total: number) => React.ReactNode
+  selectedShort?: (selected: number) => React.ReactNode
+  first?: string
+  previous?: string
+  next?: string
+  last?: string
+  page?: (page: number) => string
+  goTo?: string
+}
+
 export function ProTablePagination<TData>({
   table,
   pageSizeOptions = [10, 20, 50, 100],
+  labels,
   showTotal = true,
   showQuickJump = false,
 }: ProTablePaginationProps<TData>) {
@@ -42,6 +58,7 @@ export function ProTablePagination<TData>({
   const safePageCount = Math.max(pageCount, 1)
   const current = Math.min(pageIndex + 1, safePageCount)
   const total = table.getRowCount()
+  const selected = table.getFilteredSelectedRowModel().rows.length
   const pageSize = table.getState().pagination.pageSize
 
   const pageRange = getPageRange(current, safePageCount)
@@ -61,14 +78,23 @@ export function ProTablePagination<TData>({
       <div className="text-sm text-muted-foreground shrink-0 hidden sm:block">
         {showTotal && (
           <span>
-            Total <span className="font-medium text-foreground">{total}</span> rows
-            {table.getFilteredSelectedRowModel().rows.length > 0 && (
+            {labels?.total ? (
+              labels.total(total)
+            ) : (
+              <>
+                Total <span className="font-medium text-foreground">{total}</span> rows
+              </>
+            )}
+            {selected > 0 && (
               <span className="ml-2">
                 ·{' '}
-                <span className="font-medium text-foreground">
-                  {table.getFilteredSelectedRowModel().rows.length}
-                </span>{' '}
-                selected
+                {labels?.selected ? (
+                  labels.selected(selected)
+                ) : (
+                  <>
+                    <span className="font-medium text-foreground">{selected}</span> selected
+                  </>
+                )}
               </span>
             )}
           </span>
@@ -80,16 +106,20 @@ export function ProTablePagination<TData>({
         {/* Mobile total — compact */}
         {showTotal && (
           <span className="text-xs text-muted-foreground sm:hidden">
-            {total} rows
-            {table.getFilteredSelectedRowModel().rows.length > 0 &&
-              ` · ${table.getFilteredSelectedRowModel().rows.length} selected`}
+            {labels?.rowsShort ? labels.rowsShort(total) : `${total} rows`}
+            {selected > 0 && (
+              <>
+                {' · '}
+                {labels?.selectedShort ? labels.selectedShort(selected) : `${selected} selected`}
+              </>
+            )}
           </span>
         )}
 
         {/* Page size */}
         <div className="flex items-center gap-1.5 sm:gap-2">
           <span className="text-xs sm:text-sm text-muted-foreground shrink-0 hidden xs:inline">
-            Rows
+            {labels?.rows ?? 'Rows'}
           </span>
           <Select
             value={`${pageSize}`}
@@ -120,7 +150,7 @@ export function ProTablePagination<TData>({
             className="size-8"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
-            aria-label="First page"
+            aria-label={labels?.first ?? 'First page'}
           >
             <ChevronsLeft size={14} />
           </Button>
@@ -130,7 +160,7 @@ export function ProTablePagination<TData>({
             className="size-8"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            aria-label="Previous page"
+            aria-label={labels?.previous ?? 'Previous page'}
           >
             <ChevronLeft size={14} />
           </Button>
@@ -153,7 +183,7 @@ export function ProTablePagination<TData>({
                   size="icon"
                   className={cn('size-8', page === current && 'pointer-events-none')}
                   onClick={() => table.setPageIndex((page as number) - 1)}
-                  aria-label={`Page ${page}`}
+                  aria-label={labels?.page?.(page as number) ?? `Page ${page}`}
                   aria-current={page === current ? 'page' : undefined}
                 >
                   {page}
@@ -174,7 +204,7 @@ export function ProTablePagination<TData>({
             className="size-8"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            aria-label="Next page"
+            aria-label={labels?.next ?? 'Next page'}
           >
             <ChevronRight size={14} />
           </Button>
@@ -184,7 +214,7 @@ export function ProTablePagination<TData>({
             className="size-8"
             onClick={() => table.setPageIndex(safePageCount - 1)}
             disabled={!table.getCanNextPage()}
-            aria-label="Last page"
+            aria-label={labels?.last ?? 'Last page'}
           >
             <ChevronsRight size={14} />
           </Button>
@@ -193,7 +223,9 @@ export function ProTablePagination<TData>({
         {/* Quick jump */}
         {showQuickJump && (
           <div className="flex items-center gap-1.5">
-            <span className="text-sm text-muted-foreground shrink-0 hidden sm:inline">Go to</span>
+            <span className="text-sm text-muted-foreground shrink-0 hidden sm:inline">
+              {labels?.goTo ?? 'Go to'}
+            </span>
             <input
               type="number"
               min={1}
@@ -201,7 +233,7 @@ export function ProTablePagination<TData>({
               value={jumpValue}
               onChange={(e) => setJumpValue(e.target.value)}
               onKeyDown={handleJump}
-              aria-label="Go to page"
+              aria-label={labels?.goTo ?? 'Go to page'}
               className="h-8 w-14 rounded-md border border-input bg-transparent px-2 text-center text-sm shadow-xs focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>

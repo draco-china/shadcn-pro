@@ -6,8 +6,9 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { cn } from '@/lib/utils'
 
 export interface RadioOption {
-  label: string
+  label: React.ReactNode
   value: string
+  description?: React.ReactNode
   disabled?: boolean
 }
 
@@ -51,10 +52,18 @@ export function Radio({
         const itemId = `${generatedId}-${index}`
 
         return (
-          <div key={opt.value} className={cn('flex items-center gap-2', itemClassName)}>
+          <div key={opt.value} className={cn('flex items-start gap-2', itemClassName)}>
             <RadioGroupItem value={opt.value} id={itemId} disabled={opt.disabled} />
-            <Label htmlFor={itemId} className={cn('cursor-pointer font-normal', labelClassName)}>
-              {opt.label}
+            <Label
+              htmlFor={itemId}
+              className={cn('grid cursor-pointer gap-1 font-normal leading-none', labelClassName)}
+            >
+              <span>{opt.label}</span>
+              {opt.description && (
+                <span className="text-xs leading-snug text-muted-foreground">
+                  {opt.description}
+                </span>
+              )}
             </Label>
           </div>
         )

@@ -5,7 +5,7 @@ import { Switch as ShadcnSwitch } from '@/components/ui/switch'
 
 export interface SwitchProps
   extends Omit<
-    React.ComponentProps<typeof Switch>,
+    React.ComponentProps<typeof ShadcnSwitch>,
     'checked' | 'onCheckedChange' | 'onChange' | 'value'
   > {
   value?: boolean

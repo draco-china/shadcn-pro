@@ -33,7 +33,9 @@ This copies the component source code directly into your project under `componen
 
 ## Using the CLI
 
-The recommended way to add components is via the CLI. List available components first when you are exploring:
+The recommended way to add components is through the shadcn-pro registry CLI. Manual copying is only for debugging or for projects that cannot run the registry installer.
+
+List available components first when you are exploring:
 
 ```bash
 npx @draco-china/shadcn-pro@latest list
@@ -43,6 +45,14 @@ Then add any component by name:
 
 ```bash
 npx @draco-china/shadcn-pro@latest add pro-fields
+```
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-base
+```
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-toolbar
 ```
 
 ```bash
@@ -65,6 +75,8 @@ Install the dependencies for the component you copy:
 
 | Component | Dependencies |
 | --- | --- |
+| `pro-base` | `lucide-react` |
+| `pro-toolbar` | `lucide-react` |
 | `pro-fields` | `@dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities date-fns lucide-react` |
 | `pro-form` | `@formily/core @formily/react @formily/reactive-react date-fns lucide-react` |
 | `pro-table` | `@tanstack/react-table @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react` |
@@ -85,8 +97,10 @@ bun add react-markdown shiki lucide-react remark-gfm remark-breaks remark-math r
 
 ### 2. Copy the component
 
-Browse the component source on GitHub and copy each component folder into your project:
+Browse the component source on GitHub and copy each component folder into your project. Prefer the registry installer because it also copies internal registry dependencies such as `pro-base` and `pro-toolbar`.
 
+- `ProBase` → `components/pro/pro-base/`
+- `ProToolbar` → `components/pro/pro-toolbar/`
 - `ProFields` → `components/pro/pro-fields/`
 - `ProForm` → `components/pro/pro-form/`
 - `ProTable` → `components/pro/pro-table/`
@@ -107,6 +121,63 @@ import { FormilyInput } from "@/components/pro/pro-fields/input"
 import { ProForm } from "@/components/pro/pro-form"
 import { ProTable } from "@/components/pro/pro-table"
 ```
+
+## Standard Patterns
+
+### Request + hooks/store
+
+Use `request` to keep existing API hooks or stores outside the table component while still letting ProTable own pagination, filters, and sorting.
+
+```tsx
+<ProTable
+  columns={columns}
+  request={({ pagination, sorting, columnFilters }) =>
+    userStore.fetchUsers({
+      page: pagination.pageIndex + 1,
+      pageSize: pagination.pageSize,
+      sort: sorting[0]?.id,
+      order: sorting[0] ? (sorting[0].desc ? "desc" : "asc") : undefined,
+      filters: columnFilters,
+    })
+  }
+/>
+```
+
+The request result should be `{ data, total }`.
+
+### URL state
+
+```tsx
+const tableState = useProTableUrlState({
+  search,
+  navigate,
+  sorting: { sortKey: "sort", orderKey: "order" },
+  columnFilters: [
+    { columnId: "name", searchKey: "name" },
+    { columnId: "role", searchKey: "role", type: "array" },
+  ],
+})
+
+<ProTable columns={columns} request={request} {...tableState} />
+```
+
+### JSON schema forms
+
+```tsx
+<ProForm
+  schema={{
+    type: "object",
+    properties: {
+      name: { type: "string", title: "Name" },
+      age: { type: "number", title: "Age" },
+      enabled: { type: "boolean", title: "Enabled" },
+      role: { type: "string", title: "Role", enum: ["admin", "user"] },
+    },
+  }}
+/>
+```
+
+Use Formily `x-reactions` for conditional visibility and linkage. `ModalForm` and `DrawerForm` accept the same `schema` and `schemaComponents` props, and can be controlled with `open` / `onOpenChange` without a trigger.
 
 ## TypeScript
 

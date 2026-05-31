@@ -44,7 +44,6 @@ export function CodeViewer({
   const [tokenLines, setTokenLines] = useState<ThemedToken[][]>([])
   const [loading, setLoading] = useState(true)
   const [failed, setFailed] = useState(false)
-  const [copied, setCopied] = useState(false)
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set())
 
   const rawLines = useMemo(() => (code ? code.split('\n') : []), [code])
@@ -93,13 +92,6 @@ export function CodeViewer({
     })
   }, [])
 
-  const copy = useCallback(async () => {
-    if (!code) return
-    await navigator.clipboard.writeText(code)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 2000)
-  }, [code])
-
   return (
     <div
       className={cn(
@@ -109,13 +101,7 @@ export function CodeViewer({
       )}
     >
       {showHeader && (
-        <CodeViewerHeader
-          title={title ?? lang}
-          copied={copied}
-          embedded={embedded}
-          theme={theme}
-          onCopy={copy}
-        />
+        <CodeViewerHeader title={title ?? lang} code={code} embedded={embedded} theme={theme} />
       )}
       <div
         ref={scrollRef}

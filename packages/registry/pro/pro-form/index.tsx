@@ -1,94 +1,45 @@
 'use client'
 
 import { createForm, type Form, type IFormProps } from '@formily/core'
-import { createSchemaField, FormProvider, type SchemaReactComponents } from '@formily/react'
+import { FormProvider, type SchemaReactComponents } from '@formily/react'
 import type { ReactNode } from 'react'
 import * as React from 'react'
-import { FormItem } from './form-item'
-import {
-  FormilyArrayField,
-  FormilyCaptcha,
-  FormilyCascader,
-  FormilyCheckbox,
-  FormilyDatePicker,
-  FormilyDateRangePicker,
-  FormilyDateTimePicker,
-  FormilyDigit,
-  FormilyDigitRange,
-  FormilyInput,
-  FormilyMoney,
-  FormilyObjectField,
-  FormilyRadio,
-  FormilyRate,
-  FormilySegmented,
-  FormilySelect,
-  FormilySlider,
-  FormilySwitch,
-  FormilyTextarea,
-  FormilyTimePicker,
-  FormilyTreeSelect,
-  FormilyUpload,
-} from './formily-fields'
-import { ProFormActions, ProFormGrid } from './layout'
+import { ProFormActions, type ProFormActionsProps, ProFormGrid } from './layout'
+import { createSchemaFieldWithComponents, type ProFormSchema, SchemaField } from './schema'
 
 export type { ProFormActionsProps, ProFormLayoutProps } from './layout'
 export { DrawerForm, ModalForm } from './overlay-form'
 export type { Form, IFormProps }
-export { createForm, ProFormActions, ProFormGrid }
+export { createForm, createSchemaFieldWithComponents, ProFormActions, ProFormGrid, SchemaField }
 
-const defaultComponents: SchemaReactComponents = {
-  FormItem,
-  Input: FormilyInput,
-  Textarea: FormilyTextarea,
-  Select: FormilySelect,
-  Checkbox: FormilyCheckbox,
-  Switch: FormilySwitch,
-  Radio: FormilyRadio,
-  DatePicker: FormilyDatePicker,
-  DateRangePicker: FormilyDateRangePicker,
-  DateTimePicker: FormilyDateTimePicker,
-  TimePicker: FormilyTimePicker,
-  Digit: FormilyDigit,
-  DigitRange: FormilyDigitRange,
-  Slider: FormilySlider,
-  Rate: FormilyRate,
-  Segmented: FormilySegmented,
-  Cascader: FormilyCascader,
-  TreeSelect: FormilyTreeSelect,
-  Upload: FormilyUpload,
-  Captcha: FormilyCaptcha,
-  Money: FormilyMoney,
-  ArrayField: FormilyArrayField,
-  ObjectField: FormilyObjectField,
+export interface ProFormRenderContext {
+  form: Form
+  submitting: boolean
+  submit: () => void
+  reset: () => void | Promise<void>
 }
 
-export function createSchemaFieldWithComponents(extra?: SchemaReactComponents) {
-  return createSchemaField({
-    components: { ...defaultComponents, ...extra },
-  })
-}
+export type ProFormSubmitterSlot =
+  | ReactNode
+  | ((actions: ReactNode, context: ProFormRenderContext) => ReactNode)
 
-export const SchemaField = createSchemaField({
-  components: defaultComponents,
-})
+export interface ProFormSubmitterProps extends ProFormActionsProps {
+  position?: 'header' | 'footer'
+  header?: ProFormSubmitterSlot
+  footer?: ProFormSubmitterSlot
+}
 
 export interface ProFormProps {
   form?: Form
   formProps?: IFormProps
+  schema?: ProFormSchema
+  schemaComponents?: SchemaReactComponents
   children?: ReactNode
   onFinish?: (values: Record<string, unknown>) => void | Promise<void>
   onFinishFailed?: (errors: unknown) => void
   onReset?: () => void | Promise<void>
-  /** Submit button label (only effective when hideActions is false) */
-  submitText?: string
-  /** Whether to show the reset button */
-  showReset?: boolean
-  /** Reset button label */
-  resetText?: string
-  /** Hide the default action bar (place ProFormActions yourself) */
-  hideActions?: boolean
-  /** Action bar alignment */
-  actionsAlign?: 'left' | 'center' | 'right'
+  /** Submitter config. Set to false to hide built-in actions. */
+  submitter?: false | ProFormSubmitterProps
   /** Number of form columns (passed through to ProFormGrid) */
   columns?: 1 | 2 | 3 | 4
   className?: string
@@ -97,15 +48,13 @@ export interface ProFormProps {
 export function ProForm({
   form,
   formProps,
+  schema,
+  schemaComponents,
   children,
   onFinish,
   onFinishFailed,
   onReset,
-  submitText = 'Submit',
-  showReset = false,
-  resetText = 'Reset',
-  hideActions = false,
-  actionsAlign = 'left',
+  submitter,
   columns,
   className,
 }: ProFormProps) {
@@ -117,10 +66,20 @@ export function ProForm({
   }
 
   const activeForm = form ?? internalFormRef.current
+  const ActiveSchemaField = React.useMemo(
+    () => createSchemaFieldWithComponents(schemaComponents),
+    [schemaComponents],
+  )
+  const activeSubmitter = submitter === false ? undefined : (submitter ?? {})
+  const isSubmitting = activeSubmitter?.submitting ?? loading
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    if (loading) return
+  const handleReset = React.useCallback(async () => {
+    await activeForm.reset()
+    await onReset?.()
+  }, [activeForm, onReset])
+
+  const submit = React.useCallback(async () => {
+    if (isSubmitting) return
 
     setLoading(true)
     try {
@@ -131,36 +90,102 @@ export function ProForm({
     } finally {
       setLoading(false)
     }
+  }, [activeForm, isSubmitting, onFinish, onFinishFailed])
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    void submit()
   }
 
-  async function handleReset() {
-    await activeForm.reset()
-    await onReset?.()
+  const activeActionsPlacement = activeSubmitter?.header
+    ? 'header'
+    : (activeSubmitter?.position ?? 'footer')
+  const {
+    position: _position,
+    header: submitterHeader,
+    footer: submitterFooter,
+    ...submitterActions
+  } = activeSubmitter ?? {}
+  const renderContext = React.useMemo<ProFormRenderContext>(
+    () => ({
+      form: activeForm,
+      submitting: isSubmitting,
+      submit,
+      reset: handleReset,
+    }),
+    [activeForm, handleReset, isSubmitting, submit],
+  )
+  const baseActionsProps: ProFormActionsProps = {
+    ...submitterActions,
+    submitting: submitterActions.submitting ?? isSubmitting,
+    reset:
+      submitterActions.reset === false
+        ? false
+        : submitterActions.reset
+          ? {
+              ...submitterActions.reset,
+              onClick: submitterActions.reset.onClick ?? handleReset,
+            }
+          : undefined,
+    actionsVariant:
+      submitterActions.actionsVariant ?? (activeActionsPlacement === 'header' ? 'page' : 'inline'),
+    align: submitterActions.align ?? (activeActionsPlacement === 'header' ? 'right' : 'left'),
   }
+
+  const actionsNode = activeSubmitter ? <ProFormActions {...baseActionsProps} /> : null
+  const headerSubmitterNode = renderSubmitterSlot(
+    submitterHeader,
+    actionsNode,
+    renderContext,
+    defaultHeaderSubmitter,
+  )
+  const footerSubmitterNode = renderSubmitterSlot(
+    submitterFooter,
+    actionsNode,
+    renderContext,
+    defaultFooterSubmitter,
+  )
+
+  const formContent = (
+    <>
+      {schema && <ActiveSchemaField schema={schema} />}
+      {children}
+    </>
+  )
 
   const body = columns ? (
     <ProFormGrid columns={columns} className="mb-4">
-      {children}
+      {formContent}
     </ProFormGrid>
   ) : (
-    <div className="space-y-4">{children}</div>
+    <div className="space-y-4">{formContent}</div>
   )
 
   return (
     <FormProvider form={activeForm}>
       <form onSubmit={handleSubmit} className={className}>
+        {activeSubmitter && activeActionsPlacement === 'header' && headerSubmitterNode}
         {body}
-        {!hideActions && (
-          <ProFormActions
-            submitText={submitText}
-            showReset={showReset}
-            resetText={resetText}
-            onReset={handleReset}
-            loading={loading}
-            align={actionsAlign}
-          />
-        )}
+        {activeSubmitter && activeActionsPlacement === 'footer' && footerSubmitterNode}
       </form>
     </FormProvider>
   )
+}
+
+function renderSubmitterSlot(
+  slot: ProFormSubmitterSlot | undefined,
+  actions: ReactNode,
+  context: ProFormRenderContext,
+  defaultRender: (actions: ReactNode, context: ProFormRenderContext) => ReactNode,
+) {
+  if (!slot) return defaultRender(actions, context)
+  return typeof slot === 'function' ? slot(actions, context) : slot
+}
+
+function defaultHeaderSubmitter(actions: ReactNode) {
+  return <div className="flex flex-wrap items-start justify-end gap-3 border-b pb-2">{actions}</div>
+}
+
+function defaultFooterSubmitter(actions: ReactNode) {
+  return actions
 }

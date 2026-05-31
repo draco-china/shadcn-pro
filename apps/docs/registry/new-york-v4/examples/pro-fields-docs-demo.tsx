@@ -151,15 +151,15 @@ export default function ProFieldsDocsDemo() {
         <Money value={amount} onChange={setAmount} currency="$" />
       </FieldPreview>
       <FieldPreview title="Select">
-        <Select
-          value={role}
-          onChange={setRole}
-          options={roleOptions}
-          allowClear
+          <Select
+            value={role}
+            onChange={(next) => setRole(typeof next === "string" ? next : undefined)}
+            options={roleOptions}
+            allowClear
         />
       </FieldPreview>
       <FieldPreview title="Checkbox">
-        <Checkbox value={checked} onChange={setChecked}>
+        <Checkbox value={checked} onChange={(next) => setChecked(next === true)}>
           Accept terms
         </Checkbox>
       </FieldPreview>
@@ -242,30 +242,15 @@ export default function ProFieldsDocsDemo() {
       <FieldPreview title="ArrayField">
         <ArrayField
           value={items}
+          onChange={setItems}
+          newItem={() => ({ name: "New contact" })}
           addText="Add contact"
-          onAdd={() =>
-            setItems((current) => [...current, { name: "New contact" }])
-          }
-          onRemove={(index) =>
-            setItems((current) => current.filter((_, i) => i !== index))
-          }
-          onMoveUp={(index) =>
-            setItems((current) => {
-              if (index === 0) return current
-              const next = [...current]
-              ;[next[index - 1], next[index]] = [next[index], next[index - 1]]
-              return next
-            })
-          }
-          onMoveDown={(index) =>
-            setItems((current) => {
-              if (index === current.length - 1) return current
-              const next = [...current]
-              ;[next[index], next[index + 1]] = [next[index + 1], next[index]]
-              return next
-            })
-          }
-          renderItem={(item) => <Input value={item.name} readOnly />}
+          renderItem={(item, _index, { update }) => (
+            <Input
+              value={item.name}
+              onChange={(event) => update({ name: event.target.value })}
+            />
+          )}
         />
       </FieldPreview>
       <FieldPreview title="ObjectField">

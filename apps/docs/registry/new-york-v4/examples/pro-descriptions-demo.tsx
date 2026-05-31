@@ -7,7 +7,6 @@ import { Button } from "@/registry/new-york-v4/ui/button"
 import { ProDescriptions } from "@/registry/new-york-v4/pro/pro-descriptions/index"
 import {
   ProForm,
-  ProFormActions,
   SchemaField,
 } from "@/registry/new-york-v4/pro/pro-form/index"
 
@@ -103,7 +102,14 @@ export default function ProDescriptionsDemo() {
       {mode === "view" ? (
         <ProDescriptions items={items} columns={2} bordered />
       ) : (
-        <ProForm form={form} onFinish={handleFinish} hideActions>
+        <ProForm
+          form={form}
+          onFinish={handleFinish}
+          submitter={{
+            submit: { text: "Save" },
+            cancel: { text: "Cancel", onClick: () => setMode("view") },
+          }}
+        >
           <SchemaField>
             <SchemaField.String
               name="name"
@@ -160,16 +166,6 @@ export default function ProDescriptionsDemo() {
               x-component-props={{ placeholder: "Short bio" }}
             />
           </SchemaField>
-          <div className="flex gap-2 pt-2">
-            <Button type="submit">Save</Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setMode("view")}
-            >
-              Cancel
-            </Button>
-          </div>
         </ProForm>
       )}
     </div>

@@ -9,16 +9,19 @@ import {
   getColumnMeta,
   getPinnedColumnClassName,
   getPinnedColumnStyle,
+  type ProTablePinnedColumnOffsets,
 } from './utils'
 
 export function ProTableHeader<TData>({
   headerGroups,
   dragSort,
   sticky,
+  pinnedOffsets,
 }: {
   headerGroups: HeaderGroup<TData>[]
   dragSort: boolean
   sticky: boolean
+  pinnedOffsets: ProTablePinnedColumnOffsets
 }) {
   return (
     <>
@@ -27,7 +30,7 @@ export function ProTableHeader<TData>({
           {dragSort && (
             <TableHead
               className={cn(
-                'sticky left-0 z-20 w-8 bg-background pr-0',
+                'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 hover:bg-muted',
                 sticky && 'top-0 z-30',
               )}
             />
@@ -50,6 +53,7 @@ export function ProTableHeader<TData>({
                 colSpan={header.colSpan}
                 className={cn(
                   sticky && 'sticky top-0 z-10 bg-background',
+                  'transition-colors duration-150 hover:bg-muted',
                   getPinnedColumnClassName(
                     header.column,
                     header.column.getIsPinned() && sticky ? 'z-30' : undefined,
@@ -58,7 +62,8 @@ export function ProTableHeader<TData>({
                   getColumnMeta(header.column)?.className,
                   canSort && 'cursor-pointer select-none',
                 )}
-                style={getPinnedColumnStyle(header.column, dragSort ? 32 : 0)}
+                style={getPinnedColumnStyle(header.column, pinnedOffsets, dragSort ? 32 : 0)}
+                data-pro-table-column-id={header.column.id}
                 aria-sort={ariaSort}
                 tabIndex={canSort ? 0 : undefined}
                 onClick={sortHandler}

@@ -33,7 +33,7 @@ export type ProTableSearch =
 export interface ProTableColumnFilter<TData = unknown> {
   options: ProTableFilterOption[]
   placeholder?: string
-  mode?: 'single' | 'multi'
+  multiple?: boolean
   variant?: 'badge' | 'text'
   onFilter?: (value: string, record: TData) => boolean
 }

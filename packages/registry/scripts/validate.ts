@@ -22,6 +22,8 @@ const docsMetaPath = join(docsComponentsRoot, 'meta.json')
 const registry = JSON.parse(readFileSync(join(registryRoot, 'registry.json'), 'utf8')) as Registry
 
 const expectedComponents = [
+  'pro-base',
+  'pro-toolbar',
   'pro-fields',
   'pro-form',
   'pro-table',

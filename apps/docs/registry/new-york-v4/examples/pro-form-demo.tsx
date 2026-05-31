@@ -26,9 +26,7 @@ export default function ProFormDemo() {
       <ProForm
         form={form}
         onFinish={handleFinish}
-        showReset
-        submitText="Submit"
-        resetText="Reset"
+        submitter={{ submit: { text: "Submit" }, reset: { text: "Reset" } }}
       >
         <SchemaField>
         {/* Basic info — ObjectField */}

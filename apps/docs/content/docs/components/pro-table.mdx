@@ -67,11 +67,21 @@ export default function UsersTable() {
       data={users}
       header={<h2 className="text-lg font-semibold">Users</h2>}
       table={{ stickyHeader: true }}
-      toolbar={{ options: { refresh: () => refetch() } }}
+      toolbar={{
+        filters: [
+          {
+            key: "created",
+            render: () => <DateRangePicker value={range} onChange={setRange} />,
+          },
+        ],
+        options: { refresh: () => refetch() },
+      }}
     />
   )
 }
 ```
+
+`header` is reserved for title and description content. Search, filters, and actions belong in `toolbar`. Use `toolbar.filters` for business-specific controls such as keyword search, date ranges, and multi-field filters.
 
 ## Examples
 
@@ -94,8 +104,8 @@ const columns = [
 
 Add `meta.search` or `meta.filter` to columns — ProTable **automatically** renders the toolbar search input and `FacetedFilter` controls, maps `value → label` in cells, and shows a **Reset** button whenever any filter is active.
 
-- Default filter mode is **multi-select**.
-- Set `meta.filter.mode: "single"` for single-select filtering.
+- Default filter mode is **single-select**.
+- Set `meta.filter.multiple: true` for multi-select filtering.
 
 <ComponentPreview name="pro-table-filter-demo" previewClassName="min-h-[460px]" />
 
@@ -114,6 +124,7 @@ const columns: ColumnDef<User>[] = [
     meta: {
       filter: {
         placeholder: "Role",
+        multiple: true,
         options: [
           { label: "Admin", value: "admin" },
           { label: "Editor", value: "editor" },
@@ -127,7 +138,6 @@ const columns: ColumnDef<User>[] = [
     meta: {
       filter: {
         placeholder: "Status",
-        mode: "single",
         variant: "text",
         options: [
           { label: "Active", value: "active" },
@@ -138,11 +148,49 @@ const columns: ColumnDef<User>[] = [
   },
 ]
 
-// Search and filters are auto-rendered from column meta
-<ProTable columns={columns} data={data} />
+<ProTable
+  columns={columns}
+  data={data}
+  toolbar={{
+    filters: [
+      {
+        key: "createdAt",
+        render: () => <DateRangePicker value={range} onChange={setRange} />,
+      },
+    ],
+  }}
+/>
 ```
 
 `meta.search` writes to the same column filter state as the rest of the toolbar. If you do not want to put search config in column meta, pass `toolbar={{ search: { columnId: "name", placeholder: "Search name..." } }}` instead.
+
+Filtering, searching, and sorting reset pagination to the first page automatically.
+
+### Request Data
+
+`request` receives pagination, filters, and sorting. Return `{ data, total }`; you do not need to also pass `pagination.total`.
+
+```tsx
+<ProTable
+  columns={columns}
+  request={async ({ pagination, sorting, columnFilters }) => {
+    const result = await api.users.list({
+      page: pagination.pageIndex + 1,
+      pageSize: pagination.pageSize,
+      sort: sorting[0]?.id,
+      order: sorting[0] ? (sorting[0].desc ? "desc" : "asc") : undefined,
+      filters: columnFilters,
+    })
+
+    return {
+      data: result.items,
+      total: result.total,
+    }
+  }}
+/>
+```
+
+When a column has `enableSorting: true`, clicking the header updates TanStack sorting state. With `useProTableUrlState`, it also syncs to `sort` / `order` URL params by default.
 
 ### Bulk Actions
 
@@ -197,20 +245,22 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | ----------------------- | ------------------------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `columns`               | `ColumnDef<T>[]`                      | —                            | TanStack Table column definitions.                                                                             |
 | `data`                  | `T[]`                                 | `[]`                         | Table data array for local/client data.                                                                        |
-| `request`               | `(state) => Promise<{ data, total? }>`| —                            | Server request function. When provided, pagination, sorting, and filtering are sent through request params.     |
+| `request`               | `(state) => Promise<{ data, total? }>`| —                            | Server request function. Return `{ data, total }`; `total` feeds pagination automatically.     |
 | `initialState`          | `Partial<ProTableState>`              | —                            | Initial pagination, sorting, and column filters. Useful for URL-derived initial state.                          |
 | `onChange`              | `(state) => void`                     | —                            | Called when pagination, sorting, or filters change. Useful for URL sync or manually loading data.               |
-| `header`                | `ReactNode \| (context) => ReactNode` | —                            | Custom content rendered above the toolbar.                                                                     |
+| `header`                | `ReactNode \| (context) => ReactNode` | —                            | Title/description area rendered above the toolbar. Do not put search, filters, or actions here.                                                                     |
 | `toolbar`               | `false \| ProTableToolbarOptions<T>` | enabled                      | Toolbar config. Controls search, actions, and built-in options in one object.                                  |
 | `toolbar.search`        | `false \| string \| { columnId, placeholder? }` | from `columns[].meta.search` | Explicit toolbar search config. Writes to the target column filter.                                  |
+| `toolbar.filters`       | `ProToolbarItem<ProTableRenderContext<T>>[]` | — | Left-side custom toolbar controls, such as search boxes, date filters, and business filters. |
 | `toolbar.options`       | `false \| { refresh?, density?, columns? }` | `{ density: true, columns: true }` | Built-in toolbar options, similar to Ant Design ProTable.                                           |
-| `toolbar.actions`       | `ProTableAction<T>[]`                 | —                            | Configured action buttons rendered on the right side of the toolbar. Button props are passed directly on each action; use `tooltip` for tooltip content. |
+| `toolbar.actions`       | `ProTableAction<T>[]`                 | —                            | Configured `ProToolbar` action items rendered on the right side. |
+| `toolbar.labels`        | `ProTableToolbarLabels`               | English defaults             | Override toolbar text such as search, reset, refresh, density, and columns. |
 | `bulkToolbar`           | `false \| { entityName?, actions? }`  | —                            | Bulk toolbar config shown when rows are selected.                                                              |
-| `pagination`            | `false \| { pageSizeOptions? }`       | enabled                      | Pagination config. Set to `false` to hide pagination.                                                          |
+| `pagination`            | `false \| { pageSizeOptions?, labels? }` | enabled                   | Pagination config. Set to `false` to hide pagination. `labels` overrides pagination text for i18n.                                                          |
 | `dragSort`              | `false \| { rowKey?, onDragSortEnd? }` | —                            | Drag sort config. Pass an object to enable row drag sorting.                                                   |
 | `loading`               | `boolean \| { rows? }`                | `false`                      | Shows a skeleton loading state. Object form configures skeleton rows.                                           |
 | `empty`                 | `ReactNode \| { text?, icon? }`       | `'No data'`                  | Empty state content. Object form configures text and icon together.                                             |
-| `layout`                | `'full' \| 'auto'`                    | `'full'`                     | Full layout fills the available height and keeps pagination at the bottom; auto layout follows content height. |
+| `layout`                | `'full' \| 'auto'`                    | `'full'`                     | Full layout keeps pagination at the bottom with a spacer; the table itself still follows content height. |
 | `table`                 | `{ stickyHeader?, pinning? }`         | `{ stickyHeader: true }`     | Table behavior config. `pinning` can be controlled with `{ value, onChange(value) }` or disabled with `false`.  |
 | `className`             | `string`                              | —                            | Additional className for the outer container.                                                                  |
 
@@ -219,9 +269,9 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | Meta                    | Type                                  | Default                      | Description                                                                                                    |
 | ----------------------- | ------------------------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `search`                | `boolean \| { placeholder? }`         | —                            | Enables the toolbar search input from this column.                                                             |
-| `filter`                | `{ options, placeholder?, mode?, variant?, onFilter? }` | —          | Auto-renders a FacetedFilter and maps values to labels in cells.                                                |
+| `filter`                | `{ options, placeholder?, multiple?, variant?, onFilter? }` | —       | Auto-renders a FacetedFilter and maps values to labels in cells.                                                |
 | `filter.options`        | `{ label, value }[]`                  | —                            | Options used by the auto-rendered FacetedFilter.                                                               |
-| `filter.mode`           | `'single' \| 'multi'`                 | `'multi'`                    | Selection mode for the auto-rendered FacetedFilter.                                                            |
+| `filter.multiple`       | `boolean`                             | `false`                      | Whether the auto-rendered FacetedFilter returns multiple selected values.                                       |
 | `filter.variant`        | `'badge' \| 'text'`                   | `'badge'`                    | Cell display style when `filter.options` is set.                                                               |
 | `filter.onFilter`       | `(value, record) => boolean`          | auto                         | Custom matching function for advanced filter behavior.                                                         |
 | `pinned`                | `'left' \| 'right'`                   | —                            | Initial pinned position for the column.                                                                        |
@@ -253,6 +303,8 @@ const urlState = useProTableUrlState({
 | `pagination.pageSizeKey`  | `string` | `'pageSize'`| URL key for page size.               |
 | `pagination.defaultPage`  | `number` | `1`         | Default page (omitted from URL).     |
 | `pagination.defaultPageSize` | `number` | `10`     | Default page size (omitted from URL).|
+| `sorting.sortKey` | `string` | `'sort'` | URL key for sorting column id. |
+| `sorting.orderKey` | `string` | `'order'` | URL key for sort order (`asc` / `desc`). |
 | `columnFilters` | `Array<ColumnFilterConfig>` | `[]`  | Column filter definitions with URL key mapping. |
 
 **Returns:**
@@ -295,11 +347,15 @@ export default function UsersTable() {
     [router, search],
   )
 
-  const tableState = useProTableUrlState({
-    search,
-    navigate,
-    columnFilters,
-  })
+const tableState = useProTableUrlState({
+  search,
+  navigate,
+  sorting: {
+    sortKey: 'sort',
+    orderKey: 'order',
+  },
+  columnFilters,
+})
 
   return (
     <ProTable

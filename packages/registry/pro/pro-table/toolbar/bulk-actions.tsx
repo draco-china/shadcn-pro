@@ -5,9 +5,8 @@ import { X } from 'lucide-react'
 import type * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-import { Button } from '@/components/ui/button'
+import { ProButton } from '@/components/pro/pro-base'
 import { Separator } from '@/components/ui/separator'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 
 export interface ProTableBulkActionsProps<TData> {
@@ -92,7 +91,7 @@ export function ProTableBulkActions<TData>({
   if (selectedCount === 0) return null
 
   return (
-    <TooltipProvider>
+    <>
       <div aria-live="polite" aria-atomic="true" className="sr-only" role="status">
         {announcement}
       </div>
@@ -110,22 +109,16 @@ export function ProTableBulkActions<TData>({
         )}
       >
         <div className="flex items-center gap-x-2 overflow-x-auto rounded-xl border bg-background/95 p-2 shadow-xl backdrop-blur-lg supports-backdrop-filter:bg-background/60">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="size-6 rounded-full"
-                aria-label="Clear selection"
-                title="Clear selection (Escape)"
-                onClick={handleClearSelection}
-              >
-                <X size={14} />
-                <span className="sr-only">Clear selection</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Clear selection (Escape)</TooltipContent>
-          </Tooltip>
+          <ProButton
+            variant="outline"
+            size="icon-xs"
+            icon={<X size={14} />}
+            className="size-6 rounded-full"
+            aria-label="Clear selection"
+            title="Clear selection (Escape)"
+            tooltip="Clear selection (Escape)"
+            onClick={handleClearSelection}
+          />
 
           <Separator className="h-5" orientation="vertical" aria-hidden="true" />
 
@@ -148,6 +141,6 @@ export function ProTableBulkActions<TData>({
           )}
         </div>
       </div>
-    </TooltipProvider>
+    </>
   )
 }

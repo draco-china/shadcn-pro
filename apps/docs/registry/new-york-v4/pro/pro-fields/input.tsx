@@ -1,15 +1,11 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { X } from "lucide-react"
+import { X } from 'lucide-react'
+import * as React from 'react'
+import { Input as ShadcnInput } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
 
-import { cn } from "@/lib/utils"
-import { Input as ShadcnInput } from "@/components/ui/input"
-
-export interface InputProps extends Omit<
-  React.ComponentProps<typeof ShadcnInput>,
-  "prefix"
-> {
+export interface InputProps extends Omit<React.ComponentProps<typeof ShadcnInput>, 'prefix'> {
   prefix?: React.ReactNode
   suffix?: React.ReactNode
   allowClear?: boolean
@@ -30,17 +26,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null)
-    const [internalValue, setInternalValue] = React.useState(defaultValue ?? "")
+    const [internalValue, setInternalValue] = React.useState(defaultValue ?? '')
 
     React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)
 
     const isControlled = value !== undefined
     const currentValue = isControlled ? value : internalValue
-    const hasValue =
-      currentValue !== "" && currentValue !== undefined && currentValue !== null
+    const hasValue = currentValue !== '' && currentValue !== undefined && currentValue !== null
 
     const showClear = allowClear && hasValue
 
@@ -50,17 +45,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }
 
     function handleClear(
-      e:
-        | React.PointerEvent<HTMLButtonElement>
-        | React.MouseEvent<HTMLButtonElement>
+      e: React.PointerEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
     ) {
       e.preventDefault()
       e.stopPropagation()
-      if (!isControlled) setInternalValue("")
+      if (!isControlled) setInternalValue('')
       onClear?.()
       const inputEl = inputRef.current
       if (inputEl) {
-        inputEl.value = ""
+        inputEl.value = ''
         onChange?.({
           ...e,
           target: inputEl,
@@ -72,19 +65,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={cn(
-          "flex h-9 w-full items-center rounded-md border border-input bg-transparent px-3 shadow-xs",
-          "transition-[color,box-shadow]",
-          "focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50",
-          "has-aria-invalid:border-destructive has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40",
-          "has-disabled:pointer-events-none has-disabled:opacity-50",
-          "dark:bg-input/30",
-          className
+          'flex h-9 w-full items-center rounded-md border border-input bg-transparent px-3 shadow-xs',
+          'transition-[color,box-shadow]',
+          'focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50',
+          'has-aria-invalid:border-destructive has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40',
+          'has-disabled:pointer-events-none has-disabled:opacity-50',
+          'dark:bg-input/30',
+          className,
         )}
       >
         {prefix && (
-          <span className="mr-2 shrink-0 text-sm text-muted-foreground select-none">
-            {prefix}
-          </span>
+          <span className="mr-2 shrink-0 text-sm text-muted-foreground select-none">{prefix}</span>
         )}
 
         <ShadcnInput
@@ -92,7 +83,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           value={isControlled ? value : internalValue}
           onChange={handleChange}
-          className="h-auto min-w-0 flex-1 border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
+          className="h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
           {...props}
         />
 
@@ -103,21 +94,19 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onClick={handleClear}
             tabIndex={-1}
             aria-label="Clear input"
-            className="ml-1.5 shrink-0 text-muted-foreground transition-colors hover:text-foreground"
+            className="ml-1.5 shrink-0 text-muted-foreground hover:text-foreground transition-colors"
           >
             <X size={14} />
           </button>
         )}
 
         {suffix && (
-          <span className="ml-2 shrink-0 text-sm text-muted-foreground select-none">
-            {suffix}
-          </span>
+          <span className="ml-2 shrink-0 text-sm text-muted-foreground select-none">{suffix}</span>
         )}
       </div>
     )
-  }
+  },
 )
-Input.displayName = "Input"
+Input.displayName = 'Input'
 
 export { Input }

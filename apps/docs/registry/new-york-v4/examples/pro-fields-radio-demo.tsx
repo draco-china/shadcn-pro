@@ -13,9 +13,9 @@ export default function ProFieldsRadioDemo() {
         value={value}
         onChange={setValue}
         options={[
-          { label: "High", value: "high" },
-          { label: "Medium", value: "medium" },
-          { label: "Low", value: "low" },
+          { label: "High", value: "high", description: "Notify immediately." },
+          { label: "Medium", value: "medium", description: "Batch updates hourly." },
+          { label: "Low", value: "low", description: "Only send daily summaries." },
         ]}
       />
     </div>

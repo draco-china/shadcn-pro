@@ -1,5 +1,7 @@
 import type MonacoEditor from '@monaco-editor/react'
 import type * as React from 'react'
+import type { ProFullscreenMode } from '@/components/pro/pro-base'
+import type { ProToolbarItem } from '@/components/pro/pro-toolbar'
 
 export type EditorTheme = 'light' | 'dark'
 
@@ -14,6 +16,7 @@ export interface PreviewProps {
 export interface EditorProps {
   value?: string
   onChange?: (value: string) => void
+  disabled?: boolean
   /** Language id (e.g. tsx, typescript, javascript, python, markdown) */
   language: string
   /** Force light or dark variant — defaults to system/page theme via next-themes */
@@ -47,8 +50,16 @@ export interface EditorToolbarOptions {
         mode?: boolean
         format?: boolean
         copy?: boolean
-        fullscreen?: boolean
+        fullscreen?: boolean | EditorToolbarFullscreenOptions
       }
+}
+
+export interface EditorToolbarFullscreenOptions {
+  enabled?: boolean
+  value?: boolean
+  defaultValue?: boolean
+  onChange?: (fullscreen: boolean) => void
+  mode?: EditorFullscreenMode
 }
 
 export type MonacoEditorInstance = Parameters<
@@ -56,38 +67,24 @@ export type MonacoEditorInstance = Parameters<
 >[0]
 
 export type EditorViewMode = 'edit' | 'preview' | 'split'
+export type EditorFullscreenMode = ProFullscreenMode
 
-export type EditorToolbarActionContent =
-  | React.ReactNode
-  | ((context: EditorToolbarActionContext) => React.ReactNode)
-
-export interface EditorToolbarAction
-  extends Omit<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    'children' | 'disabled' | 'hidden' | 'onClick'
-  > {
-  key: string
-  label: string
-  icon?: EditorToolbarActionContent
-  tooltip?: string
+export type EditorToolbarAction = ProToolbarItem<EditorToolbarActionContext> & {
   position?: 'start' | 'before' | 'after'
-  disabled?: boolean | ((context: EditorToolbarActionContext) => boolean)
-  hidden?: boolean | ((context: EditorToolbarActionContext) => boolean)
-  onClick?: (context: EditorToolbarActionContext) => void
 }
 
 export interface EditorToolbarActionContext {
   value: string
+  disabled: boolean
   language: string
   theme: EditorTheme
   mode: EditorViewMode
   hasPreview: boolean
   isSplitView: boolean
-  copied: boolean
   fullscreen: boolean
+  fullscreenMode: EditorFullscreenMode
   editor: MonacoEditorInstance | null
   format: () => void
-  copy: () => Promise<void>
   setMode: (mode: EditorViewMode) => void
-  setFullscreen: React.Dispatch<React.SetStateAction<boolean>>
+  setFullscreen: (fullscreen: boolean) => void
 }

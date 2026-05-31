@@ -2,7 +2,44 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { ModalForm, SchemaField } from '@/registry/new-york-v4/pro/pro-form/index'
+import { ModalForm } from '@/registry/new-york-v4/pro/pro-form/index'
+
+const schema = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      title: 'Name',
+      required: true,
+      'x-component-props': { placeholder: 'Full name' },
+    },
+    email: {
+      type: 'string',
+      title: 'Email',
+      required: true,
+      'x-validator': 'email',
+      'x-component-props': { placeholder: 'user@example.com' },
+    },
+    role: {
+      type: 'string',
+      title: 'Role',
+      required: true,
+      enum: [
+        { label: 'Admin', value: 'admin' },
+        { label: 'Developer', value: 'developer' },
+        { label: 'Viewer', value: 'viewer' },
+      ],
+      'x-component-props': {
+        placeholder: 'Select a role',
+      },
+    },
+    active: {
+      type: 'boolean',
+      title: 'Active',
+      default: true,
+    },
+  },
+}
 
 export default function ProFormModalDemo() {
   const [result, setResult] = useState<Record<string, unknown> | null>(null)
@@ -13,54 +50,13 @@ export default function ProFormModalDemo() {
         trigger={<Button>New Member</Button>}
         title="Add Team Member"
         description="Fill in the details below to add a new team member."
-        submitText="Add Member"
+        submitter={{ submit: { text: "Add Member" } }}
+        schema={schema}
         onFinish={async (values) => {
           await new Promise((r) => setTimeout(r, 800))
           setResult(values)
         }}
-      >
-        <SchemaField>
-        <SchemaField.String
-          name="name"
-          title="Name"
-          required
-          x-decorator="FormItem"
-          x-component="Input"
-          x-component-props={{ placeholder: 'Full name' }}
-        />
-        <SchemaField.String
-          name="email"
-          title="Email"
-          required
-          x-validator="email"
-          x-decorator="FormItem"
-          x-component="Input"
-          x-component-props={{ placeholder: 'user@example.com' }}
-        />
-        <SchemaField.String
-          name="role"
-          title="Role"
-          required
-          x-decorator="FormItem"
-          x-component="Select"
-          x-component-props={{
-            placeholder: 'Select a role',
-            options: [
-              { label: 'Admin', value: 'admin' },
-              { label: 'Developer', value: 'developer' },
-              { label: 'Viewer', value: 'viewer' },
-            ],
-          }}
-        />
-        <SchemaField.Boolean
-          name="active"
-          title="Active"
-          default={true}
-          x-decorator="FormItem"
-          x-component="Switch"
-        />
-        </SchemaField>
-      </ModalForm>
+      />
 
       {result && (
         <div className="w-full max-w-sm rounded-md border bg-muted/40 p-4">
