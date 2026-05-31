@@ -22,6 +22,7 @@ import { GripVertical, Pin, PinOff, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
+import { PRO_TABLE_SYSTEM_COLUMN_IDS } from '../table/utils'
 
 export function ProTableColumnSettings<TData>({
   table,
@@ -36,11 +37,16 @@ export function ProTableColumnSettings<TData>({
   const columnOrder = table.getState().columnOrder.length
     ? table.getState().columnOrder
     : defaultColumnOrder
-  const SYSTEM_COLUMN_IDS = ['select', 'drag']
   const orderedColumns = [
     ...columnOrder.map((id) => columns.find((column) => column.id === id)).filter(Boolean),
     ...columns.filter((column) => !columnOrder.includes(column.id)),
-  ].filter((column) => !SYSTEM_COLUMN_IDS.includes(column.id)) as Column<TData, unknown>[]
+  ].filter(
+    (column) =>
+      column.getCanHide() &&
+      !PRO_TABLE_SYSTEM_COLUMN_IDS.includes(
+        column.id as (typeof PRO_TABLE_SYSTEM_COLUMN_IDS)[number],
+      ),
+  ) as Column<TData, unknown>[]
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),

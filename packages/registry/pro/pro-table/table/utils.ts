@@ -1,8 +1,17 @@
 import { arrayMove } from '@dnd-kit/sortable'
-import type { Column, ColumnDef, ColumnPinningState, Header, Row } from '@tanstack/react-table'
+import type { Column, ColumnDef, ColumnPinningState, Row } from '@tanstack/react-table'
 import type * as React from 'react'
 
 import { cn } from '@/lib/utils'
+import type { ProTableColumnMeta } from '../types'
+
+export const PRO_TABLE_SYSTEM_COLUMN_IDS = ['select', 'drag', 'actions', 'operation'] as const
+
+function getSystemColumnPinning(columnId: string) {
+  if (columnId === 'select') return 'left'
+  if (columnId === 'actions' || columnId === 'operation') return 'right'
+  return undefined
+}
 
 export function getColumnDefId<TData, TValue>(column: ColumnDef<TData, TValue>, index: number) {
   if (column.id) return column.id
@@ -31,10 +40,10 @@ export function getDefaultColumnPinning<TData, TValue>(
         return
       }
 
-      const pinned = column.meta?.pinned
+      const id = getColumnDefId(column, index)
+      const pinned = column.meta?.pinned ?? getSystemColumnPinning(id)
       if (!pinned) return
 
-      const id = getColumnDefId(column, index)
       if (pinned === 'left') left.push(id)
       if (pinned === 'right') right.push(id)
     })
@@ -54,23 +63,53 @@ export function getPinnedColumnClassName<TData>(
   const isFirstRight = pinned === 'right' && column.getIsFirstColumn('right')
 
   return cn(
-    pinned &&
-      'sticky z-10 bg-background group-data-[state=selected]:bg-muted group-hover:bg-muted/50',
+    pinned && 'sticky z-10 bg-background group-data-[state=selected]:bg-muted group-hover:bg-muted',
     isLastLeft && 'shadow-[1px_0_0_0_hsl(var(--border))]',
     isFirstRight && 'shadow-[-1px_0_0_0_hsl(var(--border))]',
     className,
   )
 }
 
-export function getPinnedColumnStyle<TData>(column: Column<TData, unknown>): React.CSSProperties {
+export function getColumnMeta<TData>(column: Column<TData, unknown>) {
+  return column.columnDef.meta as ProTableColumnMeta<TData> | undefined
+}
+
+export function getColumnAlignClassName<TData>(
+  column: Column<TData, unknown>,
+  target: 'header' | 'cell',
+) {
+  const align = getColumnMeta(column)?.align
+
+  if (target === 'header') {
+    if (align === 'center') return 'text-center [&>div]:justify-center'
+    if (align === 'right') return 'text-right [&>div]:justify-end'
+    return undefined
+  }
+
+  if (align === 'center') return 'text-center'
+  if (align === 'right') return 'text-right'
+  return undefined
+}
+
+export function getPinnedColumnStyle<TData>(
+  column: Column<TData, unknown>,
+  leftOffset = 0,
+): React.CSSProperties {
   const pinned = column.getIsPinned()
-  const style: React.CSSProperties = {
-    width: column.getSize(),
-    minWidth: column.getSize(),
+  const columnDef = column.columnDef
+  const hasExplicitSize =
+    columnDef.size !== undefined ||
+    columnDef.minSize !== undefined ||
+    columnDef.maxSize !== undefined
+  const style: React.CSSProperties = {}
+
+  if (hasExplicitSize) {
+    style.width = column.getSize()
+    style.minWidth = column.getSize()
   }
 
   if (pinned === 'left') {
-    style.left = `${column.getStart('left')}px`
+    style.left = `${column.getStart('left') + leftOffset}px`
   }
 
   if (pinned === 'right') {
@@ -78,14 +117,6 @@ export function getPinnedColumnStyle<TData>(column: Column<TData, unknown>): Rea
   }
 
   return style
-}
-
-export function getHeaderStyle<TData>(header: Header<TData, unknown>): React.CSSProperties {
-  return {
-    ...getPinnedColumnStyle(header.column),
-    width: header.getSize(),
-    minWidth: header.getSize(),
-  }
 }
 
 export function reorderDataByRows<TData>(

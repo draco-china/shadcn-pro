@@ -28,6 +28,7 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "role",
     header: "Role",
+    meta: { align: "center", className: "w-28" },
     cell: ({ row }) => <Badge variant="outline">{row.getValue("role")}</Badge>,
   },
 ]

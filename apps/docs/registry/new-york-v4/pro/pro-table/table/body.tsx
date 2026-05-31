@@ -8,7 +8,12 @@ import { AutoFilterCell } from '../toolbar'
 import { ProTableEmptyState } from './empty-state'
 import { ProTableSkeletonRows } from './skeleton'
 import { SortableRow } from './sortable-row'
-import { getPinnedColumnClassName, getPinnedColumnStyle } from './utils'
+import {
+  getColumnAlignClassName,
+  getColumnMeta,
+  getPinnedColumnClassName,
+  getPinnedColumnStyle,
+} from './utils'
 
 export function ProTableBody<TData>({
   rows,
@@ -89,8 +94,15 @@ function BodyRows<TData>({
           return (
             <TableCell
               key={cell.id}
-              className={getPinnedColumnClassName(cell.column, paddingClass)}
-              style={getPinnedColumnStyle(cell.column)}
+              className={getPinnedColumnClassName(
+                cell.column,
+                cn(
+                  paddingClass,
+                  getColumnAlignClassName(cell.column, 'cell'),
+                  getColumnMeta(cell.column)?.className,
+                ),
+              )}
+              style={getPinnedColumnStyle(cell.column, dragSort ? 32 : 0)}
             >
               {autoRender ? (
                   <AutoFilterCell

@@ -29,6 +29,7 @@ export function selectionColumn<TData>(): ColumnDef<TData> {
         className="translate-y-[2px]"
       />
     ),
+    meta: { pinned: 'left', className: 'w-8' },
     enableSorting: false,
     enableHiding: false,
   }

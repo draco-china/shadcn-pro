@@ -4,7 +4,12 @@ import { flexRender, type HeaderGroup } from '@tanstack/react-table'
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react'
 import { TableHead, TableRow } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
-import { getHeaderStyle, getPinnedColumnClassName } from './utils'
+import {
+  getColumnAlignClassName,
+  getColumnMeta,
+  getPinnedColumnClassName,
+  getPinnedColumnStyle,
+} from './utils'
 
 export function ProTableHeader<TData>({
   headerGroups,
@@ -20,7 +25,12 @@ export function ProTableHeader<TData>({
       {headerGroups.map((headerGroup) => (
         <TableRow key={headerGroup.id}>
           {dragSort && (
-            <TableHead className={cn('w-8 pr-0', sticky && 'sticky top-0 z-10 bg-background')} />
+            <TableHead
+              className={cn(
+                'sticky left-0 z-20 w-8 bg-background pr-0',
+                sticky && 'top-0 z-30',
+              )}
+            />
           )}
           {headerGroup.headers.map((header) => {
             const canSort = !dragSort && header.column.getCanSort()
@@ -44,9 +54,11 @@ export function ProTableHeader<TData>({
                     header.column,
                     header.column.getIsPinned() && sticky ? 'z-30' : undefined,
                   ),
+                  getColumnAlignClassName(header.column, 'header'),
+                  getColumnMeta(header.column)?.className,
                   canSort && 'cursor-pointer select-none',
                 )}
-                style={getHeaderStyle(header)}
+                style={getPinnedColumnStyle(header.column, dragSort ? 32 : 0)}
                 aria-sort={ariaSort}
                 tabIndex={canSort ? 0 : undefined}
                 onClick={sortHandler}

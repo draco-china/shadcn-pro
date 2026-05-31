@@ -9,6 +9,7 @@ export const cellPadding: Record<TableSize, string> = {
 }
 
 export type ProTableColumnPinningPosition = 'left' | 'right'
+export type ProTableColumnAlign = 'left' | 'center' | 'right'
 
 export interface ProTableFilterOption {
   label: string
@@ -39,6 +40,10 @@ export interface ProTableColumnFilter<TData = unknown> {
 
 export interface ProTableColumnMeta<TData = unknown> {
   pinned?: ProTableColumnPinningPosition
+  /** Align header and cell content. */
+  align?: ProTableColumnAlign
+  /** Class applied to header, body, and skeleton cells. Use width utilities here when needed. */
+  className?: string
   /** Enable the toolbar search input from this column. */
   search?: ProTableColumnSearch
   /** Auto-render a FacetedFilter in the toolbar and map value→label in cells. */

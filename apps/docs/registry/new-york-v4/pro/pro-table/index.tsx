@@ -199,7 +199,7 @@ export function ProTable<TData, TValue>({
   const emptyOptions = getEmptyOptions(empty)
   const paginationEnabled = paginationOptions !== false
   const pageSizeOptions = typeof paginationOptions === 'object' ? paginationOptions.pageSizeOptions : undefined
-  const tableColumns = React.useMemo(() => withAutoFilterFns(columns), [columns])
+  const tableColumns = React.useMemo(() => withProTableColumnDefaults(columns), [columns])
   const defaultColumnOrder = React.useMemo(() => getLeafColumnIds(tableColumns), [tableColumns])
   const defaultColumnPinning = React.useMemo(
     () => getDefaultColumnPinning(tableColumns),
@@ -450,24 +450,36 @@ export function ProTable<TData, TValue>({
   )
 }
 
-function withAutoFilterFns<TData, TValue>(
+function withProTableColumnDefaults<TData, TValue>(
   columns: ColumnDef<TData, TValue>[],
 ): ColumnDef<TData, TValue>[] {
   return columns.map((column) => {
     const columnDef = column as ColumnDef<TData, TValue> & {
       columns?: ColumnDef<TData, TValue>[]
+      enableHiding?: boolean
       filterFn?: unknown
       meta?: ProTableColumnMeta
     }
-    const children = columnDef.columns ? withAutoFilterFns(columnDef.columns) : undefined
+    const children = columnDef.columns ? withProTableColumnDefaults(columnDef.columns) : undefined
     const filter = columnDef.meta?.filter
     const shouldApplyFilter = filter && columnDef.filterFn === undefined
+    const id = 'id' in columnDef && typeof columnDef.id === 'string' ? columnDef.id : undefined
+    const isSelectionColumn = id === 'select'
 
-    if (!children && !shouldApplyFilter) return column
+    if (!children && !shouldApplyFilter && !isSelectionColumn) return column
 
     return {
       ...column,
       ...(children ? { columns: children } : {}),
+      ...(isSelectionColumn
+        ? {
+            enableHiding: columnDef.enableHiding ?? false,
+            meta: {
+              ...columnDef.meta,
+              className: columnDef.meta?.className ?? 'w-8',
+            },
+          }
+        : {}),
       ...(shouldApplyFilter
         ? {
             filterFn: filter.onFilter

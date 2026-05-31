@@ -77,11 +77,11 @@ export default function UsersTable() {
 
 ### Pinned Columns and Sticky Header
 
-Use `meta.pinned` on column definitions to keep important columns visible during horizontal scroll. Users can also pin or unpin columns from the column settings menu. The table header is sticky by default; set `table={{ stickyHeader: false }}` to disable it.
+Use `meta.pinned` on column definitions to keep important columns visible during horizontal scroll. Users can also pin or unpin columns from the column settings menu. System columns (`select`, `drag`, `actions`, `operation`) are pinned by default and hidden from column settings; columns with `enableHiding: false` are also omitted from column settings. The table header is sticky by default; set `table={{ stickyHeader: false }}` to disable it.
 
 ```tsx
 const columns = [
-  { id: "select", size: 48, meta: { pinned: "left" } },
+  { id: "select" },
   { accessorKey: "name", header: "Name", size: 180, meta: { pinned: "left" } },
   { accessorKey: "email", header: "Email", size: 240 },
   { accessorKey: "createdAt", header: "Created", size: 150, meta: { pinned: "right" } },
@@ -225,6 +225,8 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `filter.variant`        | `'badge' \| 'text'`                   | `'badge'`                    | Cell display style when `filter.options` is set.                                                               |
 | `filter.onFilter`       | `(value, record) => boolean`          | auto                         | Custom matching function for advanced filter behavior.                                                         |
 | `pinned`                | `'left' \| 'right'`                   | —                            | Initial pinned position for the column.                                                                        |
+| `align`                 | `'left' \| 'center' \| 'right'`       | `'left'`                     | Aligns header and body cell content.                                                                           |
+| `className`             | `string`                              | —                            | Class applied to header, body, and skeleton cells. Use width utilities like `w-32` or `min-w-40` when needed. Columns without explicit size or width classes stay auto-sized. |
 
 ### useProTableUrlState
 

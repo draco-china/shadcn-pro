@@ -221,8 +221,6 @@ const data: User[] = [
 const columns: ColumnDef<User>[] = [
   {
     id: "select",
-    size: 48,
-    meta: { pinned: "left" },
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
@@ -238,7 +236,6 @@ const columns: ColumnDef<User>[] = [
       />
     ),
     enableSorting: false,
-    enableHiding: false,
   },
   {
     accessorKey: "name",

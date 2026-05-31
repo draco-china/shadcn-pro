@@ -34,7 +34,12 @@ export function SortableRow<TData>({
         zIndex: isDragging ? 10 : undefined,
       }}
     >
-      <TableCell className={cn(paddingClass, 'w-8 pr-0')}>
+      <TableCell
+        className={cn(
+          paddingClass,
+          'sticky left-0 z-20 w-8 bg-background pr-0 group-data-[state=selected]:bg-muted group-hover:bg-muted',
+        )}
+      >
         <button
           type="button"
           {...attributes}
