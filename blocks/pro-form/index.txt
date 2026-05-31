@@ -19,7 +19,7 @@
 :HL["/shadcn-pro/_next/static/media/b4e85636e2ca4056-s.p.0c3c6tp9xl371.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/shadcn-pro/_next/static/media/caa3a2e1cccd8315-s.p.09~u27dqhyhd6.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/shadcn-pro/_next/static/media/dc6d2a64e9dbf3bc-s.p.11~i--ovv74c_.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"P":null,"c":["","blocks","pro-form",""],"q":"","i":false,"f":[[["",{"children":["(app)",{"children":["(root)",{"children":["blocks",{"children":["pro-form",{"children":["__PAGE__",{}]}]}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/shadcn-pro/_next/static/chunks/0604ylw2bvpkj.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/shadcn-pro/_next/static/chunks/0k4x4i.m88ncu.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","async":true,"nonce":"$undefined"}],["$","script","script-2",{"src":"/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","async":true,"nonce":"$undefined"}],["$","script","script-3",{"src":"/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","async":true,"nonce":"$undefined"}],["$","script","script-4",{"src":"/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","suppressHydrationWarning":true,"className":"geist_798ff10f-module__HGtJha__variable geist_mono_3f173115-module__-5hxnG__variable inter_67b4815f-module__2iy6kW__variable noto_sans_2bd09725-module__q4hXyG__variable noto_serif_31868fe1-module__Sp_6Pq__variable noto_sans_arabic_43e4c719-module__-KZrLG__variable noto_sans_hebrew_1a1cc4a4-module__bpro2a__variable playfair_display_28698f53-module__8Lx67q__variable lora_4761b0d1-module__1G4sXW__variable","children":[["$","head",null,{"children":[["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n              try {\n                if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {\n                  document.querySelector('meta[name=\"theme-color\"]').setAttribute('content', '#09090b')\n                }\n                if (localStorage.layout) {\n                  document.documentElement.classList.add('layout-' + localStorage.layout)\n                }\n              } catch (_) {}\n            "}}],["$","meta",null,{"name":"theme-color","content":"#ffffff"}]]}],["$","body",null,{"className":"group/body overscroll-none antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)]","children":["$","$L2",null,{"children":["$","$L3",null,{"children":["$","$L4",null,{"children":[["$","$L5",null,{"delayDuration":0,"children":[["$","$L6",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","$L8",null,{"position":"top-center"}]]}],null,["$","$L9",null,{}]]}]}]}]}]]}]]}],{"children":[["$","$1","c",{"children":[[["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/shadcn-pro/_next/static/chunks/0mwmxnyupennj.js","async":true,"nonce":"$undefined"}]],"$La"]}],{"children":["$Lb",{"children":["$Lc",{"children":["$Ld",{"children":["$Le",{},null,false,null]},null,false,"$@f"]},null,false,null]},null,false,"$@f"]},null,false,null]},null,false,null],"$L10",false]],"m":"$undefined","G":["$11",["$L12","$L13"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"5IhmkxdsztGXdyQhhf9QA"}
+0:{"P":null,"c":["","blocks","pro-form",""],"q":"","i":false,"f":[[["",{"children":["(app)",{"children":["(root)",{"children":["blocks",{"children":["pro-form",{"children":["__PAGE__",{}]}]}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/shadcn-pro/_next/static/chunks/0604ylw2bvpkj.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/shadcn-pro/_next/static/chunks/0k4x4i.m88ncu.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","async":true,"nonce":"$undefined"}],["$","script","script-2",{"src":"/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","async":true,"nonce":"$undefined"}],["$","script","script-3",{"src":"/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","async":true,"nonce":"$undefined"}],["$","script","script-4",{"src":"/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","suppressHydrationWarning":true,"className":"geist_798ff10f-module__HGtJha__variable geist_mono_3f173115-module__-5hxnG__variable inter_67b4815f-module__2iy6kW__variable noto_sans_2bd09725-module__q4hXyG__variable noto_serif_31868fe1-module__Sp_6Pq__variable noto_sans_arabic_43e4c719-module__-KZrLG__variable noto_sans_hebrew_1a1cc4a4-module__bpro2a__variable playfair_display_28698f53-module__8Lx67q__variable lora_4761b0d1-module__1G4sXW__variable","children":[["$","head",null,{"children":[["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n              try {\n                if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {\n                  document.querySelector('meta[name=\"theme-color\"]').setAttribute('content', '#09090b')\n                }\n                if (localStorage.layout) {\n                  document.documentElement.classList.add('layout-' + localStorage.layout)\n                }\n              } catch (_) {}\n            "}}],["$","meta",null,{"name":"theme-color","content":"#ffffff"}]]}],["$","body",null,{"className":"group/body overscroll-none antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)]","children":["$","$L2",null,{"children":["$","$L3",null,{"children":["$","$L4",null,{"children":[["$","$L5",null,{"delayDuration":0,"children":[["$","$L6",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","$L8",null,{"position":"top-center"}]]}],null,["$","$L9",null,{}]]}]}]}]}]]}]]}],{"children":[["$","$1","c",{"children":[[["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/shadcn-pro/_next/static/chunks/0mwmxnyupennj.js","async":true,"nonce":"$undefined"}]],"$La"]}],{"children":["$Lb",{"children":["$Lc",{"children":["$Ld",{"children":["$Le",{},null,false,null]},null,false,"$@f"]},null,false,null]},null,false,"$@f"]},null,false,null]},null,false,null],"$L10",false]],"m":"$undefined","G":["$11",["$L12","$L13"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"DZn7Rf01c2EeFO8ElDZZa"}
 14:I[98726,["/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/0mwmxnyupennj.js"],"MobileNav"]
 1a:I[702148,["/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/0mwmxnyupennj.js","/shadcn-pro/_next/static/chunks/0_xcdjh6h7f3i.js"],""]
 1b:I[680401,["/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/0mwmxnyupennj.js","/shadcn-pro/_next/static/chunks/0_xcdjh6h7f3i.js"],"BlocksNav"]
@@ -700,7 +700,7 @@ export default function ProFormDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>35:T15e0,'use client'
+<span class="line" data-line=""></span></code></pre>35:T1650,'use client'
 
 import { createForm, type Form, type IFormProps } from '@formily/core'
 import { FormProvider, type SchemaReactComponents } from '@formily/react'
@@ -709,7 +709,14 @@ import * as React from 'react'
 import { ProFormActions, type ProFormActionsProps, ProFormGrid } from './layout'
 import { createSchemaFieldWithComponents, type ProFormSchema, SchemaField } from './schema'
 
-export type { ProFormActionsProps, ProFormLayoutProps } from './layout'
+export type {
+  ProFormActionVariant,
+  ProFormActionsProps,
+  ProFormCancelActionProps,
+  ProFormLayoutProps,
+  ProFormResetActionProps,
+  ProFormSubmitActionProps,
+} from './layout'
 export { DrawerForm, ModalForm } from './overlay-form'
 export type { Form, IFormProps }
 export { createForm, createSchemaFieldWithComponents, ProFormActions, ProFormGrid, SchemaField }
@@ -891,7 +898,7 @@ function defaultHeaderSubmitter(actions: ReactNode) {
 function defaultFooterSubmitter(actions: ReactNode) {
   return actions
 }
-36:Tfa87,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+36:Tfe00,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Form</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> IFormProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@formily/core'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">FormProvider</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> SchemaReactComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@formily/react'</span></span>
@@ -900,7 +907,14 @@ function defaultFooterSubmitter(actions: ReactNode) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createSchemaFieldWithComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProFormSchema</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './schema'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActionVariant</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormCancelActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormResetActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormSubmitActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">DrawerForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ModalForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './overlay-form'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Form</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">IFormProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">createSchemaFieldWithComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span></span>
@@ -1082,10 +1096,14 @@ function defaultFooterSubmitter(actions: ReactNode) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> defaultFooterSubmitter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">actions</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> actions</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>37:Tefa,'use client'
+<span class="line" data-line=""></span></code></pre>37:T1030,'use client'
 
 import type { ReactNode } from 'react'
-import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
+import {
+  ProToolbar,
+  type ProToolbarButtonItem,
+  type ProToolbarItem,
+} from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 
 export interface ProFormLayoutProps {
@@ -1101,6 +1119,8 @@ const colsClass: Record<number, string> = {
   3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
   4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 }
+
+export type ProFormActionVariant = NonNullable<ProToolbarButtonItem<unknown>['variant']>
 
 export function ProFormGrid({
   children,
@@ -1122,6 +1142,7 @@ export interface ProFormSubmitActionProps {
   disabled?: boolean
   loading?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
 }
 
 export interface ProFormCancelActionProps {
@@ -1129,6 +1150,7 @@ export interface ProFormCancelActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -1137,6 +1159,7 @@ export interface ProFormResetActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -1175,7 +1198,7 @@ export function ProFormActions({
             key: 'cancel',
             label: cancelOptions.text ?? 'Cancel',
             icon: cancelOptions.icon,
-            variant: 'outline' as const,
+            variant: cancelOptions.variant ?? 'outline',
             disabled: cancelOptions.disabled ?? isSubmitting,
             onClick: cancelOptions.onClick,
           },
@@ -1187,7 +1210,7 @@ export function ProFormActions({
             key: 'reset',
             label: resetOptions.text ?? 'Reset',
             icon: resetOptions.icon,
-            variant: 'outline' as const,
+            variant: resetOptions.variant ?? 'ghost',
             disabled: resetOptions.disabled ?? isSubmitting,
             onClick: resetOptions.onClick,
           },
@@ -1202,6 +1225,7 @@ export function ProFormActions({
               ? (submitOptions?.submittingText ?? 'Submitting...')
               : (submitOptions?.text ?? 'Submit'),
             icon: submitOptions?.icon,
+            variant: submitOptions?.variant ?? 'default',
             loading: isSubmitting,
             disabled: submitOptions?.disabled || isSubmitting,
             htmlType: 'submit' as const,
@@ -1226,10 +1250,14 @@ export function ProFormActions({
     />
   )
 }
-38:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+38:Tc130,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarButtonItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -1245,6 +1273,8 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#986801;--shiki-dark:#D19A66">  3</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-dark:#D19A66">  4</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NonNullable</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbarButtonItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">unknown</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[</span><span style="color:#50A14F;--shiki-dark:#98C379">'variant'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]></span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  children</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1266,6 +1296,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  loading</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormCancelActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -1273,6 +1304,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hidden</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
@@ -1281,6 +1313,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hidden</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
@@ -1319,7 +1352,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
@@ -1331,7 +1364,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
@@ -1346,6 +1379,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">              ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#C18401;--shiki-dark:#E5C07B">submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">submittingText</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Submitting...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">              :</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#C18401;--shiki-dark:#E5C07B">submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Submit'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'default'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            loading</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ||</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            htmlType</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'submit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -3759,7 +3793,7 @@ export default function ProFormLinkageDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>54:T15e0,'use client'
+<span class="line" data-line=""></span></code></pre>54:T1650,'use client'
 
 import { createForm, type Form, type IFormProps } from '@formily/core'
 import { FormProvider, type SchemaReactComponents } from '@formily/react'
@@ -3768,7 +3802,14 @@ import * as React from 'react'
 import { ProFormActions, type ProFormActionsProps, ProFormGrid } from './layout'
 import { createSchemaFieldWithComponents, type ProFormSchema, SchemaField } from './schema'
 
-export type { ProFormActionsProps, ProFormLayoutProps } from './layout'
+export type {
+  ProFormActionVariant,
+  ProFormActionsProps,
+  ProFormCancelActionProps,
+  ProFormLayoutProps,
+  ProFormResetActionProps,
+  ProFormSubmitActionProps,
+} from './layout'
 export { DrawerForm, ModalForm } from './overlay-form'
 export type { Form, IFormProps }
 export { createForm, createSchemaFieldWithComponents, ProFormActions, ProFormGrid, SchemaField }
@@ -3950,7 +3991,7 @@ function defaultHeaderSubmitter(actions: ReactNode) {
 function defaultFooterSubmitter(actions: ReactNode) {
   return actions
 }
-55:Tfa87,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+55:Tfe00,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Form</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> IFormProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@formily/core'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">FormProvider</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> SchemaReactComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@formily/react'</span></span>
@@ -3959,7 +4000,14 @@ function defaultFooterSubmitter(actions: ReactNode) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createSchemaFieldWithComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProFormSchema</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './schema'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActionVariant</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormCancelActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormResetActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormSubmitActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">DrawerForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ModalForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './overlay-form'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Form</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">IFormProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">createSchemaFieldWithComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span></span>
@@ -4141,10 +4189,14 @@ function defaultFooterSubmitter(actions: ReactNode) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> defaultFooterSubmitter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">actions</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> actions</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>56:Tefa,'use client'
+<span class="line" data-line=""></span></code></pre>56:T1030,'use client'
 
 import type { ReactNode } from 'react'
-import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
+import {
+  ProToolbar,
+  type ProToolbarButtonItem,
+  type ProToolbarItem,
+} from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 
 export interface ProFormLayoutProps {
@@ -4160,6 +4212,8 @@ const colsClass: Record<number, string> = {
   3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
   4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 }
+
+export type ProFormActionVariant = NonNullable<ProToolbarButtonItem<unknown>['variant']>
 
 export function ProFormGrid({
   children,
@@ -4181,6 +4235,7 @@ export interface ProFormSubmitActionProps {
   disabled?: boolean
   loading?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
 }
 
 export interface ProFormCancelActionProps {
@@ -4188,6 +4243,7 @@ export interface ProFormCancelActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -4196,6 +4252,7 @@ export interface ProFormResetActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -4234,7 +4291,7 @@ export function ProFormActions({
             key: 'cancel',
             label: cancelOptions.text ?? 'Cancel',
             icon: cancelOptions.icon,
-            variant: 'outline' as const,
+            variant: cancelOptions.variant ?? 'outline',
             disabled: cancelOptions.disabled ?? isSubmitting,
             onClick: cancelOptions.onClick,
           },
@@ -4246,7 +4303,7 @@ export function ProFormActions({
             key: 'reset',
             label: resetOptions.text ?? 'Reset',
             icon: resetOptions.icon,
-            variant: 'outline' as const,
+            variant: resetOptions.variant ?? 'ghost',
             disabled: resetOptions.disabled ?? isSubmitting,
             onClick: resetOptions.onClick,
           },
@@ -4261,6 +4318,7 @@ export function ProFormActions({
               ? (submitOptions?.submittingText ?? 'Submitting...')
               : (submitOptions?.text ?? 'Submit'),
             icon: submitOptions?.icon,
+            variant: submitOptions?.variant ?? 'default',
             loading: isSubmitting,
             disabled: submitOptions?.disabled || isSubmitting,
             htmlType: 'submit' as const,
@@ -4285,10 +4343,14 @@ export function ProFormActions({
     />
   )
 }
-57:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+57:Tc130,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarButtonItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -4304,6 +4366,8 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#986801;--shiki-dark:#D19A66">  3</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-dark:#D19A66">  4</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NonNullable</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbarButtonItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">unknown</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[</span><span style="color:#50A14F;--shiki-dark:#98C379">'variant'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]></span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  children</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -4325,6 +4389,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  loading</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormCancelActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -4332,6 +4397,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hidden</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
@@ -4340,6 +4406,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hidden</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
@@ -4378,7 +4445,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
@@ -4390,7 +4457,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
@@ -4405,6 +4472,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">              ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#C18401;--shiki-dark:#E5C07B">submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">submittingText</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Submitting...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">              :</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#C18401;--shiki-dark:#E5C07B">submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Submit'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'default'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            loading</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ||</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            htmlType</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'submit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -6842,7 +6910,7 @@ export default function ProFormValidationDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>6f:T15e0,'use client'
+<span class="line" data-line=""></span></code></pre>6f:T1650,'use client'
 
 import { createForm, type Form, type IFormProps } from '@formily/core'
 import { FormProvider, type SchemaReactComponents } from '@formily/react'
@@ -6851,7 +6919,14 @@ import * as React from 'react'
 import { ProFormActions, type ProFormActionsProps, ProFormGrid } from './layout'
 import { createSchemaFieldWithComponents, type ProFormSchema, SchemaField } from './schema'
 
-export type { ProFormActionsProps, ProFormLayoutProps } from './layout'
+export type {
+  ProFormActionVariant,
+  ProFormActionsProps,
+  ProFormCancelActionProps,
+  ProFormLayoutProps,
+  ProFormResetActionProps,
+  ProFormSubmitActionProps,
+} from './layout'
 export { DrawerForm, ModalForm } from './overlay-form'
 export type { Form, IFormProps }
 export { createForm, createSchemaFieldWithComponents, ProFormActions, ProFormGrid, SchemaField }
@@ -7033,7 +7108,7 @@ function defaultHeaderSubmitter(actions: ReactNode) {
 function defaultFooterSubmitter(actions: ReactNode) {
   return actions
 }
-70:Tfa87,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+70:Tfe00,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Form</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> IFormProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@formily/core'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">FormProvider</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> SchemaReactComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@formily/react'</span></span>
@@ -7042,7 +7117,14 @@ function defaultFooterSubmitter(actions: ReactNode) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createSchemaFieldWithComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProFormSchema</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './schema'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActionVariant</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormCancelActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormResetActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormSubmitActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">DrawerForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ModalForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './overlay-form'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Form</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">IFormProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">createSchemaFieldWithComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span></span>
@@ -7224,10 +7306,14 @@ function defaultFooterSubmitter(actions: ReactNode) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> defaultFooterSubmitter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">actions</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> actions</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>71:Tefa,'use client'
+<span class="line" data-line=""></span></code></pre>71:T1030,'use client'
 
 import type { ReactNode } from 'react'
-import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
+import {
+  ProToolbar,
+  type ProToolbarButtonItem,
+  type ProToolbarItem,
+} from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 
 export interface ProFormLayoutProps {
@@ -7243,6 +7329,8 @@ const colsClass: Record<number, string> = {
   3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
   4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 }
+
+export type ProFormActionVariant = NonNullable<ProToolbarButtonItem<unknown>['variant']>
 
 export function ProFormGrid({
   children,
@@ -7264,6 +7352,7 @@ export interface ProFormSubmitActionProps {
   disabled?: boolean
   loading?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
 }
 
 export interface ProFormCancelActionProps {
@@ -7271,6 +7360,7 @@ export interface ProFormCancelActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -7279,6 +7369,7 @@ export interface ProFormResetActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -7317,7 +7408,7 @@ export function ProFormActions({
             key: 'cancel',
             label: cancelOptions.text ?? 'Cancel',
             icon: cancelOptions.icon,
-            variant: 'outline' as const,
+            variant: cancelOptions.variant ?? 'outline',
             disabled: cancelOptions.disabled ?? isSubmitting,
             onClick: cancelOptions.onClick,
           },
@@ -7329,7 +7420,7 @@ export function ProFormActions({
             key: 'reset',
             label: resetOptions.text ?? 'Reset',
             icon: resetOptions.icon,
-            variant: 'outline' as const,
+            variant: resetOptions.variant ?? 'ghost',
             disabled: resetOptions.disabled ?? isSubmitting,
             onClick: resetOptions.onClick,
           },
@@ -7344,6 +7435,7 @@ export function ProFormActions({
               ? (submitOptions?.submittingText ?? 'Submitting...')
               : (submitOptions?.text ?? 'Submit'),
             icon: submitOptions?.icon,
+            variant: submitOptions?.variant ?? 'default',
             loading: isSubmitting,
             disabled: submitOptions?.disabled || isSubmitting,
             htmlType: 'submit' as const,
@@ -7368,10 +7460,14 @@ export function ProFormActions({
     />
   )
 }
-72:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+72:Tc130,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarButtonItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -7387,6 +7483,8 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#986801;--shiki-dark:#D19A66">  3</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-dark:#D19A66">  4</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NonNullable</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbarButtonItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">unknown</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[</span><span style="color:#50A14F;--shiki-dark:#98C379">'variant'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]></span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  children</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -7408,6 +7506,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  loading</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormCancelActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -7415,6 +7514,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hidden</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
@@ -7423,6 +7523,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hidden</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
@@ -7461,7 +7562,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
@@ -7473,7 +7574,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
@@ -7488,6 +7589,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">              ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#C18401;--shiki-dark:#E5C07B">submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">submittingText</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Submitting...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">              :</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#C18401;--shiki-dark:#E5C07B">submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Submit'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'default'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            loading</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ||</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            htmlType</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'submit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -9839,7 +9941,7 @@ export default function ProFormModalDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>8a:T15e0,'use client'
+<span class="line" data-line=""></span></code></pre>8a:T1650,'use client'
 
 import { createForm, type Form, type IFormProps } from '@formily/core'
 import { FormProvider, type SchemaReactComponents } from '@formily/react'
@@ -9848,7 +9950,14 @@ import * as React from 'react'
 import { ProFormActions, type ProFormActionsProps, ProFormGrid } from './layout'
 import { createSchemaFieldWithComponents, type ProFormSchema, SchemaField } from './schema'
 
-export type { ProFormActionsProps, ProFormLayoutProps } from './layout'
+export type {
+  ProFormActionVariant,
+  ProFormActionsProps,
+  ProFormCancelActionProps,
+  ProFormLayoutProps,
+  ProFormResetActionProps,
+  ProFormSubmitActionProps,
+} from './layout'
 export { DrawerForm, ModalForm } from './overlay-form'
 export type { Form, IFormProps }
 export { createForm, createSchemaFieldWithComponents, ProFormActions, ProFormGrid, SchemaField }
@@ -10030,7 +10139,7 @@ function defaultHeaderSubmitter(actions: ReactNode) {
 function defaultFooterSubmitter(actions: ReactNode) {
   return actions
 }
-8b:Tfa87,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+8b:Tfe00,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Form</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> IFormProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@formily/core'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">FormProvider</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> SchemaReactComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@formily/react'</span></span>
@@ -10039,7 +10148,14 @@ function defaultFooterSubmitter(actions: ReactNode) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createSchemaFieldWithComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProFormSchema</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './schema'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActionVariant</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormCancelActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormResetActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormSubmitActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">DrawerForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ModalForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './overlay-form'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Form</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">IFormProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">createSchemaFieldWithComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span></span>
@@ -10221,10 +10337,14 @@ function defaultFooterSubmitter(actions: ReactNode) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> defaultFooterSubmitter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">actions</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> actions</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>8c:Tefa,'use client'
+<span class="line" data-line=""></span></code></pre>8c:T1030,'use client'
 
 import type { ReactNode } from 'react'
-import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
+import {
+  ProToolbar,
+  type ProToolbarButtonItem,
+  type ProToolbarItem,
+} from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 
 export interface ProFormLayoutProps {
@@ -10240,6 +10360,8 @@ const colsClass: Record<number, string> = {
   3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
   4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 }
+
+export type ProFormActionVariant = NonNullable<ProToolbarButtonItem<unknown>['variant']>
 
 export function ProFormGrid({
   children,
@@ -10261,6 +10383,7 @@ export interface ProFormSubmitActionProps {
   disabled?: boolean
   loading?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
 }
 
 export interface ProFormCancelActionProps {
@@ -10268,6 +10391,7 @@ export interface ProFormCancelActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -10276,6 +10400,7 @@ export interface ProFormResetActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -10314,7 +10439,7 @@ export function ProFormActions({
             key: 'cancel',
             label: cancelOptions.text ?? 'Cancel',
             icon: cancelOptions.icon,
-            variant: 'outline' as const,
+            variant: cancelOptions.variant ?? 'outline',
             disabled: cancelOptions.disabled ?? isSubmitting,
             onClick: cancelOptions.onClick,
           },
@@ -10326,7 +10451,7 @@ export function ProFormActions({
             key: 'reset',
             label: resetOptions.text ?? 'Reset',
             icon: resetOptions.icon,
-            variant: 'outline' as const,
+            variant: resetOptions.variant ?? 'ghost',
             disabled: resetOptions.disabled ?? isSubmitting,
             onClick: resetOptions.onClick,
           },
@@ -10341,6 +10466,7 @@ export function ProFormActions({
               ? (submitOptions?.submittingText ?? 'Submitting...')
               : (submitOptions?.text ?? 'Submit'),
             icon: submitOptions?.icon,
+            variant: submitOptions?.variant ?? 'default',
             loading: isSubmitting,
             disabled: submitOptions?.disabled || isSubmitting,
             htmlType: 'submit' as const,
@@ -10365,10 +10491,14 @@ export function ProFormActions({
     />
   )
 }
-8d:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+8d:Tc130,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarButtonItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -10384,6 +10514,8 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#986801;--shiki-dark:#D19A66">  3</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-dark:#D19A66">  4</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NonNullable</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbarButtonItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">unknown</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[</span><span style="color:#50A14F;--shiki-dark:#98C379">'variant'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]></span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  children</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -10405,6 +10537,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  loading</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormCancelActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -10412,6 +10545,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hidden</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
@@ -10420,6 +10554,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hidden</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
@@ -10458,7 +10593,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
@@ -10470,7 +10605,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
@@ -10485,6 +10620,7 @@ export function ProFormActions({
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">              ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#C18401;--shiki-dark:#E5C07B">submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">submittingText</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Submitting...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">              :</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#C18401;--shiki-dark:#E5C07B">submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Submit'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'default'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            loading</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ||</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            htmlType</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'submit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -12862,7 +12998,7 @@ a4:T68f7,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>a5:T15e0,'use client'
+<span class="line" data-line=""></span></code></pre>a5:T1650,'use client'
 
 import { createForm, type Form, type IFormProps } from '@formily/core'
 import { FormProvider, type SchemaReactComponents } from '@formily/react'
@@ -12871,7 +13007,14 @@ import * as React from 'react'
 import { ProFormActions, type ProFormActionsProps, ProFormGrid } from './layout'
 import { createSchemaFieldWithComponents, type ProFormSchema, SchemaField } from './schema'
 
-export type { ProFormActionsProps, ProFormLayoutProps } from './layout'
+export type {
+  ProFormActionVariant,
+  ProFormActionsProps,
+  ProFormCancelActionProps,
+  ProFormLayoutProps,
+  ProFormResetActionProps,
+  ProFormSubmitActionProps,
+} from './layout'
 export { DrawerForm, ModalForm } from './overlay-form'
 export type { Form, IFormProps }
 export { createForm, createSchemaFieldWithComponents, ProFormActions, ProFormGrid, SchemaField }
@@ -13053,7 +13196,7 @@ function defaultHeaderSubmitter(actions: ReactNode) {
 function defaultFooterSubmitter(actions: ReactNode) {
   return actions
 }
-a6:Tfa87,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+a6:Tfe00,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Form</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> IFormProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@formily/core'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">FormProvider</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> SchemaReactComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@formily/react'</span></span>
@@ -13062,7 +13205,14 @@ a6:Tfa87,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createSchemaFieldWithComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProFormSchema</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './schema'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActionVariant</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormActionsProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormCancelActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormResetActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProFormSubmitActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './layout'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">DrawerForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ModalForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> './overlay-form'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Form</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">IFormProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createForm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">createSchemaFieldWithComponents</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SchemaField</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span></span>
@@ -13244,10 +13394,14 @@ a6:Tfa87,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> defaultFooterSubmitter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">actions</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> actions</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>a7:Tefa,'use client'
+<span class="line" data-line=""></span></code></pre>a7:T1030,'use client'
 
 import type { ReactNode } from 'react'
-import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
+import {
+  ProToolbar,
+  type ProToolbarButtonItem,
+  type ProToolbarItem,
+} from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 
 export interface ProFormLayoutProps {
@@ -13263,6 +13417,8 @@ const colsClass: Record<number, string> = {
   3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
   4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 }
+
+export type ProFormActionVariant = NonNullable<ProToolbarButtonItem<unknown>['variant']>
 
 export function ProFormGrid({
   children,
@@ -13284,6 +13440,7 @@ export interface ProFormSubmitActionProps {
   disabled?: boolean
   loading?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
 }
 
 export interface ProFormCancelActionProps {
@@ -13291,6 +13448,7 @@ export interface ProFormCancelActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -13299,6 +13457,7 @@ export interface ProFormResetActionProps {
   hidden?: boolean
   disabled?: boolean
   icon?: ReactNode
+  variant?: ProFormActionVariant
   onClick?: () => void | Promise<void>
 }
 
@@ -13337,7 +13496,7 @@ export function ProFormActions({
             key: 'cancel',
             label: cancelOptions.text ?? 'Cancel',
             icon: cancelOptions.icon,
-            variant: 'outline' as const,
+            variant: cancelOptions.variant ?? 'outline',
             disabled: cancelOptions.disabled ?? isSubmitting,
             onClick: cancelOptions.onClick,
           },
@@ -13349,7 +13508,7 @@ export function ProFormActions({
             key: 'reset',
             label: resetOptions.text ?? 'Reset',
             icon: resetOptions.icon,
-            variant: 'outline' as const,
+            variant: resetOptions.variant ?? 'ghost',
             disabled: resetOptions.disabled ?? isSubmitting,
             onClick: resetOptions.onClick,
           },
@@ -13364,6 +13523,7 @@ export function ProFormActions({
               ? (submitOptions?.submittingText ?? 'Submitting...')
               : (submitOptions?.text ?? 'Submit'),
             icon: submitOptions?.icon,
+            variant: submitOptions?.variant ?? 'default',
             loading: isSubmitting,
             disabled: submitOptions?.disabled || isSubmitting,
             htmlType: 'submit' as const,
@@ -13388,10 +13548,14 @@ export function ProFormActions({
     />
   )
 }
-a8:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+a8:Tc130,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarButtonItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormLayoutProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -13407,6 +13571,8 @@ a8:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#986801;--shiki-dark:#D19A66">  3</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-dark:#D19A66">  4</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NonNullable</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbarButtonItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">unknown</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[</span><span style="color:#50A14F;--shiki-dark:#98C379">'variant'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]></span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProFormGrid</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  children</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -13428,6 +13594,7 @@ a8:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  loading</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormCancelActionProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -13435,6 +13602,7 @@ a8:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hidden</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
@@ -13443,6 +13611,7 @@ a8:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hidden</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  icon</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFormActionVariant</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onClick</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
@@ -13481,7 +13650,7 @@ a8:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> cancelOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
@@ -13493,7 +13662,7 @@ a8:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Reset'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> resetOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#C18401;--shiki-dark:#E06C75">onClick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          },</span></span>
@@ -13508,6 +13677,7 @@ a8:Tb5aa,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">              ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#C18401;--shiki-dark:#E5C07B">submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">submittingText</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Submitting...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">              :</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#C18401;--shiki-dark:#E5C07B">submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">text</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Submit'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'default'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            loading</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> submitOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#C18401;--shiki-dark:#E06C75">disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ||</span><span style="color:#383A42;--shiki-dark:#E06C75"> isSubmitting</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            htmlType</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'submit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
