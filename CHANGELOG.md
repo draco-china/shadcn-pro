@@ -1,3 +1,10 @@
+## [1.16.5](https://github.com/draco-china/shadcn-pro/compare/v1.16.4...v1.16.5) (2026-06-01)
+
+
+### Bug Fixes
+
+* update pro form reset variant ([201bee1](https://github.com/draco-china/shadcn-pro/commit/201bee1033f141d18c5a4beb19697d022b3e602f))
+
 ## [1.16.4](https://github.com/draco-china/shadcn-pro/compare/v1.16.3...v1.16.4) (2026-06-01)
 
 
