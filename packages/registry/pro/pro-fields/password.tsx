@@ -1,6 +1,6 @@
 'use client'
 
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, X } from 'lucide-react'
 import * as React from 'react'
 import { Input as ShadcnInput } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
@@ -8,11 +8,58 @@ import { cn } from '@/lib/utils'
 export interface PasswordProps extends Omit<React.ComponentProps<typeof ShadcnInput>, 'type'> {
   suffix?: React.ReactNode
   inputClassName?: string
+  allowClear?: boolean
+  onClear?: () => void
 }
 
 const Password = React.forwardRef<HTMLInputElement, PasswordProps>(
-  ({ className, suffix, inputClassName, ...props }, ref) => {
+  (
+    {
+      className,
+      suffix,
+      inputClassName,
+      allowClear = true,
+      onClear,
+      value,
+      defaultValue,
+      onChange,
+      ...props
+    },
+    ref,
+  ) => {
     const [visible, setVisible] = React.useState(false)
+    const inputRef = React.useRef<HTMLInputElement>(null)
+    const [internalValue, setInternalValue] = React.useState(defaultValue ?? '')
+
+    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)
+
+    const isControlled = value !== undefined
+    const currentValue = isControlled ? value : internalValue
+    const hasValue = currentValue !== '' && currentValue !== undefined && currentValue !== null
+    const showClear = allowClear && hasValue && !props.disabled && !props.readOnly
+
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+      if (!isControlled) setInternalValue(event.target.value)
+      onChange?.(event)
+    }
+
+    function handleClear(
+      event: React.PointerEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
+    ) {
+      event.preventDefault()
+      event.stopPropagation()
+      if (!isControlled) setInternalValue('')
+      onClear?.()
+      const inputEl = inputRef.current
+      if (inputEl) {
+        inputEl.value = ''
+        onChange?.({
+          ...event,
+          target: inputEl,
+          currentTarget: inputEl,
+        } as unknown as React.ChangeEvent<HTMLInputElement>)
+      }
+    }
 
     return (
       <div
@@ -27,8 +74,10 @@ const Password = React.forwardRef<HTMLInputElement, PasswordProps>(
         )}
       >
         <ShadcnInput
-          ref={ref}
+          ref={inputRef}
           type={visible ? 'text' : 'password'}
+          value={isControlled ? value : internalValue}
+          onChange={handleChange}
           className={cn(
             'h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent',
             inputClassName,
@@ -37,6 +86,18 @@ const Password = React.forwardRef<HTMLInputElement, PasswordProps>(
         />
         {suffix && (
           <span className="ml-2 shrink-0 select-none text-sm text-muted-foreground">{suffix}</span>
+        )}
+        {showClear && (
+          <button
+            type="button"
+            tabIndex={-1}
+            aria-label="Clear password"
+            onPointerDown={handleClear}
+            onClick={handleClear}
+            className="ml-1.5 shrink-0 text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <X size={14} />
+          </button>
         )}
         <button
           type="button"

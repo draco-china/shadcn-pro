@@ -13,15 +13,24 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import type { ProToolbarMenuItem, ProToolbarMenuOption } from '../types'
+import type {
+  ProToolbarButtonSize,
+  ProToolbarButtonVariant,
+  ProToolbarMenuItem,
+  ProToolbarMenuOption,
+} from '../types'
 import { renderToolbarContent, resolveToolbarCopy } from './utils'
 
 export function ToolbarMenuItem<TContext>({
   item,
   context,
+  variant,
+  size,
 }: {
   item: ProToolbarMenuItem<TContext>
   context: TContext
+  variant?: ProToolbarButtonVariant
+  size?: ProToolbarButtonSize
 }) {
   const label = renderToolbarContent(item.label, context)
   const icon = renderToolbarContent(item.icon, context)
@@ -30,7 +39,7 @@ export function ToolbarMenuItem<TContext>({
   const loading = typeof item.loading === 'function' ? item.loading(context) : item.loading
   const itemDisabled = typeof item.disabled === 'function' ? item.disabled(context) : item.disabled
   const iconOnly = Boolean(icon) && !label
-  const itemSize = item.size
+  const itemSize = item.size ?? size
   const options = typeof item.items === 'function' ? item.items(context) : item.items
   const {
     key,
@@ -43,6 +52,7 @@ export function ToolbarMenuItem<TContext>({
     copy: _copy,
     items,
     size: _size,
+    variant: itemVariant,
     align = 'end',
     side = 'bottom',
     ...buttonProps
@@ -62,6 +72,7 @@ export function ToolbarMenuItem<TContext>({
     <ProButton
       type="button"
       {...buttonProps}
+      variant={itemVariant ?? variant}
       size={itemSize}
       icon={icon}
       copy={copy}

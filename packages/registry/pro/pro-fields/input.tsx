@@ -17,13 +17,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     {
       prefix,
       suffix,
-      allowClear,
+      allowClear = true,
       onClear,
       className,
       type,
       value,
       defaultValue,
       onChange,
+      disabled,
+      readOnly,
       ...props
     },
     ref,
@@ -37,7 +39,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const currentValue = isControlled ? value : internalValue
     const hasValue = currentValue !== '' && currentValue !== undefined && currentValue !== null
 
-    const showClear = allowClear && hasValue
+    const showClear = allowClear && hasValue && !disabled && !readOnly
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
       if (!isControlled) setInternalValue(e.target.value)
@@ -83,6 +85,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           value={isControlled ? value : internalValue}
           onChange={handleChange}
+          disabled={disabled}
+          readOnly={readOnly}
           className="h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
           {...props}
         />

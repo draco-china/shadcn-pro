@@ -94,11 +94,21 @@ export default function ProEditorDemo() {
         value={value}
         onChange={setValue}
         toolbar={{
+          title: ({ language }) => (
+            <span className="flex items-center gap-2">
+              <span>Example editor</span>
+              <span className="text-muted-foreground uppercase">{language}</span>
+            </span>
+          ),
           actions: [
             {
               key: "focus",
-              label: "Focus editor",
               icon: <Focus size={14} />,
+              tooltip: "Focus editor",
+              "aria-label": "Focus editor",
+              position: "before",
+              size: "icon-xs",
+              variant: "ghost",
               onClick: ({ editor }) => editor?.focus(),
             },
             {

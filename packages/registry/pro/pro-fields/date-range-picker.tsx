@@ -27,7 +27,7 @@ export function DateRangePicker({
   onChange,
   disabled,
   placeholder = 'Pick date range',
-  allowClear,
+  allowClear = true,
   className,
 }: DateRangePickerProps) {
   const label = value?.from

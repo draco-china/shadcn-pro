@@ -2,7 +2,7 @@
 
 import { X } from 'lucide-react'
 import type * as React from 'react'
-import { Input } from '@/components/ui/input'
+import { Input } from '@/registry/new-york-v4/ui/input'
 import { cn } from '@/lib/utils'
 
 export interface DigitProps
@@ -21,7 +21,7 @@ export function Digit({
   placeholder = 'Enter number',
   disabled,
   className,
-  allowClear,
+  allowClear = true,
   min,
   max,
   step = 1,
@@ -70,7 +70,7 @@ export function Digit({
         {...props}
         className="h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
       />
-      {allowClear && hasValue && (
+      {allowClear && hasValue && !disabled && (
         <button
           type="button"
           tabIndex={-1}

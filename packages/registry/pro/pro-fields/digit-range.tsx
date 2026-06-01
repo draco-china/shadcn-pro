@@ -25,7 +25,7 @@ export function DigitRange({
   placeholder = ['Min', 'Max'],
   disabled,
   className,
-  allowClear,
+  allowClear = true,
 }: DigitRangeProps) {
   const hasValue =
     (value?.min !== undefined && !Number.isNaN(value.min)) ||
@@ -67,7 +67,7 @@ export function DigitRange({
       <div
         className={cn(
           'flex h-9 flex-1 items-center rounded-md border border-input bg-transparent px-3 shadow-xs transition-[color,box-shadow] focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50 dark:bg-input/30',
-          allowClear && hasValue && 'pr-8',
+          allowClear && hasValue && !disabled && 'pr-8',
         )}
       >
         <Input
@@ -79,7 +79,7 @@ export function DigitRange({
           className="h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
         />
       </div>
-      {allowClear && hasValue && (
+      {allowClear && hasValue && !disabled && (
         <button
           type="button"
           tabIndex={-1}

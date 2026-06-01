@@ -19,6 +19,8 @@ import { ProToolbar } from "@/components/pro/pro-toolbar"
 
 <ProToolbar
   context={{ table }}
+  size="sm"
+  variant="ghost"
   left={{
     className: "w-full sm:w-auto",
     options: [
@@ -32,7 +34,6 @@ import { ProToolbar } from "@/components/pro/pro-toolbar"
         key: "columns",
         icon: <SlidersHorizontal />,
         tooltip: "Columns",
-        variant: "ghost",
         contentClassName: "w-56 p-2",
         content: (context) => <ColumnSettings table={context.table} />,
       },
@@ -46,7 +47,7 @@ import { ProToolbar } from "@/components/pro/pro-toolbar"
           { key: "delete", label: "Delete", danger: true, separator: "left" },
         ],
       },
-      { key: "create", label: "Create", icon: <Plus /> },
+      { key: "create", label: "Create", icon: <Plus />, variant: "default" },
     ],
   }}
 />
@@ -62,7 +63,7 @@ Use `items` for simple menu actions, and `content` for custom dropdown panels su
 - `options` is always an array.
 - Items are shape-based: `render` is custom content, `separator: true` is a separator, `items` is a menu, `content` is a custom dropdown panel, otherwise the item renders as a button.
 - `context` is generic and is passed to item callbacks, labels, icons, tooltips, disabled/loading/hidden states, copy config, menu options, and dropdown content.
-- `ProToolbar` does not force button `variant` or `size`. Use scenario wrappers such as `ProTableToolbar` to apply compact density, or pass `variant` / `size` on individual items.
+- `variant` and `size` can be set on the toolbar; individual items can still override them.
 - Regions with only hidden items are not rendered, so hidden filters/actions do not leave layout gaps.
 - The toolbar wraps responsively. When a region wraps on small screens, region class names can make filters/search occupy a full row with `w-full sm:w-auto`.
 
@@ -130,6 +131,8 @@ Use `render` when an option needs to return arbitrary controls or business-speci
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `context` | `TContext` | — | Generic context passed to item callbacks. |
+| `variant` | `ProButton variant` | — | Default button variant for toolbar button, menu, and dropdown items. |
+| `size` | `ProButton size` | — | Default button size for toolbar button, menu, and dropdown items. |
 | `left` | `{ options, className? }` | — | Left region. |
 | `center` | `{ options, className? }` | — | Center region. |
 | `right` | `{ options, className? }` | — | Right region. |
@@ -139,8 +142,8 @@ Use `render` when an option needs to return arbitrary controls or business-speci
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `variant` | `ProButton variant` | Button visual style. No toolbar-level default is applied. |
-| `size` | `ProButton size` | Button size. No toolbar-level default is applied. |
+| `variant` | `ProButton variant` | Button visual style. Overrides the toolbar default. |
+| `size` | `ProButton size` | Button size. Overrides the toolbar default. |
 | `hidden` | `boolean \| (context) => boolean` | Hide an item without leaving an empty region. |
 | `align` | `'start' \| 'center' \| 'end'` | Menu or dropdown panel alignment. |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | Menu or dropdown panel side. |

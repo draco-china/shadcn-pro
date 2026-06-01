@@ -52,6 +52,12 @@ export interface SelectProps
   contentClassName?: string
 }
 
+const selectTriggerClassName = cn(
+  'h-9 w-full justify-between rounded-md border border-input bg-transparent px-3 text-sm font-normal shadow-xs',
+  'transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',
+  'disabled:opacity-50 dark:bg-input/30',
+)
+
 export function Select({
   value,
   defaultValue,
@@ -60,7 +66,7 @@ export function Select({
   disabled,
   required,
   options = [],
-  allowClear,
+  allowClear = true,
   multiple = false,
   searchable = false,
   searchPlaceholder,
@@ -128,8 +134,9 @@ export function Select({
               role="combobox"
               disabled={disabled}
               className={cn(
-                'h-9 w-full justify-between px-3 font-normal',
-                !selectedOptions.length && 'text-muted-foreground',
+                selectTriggerClassName,
+                'hover:bg-transparent hover:text-foreground dark:hover:bg-input/30',
+                !selectedOptions.length && 'text-muted-foreground hover:text-muted-foreground',
                 showClear && 'pr-14',
                 triggerClassName,
               )}
@@ -194,7 +201,11 @@ export function Select({
         {...props}
       >
         <ShadcnSelectTrigger
-          className={cn('w-full', showClear && '*:data-[slot=select-value]:pr-8', triggerClassName)}
+          className={cn(
+            selectTriggerClassName,
+            showClear && '*:data-[slot=select-value]:pr-8',
+            triggerClassName,
+          )}
         >
           <ShadcnSelectValue placeholder={placeholder ?? 'Select...'}>
             {currentValue ? (

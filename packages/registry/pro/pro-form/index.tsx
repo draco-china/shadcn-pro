@@ -134,9 +134,6 @@ export function ProForm({
               onClick: submitterActions.reset.onClick ?? handleReset,
             }
           : undefined,
-    actionsVariant:
-      submitterActions.actionsVariant ?? (activeActionsPlacement === 'header' ? 'page' : 'inline'),
-    align: submitterActions.align ?? (activeActionsPlacement === 'header' ? 'right' : 'left'),
   }
 
   const actionsNode = activeSubmitter ? <ProFormActions {...baseActionsProps} /> : null
@@ -194,5 +191,5 @@ function defaultHeaderSubmitter(actions: ReactNode) {
 }
 
 function defaultFooterSubmitter(actions: ReactNode) {
-  return actions
+  return <div className="pt-2">{actions}</div>
 }

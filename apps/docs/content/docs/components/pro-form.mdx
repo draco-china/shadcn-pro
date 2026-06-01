@@ -91,6 +91,63 @@ Real-time and async field validation with custom error messages.
 
 <ComponentPreview name="pro-form-validation-demo" previewClassName="min-h-[480px]" />
 
+Validation rules live in `schema` through Formily's field-level `required` and `x-validator`.
+`ProForm` does not expose a separate `validationSchema` prop.
+Use Formily's native validator syntax when you do not want an extra schema dependency:
+
+```tsx
+const schema = {
+  type: "object",
+  properties: {
+    email: {
+      type: "string",
+      title: "Email",
+      required: true,
+      "x-validator": [
+        { required: true, message: "Email is required" },
+        { format: "email", message: "Please enter a valid email address" },
+      ],
+    },
+    password: {
+      type: "string",
+      title: "Password",
+      required: true,
+      "x-validator": [
+        { required: true, message: "Password is required" },
+        { min: 8, message: "Password must be at least 8 characters" },
+      ],
+    },
+  },
+}
+```
+
+`x-validator` also accepts Zod schemas as an optional enhancement without making `ProForm` depend on `zod`. Use Zod's chainable API when a field has multiple Zod rules:
+
+```tsx
+import { z } from "zod"
+
+const schema = {
+  type: "object",
+  properties: {
+    email: {
+      type: "string",
+      title: "Email",
+      required: true,
+      "x-validator": z.string().email("Please enter a valid email address"),
+    },
+    password: {
+      type: "string",
+      title: "Password",
+      required: true,
+      "x-validator": z
+        .string()
+        .min(8, "Password must be at least 8 characters")
+        .regex(/[A-Z]/, "Password must include an uppercase letter"),
+    },
+  },
+}
+```
+
 ### Field Linkage
 
 Show or hide fields dynamically based on other field values.
@@ -329,8 +386,7 @@ Default action priority is explicit and uses the underlying button variants dire
 | `reset` | `false \| ProFormResetActionProps` | — | Reset button config. Omit to hide it. |
 | `submitting` | `boolean` | — | Controlled submitting state for default actions. |
 | `loading` | `boolean` | `false` | Fallback loading state for default actions. |
-| `actionsVariant` | `'page' \| 'inline' \| 'overlay'` | header: `'page'`, footer: `'inline'` | Visual variant for actions. |
-| `align` | `'left' \| 'center' \| 'right'` | header: `'right'`, footer: `'left'` | Alignment of default actions. |
+| `className` | `string` | — | Additional className for the default actions node. |
 | `header` | `ReactNode \| (actions, context) => ReactNode` | — | Custom header submitter slot. |
 | `footer` | `ReactNode \| (actions, context) => ReactNode` | default footer renderer | Custom footer submitter slot. |
 
@@ -368,8 +424,7 @@ Standalone action bar — use directly when a page needs to compose actions outs
 | `reset` | `false \| ProFormResetActionProps` | — | Reset button config. |
 | `submitting` | `boolean` | — | Controlled submitting state. |
 | `loading` | `boolean` | `false` | Fallback loading state. |
-| `actionsVariant` | `'page' \| 'inline' \| 'overlay'` | `'inline'` | Visual variant for page header, inline, or overlay footer actions. |
-| `align` | `'left' \| 'center' \| 'right'` | `'left'` | Alignment of buttons. |
+| `className` | `string` | — | Additional className for the action container. |
 | `children` | `ReactNode` | — | Extra buttons or content to render alongside actions. |
 
 ### ModalForm

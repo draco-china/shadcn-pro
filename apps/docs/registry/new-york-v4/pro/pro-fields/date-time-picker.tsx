@@ -1,10 +1,11 @@
 'use client'
 
 import { format } from 'date-fns'
-import { CalendarIcon } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { CalendarIcon, X } from 'lucide-react'
+import type * as React from 'react'
+import { Button } from '@/registry/new-york-v4/ui/button'
+import { Calendar } from '@/registry/new-york-v4/ui/calendar'
+import { Popover, PopoverContent, PopoverTrigger } from '@/registry/new-york-v4/ui/popover'
 import { cn } from '@/lib/utils'
 
 export interface TimeSelectProps {
@@ -66,6 +67,7 @@ export interface DateTimePickerProps {
   onChange?: (date: Date | undefined) => void
   disabled?: boolean
   placeholder?: string
+  allowClear?: boolean
   className?: string
 }
 
@@ -74,11 +76,13 @@ export function DateTimePicker({
   onChange,
   disabled,
   placeholder = 'Pick date & time',
+  allowClear = true,
   className,
 }: DateTimePickerProps) {
   const hour = value ? value.getHours() : 0
   const minute = value ? value.getMinutes() : 0
   const second = value ? value.getSeconds() : 0
+  const showClear = allowClear && value && !disabled
 
   function handleDaySelect(day: Date | undefined) {
     if (!day) {
@@ -97,22 +101,46 @@ export function DateTimePicker({
     onChange?.(d)
   }
 
+  function handleClear(
+    event: React.PointerEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
+  ) {
+    event.preventDefault()
+    event.stopPropagation()
+    onChange?.(undefined)
+  }
+
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          disabled={disabled}
-          className={cn(
-            'w-full justify-start text-left font-normal',
-            !value && 'text-muted-foreground',
-            className,
-          )}
-        >
-          <CalendarIcon className="mr-2 size-4" />
-          {value ? format(value, 'PPP HH:mm:ss') : placeholder}
-        </Button>
-      </PopoverTrigger>
+      <div className={cn('relative w-full', className)}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            disabled={disabled}
+            className={cn(
+              'w-full justify-start text-left font-normal',
+              showClear && 'pr-8',
+              !value && 'text-muted-foreground',
+            )}
+          >
+            <CalendarIcon className="mr-2 size-4" />
+            <span className="min-w-0 flex-1 truncate text-left">
+              {value ? format(value, 'PPP HH:mm:ss') : placeholder}
+            </span>
+          </Button>
+        </PopoverTrigger>
+        {showClear && (
+          <button
+            type="button"
+            tabIndex={-1}
+            aria-label="Clear date and time"
+            onPointerDown={handleClear}
+            onClick={handleClear}
+            className="absolute top-1/2 right-2 z-10 flex size-5 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <X size={14} />
+          </button>
+        )}
+      </div>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar mode="single" selected={value} onSelect={handleDaySelect} />
         <TimeSelect
@@ -126,4 +154,3 @@ export function DateTimePicker({
     </Popover>
   )
 }
-

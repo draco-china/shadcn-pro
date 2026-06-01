@@ -51,7 +51,7 @@ Every field is a plain React/shadcn component. Simple fields preserve the underl
 import { Input } from "@/components/pro/pro-fields/input"
 
 export default function Example() {
-  return <Input placeholder="Enter username" allowClear />
+  return <Input placeholder="Enter username" />
 }
 ```
 
@@ -231,7 +231,7 @@ interface CascaderOption {
 | `options`     | `TreeSelectOption[]`        | `[]`          | Nested tree data                                                    |
 | `placeholder` | `string`                    | `'Select...'` | Placeholder text                                                    |
 | `multiple`    | `boolean`                   | `false`       | Allow multiple selection                                            |
-| `allowClear`  | `boolean`                   | `false`       | Show a clear button when the field has a value and is not required. |
+| `allowClear`  | `boolean`                   | `true`        | Show a clear button when the field has a value and is not required. |
 | `disabled`    | `boolean`                   | `false`       | Disable interaction                                                 |
 | `className`   | `string`                    | —             | Additional CSS classes                                              |
 
@@ -261,10 +261,12 @@ interface TreeSelectOption {
 | `value`       | `UploadFile[]`                  | —                           | Controlled file list |
 | `onChange`    | `(files: UploadFile[]) => void` | —                           | Change handler       |
 | `accept`      | `string`                        | —                           | Accepted MIME types  |
-| `multiple`    | `boolean`                       | `false`                     | Allow multiple files |
+| `multiple`    | `boolean`                       | `true`                      | Allow multiple files |
 | `maxCount`    | `number`                        | —                           | Maximum file count   |
 | `disabled`    | `boolean`                       | `false`                     | Disable interaction  |
 | `placeholder` | `string`                        | `'Click or drag to upload'` | Drop zone label      |
+| `variant`     | `'dropzone' \| 'compact'`       | `'dropzone'`                | Render as a drop zone or compact input-style trigger with a suffix upload icon. |
+| `showFileList` | `boolean`                      | `true` in dropzone, `false` in compact | Show the selected file list below the trigger. |
 
 ```ts
 interface UploadFile {
@@ -482,7 +484,7 @@ The following fields cover the full ProFields surface. Use the standalone field 
 />
 ```
 
-`Input` and `Select` support `allowClear`. Clearing `Select` sends `undefined` so Formily can return to an empty value.
+Clearable fields enable `allowClear` by default. Clearing `Select` sends `undefined` so Formily can return to an empty value.
 
 `Select`, `Radio`, and grouped `Checkbox` options support `description` for consistent option help text. `Select` also supports `searchable` and `multiple`; multiple mode uses a `string[]` value.
 
@@ -791,6 +793,23 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   title="Attachments"
   decorator={[FormItem]}
   component={[FormilyUpload, { multiple: true, maxCount: 3 }]}
+/>
+```
+
+```tsx
+<Field
+  name="contract"
+  title="Contract"
+  decorator={[FormItem]}
+  component={[
+    FormilyUpload,
+    {
+      variant: "compact",
+      multiple: false,
+      maxCount: 1,
+      placeholder: "Upload contract",
+    },
+  ]}
 />
 ```
 

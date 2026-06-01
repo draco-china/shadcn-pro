@@ -6,6 +6,8 @@ import type { ProToolbarItem, ProToolbarProps } from './types'
 
 export type {
   ProToolbarButtonItem,
+  ProToolbarButtonSize,
+  ProToolbarButtonVariant,
   ProToolbarContent,
   ProToolbarCustomItem,
   ProToolbarDropdownItem,
@@ -23,6 +25,8 @@ export function ProToolbar<TContext = unknown>({
   left,
   center,
   right,
+  variant,
+  size,
   className,
 }: ProToolbarProps<TContext>) {
   const resolvedContext = context as TContext
@@ -32,11 +36,15 @@ export function ProToolbar<TContext = unknown>({
       <ProToolbarRegionView
         options={left?.options}
         context={resolvedContext}
+        variant={variant}
+        size={size}
         className={cn('basis-full justify-start md:basis-auto', left?.className)}
       />
       <ProToolbarRegionView
         options={center?.options}
         context={resolvedContext}
+        variant={variant}
+        size={size}
         className={cn(
           'min-w-0 basis-full justify-center md:flex-1 md:basis-auto',
           center?.className,
@@ -45,6 +53,8 @@ export function ProToolbar<TContext = unknown>({
       <ProToolbarRegionView
         options={right?.options}
         context={resolvedContext}
+        variant={variant}
+        size={size}
         className={cn('basis-full justify-end md:ml-auto md:basis-auto', right?.className)}
       />
     </div>
@@ -54,10 +64,14 @@ export function ProToolbar<TContext = unknown>({
 function ProToolbarRegionView<TContext>({
   options,
   context,
+  variant,
+  size,
   className,
 }: {
   options?: ProToolbarItem<TContext>[]
   context: TContext
+  variant?: ProToolbarProps<TContext>['variant']
+  size?: ProToolbarProps<TContext>['size']
   className?: string
 }) {
   const visibleOptions = options?.filter((item) => {
@@ -65,7 +79,13 @@ function ProToolbarRegionView<TContext>({
     return !hidden
   })
   const itemNodes = visibleOptions?.map((item) => (
-    <ProToolbarItemView key={item.key} item={item} context={context} />
+    <ProToolbarItemView
+      key={item.key}
+      item={item}
+      context={context}
+      variant={variant}
+      size={size}
+    />
   ))
 
   if (!itemNodes?.length) return null

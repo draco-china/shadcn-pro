@@ -8,15 +8,23 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
-import type { ProToolbarDropdownItem } from '../types'
+import type {
+  ProToolbarButtonSize,
+  ProToolbarButtonVariant,
+  ProToolbarDropdownItem,
+} from '../types'
 import { renderToolbarContent, resolveToolbarCopy } from './utils'
 
 export function ToolbarDropdownItem<TContext>({
   item,
   context,
+  variant,
+  size,
 }: {
   item: ProToolbarDropdownItem<TContext>
   context: TContext
+  variant?: ProToolbarButtonVariant
+  size?: ProToolbarButtonSize
 }) {
   const label = renderToolbarContent(item.label, context)
   const icon = renderToolbarContent(item.icon, context)
@@ -26,7 +34,7 @@ export function ToolbarDropdownItem<TContext>({
   const loading = typeof item.loading === 'function' ? item.loading(context) : item.loading
   const itemDisabled = typeof item.disabled === 'function' ? item.disabled(context) : item.disabled
   const iconOnly = Boolean(icon) && !label
-  const itemSize = item.size
+  const itemSize = item.size ?? size
   const {
     key,
     label: _label,
@@ -37,6 +45,7 @@ export function ToolbarDropdownItem<TContext>({
     loading: _loading,
     copy: _copy,
     size: _size,
+    variant: itemVariant,
     content: _content,
     contentClassName,
     align = 'end',
@@ -58,6 +67,7 @@ export function ToolbarDropdownItem<TContext>({
     <ProButton
       type="button"
       {...buttonProps}
+      variant={itemVariant ?? variant}
       size={itemSize}
       icon={icon}
       copy={copy}

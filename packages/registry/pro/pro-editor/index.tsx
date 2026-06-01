@@ -157,7 +157,6 @@ export function ProEditor({
     setMode,
     setFullscreen,
   }
-  const startToolbarActions = getToolbarActions(toolbarOptions?.actions, 'start')
   const toolbarActions = getToolbarActions(toolbarOptions?.actions, 'before')
   const afterToolbarActions = getToolbarActions(toolbarOptions?.actions, 'after')
   const centerToolbarActions: ProToolbarItem<EditorToolbarActionContext>[] =
@@ -208,7 +207,7 @@ export function ProEditor({
             language={language}
             fullscreen={fullscreen}
             context={toolbarContext}
-            startActions={startToolbarActions}
+            title={toolbarOptions?.title}
             centerActions={centerToolbarActions}
             actions={toolbarActions}
             afterActions={afterToolbarActions}

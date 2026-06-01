@@ -1,17 +1,17 @@
 'use client'
 
-import { Clipboard, Maximize2, Minimize2, WandSparkles } from 'lucide-react'
+import { Copy, Maximize2, Minimize2, WandSparkles } from 'lucide-react'
 import type * as React from 'react'
 import { ProToolbar, type ProToolbarItem } from '@/registry/new-york-v4/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 import { getLanguageLabel } from '../language'
-import type { EditorToolbarActionContext } from '../types'
+import type { EditorToolbarActionContext, EditorToolbarOptions } from '../types'
 
 export interface EditorToolbarProps {
   language: string
   fullscreen: boolean
   context: EditorToolbarActionContext
-  startActions?: ProToolbarItem<EditorToolbarActionContext>[]
+  title?: EditorToolbarOptions['title']
   centerActions?: ProToolbarItem<EditorToolbarActionContext>[]
   actions?: ProToolbarItem<EditorToolbarActionContext>[]
   afterActions?: ProToolbarItem<EditorToolbarActionContext>[]
@@ -26,7 +26,7 @@ export function EditorToolbar({
   language,
   fullscreen,
   context,
-  startActions,
+  title,
   centerActions,
   actions,
   afterActions,
@@ -36,13 +36,14 @@ export function EditorToolbar({
   onFormat,
   onFullscreenChange,
 }: EditorToolbarProps) {
+  const titleContent =
+    typeof title === 'function' ? title(context) : title ?? getLanguageLabel(language)
   const leftItems: ProToolbarItem<EditorToolbarActionContext>[] = [
-    ...(startActions ?? []),
     {
       key: 'language',
       render: () => (
         <span className="px-3 text-sm font-medium text-foreground capitalize">
-          {getLanguageLabel(language)}
+          {titleContent}
         </span>
       ),
     },
@@ -67,7 +68,7 @@ export function EditorToolbar({
       ? [
           {
             key: 'copy',
-            icon: <Clipboard size={14} />,
+            icon: <Copy size={14} />,
             tooltip: 'Copy',
             'aria-label': 'Copy',
             variant: 'ghost',
@@ -99,7 +100,7 @@ export function EditorToolbar({
   return (
     <ProToolbar
       context={context}
-      className="h-9 justify-between gap-1 border-b border-input bg-muted/40 px-2"
+      className="h-9 justify-between gap-1 border-b border-input bg-background px-2"
       left={{ options: leftItems, className: 'h-full min-w-0 gap-1 md:flex-1' }}
       center={{ options: centerActions ?? [], className: 'gap-0.5 md:flex-none' }}
       right={{ options: rightItems, className: 'gap-0.5' }}
@@ -132,6 +133,7 @@ export function EditorToolbarButton({
 >) {
   return (
     <ProToolbar
+      className="bg-background"
       right={{
         options: [
           {

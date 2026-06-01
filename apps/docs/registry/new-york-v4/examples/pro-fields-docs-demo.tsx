@@ -232,6 +232,15 @@ export default function ProFieldsDocsDemo() {
       <FieldPreview title="Upload">
         <Upload value={files} onChange={setFiles} maxCount={2} />
       </FieldPreview>
+      <FieldPreview title="Upload compact">
+        <Upload
+          accept=".pdf,.doc,.docx"
+          maxCount={1}
+          multiple={false}
+          placeholder="Upload contract"
+          variant="compact"
+        />
+      </FieldPreview>
       <FieldPreview title="Captcha">
         <Captcha
           buttonText="Send code"

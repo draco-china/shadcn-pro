@@ -53,7 +53,7 @@ export default function Demo() {
   return (
     <div className="flex flex-col gap-4">
       <Input placeholder="Basic input" />
-      <Input prefix={<SearchIcon />} placeholder="With prefix icon" allowClear />
+      <Input prefix={<SearchIcon />} placeholder="With prefix icon" />
       <Password placeholder="Password" />
     </div>
   )
@@ -70,7 +70,7 @@ export default function Demo() {
 |---|---|---|---|
 | `prefix` | `ReactNode` | — | Content to render before the input (icon or text). |
 | `suffix` | `ReactNode` | — | Content to render after the input (icon or text). |
-| `allowClear` | `boolean` | `false` | Show a clear button when the input has a value. |
+| `allowClear` | `boolean` | `true` | Show a clear button when the input has a value. |
 | `onClear` | `() => void` | — | Called when the clear button is clicked. |
 
 ### Password
@@ -79,3 +79,5 @@ export default function Demo() {
 |---|---|---|---|
 | `suffix` | `ReactNode` | — | Content rendered before the visibility toggle. |
 | `inputClassName` | `string` | — | CSS class passed to the inner shadcn Input when using `Password`. |
+| `allowClear` | `boolean` | `true` | Show a clear button when the password has a value. |
+| `onClear` | `() => void` | — | Called when the clear button is clicked. |

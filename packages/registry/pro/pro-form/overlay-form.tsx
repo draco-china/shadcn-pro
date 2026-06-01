@@ -310,9 +310,7 @@ function renderOverlaySubmitter({
       {...submitterActions}
       cancel={cancel}
       submitting={submitting}
-      actionsVariant="overlay"
-      align="right"
-      className={cn('w-full border-t-0 pt-0', submitterActions.className)}
+      className={cn('w-full justify-end', submitterActions.className)}
     />
   )
 }

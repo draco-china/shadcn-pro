@@ -132,7 +132,7 @@ export function TreeSelect({
   placeholder = 'Select...',
   disabled,
   required,
-  allowClear,
+  allowClear = true,
   multiple = false,
   className,
 }: TreeSelectProps) {

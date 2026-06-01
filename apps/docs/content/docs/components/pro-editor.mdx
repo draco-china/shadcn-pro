@@ -165,16 +165,34 @@ const [fullscreen, setFullscreen] = useState(false)
 ### Toolbar Extension
 
 ```tsx
+import { FocusIcon } from "lucide-react"
+
 <ProEditor
   language="typescript"
   value={code}
   onChange={setCode}
   toolbar={{
+    title: ({ language }) => (
+      <span className="flex items-center gap-2">
+        <span>Example editor</span>
+        <span className="text-muted-foreground uppercase">{language}</span>
+      </span>
+    ),
     actions: [
       {
         key: "run",
         label: "Run",
         onClick: ({ value }) => runCode(value),
+      },
+      {
+        key: "focus",
+        icon: <FocusIcon className="size-3.5" />,
+        tooltip: "Focus editor",
+        "aria-label": "Focus editor",
+        position: "before",
+        size: "icon-xs",
+        variant: "ghost",
+        onClick: ({ editor }) => editor?.focus(),
       },
       {
         key: "prettier",
@@ -188,6 +206,8 @@ const [fullscreen, setFullscreen] = useState(false)
 ```
 
 Toolbar actions use the same `ProToolbarItem` API as `ProToolbar`, so labels, icons, tooltips, hidden/disabled/loading state, menus, dropdown content, separators, copy behavior, and custom `render` items are available.
+
+Use `toolbar.title` to customize the left title. Use `position: "before"` for custom right-side icon actions before the built-in format, copy, and fullscreen buttons; this is also the default when `position` is omitted. Use `position: "after"` for actions after the built-in buttons.
 
 ## API Reference
 

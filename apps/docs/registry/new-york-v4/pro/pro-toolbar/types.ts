@@ -17,6 +17,8 @@ export type ProToolbarCopyOptions<TContext> = Omit<
   onSuccess?: (text: string, context: TContext) => void | Promise<void>
   onError?: (error: unknown, context: TContext) => void | Promise<void>
 }
+export type ProToolbarButtonVariant = React.ComponentProps<typeof ProButton>['variant']
+export type ProToolbarButtonSize = React.ComponentProps<typeof ProButton>['size']
 
 interface ProToolbarItemBase<TContext> {
   key: string
@@ -150,5 +152,7 @@ export interface ProToolbarProps<TContext = unknown> {
   left?: ProToolbarRegion<TContext>
   center?: ProToolbarRegion<TContext>
   right?: ProToolbarRegion<TContext>
+  variant?: ProToolbarButtonVariant
+  size?: ProToolbarButtonSize
   className?: string
 }

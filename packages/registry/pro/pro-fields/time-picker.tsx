@@ -14,7 +14,13 @@ export interface TimePickerProps {
   allowClear?: boolean
 }
 
-export function TimePicker({ value, onChange, disabled, className, allowClear }: TimePickerProps) {
+export function TimePicker({
+  value,
+  onChange,
+  disabled,
+  className,
+  allowClear = true,
+}: TimePickerProps) {
   const pad = (n: number) => String(n).padStart(2, '0')
   const parts = value ? value.split(':') : []
   const hour = parts[0] ? Number(parts[0]) : 0

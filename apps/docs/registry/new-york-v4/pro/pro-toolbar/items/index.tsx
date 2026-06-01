@@ -1,7 +1,13 @@
 'use client'
 
-import { Separator } from '@/components/ui/separator'
-import type { ProToolbarDropdownItem, ProToolbarItem, ProToolbarMenuItem } from '../types'
+import { Separator } from '@/registry/new-york-v4/ui/separator'
+import type {
+  ProToolbarButtonSize,
+  ProToolbarButtonVariant,
+  ProToolbarDropdownItem,
+  ProToolbarItem,
+  ProToolbarMenuItem,
+} from '../types'
 import { ToolbarButtonItem } from './button'
 import { ToolbarDropdownItem } from './dropdown'
 import { ToolbarMenuItem } from './menu'
@@ -9,9 +15,13 @@ import { ToolbarMenuItem } from './menu'
 export function ProToolbarItemView<TContext>({
   item,
   context,
+  variant,
+  size,
 }: {
   item: ProToolbarItem<TContext>
   context: TContext
+  variant?: ProToolbarButtonVariant
+  size?: ProToolbarButtonSize
 }) {
   if ('render' in item) {
     return item.render(context)
@@ -26,9 +36,13 @@ export function ProToolbarItemView<TContext>({
     )
   }
 
-  if (isToolbarDropdownItem(item)) return <ToolbarDropdownItem item={item} context={context} />
-  if (isToolbarMenuItem(item)) return <ToolbarMenuItem item={item} context={context} />
-  return <ToolbarButtonItem item={item} context={context} />
+  if (isToolbarDropdownItem(item)) {
+    return <ToolbarDropdownItem item={item} context={context} variant={variant} size={size} />
+  }
+  if (isToolbarMenuItem(item)) {
+    return <ToolbarMenuItem item={item} context={context} variant={variant} size={size} />
+  }
+  return <ToolbarButtonItem item={item} context={context} variant={variant} size={size} />
 }
 
 function isToolbarDropdownItem<TContext>(

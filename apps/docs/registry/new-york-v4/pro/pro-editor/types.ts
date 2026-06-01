@@ -1,7 +1,7 @@
 import type MonacoEditor from '@monaco-editor/react'
 import type * as React from 'react'
 import type { ProFullscreenMode } from '@/registry/new-york-v4/pro/pro-base'
-import type { ProToolbarItem } from '@/registry/new-york-v4/pro/pro-toolbar'
+import type { ProToolbarContent, ProToolbarItem } from '@/registry/new-york-v4/pro/pro-toolbar'
 
 export type EditorTheme = 'light' | 'dark'
 
@@ -43,6 +43,7 @@ export interface EditorPreviewOptions {
 }
 
 export interface EditorToolbarOptions {
+  title?: ProToolbarContent<EditorToolbarActionContext>
   actions?: EditorToolbarAction[]
   options?:
     | false
@@ -70,7 +71,11 @@ export type EditorViewMode = 'edit' | 'preview' | 'split'
 export type EditorFullscreenMode = ProFullscreenMode
 
 export type EditorToolbarAction = ProToolbarItem<EditorToolbarActionContext> & {
-  position?: 'start' | 'before' | 'after'
+  /**
+   * `before` renders in the right region before built-in format/copy/fullscreen controls.
+   * `after` renders after the built-in right controls.
+   */
+  position?: 'before' | 'after'
 }
 
 export interface EditorToolbarActionContext {

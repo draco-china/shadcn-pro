@@ -20,6 +20,8 @@ export interface UploadProps {
   maxCount?: number
   disabled?: boolean
   placeholder?: string
+  variant?: 'dropzone' | 'compact'
+  showFileList?: boolean
   className?: string
 }
 
@@ -31,10 +33,14 @@ export function Upload({
   maxCount,
   disabled,
   placeholder = 'Click or drag to upload',
+  variant = 'dropzone',
+  showFileList,
   className,
 }: UploadProps) {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const [dragging, setDragging] = React.useState(false)
+  const compact = variant === 'compact'
+  const shouldShowFileList = showFileList ?? !compact
 
   function addFiles(files: FileList | null) {
     if (!files) return
@@ -57,36 +63,66 @@ export function Upload({
   }
 
   const reachedMax = maxCount !== undefined && value.length >= maxCount
+  const selectedLabel = value.length
+    ? value.map((file) => file.name).join(', ')
+    : compact
+      ? placeholder
+      : undefined
 
   return (
     <div className={cn('space-y-2', className)}>
-      {!reachedMax && (
+      {compact ? (
         <button
           type="button"
           aria-label="Upload files"
           disabled={disabled}
           className={cn(
-            'flex w-full flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed p-6',
-            'text-sm text-muted-foreground transition-colors cursor-pointer',
-            dragging && 'border-primary bg-primary/5',
-            disabled && 'opacity-50 cursor-not-allowed',
-            !disabled && 'hover:border-primary hover:bg-primary/5',
+            'flex h-9 w-full items-center rounded-md border border-input bg-transparent px-3 text-sm shadow-xs',
+            'transition-[color,box-shadow]',
+            'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none',
+            'disabled:pointer-events-none disabled:opacity-50 dark:bg-input/30',
           )}
           onClick={() => inputRef.current?.click()}
-          onDragOver={(e) => {
-            e.preventDefault()
-            !disabled && setDragging(true)
-          }}
-          onDragLeave={() => setDragging(false)}
-          onDrop={(e) => {
-            e.preventDefault()
-            setDragging(false)
-            if (!disabled) addFiles(e.dataTransfer.files)
-          }}
         >
-          <UploadIcon className="size-6" />
-          <span>{placeholder}</span>
+          <span
+            className={cn(
+              'min-w-0 flex-1 truncate text-left',
+              !value.length && 'text-muted-foreground',
+            )}
+          >
+            {selectedLabel}
+          </span>
+          <UploadIcon className="ml-2 size-4 shrink-0 text-muted-foreground" />
         </button>
+      ) : (
+        !reachedMax && (
+          <button
+            type="button"
+            aria-label="Upload files"
+            disabled={disabled}
+            className={cn(
+              'flex w-full flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed p-6',
+              'text-sm text-muted-foreground transition-colors cursor-pointer',
+              dragging && 'border-primary bg-primary/5',
+              disabled && 'opacity-50 cursor-not-allowed',
+              !disabled && 'hover:border-primary hover:bg-primary/5',
+            )}
+            onClick={() => inputRef.current?.click()}
+            onDragOver={(e) => {
+              e.preventDefault()
+              !disabled && setDragging(true)
+            }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={(e) => {
+              e.preventDefault()
+              setDragging(false)
+              if (!disabled) addFiles(e.dataTransfer.files)
+            }}
+          >
+            <UploadIcon className="size-6" />
+            <span>{placeholder}</span>
+          </button>
+        )
       )}
       <input
         ref={inputRef}
@@ -94,9 +130,13 @@ export function Upload({
         className="hidden"
         accept={accept}
         multiple={multiple}
-        onChange={(e) => addFiles(e.target.files)}
+        disabled={disabled}
+        onChange={(e) => {
+          addFiles(e.target.files)
+          e.currentTarget.value = ''
+        }}
       />
-      {value.length > 0 && (
+      {shouldShowFileList && value.length > 0 && (
         <ul className="space-y-1">
           {value.map((f) => (
             <li

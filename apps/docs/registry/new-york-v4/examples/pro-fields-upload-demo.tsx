@@ -27,6 +27,21 @@ export default function ProFieldsUploadDemo() {
           ]}
         />
         <Field
+          name="contract"
+          title="Contract"
+          decorator={[FormItem]}
+          component={[
+            FormilyUpload,
+            {
+              accept: ".pdf,.doc,.docx",
+              multiple: false,
+              maxCount: 1,
+              placeholder: "Upload contract",
+              variant: "compact",
+            },
+          ]}
+        />
+        <Field
           name="documents"
           title="Documents"
           decorator={[FormItem]}

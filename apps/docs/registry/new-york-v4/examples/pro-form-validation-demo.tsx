@@ -2,6 +2,7 @@
 
 import { createForm } from '@formily/core'
 import { useMemo } from 'react'
+import { z } from 'zod'
 import { ProForm } from '@/registry/new-york-v4/pro/pro-form/index'
 
 const schema = {
@@ -14,10 +15,7 @@ const schema = {
       'x-component-props': {
         placeholder: 'your@email.com',
       },
-      'x-validator': [
-        { required: true, message: 'Email is required' },
-        { format: 'email', message: 'Please enter a valid email address' },
-      ],
+      'x-validator': z.string().email('Please enter a valid email address'),
     },
     password: {
       type: 'string',
@@ -27,10 +25,10 @@ const schema = {
       'x-component-props': {
         placeholder: 'At least 8 characters',
       },
-      'x-validator': [
-        { required: true, message: 'Password is required' },
-        { min: 8, message: 'Password must be at least 8 characters' },
-      ],
+      'x-validator': z
+        .string()
+        .min(8, 'Password must be at least 8 characters')
+        .regex(/[A-Z]/, 'Password must include an uppercase letter'),
     },
     confirmPassword: {
       type: 'string',

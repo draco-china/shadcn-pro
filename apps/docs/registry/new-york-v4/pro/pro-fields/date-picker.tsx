@@ -1,17 +1,12 @@
-"use client"
+'use client'
 
-import type * as React from "react"
-import { format } from "date-fns"
-import { CalendarIcon, X } from "lucide-react"
-
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { format } from 'date-fns'
+import { CalendarIcon, X } from 'lucide-react'
+import type * as React from 'react'
+import { Button } from '@/registry/new-york-v4/ui/button'
+import { Calendar } from '@/registry/new-york-v4/ui/calendar'
+import { Popover, PopoverContent, PopoverTrigger } from '@/registry/new-york-v4/ui/popover'
+import { cn } from '@/lib/utils'
 
 export interface DatePickerBaseProps {
   value?: Date
@@ -27,17 +22,15 @@ export function DatePicker({
   value,
   onChange,
   disabled,
-  placeholder = "Pick a date",
-  dateFormat = "PPP",
-  allowClear,
+  placeholder = 'Pick a date',
+  dateFormat = 'PPP',
+  allowClear = true,
   className,
 }: DatePickerBaseProps) {
   const showClear = allowClear && value && !disabled
 
   function handleClear(
-    event:
-      | React.PointerEvent<HTMLButtonElement>
-      | React.MouseEvent<HTMLButtonElement>
+    event: React.PointerEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>,
   ) {
     event.preventDefault()
     event.stopPropagation()
@@ -46,15 +39,15 @@ export function DatePicker({
 
   return (
     <Popover>
-      <div className={cn("relative w-full", className)}>
+      <div className={cn('relative w-full', className)}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             disabled={disabled}
             className={cn(
-              "w-full justify-start text-left font-normal",
-              showClear && "pr-8",
-              !value && "text-muted-foreground"
+              'w-full justify-start text-left font-normal',
+              showClear && 'pr-8',
+              !value && 'text-muted-foreground',
             )}
           >
             <CalendarIcon className="mr-2 size-4" />
@@ -82,4 +75,3 @@ export function DatePicker({
     </Popover>
   )
 }
-

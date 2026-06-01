@@ -95,7 +95,7 @@ export function Cascader({
   placeholder = 'Select...',
   disabled,
   required,
-  allowClear,
+  allowClear = true,
   className,
 }: CascaderProps) {
   const [open, setOpen] = React.useState(false)

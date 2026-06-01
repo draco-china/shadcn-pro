@@ -9,6 +9,8 @@ export default function ProToolbarDemo() {
   return (
     <div className="w-full max-w-3xl rounded-lg border p-4">
       <ProToolbar
+        size="sm"
+        variant="ghost"
         left={{
           options: [
             {
@@ -19,7 +21,7 @@ export default function ProToolbarDemo() {
         }}
         center={{
           options: [
-            { key: "draft", label: "Drafts", variant: "ghost" },
+            { key: "draft", label: "Drafts" },
             { key: "published", label: "Published", variant: "secondary" },
           ],
         }}
@@ -29,7 +31,6 @@ export default function ProToolbarDemo() {
               key: "refresh",
               icon: <RefreshCw size={16} />,
               tooltip: "Refresh",
-              variant: "ghost",
             },
             { key: "separator", separator: true },
             {
@@ -42,7 +43,6 @@ export default function ProToolbarDemo() {
               key: "columns",
               icon: <SlidersHorizontal size={16} />,
               tooltip: "Columns",
-              variant: "ghost",
               contentClassName: "w-48 p-2",
               content: () => (
                 <div className="space-y-2 text-sm">
@@ -61,7 +61,6 @@ export default function ProToolbarDemo() {
               key: "more",
               icon: <MoreHorizontal size={16} />,
               tooltip: "More actions",
-              variant: "ghost",
               items: [
                 { key: "archive", label: "Archive" },
                 { key: "duplicate", label: "Duplicate", shortcut: "⌘D" },
@@ -72,6 +71,7 @@ export default function ProToolbarDemo() {
               key: "create",
               label: "Create",
               icon: <Plus size={16} />,
+              variant: "default",
             },
           ],
         }}

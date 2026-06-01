@@ -24,7 +24,7 @@ export function DatePicker({
   disabled,
   placeholder = 'Pick a date',
   dateFormat = 'PPP',
-  allowClear,
+  allowClear = true,
   className,
 }: DatePickerBaseProps) {
   const showClear = allowClear && value && !disabled
