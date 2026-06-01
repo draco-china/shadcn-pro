@@ -1,3 +1,10 @@
+## [1.16.4](https://github.com/draco-china/shadcn-pro/compare/v1.16.3...v1.16.4) (2026-06-01)
+
+
+### Bug Fixes
+
+* simplify pro form grid spacing ([99d28c9](https://github.com/draco-china/shadcn-pro/commit/99d28c9c886eee2d585b1799f028bc23f944a2a8))
+
 ## [1.16.3](https://github.com/draco-china/shadcn-pro/compare/v1.16.2...v1.16.3) (2026-06-01)
 
 
