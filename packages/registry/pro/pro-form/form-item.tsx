@@ -55,7 +55,7 @@ export const FormItem = observer(
             <Label
               htmlFor={formField.path?.toString()}
               className={cn(
-                'text-sm font-medium leading-none',
+                'text-sm font-medium leading-5',
                 formField.disabled && 'cursor-not-allowed opacity-50',
               )}
             >
@@ -74,7 +74,7 @@ export const FormItem = observer(
               </TooltipProvider>
             )}
             {fieldRequired && (
-              <span className="text-destructive" aria-hidden="true">
+              <span className="text-sm leading-5 text-destructive" aria-hidden="true">
                 *
               </span>
             )}
