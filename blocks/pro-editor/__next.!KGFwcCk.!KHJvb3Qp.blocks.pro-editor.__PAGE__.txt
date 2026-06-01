@@ -1,8 +1,8 @@
 1:"$Sreact.fragment"
-2:I[625209,["/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/0gbfk-es.g.as.js","/shadcn-pro/_next/static/chunks/0_xcdjh6h7f3i.js","/shadcn-pro/_next/static/chunks/0l3tq1tda~tkm.js"],"BlockViewer"]
+2:I[625209,["/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js","/shadcn-pro/_next/static/chunks/0t2i44lr~a67~.js","/shadcn-pro/_next/static/chunks/0gbfk-es.g.as.js","/shadcn-pro/_next/static/chunks/0ua_mdiy5rzd2.js","/shadcn-pro/_next/static/chunks/0l3tq1tda~tkm.js"],"BlockViewer"]
 3c:I[80196,["/shadcn-pro/_next/static/chunks/0i7rqi9pg6sn1.js","/shadcn-pro/_next/static/chunks/0og83_4p.ac.u.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/18djrr1nx_d3d.js"],"OutletBoundary"]
 3d:"$Sreact.suspense"
-3:Tdcf,"use client"
+3:Tf57,"use client"
 
 import { useState } from 'react'
 import { useTheme } from 'next-themes'
@@ -98,11 +98,21 @@ export default function ProEditorDemo() {
         value={value}
         onChange={setValue}
         toolbar={{
+          title: ({ language }) => (
+            <span className="flex items-center gap-2">
+              <span>Example editor</span>
+              <span className="text-muted-foreground uppercase">{language}</span>
+            </span>
+          ),
           actions: [
             {
               key: "focus",
-              label: "Focus editor",
               icon: <Focus size={14} />,
+              tooltip: "Focus editor",
+              "aria-label": "Focus editor",
+              position: "before",
+              size: "icon-xs",
+              variant: "ghost",
               onClick: ({ editor }) => editor?.focus(),
             },
             {
@@ -124,7 +134,7 @@ export default function ProEditorDemo() {
     </div>
   )
 }
-4:T9ab5,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
+4:Ta991,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useTheme</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'next-themes'</span></span>
@@ -220,11 +230,21 @@ export default function ProEditorDemo() {
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        value</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        onChange</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">setValue</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        toolbar</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">          title</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> ({ </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">language</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex items-center gap-2"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>Example editor&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-muted-foreground uppercase"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">language</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          ),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">          actions</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">              key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> "focus"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">              label</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> "Focus editor"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">              icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Focus</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">14</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">              tooltip</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> "Focus editor"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">              "aria-label"</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> "Focus editor"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">              position</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> "before"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">              size</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> "icon-xs"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">              variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> "ghost"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              onClick</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> ({ </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#C18401;--shiki-dark:#E5C07B"> editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">focus</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            },</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            {</span></span>
@@ -246,7 +266,7 @@ export default function ProEditorDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>5:T2ae6,'use client'
+<span class="line" data-line=""></span></code></pre>5:T2a8f,'use client'
 
 import MonacoEditor, { type Monaco } from '@monaco-editor/react'
 import { Columns2, Eye, EyeOff } from 'lucide-react'
@@ -405,7 +425,6 @@ export function ProEditor({
     setMode,
     setFullscreen,
   }
-  const startToolbarActions = getToolbarActions(toolbarOptions?.actions, 'start')
   const toolbarActions = getToolbarActions(toolbarOptions?.actions, 'before')
   const afterToolbarActions = getToolbarActions(toolbarOptions?.actions, 'after')
   const centerToolbarActions: ProToolbarItem<EditorToolbarActionContext>[] =
@@ -456,7 +475,7 @@ export function ProEditor({
             language={language}
             fullscreen={fullscreen}
             context={toolbarContext}
-            startActions={startToolbarActions}
+            title={toolbarOptions?.title}
             centerActions={centerToolbarActions}
             actions={toolbarActions}
             afterActions={afterToolbarActions}
@@ -567,7 +586,7 @@ function getToolbarActions(
       return item
     })
 }
-6:T1b514,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+6:T1b29e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Monaco</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Columns2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Eye</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">EyeOff</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
@@ -726,7 +745,6 @@ function getToolbarActions(
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    setFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> startToolbarActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getToolbarActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'start'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> toolbarActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getToolbarActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'before'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> afterToolbarActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getToolbarActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'after'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> centerToolbarActions</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span></span>
@@ -777,7 +795,7 @@ function getToolbarActions(
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            language</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">language</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            fullscreen</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            context</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarContext</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            startActions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">startToolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            centerActions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">centerToolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            actions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            afterActions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">afterToolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -888,20 +906,20 @@ function getToolbarActions(
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      return</span><span style="color:#383A42;--shiki-dark:#E06C75"> item</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    })</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>7:T1068,'use client'
+<span class="line" data-line=""></span></code></pre>7:T10aa,'use client'
 
-import { Clipboard, Maximize2, Minimize2, WandSparkles } from 'lucide-react'
+import { Copy, Maximize2, Minimize2, WandSparkles } from 'lucide-react'
 import type * as React from 'react'
 import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 import { getLanguageLabel } from '../language'
-import type { EditorToolbarActionContext } from '../types'
+import type { EditorToolbarActionContext, EditorToolbarOptions } from '../types'
 
 export interface EditorToolbarProps {
   language: string
   fullscreen: boolean
   context: EditorToolbarActionContext
-  startActions?: ProToolbarItem<EditorToolbarActionContext>[]
+  title?: EditorToolbarOptions['title']
   centerActions?: ProToolbarItem<EditorToolbarActionContext>[]
   actions?: ProToolbarItem<EditorToolbarActionContext>[]
   afterActions?: ProToolbarItem<EditorToolbarActionContext>[]
@@ -916,7 +934,7 @@ export function EditorToolbar({
   language,
   fullscreen,
   context,
-  startActions,
+  title,
   centerActions,
   actions,
   afterActions,
@@ -926,14 +944,13 @@ export function EditorToolbar({
   onFormat,
   onFullscreenChange,
 }: EditorToolbarProps) {
+  const titleContent =
+    typeof title === 'function' ? title(context) : (title ?? getLanguageLabel(language))
   const leftItems: ProToolbarItem<EditorToolbarActionContext>[] = [
-    ...(startActions ?? []),
     {
       key: 'language',
       render: () => (
-        <span className="px-3 text-sm font-medium text-foreground capitalize">
-          {getLanguageLabel(language)}
-        </span>
+        <span className="px-3 text-sm font-medium text-foreground capitalize">{titleContent}</span>
       ),
     },
   ]
@@ -957,7 +974,7 @@ export function EditorToolbar({
       ? [
           {
             key: 'copy',
-            icon: <Clipboard size={14} />,
+            icon: <Copy size={14} />,
             tooltip: 'Copy',
             'aria-label': 'Copy',
             variant: 'ghost',
@@ -989,7 +1006,7 @@ export function EditorToolbar({
   return (
     <ProToolbar
       context={context}
-      className="h-9 justify-between gap-1 border-b border-input bg-muted/40 px-2"
+      className="h-9 justify-between gap-1 border-b border-input bg-background px-2"
       left={{ options: leftItems, className: 'h-full min-w-0 gap-1 md:flex-1' }}
       center={{ options: centerActions ?? [], className: 'gap-0.5 md:flex-none' }}
       right={{ options: rightItems, className: 'gap-0.5' }}
@@ -1022,6 +1039,7 @@ export function EditorToolbarButton({
 >) {
   return (
     <ProToolbar
+      className="bg-background"
       right={{
         options: [
           {
@@ -1041,20 +1059,20 @@ export function EditorToolbarButton({
     />
   )
 }
-8:Tbaea,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+8:Tbf1f,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Clipboard</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Maximize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Minimize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">WandSparkles</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Maximize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Minimize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">WandSparkles</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#0184BC;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">getLanguageLabel</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../language'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../types'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">EditorToolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../types'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  language</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  fullscreen</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  context</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarActionContext</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  startActions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#50A14F;--shiki-dark:#98C379">'title'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  centerActions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  actions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  afterActions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
@@ -1069,7 +1087,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  context</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  startActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  centerActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  afterActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1079,14 +1097,13 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onFormat</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onFullscreenChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> titleContent</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">    typeof</span><span style="color:#383A42;--shiki-dark:#E06C75"> title</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'function'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">context</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getLanguageLabel</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">))</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> leftItems</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
-<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">    ...</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">startActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> []),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'language'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      render</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"px-3 text-sm font-medium text-foreground capitalize"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#4078F2;--shiki-dark:#61AFEF">getLanguageLabel</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"px-3 text-sm font-medium text-foreground capitalize"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">titleContent</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      ),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  ]</span></span>
@@ -1110,7 +1127,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">      ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'copy'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Clipboard</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">14</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">14</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            tooltip</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Copy'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">            'aria-label'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Copy'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1142,7 +1159,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbar</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      context</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">context</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"h-9 justify-between gap-1 border-b border-input bg-muted/40 px-2"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"h-9 justify-between gap-1 border-b border-input bg-background px-2"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      left</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> leftItems</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'h-full min-w-0 gap-1 md:flex-1'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      center</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> centerActions</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [], </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'gap-0.5 md:flex-none'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      right</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> rightItems</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'gap-0.5'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -1175,6 +1192,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">>) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbar</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"bg-background"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      right</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">        options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          {</span></span>
@@ -1397,10 +1415,10 @@ a:T76ae,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getMonacoLanguage</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">language</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> language</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'tsx'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'typescript'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#383A42;--shiki-dark:#E06C75"> language</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>d:Ta7b,import type MonacoEditor from '@monaco-editor/react'
+<span class="line" data-line=""></span></code></pre>d:Tb5b,import type MonacoEditor from '@monaco-editor/react'
 import type * as React from 'react'
 import type { ProFullscreenMode } from '@/components/pro/pro-base'
-import type { ProToolbarItem } from '@/components/pro/pro-toolbar'
+import type { ProToolbarContent, ProToolbarItem } from '@/components/pro/pro-toolbar'
 
 export type EditorTheme = 'light' | 'dark'
 
@@ -1442,6 +1460,7 @@ export interface EditorPreviewOptions {
 }
 
 export interface EditorToolbarOptions {
+  title?: ProToolbarContent<EditorToolbarActionContext>
   actions?: EditorToolbarAction[]
   options?:
     | false
@@ -1469,7 +1488,11 @@ export type EditorViewMode = 'edit' | 'preview' | 'split'
 export type EditorFullscreenMode = ProFullscreenMode
 
 export type EditorToolbarAction = ProToolbarItem<EditorToolbarActionContext> & {
-  position?: 'start' | 'before' | 'after'
+  /**
+   * `before` renders in the right region before built-in format/copy/fullscreen controls.
+   * `after` renders after the built-in right controls.
+   */
+  position?: 'before' | 'after'
 }
 
 export interface EditorToolbarActionContext {
@@ -1487,10 +1510,10 @@ export interface EditorToolbarActionContext {
   setMode: (mode: EditorViewMode) => void
   setFullscreen: (fullscreen: boolean) => void
 }
-e:T66a8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
+e:T6bb4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#E45649;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFullscreenMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-base'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbarContent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'light'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span></span>
 <span class="line" data-line=""></span>
@@ -1532,6 +1555,7 @@ e:T66a8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarContent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  actions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarAction</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  options</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span></span>
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">    |</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> false</span></span>
@@ -1559,7 +1583,11 @@ e:T66a8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorFullscreenMode</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFullscreenMode</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarAction</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">> </span><span style="color:#0184BC;--shiki-dark:#ABB2BF">&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  position</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'start'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'before'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'after'</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">  /**</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">   * `before` renders in the right region before built-in format/copy/fullscreen controls.</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">   * `after` renders after the built-in right controls.</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">   */</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  position</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'before'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'after'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -1965,7 +1993,7 @@ export async function applyShadcnTheme(monaco: Monaco, theme: EditorTheme) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  })</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E5C07B">  monaco</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setTheme</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">name</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-editor-demo",{"item":{"name":"pro-editor-demo","description":"Monaco-powered code editor with externally controlled language, syntax theme, format, and live preview.","iframeHeight":"490px","installName":"pro-editor"},"tree":[{"name":"examples","children":[{"name":"pro-editor-demo.tsx","path":"examples/pro-editor-demo.tsx"}]},{"name":"pro-editor","children":[{"name":"index.tsx","path":"pro-editor/index.tsx"},{"name":"toolbar","children":[{"name":"index.tsx","path":"pro-editor/toolbar/index.tsx"}]},{"name":"preview","children":[{"name":"scroll-sync.ts","path":"pro-editor/preview/scroll-sync.ts"},{"name":"styles.ts","path":"pro-editor/preview/styles.ts"}]},{"name":"language","children":[{"name":"index.ts","path":"pro-editor/language/index.ts"}]},{"name":"types.ts","path":"pro-editor/types.ts"},{"name":"monaco","children":[{"name":"index.ts","path":"pro-editor/monaco/index.ts"}]}]}],"highlightedFiles":[{"target":"examples/pro-editor-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-editor/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-editor/toolbar/index.tsx","content":"$7","highlightedContent":"$8"},{"target":"pro-editor/preview/scroll-sync.ts","content":"$9","highlightedContent":"$a"},{"target":"pro-editor/preview/styles.ts","content":"export const scrollbarClassName =\n  '[scrollbar-width:thin] [scrollbar-color:transparent_transparent] hover:[scrollbar-color:rgba(148,163,184,0.45)_transparent] [&::-webkit-scrollbar]:size-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/35'\n","highlightedContent":"$b"},{"target":"pro-editor/language/index.ts","content":"const LANGUAGE_LABELS: Record<string, string> = {\n  css: 'CSS',\n  go: 'Go',\n  html: 'HTML',\n  java: 'Java',\n  javascript: 'JavaScript',\n  json: 'JSON',\n  markdown: 'Markdown',\n  python: 'Python',\n  rust: 'Rust',\n  shell: 'Shell',\n  sql: 'SQL',\n  tsx: 'TSX',\n  typescript: 'TypeScript',\n  yaml: 'YAML',\n}\n\nexport function getLanguageLabel(language: string) {\n  return LANGUAGE_LABELS[language] ?? language\n}\n\nexport function getEditorPath(language: string) {\n  if (language === 'tsx') return 'file:///index.tsx'\n  if (language === 'typescript') return 'file:///index.ts'\n  if (language === 'javascript') return 'file:///index.jsx'\n  return `file:///index.${language}`\n}\n\nexport function getMonacoLanguage(language: string) {\n  return language === 'tsx' ? 'typescript' : language\n}\n","highlightedContent":"$c"},{"target":"pro-editor/types.ts","content":"$d","highlightedContent":"$e"},{"target":"pro-editor/monaco/index.ts","content":"$f","highlightedContent":"$10"}]}],"$L11","$L12"]}],["$L13"],"$L14"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"6D831_cIkzsOUY4ag9EmH"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-editor-demo",{"item":{"name":"pro-editor-demo","description":"Monaco-powered code editor with externally controlled language, syntax theme, format, and live preview.","iframeHeight":"490px","installName":"pro-editor"},"tree":[{"name":"examples","children":[{"name":"pro-editor-demo.tsx","path":"examples/pro-editor-demo.tsx"}]},{"name":"pro-editor","children":[{"name":"index.tsx","path":"pro-editor/index.tsx"},{"name":"toolbar","children":[{"name":"index.tsx","path":"pro-editor/toolbar/index.tsx"}]},{"name":"preview","children":[{"name":"scroll-sync.ts","path":"pro-editor/preview/scroll-sync.ts"},{"name":"styles.ts","path":"pro-editor/preview/styles.ts"}]},{"name":"language","children":[{"name":"index.ts","path":"pro-editor/language/index.ts"}]},{"name":"types.ts","path":"pro-editor/types.ts"},{"name":"monaco","children":[{"name":"index.ts","path":"pro-editor/monaco/index.ts"}]}]}],"highlightedFiles":[{"target":"examples/pro-editor-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"pro-editor/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pro-editor/toolbar/index.tsx","content":"$7","highlightedContent":"$8"},{"target":"pro-editor/preview/scroll-sync.ts","content":"$9","highlightedContent":"$a"},{"target":"pro-editor/preview/styles.ts","content":"export const scrollbarClassName =\n  '[scrollbar-width:thin] [scrollbar-color:transparent_transparent] hover:[scrollbar-color:rgba(148,163,184,0.45)_transparent] [&::-webkit-scrollbar]:size-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/35'\n","highlightedContent":"$b"},{"target":"pro-editor/language/index.ts","content":"const LANGUAGE_LABELS: Record<string, string> = {\n  css: 'CSS',\n  go: 'Go',\n  html: 'HTML',\n  java: 'Java',\n  javascript: 'JavaScript',\n  json: 'JSON',\n  markdown: 'Markdown',\n  python: 'Python',\n  rust: 'Rust',\n  shell: 'Shell',\n  sql: 'SQL',\n  tsx: 'TSX',\n  typescript: 'TypeScript',\n  yaml: 'YAML',\n}\n\nexport function getLanguageLabel(language: string) {\n  return LANGUAGE_LABELS[language] ?? language\n}\n\nexport function getEditorPath(language: string) {\n  if (language === 'tsx') return 'file:///index.tsx'\n  if (language === 'typescript') return 'file:///index.ts'\n  if (language === 'javascript') return 'file:///index.jsx'\n  return `file:///index.${language}`\n}\n\nexport function getMonacoLanguage(language: string) {\n  return language === 'tsx' ? 'typescript' : language\n}\n","highlightedContent":"$c"},{"target":"pro-editor/types.ts","content":"$d","highlightedContent":"$e"},{"target":"pro-editor/monaco/index.ts","content":"$f","highlightedContent":"$10"}]}],"$L11","$L12"]}],["$L13"],"$L14"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"EKzPfA4YxjXa8jwKEgu49"}
 15:T1944,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> "react"</span></span>
@@ -1994,7 +2022,7 @@ export async function applyShadcnTheme(monaco: Monaco, theme: EditorTheme) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>16:T2ae6,'use client'
+<span class="line" data-line=""></span></code></pre>16:T2a8f,'use client'
 
 import MonacoEditor, { type Monaco } from '@monaco-editor/react'
 import { Columns2, Eye, EyeOff } from 'lucide-react'
@@ -2153,7 +2181,6 @@ export function ProEditor({
     setMode,
     setFullscreen,
   }
-  const startToolbarActions = getToolbarActions(toolbarOptions?.actions, 'start')
   const toolbarActions = getToolbarActions(toolbarOptions?.actions, 'before')
   const afterToolbarActions = getToolbarActions(toolbarOptions?.actions, 'after')
   const centerToolbarActions: ProToolbarItem<EditorToolbarActionContext>[] =
@@ -2204,7 +2231,7 @@ export function ProEditor({
             language={language}
             fullscreen={fullscreen}
             context={toolbarContext}
-            startActions={startToolbarActions}
+            title={toolbarOptions?.title}
             centerActions={centerToolbarActions}
             actions={toolbarActions}
             afterActions={afterToolbarActions}
@@ -2315,7 +2342,7 @@ function getToolbarActions(
       return item
     })
 }
-17:T1b514,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+17:T1b29e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Monaco</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Columns2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Eye</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">EyeOff</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
@@ -2474,7 +2501,6 @@ function getToolbarActions(
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    setFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> startToolbarActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getToolbarActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'start'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> toolbarActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getToolbarActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'before'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> afterToolbarActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getToolbarActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'after'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> centerToolbarActions</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span></span>
@@ -2525,7 +2551,7 @@ function getToolbarActions(
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            language</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">language</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            fullscreen</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            context</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarContext</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            startActions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">startToolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            centerActions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">centerToolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            actions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            afterActions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">afterToolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -2636,20 +2662,20 @@ function getToolbarActions(
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      return</span><span style="color:#383A42;--shiki-dark:#E06C75"> item</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    })</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>18:T1068,'use client'
+<span class="line" data-line=""></span></code></pre>18:T10aa,'use client'
 
-import { Clipboard, Maximize2, Minimize2, WandSparkles } from 'lucide-react'
+import { Copy, Maximize2, Minimize2, WandSparkles } from 'lucide-react'
 import type * as React from 'react'
 import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 import { getLanguageLabel } from '../language'
-import type { EditorToolbarActionContext } from '../types'
+import type { EditorToolbarActionContext, EditorToolbarOptions } from '../types'
 
 export interface EditorToolbarProps {
   language: string
   fullscreen: boolean
   context: EditorToolbarActionContext
-  startActions?: ProToolbarItem<EditorToolbarActionContext>[]
+  title?: EditorToolbarOptions['title']
   centerActions?: ProToolbarItem<EditorToolbarActionContext>[]
   actions?: ProToolbarItem<EditorToolbarActionContext>[]
   afterActions?: ProToolbarItem<EditorToolbarActionContext>[]
@@ -2664,7 +2690,7 @@ export function EditorToolbar({
   language,
   fullscreen,
   context,
-  startActions,
+  title,
   centerActions,
   actions,
   afterActions,
@@ -2674,14 +2700,13 @@ export function EditorToolbar({
   onFormat,
   onFullscreenChange,
 }: EditorToolbarProps) {
+  const titleContent =
+    typeof title === 'function' ? title(context) : (title ?? getLanguageLabel(language))
   const leftItems: ProToolbarItem<EditorToolbarActionContext>[] = [
-    ...(startActions ?? []),
     {
       key: 'language',
       render: () => (
-        <span className="px-3 text-sm font-medium text-foreground capitalize">
-          {getLanguageLabel(language)}
-        </span>
+        <span className="px-3 text-sm font-medium text-foreground capitalize">{titleContent}</span>
       ),
     },
   ]
@@ -2705,7 +2730,7 @@ export function EditorToolbar({
       ? [
           {
             key: 'copy',
-            icon: <Clipboard size={14} />,
+            icon: <Copy size={14} />,
             tooltip: 'Copy',
             'aria-label': 'Copy',
             variant: 'ghost',
@@ -2737,7 +2762,7 @@ export function EditorToolbar({
   return (
     <ProToolbar
       context={context}
-      className="h-9 justify-between gap-1 border-b border-input bg-muted/40 px-2"
+      className="h-9 justify-between gap-1 border-b border-input bg-background px-2"
       left={{ options: leftItems, className: 'h-full min-w-0 gap-1 md:flex-1' }}
       center={{ options: centerActions ?? [], className: 'gap-0.5 md:flex-none' }}
       right={{ options: rightItems, className: 'gap-0.5' }}
@@ -2770,6 +2795,7 @@ export function EditorToolbarButton({
 >) {
   return (
     <ProToolbar
+      className="bg-background"
       right={{
         options: [
           {
@@ -2789,20 +2815,20 @@ export function EditorToolbarButton({
     />
   )
 }
-19:Tbaea,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+19:Tbf1f,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Clipboard</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Maximize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Minimize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">WandSparkles</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Maximize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Minimize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">WandSparkles</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#0184BC;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">getLanguageLabel</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../language'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../types'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">EditorToolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../types'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  language</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  fullscreen</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  context</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarActionContext</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  startActions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#50A14F;--shiki-dark:#98C379">'title'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  centerActions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  actions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  afterActions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
@@ -2817,7 +2843,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  context</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  startActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  centerActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  afterActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -2827,14 +2853,13 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onFormat</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onFullscreenChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> titleContent</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">    typeof</span><span style="color:#383A42;--shiki-dark:#E06C75"> title</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'function'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">context</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getLanguageLabel</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">))</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> leftItems</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
-<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">    ...</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">startActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> []),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'language'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      render</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"px-3 text-sm font-medium text-foreground capitalize"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#4078F2;--shiki-dark:#61AFEF">getLanguageLabel</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"px-3 text-sm font-medium text-foreground capitalize"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">titleContent</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      ),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  ]</span></span>
@@ -2858,7 +2883,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">      ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'copy'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Clipboard</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">14</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">14</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            tooltip</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Copy'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">            'aria-label'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Copy'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -2890,7 +2915,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbar</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      context</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">context</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"h-9 justify-between gap-1 border-b border-input bg-muted/40 px-2"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"h-9 justify-between gap-1 border-b border-input bg-background px-2"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      left</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> leftItems</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'h-full min-w-0 gap-1 md:flex-1'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      center</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> centerActions</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [], </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'gap-0.5 md:flex-none'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      right</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> rightItems</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'gap-0.5'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -2923,6 +2948,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">>) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbar</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"bg-background"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      right</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">        options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          {</span></span>
@@ -3145,10 +3171,10 @@ export function useEditorPreviewScrollSync() {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getMonacoLanguage</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">language</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> language</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'tsx'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'typescript'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#383A42;--shiki-dark:#E06C75"> language</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>1e:Ta7b,import type MonacoEditor from '@monaco-editor/react'
+<span class="line" data-line=""></span></code></pre>1e:Tb5b,import type MonacoEditor from '@monaco-editor/react'
 import type * as React from 'react'
 import type { ProFullscreenMode } from '@/components/pro/pro-base'
-import type { ProToolbarItem } from '@/components/pro/pro-toolbar'
+import type { ProToolbarContent, ProToolbarItem } from '@/components/pro/pro-toolbar'
 
 export type EditorTheme = 'light' | 'dark'
 
@@ -3190,6 +3216,7 @@ export interface EditorPreviewOptions {
 }
 
 export interface EditorToolbarOptions {
+  title?: ProToolbarContent<EditorToolbarActionContext>
   actions?: EditorToolbarAction[]
   options?:
     | false
@@ -3217,7 +3244,11 @@ export type EditorViewMode = 'edit' | 'preview' | 'split'
 export type EditorFullscreenMode = ProFullscreenMode
 
 export type EditorToolbarAction = ProToolbarItem<EditorToolbarActionContext> & {
-  position?: 'start' | 'before' | 'after'
+  /**
+   * `before` renders in the right region before built-in format/copy/fullscreen controls.
+   * `after` renders after the built-in right controls.
+   */
+  position?: 'before' | 'after'
 }
 
 export interface EditorToolbarActionContext {
@@ -3235,10 +3266,10 @@ export interface EditorToolbarActionContext {
   setMode: (mode: EditorViewMode) => void
   setFullscreen: (fullscreen: boolean) => void
 }
-1f:T66a8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
+1f:T6bb4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#E45649;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFullscreenMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-base'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbarContent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'light'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span></span>
 <span class="line" data-line=""></span>
@@ -3280,6 +3311,7 @@ export interface EditorToolbarActionContext {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarContent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  actions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarAction</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  options</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span></span>
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">    |</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> false</span></span>
@@ -3307,7 +3339,11 @@ export interface EditorToolbarActionContext {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorFullscreenMode</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFullscreenMode</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarAction</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">> </span><span style="color:#0184BC;--shiki-dark:#ABB2BF">&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  position</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'start'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'before'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'after'</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">  /**</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">   * `before` renders in the right region before built-in format/copy/fullscreen controls.</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">   * `after` renders after the built-in right controls.</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">   */</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  position</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'before'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'after'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -3808,7 +3844,7 @@ export default function ProEditorMarkdownDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>24:T2ae6,'use client'
+<span class="line" data-line=""></span></code></pre>24:T2a8f,'use client'
 
 import MonacoEditor, { type Monaco } from '@monaco-editor/react'
 import { Columns2, Eye, EyeOff } from 'lucide-react'
@@ -3967,7 +4003,6 @@ export function ProEditor({
     setMode,
     setFullscreen,
   }
-  const startToolbarActions = getToolbarActions(toolbarOptions?.actions, 'start')
   const toolbarActions = getToolbarActions(toolbarOptions?.actions, 'before')
   const afterToolbarActions = getToolbarActions(toolbarOptions?.actions, 'after')
   const centerToolbarActions: ProToolbarItem<EditorToolbarActionContext>[] =
@@ -4018,7 +4053,7 @@ export function ProEditor({
             language={language}
             fullscreen={fullscreen}
             context={toolbarContext}
-            startActions={startToolbarActions}
+            title={toolbarOptions?.title}
             centerActions={centerToolbarActions}
             actions={toolbarActions}
             afterActions={afterToolbarActions}
@@ -4129,7 +4164,7 @@ function getToolbarActions(
       return item
     })
 }
-25:T1b514,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+25:T1b29e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Monaco</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Columns2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Eye</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">EyeOff</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
@@ -4288,7 +4323,6 @@ function getToolbarActions(
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    setFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> startToolbarActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getToolbarActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'start'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> toolbarActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getToolbarActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'before'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> afterToolbarActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getToolbarActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'after'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> centerToolbarActions</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span></span>
@@ -4339,7 +4373,7 @@ function getToolbarActions(
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            language</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">language</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            fullscreen</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            context</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarContext</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            startActions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">startToolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.</span><span style="color:#E45649;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            centerActions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">centerToolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            actions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            afterActions</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">afterToolbarActions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -4450,20 +4484,20 @@ function getToolbarActions(
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      return</span><span style="color:#383A42;--shiki-dark:#E06C75"> item</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    })</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>26:T1068,'use client'
+<span class="line" data-line=""></span></code></pre>26:T10aa,'use client'
 
-import { Clipboard, Maximize2, Minimize2, WandSparkles } from 'lucide-react'
+import { Copy, Maximize2, Minimize2, WandSparkles } from 'lucide-react'
 import type * as React from 'react'
 import { ProToolbar, type ProToolbarItem } from '@/components/pro/pro-toolbar'
 import { cn } from '@/lib/utils'
 import { getLanguageLabel } from '../language'
-import type { EditorToolbarActionContext } from '../types'
+import type { EditorToolbarActionContext, EditorToolbarOptions } from '../types'
 
 export interface EditorToolbarProps {
   language: string
   fullscreen: boolean
   context: EditorToolbarActionContext
-  startActions?: ProToolbarItem<EditorToolbarActionContext>[]
+  title?: EditorToolbarOptions['title']
   centerActions?: ProToolbarItem<EditorToolbarActionContext>[]
   actions?: ProToolbarItem<EditorToolbarActionContext>[]
   afterActions?: ProToolbarItem<EditorToolbarActionContext>[]
@@ -4478,7 +4512,7 @@ export function EditorToolbar({
   language,
   fullscreen,
   context,
-  startActions,
+  title,
   centerActions,
   actions,
   afterActions,
@@ -4488,14 +4522,13 @@ export function EditorToolbar({
   onFormat,
   onFullscreenChange,
 }: EditorToolbarProps) {
+  const titleContent =
+    typeof title === 'function' ? title(context) : (title ?? getLanguageLabel(language))
   const leftItems: ProToolbarItem<EditorToolbarActionContext>[] = [
-    ...(startActions ?? []),
     {
       key: 'language',
       render: () => (
-        <span className="px-3 text-sm font-medium text-foreground capitalize">
-          {getLanguageLabel(language)}
-        </span>
+        <span className="px-3 text-sm font-medium text-foreground capitalize">{titleContent}</span>
       ),
     },
   ]
@@ -4519,7 +4552,7 @@ export function EditorToolbar({
       ? [
           {
             key: 'copy',
-            icon: <Clipboard size={14} />,
+            icon: <Copy size={14} />,
             tooltip: 'Copy',
             'aria-label': 'Copy',
             variant: 'ghost',
@@ -4551,7 +4584,7 @@ export function EditorToolbar({
   return (
     <ProToolbar
       context={context}
-      className="h-9 justify-between gap-1 border-b border-input bg-muted/40 px-2"
+      className="h-9 justify-between gap-1 border-b border-input bg-background px-2"
       left={{ options: leftItems, className: 'h-full min-w-0 gap-1 md:flex-1' }}
       center={{ options: centerActions ?? [], className: 'gap-0.5 md:flex-none' }}
       right={{ options: rightItems, className: 'gap-0.5' }}
@@ -4584,6 +4617,7 @@ export function EditorToolbarButton({
 >) {
   return (
     <ProToolbar
+      className="bg-background"
       right={{
         options: [
           {
@@ -4603,20 +4637,20 @@ export function EditorToolbarButton({
     />
   )
 }
-27:Tbaea,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+27:Tbf1f,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Clipboard</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Maximize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Minimize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">WandSparkles</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Maximize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Minimize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">WandSparkles</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#0184BC;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">getLanguageLabel</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../language'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../types'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">EditorToolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../types'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  language</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  fullscreen</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  context</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarActionContext</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  startActions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#50A14F;--shiki-dark:#98C379">'title'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  centerActions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  actions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  afterActions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[]</span></span>
@@ -4631,7 +4665,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  context</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  startActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  centerActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  actions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  afterActions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -4641,14 +4675,13 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onFormat</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onFullscreenChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> titleContent</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">    typeof</span><span style="color:#383A42;--shiki-dark:#E06C75"> title</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'function'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">context</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getLanguageLabel</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">))</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> leftItems</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
-<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">    ...</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">startActions</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> []),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'language'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      render</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"px-3 text-sm font-medium text-foreground capitalize"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#4078F2;--shiki-dark:#61AFEF">getLanguageLabel</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"px-3 text-sm font-medium text-foreground capitalize"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">titleContent</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      ),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  ]</span></span>
@@ -4672,7 +4705,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#C678DD">      ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'copy'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Clipboard</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">14</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            icon</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">14</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> />,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            tooltip</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Copy'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">            'aria-label'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Copy'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -4704,7 +4737,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbar</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      context</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">context</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"h-9 justify-between gap-1 border-b border-input bg-muted/40 px-2"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"h-9 justify-between gap-1 border-b border-input bg-background px-2"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      left</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> leftItems</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'h-full min-w-0 gap-1 md:flex-1'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      center</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> centerActions</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [], </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'gap-0.5 md:flex-none'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      right</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{ </span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> rightItems</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'gap-0.5'</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -4737,6 +4770,7 @@ export function EditorToolbarButton({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">>) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProToolbar</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"bg-background"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      right</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">{</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">        options</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          {</span></span>
@@ -4959,10 +4993,10 @@ export function useEditorPreviewScrollSync() {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getMonacoLanguage</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">language</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> language</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'tsx'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'typescript'</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#383A42;--shiki-dark:#E06C75"> language</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>2c:Ta7b,import type MonacoEditor from '@monaco-editor/react'
+<span class="line" data-line=""></span></code></pre>2c:Tb5b,import type MonacoEditor from '@monaco-editor/react'
 import type * as React from 'react'
 import type { ProFullscreenMode } from '@/components/pro/pro-base'
-import type { ProToolbarItem } from '@/components/pro/pro-toolbar'
+import type { ProToolbarContent, ProToolbarItem } from '@/components/pro/pro-toolbar'
 
 export type EditorTheme = 'light' | 'dark'
 
@@ -5004,6 +5038,7 @@ export interface EditorPreviewOptions {
 }
 
 export interface EditorToolbarOptions {
+  title?: ProToolbarContent<EditorToolbarActionContext>
   actions?: EditorToolbarAction[]
   options?:
     | false
@@ -5031,7 +5066,11 @@ export type EditorViewMode = 'edit' | 'preview' | 'split'
 export type EditorFullscreenMode = ProFullscreenMode
 
 export type EditorToolbarAction = ProToolbarItem<EditorToolbarActionContext> & {
-  position?: 'start' | 'before' | 'after'
+  /**
+   * `before` renders in the right region before built-in format/copy/fullscreen controls.
+   * `after` renders after the built-in right controls.
+   */
+  position?: 'before' | 'after'
 }
 
 export interface EditorToolbarActionContext {
@@ -5049,10 +5088,10 @@ export interface EditorToolbarActionContext {
   setMode: (mode: EditorViewMode) => void
   setFullscreen: (fullscreen: boolean) => void
 }
-2d:T66a8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
+2d:T6bb4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#E45649;--shiki-dark:#D19A66"> *</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> React</span><span style="color:#A626A4;--shiki-dark:#C678DD"> from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProFullscreenMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-base'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbarContent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/components/pro/pro-toolbar'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'light'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span></span>
 <span class="line" data-line=""></span>
@@ -5094,6 +5133,7 @@ export interface EditorToolbarActionContext {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarContent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  actions</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarAction</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  options</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span></span>
 <span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">    |</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> false</span></span>
@@ -5121,7 +5161,11 @@ export interface EditorToolbarActionContext {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorFullscreenMode</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProFullscreenMode</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarAction</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProToolbarItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">> </span><span style="color:#0184BC;--shiki-dark:#ABB2BF">&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  position</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'start'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'before'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'after'</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">  /**</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">   * `before` renders in the right region before built-in format/copy/fullscreen controls.</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">   * `after` renders after the built-in right controls.</span></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">   */</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  position</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'before'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'after'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarActionContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
