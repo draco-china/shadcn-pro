@@ -434,7 +434,7 @@ Same as Modal Form but rendered inside a side Drawer. Use the `side` prop to con
 
 Object config for the built-in submit/cancel/reset area. `header` renders above the form and `footer` renders below it; both receive the default actions node.
 
-Default action priority is explicit and uses the underlying button variants directly: submit defaults to `default`, cancel defaults to `outline`, and reset defaults to `ghost`. Override each button with `submit.variant`, `cancel.variant`, or `reset.variant`.
+Default action priority is explicit and uses the underlying button variants directly: submit defaults to `default`, cancel defaults to `outline`, and reset defaults to `secondary`. Override each button with `submit.variant`, `cancel.variant`, or `reset.variant`.
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
@@ -453,7 +453,7 @@ Default action priority is explicit and uses the underlying button variants dire
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `text` | `string` | action default | Button text. |
-| `variant` | `ProFormActionVariant` | submit: `default`, cancel: `outline`, reset: `ghost` | Button variant inherited from the underlying `ProButton`. |
+| `variant` | `ProFormActionVariant` | submit: `default`, cancel: `outline`, reset: `secondary` | Button variant inherited from the underlying `ProButton`. |
 | `hidden` | `boolean` | `false` | Hide the action. |
 | `disabled` | `boolean` | `false` | Disable the action. |
 | `icon` | `ReactNode` | — | Optional button icon. |

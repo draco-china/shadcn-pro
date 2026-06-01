@@ -148,7 +148,7 @@ export function ProFormActions({
       {resetOptions && !resetOptions.hidden && (
         <ProButton
           icon={resetOptions.icon}
-          variant={resetOptions.variant ?? 'ghost'}
+          variant={resetOptions.variant ?? 'secondary'}
           disabled={resetOptions.disabled ?? isSubmitting}
           onClick={resetOptions.onClick}
         >
