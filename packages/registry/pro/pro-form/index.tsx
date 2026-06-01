@@ -198,11 +198,13 @@ function renderFormBody(content: ReactNode, schema?: ProFormSchema, columns?: 1 
     )
   }
 
-  return (
-    <div className={cn(columns ? ['mb-4 grid gap-4', colsClass[columns]] : 'space-y-4')}>
-      {content}
-    </div>
+  const bodyClassName = cn(
+    'grid gap-4',
+    columns ? 'mb-4' : 'grid-cols-1',
+    columns && colsClass[columns],
   )
+
+  return <div className={bodyClassName}>{content}</div>
 }
 
 function renderSubmitterSlot(

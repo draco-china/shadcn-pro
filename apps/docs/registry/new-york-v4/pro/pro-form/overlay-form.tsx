@@ -334,9 +334,9 @@ function renderOverlayBody(
     )
   }
 
-  return (
-    <div className={cn(columns ? ['grid gap-4', colsClass[columns]] : 'space-y-4')}>{content}</div>
-  )
+  const bodyClassName = cn('grid gap-4', columns ? colsClass[columns] : 'grid-cols-1')
+
+  return <div className={bodyClassName}>{content}</div>
 }
 
 function getSubmitterCancelHandler(submitter: false | OverlayFormSubmitterProps | undefined) {

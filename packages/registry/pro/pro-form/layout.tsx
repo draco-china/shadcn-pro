@@ -42,9 +42,10 @@ export function ProFormSection({
   contentClassName,
 }: ProFormSectionProps) {
   const hasHeader = title || description || action
+  const layoutClassName = cn('grid', columns ? colsClass[columns] : 'grid-cols-1', gap)
 
   return (
-    <section data-slot="pro-form-section" className={cn('space-y-4', className)}>
+    <section data-slot="pro-form-section" className={cn('grid gap-4', className)}>
       {hasHeader && (
         <div className="flex items-start justify-between gap-3 border-b pb-2">
           <div className="min-w-0 space-y-1">
@@ -54,14 +55,7 @@ export function ProFormSection({
           {action && <div className="shrink-0">{action}</div>}
         </div>
       )}
-      <div
-        className={cn(
-          columns ? ['grid', colsClass[columns] ?? 'grid-cols-1', gap] : 'space-y-4',
-          contentClassName,
-        )}
-      >
-        {children}
-      </div>
+      <div className={cn(layoutClassName, contentClassName)}>{children}</div>
     </section>
   )
 }
