@@ -124,6 +124,14 @@ export default function ProFieldsDocsDemo() {
   const [files, setFiles] = useState<UploadFile[]>([
     { uid: "1", name: "contract.pdf", status: "done" as const, size: 248000 },
   ])
+  const [imageUrlFiles, setImageUrlFiles] = useState<UploadFile[]>([
+    {
+      uid: "image-url",
+      name: "avatar.png",
+      status: "done" as const,
+      url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop",
+    },
+  ])
   const [items, setItems] = useState([{ name: "Primary contact" }])
 
   return (
@@ -239,6 +247,18 @@ export default function ProFieldsDocsDemo() {
           multiple={false}
           placeholder="Upload contract"
           variant="compact"
+        />
+      </FieldPreview>
+      <FieldPreview title="Upload URL">
+        <Upload
+          accept="image/*"
+          maxCount={1}
+          multiple={false}
+          placeholder="Paste image URL or upload"
+          value={imageUrlFiles}
+          mode="input"
+          variant="compact"
+          onChange={setImageUrlFiles}
         />
       </FieldPreview>
       <FieldPreview title="Captcha">

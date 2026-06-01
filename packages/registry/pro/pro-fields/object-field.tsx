@@ -74,59 +74,31 @@ export function ObjectField({
     </div>
   )
 
-  const content = <div className={cn('space-y-4', contentClassName)}>{children}</div>
-
-  const inner = (
-    <div className={cn(variant === 'bordered' && 'border-l-2 border-border pl-4', className)}>
-      {variant === 'separated' ? (
-        <>
-          {hasHeader && (
-            <>
-              {header}
-              <Separator className="mb-4" />
-            </>
-          )}
-          {content}
-        </>
-      ) : (
-        <>
-          {header}
-          {content}
-        </>
-      )}
-    </div>
+  const separated = variant === 'separated'
+  const rootClassName = cn(variant === 'bordered' && 'border-l-2 border-border pl-4', className)
+  const contentClassNameValue = cn(
+    'space-y-4',
+    collapsible && !separated && hasHeader && 'pt-2',
+    contentClassName,
+  )
+  const content = <div className={contentClassNameValue}>{children}</div>
+  const body = (
+    <>
+      {header}
+      {separated && hasHeader && <Separator className="mb-4" />}
+      {collapsible ? <CollapsibleContent>{content}</CollapsibleContent> : content}
+    </>
   )
 
   if (collapsible) {
     return (
       <Collapsible open={open} onOpenChange={setOpen}>
-        <div className={cn(variant === 'bordered' && 'border-l-2 border-border pl-4', className)}>
-          {variant === 'separated' ? (
-            <>
-              {hasHeader && (
-                <>
-                  {header}
-                  <Separator className="mb-4" />
-                </>
-              )}
-              <CollapsibleContent>
-                <div className={cn('space-y-4', contentClassName)}>{children}</div>
-              </CollapsibleContent>
-            </>
-          ) : (
-            <>
-              {header}
-              <CollapsibleContent>
-                <div className={cn('space-y-4 pt-2', contentClassName)}>{children}</div>
-              </CollapsibleContent>
-            </>
-          )}
-        </div>
+        <div className={rootClassName}>{body}</div>
       </Collapsible>
     )
   }
 
-  return inner
+  return <div className={rootClassName}>{body}</div>
 }
 
 ObjectField.displayName = 'ObjectField'

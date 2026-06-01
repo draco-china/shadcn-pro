@@ -16,6 +16,7 @@ import {
   FormilyInput,
   FormilyMoney,
   FormilyObjectField,
+  FormilyProFormSection,
   FormilyRadio,
   FormilyRate,
   FormilySegmented,
@@ -52,6 +53,7 @@ export const defaultSchemaComponents: SchemaReactComponents = {
   Money: FormilyMoney,
   ArrayField: FormilyArrayField,
   ObjectField: FormilyObjectField,
+  ProFormSection: FormilyProFormSection,
 }
 
 export function createSchemaFieldWithComponents(extra?: SchemaReactComponents) {
@@ -116,7 +118,7 @@ function normalizeSchemaNode(schema: SchemaNode, isRoot = false): SchemaNode {
   }
 
   if (!next['x-component']) {
-    const component = inferComponent(next)
+    const component = inferComponent(next, isRoot)
     if (component) next['x-component'] = component
   }
 
@@ -124,13 +126,10 @@ function normalizeSchemaNode(schema: SchemaNode, isRoot = false): SchemaNode {
     next['x-validator'] = normalizeZodValidator(next['x-validator'])
   }
 
-  if (next.enum && !next['x-component-props']) {
+  if (next.enum && !next['x-component-props']?.options) {
     next['x-component-props'] = {
-      options: next.enum.map((item) =>
-        typeof item === 'object' && item !== null && 'value' in item
-          ? item
-          : { label: String(item), value: String(item) },
-      ),
+      ...next['x-component-props'],
+      options: normalizeEnumOptions(next.enum),
     }
   }
 
@@ -177,7 +176,7 @@ function isZodLikeSchema(value: unknown): value is ZodLikeSchema {
   )
 }
 
-function inferComponent(schema: SchemaNode) {
+function inferComponent(schema: SchemaNode, isRoot = false) {
   if (schema.enum) return 'Select'
 
   switch (schema.type) {
@@ -190,9 +189,19 @@ function inferComponent(schema: SchemaNode) {
       return 'Switch'
     case 'array':
       return 'ArrayField'
+    case 'void':
+      return schema.properties ? 'ProFormSection' : undefined
     case 'object':
-      return schema.properties ? undefined : 'ObjectField'
+      return isRoot ? undefined : 'ObjectField'
     default:
       return undefined
   }
+}
+
+function normalizeEnumOptions(items: unknown[]) {
+  return items.map((item) =>
+    typeof item === 'object' && item !== null && 'value' in item
+      ? { ...item, value: String(item.value) }
+      : { label: String(item), value: String(item) },
+  )
 }

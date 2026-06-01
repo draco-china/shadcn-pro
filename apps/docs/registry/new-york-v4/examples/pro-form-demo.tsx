@@ -3,7 +3,7 @@
 import { createForm } from '@formily/core'
 import { useMemo, useState } from 'react'
 
-import { ProForm, ProFormGrid, SchemaField } from '@/registry/new-york-v4/pro/pro-form/index'
+import { ProForm, SchemaField } from '@/registry/new-york-v4/pro/pro-form/index'
 
 export default function ProFormDemo() {
   const form = useMemo(() => createForm(), [])
@@ -29,48 +29,45 @@ export default function ProFormDemo() {
         submitter={{ submit: { text: "Submit" }, reset: { text: "Reset" } }}
       >
         <SchemaField>
-        {/* Basic info — ObjectField */}
-        <SchemaField.Object
-          name="basic"
+        {/* Basic info */}
+        <SchemaField.Void
           title="Basic Information"
-          x-component="ObjectField"
-          x-component-props={{ variant: 'separated', collapsible: true }}
+          x-component="ProFormSection"
+          x-component-props={{ columns: 2 }}
         >
-          <ProFormGrid columns={2}>
-            <SchemaField.String
-              name="firstName"
-              title="First Name"
-              required
-              x-decorator="FormItem"
-              x-component="Input"
-              x-component-props={{ placeholder: 'First name' }}
-            />
-            <SchemaField.String
-              name="lastName"
-              title="Last Name"
-              required
-              x-decorator="FormItem"
-              x-component="Input"
-              x-component-props={{ placeholder: 'Last name' }}
-            />
-            <SchemaField.String
-              name="email"
-              title="Email"
-              required
-              x-validator="email"
-              x-decorator="FormItem"
-              x-component="Input"
-              x-component-props={{ placeholder: 'user@example.com' }}
-            />
-            <SchemaField.String
-              name="password"
-              title="Password"
-              required
-              x-decorator="FormItem"
-              x-component="Password"
-              x-component-props={{ placeholder: 'Enter password' }}
-            />
-          </ProFormGrid>
+          <SchemaField.String
+            name="firstName"
+            title="First Name"
+            required
+            x-decorator="FormItem"
+            x-component="Input"
+            x-component-props={{ placeholder: 'First name' }}
+          />
+          <SchemaField.String
+            name="lastName"
+            title="Last Name"
+            required
+            x-decorator="FormItem"
+            x-component="Input"
+            x-component-props={{ placeholder: 'Last name' }}
+          />
+          <SchemaField.String
+            name="email"
+            title="Email"
+            required
+            x-validator="email"
+            x-decorator="FormItem"
+            x-component="Input"
+            x-component-props={{ placeholder: 'user@example.com' }}
+          />
+          <SchemaField.String
+            name="password"
+            title="Password"
+            required
+            x-decorator="FormItem"
+            x-component="Password"
+            x-component-props={{ placeholder: 'Enter password' }}
+          />
           <SchemaField.String
             name="bio"
             title="Bio"
@@ -79,185 +76,179 @@ export default function ProFormDemo() {
             x-component="Textarea"
             x-component-props={{ placeholder: 'Tell us about yourself', rows: 3 }}
           />
-        </SchemaField.Object>
+        </SchemaField.Void>
 
         {/* Role & Settings */}
-        <SchemaField.Object
-          name="settings"
+        <SchemaField.Void
           title="Role & Settings"
-          x-component="ObjectField"
-          x-component-props={{ variant: 'separated', collapsible: true }}
+          x-component="ProFormSection"
+          x-component-props={{ columns: 2 }}
         >
-          <ProFormGrid columns={2}>
-            <SchemaField.String
-              name="role"
-              title="Role"
-              required
-              x-decorator="FormItem"
-              x-component="Select"
-              x-component-props={{
-                placeholder: 'Select a role',
-                options: [
-                  { label: 'Admin', value: 'admin' },
-                  { label: 'Developer', value: 'developer' },
-                  { label: 'Designer', value: 'designer' },
-                  { label: 'Viewer', value: 'viewer' },
-                ],
-              }}
-            />
-            <SchemaField.String
-              name="priority"
-              title="Priority"
-              x-decorator="FormItem"
-              x-component="Radio"
-              x-component-props={{
-                options: [
-                  { label: 'High', value: 'high' },
-                  { label: 'Medium', value: 'medium' },
-                  { label: 'Low', value: 'low' },
-                ],
-              }}
-            />
-            <SchemaField.String
-              name="plan"
-              title="Plan"
-              x-decorator="FormItem"
-              x-component="Segmented"
-              x-component-props={{
-                options: [
-                  { label: 'Free', value: 'free' },
-                  { label: 'Pro', value: 'pro' },
-                  { label: 'Enterprise', value: 'enterprise' },
-                ],
-                defaultValue: 'free',
-              }}
-            />
-            <SchemaField.String
-              name="team"
-              title="Team"
-              x-decorator="FormItem"
-              x-component="TreeSelect"
-              x-component-props={{
-                placeholder: 'Select teams',
-                multiple: true,
-                options: [
-                  {
-                    label: 'Engineering', value: 'eng',
-                    children: [
-                      { label: 'Frontend', value: 'fe' },
-                      { label: 'Backend', value: 'be' },
-                    ],
-                  },
-                  {
-                    label: 'Product', value: 'product',
-                    children: [
-                      { label: 'Design', value: 'design' },
-                      { label: 'Research', value: 'research' },
-                    ],
-                  },
-                ],
-              }}
-            />
-            <SchemaField.String
-              name="location"
-              title="Location"
-              x-decorator="FormItem"
-              x-component="Cascader"
-              x-component-props={{
-                placeholder: 'Select location',
-                options: [
-                  {
-                    label: 'North America', value: 'na',
-                    children: [
-                      { label: 'United States', value: 'us', children: [{ label: 'New York', value: 'ny' }, { label: 'California', value: 'ca' }] },
-                    ],
-                  },
-                  {
-                    label: 'Asia', value: 'asia',
-                    children: [
-                      { label: 'China', value: 'cn', children: [{ label: 'Beijing', value: 'bj' }, { label: 'Shanghai', value: 'sh' }] },
-                    ],
-                  },
-                ],
-              }}
-            />
-            <SchemaField.Boolean
-              name="active"
-              title="Active"
-              default={true}
-              description="Enable this account immediately."
-              x-decorator="FormItem"
-              x-component="Switch"
-            />
-          </ProFormGrid>
-        </SchemaField.Object>
+          <SchemaField.String
+            name="role"
+            title="Role"
+            required
+            x-decorator="FormItem"
+            x-component="Select"
+            x-component-props={{
+              placeholder: 'Select a role',
+              options: [
+                { label: 'Admin', value: 'admin' },
+                { label: 'Developer', value: 'developer' },
+                { label: 'Designer', value: 'designer' },
+                { label: 'Viewer', value: 'viewer' },
+              ],
+            }}
+          />
+          <SchemaField.String
+            name="priority"
+            title="Priority"
+            x-decorator="FormItem"
+            x-component="Radio"
+            x-component-props={{
+              options: [
+                { label: 'High', value: 'high' },
+                { label: 'Medium', value: 'medium' },
+                { label: 'Low', value: 'low' },
+              ],
+            }}
+          />
+          <SchemaField.String
+            name="plan"
+            title="Plan"
+            x-decorator="FormItem"
+            x-component="Segmented"
+            x-component-props={{
+              options: [
+                { label: 'Free', value: 'free' },
+                { label: 'Pro', value: 'pro' },
+                { label: 'Enterprise', value: 'enterprise' },
+              ],
+              defaultValue: 'free',
+            }}
+          />
+          <SchemaField.String
+            name="team"
+            title="Team"
+            x-decorator="FormItem"
+            x-component="TreeSelect"
+            x-component-props={{
+              placeholder: 'Select teams',
+              multiple: true,
+              options: [
+                {
+                  label: 'Engineering', value: 'eng',
+                  children: [
+                    { label: 'Frontend', value: 'fe' },
+                    { label: 'Backend', value: 'be' },
+                  ],
+                },
+                {
+                  label: 'Product', value: 'product',
+                  children: [
+                    { label: 'Design', value: 'design' },
+                    { label: 'Research', value: 'research' },
+                  ],
+                },
+              ],
+            }}
+          />
+          <SchemaField.String
+            name="location"
+            title="Location"
+            x-decorator="FormItem"
+            x-component="Cascader"
+            x-component-props={{
+              placeholder: 'Select location',
+              options: [
+                {
+                  label: 'North America', value: 'na',
+                  children: [
+                    { label: 'United States', value: 'us', children: [{ label: 'New York', value: 'ny' }, { label: 'California', value: 'ca' }] },
+                  ],
+                },
+                {
+                  label: 'Asia', value: 'asia',
+                  children: [
+                    { label: 'China', value: 'cn', children: [{ label: 'Beijing', value: 'bj' }, { label: 'Shanghai', value: 'sh' }] },
+                  ],
+                },
+              ],
+            }}
+          />
+          <SchemaField.Boolean
+            name="active"
+            title="Active"
+            default={true}
+            description="Enable this account immediately."
+            x-decorator="FormItem"
+            x-component="Switch"
+          />
+        </SchemaField.Void>
 
         {/* Numeric & Date */}
-        <SchemaField.Object
-          name="numeric"
+        <SchemaField.Void
           title="Budget & Schedule"
-          x-component="ObjectField"
-          x-component-props={{ variant: 'separated', collapsible: true }}
+          x-component="ProFormSection"
+          x-component-props={{ columns: 2 }}
         >
-          <ProFormGrid columns={2}>
-            <SchemaField.Number
-              name="budget"
-              title="Budget"
-              x-decorator="FormItem"
-              x-component="Money"
-              x-component-props={{ placeholder: '0.00', currency: 'USD' }}
-            />
-            <SchemaField.Number
-              name="headcount"
-              title="Headcount"
-              x-decorator="FormItem"
-              x-component="Digit"
-              x-component-props={{ placeholder: '0', min: 1, max: 500 }}
-            />
-            <SchemaField.Number
-              name="salary_range"
-              title="Salary Range (K)"
-              x-decorator="FormItem"
-              x-component="DigitRange"
-              x-component-props={{ min: 0, max: 500 }}
-            />
-            <SchemaField.Number
-              name="progress"
-              title="Progress (%)"
-              x-decorator="FormItem"
-              x-component="Slider"
-              x-component-props={{ min: 0, max: 100, step: 5 }}
-            />
-            <SchemaField.Number
-              name="rating"
-              title="Team Rating"
-              x-decorator="FormItem"
-              x-component="Rate"
-              x-component-props={{ count: 5 }}
-            />
-            <SchemaField.String
-              name="start_date"
-              title="Start Date"
-              x-decorator="FormItem"
-              x-component="DatePicker"
-              x-component-props={{ placeholder: 'Select start date' }}
-            />
-            <SchemaField.String
-              name="period"
-              title="Period"
-              x-decorator="FormItem"
-              x-component="DateRangePicker"
-              x-component-props={{ placeholder: 'Select period' }}
-            />
-            <SchemaField.String
-              name="standup_time"
-              title="Daily Standup"
-              x-decorator="FormItem"
-              x-component="TimePicker"
-              x-component-props={{ placeholder: 'Pick a time' }}
-            />
-          </ProFormGrid>
-        </SchemaField.Object>
+          <SchemaField.Number
+            name="budget"
+            title="Budget"
+            x-decorator="FormItem"
+            x-component="Money"
+            x-component-props={{ placeholder: '0.00', currency: 'USD' }}
+          />
+          <SchemaField.Number
+            name="headcount"
+            title="Headcount"
+            x-decorator="FormItem"
+            x-component="Digit"
+            x-component-props={{ placeholder: '0', min: 1, max: 500 }}
+          />
+          <SchemaField.Number
+            name="salary_range"
+            title="Salary Range (K)"
+            x-decorator="FormItem"
+            x-component="DigitRange"
+            x-component-props={{ min: 0, max: 500 }}
+          />
+          <SchemaField.Number
+            name="progress"
+            title="Progress (%)"
+            x-decorator="FormItem"
+            x-component="Slider"
+            x-component-props={{ min: 0, max: 100, step: 5 }}
+          />
+          <SchemaField.Number
+            name="rating"
+            title="Team Rating"
+            x-decorator="FormItem"
+            x-component="Rate"
+            x-component-props={{ count: 5 }}
+          />
+          <SchemaField.String
+            name="start_date"
+            title="Start Date"
+            x-decorator="FormItem"
+            x-component="DatePicker"
+            x-component-props={{ placeholder: 'Select start date' }}
+          />
+          <SchemaField.String
+            name="period"
+            title="Period"
+            x-decorator="FormItem"
+            x-component="DateRangePicker"
+            x-component-props={{ placeholder: 'Select period' }}
+          />
+          <SchemaField.String
+            name="standup_time"
+            title="Daily Standup"
+            x-decorator="FormItem"
+            x-component="TimePicker"
+            x-component-props={{ placeholder: 'Pick a time' }}
+          />
+        </SchemaField.Void>
 
         {/* Contacts — ArrayField */}
         <SchemaField.Array
@@ -268,25 +259,23 @@ export default function ProFormDemo() {
           x-component="ArrayField"
           x-component-props={{ addText: 'Add contact', min: 1 }}
         >
-          <SchemaField.Object>
-            <ProFormGrid columns={2}>
-              <SchemaField.String
-                name="name"
-                title="Name"
-                required
-                x-decorator="FormItem"
-                x-component="Input"
-                x-component-props={{ placeholder: 'Contact name' }}
-              />
-              <SchemaField.String
-                name="phone"
-                title="Phone"
-                x-decorator="FormItem"
-                x-component="Input"
-                x-component-props={{ placeholder: '+1 (555) 000-0000' }}
-              />
-            </ProFormGrid>
-          </SchemaField.Object>
+          <SchemaField.Void x-component="ProFormSection" x-component-props={{ columns: 2 }}>
+            <SchemaField.String
+              name="name"
+              title="Name"
+              required
+              x-decorator="FormItem"
+              x-component="Input"
+              x-component-props={{ placeholder: 'Contact name' }}
+            />
+            <SchemaField.String
+              name="phone"
+              title="Phone"
+              x-decorator="FormItem"
+              x-component="Input"
+              x-component-props={{ placeholder: '+1 (555) 000-0000' }}
+            />
+          </SchemaField.Void>
         </SchemaField.Array>
 
         {/* Avatar upload */}
@@ -296,7 +285,7 @@ export default function ProFormDemo() {
           description="Upload a profile picture (PNG, JPG, max 2MB)."
           x-decorator="FormItem"
           x-component="Upload"
-          x-component-props={{ accept: 'image/*', maxFiles: 1 }}
+          x-component-props={{ accept: 'image/*', maxCount: 1, multiple: false }}
         />
 
         <SchemaField.Boolean

@@ -23,7 +23,12 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { cn } from '@/lib/utils'
-import { ProFormActions, type ProFormActionsProps, ProFormGrid } from './layout'
+import {
+  getProFormRootSectionProps,
+  ProFormActions,
+  type ProFormActionsProps,
+  ProFormSection,
+} from './layout'
 import { createSchemaFieldWithComponents, type ProFormSchema } from './schema'
 
 // ─── Shared types ──────────────────────────────────────────────────────────────
@@ -63,6 +68,13 @@ export interface OverlayFormSubmitterContext {
 }
 
 export interface OverlayFormSubmitterProps extends ProFormActionsProps {}
+
+const colsClass: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 sm:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+}
 
 // ─── Shared hook ──────────────────────────────────────────────────────────────
 
@@ -170,11 +182,7 @@ export function ModalForm({
     </>
   )
 
-  const body = columns ? (
-    <ProFormGrid columns={columns}>{formContent}</ProFormGrid>
-  ) : (
-    <div className="space-y-4">{formContent}</div>
-  )
+  const body = renderOverlayBody(formContent, schema, columns)
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -252,11 +260,7 @@ export function DrawerForm({
     </>
   )
 
-  const body = columns ? (
-    <ProFormGrid columns={columns}>{formContent}</ProFormGrid>
-  ) : (
-    <div className="space-y-4">{formContent}</div>
-  )
+  const body = renderOverlayBody(formContent, schema, columns)
 
   return (
     <Drawer open={open} onOpenChange={setOpen} direction={side}>
@@ -312,6 +316,26 @@ function renderOverlaySubmitter({
       submitting={submitting}
       className={cn('w-full justify-end', submitterActions.className)}
     />
+  )
+}
+
+function renderOverlayBody(
+  content: React.ReactNode,
+  schema?: ProFormSchema,
+  columns?: 1 | 2 | 3 | 4,
+) {
+  const rootSectionProps = getProFormRootSectionProps(schema)
+
+  if (rootSectionProps) {
+    return (
+      <ProFormSection {...rootSectionProps} columns={rootSectionProps.columns ?? columns}>
+        {content}
+      </ProFormSection>
+    )
+  }
+
+  return (
+    <div className={cn(columns ? ['grid gap-4', colsClass[columns]] : 'space-y-4')}>{content}</div>
   )
 }
 

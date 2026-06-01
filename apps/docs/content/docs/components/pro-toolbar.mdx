@@ -142,8 +142,37 @@ Use `render` when an option needs to return arbitrary controls or business-speci
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `key` | `string` | Stable item key. |
+| `label` | `ReactNode \| (context) => ReactNode` | Button or menu trigger label. |
+| `icon` | `ReactNode \| (context) => ReactNode` | Button or menu trigger icon. |
+| `tooltip` | `ReactNode \| (context) => ReactNode` | Tooltip shown for button, menu, and dropdown triggers. |
 | `variant` | `ProButton variant` | Button visual style. Overrides the toolbar default. |
 | `size` | `ProButton size` | Button size. Overrides the toolbar default. |
 | `hidden` | `boolean \| (context) => boolean` | Hide an item without leaving an empty region. |
+| `disabled` | `boolean \| (context) => boolean` | Disable the item. |
+| `loading` | `boolean \| (context) => boolean` | Show a loading state. |
+| `onClick` | `(context) => void \| Promise<void>` | Button or menu option click handler. |
+| `copy` | `{ text, success?, error?, onSuccess?, onError? }` | Copy text using the shared `ProButton` copy behavior. |
+| `htmlType` | `button \| submit \| reset` | Native button type for button items. Defaults to `button`. |
+| `render` | `(context) => ReactNode` | Render custom toolbar content. |
+| `separator` | `true` | Render a vertical separator item. |
+| `items` | `MenuOption[] \| (context) => MenuOption[]` | Render the item as a menu trigger. |
+| `content` | `ReactNode \| (context) => ReactNode` | Render the item as a custom dropdown panel. |
+| `contentClassName` | `string` | Extra className for dropdown panel content. |
 | `align` | `'start' \| 'center' \| 'end'` | Menu or dropdown panel alignment. |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | Menu or dropdown panel side. |
+
+### Menu Options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `key` | `string` | Stable menu option key. |
+| `label` | `ReactNode \| (context) => ReactNode` | Menu option label. |
+| `icon` | `ReactNode \| (context) => ReactNode` | Leading menu icon. |
+| `shortcut` | `ReactNode \| (context) => ReactNode` | Shortcut text rendered at the end of the row. |
+| `hidden` | `boolean \| (context) => boolean` | Hide the menu option. |
+| `disabled` | `boolean \| (context) => boolean` | Disable the menu option. |
+| `loading` | `boolean \| (context) => boolean` | Show a loading spinner for the option. |
+| `danger` | `boolean \| (context) => boolean` | Render the menu option with destructive styling. |
+| `separator` | `'left' \| 'right' \| 'both'` | Add separators before and/or after the option. |
+| `onClick` | `(context) => void \| Promise<void>` | Menu option click handler. |

@@ -6,8 +6,10 @@ import type {
 } from '@formily/core'
 import { RecursionField, useField, useFieldSchema } from '@formily/react'
 import { observer } from '@formily/reactive-react'
+import type { ReactNode } from 'react'
 import { ArrayField } from '../../pro-fields/array-field'
 import { ObjectField, type ObjectFieldProps } from '../../pro-fields/object-field'
+import { ProFormSection, type ProFormSectionProps } from '../layout'
 
 export const FormilyArrayField = observer(() => {
   const field = useField<FormilyArrayFieldModel>()
@@ -56,3 +58,21 @@ export const FormilyObjectField = observer(
   },
 )
 FormilyObjectField.displayName = 'FormilyObjectField'
+
+export const FormilyProFormSection = observer(
+  ({ ...props }: Omit<ProFormSectionProps, 'children'>) => {
+    const field = useField() as { title?: ReactNode; description?: ReactNode }
+    const schema = useFieldSchema()
+
+    return (
+      <ProFormSection
+        {...props}
+        title={props.title ?? field.title}
+        description={props.description ?? field.description}
+      >
+        <RecursionField schema={schema} onlyRenderProperties />
+      </ProFormSection>
+    )
+  },
+)
+FormilyProFormSection.displayName = 'FormilyProFormSection'

@@ -42,6 +42,22 @@ export default function ProFieldsUploadDemo() {
           ]}
         />
         <Field
+          name="avatarUrl"
+          title="Avatar URL"
+          decorator={[FormItem]}
+          component={[
+            FormilyUpload,
+            {
+              accept: "image/*",
+              multiple: false,
+              maxCount: 1,
+              placeholder: "Paste image URL or upload",
+              mode: "input",
+              variant: "compact",
+            },
+          ]}
+        />
+        <Field
           name="documents"
           title="Documents"
           decorator={[FormItem]}

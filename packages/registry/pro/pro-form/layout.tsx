@@ -4,11 +4,24 @@ import type { ComponentProps, ReactNode } from 'react'
 import { ProButton } from '@/components/pro/pro-base'
 import { cn } from '@/lib/utils'
 
-export interface ProFormLayoutProps {
+export type ProFormActionVariant = NonNullable<ComponentProps<typeof ProButton>['variant']>
+
+export interface ProFormSectionProps {
+  title?: ReactNode
+  description?: ReactNode
+  action?: ReactNode
   children?: ReactNode
   columns?: 1 | 2 | 3 | 4
   gap?: string
   className?: string
+  contentClassName?: string
+}
+
+export type ProFormRootSectionSchema = {
+  title?: ReactNode
+  description?: ReactNode
+  'x-component'?: string
+  'x-component-props'?: Omit<ProFormSectionProps, 'children'>
 }
 
 const colsClass: Record<number, string> = {
@@ -18,19 +31,56 @@ const colsClass: Record<number, string> = {
   4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 }
 
-export type ProFormActionVariant = NonNullable<ComponentProps<typeof ProButton>['variant']>
-
-export function ProFormGrid({
+export function ProFormSection({
+  title,
+  description,
+  action,
   children,
-  columns = 1,
+  columns,
   gap = 'gap-4',
   className,
-}: ProFormLayoutProps) {
+  contentClassName,
+}: ProFormSectionProps) {
+  const hasHeader = title || description || action
+
   return (
-    <div className={cn('grid', colsClass[columns] ?? 'grid-cols-1', gap, className)}>
-      {children}
-    </div>
+    <section data-slot="pro-form-section" className={cn('space-y-4', className)}>
+      {hasHeader && (
+        <div className="flex items-start justify-between gap-3 border-b pb-2">
+          <div className="min-w-0 space-y-1">
+            {title && <h3 className="text-sm font-medium leading-none">{title}</h3>}
+            {description && <p className="text-xs text-muted-foreground">{description}</p>}
+          </div>
+          {action && <div className="shrink-0">{action}</div>}
+        </div>
+      )}
+      <div
+        className={cn(
+          columns ? ['grid', colsClass[columns] ?? 'grid-cols-1', gap] : 'space-y-4',
+          contentClassName,
+        )}
+      >
+        {children}
+      </div>
+    </section>
   )
+}
+
+export function getProFormRootSectionProps(
+  schema?: unknown,
+): Omit<ProFormSectionProps, 'children'> | null {
+  if (!schema || typeof schema !== 'object') return null
+
+  const rootSchema = schema as ProFormRootSectionSchema
+  if (rootSchema['x-component'] !== 'ProFormSection') return null
+
+  const componentProps = rootSchema['x-component-props'] ?? {}
+
+  return {
+    ...componentProps,
+    title: componentProps.title ?? rootSchema.title,
+    description: componentProps.description ?? rootSchema.description,
+  }
 }
 
 export interface ProFormSubmitActionProps {

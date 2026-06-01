@@ -100,6 +100,7 @@ function PreviewPanel() {
 | `loading` | `boolean` | `false` | Forces loading state. |
 | `disabled` | `boolean` | `false` | Disables the button. Loading also disables it. |
 | `onClick` | `(event) => void \| Promise<void>` | — | Click handler. Sync handlers are not wrapped in async state. |
+| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type. Defaults to `button` to avoid accidental form submission. |
 | `children` | `ReactNode` | — | Button label/content. |
 
 All other props are passed to the underlying shadcn/ui `Button`.
@@ -113,3 +114,15 @@ All other props are passed to the underlying shadcn/ui `Button`.
 | `onFullscreenChange` | `(fullscreen: boolean) => void` | — | Called when fullscreen state changes. |
 | `mode` | `'fixed' \| 'screen'` | `'fixed'` | Fixed-position simulated fullscreen or browser Fullscreen API. |
 | `ref` | `RefObject<HTMLElement>` | internal ref | Optional target element ref. |
+
+**Returns:**
+
+| Key | Type | Description |
+| --- | --- | --- |
+| `ref` | `RefObject<HTMLElement>` | Ref to attach to the fullscreen target. |
+| `fullscreen` | `boolean` | Current fullscreen state. |
+| `fullscreenMode` | `'fixed' \| 'screen'` | Active fullscreen mode. |
+| `isFixedFullscreen` | `boolean` | `true` when fullscreen is active in fixed mode. |
+| `isScreenFullscreen` | `boolean` | `true` when fullscreen is active through the browser Fullscreen API. |
+| `setFullscreen` | `(fullscreen: boolean) => void` | Updates fullscreen state. |
+| `toggleFullscreen` | `() => void` | Toggles fullscreen state. |

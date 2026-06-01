@@ -178,7 +178,8 @@ export const CATEGORIES: Category[] = [
       },
       {
         name: 'pro-form-validation-demo',
-        description: 'Built-in Zod validation with real-time error messages.',
+        description:
+          'Schema validation with native rules, optional Zod validators, and real-time error messages.',
         iframeHeight: '500px',
         files: [demoFile('pro-form-validation-demo'), ...componentFiles('pro-form', proFormFiles)],
       },

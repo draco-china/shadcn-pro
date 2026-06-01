@@ -204,6 +204,9 @@ Use `schemaComponents` when a schema references project-specific components:
 />
 ```
 
+When `enum` is present, `Select` options are inferred automatically and merged into
+`x-component-props`; existing `x-component-props.options` are left unchanged.
+
 ### Reactions
 
 Formily `x-reactions` are passed through unchanged, so conditional visibility and linkage can live in schema instead of React conditionals:
@@ -288,9 +291,64 @@ const schema = {
 }
 ```
 
+### Sections
+
+Use `type: "void"` for section-only groups. Void sections do not create a form value and are rendered by the built-in `ProFormSection` by default:
+
+```ts
+const schema = {
+  type: "object",
+  properties: {
+    basic: {
+      type: "void",
+      title: "Basic Information",
+      "x-component-props": {
+        columns: 2,
+      },
+      properties: {
+        firstName: { type: "string", title: "First Name" },
+        lastName: { type: "string", title: "Last Name" },
+      },
+    },
+  },
+}
+```
+
+`ProFormSection` is a form layout section, not an object value field. Non-root `type: "object"` groups are rendered by the built-in `ObjectField` by default, while the root schema object stays unwrapped.
+
+When composing with `SchemaField` JSX instead of the `schema` prop, set `x-component="ProFormSection"` explicitly because JSX fields do not run through schema normalization.
+
+```tsx
+<SchemaField.Void
+  title="Basic Information"
+  x-component="ProFormSection"
+  x-component-props={{ columns: 2 }}
+>
+  <SchemaField.String name="firstName" title="First Name" />
+  <SchemaField.String name="lastName" title="Last Name" />
+</SchemaField.Void>
+```
+
+If the root form body should also render as a section, set the root schema component explicitly:
+
+```ts
+const schema = {
+  type: "object",
+  title: "Basic Information",
+  "x-component": "ProFormSection",
+  "x-component-props": {
+    columns: 2,
+  },
+  properties: {
+    firstName: { type: "string", title: "First Name" },
+    lastName: { type: "string", title: "Last Name" },
+  },
+}
+```
+
 ### Object Fields
 
-Nested object grouping with optional card wrapper:
+Use `type: "object"` when the group should produce an object value. Nested object groups are rendered by the built-in `ObjectField` automatically:
 
 ```ts
 const schema = {
@@ -299,9 +357,9 @@ const schema = {
     address: {
       type: "object",
       title: "Address",
-      "x-component": "ObjectField",
       properties: {
         city: { type: "string", title: "City" },
+        street: { type: "string", title: "Street" },
       },
     },
   },
@@ -369,7 +427,7 @@ Same as Modal Form but rendered inside a side Drawer. Use the `side` prop to con
 | `onFinishFailed` | `(errors) => void` | — | Called when validation fails on submit. |
 | `onReset` | `() => void \| Promise<void>` | — | Called after reset completes. |
 | `submitter` | `false \| ProFormSubmitterProps` | `{}` | Built-in submitter config. Set to `false` to hide actions. |
-| `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout. Wraps fields in `ProFormGrid` automatically. |
+| `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout for the top-level form body. |
 | `className` | `string` | — | Additional className for the `<form>` element. |
 
 ### ProFormSubmitter
@@ -403,16 +461,6 @@ Default action priority is explicit and uses the underlying button variants dire
 | `loading` | `boolean` | — | Submit-only loading override. |
 | `onClick` | `() => void \| Promise<void>` | — | Cancel/reset click handler. |
 
-### ProFormGrid
-
-Multi-column grid container — fields inside are evenly distributed.
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `columns` | `1 \| 2 \| 3 \| 4` | `1` | Number of columns. |
-| `gap` | `string` | `'gap-4'` | Tailwind gap class. |
-| `className` | `string` | — | Additional className. |
-
 ### ProFormActions
 
 Standalone action bar — use directly when a page needs to compose actions outside `ProForm`.
@@ -426,6 +474,20 @@ Standalone action bar — use directly when a page needs to compose actions outs
 | `loading` | `boolean` | `false` | Fallback loading state. |
 | `className` | `string` | — | Additional className for the action container. |
 | `children` | `ReactNode` | — | Extra buttons or content to render alongside actions. |
+
+### ProFormSection
+
+Section-only layout container used by `type: "void"` schema groups.
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `title` | `ReactNode` | field title | Section heading. |
+| `description` | `ReactNode` | field description | Helper text below the heading. |
+| `action` | `ReactNode` | — | Element rendered to the right of the heading. |
+| `columns` | `1 \| 2 \| 3 \| 4` | — | Render section content as a responsive grid. |
+| `gap` | `string` | `'gap-4'` | Tailwind gap class used when `columns` is set. |
+| `className` | `string` | — | Additional className for the section. |
+| `contentClassName` | `string` | — | Additional className for the section content. |
 
 ### ModalForm
 

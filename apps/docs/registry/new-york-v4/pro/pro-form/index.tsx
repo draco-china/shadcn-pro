@@ -4,20 +4,26 @@ import { createForm, type Form, type IFormProps } from '@formily/core'
 import { FormProvider, type SchemaReactComponents } from '@formily/react'
 import type { ReactNode } from 'react'
 import * as React from 'react'
-import { ProFormActions, type ProFormActionsProps, ProFormGrid } from './layout'
+import { cn } from '@/lib/utils'
+import {
+  getProFormRootSectionProps,
+  ProFormActions,
+  type ProFormActionsProps,
+  ProFormSection,
+} from './layout'
 import { createSchemaFieldWithComponents, type ProFormSchema, SchemaField } from './schema'
 
 export type {
   ProFormActionsProps,
   ProFormActionVariant,
   ProFormCancelActionProps,
-  ProFormLayoutProps,
   ProFormResetActionProps,
+  ProFormSectionProps,
   ProFormSubmitActionProps,
 } from './layout'
 export { DrawerForm, ModalForm } from './overlay-form'
 export type { Form, IFormProps }
-export { createForm, createSchemaFieldWithComponents, ProFormActions, ProFormGrid, SchemaField }
+export { createForm, createSchemaFieldWithComponents, ProFormActions, ProFormSection, SchemaField }
 
 export interface ProFormRenderContext {
   form: Form
@@ -47,9 +53,16 @@ export interface ProFormProps {
   onReset?: () => void | Promise<void>
   /** Submitter config. Set to false to hide built-in actions. */
   submitter?: false | ProFormSubmitterProps
-  /** Number of form columns (passed through to ProFormGrid) */
+  /** Number of columns for the top-level form body */
   columns?: 1 | 2 | 3 | 4
   className?: string
+}
+
+const colsClass: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 sm:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 }
 
 export function ProForm({
@@ -157,13 +170,7 @@ export function ProForm({
     </>
   )
 
-  const body = columns ? (
-    <ProFormGrid columns={columns} className="mb-4">
-      {formContent}
-    </ProFormGrid>
-  ) : (
-    <div className="space-y-4">{formContent}</div>
-  )
+  const body = renderFormBody(formContent, schema, columns)
 
   return (
     <FormProvider form={activeForm}>
@@ -173,6 +180,28 @@ export function ProForm({
         {activeSubmitter && activeActionsPlacement === 'footer' && footerSubmitterNode}
       </form>
     </FormProvider>
+  )
+}
+
+function renderFormBody(content: ReactNode, schema?: ProFormSchema, columns?: 1 | 2 | 3 | 4) {
+  const rootSectionProps = getProFormRootSectionProps(schema)
+
+  if (rootSectionProps) {
+    return (
+      <ProFormSection
+        {...rootSectionProps}
+        columns={rootSectionProps.columns ?? columns}
+        className={cn('mb-4', rootSectionProps.className)}
+      >
+        {content}
+      </ProFormSection>
+    )
+  }
+
+  return (
+    <div className={cn(columns ? ['mb-4 grid gap-4', colsClass[columns]] : 'space-y-4')}>
+      {content}
+    </div>
   )
 }
 

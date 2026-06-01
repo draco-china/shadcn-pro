@@ -260,13 +260,16 @@ interface TreeSelectOption {
 | ------------- | ------------------------------- | --------------------------- | -------------------- |
 | `value`       | `UploadFile[]`                  | —                           | Controlled file list |
 | `onChange`    | `(files: UploadFile[]) => void` | —                           | Change handler       |
+| `upload` | `(files, context) => UploadResult \| UploadResult[] \| Promise<...>` | — | Custom upload behavior for the selected files. Return URL strings, `UploadFile` patches, `false`/`null` to skip, or nothing to use the default object URL. |
 | `accept`      | `string`                        | —                           | Accepted MIME types  |
 | `multiple`    | `boolean`                       | `true`                      | Allow multiple files |
 | `maxCount`    | `number`                        | —                           | Maximum file count   |
 | `disabled`    | `boolean`                       | `false`                     | Disable interaction  |
 | `placeholder` | `string`                        | `'Click or drag to upload'` | Drop zone label      |
-| `variant`     | `'dropzone' \| 'compact'`       | `'dropzone'`                | Render as a drop zone or compact input-style trigger with a suffix upload icon. |
-| `showFileList` | `boolean`                      | `true` in dropzone, `false` in compact | Show the selected file list below the trigger. |
+| `variant`     | `'default' \| 'compact'` | `'default'`          | Visual density. Default renders as a drop zone; compact renders as an input-like control. |
+| `mode`        | `'upload' \| 'input'` | `'upload'`              | Upload-only mode or URL input mode with suffix upload action. |
+| `preview` | `boolean` | image input mode | Show the prefix preview in `input` mode. |
+| `fileList` | `boolean` | `true` in default variant | Show the selected file list below the trigger. |
 
 ```ts
 interface UploadFile {
@@ -276,6 +279,30 @@ interface UploadFile {
   status?: "uploading" | "done" | "error"
   size?: number
 }
+
+type UploadResult = string | Partial<UploadFile> | null | false | undefined
+```
+
+```tsx
+<Upload
+  variant="compact"
+  mode="input"
+  multiple={false}
+  upload={async ([file]) => {
+    const url = await uploadAvatar(file)
+    return { url, name: file.name, status: "done" }
+  }}
+/>
+```
+
+```tsx
+<Upload
+  multiple
+  upload={async (files) => {
+    const urls = await uploadAttachments(files)
+    return urls.map((url, index) => ({ url, name: files[index].name }))
+  }}
+/>
 ```
 
 ---
@@ -798,20 +825,24 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
 
 ```tsx
 <Field
-  name="contract"
-  title="Contract"
+  name="avatarUrl"
+  title="Avatar URL"
   decorator={[FormItem]}
   component={[
     FormilyUpload,
     {
+      accept: "image/*",
       variant: "compact",
+      mode: "input",
       multiple: false,
       maxCount: 1,
-      placeholder: "Upload contract",
+      placeholder: "Paste image URL or upload",
     },
   ]}
 />
 ```
+
+Input mode is intended for single-file inputs, such as avatar or image URL fields. The value remains an `UploadFile[]`, so pasted URLs and locally selected files use the same data shape.
 
 ### Captcha
 
