@@ -1,3 +1,11 @@
+## [1.16.2](https://github.com/draco-china/shadcn-pro/compare/v1.16.1...v1.16.2) (2026-06-01)
+
+
+### Bug Fixes
+
+* align form item label line height ([cd58d85](https://github.com/draco-china/shadcn-pro/commit/cd58d855492afc6d55c6dbfe3879e4e9b362c96c))
+* refine pro component defaults and docs ([86e9710](https://github.com/draco-china/shadcn-pro/commit/86e9710ce9e0680ceb983f6d7f86db66f55df15d))
+
 ## [1.16.1](https://github.com/draco-china/shadcn-pro/compare/v1.16.0...v1.16.1) (2026-05-31)
 
 
