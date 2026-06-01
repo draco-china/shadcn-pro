@@ -1,3 +1,10 @@
+## [1.16.3](https://github.com/draco-china/shadcn-pro/compare/v1.16.2...v1.16.3) (2026-06-01)
+
+
+### Bug Fixes
+
+* refine pro form and upload docs ([2aa4c90](https://github.com/draco-china/shadcn-pro/commit/2aa4c90cb109555b2b0790a1b9c5cc7f98e1cbe8))
+
 ## [1.16.2](https://github.com/draco-china/shadcn-pro/compare/v1.16.1...v1.16.2) (2026-06-01)
 
 
