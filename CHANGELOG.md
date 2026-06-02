@@ -1,3 +1,10 @@
+## [1.16.6](https://github.com/draco-china/shadcn-pro/compare/v1.16.5...v1.16.6) (2026-06-02)
+
+
+### Bug Fixes
+
+* adjust input affix interaction ([ef889e1](https://github.com/draco-china/shadcn-pro/commit/ef889e111fb5f7c321d8d1d34ad3011d30a22fb4))
+
 ## [1.16.5](https://github.com/draco-china/shadcn-pro/compare/v1.16.4...v1.16.5) (2026-06-01)
 
 
