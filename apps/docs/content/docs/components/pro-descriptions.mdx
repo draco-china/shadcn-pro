@@ -26,11 +26,19 @@ npx @draco-china/shadcn-pro@latest add pro-descriptions
 
 <Steps className="mb-0 pt-2">
 
-<Step>No additional package dependencies are required.</Step>
+<Step>Install or copy `pro-base`.</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="pro-descriptions" title="components/pro/pro-descriptions/index.tsx" />
+<ComponentSource name="pro-descriptions" title="components/pro/descriptions/index.tsx" />
+
+Manual installs also need the sibling files used by the entry component:
+
+- `components/pro/descriptions/item.tsx`
+- `components/pro/descriptions/styles.ts`
+- `components/pro/descriptions/types.ts`
+- `components/pro/descriptions/utils.ts`
+- `components/pro/base/utils/react-node.ts`
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -43,7 +51,7 @@ npx @draco-china/shadcn-pro@latest add pro-descriptions
 ## Usage
 
 ```tsx
-import { ProDescriptions } from "@/components/pro/pro-descriptions"
+import { ProDescriptions } from "@/components/pro/descriptions"
 
 const items = [
   { label: "Name", value: "Alice Wang" },

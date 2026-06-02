@@ -3,38 +3,38 @@
 import { useState, type ReactNode } from "react"
 import { Search } from "lucide-react"
 
-import { ArrayField } from "@/registry/new-york-v4/pro/pro-fields/array-field"
-import { Captcha } from "@/registry/new-york-v4/pro/pro-fields/captcha"
-import { Cascader } from "@/registry/new-york-v4/pro/pro-fields/cascader"
-import { Checkbox } from "@/registry/new-york-v4/pro/pro-fields/checkbox"
-import { DatePicker } from "@/registry/new-york-v4/pro/pro-fields/date-picker"
+import { ArrayField } from "@/registry/new-york-v4/pro/base/fields/array-field"
+import { Captcha } from "@/registry/new-york-v4/pro/base/fields/captcha"
+import { Cascader } from "@/registry/new-york-v4/pro/base/fields/cascader"
+import { Checkbox } from "@/registry/new-york-v4/pro/base/fields/checkbox"
+import { DatePicker } from "@/registry/new-york-v4/pro/base/fields/date-picker"
 import {
   DateRangePicker,
   type DateRangeValue,
-} from "@/registry/new-york-v4/pro/pro-fields/date-range-picker"
-import { DateTimePicker } from "@/registry/new-york-v4/pro/pro-fields/date-time-picker"
-import { Digit } from "@/registry/new-york-v4/pro/pro-fields/digit"
+} from "@/registry/new-york-v4/pro/base/fields/date-range-picker"
+import { DateTimePicker } from "@/registry/new-york-v4/pro/base/fields/date-time-picker"
+import { Digit } from "@/registry/new-york-v4/pro/base/fields/digit"
 import {
   DigitRange,
   type DigitRangeValue,
-} from "@/registry/new-york-v4/pro/pro-fields/digit-range"
-import { Input } from "@/registry/new-york-v4/pro/pro-fields/input"
-import { Money } from "@/registry/new-york-v4/pro/pro-fields/money"
-import { ObjectField } from "@/registry/new-york-v4/pro/pro-fields/object-field"
-import { Password } from "@/registry/new-york-v4/pro/pro-fields/password"
-import { Radio } from "@/registry/new-york-v4/pro/pro-fields/radio"
-import { Rate } from "@/registry/new-york-v4/pro/pro-fields/rate"
-import { Segmented } from "@/registry/new-york-v4/pro/pro-fields/segmented"
-import { Select } from "@/registry/new-york-v4/pro/pro-fields/select"
-import { Slider } from "@/registry/new-york-v4/pro/pro-fields/slider"
-import { Switch } from "@/registry/new-york-v4/pro/pro-fields/switch"
-import { Textarea } from "@/registry/new-york-v4/pro/pro-fields/textarea"
-import { TimePicker } from "@/registry/new-york-v4/pro/pro-fields/time-picker"
-import { TreeSelect } from "@/registry/new-york-v4/pro/pro-fields/tree-select"
+} from "@/registry/new-york-v4/pro/base/fields/digit-range"
+import { Input } from "@/registry/new-york-v4/pro/base/fields/input"
+import { Money } from "@/registry/new-york-v4/pro/base/fields/money"
+import { ObjectField } from "@/registry/new-york-v4/pro/base/fields/object-field"
+import { Password } from "@/registry/new-york-v4/pro/base/fields/password"
+import { Radio } from "@/registry/new-york-v4/pro/base/fields/radio"
+import { Rate } from "@/registry/new-york-v4/pro/base/fields/rate"
+import { Segmented } from "@/registry/new-york-v4/pro/base/fields/segmented"
+import { Select } from "@/registry/new-york-v4/pro/base/fields/select"
+import { Slider } from "@/registry/new-york-v4/pro/base/fields/slider"
+import { Switch } from "@/registry/new-york-v4/pro/base/fields/switch"
+import { Textarea } from "@/registry/new-york-v4/pro/base/fields/textarea"
+import { TimePicker } from "@/registry/new-york-v4/pro/base/fields/time-picker"
+import { TreeSelect } from "@/registry/new-york-v4/pro/base/fields/tree-select"
 import {
   Upload,
   type UploadFile,
-} from "@/registry/new-york-v4/pro/pro-fields/upload"
+} from "@/registry/new-york-v4/pro/base/fields/upload"
 
 const roleOptions = [
   { label: "Admin", value: "admin" },
@@ -159,11 +159,11 @@ export default function ProFieldsDocsDemo() {
         <Money value={amount} onChange={setAmount} currency="$" />
       </FieldPreview>
       <FieldPreview title="Select">
-          <Select
-            value={role}
-            onChange={(next) => setRole(typeof next === "string" ? next : undefined)}
-            options={roleOptions}
-            allowClear
+        <Select
+          value={role}
+          onChange={(next) => setRole(typeof next === "string" ? next : undefined)}
+          options={roleOptions}
+          allowClear
         />
       </FieldPreview>
       <FieldPreview title="Checkbox">
@@ -246,7 +246,7 @@ export default function ProFieldsDocsDemo() {
           maxCount={1}
           multiple={false}
           placeholder="Upload contract"
-          variant="compact"
+          presentation="compact"
         />
       </FieldPreview>
       <FieldPreview title="Upload URL">
@@ -256,15 +256,14 @@ export default function ProFieldsDocsDemo() {
           multiple={false}
           placeholder="Paste image URL or upload"
           value={imageUrlFiles}
-          mode="input"
-          variant="compact"
+          presentation="input"
           onChange={setImageUrlFiles}
         />
       </FieldPreview>
       <FieldPreview title="Captcha">
         <Captcha
           buttonText="Send code"
-          countdown={30}
+          countdown={30000}
           placeholder="Verification code"
         />
       </FieldPreview>
@@ -277,7 +276,7 @@ export default function ProFieldsDocsDemo() {
           renderItem={(item, _index, { update }) => (
             <Input
               value={item.name}
-              onChange={(event) => update({ name: event.target.value })}
+              onChange={(event) => update({ ...item, name: event.target.value })}
             />
           )}
         />

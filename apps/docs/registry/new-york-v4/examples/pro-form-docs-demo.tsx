@@ -3,7 +3,7 @@
 import { createForm } from "@formily/core"
 import { useMemo } from "react"
 
-import { ProForm } from "@/registry/new-york-v4/pro/pro-form/index"
+import { ProForm } from "@/registry/new-york-v4/pro/form/index"
 
 const schema = {
   type: "object",

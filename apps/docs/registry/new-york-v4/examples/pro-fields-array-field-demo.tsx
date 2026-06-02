@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 
-import { ArrayField } from "@/registry/new-york-v4/pro/pro-fields/array-field"
-import { Input } from "@/registry/new-york-v4/pro/pro-fields/input"
+import { ArrayField } from "@/registry/new-york-v4/pro/base/fields/array-field"
+import { Input } from "@/registry/new-york-v4/pro/base/fields/input"
 
 interface Contact {
   name: string
@@ -29,12 +29,12 @@ export default function ProFieldsArrayFieldDemo() {
             <Input
               placeholder="Name"
               value={item.name}
-              onChange={(e) => update({ name: e.target.value })}
+              onChange={(e) => update({ ...item, name: e.target.value })}
             />
             <Input
               placeholder="Email"
               value={item.email}
-              onChange={(e) => update({ email: e.target.value })}
+              onChange={(e) => update({ ...item, email: e.target.value })}
             />
           </div>
         )}

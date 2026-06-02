@@ -4,7 +4,7 @@ import { createForm } from '@formily/core'
 import { useField } from '@formily/react'
 import { observer } from '@formily/reactive-react'
 import { useMemo } from 'react'
-import { ProForm } from '@/registry/new-york-v4/pro/pro-form/index'
+import { ProForm } from '@/registry/new-york-v4/pro/form/index'
 
 // Enterprise-specific field: listens to the `type` field to conditionally show/hide
 const CompanyField = observer(() => {

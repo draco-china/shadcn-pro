@@ -1,4 +1,4 @@
-import { MarkdownViewer } from "@/registry/new-york-v4/pro/pro-viewer/markdown"
+import { MarkdownViewer } from "@/registry/new-york-v4/pro/viewer/markdown"
 
 const CONTENT = `# MarkdownViewer
 

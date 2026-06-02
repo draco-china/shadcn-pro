@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { Checkbox } from "@/registry/new-york-v4/pro/pro-fields/checkbox"
+import { Checkbox } from "@/registry/new-york-v4/pro/base/fields/checkbox"
 
 export default function ProFieldsCheckboxDemo() {
   const [checked, setChecked] = useState(true)

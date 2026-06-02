@@ -3,8 +3,8 @@
 import { createForm } from "@formily/core"
 import { Field, FormProvider } from "@formily/react"
 
-import { FormItem } from "@/registry/new-york-v4/pro/pro-form/form-item"
-import { FormilyCaptcha } from "@/registry/new-york-v4/pro/pro-form/formily-fields"
+import { FormItem } from "@/registry/new-york-v4/pro/form/form-item"
+import { FormilyCaptcha } from "@/registry/new-york-v4/pro/form/formily-fields"
 
 const form = createForm()
 
@@ -21,8 +21,8 @@ export default function ProFieldsCaptchaDemo() {
             {
               placeholder: "Enter verification code",
               buttonText: "Send code",
-              countdown: 30,
-              onRefresh: () => {},
+              countdown: 30000,
+              onSend: () => {},
             },
           ]}
         />

@@ -30,7 +30,11 @@ npx @draco-china/shadcn-pro@latest add html-viewer
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="html-viewer" title="components/pro/pro-viewer/html/index.tsx" />
+<ComponentSource name="html-viewer" title="components/pro/viewer/html/index.tsx" />
+
+Manual installs also need the sibling files used by the entry component:
+
+- `components/pro/viewer/html/classes.ts`
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -43,7 +47,7 @@ npx @draco-china/shadcn-pro@latest add html-viewer
 ## Usage
 
 ```tsx
-import { HtmlViewer } from '@/components/pro/pro-viewer/html'
+import { HtmlViewer } from '@/components/pro/viewer/html'
 
 export default function Example() {
   return (

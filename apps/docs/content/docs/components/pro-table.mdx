@@ -1,6 +1,6 @@
 ---
 title: ProTable
-description: Feature-rich data table with search, filtering, reset, sorting, density toggle, column visibility, and drag-to-sort — powered by TanStack Table and shadcn/ui.
+description: Feature-rich data table with search, filtering, reset, sorting, density toggle, column visibility, and drag-to-sort — powered by TanStack Table.
 ---
 
 <ComponentPreview name="pro-table-docs-demo" previewClassName="min-h-[460px]" />
@@ -29,12 +29,110 @@ npx @draco-china/shadcn-pro@latest add pro-table
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add @tanstack/react-table @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react
+bun add @tanstack/react-table @tanstack/match-sorter-utils @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react radix-ui
 ```
+
+<Step>Install or copy `pro-fields` and `pro-base`. The registry installer includes the private toolbar dependency automatically; fully manual copies also need `components/pro/base/toolbar/`.</Step>
+
+<Step>No additional shadcn/ui components are required.</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="pro-table" title="components/pro/pro-table/index.tsx" />
+<ComponentSource name="pro-table" title="components/pro/table/index.tsx" />
+
+Manual installs also need the sibling files used by the entry component:
+
+- `components/pro/table/types.ts`
+- `components/pro/table/types/column.ts`
+- `components/pro/table/types/state.ts`
+- `components/pro/table/types/table.ts`
+- `components/pro/table/types/toolbar.ts`
+- `components/pro/table/table/data-table.tsx`
+- `components/pro/table/table/request-table.tsx`
+- `components/pro/table/table/view.tsx`
+- `components/pro/table/table/view-bulk-actions.tsx`
+- `components/pro/table/table/view-header.tsx`
+- `components/pro/table/table/view-toolbar.tsx`
+- `components/pro/table/table/view-types.ts`
+- `components/pro/table/table/content.tsx`
+- `components/pro/table/table/content-frame.tsx`
+- `components/pro/table/table/classes.ts`
+- `components/pro/table/table/element-types.ts`
+- `components/pro/table/table/elements.tsx`
+- `components/pro/table/hooks/column-filter.ts`
+- `components/pro/table/hooks/ranked-row-model.ts`
+- `components/pro/table/hooks/use-table.ts`
+- `components/pro/table/hooks/use-table-instance.ts`
+- `components/pro/table/hooks/use-table-pagination.ts`
+- `components/pro/table/hooks/use-table-state-handlers.ts`
+- `components/pro/table/hooks/use-table-ui-state.ts`
+- `components/pro/table/hooks/use-table-view-state.ts`
+- `components/pro/table/hooks/use-table-drag-sort.ts`
+- `components/pro/table/hooks/use-table-column-state.ts`
+- `components/pro/table/hooks/use-table-columns.ts`
+- `components/pro/table/table/column-align.ts`
+- `components/pro/table/table/column-state.ts`
+- `components/pro/table/table/column-utils.ts`
+- `components/pro/table/table/drag-sort.ts`
+- `components/pro/table/table/pinning.ts`
+- `components/pro/table/table/pinning-offsets.ts`
+- `components/pro/table/table/pinning-observer.ts`
+- `components/pro/table/table/system-columns.ts`
+- `components/pro/table/table/state.ts`
+- `components/pro/table/table/empty-state.tsx`
+- `components/pro/table/table/empty-row.tsx`
+- `components/pro/table/table/skeleton.tsx`
+- `components/pro/table/table/sortable-row.tsx`
+- `components/pro/table/table/header.tsx`
+- `components/pro/table/table/header-cell.tsx`
+- `components/pro/table/table/sort-indicator.tsx`
+- `components/pro/table/table/body.tsx`
+- `components/pro/table/table/body-cell.tsx`
+- `components/pro/table/table/body-row.tsx`
+- `components/pro/table/table/body-rows.tsx`
+- `components/pro/table/table/columns.tsx`
+- `components/pro/table/toolbar/index.tsx`
+- `components/pro/table/toolbar/classes.ts`
+- `components/pro/table/toolbar/auto-filter-cell.tsx`
+- `components/pro/table/toolbar/column-settings/button.tsx`
+- `components/pro/table/toolbar/column-settings/content.tsx`
+- `components/pro/table/toolbar/column-settings/header.tsx`
+- `components/pro/table/toolbar/column-settings/item.tsx`
+- `components/pro/table/toolbar/column-settings/list.tsx`
+- `components/pro/table/toolbar/column-settings/pinning-toggle.tsx`
+- `components/pro/table/toolbar/column-settings/use-column-settings-drag.ts`
+- `components/pro/table/toolbar/column-settings/utils.ts`
+- `components/pro/table/toolbar/columns-item.tsx`
+- `components/pro/table/toolbar/density-item.tsx`
+- `components/pro/table/toolbar/filter-items.tsx`
+- `components/pro/table/toolbar/left-items.tsx`
+- `components/pro/table/toolbar/refresh-item.tsx`
+- `components/pro/table/toolbar/reset-item.tsx`
+- `components/pro/table/toolbar/right-items.tsx`
+- `components/pro/table/toolbar/search-item.tsx`
+- `components/pro/table/toolbar/types.ts`
+- `components/pro/table/toolbar/utils.ts`
+- `components/pro/table/toolbar/bulk-actions/index.tsx`
+- `components/pro/table/toolbar/bulk-actions/keyboard.ts`
+- `components/pro/table/toolbar/bulk-actions/summary.tsx`
+- `components/pro/table/toolbar/bulk-actions/use-announcement.ts`
+- `components/pro/table/pagination/index.tsx`
+- `components/pro/table/pagination/classes.ts`
+- `components/pro/table/pagination/elements.tsx`
+- `components/pro/table/pagination/navigation.tsx`
+- `components/pro/table/pagination/navigation-control.tsx`
+- `components/pro/table/pagination/navigation-link.tsx`
+- `components/pro/table/pagination/page-range.tsx`
+- `components/pro/table/pagination/page-size.tsx`
+- `components/pro/table/pagination/quick-jump.tsx`
+- `components/pro/table/pagination/total.tsx`
+- `components/pro/table/pagination/types.ts`
+- `components/pro/table/pagination/utils.ts`
+- `components/pro/table/hooks/url-state/config.ts`
+- `components/pro/table/hooks/url-state/parse.ts`
+- `components/pro/table/hooks/url-state/patch.ts`
+- `components/pro/table/hooks/url-state/types.ts`
+- `components/pro/table/hooks/use-pro-table-url-state.ts`
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -47,7 +145,7 @@ bun add @tanstack/react-table @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
 ## Usage
 
 ```tsx
-import { ProTable } from "@/components/pro/pro-table"
+import { ProTable } from "@/components/pro/table"
 
 const columns = [
   {
@@ -104,7 +202,7 @@ const columns = [
 
 Add `meta.search` or `meta.filter` to columns — ProTable **automatically** renders the toolbar search input and `FacetedFilter` controls, maps `value → label` in cells, and shows a **Reset** button whenever any filter is active.
 
-- Default filter mode is **single-select**.
+- Default filter behavior is **single-select**.
 - Set `meta.filter.multiple: true` for multi-select filtering.
 
 <ComponentPreview name="pro-table-filter-demo" previewClassName="min-h-[460px]" />
@@ -162,7 +260,11 @@ const columns: ColumnDef<User>[] = [
 />
 ```
 
-`meta.search` writes to the same column filter state as the rest of the toolbar. If you do not want to put search config in column meta, pass `toolbar={{ search: { columnId: "name", placeholder: "Search name..." } }}` instead.
+`meta.search` writes to the same column filter state as the rest of the toolbar. Search columns use `@tanstack/match-sorter-utils` by default for fuzzy matching and rank-aware sorting in client-side tables. If you do not want to put search config in column meta, pass `toolbar={{ search: { columnId: "name", placeholder: "Search name..." } }}` instead; the target column gets the same default fuzzy behavior.
+
+When `request` is provided, ProTable switches to manual filtering and sorting. Fuzzy matching is not run on the client; search/sort state is passed through to your request handler.
+
+Internally ProTable dispatches from props: local `data` uses the client-side implementation, while `request` uses the server-side implementation. No extra prop is required.
 
 Filtering, searching, and sorting reset pagination to the first page automatically.
 
@@ -253,13 +355,13 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `toolbar.search`        | `false \| string \| { columnId, placeholder? }` | from `columns[].meta.search` | Explicit toolbar search config. Writes to the target column filter.                                  |
 | `toolbar.filters`       | `ProToolbarItem<ProTableRenderContext<T>>[]` | — | Left-side custom toolbar controls, such as search boxes, date filters, and business filters. |
 | `toolbar.options`       | `false \| { refresh?, density?, columns? }` | `{ density: true, columns: true }` | Built-in toolbar options, similar to Ant Design ProTable.                                           |
-| `toolbar.actions`       | `ProTableAction<T>[]`                 | —                            | Configured `ProToolbar` action items rendered on the right side. |
+| `toolbar.actions`       | `ProTableAction<T>[]`                 | —                            | Configured toolbar action items rendered on the right side. |
 | `toolbar.labels`        | `ProTableToolbarLabels`               | English defaults             | Override toolbar text such as search, reset, refresh, density, and columns. |
 | `bulkToolbar`           | `false \| { entityName?, actions? }`  | —                            | Bulk toolbar config shown when rows are selected.                                                              |
-| `pagination`            | `false \| { pageSizeOptions?, labels? }` | enabled                   | Pagination config. Set to `false` to hide pagination. `labels` overrides pagination text for i18n.                                                          |
+| `pagination`            | `false \| { pageSizeOptions?, showTotal?, showQuickJump?, labels? }` | enabled                   | Pagination config. Set to `false` to hide pagination. `showTotal` and `showQuickJump` control secondary pagination UI. `labels` overrides pagination text for i18n. |
 | `dragSort`              | `false \| { rowKey?, onDragSortEnd? }` | —                            | Drag sort config. Pass an object to enable row drag sorting.                                                   |
 | `loading`               | `boolean \| { rows? }`                | `false`                      | Shows a skeleton loading state. Object form configures skeleton rows.                                           |
-| `empty`                 | `ReactNode \| { text?, icon? }`       | `'No data'`                  | Empty state content. Object form configures text and icon together.                                             |
+| `empty`                 | `{ text?, icon? }`                    | `{ text: 'No data' }`        | Empty state config for text and icon.                                                                          |
 | `layout`                | `'full' \| 'auto'`                    | `'full'`                     | Full layout keeps pagination at the bottom with a spacer; the table itself still follows content height. |
 | `table`                 | `{ stickyHeader?, pinning? }`         | `{ stickyHeader: true }`     | Table behavior config. `pinning` can be controlled with `{ value, onChange(value) }` or disabled with `false`.  |
 | `className`             | `string`                              | —                            | Additional className for the outer container.                                                                  |
@@ -283,7 +385,7 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 Use URL search params as initial table state and sync later table state changes back to the URL — framework-agnostic via a `search` + `navigate` interface (compatible with TanStack Router, Next.js App Router, React Router, etc.).
 
 ```tsx
-import { useProTableUrlState } from '@/components/pro/pro-table/use-pro-table-url-state'
+import { useProTableUrlState } from '@/components/pro/table/hooks/use-pro-table-url-state'
 
 const urlState = useProTableUrlState({
   search: { page: 2, filter: 'alice' },  // current URL search params
@@ -321,9 +423,9 @@ const urlState = useProTableUrlState({
 
 import { useCallback, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import type { ColumnFilterConfig } from '@/components/pro/pro-table/use-pro-table-url-state'
-import { useProTableUrlState } from '@/components/pro/pro-table/use-pro-table-url-state'
-import { ProTable } from '@/components/pro/pro-table'
+import type { ColumnFilterConfig } from '@/components/pro/table/hooks/use-pro-table-url-state'
+import { useProTableUrlState } from '@/components/pro/table/hooks/use-pro-table-url-state'
+import { ProTable } from '@/components/pro/table'
 
 const columnFilters: ColumnFilterConfig[] = [
   { columnId: 'name', searchKey: 'name' },
@@ -334,13 +436,20 @@ export default function UsersTable() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const search = useMemo(() => Object.fromEntries(searchParams.entries()), [searchParams])
+  const search = useMemo(() => {
+    const nextSearch: Record<string, string> = {}
+    for (const [key, value] of searchParams.entries()) {
+      nextSearch[key] = value
+    }
+    return nextSearch
+  }, [searchParams])
   const navigate = useCallback(
     ({ search: next }) => {
       const params = new URLSearchParams()
       const resolved = typeof next === 'function' ? next(search) : next
-      for (const [k, v] of Object.entries(resolved)) {
-        if (v !== undefined) params.set(k, String(v))
+      for (const key in resolved) {
+        const value = resolved[key]
+        if (value !== undefined) params.set(key, String(value))
       }
       router.push(`?${params.toString()}`)
     },

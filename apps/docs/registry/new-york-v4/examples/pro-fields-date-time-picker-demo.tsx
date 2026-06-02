@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { DateTimePicker } from "@/registry/new-york-v4/pro/pro-fields/date-time-picker"
+import { DateTimePicker } from "@/registry/new-york-v4/pro/base/fields/date-time-picker"
 
 export default function ProFieldsDateTimePickerDemo() {
   const [value, setValue] = useState<Date | undefined>(

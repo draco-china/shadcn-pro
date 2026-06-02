@@ -226,7 +226,7 @@ function getFileTarget(file: RegistryItemFile) {
     }
 
     if (file.type === 'registry:ui') {
-      target = `components/ui/${fileName}`
+      target = getProComponentTarget(sourcePath) ?? `components/ui/${fileName}`
     }
 
     if (file.type === 'registry:hook') {
@@ -239,6 +239,17 @@ function getFileTarget(file: RegistryItemFile) {
   }
 
   return target ?? ''
+}
+
+function getProComponentTarget(sourcePath: string) {
+  const marker = 'registry/new-york-v4/pro/'
+  const index = sourcePath.indexOf(marker)
+
+  if (index === -1) {
+    return null
+  }
+
+  return `components/pro/${sourcePath.slice(index + marker.length)}`
 }
 
 function fixFilePaths(files: RegistryItemFile[]) {

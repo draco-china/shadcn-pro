@@ -1,5 +1,5 @@
 import { Badge } from "@/registry/new-york-v4/ui/badge"
-import { ProDescriptions } from "@/registry/new-york-v4/pro/pro-descriptions/index"
+import { ProDescriptions } from "@/registry/new-york-v4/pro/descriptions/index"
 
 export default function ProDescriptionsDocsDemo() {
   return (

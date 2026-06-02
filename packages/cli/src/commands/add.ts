@@ -2,7 +2,47 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import * as p from '@clack/prompts'
 import pc from 'picocolors'
+import type { Registry, RegistryComponent } from '../registry.js'
 import { fetchFile, fetchRegistry, loadConfig } from '../registry.js'
+
+function unique<T>(values: T[]) {
+  return [...new Set(values)]
+}
+
+function resolveComponentDependencies(
+  registry: Registry,
+  component: RegistryComponent,
+  visited = new Set<string>(),
+): {
+  components: RegistryComponent[]
+  shadcnDependencies: string[]
+} {
+  if (visited.has(component.name)) {
+    return { components: [], shadcnDependencies: [] }
+  }
+
+  visited.add(component.name)
+
+  const components: RegistryComponent[] = []
+  const shadcnDependencies: string[] = []
+
+  for (const dependencyName of component.registryDependencies ?? []) {
+    const dependencyComponent = registry.components.find((item) => item.name === dependencyName)
+    if (!dependencyComponent) {
+      shadcnDependencies.push(dependencyName)
+      continue
+    }
+
+    const resolved = resolveComponentDependencies(registry, dependencyComponent, visited)
+    components.push(...resolved.components, dependencyComponent)
+    shadcnDependencies.push(...resolved.shadcnDependencies)
+  }
+
+  return {
+    components,
+    shadcnDependencies,
+  }
+}
 
 /**
  * Add a component to the project.
@@ -33,6 +73,10 @@ export async function add(componentName: string, options: { path?: string }): Pr
     p.log.error(`Component "${componentName}" not found. Run: npx @draco-china/shadcn-pro list`)
     process.exit(1)
   }
+  if (component.private) {
+    p.log.error(`Component "${componentName}" is internal and cannot be installed directly.`)
+    process.exit(1)
+  }
 
   // Handle variants (e.g. editor engine selection)
   const selectedVariants: Record<string, string> = {}
@@ -54,15 +98,19 @@ export async function add(componentName: string, options: { path?: string }): Pr
     }
   }
 
+  const resolvedDependencies = resolveComponentDependencies(registry, component)
+  const componentsToInstall = unique([...resolvedDependencies.components, component])
+
   // Collect all files to download
-  let filesToDownload = [...component.files]
-  let depsToInstall = [...(component.dependencies ?? [])]
+  let filesToDownload = unique(componentsToInstall.flatMap((item) => item.files))
+  let depsToInstall = unique(componentsToInstall.flatMap((item) => item.dependencies ?? []))
+  const shadcnDependencies = unique(resolvedDependencies.shadcnDependencies)
 
   for (const [variantKey, selectedValue] of Object.entries(selectedVariants)) {
     const variantDef = component.variants?.[variantKey]?.[selectedValue]
     if (variantDef) {
-      filesToDownload = [...filesToDownload, ...variantDef.files]
-      depsToInstall = [...depsToInstall, ...variantDef.dependencies]
+      filesToDownload = unique([...filesToDownload, ...variantDef.files])
+      depsToInstall = unique([...depsToInstall, ...variantDef.dependencies])
     }
   }
 
@@ -72,9 +120,9 @@ export async function add(componentName: string, options: { path?: string }): Pr
     p.log.info(pc.dim(`  bun add ${depsToInstall.join(' ')}`))
   }
 
-  if (component.registryDependencies?.length) {
+  if (shadcnDependencies.length) {
     p.log.info(pc.dim('shadcn/ui components required:'))
-    p.log.info(pc.dim(`  npx shadcn add ${component.registryDependencies.join(' ')}`))
+    p.log.info(pc.dim(`  npx shadcn add ${shadcnDependencies.join(' ')}`))
   }
 
   const confirm = await p.confirm({
@@ -95,7 +143,7 @@ export async function add(componentName: string, options: { path?: string }): Pr
       s.stop(`Failed to fetch ${file}`)
       process.exit(1)
     }
-    const destPath = path.join(outDir, file.replace('components/', ''))
+    const destPath = path.join(outDir, file)
     mkdirSync(path.dirname(destPath), { recursive: true })
     writeFileSync(destPath, content)
   }

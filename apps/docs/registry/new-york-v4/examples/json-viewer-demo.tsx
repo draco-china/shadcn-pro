@@ -1,6 +1,6 @@
 'use client'
 
-import { CodeViewer } from '@/registry/new-york-v4/pro/pro-viewer/code'
+import { CodeViewer } from '@/registry/new-york-v4/pro/viewer/code'
 
 const SAMPLE_DATA = {
   name: 'shadcn-pro',

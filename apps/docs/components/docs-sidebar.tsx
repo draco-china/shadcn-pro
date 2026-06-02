@@ -24,7 +24,6 @@ const TOP_LEVEL_SECTIONS = [
 
 const COMPONENTS = [
   { name: 'ProBase', href: '/docs/components/pro-base' },
-  { name: 'ProToolbar', href: '/docs/components/pro-toolbar' },
   { name: 'ProDescriptions', href: '/docs/components/pro-descriptions' },
   { name: 'ProEditor', href: '/docs/components/pro-editor' },
   { name: 'ProFields', href: '/docs/components/pro-fields' },

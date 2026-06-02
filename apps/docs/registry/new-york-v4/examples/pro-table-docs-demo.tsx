@@ -2,7 +2,7 @@
 
 import type { ColumnDef } from "@tanstack/react-table"
 
-import { ProTable } from "@/registry/new-york-v4/pro/pro-table/index"
+import { ProTable } from "@/registry/new-york-v4/pro/table/index"
 import { Badge } from "@/registry/new-york-v4/ui/badge"
 
 type User = {

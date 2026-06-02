@@ -3,7 +3,7 @@
 import { createForm } from '@formily/core'
 import { useMemo, useState } from 'react'
 
-import { ProForm, SchemaField } from '@/registry/new-york-v4/pro/pro-form/index'
+import { ProForm, SchemaField } from '@/registry/new-york-v4/pro/form/index'
 
 export default function ProFormDemo() {
   const form = useMemo(() => createForm(), [])
@@ -246,7 +246,6 @@ export default function ProFormDemo() {
             title="Daily Standup"
             x-decorator="FormItem"
             x-component="TimePicker"
-            x-component-props={{ placeholder: 'Pick a time' }}
           />
         </SchemaField.Void>
 

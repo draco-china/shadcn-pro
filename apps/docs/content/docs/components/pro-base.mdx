@@ -7,18 +7,89 @@ description: Shared low-level primitives used by Pro components.
 
 ## Installation
 
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
 ```bash
 npx @draco-china/shadcn-pro@latest add pro-base
 ```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies.</Step>
+
+```bash
+bun add class-variance-authority cmdk lucide-react radix-ui
+```
+
+<Step>No additional shadcn/ui components are required.</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="pro-base" title="components/pro/base/button/index.tsx" />
+
+Manual installs also need the sibling files used by the entry component:
+
+- `components/pro/base/hooks/use-copy.ts`
+- `components/pro/base/hooks/use-composed-ref.ts`
+- `components/pro/base/hooks/use-fullscreen.ts`
+- `components/pro/base/hooks/use-countdown.ts`
+- `components/pro/base/hooks/use-faceted-filter.ts`
+- `components/pro/base/utils/react-node.ts`
+- `components/pro/base/badge/index.tsx`
+- `components/pro/base/badge/variants.ts`
+- `components/pro/base/button/classes.ts`
+- `components/pro/base/button/index.tsx`
+- `components/pro/base/button/variants.ts`
+- `components/pro/base/button/tooltip.tsx`
+- `components/pro/base/button/copy.tsx`
+- `components/pro/base/button/fullscreen.tsx`
+- `components/pro/base/button/refresh.tsx`
+- `components/pro/base/label/classes.ts`
+- `components/pro/base/label/index.tsx`
+- `components/pro/base/separator/classes.ts`
+- `components/pro/base/separator/index.tsx`
+- `components/pro/base/command-menu/classes.ts`
+- `components/pro/base/command-menu/index.tsx`
+- `components/pro/base/command-menu/types.ts`
+- `components/pro/base/dropdown-menu/classes.ts`
+- `components/pro/base/dropdown-menu/index.tsx`
+- `components/pro/base/dropdown-menu/types.ts`
+- `components/pro/base/filter/faceted-filter/classes.ts`
+- `components/pro/base/filter/faceted-filter/index.tsx`
+- `components/pro/base/filter/faceted-filter/options.tsx`
+- `components/pro/base/filter/faceted-filter/trigger.tsx`
+- `components/pro/base/filter/faceted-filter/types.ts`
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { Copy, RefreshCw } from "lucide-react"
-import { ProButton } from "@/components/pro/pro-base"
+import { CopyButton } from "@/components/pro/base/button/copy"
+import { FullscreenButton } from "@/components/pro/base/button/fullscreen"
+import { RefreshButton } from "@/components/pro/base/button/refresh"
+import { TooltipButton } from "@/components/pro/base/button/tooltip"
 
-<ProButton
-  icon={<Copy />}
+<CopyButton
+  prefix={<Copy />}
   tooltip="Copy link"
   copy={{
     text: () => window.location.href,
@@ -26,34 +97,31 @@ import { ProButton } from "@/components/pro/pro-base"
     error: "Copy failed",
   }}
 />
+
+<FullscreenButton fullscreen={{ value: false }} />
 ```
 
-`ProButton` centralizes Button + Tooltip + loading + copy feedback for higher-level Pro components. Copy behavior is configured through the `copy` object. When copy succeeds, the icon temporarily changes to a green check; failed copy shows an error icon and error tooltip.
+`ProButton` owns the shadcn-compatible button variants and adds prefix, suffix, and loading slots without taking over action logic. `TooltipButton` adds tooltip composition, `CopyButton` adds copy feedback, `RefreshButton` standardizes refresh actions, and `FullscreenButton` standardizes fullscreen toggle presentation on top of it. Copy success temporarily changes the prefix to a green check; failed copy shows an error prefix and tooltip.
 
-`useProFullscreen` centralizes controlled/uncontrolled fullscreen behavior for components such as editors, viewers, previews, and panels.
+`useFullscreen` lives in `base/hooks/use-fullscreen` and centralizes controlled/uncontrolled fullscreen behavior for components such as editors, viewers, previews, and panels.
 
 ## Examples
 
 ### Async Action
 
 ```tsx
-<ProButton
-  icon={<RefreshCw />}
-  tooltip="Refresh"
-  loading={isRefreshing}
-  onClick={() => refresh()}
->
+<RefreshButton tooltip="Refresh" loading={isRefreshing} onClick={() => refresh()}>
   Refresh
-</ProButton>
+</RefreshButton>
 ```
 
-`onClick` can be sync or async. Sync handlers run as normal. Promise-like handlers automatically enter a temporary loading state and ignore repeated clicks until settled.
+`ProButton` and `RefreshButton` do not manage async click state. Pass `loading` explicitly when an action is pending.
 
 ### Copy
 
 ```tsx
-<ProButton
-  icon={<Copy />}
+<CopyButton
+  prefix={<Copy />}
   tooltip="Copy API key"
   copy={{
     text: apiKey,
@@ -66,7 +134,8 @@ import { ProButton } from "@/components/pro/pro-base"
 ### Fullscreen
 
 ```tsx
-import { useProFullscreen } from "@/components/pro/pro-base"
+import { FullscreenButton } from "@/components/pro/base/button/fullscreen"
+import { useFullscreen } from "@/components/pro/base/hooks/use-fullscreen"
 
 function PreviewPanel() {
   const {
@@ -75,15 +144,13 @@ function PreviewPanel() {
     isFixedFullscreen,
     isScreenFullscreen,
     setFullscreen,
-  } = useProFullscreen<HTMLDivElement>({
+  } = useFullscreen<HTMLDivElement>({
     mode: "screen",
   })
 
   return (
     <div ref={ref}>
-      <button onClick={() => setFullscreen(!fullscreen)}>
-        {fullscreen ? "Exit" : "Fullscreen"}
-      </button>
+      <FullscreenButton fullscreen={{ value: fullscreen, onChange: setFullscreen }} />
       <div>{isFixedFullscreen || isScreenFullscreen ? "Fullscreen" : "Inline"}</div>
     </div>
   )
@@ -92,20 +159,39 @@ function PreviewPanel() {
 
 ## API Reference
 
+### ProButton
+
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `icon` | `ReactNode` | — | Optional leading icon. |
-| `tooltip` | `ReactNode` | — | Tooltip content. If omitted, a normal shadcn `Button` is rendered without tooltip wrappers. |
-| `copy` | `{ text, success?, error?, resetDuration?, onSuccess?, onError? }` | — | Copy configuration. `text` can be a string or async function. |
+| `prefix` | `ReactNode` | — | Optional leading content. |
+| `suffix` | `ReactNode` | — | Optional trailing content. |
 | `loading` | `boolean` | `false` | Forces loading state. |
 | `disabled` | `boolean` | `false` | Disables the button. Loading also disables it. |
-| `onClick` | `(event) => void \| Promise<void>` | — | Click handler. Sync handlers are not wrapped in async state. |
+| `onClick` | `(event) => void` | — | Native click handler. Async state is controlled by passing `loading`. |
 | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type. Defaults to `button` to avoid accidental form submission. |
 | `children` | `ReactNode` | — | Button label/content. |
 
-All other props are passed to the underlying shadcn/ui `Button`.
+Other button HTML props are passed to the rendered button or slot child.
 
-### useProFullscreen
+### TooltipButton
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `tooltip` | `ReactNode` | — | Tooltip content. If omitted, only `ProButton` is rendered. |
+| `aria-label` | `string` | tooltip text | Accessible label. String tooltip content is used as a fallback. |
+
+`TooltipButton` also accepts `ProButton` props.
+
+### CopyButton
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `copy` | `{ text, success?, error?, resetDuration?, onSuccess?, onError? }` | — | Copy configuration. `text` can be a string or async function. |
+| `tooltip` | `ReactNode` | — | Default tooltip before feedback state is shown. |
+
+`CopyButton` also accepts `TooltipButton` props.
+
+### useFullscreen
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |

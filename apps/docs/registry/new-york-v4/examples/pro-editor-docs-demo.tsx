@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { ProEditor } from "@/registry/new-york-v4/pro/pro-editor/index"
+import { ProEditor } from "@/registry/new-york-v4/pro/editor/index"
 
 const INITIAL_CODE = `type Status = "draft" | "published"
 

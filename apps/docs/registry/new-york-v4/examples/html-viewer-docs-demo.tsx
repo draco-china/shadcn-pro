@@ -1,4 +1,4 @@
-import { HtmlViewer } from "@/registry/new-york-v4/pro/pro-viewer/html"
+import { HtmlViewer } from "@/registry/new-york-v4/pro/viewer/html"
 
 const HTML = `<!doctype html>
 <html>

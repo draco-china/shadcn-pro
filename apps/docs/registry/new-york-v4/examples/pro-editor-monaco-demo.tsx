@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ProEditor } from "@/registry/new-york-v4/pro/pro-editor/index"
+import { ProEditor } from "@/registry/new-york-v4/pro/editor/index"
 
 const INITIAL = `function fibonacci(n: number): number {
   if (n <= 1) return n

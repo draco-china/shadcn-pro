@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { Digit } from "@/registry/new-york-v4/pro/pro-fields/digit"
+import { Digit } from "@/registry/new-york-v4/pro/base/fields/digit"
 
 export default function ProFieldsDigitDemo() {
   const [value, setValue] = useState<number | undefined>(12)

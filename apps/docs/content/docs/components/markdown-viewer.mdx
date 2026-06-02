@@ -29,12 +29,35 @@ npx @draco-china/shadcn-pro@latest add markdown-viewer
 <Step>Install the following dependencies.</Step>
 
 ```bash
-bun add react-markdown shiki lucide-react remark-gfm remark-breaks remark-math remark-toc rehype-raw rehype-sanitize rehype-mathjax
+bun add react-markdown lucide-react remark-gfm remark-breaks remark-math remark-toc rehype-raw rehype-sanitize rehype-mathjax
 ```
 
-<Step>Copy and paste the MarkdownViewer file and the shared CodeViewer files into your project.</Step>
+<Step>Install or copy `pro-base` and `code-viewer` when installing manually.</Step>
 
-<ComponentSource name="markdown-viewer" title="components/pro/pro-viewer/markdown/index.tsx" />
+<Step>Copy and paste the MarkdownViewer files into your project.</Step>
+
+<ComponentSource name="markdown-viewer" title="components/pro/viewer/markdown/index.tsx" />
+
+Manual installs also need the sibling files used by the entry component:
+
+- `components/pro/viewer/markdown/alert-element.tsx`
+- `components/pro/viewer/markdown/alert-style.tsx`
+- `components/pro/viewer/markdown/alert.tsx`
+- `components/pro/viewer/markdown/block-elements.tsx`
+- `components/pro/viewer/markdown/classes.ts`
+- `components/pro/viewer/markdown/code.tsx`
+- `components/pro/viewer/markdown/components.tsx`
+- `components/pro/viewer/markdown/elements.tsx`
+- `components/pro/viewer/markdown/github-alerts.ts`
+- `components/pro/viewer/markdown/headings.tsx`
+- `components/pro/viewer/markdown/inline-elements.tsx`
+- `components/pro/viewer/markdown/math-code-blocks.ts`
+- `components/pro/viewer/markdown/plugins.ts`
+- `components/pro/viewer/markdown/sanitize-schema.ts`
+- `components/pro/viewer/markdown/table.tsx`
+- `components/pro/viewer/markdown/types.ts`
+- `components/pro/viewer/markdown/utils.ts`
+- `components/pro/viewer/markdown/viewer.tsx`
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -47,7 +70,7 @@ bun add react-markdown shiki lucide-react remark-gfm remark-breaks remark-math r
 ## Usage
 
 ```tsx
-import { MarkdownViewer } from "@/components/pro/pro-viewer/markdown"
+import { MarkdownViewer } from "@/components/pro/viewer/markdown"
 
 export default function Example() {
   return (

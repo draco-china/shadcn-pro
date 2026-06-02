@@ -1,4 +1,4 @@
-import { CodeViewer } from "@/registry/new-york-v4/pro/pro-viewer/code"
+import { CodeViewer } from "@/registry/new-york-v4/pro/viewer/code"
 
 const CODE = `export function cn(...classes: string[]) {
   return classes.filter(Boolean).join(" ")

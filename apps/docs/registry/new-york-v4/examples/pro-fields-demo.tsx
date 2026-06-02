@@ -1,38 +1,38 @@
 'use client'
 
-import { useState } from 'react'
+import { type ReactNode, useState } from 'react'
 
-import { ArrayField } from '@/registry/new-york-v4/pro/pro-fields/array-field'
-import { Captcha as Captcha } from '@/registry/new-york-v4/pro/pro-fields/captcha'
-import { Cascader } from '@/registry/new-york-v4/pro/pro-fields/cascader'
-import { Checkbox } from '@/registry/new-york-v4/pro/pro-fields/checkbox'
-import { DatePicker } from '@/registry/new-york-v4/pro/pro-fields/date-picker'
-import { DateRangePicker } from '@/registry/new-york-v4/pro/pro-fields/date-range-picker'
-import { DateTimePicker } from '@/registry/new-york-v4/pro/pro-fields/date-time-picker'
-import { Digit } from '@/registry/new-york-v4/pro/pro-fields/digit'
+import { ArrayField } from '@/registry/new-york-v4/pro/base/fields/array-field'
+import { Captcha } from '@/registry/new-york-v4/pro/base/fields/captcha'
+import { Cascader } from '@/registry/new-york-v4/pro/base/fields/cascader'
+import { Checkbox } from '@/registry/new-york-v4/pro/base/fields/checkbox'
+import { DatePicker } from '@/registry/new-york-v4/pro/base/fields/date-picker'
+import { DateRangePicker } from '@/registry/new-york-v4/pro/base/fields/date-range-picker'
+import { DateTimePicker } from '@/registry/new-york-v4/pro/base/fields/date-time-picker'
+import { Digit } from '@/registry/new-york-v4/pro/base/fields/digit'
 import {
   DigitRange,
   type DigitRangeValue,
-} from '@/registry/new-york-v4/pro/pro-fields/digit-range'
-import { FacetedFilter } from '@/registry/new-york-v4/pro/pro-fields/faceted-filter'
-import { Input } from '@/registry/new-york-v4/pro/pro-fields/input'
-import { Money } from '@/registry/new-york-v4/pro/pro-fields/money'
-import { ObjectField } from '@/registry/new-york-v4/pro/pro-fields/object-field'
-import { Password } from '@/registry/new-york-v4/pro/pro-fields/password'
-import { Radio } from '@/registry/new-york-v4/pro/pro-fields/radio'
-import { Rate } from '@/registry/new-york-v4/pro/pro-fields/rate'
-import { Segmented } from '@/registry/new-york-v4/pro/pro-fields/segmented'
-import { Select } from '@/registry/new-york-v4/pro/pro-fields/select'
-import { Slider } from '@/registry/new-york-v4/pro/pro-fields/slider'
-import { Switch } from '@/registry/new-york-v4/pro/pro-fields/switch'
-import { Textarea } from '@/registry/new-york-v4/pro/pro-fields/textarea'
-import { TimePicker } from '@/registry/new-york-v4/pro/pro-fields/time-picker'
-import { TreeSelect } from '@/registry/new-york-v4/pro/pro-fields/tree-select'
-import { Upload } from '@/registry/new-york-v4/pro/pro-fields/upload'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
+} from '@/registry/new-york-v4/pro/base/fields/digit-range'
+import { FacetedFilter } from '@/registry/new-york-v4/pro/base/filter/faceted-filter'
+import { Input } from '@/registry/new-york-v4/pro/base/fields/input'
+import { Money } from '@/registry/new-york-v4/pro/base/fields/money'
+import { ObjectField } from '@/registry/new-york-v4/pro/base/fields/object-field'
+import { Password } from '@/registry/new-york-v4/pro/base/fields/password'
+import { Radio } from '@/registry/new-york-v4/pro/base/fields/radio'
+import { Rate } from '@/registry/new-york-v4/pro/base/fields/rate'
+import { Segmented } from '@/registry/new-york-v4/pro/base/fields/segmented'
+import { Select } from '@/registry/new-york-v4/pro/base/fields/select'
+import { Slider } from '@/registry/new-york-v4/pro/base/fields/slider'
+import { Switch } from '@/registry/new-york-v4/pro/base/fields/switch'
+import { Textarea } from '@/registry/new-york-v4/pro/base/fields/textarea'
+import { TimePicker } from '@/registry/new-york-v4/pro/base/fields/time-picker'
+import { TreeSelect } from '@/registry/new-york-v4/pro/base/fields/tree-select'
+import { Upload } from '@/registry/new-york-v4/pro/base/fields/upload'
+import { ProLabel as Label } from '@/registry/new-york-v4/pro/base/label'
+import { ProSeparator as Separator } from '@/registry/new-york-v4/pro/base/separator'
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="space-y-4">
       <div>
@@ -44,7 +44,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   )
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label className="text-xs text-muted-foreground">{label}</Label>
@@ -127,7 +127,7 @@ export default function ProFieldsDemo() {
           <Captcha
             placeholder="Enter code"
             buttonText="Send code"
-            onRefresh={() => {}}
+            onSend={() => {}}
           />
         </Field>
       </Section>
@@ -216,7 +216,7 @@ export default function ProFieldsDemo() {
           <DateRangePicker value={dateRange} onChange={setDateRange} placeholder="Pick a range" />
         </Field>
         <Field label="Time Picker">
-          <TimePicker placeholder="Pick a time" />
+          <TimePicker />
         </Field>
       </Section>
 
@@ -280,12 +280,12 @@ export default function ProFieldsDemo() {
                 <Input
                   placeholder="Name"
                   value={item.name}
-                  onChange={(e) => update({ name: e.target.value })}
+                  onChange={(e) => update({ ...item, name: e.target.value })}
                 />
                 <Input
                   placeholder="Email"
                   value={item.email}
-                  onChange={(e) => update({ email: e.target.value })}
+                  onChange={(e) => update({ ...item, email: e.target.value })}
                 />
               </div>
             )}

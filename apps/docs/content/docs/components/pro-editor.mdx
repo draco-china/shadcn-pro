@@ -36,9 +36,40 @@ npx @draco-china/shadcn-pro@latest add pro-editor
 bun add @monaco-editor/react @shikijs/monaco monaco-editor shiki lucide-react
 ```
 
+<Step>Install or copy `pro-base`. The registry installer includes the private toolbar dependency automatically; fully manual copies also need `components/pro/base/toolbar/`.</Step>
+
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="pro-editor" title="components/pro/pro-editor/index.tsx" />
+<ComponentSource name="pro-editor" title="components/pro/editor/index.tsx" />
+
+Manual installs also need the sibling files used by the entry component:
+
+- `components/pro/editor/toolbar/index.tsx`
+- `components/pro/editor/toolbar/actions.tsx`
+- `components/pro/editor/toolbar/options.ts`
+- `components/pro/editor/toolbar/right-items.tsx`
+- `components/pro/editor/toolbar/types.ts`
+- `components/pro/editor/classes.ts`
+- `components/pro/editor/editor-content.tsx`
+- `components/pro/editor/editor-pane.tsx`
+- `components/pro/editor/editor-shell.tsx`
+- `components/pro/editor/editor-toolbar-section.tsx`
+- `components/pro/editor/preview-pane.tsx`
+- `components/pro/editor/use-editor-state.ts`
+- `components/pro/editor/use-editor-value.ts`
+- `components/pro/editor/use-monaco-editor.ts`
+- `components/pro/editor/preview-state.ts`
+- `components/pro/editor/layout.ts`
+- `components/pro/editor/core-types.ts`
+- `components/pro/editor/preview/scroll-sync.ts`
+- `components/pro/editor/preview/styles.ts`
+- `components/pro/editor/preview/types.ts`
+- `components/pro/editor/language/index.ts`
+- `components/pro/editor/types.ts`
+- `components/pro/editor/monaco/index.ts`
+- `components/pro/editor/monaco/shiki.ts`
+- `components/pro/editor/monaco/theme.ts`
+- `components/pro/editor/monaco/typescript.ts`
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -53,7 +84,7 @@ bun add @monaco-editor/react @shikijs/monaco monaco-editor shiki lucide-react
 ```tsx
 import { useState } from "react"
 
-import { ProEditor } from "@/components/pro/pro-editor"
+import { ProEditor } from "@/components/pro/editor"
 
 export default function EditorPage() {
   const [value, setValue] = useState("")
@@ -102,7 +133,7 @@ Hide the built-in fullscreen button with `toolbar={{ options: { fullscreen: fals
 ### Markdown
 
 ```tsx
-import { MarkdownViewer } from "@/components/pro/pro-viewer/markdown"
+import { MarkdownViewer } from "@/components/pro/viewer/markdown"
 
 <ProEditor
   language="markdown"
@@ -205,7 +236,7 @@ import { FocusIcon } from "lucide-react"
 />
 ```
 
-Toolbar actions use the same `ProToolbarItem` API as `ProToolbar`, so labels, icons, tooltips, hidden/disabled/loading state, menus, dropdown content, separators, copy behavior, and custom `render` items are available.
+Toolbar actions use the shared toolbar item shape, so labels, icons, tooltips, hidden/disabled/loading state, menus, separators, copy behavior, and custom `render` items are available without installing the internal toolbar directly.
 
 Use `toolbar.title` to customize the left title. Use `position: "before"` for custom right-side icon actions before the built-in format, copy, and fullscreen buttons; this is also the default when `position` is omitted. Use `position: "after"` for actions after the built-in buttons.
 
@@ -222,7 +253,7 @@ Use `toolbar.title` to customize the left title. Use `position: "before"` for cu
 | `theme`       | `'light' \| 'dark'`          | `'dark'`         | Editor theme. Internally maps to One Light / One Dark Pro syntax themes. |
 | `className`   | `string`                              | —              | Additional CSS class for the editor root. |
 | `height`      | `string \| number`                    | —              | Content height. When omitted, the editor fills its parent container. |
-| `toolbar`     | `false \| { actions?, options? }`     | —              | Toolbar config. Pass `false` to hide the toolbar; pass `options: false` to hide built-in buttons. |
+| `toolbar`     | `false \| { title?, actions?, options? }` | —           | Toolbar config. Pass `false` to hide the toolbar; pass `options: false` to hide built-in buttons. |
 | `preview`     | `{ component, mode?, defaultMode?, onModeChange? }` | — | External preview renderer and preview mode state; enables preview and split modes. |
 
 ### Toolbar Fullscreen

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { Radio } from "@/registry/new-york-v4/pro/pro-fields/radio"
+import { Radio } from "@/registry/new-york-v4/pro/base/fields/radio"
 
 export default function ProFieldsRadioDemo() {
   const [value, setValue] = useState("medium")

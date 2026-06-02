@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { DatePicker } from "@/registry/new-york-v4/pro/pro-fields/date-picker"
+import { DatePicker } from "@/registry/new-york-v4/pro/base/fields/date-picker"
 
 export default function ProFieldsDatePickerDemo() {
   const [value, setValue] = useState<Date | undefined>(

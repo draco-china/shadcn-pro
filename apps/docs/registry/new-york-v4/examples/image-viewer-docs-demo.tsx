@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { ImageViewer } from "@/registry/new-york-v4/pro/pro-viewer/image"
+import { ImageViewer } from "@/registry/new-york-v4/pro/viewer/image"
 
 const IMAGES = [
   "https://picsum.photos/seed/docs-viewer-1/800/600",

@@ -1,6 +1,6 @@
 ---
 title: ProInput
-description: Enhanced input component built on top of shadcn/ui Input — with prefix/suffix decorators, one-click clear, and password visibility toggle.
+description: Enhanced input component with prefix/suffix decorators, compact affix select conversion, one-click clear, and password visibility toggle.
 ---
 
 <ComponentPreview name="pro-input-docs-demo" previewClassName="min-h-[300px]" />
@@ -29,13 +29,34 @@ npx @draco-china/shadcn-pro@latest add pro-input
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add lucide-react
+bun add lucide-react radix-ui
 ```
 
-<Step>Copy and paste the following files into your project under `components/pro/pro-fields/`.</Step>
+<Step>No additional shadcn/ui components are required.</Step>
 
-- `components/pro/pro-fields/input.tsx`
-- `components/pro/pro-fields/password.tsx`
+<Step>Copy and paste the following files into your project under `components/pro/base/fields/`.</Step>
+
+- `components/pro/base/fields/input/index.tsx`
+- `components/pro/base/fields/input/affix.tsx`
+- `components/pro/base/fields/input/affix-types.ts`
+- `components/pro/base/fields/input/classes.ts`
+- `components/pro/base/fields/input/clear.ts`
+- `components/pro/base/fields/input/types.ts`
+- `components/pro/base/fields/input/affix-utils.ts`
+- `components/pro/base/fields/input/affix-value.ts`
+- `components/pro/base/fields/input/affix-select.tsx`
+- `components/pro/base/fields/input/use-affix-selection.ts`
+- `components/pro/base/fields/input/use-input-affix.ts`
+- `components/pro/base/fields/input/use-input-value.ts`
+- `components/pro/base/fields/password/index.tsx`
+- `components/pro/base/fields/password/types.ts`
+- `components/pro/base/fields/shared/field.tsx`
+- `components/pro/base/fields/shared/classes.ts`
+- `components/pro/base/fields/shared/change-event.ts`
+- `components/pro/base/fields/shared/select-classes.ts`
+- `components/pro/base/fields/shared/select-content.tsx`
+- `components/pro/base/fields/shared/select-item.tsx`
+- `components/pro/base/fields/shared/select.tsx`
 
 </Steps>
 
@@ -46,38 +67,92 @@ bun add lucide-react
 ## Usage
 
 ```tsx
-import { Input } from "@/components/pro/pro-fields/input"
-import { Password } from "@/components/pro/pro-fields/password"
+import { SearchIcon } from "lucide-react"
+
+import { Input } from "@/components/pro/base/fields/input"
+import { Password } from "@/components/pro/base/fields/password"
 
 export default function Demo() {
   return (
     <div className="flex flex-col gap-4">
       <Input placeholder="Basic input" />
       <Input prefix={<SearchIcon />} placeholder="With prefix icon" />
+      <Input
+        defaultValue="https://example.com"
+        prefix={{
+          defaultValue: "https://",
+          format: (value, option) =>
+            value.startsWith(option.value)
+              ? value.slice(option.value.length)
+              : value,
+          parse: (value, option) =>
+            option.value + value.replace(/^https?:\/\//, ""),
+          options: [
+            { label: "https://", value: "https://" },
+            { label: "http://", value: "http://" },
+          ],
+        }}
+        suffix={{
+          defaultValue: ".com",
+          format: (value, option) =>
+            value.toLowerCase().endsWith(option.value)
+              ? value.slice(0, -option.value.length)
+              : value,
+          parse: (value, option) =>
+            value.replace(/\.(com|cn|io)$/i, "") + option.value,
+          options: [
+            { label: ".com", value: ".com" },
+            { label: ".cn", value: ".cn" },
+            { label: ".io", value: ".io" },
+          ],
+        }}
+      />
       <Password placeholder="Password" />
     </div>
   )
 }
 ```
 
+Pass a React node to `prefix` or `suffix` for static content, or pass an object with `options` when the affix needs a compact dropdown. Use `format(value, option)` to convert the stored value into the visible input text, and `parse(inputValue, option)` to convert edited text back to the stored value. When the selected affix option changes, the current visible input text is parsed again with the new option and emitted through `onChange`.
+
 ## API Reference
 
-`Input` and `Password` preserve the native shadcn/ui input props except where noted below.
+`Input` and `Password` preserve native input props except where noted below.
 
 ### Input
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `prefix` | `ReactNode` | — | Content to render before the input (icon or text). |
-| `suffix` | `ReactNode` | — | Content to render after the input (icon or text). |
+| `prefix` | `ReactNode \| object` | — | Content or compact select config rendered before the input. |
+| `suffix` | `ReactNode \| object` | — | Content or compact select config rendered after the input. |
 | `allowClear` | `boolean` | `true` | Show a clear button when the input has a value. |
 | `onClear` | `() => void` | — | Called when the clear button is clicked. |
+
+### Affix Select Object
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Controlled selected option value. |
+| `defaultValue` | `string` | — | Initial selected option value. |
+| `options` | `object[]` | — | Dropdown options. |
+| `format` | `(value, option) => string` | — | Convert the stored input value to the visible value. |
+| `parse` | `(inputValue, option) => string` | — | Convert the visible input value back to the stored value. |
+| `onChange` | `(value, option) => void` | — | Called when the selected option changes. |
+| `ariaLabel` | `string` | — | Accessible label for the compact select. |
+| `className` | `string` | — | Additional className for the compact select. |
+
+### Affix Option Object
+
+| Prop | Type | Description |
+|---|---|---|
+| `label` | `ReactNode` | Option label. |
+| `value` | `string` | Option value. |
 
 ### Password
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `suffix` | `ReactNode` | — | Content rendered before the visibility toggle. |
-| `inputClassName` | `string` | — | CSS class passed to the inner shadcn Input when using `Password`. |
+| `suffix` | `ReactNode \| object` | — | Same suffix slot as `Input`; rendered before the visibility toggle. |
+| `inputClassName` | `string` | — | CSS class passed to the inner input control. |
 | `allowClear` | `boolean` | `true` | Show a clear button when the password has a value. |
 | `onClear` | `() => void` | — | Called when the clear button is clicked. |

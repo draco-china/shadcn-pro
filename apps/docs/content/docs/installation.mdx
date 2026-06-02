@@ -69,15 +69,11 @@ npx @draco-china/shadcn-pro@latest list
 Then add any component by name:
 
 ```bash
-npx @draco-china/shadcn-pro@latest add pro-fields
-```
-
-```bash
 npx @draco-china/shadcn-pro@latest add pro-base
 ```
 
 ```bash
-npx @draco-china/shadcn-pro@latest add pro-toolbar
+npx @draco-china/shadcn-pro@latest add pro-fields
 ```
 
 ```bash
@@ -101,12 +97,11 @@ Install the dependencies for the component you copy:
 | Component | Dependencies |
 | --- | --- |
 | `pro-base` | `lucide-react` |
-| `pro-toolbar` | `lucide-react` |
 | `pro-fields` | `@dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities date-fns lucide-react` |
 | `pro-form` | `@formily/core @formily/react @formily/reactive-react date-fns lucide-react` |
-| `pro-table` | `@tanstack/react-table @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react` |
+| `pro-table` | `@tanstack/react-table @tanstack/match-sorter-utils @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react` |
 | `pro-editor` | `@monaco-editor/react @shikijs/monaco monaco-editor shiki lucide-react` |
-| `pro-descriptions` | None |
+| `pro-descriptions` | `lucide-react` through `pro-base` |
 | `pro-input` | `lucide-react` |
 | `code-viewer` | `shiki lucide-react` |
 | `diff-viewer` | `diff shiki` |
@@ -122,29 +117,28 @@ bun add react-markdown shiki lucide-react remark-gfm remark-breaks remark-math r
 
 ### 2. Copy the component
 
-Browse the component source on GitHub and copy each component folder into your project. Prefer the registry installer because it also copies internal registry dependencies such as `pro-base` and `pro-toolbar`.
+Browse the component source on GitHub and copy each component folder into your project. Prefer the registry installer because it also copies shared Pro dependencies and internal registry dependencies such as `pro-toolbar`.
 
-- `ProBase` → `components/pro/pro-base/`
-- `ProToolbar` → `components/pro/pro-toolbar/`
-- `ProFields` → `components/pro/pro-fields/`
-- `ProForm` → `components/pro/pro-form/`
-- `ProTable` → `components/pro/pro-table/`
-- `ProEditor` → `components/pro/pro-editor/`
-- `ProDescriptions` → `components/pro/pro-descriptions/`
-- `CodeViewer` → `components/pro/pro-viewer/code/`
-- `DiffViewer` → `components/pro/pro-viewer/diff/`
-- `HtmlViewer` → `components/pro/pro-viewer/html/`
-- `ImageViewer` → `components/pro/pro-viewer/image/`
-- `MarkdownViewer` → `components/pro/pro-viewer/markdown/index.tsx` and `components/pro/pro-viewer/code/`
+- `ProBase` → `components/pro/base/`
+- `ProFields` → `components/pro/base/fields/`
+- `ProForm` → `components/pro/form/`
+- `ProTable` → `components/pro/table/`
+- `ProEditor` → `components/pro/editor/`
+- `ProDescriptions` → `components/pro/descriptions/` and `components/pro/base/`
+- `CodeViewer` → `components/pro/viewer/code/`
+- `DiffViewer` → `components/pro/viewer/diff/`
+- `HtmlViewer` → `components/pro/viewer/html/`
+- `ImageViewer` → `components/pro/viewer/image/`
+- `MarkdownViewer` → `components/pro/viewer/markdown/index.tsx` and `components/pro/viewer/code/`
 
-`ProInput` is a focused subset of ProFields. Copy `components/pro/pro-fields/input.tsx` and `components/pro/pro-fields/password.tsx`.
+`ProInput` is a focused subset of ProFields. Copy `components/pro/base/fields/input/`, `components/pro/base/fields/password/`, and the shared field helpers they import.
 
 ### 3. Import and use
 
 ```tsx
-import { FormilyInput } from "@/components/pro/pro-fields/input"
-import { ProForm } from "@/components/pro/pro-form"
-import { ProTable } from "@/components/pro/pro-table"
+import { Input } from "@/components/pro/base/fields/input"
+import { ProForm } from "@/components/pro/form"
+import { ProTable } from "@/components/pro/table"
 ```
 
 ## Standard Patterns

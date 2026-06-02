@@ -1,6 +1,6 @@
 'use client'
 
-import { HtmlViewer } from '@/registry/new-york-v4/pro/pro-viewer/html'
+import { HtmlViewer } from '@/registry/new-york-v4/pro/viewer/html'
 
 const DEMO_HTML = `<!DOCTYPE html>
 <html lang="en">

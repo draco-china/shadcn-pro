@@ -4,11 +4,11 @@ import { createForm } from "@formily/core"
 import { useMemo, useState } from "react"
 import { Badge } from "@/registry/new-york-v4/ui/badge"
 import { Button } from "@/registry/new-york-v4/ui/button"
-import { ProDescriptions } from "@/registry/new-york-v4/pro/pro-descriptions/index"
+import { ProDescriptions } from "@/registry/new-york-v4/pro/descriptions/index"
 import {
   ProForm,
   SchemaField,
-} from "@/registry/new-york-v4/pro/pro-form/index"
+} from "@/registry/new-york-v4/pro/form/index"
 
 interface UserData {
   name: string

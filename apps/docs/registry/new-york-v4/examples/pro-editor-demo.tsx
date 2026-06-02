@@ -3,11 +3,11 @@
 import { useState } from 'react'
 import { useTheme } from 'next-themes'
 import { Focus, RotateCcw } from 'lucide-react'
-import { ProEditor } from "@/registry/new-york-v4/pro/pro-editor/index"
+import { ProEditor } from "@/registry/new-york-v4/pro/editor/index"
 import type {
   EditorViewMode,
   PreviewProps,
-} from "@/registry/new-york-v4/pro/pro-editor/index"
+} from "@/registry/new-york-v4/pro/editor/index"
 
 const INITIAL_CODE = `import { useState } from "react"
 

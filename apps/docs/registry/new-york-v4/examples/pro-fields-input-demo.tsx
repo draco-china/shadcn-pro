@@ -2,7 +2,7 @@
 
 import { Search } from "lucide-react"
 
-import { Input } from "@/registry/new-york-v4/pro/pro-fields/input"
+import { Input } from "@/registry/new-york-v4/pro/base/fields/input"
 
 export default function ProFieldsInputDemo() {
   return (

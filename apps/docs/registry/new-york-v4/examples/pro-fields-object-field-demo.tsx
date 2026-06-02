@@ -1,9 +1,9 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/registry/new-york-v4/pro/pro-fields/input"
-import { ObjectField } from "@/registry/new-york-v4/pro/pro-fields/object-field"
-import { Select } from "@/registry/new-york-v4/pro/pro-fields/select"
+import { ProButton as Button } from "@/registry/new-york-v4/pro/base/button"
+import { Input } from "@/registry/new-york-v4/pro/base/fields/input"
+import { ObjectField } from "@/registry/new-york-v4/pro/base/fields/object-field"
+import { Select } from "@/registry/new-york-v4/pro/base/fields/select"
 
 export default function ProFieldsObjectFieldDemo() {
   return (

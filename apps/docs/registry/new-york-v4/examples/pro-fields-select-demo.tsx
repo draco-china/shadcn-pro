@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { Select } from "@/registry/new-york-v4/pro/pro-fields/select"
+import { Select } from "@/registry/new-york-v4/pro/base/fields/select"
 
 export default function ProFieldsSelectDemo() {
   const [value, setValue] = useState<string | undefined>("admin")

@@ -1,6 +1,6 @@
 "use client"
 
-import { Textarea } from "@/registry/new-york-v4/pro/pro-fields/textarea"
+import { Textarea } from "@/registry/new-york-v4/pro/base/fields/textarea"
 
 export default function ProFieldsTextareaDemo() {
   return (

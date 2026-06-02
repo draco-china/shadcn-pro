@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 
-import { FacetedFilter } from '@/registry/new-york-v4/pro/pro-fields/faceted-filter'
-import { Label } from '@/components/ui/label'
+import { FacetedFilter } from '@/registry/new-york-v4/pro/base/filter/faceted-filter'
+import { ProLabel as Label } from '@/registry/new-york-v4/pro/base/label'
 
 const statusOptions = [
   { label: 'Backlog', value: 'backlog' },

@@ -3,6 +3,7 @@ import path from 'node:path'
 
 export interface RegistryComponent {
   name: string
+  private?: boolean
   category: string
   description: string
   dependencies: string[]

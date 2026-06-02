@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { ModalForm } from '@/registry/new-york-v4/pro/pro-form/index'
+import { ProButton as Button } from '@/registry/new-york-v4/pro/base/button'
+import { ModalForm } from '@/registry/new-york-v4/pro/form/index'
 
 const schema = {
   type: 'object',

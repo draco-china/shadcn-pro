@@ -5,7 +5,7 @@ import { useState } from "react"
 import {
   DigitRange,
   type DigitRangeValue,
-} from "@/registry/new-york-v4/pro/pro-fields/digit-range"
+} from "@/registry/new-york-v4/pro/base/fields/digit-range"
 
 export default function ProFieldsDigitRangeDemo() {
   const [value, setValue] = useState<DigitRangeValue | undefined>({

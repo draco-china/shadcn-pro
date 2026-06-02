@@ -12,6 +12,16 @@ import { CATEGORIES } from '../lib/blocks-categories'
 
 const CWD = process.cwd() // apps/docs
 const OUT = path.join(CWD, 'lib/__blocks-generated__.ts')
+const REGISTRY_PATH = path.join(CWD, '../../packages/registry/registry.json')
+
+type RegistryComponent = {
+  private?: boolean
+  files?: string[]
+}
+
+type RegistryManifest = {
+  components: RegistryComponent[]
+}
 
 async function highlight(code: string, lang = 'tsx'): Promise<string> {
   return codeToHtml(code, {
@@ -44,6 +54,56 @@ function readFile(src: string): string {
   }
 }
 
+function readRegistry(): RegistryManifest {
+  return JSON.parse(fs.readFileSync(REGISTRY_PATH, 'utf-8')) as RegistryManifest
+}
+
+function proRegistryFiles(registry: RegistryManifest, includePrivate: boolean) {
+  return new Set(
+    registry.components
+      .filter((component) => includePrivate || !component.private)
+      .flatMap((component) => component.files ?? [])
+      .filter((file) => file.startsWith('pro/'))
+      .map((file) => file.replace(/^pro\//, '')),
+  )
+}
+
+function validateBlockSources() {
+  const registry = readRegistry()
+  const registeredProFiles = proRegistryFiles(registry, true)
+  const publicProFiles = proRegistryFiles(registry, false)
+  const blockProFiles = new Set<string>()
+  const errors: string[] = []
+
+  for (const category of CATEGORIES) {
+    for (const block of category.blocks) {
+      for (const file of block.files) {
+        const abs = path.isAbsolute(file.src) ? file.src : path.join(CWD, file.src)
+        if (!fs.existsSync(abs)) {
+          errors.push(`${block.name}: missing source ${file.src}`)
+        }
+
+        if (file.target.startsWith('examples/')) continue
+
+        blockProFiles.add(file.target)
+        if (!registeredProFiles.has(file.target)) {
+          errors.push(`${block.name}: ${file.target} is not registered in packages/registry`)
+        }
+      }
+    }
+  }
+
+  for (const file of publicProFiles) {
+    if (!blockProFiles.has(file)) {
+      errors.push(`public registry file is missing from blocks: ${file}`)
+    }
+  }
+
+  if (errors.length) {
+    throw new Error(`Blocks source validation failed:\n${errors.join('\n')}`)
+  }
+}
+
 function buildTree(files: { target: string }[]) {
   const root: unknown[] = []
   for (const file of files) {
@@ -65,6 +125,7 @@ function buildTree(files: { target: string }[]) {
 
 async function main() {
   console.log('Generating blocks data…')
+  validateBlockSources()
 
   const categories = await Promise.all(
     CATEGORIES.map(async (cat) => {

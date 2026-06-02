@@ -1,4 +1,4 @@
-import { DiffViewer } from "@/registry/new-york-v4/pro/pro-viewer/diff"
+import { DiffViewer } from "@/registry/new-york-v4/pro/viewer/diff"
 
 const OLD_CODE = `function total(items) {
   return items.length

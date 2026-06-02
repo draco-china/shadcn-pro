@@ -3,8 +3,8 @@
 import { createForm } from "@formily/core"
 import { Field, FormProvider } from "@formily/react"
 
-import { FormItem } from "@/registry/new-york-v4/pro/pro-form/form-item"
-import { FormilyUpload } from "@/registry/new-york-v4/pro/pro-form/formily-fields"
+import { FormItem } from "@/registry/new-york-v4/pro/form/form-item"
+import { FormilyUpload } from "@/registry/new-york-v4/pro/form/formily-fields"
 
 const form = createForm()
 
@@ -37,7 +37,7 @@ export default function ProFieldsUploadDemo() {
               multiple: false,
               maxCount: 1,
               placeholder: "Upload contract",
-              variant: "compact",
+              presentation: "compact",
             },
           ]}
         />
@@ -52,8 +52,7 @@ export default function ProFieldsUploadDemo() {
               multiple: false,
               maxCount: 1,
               placeholder: "Paste image URL or upload",
-              mode: "input",
-              variant: "compact",
+              presentation: "input",
             },
           ]}
         />

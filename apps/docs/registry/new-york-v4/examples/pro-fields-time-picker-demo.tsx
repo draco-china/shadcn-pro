@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { TimePicker } from "@/registry/new-york-v4/pro/pro-fields/time-picker"
+import { TimePicker } from "@/registry/new-york-v4/pro/base/fields/time-picker"
 
 export default function ProFieldsTimePickerDemo() {
   const [value, setValue] = useState<string | undefined>("09:30:00")

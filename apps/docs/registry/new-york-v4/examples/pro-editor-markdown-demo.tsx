@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { ProEditor } from "@/registry/new-york-v4/pro/pro-editor/index"
-import type { PreviewProps } from "@/registry/new-york-v4/pro/pro-editor/index"
-import { MarkdownViewer } from "@/registry/new-york-v4/pro/pro-viewer/markdown"
+import { ProEditor } from "@/registry/new-york-v4/pro/editor/index"
+import type { PreviewProps } from "@/registry/new-york-v4/pro/editor/index"
+import { MarkdownViewer } from "@/registry/new-york-v4/pro/viewer/markdown"
 
 const INITIAL = `# Getting Started
 

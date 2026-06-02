@@ -15,7 +15,7 @@ export async function list(options: { category?: string }): Promise<void> {
     process.exit(1)
   }
 
-  let components = registry.components
+  let components = registry.components.filter((component) => !component.private)
   if (options.category) {
     components = components.filter((c) => c.category === options.category)
   }

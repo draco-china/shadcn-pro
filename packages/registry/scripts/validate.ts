@@ -3,6 +3,7 @@ import { dirname, join, normalize, resolve } from 'node:path'
 
 interface RegistryItem {
   name: string
+  private?: boolean
   dependencies?: string[]
   registryDependencies?: string[]
   files?: string[]
@@ -14,6 +15,7 @@ interface Registry {
 
 const registryRoot = resolve(import.meta.dir, '..')
 const repoRoot = resolve(registryRoot, '..', '..')
+const proRegistryRoot = join(registryRoot, 'pro')
 const docsRegistryRoot = join(repoRoot, 'apps/docs/registry/new-york-v4')
 const docsComponentsRoot = join(repoRoot, 'apps/docs/content/docs/components')
 const docsExamplesRoot = join(repoRoot, 'apps/docs/registry/new-york-v4/examples')
@@ -23,7 +25,6 @@ const registry = JSON.parse(readFileSync(join(registryRoot, 'registry.json'), 'u
 
 const expectedComponents = [
   'pro-base',
-  'pro-toolbar',
   'pro-fields',
   'pro-form',
   'pro-table',
@@ -48,8 +49,35 @@ const sourceExtensions = ['.ts', '.tsx', '.js', '.jsx']
 
 const components = registry.components
 const componentNames = components.map((component) => component.name)
+const publicComponents = components.filter((component) => !component.private)
+const publicComponentNames = publicComponents.map((component) => component.name)
 const fileOwners = new Map<string, Set<string>>()
 const failures: string[] = []
+const allowedDuplicateFileOwners = new Map(
+  [
+    'pro/base/fields/shared/field.tsx',
+    'pro/base/fields/shared/classes.ts',
+    'pro/base/fields/shared/change-event.ts',
+    'pro/base/fields/shared/select.tsx',
+    'pro/base/fields/shared/select-classes.ts',
+    'pro/base/fields/shared/select-content.tsx',
+    'pro/base/fields/shared/select-item.tsx',
+    'pro/base/fields/input/index.tsx',
+    'pro/base/fields/input/affix.tsx',
+    'pro/base/fields/input/affix-types.ts',
+    'pro/base/fields/input/classes.ts',
+    'pro/base/fields/input/clear.ts',
+    'pro/base/fields/input/types.ts',
+    'pro/base/fields/input/affix-utils.ts',
+    'pro/base/fields/input/affix-value.ts',
+    'pro/base/fields/input/affix-select.tsx',
+    'pro/base/fields/input/use-affix-selection.ts',
+    'pro/base/fields/input/use-input-affix.ts',
+    'pro/base/fields/input/use-input-value.ts',
+    'pro/base/fields/password/index.tsx',
+    'pro/base/fields/password/types.ts',
+  ].map((file) => [file, new Set(['pro-fields', 'pro-input'])]),
+)
 
 function fail(message: string) {
   failures.push(message)
@@ -114,6 +142,10 @@ function sourceFilesIn(dir: string, extensions: string[]) {
   return files
 }
 
+function registryRelativePath(filePath: string) {
+  return normalize(filePath).replace(`${normalize(registryRoot)}/`, '')
+}
+
 function includesDecoratedObjectFieldComponent(content: string) {
   return [...content.matchAll(/<SchemaField\.Object[\s\S]*?>/g)].some((match) => {
     const tag = match[0]
@@ -121,16 +153,26 @@ function includesDecoratedObjectFieldComponent(content: string) {
   })
 }
 
+function includesDuplicateClearPointerHandler(content: string) {
+  return (
+    (content.includes('onPointerDown={handleClear}') &&
+      content.includes('onClick={handleClear}')) ||
+    (content.includes('onPointerDown={onClear}') && content.includes('onClick={onClear}'))
+  )
+}
+
 for (const name of expectedComponents) {
-  if (!componentNames.includes(name)) fail(`Missing public component: ${name}`)
+  if (!publicComponentNames.includes(name)) fail(`Missing public component: ${name}`)
 }
 
 for (const name of removedComponents) {
   if (componentNames.includes(name)) fail(`Removed component is still public: ${name}`)
 }
 
-if (componentNames.length !== expectedComponents.length) {
-  fail(`Expected ${expectedComponents.length} public components, found ${componentNames.length}`)
+if (publicComponentNames.length !== expectedComponents.length) {
+  fail(
+    `Expected ${expectedComponents.length} public components, found ${publicComponentNames.length}`,
+  )
 }
 
 for (const component of components) {
@@ -142,6 +184,34 @@ for (const component of components) {
   }
 }
 
+for (const [file, owners] of fileOwners) {
+  if (owners.size <= 1) continue
+
+  const allowedOwners = allowedDuplicateFileOwners.get(file)
+  const ownerList = [...owners].sort()
+  const allowedOwnerList = [...(allowedOwners ?? [])].sort()
+  if (
+    !allowedOwners ||
+    ownerList.length !== allowedOwnerList.length ||
+    ownerList.some((owner, index) => owner !== allowedOwnerList[index])
+  ) {
+    fail(`${file} is listed by multiple components: ${ownerList.join(', ')}`)
+  }
+}
+
+const listedProFiles = new Set([...fileOwners.keys()].filter((file) => file.startsWith('pro/')))
+const actualProFiles = new Set(
+  sourceFilesIn(proRegistryRoot, sourceExtensions).map(registryRelativePath),
+)
+
+for (const file of actualProFiles) {
+  if (!listedProFiles.has(file)) fail(`Pro source file is not listed in registry: ${file}`)
+}
+
+for (const file of listedProFiles) {
+  if (!actualProFiles.has(file)) fail(`Listed Pro registry file does not exist: ${file}`)
+}
+
 const meta = JSON.parse(readFileSync(docsMetaPath, 'utf8')) as {
   pages: string[]
 }
@@ -151,14 +221,16 @@ for (const component of components) {
   const dependencies = toSet(component.dependencies)
   const registryDependencies = toSet(component.registryDependencies)
 
-  if (!existsSync(join(docsComponentsRoot, `${component.name}.mdx`))) {
-    fail(`${component.name} is missing docs page`)
-  }
-  if (!meta.pages.includes(component.name)) {
-    fail(`${component.name} is missing from docs components meta`)
-  }
-  if (!examplesIndex.includes(`${component.name}-demo`)) {
-    fail(`${component.name} is missing a default demo entry`)
+  if (!component.private) {
+    if (!existsSync(join(docsComponentsRoot, `${component.name}.mdx`))) {
+      fail(`${component.name} is missing docs page`)
+    }
+    if (!meta.pages.includes(component.name)) {
+      fail(`${component.name} is missing from docs components meta`)
+    }
+    if (!examplesIndex.includes(`${component.name}-demo`)) {
+      fail(`${component.name} is missing a default demo entry`)
+    }
   }
 
   for (const file of component.files ?? []) {
@@ -175,6 +247,9 @@ for (const component of components) {
       includesDeprecatedArrayFieldAdapterProps(content)
     ) {
       fail(`${component.name} uses deprecated ArrayField adapter props in ${file}`)
+    }
+    if (includesDuplicateClearPointerHandler(content)) {
+      fail(`${component.name} uses duplicate pointer/click clear handlers in ${file}`)
     }
 
     for (const specifier of importsFor(content)) {

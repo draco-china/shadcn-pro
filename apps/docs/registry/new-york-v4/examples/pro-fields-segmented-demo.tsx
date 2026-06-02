@@ -3,8 +3,8 @@
 import { createForm } from "@formily/core"
 import { Field, FormProvider } from "@formily/react"
 
-import { FormItem } from "@/registry/new-york-v4/pro/pro-form/form-item"
-import { FormilySegmented } from "@/registry/new-york-v4/pro/pro-form/formily-fields"
+import { FormItem } from "@/registry/new-york-v4/pro/form/form-item"
+import { FormilySegmented } from "@/registry/new-york-v4/pro/form/formily-fields"
 
 const form = createForm()
 

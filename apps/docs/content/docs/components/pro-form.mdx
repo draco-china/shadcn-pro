@@ -29,12 +29,73 @@ npx @draco-china/shadcn-pro@latest add pro-form
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add @formily/core @formily/react @formily/reactive-react date-fns lucide-react
+bun add @formily/core @formily/json-schema @formily/react @formily/reactive-react date-fns lucide-react radix-ui vaul
 ```
+
+<Step>Install or copy `pro-fields` and `pro-base`. No additional shadcn/ui components are required.</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="pro-form" title="components/pro/pro-form/index.tsx" />
+<ComponentSource name="pro-form" title="components/pro/form/index.tsx" />
+
+Manual installs also need the sibling files used by the entry component:
+
+- `components/pro/form/index.tsx`
+- `components/pro/form/classes.ts`
+- `components/pro/form/form.tsx`
+- `components/pro/form/types.ts`
+- `components/pro/form/submitter-types.ts`
+- `components/pro/form/submitter-slots.tsx`
+- `components/pro/form/submitter.tsx`
+- `components/pro/form/use-form-instance.ts`
+- `components/pro/form/use-pro-form.ts`
+- `components/pro/form/layout/index.tsx`
+- `components/pro/form/layout/classes.ts`
+- `components/pro/form/layout/types.ts`
+- `components/pro/form/layout/utils.ts`
+- `components/pro/form/layout/action-buttons.tsx`
+- `components/pro/form/layout/action-types.ts`
+- `components/pro/form/layout/actions.tsx`
+- `components/pro/form/layout/section.tsx`
+- `components/pro/form/schema/enum-options.ts`
+- `components/pro/form/schema/infer-component.ts`
+- `components/pro/form/schema/index.tsx`
+- `components/pro/form/schema/components.tsx`
+- `components/pro/form/schema/normalize.ts`
+- `components/pro/form/schema/types.ts`
+- `components/pro/form/schema/validator.ts`
+- `components/pro/form/schema/field.tsx`
+- `components/pro/form/schema/content.tsx`
+- `components/pro/form/overlay-form/index.tsx`
+- `components/pro/form/overlay-form/drawer-form.tsx`
+- `components/pro/form/overlay-form/modal-form.tsx`
+- `components/pro/form/overlay-form/classes.ts`
+- `components/pro/form/overlay-form/element-types.ts`
+- `components/pro/form/overlay-form/drawer-elements.tsx`
+- `components/pro/form/overlay-form/modal-elements.tsx`
+- `components/pro/form/overlay-form/content.tsx`
+- `components/pro/form/overlay-form/submitter.tsx`
+- `components/pro/form/overlay-form/types.ts`
+- `components/pro/form/overlay-form/use-overlay-form.ts`
+- `components/pro/form/form-item-help.tsx`
+- `components/pro/form/form-item-label.tsx`
+- `components/pro/form/form-item.tsx`
+- `components/pro/form/formily-fields/index.tsx`
+- `components/pro/form/formily-fields/classes.ts`
+- `components/pro/form/formily-fields/field.ts`
+- `components/pro/form/formily-fields/date-value.ts`
+- `components/pro/form/formily-fields/labels.ts`
+- `components/pro/form/formily-fields/format.ts`
+- `components/pro/form/formily-fields/read-pretty.tsx`
+- `components/pro/form/formily-fields/text.tsx`
+- `components/pro/form/formily-fields/choice-read-pretty.tsx`
+- `components/pro/form/formily-fields/choice.tsx`
+- `components/pro/form/formily-fields/date.tsx`
+- `components/pro/form/formily-fields/numeric-read-pretty.tsx`
+- `components/pro/form/formily-fields/numeric.tsx`
+- `components/pro/form/formily-fields/upload-read-pretty.tsx`
+- `components/pro/form/formily-fields/advanced.tsx`
+- `components/pro/form/formily-fields/schema.tsx`
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -47,7 +108,7 @@ bun add @formily/core @formily/react @formily/reactive-react date-fns lucide-rea
 ## Usage
 
 ```tsx
-import { createForm, ProForm } from "@/components/pro/pro-form"
+import { createForm, ProForm } from "@/components/pro/form"
 
 const form = createForm()
 const schema = {
@@ -159,7 +220,7 @@ Show or hide fields dynamically based on other field values.
 Define your entire form with a JSON schema. You can pass the schema directly to `ProForm`:
 
 ```tsx
-import { ProForm } from "@/components/pro/pro-form"
+import { ProForm } from "@/components/pro/form"
 
 const schema = {
   type: "object",
@@ -263,7 +324,7 @@ const schema = {
 </ProForm>
 ```
 
-`submitter.header` and `submitter.footer` receive the default actions node. Use them when a page needs title, description, tabs, status, or any custom layout around the built-in submit/cancel/reset buttons.
+`submitter.header` and `submitter.footer` receive the default actions node. Use them when a page needs title, description, tabs, status, or any custom layout around the built-in submit/cancel/reset buttons. When either slot is provided, only the explicit slot renders; otherwise the default actions render at `position`.
 
 ### Array Fields
 
@@ -313,6 +374,8 @@ const schema = {
   },
 }
 ```
+
+When `x-component` is set explicitly, that component is used instead of the default `ProFormSection` inference.
 
 `ProFormSection` is a form layout section, not an object value field. Non-root `type: "object"` groups are rendered by the built-in `ObjectField` by default, while the root schema object stays unwrapped.
 
@@ -428,6 +491,7 @@ Same as Modal Form but rendered inside a side Drawer. Use the `side` prop to con
 | `onReset` | `() => void \| Promise<void>` | — | Called after reset completes. |
 | `submitter` | `false \| ProFormSubmitterProps` | `{}` | Built-in submitter config. Set to `false` to hide actions. |
 | `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout for the top-level form body. |
+| `gap` | `string` | `'gap-4'` | Tailwind gap class for the top-level form body or root section content. |
 | `className` | `string` | — | Additional className for the `<form>` element. |
 
 ### ProFormSubmitter
@@ -438,7 +502,7 @@ Default action priority is explicit and uses the underlying button variants dire
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `position` | `'header' \| 'footer'` | `'footer'` | Where default actions render when no `header` slot is provided. |
+| `position` | `'header' \| 'footer'` | `'footer'` | Where default actions render when no `header` or `footer` slot is provided. |
 | `submit` | `false \| ProFormSubmitActionProps` | `{}` | Submit button config. Set `false` or `hidden: true` to hide it. |
 | `cancel` | `false \| ProFormCancelActionProps` | — | Cancel button config. Omit to hide it. |
 | `reset` | `false \| ProFormResetActionProps` | — | Reset button config. Omit to hide it. |
@@ -453,7 +517,7 @@ Default action priority is explicit and uses the underlying button variants dire
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `text` | `string` | action default | Button text. |
-| `variant` | `ProFormActionVariant` | submit: `default`, cancel: `outline`, reset: `secondary` | Button variant inherited from the underlying `ProButton`. |
+| `variant` | `ProFormActionVariant` | submit: `default`, cancel: `outline`, reset: `secondary` | Action button visual variant. |
 | `hidden` | `boolean` | `false` | Hide the action. |
 | `disabled` | `boolean` | `false` | Disable the action. |
 | `icon` | `ReactNode` | — | Optional button icon. |
@@ -475,6 +539,18 @@ Standalone action bar — use directly when a page needs to compose actions outs
 | `className` | `string` | — | Additional className for the action container. |
 | `children` | `ReactNode` | — | Extra buttons or content to render alongside actions. |
 
+### ProFormBody
+
+Shared form body layout used by `ProForm`, `ModalForm`, and `DrawerForm`. It renders a root `ProFormSection` when the root schema declares `x-component: "ProFormSection"` or a root `type: "void"` schema with properties, otherwise it renders a grid body directly.
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `schema` | `ISchema` | — | Optional schema used to detect root section metadata. |
+| `columns` | `1 \| 2 \| 3 \| 4` | — | Responsive grid columns for body content. |
+| `gap` | `string` | `'gap-4'` | Tailwind gap class for body content. |
+| `className` | `string` | — | Additional className for the rendered body or root section. |
+| `children` | `ReactNode` | — | Form body content. |
+
 ### ProFormSection
 
 Section-only layout container used by `type: "void"` schema groups.
@@ -485,13 +561,13 @@ Section-only layout container used by `type: "void"` schema groups.
 | `description` | `ReactNode` | field description | Helper text below the heading. |
 | `action` | `ReactNode` | — | Element rendered to the right of the heading. |
 | `columns` | `1 \| 2 \| 3 \| 4` | — | Render section content as a responsive grid. |
-| `gap` | `string` | `'gap-4'` | Tailwind gap class used when `columns` is set. |
+| `gap` | `string` | `'gap-4'` | Tailwind gap class for the section content grid. |
 | `className` | `string` | — | Additional className for the section. |
 | `contentClassName` | `string` | — | Additional className for the section content. |
 
 ### ModalForm
 
-A `ProForm` embedded inside a shadcn `Dialog`. The dialog opens when the `trigger` is clicked and closes automatically on successful submit.
+A `ProForm` embedded inside the built-in modal overlay. The dialog opens when the `trigger` is clicked and closes automatically on successful submit.
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
@@ -508,6 +584,7 @@ A `ProForm` embedded inside a shadcn `Dialog`. The dialog opens when the `trigge
 | `form` | `Form` | internal | Formily form instance. |
 | `formProps` | `IFormProps` | — | Options when creating the internal form. |
 | `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout. |
+| `gap` | `string` | `'gap-4'` | Tailwind gap class for form body content. |
 | `widthClass` | `string` | `'sm:max-w-lg'` | Tailwind class controlling dialog width. |
 | `className` | `string` | — | Additional className for the form element. |
 | `children` | `ReactNode` | — | Form fields (`SchemaField` nodes or layout components). |
@@ -532,5 +609,6 @@ Identical to `ModalForm` but renders inside a shadcn `Drawer` that slides in fro
 | `form` | `Form` | internal | Formily form instance. |
 | `formProps` | `IFormProps` | — | Options when creating the internal form. |
 | `columns` | `1 \| 2 \| 3 \| 4` | — | Multi-column layout. |
+| `gap` | `string` | `'gap-4'` | Tailwind gap class for form body content. |
 | `className` | `string` | — | Additional className for the form element. |
 | `children` | `ReactNode` | — | Form fields (`SchemaField` nodes or layout components). |

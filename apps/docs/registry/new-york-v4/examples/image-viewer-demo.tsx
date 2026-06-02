@@ -1,6 +1,6 @@
 'use client'
 
-import { ImageViewer } from '@/registry/new-york-v4/pro/pro-viewer/image'
+import { ImageViewer } from '@/registry/new-york-v4/pro/viewer/image'
 import { useState } from 'react'
 
 const IMAGES = [

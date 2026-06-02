@@ -5,7 +5,7 @@ import { useState } from "react"
 import {
   DateRangePicker,
   type DateRangeValue,
-} from "@/registry/new-york-v4/pro/pro-fields/date-range-picker"
+} from "@/registry/new-york-v4/pro/base/fields/date-range-picker"
 
 export default function ProFieldsDateRangePickerDemo() {
   const [value, setValue] = useState<DateRangeValue | undefined>({

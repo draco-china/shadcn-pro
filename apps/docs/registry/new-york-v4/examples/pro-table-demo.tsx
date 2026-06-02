@@ -3,7 +3,7 @@
 import { type ColumnDef } from "@tanstack/react-table"
 import { Download, Plus, Trash2 } from "lucide-react"
 
-import { ProTable } from "@/registry/new-york-v4/pro/pro-table/index"
+import { ProTable } from "@/registry/new-york-v4/pro/table/index"
 import { Checkbox } from "@/registry/new-york-v4/ui/checkbox"
 
 type User = {

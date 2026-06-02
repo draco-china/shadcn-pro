@@ -1,9 +1,9 @@
 'use client'
 
-import * as React from 'react'
 import { type ColumnDef } from '@tanstack/react-table'
+import { useState } from 'react'
 import { Badge } from '@/registry/new-york-v4/ui/badge'
-import { ProTable } from '@/registry/new-york-v4/pro/pro-table/index'
+import { ProTable } from '@/registry/new-york-v4/pro/table/index'
 
 type Task = {
   id: string
@@ -63,7 +63,7 @@ const columns: ColumnDef<Task>[] = [
 ]
 
 export default function ProTableDragSortDemo() {
-  const [order, setOrder] = React.useState<string[]>([])
+  const [order, setOrder] = useState<string[]>([])
 
   return (
     <div className="size-full space-y-3 p-4">
