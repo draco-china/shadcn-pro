@@ -1,5 +1,11 @@
 export const inputShellClassName = 'gap-2'
 
+export const inputAffixGroupClassName = 'flex shrink-0 items-center gap-2'
+
+export const inputPrefixGroupClassName = '-ml-2'
+
+export const inputSuffixGroupClassName = '-mr-2'
+
 export const inputDisabledShellClassName = 'pointer-events-none opacity-50'
 
 export const inputControlClassName =

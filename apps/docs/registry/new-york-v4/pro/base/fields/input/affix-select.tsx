@@ -32,7 +32,6 @@ export function AffixSelect({
         className={cn(
           'h-7 w-auto shrink-0 gap-1 rounded-sm border-0 bg-transparent px-1 py-0 text-muted-foreground shadow-none',
           'focus-visible:ring-0 dark:bg-transparent dark:hover:bg-transparent',
-          side === 'prefix' ? '-ml-1' : '-mr-1',
           affixSelect.className,
         )}
       >
