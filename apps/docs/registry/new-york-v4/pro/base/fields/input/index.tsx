@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import { useComposedRef } from '../../hooks/use-composed-ref'
 import { FieldClearButton, fieldControlClassName, fieldShellClassName } from '../shared/field'
 import { type AffixSlot, InputAffix } from './affix'
-import { inputControlClassName } from './classes'
+import { inputControlClassName, inputDisabledShellClassName, inputShellClassName } from './classes'
 import { shouldShowInputClear } from './clear'
 import type { InputProps as BaseInputProps } from './types'
 import { useInputAffix } from './use-input-affix'
@@ -65,7 +65,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     }
 
     return (
-      <div className={cn(fieldShellClassName, className)}>
+      <div
+        className={cn(
+          fieldShellClassName,
+          inputShellClassName,
+          disabled && inputDisabledShellClassName,
+          className,
+        )}
+      >
         <InputAffix
           affix={prefix}
           side="prefix"
@@ -86,7 +93,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
 
-        {showClear && <FieldClearButton label="Clear input" onClear={handleClear} />}
+        {showClear && (
+          <FieldClearButton label="Clear input" className="ml-0" onClear={handleClear} />
+        )}
 
         <InputAffix
           affix={suffix}

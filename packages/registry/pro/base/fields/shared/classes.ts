@@ -1,7 +1,7 @@
 export type FieldSize = 'default' | 'sm'
 
 export const fieldShellClassName =
-  'flex h-9 w-full min-w-0 items-center rounded-md border border-input bg-transparent px-3 text-base shadow-xs transition-[color,box-shadow] outline-none focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50 has-aria-invalid:border-destructive has-aria-invalid:ring-destructive/20 has-disabled:pointer-events-none has-disabled:opacity-50 md:text-sm dark:bg-input/30 dark:has-aria-invalid:ring-destructive/40'
+  'flex h-9 w-full min-w-0 items-center rounded-md border border-input bg-transparent px-3 text-base shadow-xs transition-[color,box-shadow] outline-none focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50 has-aria-invalid:border-destructive has-aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:has-aria-invalid:ring-destructive/40'
 
 export const fieldControlClassName =
   'h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent'

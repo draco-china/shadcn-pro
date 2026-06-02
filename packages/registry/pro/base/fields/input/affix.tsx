@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import { cn } from '@/lib/utils'
 import { AffixSelect } from './affix-select'
 import type { AffixConfig, AffixSlot } from './affix-types'
 import { isAffixConfig } from './affix-utils'
@@ -44,14 +43,5 @@ export function InputAffix({ affix, side, selectedValue, disabled, onChange }: I
     )
   }
 
-  return (
-    <span
-      className={cn(
-        'shrink-0 text-sm text-muted-foreground select-none',
-        side === 'prefix' ? 'mr-2' : 'ml-2',
-      )}
-    >
-      {affix}
-    </span>
-  )
+  return <span className="shrink-0 text-sm text-muted-foreground select-none">{affix}</span>
 }

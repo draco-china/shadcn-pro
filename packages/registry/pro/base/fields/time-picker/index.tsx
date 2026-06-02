@@ -38,6 +38,7 @@ export function TimePicker({
         fieldShellClassName,
         timePickerRootClassName,
         showClear && timePickerRootClearableClassName,
+        disabled && 'pointer-events-none opacity-50',
         className,
       )}
     >
