@@ -1,3 +1,10 @@
+## [1.16.7](https://github.com/draco-china/shadcn-pro/compare/v1.16.6...v1.16.7) (2026-06-02)
+
+
+### Bug Fixes
+
+* align input affix edges ([65abece](https://github.com/draco-china/shadcn-pro/commit/65abece522fcf1e5649557a78909a961daf4f2dd))
+
 ## [1.16.6](https://github.com/draco-china/shadcn-pro/compare/v1.16.5...v1.16.6) (2026-06-02)
 
 
