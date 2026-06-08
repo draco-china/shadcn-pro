@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/draco-china/shadcn-pro/compare/v1.17.0...v1.18.0) (2026-06-08)
+
+
+### Features
+
+* install components via shadcn registry ([999bd02](https://github.com/draco-china/shadcn-pro/commit/999bd0290e8240512bad0088bc7228019751e1d3))
+
 # [1.17.0](https://github.com/draco-china/shadcn-pro/compare/v1.16.29...v1.17.0) (2026-06-08)
 
 

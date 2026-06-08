@@ -17,7 +17,7 @@
   ],
   "categories": ["base"],
   "meta": {
-    "version": "1.17.0",
+    "version": "1.18.0",
     "docs": "https://draco-china.github.io/shadcn-pro/docs/components/pro-pagination"
   }
 }
