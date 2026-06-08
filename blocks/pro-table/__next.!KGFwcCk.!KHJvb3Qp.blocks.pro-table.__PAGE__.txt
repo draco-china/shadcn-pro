@@ -690,7 +690,7 @@ export default function ProTableDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>5:Tfc67,'use client'
+<span class="line" data-line=""></span></code></pre>5:Tfcd4,'use client'
 
 import {
   closestCenter,
@@ -1516,23 +1516,7 @@ function useProTablePinnedColumnOffsets<TData>(
         right += widths.get(column.id) ?? column.getSize()
       }
 
-      setOffsets((current) => {
-        let changed = false
-        for (const side of ['left', 'right'] as const) {
-          let currentCount = 0
-          let nextCount = 0
-          for (const key in current[side]) {
-            currentCount += 1
-            if (!(key in next[side])) changed = true
-          }
-          for (const key in next[side]) {
-            nextCount += 1
-            if (current[side][key] !== next[side][key]) changed = true
-          }
-          if (currentCount !== nextCount) changed = true
-        }
-        return changed ? next : current
-      })
+      setOffsets((current) => (arePinnedColumnOffsetsEqual(current, next) ? current : next))
     }
 
     updateOffsets()
@@ -1550,6 +1534,30 @@ function useProTablePinnedColumnOffsets<TData>(
   }, [dragSort, leftPinnedKey, rightPinnedKey, table, tableRef, visibleColumnKey])
 
   return offsets
+}
+
+function arePinnedColumnOffsetsEqual(
+  current: ProTablePinnedColumnOffsets,
+  next: ProTablePinnedColumnOffsets,
+) {
+  for (const side of ['left', 'right'] as const) {
+    let currentCount = 0
+    let nextCount = 0
+
+    for (const [columnId, offset] of Object.entries(current[side])) {
+      currentCount += 1
+      if (next[side][columnId] !== offset) return false
+    }
+
+    for (const [columnId, offset] of Object.entries(next[side])) {
+      nextCount += 1
+      if (current[side][columnId] !== offset) return false
+    }
+
+    if (currentCount !== nextCount) return false
+  }
+
+  return true
 }
 
 export function ProTable<TData, TValue>({
@@ -2692,7 +2700,7 @@ function getPinnedColumnStyle<TData>(
 
   return style
 }
-6:Tabce5,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+6:Tac482,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  closestCenter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -3518,23 +3526,7 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">        right</span><span style="color:#0184BC;--shiki-dark:#C678DD"> +=</span><span style="color:#E45649;--shiki-dark:#E5C07B"> widths</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">get</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">column</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">id</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#56B6C2">??</span><span style="color:#E45649;--shiki-dark:#E5C07B"> column</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">getSize</span><span style="color:#383A42;--shiki-dark:#ABB2BF">()</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      }</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      setOffsets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        let</span><span style="color:#383A42;--shiki-dark:#E06C75"> changed</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#986801;--shiki-dark:#E5C07B"> side</span><span style="color:#A626A4;--shiki-dark:#C678DD"> of</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#50A14F;--shiki-dark:#98C379">'left'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'right'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#383A42;--shiki-dark:#C678DD">as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">          let</span><span style="color:#383A42;--shiki-dark:#E06C75"> currentCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">          let</span><span style="color:#383A42;--shiki-dark:#E06C75"> nextCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">          for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#986801;--shiki-dark:#E5C07B"> key</span><span style="color:#A626A4;--shiki-dark:#C678DD"> in</span><span style="color:#383A42;--shiki-dark:#E06C75"> current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]) {</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            currentCount</span><span style="color:#0184BC;--shiki-dark:#C678DD"> +=</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">            if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#0184BC;--shiki-dark:#56B6C2">!</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">key</span><span style="color:#A626A4;--shiki-dark:#C678DD"> in</span><span style="color:#383A42;--shiki-dark:#E06C75"> next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])) </span><span style="color:#383A42;--shiki-dark:#E06C75">changed</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          }</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">          for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#986801;--shiki-dark:#E5C07B"> key</span><span style="color:#A626A4;--shiki-dark:#C678DD"> in</span><span style="color:#383A42;--shiki-dark:#E06C75"> next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]) {</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            nextCount</span><span style="color:#0184BC;--shiki-dark:#C678DD"> +=</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">            if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">][</span><span style="color:#383A42;--shiki-dark:#E06C75">key</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">!==</span><span style="color:#383A42;--shiki-dark:#E06C75"> next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">][</span><span style="color:#383A42;--shiki-dark:#E06C75">key</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]) </span><span style="color:#383A42;--shiki-dark:#E06C75">changed</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          }</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">          if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">currentCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> !==</span><span style="color:#383A42;--shiki-dark:#E06C75"> nextCount</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#383A42;--shiki-dark:#E06C75">changed</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        }</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        return</span><span style="color:#383A42;--shiki-dark:#E06C75"> changed</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#E06C75"> next</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#383A42;--shiki-dark:#E06C75"> current</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      })</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      setOffsets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#4078F2;--shiki-dark:#61AFEF">arePinnedColumnOffsetsEqual</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#383A42;--shiki-dark:#E06C75"> current</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#383A42;--shiki-dark:#E06C75"> next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">))</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    updateOffsets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">()</span></span>
@@ -3552,6 +3544,30 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }, [</span><span style="color:#383A42;--shiki-dark:#E06C75">dragSort</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">leftPinnedKey</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">rightPinnedKey</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">table</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">tableRef</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">visibleColumnKey</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> offsets</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> arePinnedColumnOffsetsEqual</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  current</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProTablePinnedColumnOffsets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  next</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProTablePinnedColumnOffsets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#986801;--shiki-dark:#E5C07B"> side</span><span style="color:#A626A4;--shiki-dark:#C678DD"> of</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#50A14F;--shiki-dark:#98C379">'left'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'right'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#383A42;--shiki-dark:#C678DD">as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    let</span><span style="color:#383A42;--shiki-dark:#E06C75"> currentCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    let</span><span style="color:#383A42;--shiki-dark:#E06C75"> nextCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">columnId</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">offset</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#A626A4;--shiki-dark:#C678DD">of</span><span style="color:#E45649;--shiki-dark:#E5C07B"> Object</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">entries</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])) {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      currentCount</span><span style="color:#0184BC;--shiki-dark:#C678DD"> +=</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">][</span><span style="color:#383A42;--shiki-dark:#E06C75">columnId</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">!==</span><span style="color:#383A42;--shiki-dark:#E06C75"> offset</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">columnId</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">offset</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#A626A4;--shiki-dark:#C678DD">of</span><span style="color:#E45649;--shiki-dark:#E5C07B"> Object</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">entries</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])) {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      nextCount</span><span style="color:#0184BC;--shiki-dark:#C678DD"> +=</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">][</span><span style="color:#383A42;--shiki-dark:#E06C75">columnId</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">!==</span><span style="color:#383A42;--shiki-dark:#E06C75"> offset</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">currentCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> !==</span><span style="color:#383A42;--shiki-dark:#E06C75"> nextCount</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProTable</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">TData</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#C18401;--shiki-dark:#E5C07B">TValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>({</span></span>
@@ -5130,7 +5146,7 @@ function getPaginationRange(currentPage: number, pageCount: number) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#D19A66">1</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">currentPage</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> -</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">currentPage</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">currentPage</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> +</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">pageCount</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-table-demo",{"item":{"name":"pro-table-demo","description":"Full-featured data table with filtering, sorting, and pagination.","iframeHeight":"676px","installName":"pro-table"},"tree":[{"name":"examples","children":[{"name":"pro-table-demo.tsx","path":"examples/pro-table-demo.tsx"}]},{"name":"table","children":[{"name":"index.tsx","path":"table/index.tsx"}]},{"name":"pagination","children":[{"name":"index.tsx","path":"pagination/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-table-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"table/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pagination/index.tsx","content":"$7","highlightedContent":"$8"}]}],"$L9"]}],["$La"],"$Lb"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"0E8nHxMNQmEWf_Ua8ZOoY"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-table-demo",{"item":{"name":"pro-table-demo","description":"Full-featured data table with filtering, sorting, and pagination.","iframeHeight":"676px","installName":"pro-table"},"tree":[{"name":"examples","children":[{"name":"pro-table-demo.tsx","path":"examples/pro-table-demo.tsx"}]},{"name":"table","children":[{"name":"index.tsx","path":"table/index.tsx"}]},{"name":"pagination","children":[{"name":"index.tsx","path":"pagination/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-table-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"table/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pagination/index.tsx","content":"$7","highlightedContent":"$8"}]}],"$L9"]}],["$La"],"$Lb"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"y9Eq8OrDK7Ug8EINe5lgG"}
 c:T9b8,'use client'
 
 import { type ColumnDef } from '@tanstack/react-table'
@@ -5301,7 +5317,7 @@ d:T8325,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>e:Tfc67,'use client'
+<span class="line" data-line=""></span></code></pre>e:Tfcd4,'use client'
 
 import {
   closestCenter,
@@ -6127,23 +6143,7 @@ function useProTablePinnedColumnOffsets<TData>(
         right += widths.get(column.id) ?? column.getSize()
       }
 
-      setOffsets((current) => {
-        let changed = false
-        for (const side of ['left', 'right'] as const) {
-          let currentCount = 0
-          let nextCount = 0
-          for (const key in current[side]) {
-            currentCount += 1
-            if (!(key in next[side])) changed = true
-          }
-          for (const key in next[side]) {
-            nextCount += 1
-            if (current[side][key] !== next[side][key]) changed = true
-          }
-          if (currentCount !== nextCount) changed = true
-        }
-        return changed ? next : current
-      })
+      setOffsets((current) => (arePinnedColumnOffsetsEqual(current, next) ? current : next))
     }
 
     updateOffsets()
@@ -6161,6 +6161,30 @@ function useProTablePinnedColumnOffsets<TData>(
   }, [dragSort, leftPinnedKey, rightPinnedKey, table, tableRef, visibleColumnKey])
 
   return offsets
+}
+
+function arePinnedColumnOffsetsEqual(
+  current: ProTablePinnedColumnOffsets,
+  next: ProTablePinnedColumnOffsets,
+) {
+  for (const side of ['left', 'right'] as const) {
+    let currentCount = 0
+    let nextCount = 0
+
+    for (const [columnId, offset] of Object.entries(current[side])) {
+      currentCount += 1
+      if (next[side][columnId] !== offset) return false
+    }
+
+    for (const [columnId, offset] of Object.entries(next[side])) {
+      nextCount += 1
+      if (current[side][columnId] !== offset) return false
+    }
+
+    if (currentCount !== nextCount) return false
+  }
+
+  return true
 }
 
 export function ProTable<TData, TValue>({
@@ -7303,7 +7327,7 @@ function getPinnedColumnStyle<TData>(
 
   return style
 }
-f:Tabce5,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+f:Tac482,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  closestCenter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -8129,23 +8153,7 @@ f:Tabce5,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">        right</span><span style="color:#0184BC;--shiki-dark:#C678DD"> +=</span><span style="color:#E45649;--shiki-dark:#E5C07B"> widths</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">get</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">column</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">id</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#56B6C2">??</span><span style="color:#E45649;--shiki-dark:#E5C07B"> column</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">getSize</span><span style="color:#383A42;--shiki-dark:#ABB2BF">()</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      }</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      setOffsets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        let</span><span style="color:#383A42;--shiki-dark:#E06C75"> changed</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#986801;--shiki-dark:#E5C07B"> side</span><span style="color:#A626A4;--shiki-dark:#C678DD"> of</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#50A14F;--shiki-dark:#98C379">'left'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'right'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#383A42;--shiki-dark:#C678DD">as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">          let</span><span style="color:#383A42;--shiki-dark:#E06C75"> currentCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">          let</span><span style="color:#383A42;--shiki-dark:#E06C75"> nextCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">          for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#986801;--shiki-dark:#E5C07B"> key</span><span style="color:#A626A4;--shiki-dark:#C678DD"> in</span><span style="color:#383A42;--shiki-dark:#E06C75"> current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]) {</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            currentCount</span><span style="color:#0184BC;--shiki-dark:#C678DD"> +=</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">            if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#0184BC;--shiki-dark:#56B6C2">!</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">key</span><span style="color:#A626A4;--shiki-dark:#C678DD"> in</span><span style="color:#383A42;--shiki-dark:#E06C75"> next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])) </span><span style="color:#383A42;--shiki-dark:#E06C75">changed</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          }</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">          for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#986801;--shiki-dark:#E5C07B"> key</span><span style="color:#A626A4;--shiki-dark:#C678DD"> in</span><span style="color:#383A42;--shiki-dark:#E06C75"> next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]) {</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            nextCount</span><span style="color:#0184BC;--shiki-dark:#C678DD"> +=</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">            if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">][</span><span style="color:#383A42;--shiki-dark:#E06C75">key</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">!==</span><span style="color:#383A42;--shiki-dark:#E06C75"> next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">][</span><span style="color:#383A42;--shiki-dark:#E06C75">key</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]) </span><span style="color:#383A42;--shiki-dark:#E06C75">changed</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          }</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">          if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">currentCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> !==</span><span style="color:#383A42;--shiki-dark:#E06C75"> nextCount</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#383A42;--shiki-dark:#E06C75">changed</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        }</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        return</span><span style="color:#383A42;--shiki-dark:#E06C75"> changed</span><span style="color:#0184BC;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#E06C75"> next</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#383A42;--shiki-dark:#E06C75"> current</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      })</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      setOffsets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#4078F2;--shiki-dark:#61AFEF">arePinnedColumnOffsetsEqual</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#383A42;--shiki-dark:#E06C75"> current</span><span style="color:#0184BC;--shiki-dark:#C678DD"> :</span><span style="color:#383A42;--shiki-dark:#E06C75"> next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">))</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    updateOffsets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">()</span></span>
@@ -8163,6 +8171,30 @@ f:Tabce5,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }, [</span><span style="color:#383A42;--shiki-dark:#E06C75">dragSort</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">leftPinnedKey</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">rightPinnedKey</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">table</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">tableRef</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">visibleColumnKey</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> offsets</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> arePinnedColumnOffsetsEqual</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  current</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProTablePinnedColumnOffsets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  next</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProTablePinnedColumnOffsets</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#986801;--shiki-dark:#E5C07B"> side</span><span style="color:#A626A4;--shiki-dark:#C678DD"> of</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#50A14F;--shiki-dark:#98C379">'left'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'right'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#383A42;--shiki-dark:#C678DD">as</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    let</span><span style="color:#383A42;--shiki-dark:#E06C75"> currentCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    let</span><span style="color:#383A42;--shiki-dark:#E06C75"> nextCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">columnId</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">offset</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#A626A4;--shiki-dark:#C678DD">of</span><span style="color:#E45649;--shiki-dark:#E5C07B"> Object</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">entries</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])) {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      currentCount</span><span style="color:#0184BC;--shiki-dark:#C678DD"> +=</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">][</span><span style="color:#383A42;--shiki-dark:#E06C75">columnId</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">!==</span><span style="color:#383A42;--shiki-dark:#E06C75"> offset</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    for</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#A626A4;--shiki-dark:#C678DD">const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">columnId</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">offset</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#A626A4;--shiki-dark:#C678DD">of</span><span style="color:#E45649;--shiki-dark:#E5C07B"> Object</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">entries</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">next</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])) {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      nextCount</span><span style="color:#0184BC;--shiki-dark:#C678DD"> +=</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#ABB2BF">][</span><span style="color:#383A42;--shiki-dark:#E06C75">columnId</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">!==</span><span style="color:#383A42;--shiki-dark:#E06C75"> offset</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">currentCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> !==</span><span style="color:#383A42;--shiki-dark:#E06C75"> nextCount</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProTable</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">TData</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#C18401;--shiki-dark:#E5C07B">TValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>({</span></span>

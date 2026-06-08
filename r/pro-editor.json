@@ -23,7 +23,7 @@
   ],
   "categories": ["content"],
   "meta": {
-    "version": "1.18.2",
+    "version": "1.18.3",
     "docs": "https://draco-china.github.io/shadcn-pro/docs/components/pro-editor"
   }
 }
