@@ -1,3 +1,10 @@
+## [1.16.10](https://github.com/draco-china/shadcn-pro/compare/v1.16.9...v1.16.10) (2026-06-08)
+
+
+### Bug Fixes
+
+* split pro toolbar layout ([420d4e1](https://github.com/draco-china/shadcn-pro/commit/420d4e1b87552c9ab77207a11ea488236bdc6d5a))
+
 ## [1.16.9](https://github.com/draco-china/shadcn-pro/compare/v1.16.8...v1.16.9) (2026-06-08)
 
 
