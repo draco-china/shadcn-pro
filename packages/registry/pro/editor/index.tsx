@@ -621,7 +621,7 @@ export function ProEditor({
                   language={language === 'tsx' ? 'typescript' : language}
                   path={getEditorPath(language)}
                   value={editor.localValue}
-                  theme={theme === 'dark' ? 'vs-dark' : 'vs'}
+                  theme={theme === 'dark' ? 'one-dark-pro' : 'one-light'}
                   onMount={editor.handleMount}
                   onChange={(nextValue) => editor.handleChange(nextValue ?? '')}
                   options={{
