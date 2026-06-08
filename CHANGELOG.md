@@ -1,3 +1,10 @@
+## [1.16.18](https://github.com/draco-china/shadcn-pro/compare/v1.16.17...v1.16.18) (2026-06-08)
+
+
+### Bug Fixes
+
+* add pro overlay blocks route ([d7e75e7](https://github.com/draco-china/shadcn-pro/commit/d7e75e70079e0f7399c18c278999c424d0ea0cf8))
+
 ## [1.16.17](https://github.com/draco-china/shadcn-pro/compare/v1.16.16...v1.16.17) (2026-06-08)
 
 
