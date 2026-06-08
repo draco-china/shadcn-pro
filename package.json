@@ -1,6 +1,6 @@
 {
   "name": "@draco-china/shadcn-pro",
-  "version": "1.16.12",
+  "version": "1.16.13",
   "description": "Pro components for shadcn/ui — forms, TanStack tables, and more",
   "type": "module",
   "bin": {

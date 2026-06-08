@@ -1,3 +1,10 @@
+## [1.16.13](https://github.com/draco-china/shadcn-pro/compare/v1.16.12...v1.16.13) (2026-06-08)
+
+
+### Bug Fixes
+
+* keep image viewer toolbar buttons square ([a526949](https://github.com/draco-china/shadcn-pro/commit/a526949be2af551e1e9d6596507e94d81773cc5c))
+
 ## [1.16.12](https://github.com/draco-china/shadcn-pro/compare/v1.16.11...v1.16.12) (2026-06-08)
 
 
