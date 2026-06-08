@@ -824,23 +824,7 @@ function useProTablePinnedColumnOffsets<TData>(
         right += widths.get(column.id) ?? column.getSize()
       }
 
-      setOffsets((current) => {
-        let changed = false
-        for (const side of ['left', 'right'] as const) {
-          let currentCount = 0
-          let nextCount = 0
-          for (const key in current[side]) {
-            currentCount += 1
-            if (!(key in next[side])) changed = true
-          }
-          for (const key in next[side]) {
-            nextCount += 1
-            if (current[side][key] !== next[side][key]) changed = true
-          }
-          if (currentCount !== nextCount) changed = true
-        }
-        return changed ? next : current
-      })
+      setOffsets((current) => (arePinnedColumnOffsetsEqual(current, next) ? current : next))
     }
 
     updateOffsets()
@@ -858,6 +842,30 @@ function useProTablePinnedColumnOffsets<TData>(
   }, [dragSort, leftPinnedKey, rightPinnedKey, table, tableRef, visibleColumnKey])
 
   return offsets
+}
+
+function arePinnedColumnOffsetsEqual(
+  current: ProTablePinnedColumnOffsets,
+  next: ProTablePinnedColumnOffsets,
+) {
+  for (const side of ['left', 'right'] as const) {
+    let currentCount = 0
+    let nextCount = 0
+
+    for (const [columnId, offset] of Object.entries(current[side])) {
+      currentCount += 1
+      if (next[side][columnId] !== offset) return false
+    }
+
+    for (const [columnId, offset] of Object.entries(next[side])) {
+      nextCount += 1
+      if (current[side][columnId] !== offset) return false
+    }
+
+    if (currentCount !== nextCount) return false
+  }
+
+  return true
 }
 
 export function ProTable<TData, TValue>({
