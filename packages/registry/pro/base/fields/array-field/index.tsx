@@ -25,6 +25,30 @@ function createArrayFieldId() {
   return `item-${Math.random().toString(36).slice(2)}`
 }
 
+type ArrayFieldSortMode = 'button' | 'drag' | 'none'
+
+interface ArrayFieldRenderHelpers<TItem extends object> {
+  update: (next: TItem | ((current: TItem) => TItem)) => void
+  duplicate: () => void
+  remove: () => void
+  moveUp: () => void
+  moveDown: () => void
+}
+
+interface ArrayFieldProps<TItem extends object> {
+  value?: TItem[]
+  onChange?: (value: TItem[]) => void
+  defaultValue?: TItem[]
+  newItem: () => TItem
+  renderItem: (item: TItem, index: number, helpers: ArrayFieldRenderHelpers<TItem>) => ReactNode
+  max?: number
+  min?: number
+  sortable?: Exclude<ArrayFieldSortMode, 'none'> | false
+  variant?: 'outline' | 'ghost'
+  disabled?: boolean
+  className?: string
+}
+
 export function ArrayField<TItem extends object = Record<string, unknown>>({
   value,
   onChange,
@@ -37,29 +61,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   variant = 'outline',
   disabled,
   className,
-}: {
-  value?: TItem[]
-  onChange?: (value: TItem[]) => void
-  defaultValue?: TItem[]
-  newItem: () => TItem
-  renderItem: (
-    item: TItem,
-    index: number,
-    helpers: {
-      update: (next: TItem | ((current: TItem) => TItem)) => void
-      duplicate: () => void
-      remove: () => void
-      moveUp: () => void
-      moveDown: () => void
-    },
-  ) => ReactNode
-  max?: number
-  min?: number
-  sortable?: 'button' | 'drag' | false
-  variant?: 'outline' | 'ghost'
-  disabled?: boolean
-  className?: string
-}) {
+}: ArrayFieldProps<TItem>) {
   const [internalValue, setInternalValue] = useState<TItem[]>(defaultValue ?? [])
   const items = value ?? internalValue
   const [ids, setIds] = useState<string[]>(() =>
@@ -70,7 +72,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   )
   const canAddItem = max === undefined || items.length < max
-  const sortMode = sortable === false ? 'none' : sortable
+  const sortMode: ArrayFieldSortMode = sortable === false ? 'none' : sortable
 
   useEffect(() => {
     setIds((prev) => {
@@ -122,7 +124,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
       moveDown: () => move(index, index + 1),
     })
 
-    const itemProps = {
+    const itemProps: ArrayFieldItemProps = {
       onDuplicate: () => duplicate(index),
       onRemove: () => remove(index),
       onMoveUp: () => move(index, index - 1),
@@ -218,7 +220,7 @@ interface ArrayFieldItemProps {
   onMoveUp: () => void
   onMoveDown: () => void
   disabled?: boolean
-  sortMode: 'button' | 'drag' | 'none'
+  sortMode: ArrayFieldSortMode
   variant: 'outline' | 'ghost'
   canDuplicate?: boolean
   canRemove?: boolean
