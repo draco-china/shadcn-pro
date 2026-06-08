@@ -1,0 +1,526 @@
+1:"$Sreact.fragment"
+2:I[625209,["/shadcn-pro/_next/static/chunks/09tzpmwkohb4n.js","/shadcn-pro/_next/static/chunks/0ibtb4kvrph_5.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/04m6luujjl7_h.js","/shadcn-pro/_next/static/chunks/0hmr.vp7yy2sb.js","/shadcn-pro/_next/static/chunks/0~enwo81i_uvb.js","/shadcn-pro/_next/static/chunks/0hi.a2~vwbk9~.js","/shadcn-pro/_next/static/chunks/12kys~5j.z7wt.js"],"BlockViewer"]
+9:I[80196,["/shadcn-pro/_next/static/chunks/09tzpmwkohb4n.js","/shadcn-pro/_next/static/chunks/0ibtb4kvrph_5.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/04m6luujjl7_h.js"],"OutletBoundary"]
+a:"$Sreact.suspense"
+3:T51f,'use client'
+
+import { useState } from 'react'
+import { ProButton } from '@/registry/new-york-v4/pro/base/button'
+import { ProConfirm, ProDrawer, ProModal } from '@/registry/new-york-v4/pro/overlay'
+
+export default function ProOverlayDemo() {
+  const [deleted, setDeleted] = useState(false)
+
+  return (
+    <div className="flex flex-wrap items-center gap-3 p-6">
+      <ProModal trigger={<ProButton variant="outline">Open modal</ProButton>} title="Preview">
+        <p className="text-sm text-muted-foreground">
+          Use ProModal for ordinary dialog content without pulling in form behavior.
+        </p>
+      </ProModal>
+
+      <ProDrawer
+        trigger={<ProButton variant="outline">Open drawer</ProButton>}
+        title="Details"
+        description="Reusable drawer shell."
+      >
+        <div className="px-4 pb-4 text-sm text-muted-foreground">
+          Place panels, filters, forms, or custom content here.
+        </div>
+      </ProDrawer>
+
+      <ProConfirm
+        trigger={<ProButton variant="destructive">Delete</ProButton>}
+        title="Delete record?"
+        description="This action cannot be undone."
+        confirmText="Delete"
+        onConfirm={() => setDeleted(true)}
+      />
+
+      {deleted && <span className="text-sm text-muted-foreground">Deleted</span>}
+    </div>
+  )
+}
+4:T34ab,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/registry/new-york-v4/pro/base/button'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProConfirm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProDrawer</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProModal</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/registry/new-york-v4/pro/overlay'</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#E45649;--shiki-dark:#C678DD"> default</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProOverlayDemo</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">deleted</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setDeleted</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex flex-wrap items-center gap-3 p-6"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProModal</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> trigger</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"outline"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>Open modal&#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Preview"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">p</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-sm text-muted-foreground"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          Use ProModal for ordinary dialog content without pulling in form behavior.</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">p</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProModal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProDrawer</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        trigger</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"outline"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>Open drawer&#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Details"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        description</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Reusable drawer shell."</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"px-4 pb-4 text-sm text-muted-foreground"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          Place panels, filters, forms, or custom content here.</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProDrawer</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProConfirm</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        trigger</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"destructive"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>Delete&#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Delete record?"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        description</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"This action cannot be undone."</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        confirmText</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Delete"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        onConfirm</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> setDeleted</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      /></span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">deleted</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-sm text-muted-foreground"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>Deleted&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span></code></pre>5:T1d98,'use client'
+
+import { XIcon } from 'lucide-react'
+import { Dialog as DialogPrimitive } from 'radix-ui'
+import { type ReactNode, useState } from 'react'
+import { Drawer as DrawerPrimitive } from 'vaul'
+import { cn } from '@/lib/utils'
+import { ProButton } from '../base/button'
+
+export function ProModal({
+  trigger,
+  title,
+  description,
+  children,
+  open,
+  onOpenChange,
+  className,
+}: {
+  trigger?: ReactNode
+  title: ReactNode
+  description?: ReactNode
+  children?: ReactNode
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  className?: string
+}) {
+  return (
+    <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+      {trigger != null && (
+        <DialogPrimitive.Trigger data-slot="pro-modal-trigger" asChild>
+          {trigger}
+        </DialogPrimitive.Trigger>
+      )}
+      <DialogPrimitive.Portal>
+        <DialogPrimitive.Overlay
+          className={
+            'fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0'
+          }
+        />
+        <DialogPrimitive.Content
+          data-slot="pro-modal-content"
+          className={cn(
+            'fixed top-[50%] left-[50%] z-50 w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 outline-none data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 sm:max-w-lg',
+            'flex max-h-[90vh] flex-col',
+            className,
+          )}
+        >
+          <div
+            data-slot="pro-modal-header"
+            className="flex shrink-0 flex-col gap-2 text-center sm:text-left"
+          >
+            <DialogPrimitive.Title
+              data-slot="pro-modal-title"
+              className="text-lg leading-none font-semibold"
+            >
+              {title}
+            </DialogPrimitive.Title>
+            {description != null && (
+              <DialogPrimitive.Description
+                data-slot="pro-modal-description"
+                className="text-sm text-muted-foreground"
+              >
+                {description}
+              </DialogPrimitive.Description>
+            )}
+          </div>
+          {children}
+          <DialogPrimitive.Close asChild>
+            <ProButton
+              variant="ghost"
+              size="icon-sm"
+              aria-label="Close"
+              className="absolute top-4 right-4 opacity-70 hover:opacity-100"
+            >
+              <XIcon />
+            </ProButton>
+          </DialogPrimitive.Close>
+        </DialogPrimitive.Content>
+      </DialogPrimitive.Portal>
+    </DialogPrimitive.Root>
+  )
+}
+
+export function ProDrawer({
+  trigger,
+  title,
+  description,
+  children,
+  open,
+  onOpenChange,
+  side = 'right',
+  className,
+}: {
+  trigger?: ReactNode
+  title: ReactNode
+  description?: ReactNode
+  children?: ReactNode
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  className?: string
+  side?: 'top' | 'right' | 'bottom' | 'left'
+}) {
+  return (
+    <DrawerPrimitive.Root open={open} onOpenChange={onOpenChange} direction={side}>
+      {trigger != null && (
+        <DrawerPrimitive.Trigger data-slot="pro-drawer-trigger" asChild>
+          {trigger}
+        </DrawerPrimitive.Trigger>
+      )}
+      <DrawerPrimitive.Portal>
+        <DrawerPrimitive.Overlay
+          className={
+            'fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0'
+          }
+        />
+        <DrawerPrimitive.Content
+          data-slot="pro-drawer-content"
+          className={cn(
+            'group/drawer-content fixed z-50 flex h-auto flex-col bg-background data-[vaul-drawer-direction=top]:inset-x-0 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[80vh] data-[vaul-drawer-direction=top]:rounded-b-lg data-[vaul-drawer-direction=top]:border-b data-[vaul-drawer-direction=bottom]:inset-x-0 data-[vaul-drawer-direction=bottom]:bottom-0 data-[vaul-drawer-direction=bottom]:mt-24 data-[vaul-drawer-direction=bottom]:max-h-[80vh] data-[vaul-drawer-direction=bottom]:rounded-t-lg data-[vaul-drawer-direction=bottom]:border-t data-[vaul-drawer-direction=right]:inset-y-0 data-[vaul-drawer-direction=right]:right-0 data-[vaul-drawer-direction=right]:w-3/4 data-[vaul-drawer-direction=right]:border-l data-[vaul-drawer-direction=right]:sm:max-w-sm data-[vaul-drawer-direction=left]:inset-y-0 data-[vaul-drawer-direction=left]:left-0 data-[vaul-drawer-direction=left]:w-3/4 data-[vaul-drawer-direction=left]:border-r data-[vaul-drawer-direction=left]:sm:max-w-sm',
+            className,
+          )}
+        >
+          <div
+            className={
+              'mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full bg-muted group-data-[vaul-drawer-direction=bottom]/drawer-content:block'
+            }
+          />
+          <div
+            data-slot="pro-drawer-header"
+            className={
+              'flex shrink-0 flex-col gap-0.5 p-4 group-data-[vaul-drawer-direction=bottom]/drawer-content:text-center group-data-[vaul-drawer-direction=top]/drawer-content:text-center md:gap-1.5 md:text-left'
+            }
+          >
+            <DrawerPrimitive.Title
+              data-slot="pro-drawer-title"
+              className="font-semibold text-foreground"
+            >
+              {title}
+            </DrawerPrimitive.Title>
+            {description != null && (
+              <DrawerPrimitive.Description
+                data-slot="pro-drawer-description"
+                className="text-sm text-muted-foreground"
+              >
+                {description}
+              </DrawerPrimitive.Description>
+            )}
+          </div>
+          {children}
+        </DrawerPrimitive.Content>
+      </DrawerPrimitive.Portal>
+    </DrawerPrimitive.Root>
+  )
+}
+
+export function ProConfirm({
+  trigger,
+  title,
+  description,
+  open,
+  onOpenChange,
+  onConfirm,
+  cancelText = 'Cancel',
+  confirmText = 'Confirm',
+  variant = 'destructive',
+  className,
+}: {
+  trigger?: ReactNode
+  title: ReactNode
+  description?: ReactNode
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  onConfirm?: () => void | Promise<void>
+  cancelText?: ReactNode
+  confirmText?: ReactNode
+  variant?: 'default' | 'destructive'
+  className?: string
+}) {
+  const [internalOpen, setInternalOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  function setOpen(value: boolean) {
+    if (open === undefined) setInternalOpen(value)
+    onOpenChange?.(value)
+  }
+
+  return (
+    <ProModal
+      trigger={trigger}
+      title={title}
+      description={description}
+      open={open ?? internalOpen}
+      onOpenChange={setOpen}
+      className={className}
+    >
+      <div className="flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-end">
+        <ProButton variant="outline" disabled={loading} onClick={() => setOpen(false)}>
+          {cancelText}
+        </ProButton>
+        <ProButton
+          variant={variant}
+          loading={loading}
+          onClick={async () => {
+            if (loading) return
+
+            setLoading(true)
+            try {
+              await onConfirm?.()
+              setOpen(false)
+            } finally {
+              setLoading(false)
+            }
+          }}
+        >
+          {confirmText}
+        </ProButton>
+      </div>
+    </ProModal>
+  )
+}
+6:Tf487,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">XIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Dialog</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> DialogPrimitive</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'radix-ui'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Drawer</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> DrawerPrimitive</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'vaul'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/button'</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProModal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  trigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  description</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  children</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  open</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onOpenChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  trigger</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  description</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  children</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  open</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onOpenChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">open</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Root</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> open</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">open</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onOpenChange</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onOpenChange</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">trigger</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !=</span><span style="color:#986801;--shiki-dark:#D19A66"> null</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Trigger</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-modal-trigger"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> asChild</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">trigger</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Trigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Portal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Overlay</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">            'fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0'</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          }</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Content</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-modal-content"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">            'fixed top-[50%] left-[50%] z-50 w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 outline-none data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 sm:max-w-lg'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">            'flex max-h-[90vh] flex-col'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-modal-header"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex shrink-0 flex-col gap-2 text-center sm:text-left"</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Title</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-modal-title"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-lg leading-none font-semibold"</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">            {</span><span style="color:#383A42;--shiki-dark:#E06C75">description</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !=</span><span style="color:#986801;--shiki-dark:#D19A66"> null</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Description</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-modal-description"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-sm text-muted-foreground"</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                {</span><span style="color:#383A42;--shiki-dark:#E06C75">description</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Description</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">children</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Close</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> asChild</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon-sm"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              aria-label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Close"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"absolute top-4 right-4 opacity-70 hover:opacity-100"</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">XIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Close</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Content</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Portal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DialogPrimitive.Root</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProDrawer</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  trigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  description</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  children</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  open</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onOpenChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  side</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'right'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  trigger</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  description</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  children</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  open</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onOpenChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">open</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  side</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'top'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'right'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'bottom'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'left'</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Root</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> open</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">open</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onOpenChange</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">onOpenChange</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> direction</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">side</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">      {</span><span style="color:#383A42;--shiki-dark:#E06C75">trigger</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !=</span><span style="color:#986801;--shiki-dark:#D19A66"> null</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Trigger</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-drawer-trigger"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> asChild</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">trigger</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Trigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Portal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Overlay</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">            'fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0'</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          }</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Content</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-drawer-content"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">            'group/drawer-content fixed z-50 flex h-auto flex-col bg-background data-[vaul-drawer-direction=top]:inset-x-0 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[80vh] data-[vaul-drawer-direction=top]:rounded-b-lg data-[vaul-drawer-direction=top]:border-b data-[vaul-drawer-direction=bottom]:inset-x-0 data-[vaul-drawer-direction=bottom]:bottom-0 data-[vaul-drawer-direction=bottom]:mt-24 data-[vaul-drawer-direction=bottom]:max-h-[80vh] data-[vaul-drawer-direction=bottom]:rounded-t-lg data-[vaul-drawer-direction=bottom]:border-t data-[vaul-drawer-direction=right]:inset-y-0 data-[vaul-drawer-direction=right]:right-0 data-[vaul-drawer-direction=right]:w-3/4 data-[vaul-drawer-direction=right]:border-l data-[vaul-drawer-direction=right]:sm:max-w-sm data-[vaul-drawer-direction=left]:inset-y-0 data-[vaul-drawer-direction=left]:left-0 data-[vaul-drawer-direction=left]:w-3/4 data-[vaul-drawer-direction=left]:border-r data-[vaul-drawer-direction=left]:sm:max-w-sm'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">              'mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full bg-muted group-data-[vaul-drawer-direction=bottom]/drawer-content:block'</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">            }</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-drawer-header"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">              'flex shrink-0 flex-col gap-0.5 p-4 group-data-[vaul-drawer-direction=bottom]/drawer-content:text-center group-data-[vaul-drawer-direction=top]/drawer-content:text-center md:gap-1.5 md:text-left'</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">            }</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Title</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-drawer-title"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"font-semibold text-foreground"</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">            {</span><span style="color:#383A42;--shiki-dark:#E06C75">description</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !=</span><span style="color:#986801;--shiki-dark:#D19A66"> null</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Description</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-drawer-description"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"text-sm text-muted-foreground"</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                {</span><span style="color:#383A42;--shiki-dark:#E06C75">description</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Description</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">children</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Content</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Portal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">DrawerPrimitive.Root</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProConfirm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  trigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  title</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  description</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  open</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onOpenChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onConfirm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  cancelText</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Cancel'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  confirmText</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Confirm'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'destructive'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  trigger</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  title</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  description</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  open</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onOpenChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">open</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onConfirm</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Promise</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">void</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  cancelText</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  confirmText</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'default'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'destructive'</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">internalOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setInternalOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">loading</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setLoading</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">value</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">open</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    onOpenChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProModal</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      trigger</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">trigger</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      title</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">title</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      description</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">description</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      open</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">open</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> internalOpen</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      onOpenChange</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">setOpen</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-end"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"outline"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">loading</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">cancelText</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">variant</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          loading</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">loading</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#A626A4;--shiki-dark:#C678DD">async</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">            if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">loading</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span></span>
+<span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">            setLoading</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">            try</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">              await</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> onConfirm</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.()</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            } </span><span style="color:#A626A4;--shiki-dark:#C678DD">finally</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              setLoading</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            }</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        ></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">confirmText</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProModal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-overlay-demo",{"item":{"name":"pro-overlay-demo","description":"Reusable modal, drawer, and confirm shells.","iframeHeight":"280px","installName":"pro-overlay"},"tree":[{"name":"examples","children":[{"name":"pro-overlay-demo.tsx","path":"examples/pro-overlay-demo.tsx"}]},{"name":"overlay","children":[{"name":"index.tsx","path":"overlay/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-overlay-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"overlay/index.tsx","content":"$5","highlightedContent":"$6"}]}]]}],["$L7"],"$L8"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ZkFqAS5rNzbDqz2PoZYVq"}
+7:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/12kys~5j.z7wt.js","async":true}]
+8:["$","$L9",null,{"children":["$","$a",null,{"name":"Next.MetadataOutlet","children":"$@b"}]}]
+b:null
