@@ -1363,95 +1363,99 @@ function ProTableToolbar<TData>({
   })
   return (
     <div className="flex flex-wrap items-start gap-2 md:items-center">
-      {searchColumn && (
-        <Input
-          placeholder={searchPlaceholder}
-          value={searchValue}
-          onChange={(event) => searchColumn.setFilterValue(event.target.value || undefined)}
-          disabled={disabled}
-          allowClear={false}
-          inputClassName="h-8"
-          className="w-full md:w-[200px]"
-        />
-      )}
-      {filterControls}
-      {table.getState().columnFilters.length > 0 && (
-        <ProButton
-          variant="ghost"
-          className="h-8 px-2 text-muted-foreground"
-          disabled={disabled}
-          onClick={() => table.resetColumnFilters()}
-        >
-          <X className="size-4" />
-          Reset
-        </ProButton>
-      )}
-      {actions}
-      {refresh && (
-        <ProButton variant="ghost" tooltip="Refresh" disabled={disabled} onClick={refresh}>
-          <RefreshCw className="size-4" />
-        </ProButton>
-      )}
-      {density && onTableSizeChange && (
-        <DropdownMenuPrimitive.Root>
-          <DropdownMenuPrimitive.Trigger asChild>
-            <ProButton variant="ghost" tooltip="Density" disabled={disabled}>
-              <AlignJustify size={16} />
-            </ProButton>
-          </DropdownMenuPrimitive.Trigger>
-          <DropdownMenuPrimitive.Portal>
-            <DropdownMenuPrimitive.Content
-              align="end"
-              sideOffset={4}
-              className={
-                'z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95'
-              }
-            >
-              {TABLE_SIZE_OPTIONS.map((option) => (
-                <DropdownMenuPrimitive.Item
-                  key={option.value}
-                  className={
-                    'relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50'
-                  }
-                  onSelect={() => onTableSizeChange(option.value)}
-                >
-                  <Check
-                    className={cn(
-                      'size-4',
-                      tableSize === option.value ? 'opacity-100' : 'opacity-0',
-                    )}
-                  />
-                  <span>{option.label}</span>
-                </DropdownMenuPrimitive.Item>
-              ))}
-            </DropdownMenuPrimitive.Content>
-          </DropdownMenuPrimitive.Portal>
-        </DropdownMenuPrimitive.Root>
-      )}
-      {columns && (
-        <DropdownMenuPrimitive.Root>
-          <DropdownMenuPrimitive.Trigger asChild>
-            <ProButton variant="ghost" tooltip="Columns" disabled={disabled}>
-              <SlidersHorizontal size={16} />
-            </ProButton>
-          </DropdownMenuPrimitive.Trigger>
-          <DropdownMenuPrimitive.Portal>
-            <DropdownMenuPrimitive.Content
-              align="end"
-              sideOffset={4}
-              className={
-                'z-50 max-h-(--radix-dropdown-menu-content-available-height) w-[240px] min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border bg-popover p-0 text-popover-foreground shadow-md data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95'
-              }
-            >
-              <ProTableColumnSettings
-                table={table}
-                defaultColumnOrder={defaultColumnOrder}
-                defaultColumnPinning={defaultColumnPinning}
-              />
-            </DropdownMenuPrimitive.Content>
-          </DropdownMenuPrimitive.Portal>
-        </DropdownMenuPrimitive.Root>
-      )}
+      <div className="flex min-w-0 flex-1 flex-wrap items-start gap-2 md:items-center">
+        {searchColumn && (
+          <Input
+            placeholder={searchPlaceholder}
+            value={searchValue}
+            onChange={(event) => searchColumn.setFilterValue(event.target.value || undefined)}
+            disabled={disabled}
+            allowClear={false}
+            inputClassName="h-8"
+            className="w-full md:w-[200px]"
+          />
+        )}
+        {filterControls}
+        {table.getState().columnFilters.length > 0 && (
+          <ProButton
+            variant="ghost"
+            className="h-8 px-2 text-muted-foreground"
+            disabled={disabled}
+            onClick={() => table.resetColumnFilters()}
+          >
+            <X className="size-4" />
+            Reset
+          </ProButton>
+        )}
+      </div>
+      <div className="flex flex-wrap items-center justify-end gap-2 md:ml-auto">
+        {actions}
+        {refresh && (
+          <ProButton variant="ghost" tooltip="Refresh" disabled={disabled} onClick={refresh}>
+            <RefreshCw className="size-4" />
+          </ProButton>
+        )}
+        {density && onTableSizeChange && (
+          <DropdownMenuPrimitive.Root>
+            <DropdownMenuPrimitive.Trigger asChild>
+              <ProButton variant="ghost" tooltip="Density" disabled={disabled}>
+                <AlignJustify size={16} />
+              </ProButton>
+            </DropdownMenuPrimitive.Trigger>
+            <DropdownMenuPrimitive.Portal>
+              <DropdownMenuPrimitive.Content
+                align="end"
+                sideOffset={4}
+                className={
+                  'z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95'
+                }
+              >
+                {TABLE_SIZE_OPTIONS.map((option) => (
+                  <DropdownMenuPrimitive.Item
+                    key={option.value}
+                    className={
+                      'relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50'
+                    }
+                    onSelect={() => onTableSizeChange(option.value)}
+                  >
+                    <Check
+                      className={cn(
+                        'size-4',
+                        tableSize === option.value ? 'opacity-100' : 'opacity-0',
+                      )}
+                    />
+                    <span>{option.label}</span>
+                  </DropdownMenuPrimitive.Item>
+                ))}
+              </DropdownMenuPrimitive.Content>
+            </DropdownMenuPrimitive.Portal>
+          </DropdownMenuPrimitive.Root>
+        )}
+        {columns && (
+          <DropdownMenuPrimitive.Root>
+            <DropdownMenuPrimitive.Trigger asChild>
+              <ProButton variant="ghost" tooltip="Columns" disabled={disabled}>
+                <SlidersHorizontal size={16} />
+              </ProButton>
+            </DropdownMenuPrimitive.Trigger>
+            <DropdownMenuPrimitive.Portal>
+              <DropdownMenuPrimitive.Content
+                align="end"
+                sideOffset={4}
+                className={
+                  'z-50 max-h-(--radix-dropdown-menu-content-available-height) w-[240px] min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border bg-popover p-0 text-popover-foreground shadow-md data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95'
+                }
+              >
+                <ProTableColumnSettings
+                  table={table}
+                  defaultColumnOrder={defaultColumnOrder}
+                  defaultColumnPinning={defaultColumnPinning}
+                />
+              </DropdownMenuPrimitive.Content>
+            </DropdownMenuPrimitive.Portal>
+          </DropdownMenuPrimitive.Root>
+        )}
+      </div>
     </div>
   )
 }
