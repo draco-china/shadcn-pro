@@ -25,6 +25,7 @@ export function FieldCalendar({ className, showOutsideDays = true, ...props }: F
 
   return (
     <DayPicker
+      {...props}
       showOutsideDays={showOutsideDays}
       className={cn(
         'group/calendar bg-background p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=field-popover-content]_&]:bg-transparent',
@@ -110,7 +111,6 @@ export function FieldCalendar({ className, showOutsideDays = true, ...props }: F
         },
         DayButton: FieldCalendarDayButton,
       }}
-      {...props}
     />
   )
 }

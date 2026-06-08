@@ -6,6 +6,15 @@ import { type BundledLanguage, bundledLanguages, codeToTokensBase, type ThemedTo
 import { cn } from '@/lib/utils'
 import { CopyButton, ProButton } from '../../base/button'
 
+interface CodeLine {
+  index: number
+  tokens: ThemedToken[]
+  content: string
+  indent: number
+  isFoldable: boolean
+  foldEnd: number
+}
+
 export function CodeViewer({
   code,
   lang = 'typescript',
@@ -23,16 +32,7 @@ export function CodeViewer({
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set())
   const isLight = theme === 'light'
-  const lines = useMemo<
-    {
-      index: number
-      tokens: ThemedToken[]
-      content: string
-      indent: number
-      isFoldable: boolean
-      foldEnd: number
-    }[]
-  >(() => {
+  const lines = useMemo<CodeLine[]>(() => {
     const lines = (code ? code.split('\n') : []).map((content, index) => {
       const indent = content.search(/[^ \t]/)
       return {
