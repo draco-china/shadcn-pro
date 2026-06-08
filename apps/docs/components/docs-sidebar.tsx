@@ -19,7 +19,6 @@ import {
 const TOP_LEVEL_SECTIONS = [
   { name: 'Introduction', href: '/docs' },
   { name: 'Installation', href: '/docs/installation' },
-  { name: 'Changelog', href: '/docs/changelog' },
 ]
 
 const COMPONENTS = [
