@@ -16,7 +16,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Copy, GripVertical, Plus, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, Copy, GripVertical, Plus, Trash2 } from 'lucide-react'
 import { type CSSProperties, type ReactNode, useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../../button'
@@ -47,6 +47,8 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
       update: (next: TItem | ((current: TItem) => TItem)) => void
       duplicate: () => void
       remove: () => void
+      moveUp: () => void
+      moveDown: () => void
     },
   ) => ReactNode
   max?: number
@@ -100,6 +102,12 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
     commit([...items.slice(0, index + 1), structuredClone(items[index]), ...items.slice(index + 1)])
   }
 
+  function move(index: number, nextIndex: number) {
+    if (nextIndex < 0 || nextIndex >= items.length || index === nextIndex) return
+    setIds((prev) => arrayMove(prev, index, nextIndex))
+    commit(arrayMove(items, index, nextIndex))
+  }
+
   return (
     <div className={cn('space-y-2', className)}>
       <DndContext
@@ -123,14 +131,20 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
               id={ids[index]}
               onDuplicate={() => duplicate(index)}
               onRemove={() => remove(index)}
+              onMoveUp={() => move(index, index - 1)}
+              onMoveDown={() => move(index, index + 1)}
               disabled={disabled}
               canDuplicate={canAddItem}
               canRemove={items.length > min}
+              canMoveUp={index > 0}
+              canMoveDown={index < items.length - 1}
             >
               {renderItem(item, index, {
                 update: (next) => update(index, next),
                 duplicate: () => duplicate(index),
                 remove: () => remove(index),
+                moveUp: () => move(index, index - 1),
+                moveDown: () => move(index, index + 1),
               })}
             </SortableItem>
           ))}
@@ -160,17 +174,25 @@ function SortableItem({
   children,
   onDuplicate,
   onRemove,
+  onMoveUp,
+  onMoveDown,
   disabled,
   canDuplicate = true,
   canRemove = true,
+  canMoveUp = true,
+  canMoveDown = true,
 }: {
   id: string
   children: ReactNode
   onDuplicate: () => void
   onRemove: () => void
+  onMoveUp: () => void
+  onMoveDown: () => void
   disabled?: boolean
   canDuplicate?: boolean
   canRemove?: boolean
+  canMoveUp?: boolean
+  canMoveDown?: boolean
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id,
@@ -187,44 +209,66 @@ function SortableItem({
       style={style}
       className="group relative flex items-start gap-2 rounded-md border bg-card p-3"
     >
-      <ProButton
-        {...attributes}
-        {...listeners}
-        variant="ghost"
-        size="icon-sm"
-        disabled={disabled}
-        className={'mt-1 cursor-grab active:cursor-grabbing disabled:cursor-not-allowed'}
-        aria-label="Drag to reorder"
-      >
-        <GripVertical />
-      </ProButton>
-
       <div className="min-w-0 flex-1 space-y-3">{children}</div>
 
-      {canDuplicate && (
-        <ProButton
-          variant="ghost"
-          size="icon-sm"
-          disabled={disabled}
-          className="shrink-0"
-          onClick={onDuplicate}
-          aria-label="Duplicate item"
-        >
-          <Copy />
-        </ProButton>
-      )}
+      {(canDuplicate || canRemove || canMoveUp || canMoveDown) && (
+        <div className="mt-0.5 flex shrink-0 items-center gap-1">
+          {canDuplicate && (
+            <ProButton
+              variant="ghost"
+              size="icon-sm"
+              disabled={disabled}
+              onClick={onDuplicate}
+              aria-label="Duplicate item"
+            >
+              <Copy />
+            </ProButton>
+          )}
 
-      {canRemove && (
-        <ProButton
-          variant="ghost"
-          size="icon-sm"
-          disabled={disabled}
-          className="shrink-0"
-          onClick={onRemove}
-          aria-label="Remove item"
-        >
-          <Trash2 />
-        </ProButton>
+          {canRemove && (
+            <ProButton
+              variant="destructive"
+              size="icon-sm"
+              disabled={disabled}
+              onClick={onRemove}
+              aria-label="Remove item"
+            >
+              <Trash2 />
+            </ProButton>
+          )}
+
+          <ProButton
+            {...attributes}
+            {...listeners}
+            variant="ghost"
+            size="icon-sm"
+            disabled={disabled}
+            className="cursor-grab active:cursor-grabbing disabled:cursor-not-allowed"
+            aria-label="Drag to reorder"
+          >
+            <GripVertical />
+          </ProButton>
+
+          <ProButton
+            variant="ghost"
+            size="icon-sm"
+            disabled={disabled || !canMoveUp}
+            onClick={onMoveUp}
+            aria-label="Move item up"
+          >
+            <ArrowUp />
+          </ProButton>
+
+          <ProButton
+            variant="ghost"
+            size="icon-sm"
+            disabled={disabled || !canMoveDown}
+            onClick={onMoveDown}
+            aria-label="Move item down"
+          >
+            <ArrowDown />
+          </ProButton>
+        </div>
       )}
     </div>
   )
