@@ -525,7 +525,7 @@ export function ProEditor({
         {toolbar !== false && (
           <div
             className={
-              'flex h-9 flex-wrap items-center gap-1 border-b border-input bg-background px-2'
+              'flex min-h-9 w-full flex-col gap-1 border-b border-input bg-background px-2 py-1 md:flex-row md:items-center md:justify-between'
             }
           >
             <span className="px-3 text-sm font-medium text-foreground capitalize">
@@ -533,62 +533,62 @@ export function ProEditor({
                 ? (toolbarTitle(editor.toolbarContext) ?? defaultToolbarTitle)
                 : (toolbarTitle ?? defaultToolbarTitle)}
             </span>
-            <span className="hidden flex-1 md:block" />
-            {editor.hasPreview && toolbarMode && (
-              <>
+            <div className="flex flex-wrap items-center justify-end gap-1 md:ml-auto md:shrink-0">
+              {typeof toolbar === 'function' ? toolbar(editor.toolbarContext) : toolbar}
+              {editor.hasPreview && toolbarMode && (
+                <>
+                  <ProButton
+                    size="icon-xs"
+                    variant={previewModeActive ? 'secondary' : 'ghost'}
+                    tooltip={previewModeActive ? 'Hide Preview' : 'Preview'}
+                    onClick={() => editor.setMode(previewModeActive ? 'edit' : 'preview')}
+                  >
+                    {previewModeActive ? <EyeOff size={14} /> : <Eye size={14} />}
+                  </ProButton>
+                  <ProButton
+                    size="icon-xs"
+                    variant={editor.isSplitView ? 'secondary' : 'ghost'}
+                    tooltip="Split View"
+                    onClick={() =>
+                      editor.setMode(editor.effectiveMode === 'split' ? 'edit' : 'split')
+                    }
+                  >
+                    <Columns2 size={14} />
+                  </ProButton>
+                </>
+              )}
+              {toolbarFormat && (
                 <ProButton
                   size="icon-xs"
-                  variant={previewModeActive ? 'secondary' : 'ghost'}
-                  tooltip={previewModeActive ? 'Hide Preview' : 'Preview'}
-                  onClick={() => editor.setMode(previewModeActive ? 'edit' : 'preview')}
+                  variant="ghost"
+                  tooltip="Format"
+                  disabled={disabled}
+                  onClick={editor.handleFormat}
                 >
-                  {previewModeActive ? <EyeOff size={14} /> : <Eye size={14} />}
+                  <WandSparkles size={14} />
                 </ProButton>
+              )}
+              {toolbarCopy && (
+                <CopyButton
+                  size="icon-xs"
+                  variant="ghost"
+                  icon={<Copy size={14} />}
+                  tooltip="Copy"
+                  disabled={disabled}
+                  copy={editor.toolbarContext.value}
+                />
+              )}
+              {fullscreen !== false && (
                 <ProButton
                   size="icon-xs"
-                  variant={editor.isSplitView ? 'secondary' : 'ghost'}
-                  tooltip="Split View"
-                  onClick={() =>
-                    editor.setMode(editor.effectiveMode === 'split' ? 'edit' : 'split')
-                  }
+                  variant="ghost"
+                  tooltip={editor.fullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+                  onClick={() => editor.setFullscreen(!editor.fullscreen)}
                 >
-                  <Columns2 size={14} />
+                  {editor.fullscreen ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
                 </ProButton>
-                <span className="hidden flex-1 md:block" />
-              </>
-            )}
-            {typeof toolbar === 'function' ? toolbar(editor.toolbarContext) : toolbar}
-            {toolbarFormat && (
-              <ProButton
-                size="icon-xs"
-                variant="ghost"
-                tooltip="Format"
-                disabled={disabled}
-                onClick={editor.handleFormat}
-              >
-                <WandSparkles size={14} />
-              </ProButton>
-            )}
-            {toolbarCopy && (
-              <CopyButton
-                size="icon-xs"
-                variant="ghost"
-                icon={<Copy size={14} />}
-                tooltip="Copy"
-                disabled={disabled}
-                copy={editor.toolbarContext.value}
-              />
-            )}
-            {fullscreen !== false && (
-              <ProButton
-                size="icon-xs"
-                variant="ghost"
-                tooltip={editor.fullscreen ? 'Exit fullscreen' : 'Fullscreen'}
-                onClick={() => editor.setFullscreen(!editor.fullscreen)}
-              >
-                {editor.fullscreen ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
-              </ProButton>
-            )}
+              )}
+            </div>
           </div>
         )}
         <div

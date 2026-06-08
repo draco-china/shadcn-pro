@@ -1362,7 +1362,7 @@ function ProTableToolbar<TData>({
     ]
   })
   return (
-    <div className="flex flex-wrap items-start gap-2 md:items-center">
+    <div className="flex w-full flex-col gap-2 md:flex-row md:items-center md:justify-between">
       <div className="flex min-w-0 flex-1 flex-wrap items-start gap-2 md:items-center">
         {searchColumn && (
           <Input
@@ -1388,7 +1388,7 @@ function ProTableToolbar<TData>({
           </ProButton>
         )}
       </div>
-      <div className="flex flex-wrap items-center justify-end gap-2 md:ml-auto">
+      <div className="flex flex-wrap items-center justify-end gap-2 md:ml-auto md:shrink-0">
         {actions}
         {refresh && (
           <ProButton variant="ghost" tooltip="Refresh" disabled={disabled} onClick={refresh}>
