@@ -1,3 +1,11 @@
+## [1.16.16](https://github.com/draco-china/shadcn-pro/compare/v1.16.15...v1.16.16) (2026-06-08)
+
+
+### Bug Fixes
+
+* remove empty markdown alert paragraph ([5e9e9be](https://github.com/draco-china/shadcn-pro/commit/5e9e9becebba568242453c6040fe406a8c0fbb21))
+* restore markdown alert spacing ([bc68b50](https://github.com/draco-china/shadcn-pro/commit/bc68b502ed28030f050b5c59255fe8761da7064e))
+
 ## [1.16.15](https://github.com/draco-china/shadcn-pro/compare/v1.16.14...v1.16.15) (2026-06-08)
 
 
