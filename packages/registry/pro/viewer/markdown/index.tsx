@@ -103,8 +103,8 @@ const alertVariants = cva('', {
   variants: {
     element: {
       surface:
-        'not-prose my-5 rounded-lg border px-4 py-2.5 text-sm text-foreground shadow-sm [&_p]:my-0 [&_p+p]:mt-1.5',
-      title: 'mb-1 flex items-start gap-2 font-semibold',
+        'not-prose my-5 rounded-lg border px-4 py-3 text-sm text-foreground shadow-sm [&_p]:my-0 [&_p+p]:mt-2',
+      title: 'mb-2 flex items-start gap-2 font-semibold',
     },
     variant: {
       note: '',
