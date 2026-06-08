@@ -136,7 +136,7 @@ export default function ProFormDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>5:T421e,'use client'
+<span class="line" data-line=""></span></code></pre>5:T41d6,'use client'
 
 import { InfoIcon } from 'lucide-react'
 import { type ReactNode, useRef, useState } from 'react'
@@ -557,9 +557,9 @@ export function FormItem({
               variant="ghost"
               size="icon-xs"
               tooltip={tooltip ?? description}
-              className="size-4 cursor-help text-muted-foreground hover:text-foreground"
+              className="cursor-help"
             >
-              <InfoIcon className="size-3.5" />
+              <InfoIcon />
             </ProButton>
           )}
           {required && (
@@ -804,7 +804,7 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
     />
   )
 }
-6:T35ff0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+6:T35ec0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useRef</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
@@ -1225,9 +1225,9 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon-xs"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> description</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 cursor-help text-muted-foreground hover:text-foreground"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"cursor-help"</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">InfoIcon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
@@ -1912,7 +1912,7 @@ export function ProConfirm({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProModal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-form-demo",{"item":{"name":"pro-form-demo","description":"Schema-driven form builder with submit actions.","iframeHeight":"537px","installName":"pro-form"},"tree":[{"name":"examples","children":[{"name":"pro-form-demo.tsx","path":"examples/pro-form-demo.tsx"}]},{"name":"form","children":[{"name":"index.tsx","path":"form/index.tsx"}]},{"name":"overlay","children":[{"name":"index.tsx","path":"overlay/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-form-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"form/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"overlay/index.tsx","content":"$7","highlightedContent":"$8"}]}],"$L9","$La","$Lb","$Lc"]}],["$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"EW_boqCg3cAZlSWmNHjqN"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-form-demo",{"item":{"name":"pro-form-demo","description":"Schema-driven form builder with submit actions.","iframeHeight":"537px","installName":"pro-form"},"tree":[{"name":"examples","children":[{"name":"pro-form-demo.tsx","path":"examples/pro-form-demo.tsx"}]},{"name":"form","children":[{"name":"index.tsx","path":"form/index.tsx"}]},{"name":"overlay","children":[{"name":"index.tsx","path":"overlay/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-form-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"form/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"overlay/index.tsx","content":"$7","highlightedContent":"$8"}]}],"$L9","$La","$Lb","$Lc"]}],["$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"4IfQ6arueeW4DsfjJpx1r"}
 f:T905,'use client'
 
 import { useState } from 'react'
@@ -2031,7 +2031,7 @@ export default function ProFormLinkageDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>11:T421e,'use client'
+<span class="line" data-line=""></span></code></pre>11:T41d6,'use client'
 
 import { InfoIcon } from 'lucide-react'
 import { type ReactNode, useRef, useState } from 'react'
@@ -2452,9 +2452,9 @@ export function FormItem({
               variant="ghost"
               size="icon-xs"
               tooltip={tooltip ?? description}
-              className="size-4 cursor-help text-muted-foreground hover:text-foreground"
+              className="cursor-help"
             >
-              <InfoIcon className="size-3.5" />
+              <InfoIcon />
             </ProButton>
           )}
           {required && (
@@ -2699,7 +2699,7 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
     />
   )
 }
-12:T35ff0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+12:T35ec0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useRef</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
@@ -3120,9 +3120,9 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon-xs"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> description</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 cursor-help text-muted-foreground hover:text-foreground"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"cursor-help"</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">InfoIcon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
@@ -3890,7 +3890,7 @@ export default function ProFormValidationDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>17:T421e,'use client'
+<span class="line" data-line=""></span></code></pre>17:T41d6,'use client'
 
 import { InfoIcon } from 'lucide-react'
 import { type ReactNode, useRef, useState } from 'react'
@@ -4311,9 +4311,9 @@ export function FormItem({
               variant="ghost"
               size="icon-xs"
               tooltip={tooltip ?? description}
-              className="size-4 cursor-help text-muted-foreground hover:text-foreground"
+              className="cursor-help"
             >
-              <InfoIcon className="size-3.5" />
+              <InfoIcon />
             </ProButton>
           )}
           {required && (
@@ -4558,7 +4558,7 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
     />
   )
 }
-18:T35ff0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+18:T35ec0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useRef</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
@@ -4979,9 +4979,9 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon-xs"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> description</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 cursor-help text-muted-foreground hover:text-foreground"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"cursor-help"</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">InfoIcon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
@@ -5797,7 +5797,7 @@ export default function ProFormModalDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>1d:T421e,'use client'
+<span class="line" data-line=""></span></code></pre>1d:T41d6,'use client'
 
 import { InfoIcon } from 'lucide-react'
 import { type ReactNode, useRef, useState } from 'react'
@@ -6218,9 +6218,9 @@ export function FormItem({
               variant="ghost"
               size="icon-xs"
               tooltip={tooltip ?? description}
-              className="size-4 cursor-help text-muted-foreground hover:text-foreground"
+              className="cursor-help"
             >
-              <InfoIcon className="size-3.5" />
+              <InfoIcon />
             </ProButton>
           )}
           {required && (
@@ -6465,7 +6465,7 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
     />
   )
 }
-1e:T35ff0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+1e:T35ec0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useRef</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
@@ -6886,9 +6886,9 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon-xs"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> description</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 cursor-help text-muted-foreground hover:text-foreground"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"cursor-help"</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">InfoIcon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
@@ -7698,7 +7698,7 @@ export default function ProFormDrawerDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>23:T421e,'use client'
+<span class="line" data-line=""></span></code></pre>23:T41d6,'use client'
 
 import { InfoIcon } from 'lucide-react'
 import { type ReactNode, useRef, useState } from 'react'
@@ -8119,9 +8119,9 @@ export function FormItem({
               variant="ghost"
               size="icon-xs"
               tooltip={tooltip ?? description}
-              className="size-4 cursor-help text-muted-foreground hover:text-foreground"
+              className="cursor-help"
             >
-              <InfoIcon className="size-3.5" />
+              <InfoIcon />
             </ProButton>
           )}
           {required && (
@@ -8366,7 +8366,7 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
     />
   )
 }
-24:T35ff0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+24:T35ec0,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useRef</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
@@ -8787,9 +8787,9 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon-xs"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> description</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-4 cursor-help text-muted-foreground hover:text-foreground"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"cursor-help"</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">InfoIcon</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          {</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>

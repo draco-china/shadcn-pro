@@ -260,7 +260,7 @@ export default function ProEditorDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>5:T5630,'use client'
+<span class="line" data-line=""></span></code></pre>5:T570e,'use client'
 
 import MonacoEditor, { type Monaco } from '@monaco-editor/react'
 import { shikiToMonaco, textmateThemeToMonacoTheme } from '@shikijs/monaco'
@@ -280,7 +280,7 @@ import {
 } from 'react'
 import { createHighlighter, type Highlighter } from 'shiki'
 import { cn } from '@/lib/utils'
-import { CopyButton, ProButton } from '../base/button'
+import { CopyButton, ProButton, type ProButtonSize } from '../base/button'
 import { useFullscreen } from '../base/hooks/use-fullscreen'
 
 type EditorTheme = 'light' | 'dark'
@@ -295,6 +295,7 @@ interface EditorToolbarActionContext {
   disabled: boolean
   language: string
   theme: EditorTheme
+  size?: ProButtonSize
   mode: EditorViewMode
   hasPreview: boolean
   isSplitView: boolean
@@ -314,6 +315,7 @@ interface EditorProps {
   theme?: EditorTheme
   className?: string
   height?: string | number
+  size?: ProButtonSize
   toolbar?: false | EditorToolbarSlot
   toolbarTitle?: EditorToolbarSlot
   toolbarMode?: boolean
@@ -477,12 +479,21 @@ function useEditorState({
   disabled,
   language = 'plaintext',
   theme,
+  size,
   height,
   fullscreen,
   preview,
 }: Pick<
   EditorProps,
-  'value' | 'onChange' | 'disabled' | 'language' | 'theme' | 'height' | 'fullscreen' | 'preview'
+  | 'value'
+  | 'onChange'
+  | 'disabled'
+  | 'language'
+  | 'theme'
+  | 'size'
+  | 'height'
+  | 'fullscreen'
+  | 'preview'
 >) {
   const [localValue, setLocalValue] = useState(value ?? '')
   const [uncontrolledMode, setUncontrolledMode] = useState<EditorViewMode>(
@@ -544,6 +555,7 @@ function useEditorState({
     disabled: disabled ?? false,
     language,
     theme: theme ?? 'dark',
+    size,
     mode: effectiveMode,
     hasPreview,
     isSplitView,
@@ -727,6 +739,7 @@ export function ProEditor({
   theme = 'dark',
   className,
   height,
+  size = 'icon',
   toolbar,
   toolbarTitle,
   toolbarMode = true,
@@ -741,6 +754,7 @@ export function ProEditor({
     disabled,
     language,
     theme,
+    size,
     height,
     fullscreen,
     preview,
@@ -800,37 +814,41 @@ export function ProEditor({
               {editor.hasPreview && toolbarMode && (
                 <>
                   <ProButton
+                    size={size}
                     variant={previewModeActive ? 'secondary' : 'ghost'}
                     tooltip={previewModeActive ? 'Hide Preview' : 'Preview'}
                     onClick={() => editor.setMode(previewModeActive ? 'edit' : 'preview')}
                   >
-                    {previewModeActive ? <EyeOff size={16} /> : <Eye size={16} />}
+                    {previewModeActive ? <EyeOff /> : <Eye />}
                   </ProButton>
                   <ProButton
+                    size={size}
                     variant={editor.isSplitView ? 'secondary' : 'ghost'}
                     tooltip="Split View"
                     onClick={() =>
                       editor.setMode(editor.effectiveMode === 'split' ? 'edit' : 'split')
                     }
                   >
-                    <Columns2 size={16} />
+                    <Columns2 />
                   </ProButton>
                 </>
               )}
               {toolbarFormat && (
                 <ProButton
+                  size={size}
                   variant="ghost"
                   tooltip="Format"
                   disabled={disabled}
                   onClick={editor.handleFormat}
                 >
-                  <WandSparkles size={16} />
+                  <WandSparkles />
                 </ProButton>
               )}
               {toolbarCopy && (
                 <CopyButton
+                  size={size}
                   variant="ghost"
-                  icon={<Copy size={16} />}
+                  icon={<Copy />}
                   tooltip="Copy"
                   disabled={disabled}
                   copy={editor.toolbarContext.value}
@@ -838,11 +856,12 @@ export function ProEditor({
               )}
               {fullscreen !== false && (
                 <ProButton
+                  size={size}
                   variant="ghost"
                   tooltip={editor.fullscreen ? 'Exit fullscreen' : 'Fullscreen'}
                   onClick={() => editor.setFullscreen(!editor.fullscreen)}
                 >
-                  {editor.fullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+                  {editor.fullscreen ? <Minimize2 /> : <Maximize2 />}
                 </ProButton>
               )}
             </div>
@@ -932,7 +951,7 @@ export function ProEditor({
     </div>
   )
 }
-6:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+6:T375e4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Monaco</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">shikiToMonaco</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">textmateThemeToMonacoTheme</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@shikijs/monaco'</span></span>
@@ -952,7 +971,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createHighlighter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Highlighter</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'shiki'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">CopyButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/button'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">CopyButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProButtonSize</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/button'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/hooks/use-fullscreen'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'light'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span></span>
@@ -967,6 +986,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  language</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  theme</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  size</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProButtonSize</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  mode</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorViewMode</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hasPreview</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  isSplitView</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
@@ -986,6 +1006,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  theme</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  height</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  size</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProButtonSize</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  toolbar</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> false</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarSlot</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  toolbarTitle</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarSlot</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  toolbarMode</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
@@ -1149,12 +1170,21 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  language</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'plaintext'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  theme</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  size</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  height</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  preview</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Pick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span></span>
 <span class="line" data-line=""><span style="color:#C18401;--shiki-dark:#E5C07B">  EditorProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">  'value'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'onChange'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'disabled'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'language'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'theme'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'height'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'fullscreen'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'preview'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'value'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'onChange'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'disabled'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'language'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'theme'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'size'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'height'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'fullscreen'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'preview'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">>) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">localValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setLocalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> ''</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">uncontrolledMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setUncontrolledMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorViewMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>(</span></span>
@@ -1216,6 +1246,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    theme</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> theme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    size</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    mode</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> effectiveMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    hasPreview</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    isSplitView</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1399,6 +1430,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  theme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  height</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  size</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'icon'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  toolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  toolbarTitle</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  toolbarMode</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1413,6 +1445,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    theme</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    size</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    height</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    preview</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1472,37 +1505,41 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">hasPreview</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#E06C75"> toolbarMode</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'secondary'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Hide Preview'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Preview'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#E45649;--shiki-dark:#E5C07B"> editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'edit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'preview'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EyeOff</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Eye</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EyeOff</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Eye</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">isSplitView</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'secondary'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Split View"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">                      editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">effectiveMode</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'split'</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'edit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'split'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Columns2</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Columns2</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;/></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarFormat</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Format"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">handleFormat</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">WandSparkles</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">WandSparkles</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarCopy</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CopyButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Copy"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  copy</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -1510,11 +1547,12 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !==</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Exit fullscreen'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Fullscreen'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#E45649;--shiki-dark:#E5C07B"> editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#56B6C2">!</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                  {</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Minimize2</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Maximize2</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                  {</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Minimize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Maximize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -1604,7 +1642,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-editor-demo",{"item":{"name":"pro-editor-demo","description":"Monaco-powered code editor with externally controlled language, syntax theme, format, and live preview.","iframeHeight":"490px","installName":"pro-editor"},"tree":[{"name":"examples","children":[{"name":"pro-editor-demo.tsx","path":"examples/pro-editor-demo.tsx"}]},{"name":"editor","children":[{"name":"index.tsx","path":"editor/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-editor-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"editor/index.tsx","content":"$5","highlightedContent":"$6"}]}],"$L7","$L8"]}],["$L9"],"$La"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"EW_boqCg3cAZlSWmNHjqN"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-editor-demo",{"item":{"name":"pro-editor-demo","description":"Monaco-powered code editor with externally controlled language, syntax theme, format, and live preview.","iframeHeight":"490px","installName":"pro-editor"},"tree":[{"name":"examples","children":[{"name":"pro-editor-demo.tsx","path":"examples/pro-editor-demo.tsx"}]},{"name":"editor","children":[{"name":"index.tsx","path":"editor/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-editor-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"editor/index.tsx","content":"$5","highlightedContent":"$6"}]}],"$L7","$L8"]}],["$L9"],"$La"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"4IfQ6arueeW4DsfjJpx1r"}
 b:T193a,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> "react"</span></span>
@@ -1633,7 +1671,7 @@ b:T193a,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>c:T5630,'use client'
+<span class="line" data-line=""></span></code></pre>c:T570e,'use client'
 
 import MonacoEditor, { type Monaco } from '@monaco-editor/react'
 import { shikiToMonaco, textmateThemeToMonacoTheme } from '@shikijs/monaco'
@@ -1653,7 +1691,7 @@ import {
 } from 'react'
 import { createHighlighter, type Highlighter } from 'shiki'
 import { cn } from '@/lib/utils'
-import { CopyButton, ProButton } from '../base/button'
+import { CopyButton, ProButton, type ProButtonSize } from '../base/button'
 import { useFullscreen } from '../base/hooks/use-fullscreen'
 
 type EditorTheme = 'light' | 'dark'
@@ -1668,6 +1706,7 @@ interface EditorToolbarActionContext {
   disabled: boolean
   language: string
   theme: EditorTheme
+  size?: ProButtonSize
   mode: EditorViewMode
   hasPreview: boolean
   isSplitView: boolean
@@ -1687,6 +1726,7 @@ interface EditorProps {
   theme?: EditorTheme
   className?: string
   height?: string | number
+  size?: ProButtonSize
   toolbar?: false | EditorToolbarSlot
   toolbarTitle?: EditorToolbarSlot
   toolbarMode?: boolean
@@ -1850,12 +1890,21 @@ function useEditorState({
   disabled,
   language = 'plaintext',
   theme,
+  size,
   height,
   fullscreen,
   preview,
 }: Pick<
   EditorProps,
-  'value' | 'onChange' | 'disabled' | 'language' | 'theme' | 'height' | 'fullscreen' | 'preview'
+  | 'value'
+  | 'onChange'
+  | 'disabled'
+  | 'language'
+  | 'theme'
+  | 'size'
+  | 'height'
+  | 'fullscreen'
+  | 'preview'
 >) {
   const [localValue, setLocalValue] = useState(value ?? '')
   const [uncontrolledMode, setUncontrolledMode] = useState<EditorViewMode>(
@@ -1917,6 +1966,7 @@ function useEditorState({
     disabled: disabled ?? false,
     language,
     theme: theme ?? 'dark',
+    size,
     mode: effectiveMode,
     hasPreview,
     isSplitView,
@@ -2100,6 +2150,7 @@ export function ProEditor({
   theme = 'dark',
   className,
   height,
+  size = 'icon',
   toolbar,
   toolbarTitle,
   toolbarMode = true,
@@ -2114,6 +2165,7 @@ export function ProEditor({
     disabled,
     language,
     theme,
+    size,
     height,
     fullscreen,
     preview,
@@ -2173,37 +2225,41 @@ export function ProEditor({
               {editor.hasPreview && toolbarMode && (
                 <>
                   <ProButton
+                    size={size}
                     variant={previewModeActive ? 'secondary' : 'ghost'}
                     tooltip={previewModeActive ? 'Hide Preview' : 'Preview'}
                     onClick={() => editor.setMode(previewModeActive ? 'edit' : 'preview')}
                   >
-                    {previewModeActive ? <EyeOff size={16} /> : <Eye size={16} />}
+                    {previewModeActive ? <EyeOff /> : <Eye />}
                   </ProButton>
                   <ProButton
+                    size={size}
                     variant={editor.isSplitView ? 'secondary' : 'ghost'}
                     tooltip="Split View"
                     onClick={() =>
                       editor.setMode(editor.effectiveMode === 'split' ? 'edit' : 'split')
                     }
                   >
-                    <Columns2 size={16} />
+                    <Columns2 />
                   </ProButton>
                 </>
               )}
               {toolbarFormat && (
                 <ProButton
+                  size={size}
                   variant="ghost"
                   tooltip="Format"
                   disabled={disabled}
                   onClick={editor.handleFormat}
                 >
-                  <WandSparkles size={16} />
+                  <WandSparkles />
                 </ProButton>
               )}
               {toolbarCopy && (
                 <CopyButton
+                  size={size}
                   variant="ghost"
-                  icon={<Copy size={16} />}
+                  icon={<Copy />}
                   tooltip="Copy"
                   disabled={disabled}
                   copy={editor.toolbarContext.value}
@@ -2211,11 +2267,12 @@ export function ProEditor({
               )}
               {fullscreen !== false && (
                 <ProButton
+                  size={size}
                   variant="ghost"
                   tooltip={editor.fullscreen ? 'Exit fullscreen' : 'Fullscreen'}
                   onClick={() => editor.setFullscreen(!editor.fullscreen)}
                 >
-                  {editor.fullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+                  {editor.fullscreen ? <Minimize2 /> : <Maximize2 />}
                 </ProButton>
               )}
             </div>
@@ -2305,7 +2362,7 @@ export function ProEditor({
     </div>
   )
 }
-d:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+d:T375e4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Monaco</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">shikiToMonaco</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">textmateThemeToMonacoTheme</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@shikijs/monaco'</span></span>
@@ -2325,7 +2382,7 @@ d:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createHighlighter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Highlighter</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'shiki'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">CopyButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/button'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">CopyButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProButtonSize</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/button'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/hooks/use-fullscreen'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'light'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span></span>
@@ -2340,6 +2397,7 @@ d:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  language</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  theme</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  size</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProButtonSize</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  mode</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorViewMode</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hasPreview</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  isSplitView</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
@@ -2359,6 +2417,7 @@ d:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  theme</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  height</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  size</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProButtonSize</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  toolbar</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> false</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarSlot</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  toolbarTitle</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarSlot</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  toolbarMode</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
@@ -2522,12 +2581,21 @@ d:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  language</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'plaintext'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  theme</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  size</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  height</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  preview</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Pick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span></span>
 <span class="line" data-line=""><span style="color:#C18401;--shiki-dark:#E5C07B">  EditorProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">  'value'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'onChange'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'disabled'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'language'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'theme'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'height'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'fullscreen'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'preview'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'value'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'onChange'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'disabled'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'language'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'theme'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'size'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'height'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'fullscreen'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'preview'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">>) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">localValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setLocalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> ''</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">uncontrolledMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setUncontrolledMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorViewMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>(</span></span>
@@ -2589,6 +2657,7 @@ d:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    theme</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> theme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    size</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    mode</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> effectiveMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    hasPreview</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    isSplitView</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -2772,6 +2841,7 @@ d:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  theme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  height</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  size</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'icon'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  toolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  toolbarTitle</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  toolbarMode</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -2786,6 +2856,7 @@ d:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    theme</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    size</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    height</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    preview</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -2845,37 +2916,41 @@ d:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">hasPreview</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#E06C75"> toolbarMode</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'secondary'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Hide Preview'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Preview'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#E45649;--shiki-dark:#E5C07B"> editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'edit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'preview'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EyeOff</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Eye</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EyeOff</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Eye</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">isSplitView</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'secondary'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Split View"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">                      editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">effectiveMode</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'split'</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'edit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'split'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Columns2</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Columns2</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;/></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarFormat</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Format"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">handleFormat</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">WandSparkles</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">WandSparkles</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarCopy</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CopyButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Copy"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  copy</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -2883,11 +2958,12 @@ d:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !==</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Exit fullscreen'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Fullscreen'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#E45649;--shiki-dark:#E5C07B"> editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#56B6C2">!</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                  {</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Minimize2</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Maximize2</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                  {</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Minimize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Maximize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -3078,7 +3154,7 @@ f:T2ed5,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>10:T5630,'use client'
+<span class="line" data-line=""></span></code></pre>10:T570e,'use client'
 
 import MonacoEditor, { type Monaco } from '@monaco-editor/react'
 import { shikiToMonaco, textmateThemeToMonacoTheme } from '@shikijs/monaco'
@@ -3098,7 +3174,7 @@ import {
 } from 'react'
 import { createHighlighter, type Highlighter } from 'shiki'
 import { cn } from '@/lib/utils'
-import { CopyButton, ProButton } from '../base/button'
+import { CopyButton, ProButton, type ProButtonSize } from '../base/button'
 import { useFullscreen } from '../base/hooks/use-fullscreen'
 
 type EditorTheme = 'light' | 'dark'
@@ -3113,6 +3189,7 @@ interface EditorToolbarActionContext {
   disabled: boolean
   language: string
   theme: EditorTheme
+  size?: ProButtonSize
   mode: EditorViewMode
   hasPreview: boolean
   isSplitView: boolean
@@ -3132,6 +3209,7 @@ interface EditorProps {
   theme?: EditorTheme
   className?: string
   height?: string | number
+  size?: ProButtonSize
   toolbar?: false | EditorToolbarSlot
   toolbarTitle?: EditorToolbarSlot
   toolbarMode?: boolean
@@ -3295,12 +3373,21 @@ function useEditorState({
   disabled,
   language = 'plaintext',
   theme,
+  size,
   height,
   fullscreen,
   preview,
 }: Pick<
   EditorProps,
-  'value' | 'onChange' | 'disabled' | 'language' | 'theme' | 'height' | 'fullscreen' | 'preview'
+  | 'value'
+  | 'onChange'
+  | 'disabled'
+  | 'language'
+  | 'theme'
+  | 'size'
+  | 'height'
+  | 'fullscreen'
+  | 'preview'
 >) {
   const [localValue, setLocalValue] = useState(value ?? '')
   const [uncontrolledMode, setUncontrolledMode] = useState<EditorViewMode>(
@@ -3362,6 +3449,7 @@ function useEditorState({
     disabled: disabled ?? false,
     language,
     theme: theme ?? 'dark',
+    size,
     mode: effectiveMode,
     hasPreview,
     isSplitView,
@@ -3545,6 +3633,7 @@ export function ProEditor({
   theme = 'dark',
   className,
   height,
+  size = 'icon',
   toolbar,
   toolbarTitle,
   toolbarMode = true,
@@ -3559,6 +3648,7 @@ export function ProEditor({
     disabled,
     language,
     theme,
+    size,
     height,
     fullscreen,
     preview,
@@ -3618,37 +3708,41 @@ export function ProEditor({
               {editor.hasPreview && toolbarMode && (
                 <>
                   <ProButton
+                    size={size}
                     variant={previewModeActive ? 'secondary' : 'ghost'}
                     tooltip={previewModeActive ? 'Hide Preview' : 'Preview'}
                     onClick={() => editor.setMode(previewModeActive ? 'edit' : 'preview')}
                   >
-                    {previewModeActive ? <EyeOff size={16} /> : <Eye size={16} />}
+                    {previewModeActive ? <EyeOff /> : <Eye />}
                   </ProButton>
                   <ProButton
+                    size={size}
                     variant={editor.isSplitView ? 'secondary' : 'ghost'}
                     tooltip="Split View"
                     onClick={() =>
                       editor.setMode(editor.effectiveMode === 'split' ? 'edit' : 'split')
                     }
                   >
-                    <Columns2 size={16} />
+                    <Columns2 />
                   </ProButton>
                 </>
               )}
               {toolbarFormat && (
                 <ProButton
+                  size={size}
                   variant="ghost"
                   tooltip="Format"
                   disabled={disabled}
                   onClick={editor.handleFormat}
                 >
-                  <WandSparkles size={16} />
+                  <WandSparkles />
                 </ProButton>
               )}
               {toolbarCopy && (
                 <CopyButton
+                  size={size}
                   variant="ghost"
-                  icon={<Copy size={16} />}
+                  icon={<Copy />}
                   tooltip="Copy"
                   disabled={disabled}
                   copy={editor.toolbarContext.value}
@@ -3656,11 +3750,12 @@ export function ProEditor({
               )}
               {fullscreen !== false && (
                 <ProButton
+                  size={size}
                   variant="ghost"
                   tooltip={editor.fullscreen ? 'Exit fullscreen' : 'Fullscreen'}
                   onClick={() => editor.setFullscreen(!editor.fullscreen)}
                 >
-                  {editor.fullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+                  {editor.fullscreen ? <Minimize2 /> : <Maximize2 />}
                 </ProButton>
               )}
             </div>
@@ -3750,7 +3845,7 @@ export function ProEditor({
     </div>
   )
 }
-11:T36f11,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+11:T375e4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#E45649;--shiki-dark:#E06C75"> MonacoEditor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Monaco</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@monaco-editor/react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">shikiToMonaco</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">textmateThemeToMonacoTheme</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@shikijs/monaco'</span></span>
@@ -3770,7 +3865,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">} </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">createHighlighter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> Highlighter</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'shiki'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">CopyButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/button'</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">CopyButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ProButtonSize</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/button'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/hooks/use-fullscreen'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'light'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span></span>
@@ -3785,6 +3880,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  language</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  theme</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  size</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProButtonSize</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  mode</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorViewMode</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  hasPreview</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  isSplitView</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
@@ -3804,6 +3900,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  theme</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorTheme</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  height</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  size</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProButtonSize</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  toolbar</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> false</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarSlot</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  toolbarTitle</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> EditorToolbarSlot</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  toolbarMode</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
@@ -3967,12 +4064,21 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  language</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'plaintext'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  theme</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  size</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  height</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  preview</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Pick</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span></span>
 <span class="line" data-line=""><span style="color:#C18401;--shiki-dark:#E5C07B">  EditorProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">  'value'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'onChange'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'disabled'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'language'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'theme'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'height'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'fullscreen'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'preview'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'value'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'onChange'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'disabled'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'language'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'theme'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'size'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'height'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'fullscreen'</span></span>
+<span class="line" data-line=""><span style="color:#0184BC;--shiki-dark:#ABB2BF">  |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'preview'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">>) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">localValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setLocalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> ''</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">uncontrolledMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setUncontrolledMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EditorViewMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>(</span></span>
@@ -4034,6 +4140,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    disabled</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> disabled</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    theme</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> theme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    size</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    mode</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> effectiveMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    hasPreview</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    isSplitView</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -4217,6 +4324,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  theme</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'dark'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  height</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  size</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'icon'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  toolbar</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  toolbarTitle</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  toolbarMode</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -4231,6 +4339,7 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    language</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    theme</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    size</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    height</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    preview</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -4290,37 +4399,41 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">hasPreview</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#E06C75"> toolbarMode</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'secondary'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Hide Preview'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Preview'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#E45649;--shiki-dark:#E5C07B"> editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'edit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'preview'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EyeOff</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Eye</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    {</span><span style="color:#383A42;--shiki-dark:#E06C75">previewModeActive</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">EyeOff</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Eye</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">isSplitView</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'secondary'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Split View"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">                      editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">effectiveMode</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'split'</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'edit'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'split'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                    }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Columns2</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Columns2</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;/></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarFormat</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Format"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">handleFormat</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">WandSparkles</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">WandSparkles</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">toolbarCopy</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CopyButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Copy"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  copy</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E5C07B">toolbarContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -4328,11 +4441,12 @@ export function ProEditor({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              {</span><span style="color:#383A42;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !==</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">size</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Exit fullscreen'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Fullscreen'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                  onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#E45649;--shiki-dark:#E5C07B"> editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">setFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#56B6C2">!</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                  {</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Minimize2</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Maximize2</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#986801;--shiki-dark:#D19A66">16</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                  {</span><span style="color:#E45649;--shiki-dark:#E5C07B">editor</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">fullscreen</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Minimize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /> </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Maximize2</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -5520,7 +5634,7 @@ const markdownBlockElements: Pick<
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">ul</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'my-5 ml-6 list-disc space-y-1'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#C678DD"> {</span><span style="color:#383A42;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">elementProps</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  },</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>14:T2439,'use client'
+<span class="line" data-line=""></span></code></pre>14:T22f0,'use client'
 
 import { ChevronRight, Copy } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
@@ -5684,15 +5798,12 @@ export function CodeViewer({
         <CopyButton
           variant="ghost"
           size="icon-xs"
-          icon={<Copy className="size-3.5" />}
+          icon={<Copy />}
           tooltip="Copy code"
           copy={code}
-          className={cn(
-            'size-6 opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100',
-            isLight
-              ? 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-              : 'text-muted-foreground hover:bg-accent/70 hover:text-foreground',
-          )}
+          className={
+            'opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100'
+          }
         />
       </div>
       <div
@@ -5736,13 +5847,11 @@ export function CodeViewer({
                           variant="ghost"
                           size="icon-xs"
                           onClick={() => toggleFold(line.index)}
-                          className={
-                            'flex h-full w-4 items-center justify-center text-muted-foreground hover:text-foreground'
-                          }
+                          className="flex h-full w-4 items-center justify-center"
                           aria-label={isFolded ? 'Expand' : 'Collapse'}
                         >
                           <ChevronRight
-                            className={cn('size-3 transition-transform', !isFolded && 'rotate-90')}
+                            className={cn('transition-transform', !isFolded && 'rotate-90')}
                           />
                         </ProButton>
                       ) : null}
@@ -5791,7 +5900,7 @@ function renderTokenLineHtml(tokens: ThemedToken[]) {
     })
     .join('')
 }
-15:T162d9,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+15:T15d45,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronRight</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">useEffect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useMemo</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
@@ -5955,15 +6064,12 @@ function renderTokenLineHtml(tokens: ThemedToken[]) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">CopyButton</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon-xs"</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-3.5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          icon</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Copy code"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          copy</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">code</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">            'size-6 opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">            isLight</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">              :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground hover:bg-accent/70 hover:text-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">            'opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100'</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">          }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
@@ -6007,13 +6113,11 @@ function renderTokenLineHtml(tokens: ThemedToken[]) {
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                          variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                          size</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"icon-xs"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                          onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> toggleFold</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#E45649;--shiki-dark:#E5C07B">line</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">index</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">                            'flex h-full w-4 items-center justify-center text-muted-foreground hover:text-foreground'</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">                          }</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                          className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex h-full w-4 items-center justify-center"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                          aria-label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">isFolded</span><span style="color:#383A42;--shiki-dark:#C678DD"> ?</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Expand'</span><span style="color:#383A42;--shiki-dark:#C678DD"> :</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Collapse'</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                        ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ChevronRight</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                            className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'size-3 transition-transform'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#56B6C2">!</span><span style="color:#383A42;--shiki-dark:#E06C75">isFolded</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'rotate-90'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                            className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'transition-transform'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#56B6C2">!</span><span style="color:#383A42;--shiki-dark:#E06C75">isFolded</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'rotate-90'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                          /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                      ) </span><span style="color:#383A42;--shiki-dark:#C678DD">:</span><span style="color:#986801;--shiki-dark:#D19A66"> null</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
