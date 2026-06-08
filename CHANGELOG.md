@@ -1,3 +1,10 @@
+## [1.16.28](https://github.com/draco-china/shadcn-pro/compare/v1.16.27...v1.16.28) (2026-06-08)
+
+
+### Bug Fixes
+
+* render adaptive money and slider styles ([8acd741](https://github.com/draco-china/shadcn-pro/commit/8acd741f671d3c6abc0719767fb7da7bf9350d44))
+
 ## [1.16.27](https://github.com/draco-china/shadcn-pro/compare/v1.16.26...v1.16.27) (2026-06-08)
 
 
