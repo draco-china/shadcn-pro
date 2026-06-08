@@ -28,6 +28,7 @@
       },
       "suspicious": {
         "noDuplicateCustomProperties": "off",
+        "noReactForwardRef": "error",
         "noArrayIndexKey": "warn"
       },
       "a11y": {

@@ -1,6 +1,6 @@
 'use client'
 
-import { type RefObject, useEffect, useRef, useState } from 'react'
+import { type RefObject, useCallback, useEffect, useRef, useState } from 'react'
 
 export function useFullscreen({
   fullscreen: controlledFullscreen,
@@ -20,10 +20,14 @@ export function useFullscreen({
   const [uncontrolledFullscreen, setUncontrolledFullscreen] = useState(defaultFullscreen)
   const fullscreen = controlledFullscreen ?? uncontrolledFullscreen
 
-  function setFullscreen(nextFullscreen: boolean) {
-    if (controlledFullscreen === undefined) setUncontrolledFullscreen(nextFullscreen)
-    onFullscreenChange?.(nextFullscreen)
-  }
+  const setFullscreen = useCallback(
+    (nextFullscreen: boolean) => {
+      if (controlledFullscreen === undefined) setUncontrolledFullscreen(nextFullscreen)
+      onFullscreenChange?.(nextFullscreen)
+    },
+    [controlledFullscreen, onFullscreenChange],
+  )
+
   useEffect(() => {
     if (mode !== 'screen') return
 
@@ -35,7 +39,7 @@ export function useFullscreen({
 
     document.addEventListener('fullscreenchange', handleFullscreenChange)
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange)
-  }, [controlledFullscreen, mode, onFullscreenChange, targetRef])
+  }, [mode, setFullscreen, targetRef])
 
   useEffect(() => {
     if (mode !== 'screen') return
@@ -45,15 +49,15 @@ export function useFullscreen({
 
     if (fullscreen) {
       if (document.fullscreenElement !== element) {
-        void element.requestFullscreen?.()?.catch(() => setFullscreen(false))
+        element.requestFullscreen?.()?.catch(() => setFullscreen(false))
       }
       return
     }
 
     if (document.fullscreenElement === element) {
-      void document.exitFullscreen?.()?.catch(() => setFullscreen(true))
+      document.exitFullscreen?.()?.catch(() => setFullscreen(true))
     }
-  }, [controlledFullscreen, fullscreen, mode, onFullscreenChange, targetRef])
+  }, [fullscreen, mode, setFullscreen, targetRef])
 
   return {
     ref: targetRef,

@@ -34,14 +34,7 @@ export function ProPagination({
   const currentPage = Math.min(Math.max(current, 1), safePageCount)
   const isFirstPage = currentPage <= 1
   const isLastPage = currentPage >= safePageCount
-  const pageRange =
-    safePageCount <= 5
-      ? Array.from({ length: safePageCount }, (_, index) => index + 1)
-      : currentPage <= 3
-        ? [1, 2, 3, 4, '...', safePageCount]
-        : currentPage >= safePageCount - 2
-          ? [1, '...', safePageCount - 3, safePageCount - 2, safePageCount - 1, safePageCount]
-          : [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', safePageCount]
+  const pageRange = getPaginationRange(currentPage, safePageCount)
 
   return (
     <div
@@ -213,4 +206,13 @@ export function ProPagination({
       </div>
     </div>
   )
+}
+
+function getPaginationRange(currentPage: number, pageCount: number) {
+  if (pageCount <= 5) return Array.from({ length: pageCount }, (_, index) => index + 1)
+  if (currentPage <= 3) return [1, 2, 3, 4, '...', pageCount]
+  if (currentPage >= pageCount - 2) {
+    return [1, '...', pageCount - 3, pageCount - 2, pageCount - 1, pageCount]
+  }
+  return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', pageCount]
 }

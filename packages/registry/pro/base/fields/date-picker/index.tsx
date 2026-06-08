@@ -87,11 +87,7 @@ export function DateRangePicker({
           >
             <CalendarIcon className="mr-2 size-4" />
             <span className="min-w-0 flex-1 truncate text-left">
-              {from && to
-                ? `${format(from, 'LLL dd, y')} - ${format(to, 'LLL dd, y')}`
-                : from
-                  ? format(from, 'LLL dd, y')
-                  : placeholder}
+              {getDateRangeLabel(from, to, placeholder)}
             </span>
             <span className="relative flex size-4 shrink-0 items-center justify-center">
               {from && !disabled && (
@@ -121,4 +117,10 @@ export function DateRangePicker({
       </FieldPopoverContent>
     </PopoverPrimitive.Root>
   )
+}
+
+function getDateRangeLabel(from: Date | undefined, to: Date | undefined, placeholder: string) {
+  if (from && to) return `${format(from, 'LLL dd, y')} - ${format(to, 'LLL dd, y')}`
+  if (from) return format(from, 'LLL dd, y')
+  return placeholder
 }

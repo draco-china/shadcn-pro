@@ -157,7 +157,7 @@ export function ProList<TData>({
     setRequestLoading(true)
     setRequestError(undefined)
 
-    void Promise.resolve(request(state))
+    Promise.resolve(request(state))
       .then((result) => {
         if (canceled) return
         setListData(result.data)
@@ -217,7 +217,7 @@ export function ProList<TData>({
 
       for (const filter of filters ?? []) {
         const value = filterValues[filter.key]
-        const values = Array.isArray(value) ? value : value ? [value] : []
+        const values = toArrayValue(value)
         if (values.length === 0) continue
 
         const matched = values.some((item) =>
@@ -257,13 +257,42 @@ export function ProList<TData>({
     reset,
   }
   const headerContent = typeof header === 'function' ? header(context) : header
-  const toolbarActions =
-    toolbar === false ? undefined : typeof toolbar === 'function' ? toolbar(context) : toolbar
+  const toolbarActions = renderToolbarSlot(toolbar, context)
 
   useEffect(() => {
     if (pagination === false || pageCount <= 0 || paginationState.pageIndex < pageCount) return
     setPaginationState((current) => ({ ...current, pageIndex: pageCount - 1 }))
   }, [pageCount, pagination, paginationState.pageIndex])
+
+  let listContent: ReactNode
+  if (loadingEnabled) {
+    listContent = <ProListSkeleton rows={loadingRows} />
+  } else if (pageData.length > 0) {
+    listContent = pageData.map((record, index) => {
+      const absoluteIndex =
+        pagination === false || request
+          ? index
+          : paginationState.pageIndex * paginationState.pageSize + index
+      return (
+        <div
+          key={getProListItemKey(record, absoluteIndex, rowKey)}
+          data-slot="pro-list-item"
+          data-variant={variant}
+          data-direction={direction}
+          className={cn(
+            getProListItemClassName({ variant, direction, split }),
+            typeof itemClassName === 'function'
+              ? itemClassName(record, absoluteIndex)
+              : itemClassName,
+          )}
+        >
+          {renderItem(record, absoluteIndex, context)}
+        </div>
+      )
+    })
+  } else {
+    listContent = <ProListEmpty>{requestError ? 'Failed to load data' : emptyText}</ProListEmpty>
+  }
 
   return (
     <div
@@ -306,34 +335,7 @@ export function ProList<TData>({
             listClassName,
           )}
         >
-          {loadingEnabled ? (
-            <ProListSkeleton rows={loadingRows} />
-          ) : pageData.length > 0 ? (
-            pageData.map((record, index) => {
-              const absoluteIndex =
-                pagination === false || request
-                  ? index
-                  : paginationState.pageIndex * paginationState.pageSize + index
-              return (
-                <div
-                  key={getProListItemKey(record, absoluteIndex, rowKey)}
-                  data-slot="pro-list-item"
-                  data-variant={variant}
-                  data-direction={direction}
-                  className={cn(
-                    getProListItemClassName({ variant, direction, split }),
-                    typeof itemClassName === 'function'
-                      ? itemClassName(record, absoluteIndex)
-                      : itemClassName,
-                  )}
-                >
-                  {renderItem(record, absoluteIndex, context)}
-                </div>
-              )
-            })
-          ) : (
-            <ProListEmpty>{requestError ? 'Failed to load data' : emptyText}</ProListEmpty>
-          )}
+          {listContent}
         </div>
       </div>
       {pagination !== false && (
@@ -411,12 +413,7 @@ function ProListToolbar<TData>({
           const values = Array.isArray(rawFilterValue)
             ? rawFilterValue.filter((item): item is string => typeof item === 'string')
             : []
-          const filterValue =
-            typeof rawFilterValue === 'string'
-              ? rawFilterValue
-              : values.length === rawFilterValue?.length
-                ? values
-                : undefined
+          const filterValue = getFilterValue(rawFilterValue, values)
 
           return (
             <Select
@@ -503,6 +500,27 @@ function getProListItemsClassName({
   if (direction === 'horizontal') return 'grid gap-3 sm:grid-cols-2 xl:grid-cols-3'
   if (split) return 'overflow-hidden rounded-md border bg-background'
   return 'flex flex-col gap-3'
+}
+
+function toArrayValue(value: unknown) {
+  if (Array.isArray(value)) return value
+  if (value) return [value]
+  return []
+}
+
+function renderToolbarSlot<TData>(
+  toolbar: ProListProps<TData>['toolbar'],
+  context: ProListRenderContext<TData>,
+) {
+  if (toolbar === false) return undefined
+  if (typeof toolbar === 'function') return toolbar(context)
+  return toolbar
+}
+
+function getFilterValue(rawFilterValue: unknown, values: string[]) {
+  if (typeof rawFilterValue === 'string') return rawFilterValue
+  if (Array.isArray(rawFilterValue) && values.length === rawFilterValue.length) return values
+  return undefined
 }
 
 function getProListItemClassName({

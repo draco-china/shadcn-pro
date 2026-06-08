@@ -122,9 +122,9 @@ export function Upload({
     if (!newFiles.length) return
 
     if (!multiple) {
-      files.forEach((file) => {
+      for (const file of files) {
         if (file.url?.startsWith('blob:')) URL.revokeObjectURL(file.url)
-      })
+      }
       setFiles([newFiles[0]])
       return
     }
@@ -157,8 +157,8 @@ export function Upload({
           accept={accept}
           multiple={multiple}
           disabled={disabled || reachedMax}
-          onChange={(e) => {
-            void addFiles(e.target.files)
+          onChange={async (e) => {
+            await addFiles(e.target.files)
             e.currentTarget.value = ''
           }}
         />
@@ -180,6 +180,11 @@ export function UploadTrigger({
   const fileNames = upload.files.map((file) => file.name).join(', ')
   const hasFiles = upload.files.length > 0
   const canUpload = !upload.disabled && !upload.reachedMax
+  const triggerClassName =
+    variant === 'dropzone' && canUpload
+      ? cn('cursor-pointer hover:border-primary hover:bg-primary/5', className)
+      : className
+  const triggerContent = renderUploadTriggerContent({ variant, hasFiles, fileNames })
 
   if (variant === 'dropzone' && upload.reachedMax) return null
 
@@ -191,10 +196,7 @@ export function UploadTrigger({
       className={uploadTriggerVariants({
         variant,
         dragging,
-        className:
-          variant === 'dropzone' && canUpload
-            ? cn('cursor-pointer hover:border-primary hover:bg-primary/5', className)
-            : className,
+        className: triggerClassName,
       })}
       onClick={() => upload.inputRef.current?.click()}
       onDragOver={(event) => {
@@ -205,28 +207,42 @@ export function UploadTrigger({
       onDrop={(event) => {
         event.preventDefault()
         setDragging(false)
-        if (canUpload) void upload.addFiles(event.dataTransfer.files)
+        if (canUpload) upload.addFiles(event.dataTransfer.files).catch(() => {})
       }}
     >
-      {variant === 'compact' ? (
-        <>
-          <span
-            className={cn(
-              'min-w-0 flex-1 truncate text-left',
-              !hasFiles && 'text-muted-foreground',
-            )}
-          >
-            {hasFiles ? fileNames : 'Upload files'}
-          </span>
-          <UploadIcon className="ml-2 size-4 shrink-0 text-muted-foreground" />
-        </>
-      ) : (
-        <>
-          <UploadIcon className="size-6" />
-          <span>{hasFiles ? fileNames : 'Click or drag to upload'}</span>
-        </>
-      )}
+      {triggerContent}
     </ProButton>
+  )
+}
+
+function renderUploadTriggerContent({
+  variant,
+  hasFiles,
+  fileNames,
+}: {
+  variant: 'compact' | 'dropzone'
+  hasFiles: boolean
+  fileNames: string
+}) {
+  const label = hasFiles ? fileNames : 'Upload files'
+  if (variant === 'compact') {
+    return (
+      <>
+        <span
+          className={cn('min-w-0 flex-1 truncate text-left', !hasFiles && 'text-muted-foreground')}
+        >
+          {label}
+        </span>
+        <UploadIcon className="ml-2 size-4 shrink-0 text-muted-foreground" />
+      </>
+    )
+  }
+
+  return (
+    <>
+      <UploadIcon className="size-6" />
+      <span>{hasFiles ? fileNames : 'Click or drag to upload'}</span>
+    </>
   )
 }
 

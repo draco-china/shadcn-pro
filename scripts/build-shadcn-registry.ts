@@ -8,7 +8,7 @@ const outDir = join(root, 'apps/docs/public/r')
 const registryBaseUrl =
   process.env.SHADCN_PRO_REGISTRY_URL ?? 'https://draco-china.github.io/shadcn-pro/r'
 
-type RegistryComponent = {
+interface RegistryComponent {
   name: string
   description?: string
   category?: string
@@ -18,7 +18,7 @@ type RegistryComponent = {
   private?: boolean
 }
 
-type Registry = {
+interface Registry {
   version: string
   components: RegistryComponent[]
 }

@@ -52,11 +52,7 @@ export function Select({
   const [internalValue, setInternalValue] = useState<string | string[] | undefined>(defaultValue)
   const [open, setOpen] = useState(false)
   const currentValue = value ?? internalValue
-  const selectedValues = Array.isArray(currentValue)
-    ? currentValue
-    : typeof currentValue === 'string'
-      ? [currentValue]
-      : []
+  const selectedValues = getSelectedValues(currentValue)
   const selectedValueSet = new Set(selectedValues)
   const selectedOptions = options?.filter((option) => selectedValueSet.has(option.value)) ?? []
   const selectedCount = selectedOptions.length
@@ -102,33 +98,7 @@ export function Select({
             )}
           >
             <span className="flex min-w-0 flex-1 items-center gap-1 truncate text-left">
-              {selectedCount === 1 ? (
-                <span className="truncate">{selectedOptions[0]?.label}</span>
-              ) : selectedCount > 1 ? (
-                <>
-                  {selectedOptions.slice(0, 2).map((option) => (
-                    <span
-                      key={option.value}
-                      className={
-                        'inline-flex max-w-24 shrink-0 items-center justify-center truncate rounded-full bg-secondary px-1.5 py-0.5 text-xs font-medium text-secondary-foreground'
-                      }
-                    >
-                      {option.label}
-                    </span>
-                  ))}
-                  {selectedCount > 2 && (
-                    <span
-                      className={
-                        'inline-flex shrink-0 items-center justify-center rounded-full bg-secondary px-1.5 py-0.5 text-xs font-medium text-secondary-foreground'
-                      }
-                    >
-                      +{selectedCount - 2}
-                    </span>
-                  )}
-                </>
-              ) : (
-                selectPlaceholder
-              )}
+              {renderSelectedOptions(selectedOptions, selectedCount, selectPlaceholder)}
             </span>
             <span className="relative flex size-4 shrink-0 items-center justify-center">
               {showClear && (
@@ -558,6 +528,8 @@ function TreeNode({
   const childOptions = option.children ?? []
   const hasChildren = childOptions.length > 0
   const isSelected = selected.has(option.value)
+  const expandLabel = expanded ? 'Collapse' : 'Expand'
+  const ExpandIcon = expanded ? ChevronDown : ChevronRight
 
   return (
     <li>
@@ -571,11 +543,11 @@ function TreeNode({
           <ProButton
             variant="ghost"
             size="icon-xs"
-            aria-label={expanded ? 'Collapse' : 'Expand'}
+            aria-label={expandLabel}
             className="shrink-0"
             onClick={() => setExpanded(!expanded)}
           >
-            {expanded ? <ChevronDown /> : <ChevronRight />}
+            <ExpandIcon />
           </ProButton>
         ) : (
           <span className="size-6 shrink-0" aria-hidden />
@@ -631,5 +603,47 @@ function TreeNode({
         </ul>
       )}
     </li>
+  )
+}
+
+function getSelectedValues(value: string | string[] | undefined) {
+  if (Array.isArray(value)) return value
+  if (typeof value === 'string') return [value]
+  return []
+}
+
+function renderSelectedOptions(
+  selectedOptions: NestedOption[],
+  selectedCount: number,
+  placeholder: ReactNode,
+) {
+  if (selectedCount === 1) {
+    return <span className="truncate">{selectedOptions[0]?.label}</span>
+  }
+
+  if (selectedCount <= 1) return placeholder
+
+  return (
+    <>
+      {selectedOptions.slice(0, 2).map((option) => (
+        <span
+          key={option.value}
+          className={
+            'inline-flex max-w-24 shrink-0 items-center justify-center truncate rounded-full bg-secondary px-1.5 py-0.5 text-xs font-medium text-secondary-foreground'
+          }
+        >
+          {option.label}
+        </span>
+      ))}
+      {selectedCount > 2 && (
+        <span
+          className={
+            'inline-flex shrink-0 items-center justify-center rounded-full bg-secondary px-1.5 py-0.5 text-xs font-medium text-secondary-foreground'
+          }
+        >
+          +{selectedCount - 2}
+        </span>
+      )}
+    </>
   )
 }

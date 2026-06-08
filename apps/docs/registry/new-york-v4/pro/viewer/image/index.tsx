@@ -124,8 +124,7 @@ export function ImageViewer({
 
   if (!open || list.length === 0) return null
 
-  const portalTarget =
-    container === undefined ? (typeof document !== 'undefined' ? document.body : null) : container
+  const portalTarget = getPortalTarget(container)
 
   const hasMultipleImages = list.length > 1
 
@@ -292,4 +291,10 @@ export function ImageViewer({
 
   if (portalTarget) return createPortal(content, portalTarget)
   return content
+}
+
+function getPortalTarget(container: HTMLElement | null | undefined) {
+  if (container !== undefined) return container
+  if (typeof document === 'undefined') return null
+  return document.body
 }

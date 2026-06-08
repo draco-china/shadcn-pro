@@ -75,6 +75,19 @@ export function CodeViewer({
       ),
     [collapsed, lines],
   )
+  const codeContent =
+    status !== 'ready' || lines.length === 0 ? (
+      <div className="px-4 py-6 font-mono text-sm opacity-60">{getCodeStatusText(status)}</div>
+    ) : (
+      <CodeLinesTable
+        lines={lines}
+        hiddenLines={hiddenLines}
+        collapsed={collapsed}
+        isLight={isLight}
+        toggleFold={toggleFold}
+      />
+    )
+
   function toggleFold(lineIndex: number) {
     setCollapsed((prev) => {
       const next = new Set(prev)
@@ -87,14 +100,7 @@ export function CodeViewer({
   useEffect(() => {
     let cancelled = false
     const normalizedLang = lang.toLowerCase()
-    const highlightLang: BundledLanguage =
-      normalizedLang in bundledLanguages
-        ? (normalizedLang as BundledLanguage)
-        : normalizedLang === 'typescript' || normalizedLang === 'ts'
-          ? 'tsx'
-          : normalizedLang === 'javascript' || normalizedLang === 'js'
-            ? 'jsx'
-            : 'javascript'
+    const highlightLang = getBundledLanguage(normalizedLang)
 
     setStatus('loading')
     setCollapsed(new Set())
@@ -104,7 +110,7 @@ export function CodeViewer({
       setStatus('ready')
       return
     }
-    void codeToTokensBase(code, {
+    codeToTokensBase(code, {
       lang: highlightLang,
       theme: theme === 'dark' ? 'one-dark-pro' : 'one-light',
     })
@@ -175,80 +181,99 @@ export function CodeViewer({
           'min-h-0 flex-1 overflow-auto [scrollbar-width:thin] [scrollbar-color:transparent_transparent] hover:[scrollbar-color:var(--muted-foreground)_transparent] [&::-webkit-scrollbar]:size-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/35'
         }
       >
-        {status !== 'ready' || lines.length === 0 ? (
-          <div className="px-4 py-6 font-mono text-sm opacity-60">
-            {status === 'loading'
-              ? 'Loading...'
-              : status === 'error'
-                ? 'Unable to highlight code'
-                : 'No code'}
-          </div>
-        ) : (
-          <table className="w-full min-w-full border-collapse">
-            <tbody>
-              {lines.map((line) => {
-                if (hiddenLines.has(line.index)) return null
-                const isFolded = collapsed.has(line.index)
-
-                return (
-                  <tr
-                    key={line.index}
-                    className={cn(
-                      'group/line leading-6',
-                      isLight ? 'hover:bg-accent/60' : 'hover:bg-accent/40',
-                    )}
-                  >
-                    <td
-                      className={
-                        'w-10 select-none border-r border-border py-0 pl-2 pr-3 text-right font-mono text-xs text-muted-foreground'
-                      }
-                    >
-                      {line.index + 1}
-                    </td>
-                    <td className="w-4 select-none py-0">
-                      {line.isFoldable ? (
-                        <ProButton
-                          variant="ghost"
-                          size="icon-xs"
-                          onClick={() => toggleFold(line.index)}
-                          className="flex h-full w-4 items-center justify-center"
-                          aria-label={isFolded ? 'Expand' : 'Collapse'}
-                        >
-                          <ChevronRight
-                            className={cn('transition-transform', !isFolded && 'rotate-90')}
-                          />
-                        </ProButton>
-                      ) : null}
-                    </td>
-                    <td className="py-0 pl-2 pr-6 font-mono text-sm whitespace-pre">
-                      <span
-                        // biome-ignore lint/security/noDangerouslySetInnerHtml: escaped token content from shiki
-                        dangerouslySetInnerHTML={{
-                          __html: renderTokenLineHtml(line.tokens),
-                        }}
-                      />
-                      {isFolded && (
-                        <ProButton
-                          variant="outline"
-                          size="xs"
-                          onClick={() => toggleFold(line.index)}
-                          className={
-                            'ml-1 rounded border border-border px-1.5 py-0 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-                          }
-                        >
-                          {line.foldEnd - line.index} lines
-                        </ProButton>
-                      )}
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        )}
+        {codeContent}
       </div>
     </div>
   )
+}
+
+function CodeLinesTable({
+  lines,
+  hiddenLines,
+  collapsed,
+  isLight,
+  toggleFold,
+}: {
+  lines: CodeLine[]
+  hiddenLines: Set<number>
+  collapsed: Set<number>
+  isLight: boolean
+  toggleFold: (lineIndex: number) => void
+}) {
+  return (
+    <table className="w-full min-w-full border-collapse">
+      <tbody>
+        {lines.map((line) => {
+          if (hiddenLines.has(line.index)) return null
+          const isFolded = collapsed.has(line.index)
+          const foldLabel = isFolded ? 'Expand' : 'Collapse'
+          const foldControl = line.isFoldable ? (
+            <ProButton
+              variant="ghost"
+              size="icon-xs"
+              onClick={() => toggleFold(line.index)}
+              className="flex h-full w-4 items-center justify-center"
+              aria-label={foldLabel}
+            >
+              <ChevronRight className={cn('transition-transform', !isFolded && 'rotate-90')} />
+            </ProButton>
+          ) : null
+
+          return (
+            <tr
+              key={line.index}
+              className={cn(
+                'group/line leading-6',
+                isLight ? 'hover:bg-accent/60' : 'hover:bg-accent/40',
+              )}
+            >
+              <td
+                className={
+                  'w-10 select-none border-r border-border py-0 pl-2 pr-3 text-right font-mono text-xs text-muted-foreground'
+                }
+              >
+                {line.index + 1}
+              </td>
+              <td className="w-4 select-none py-0">{foldControl}</td>
+              <td className="py-0 pl-2 pr-6 font-mono text-sm whitespace-pre">
+                <span
+                  // biome-ignore lint/security/noDangerouslySetInnerHtml: escaped token content from shiki
+                  dangerouslySetInnerHTML={{
+                    __html: renderTokenLineHtml(line.tokens),
+                  }}
+                />
+                {isFolded && (
+                  <ProButton
+                    variant="outline"
+                    size="xs"
+                    onClick={() => toggleFold(line.index)}
+                    className={
+                      'ml-1 rounded border border-border px-1.5 py-0 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                    }
+                  >
+                    {line.foldEnd - line.index} lines
+                  </ProButton>
+                )}
+              </td>
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+  )
+}
+
+function getBundledLanguage(normalizedLang: string): BundledLanguage {
+  if (normalizedLang in bundledLanguages) return normalizedLang as BundledLanguage
+  if (normalizedLang === 'typescript' || normalizedLang === 'ts') return 'tsx'
+  if (normalizedLang === 'javascript' || normalizedLang === 'js') return 'jsx'
+  return 'javascript'
+}
+
+function getCodeStatusText(status: 'idle' | 'loading' | 'ready' | 'error') {
+  if (status === 'loading') return 'Loading...'
+  if (status === 'error') return 'Unable to highlight code'
+  return 'No code'
 }
 
 function renderTokenLineHtml(tokens: ThemedToken[]) {

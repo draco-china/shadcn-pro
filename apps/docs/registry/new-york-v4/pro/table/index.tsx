@@ -294,6 +294,16 @@ export function useProTableUrlState(params: {
   return { initialState, onChange }
 }
 
+interface ColumnFilterMeta<TData> {
+  options: Array<{
+    label: string
+    value: string
+  }>
+  placeholder?: string
+  multiple?: boolean
+  onFilter?: (value: string, record: TData) => boolean
+}
+
 declare module '@tanstack/react-table' {
   interface ColumnMeta<TData, TValue> {
     pinned?: 'left' | 'right'
@@ -304,15 +314,7 @@ declare module '@tanstack/react-table' {
       | {
           placeholder?: string
         }
-    filter?: {
-      options: Array<{
-        label: string
-        value: string
-      }>
-      placeholder?: string
-      multiple?: boolean
-      onFilter?: (value: string, record: TData) => boolean
-    }
+    filter?: ColumnFilterMeta<TData>
   }
   interface FilterMeta {
     itemRank?: RankingInfo
@@ -533,11 +535,9 @@ function getLeafColumnIds<TData, TValue>(columns: ColumnDef<TData, TValue>[]): s
 }
 
 function getSystemColumnPinning(id: string | undefined) {
-  return id === 'select' || id === 'drag'
-    ? 'left'
-    : id === 'actions' || id === 'operation'
-      ? 'right'
-      : undefined
+  if (id === 'select' || id === 'drag') return 'left'
+  if (id === 'actions' || id === 'operation') return 'right'
+  return undefined
 }
 
 function getPinnedColumnIds<TData, TValue>(
@@ -627,13 +627,7 @@ function withProTableColumnDefaults<TData, TValue>(
         : undefined
     const filter = column.meta?.filter
     const columnId = getColumnDefId(column, index)
-    const search =
-      column.meta?.search ??
-      (toolbarSearch === false || toolbarSearch === undefined
-        ? undefined
-        : typeof toolbarSearch === 'string'
-          ? toolbarSearch === columnId
-          : toolbarSearch.columnId === columnId)
+    const search = column.meta?.search ?? getColumnSearchEnabled(toolbarSearch, columnId)
     const shouldApplyFilter = filter && column.filterFn === undefined
     const shouldApplySearchFilter = search && !filter && column.filterFn === undefined
     const shouldApplyFuzzySort = search && column.sortingFn === undefined
@@ -664,32 +658,7 @@ function withProTableColumnDefaults<TData, TValue>(
         : {}),
       ...(shouldApplyFilter
         ? {
-            filterFn: filter.onFilter
-              ? (((row, _columnId, filterValue) => {
-                  if (filterValue === undefined || filterValue === null || filterValue === '') {
-                    return true
-                  }
-                  if (Array.isArray(filterValue)) {
-                    if (filterValue.length === 0) return true
-                    return filterValue.some((value) =>
-                      filter.onFilter?.(String(value), row.original),
-                    )
-                  }
-                  return !!filter.onFilter?.(String(filterValue), row.original)
-                }) satisfies FilterFn<TData>)
-              : filter.multiple
-                ? (((row, columnId, filterValue) => {
-                    if (filterValue === undefined || filterValue === null || filterValue === '') {
-                      return true
-                    }
-                    const rowValue = row.getValue(columnId)
-                    if (Array.isArray(filterValue)) {
-                      if (filterValue.length === 0) return true
-                      return filterValue.includes(rowValue)
-                    }
-                    return filterValue === rowValue
-                  }) satisfies FilterFn<TData>)
-                : 'equals',
+            filterFn: getColumnFilterFn(filter),
           }
         : {}),
       ...(shouldApplySearchFilter
@@ -724,6 +693,67 @@ function withProTableColumnDefaults<TData, TValue>(
         : {}),
     }
   })
+}
+
+function getColumnSearchEnabled(toolbarSearch: ProTableSearch | undefined, columnId: string) {
+  if (toolbarSearch === false || toolbarSearch === undefined) return undefined
+  if (typeof toolbarSearch === 'string') return toolbarSearch === columnId
+  return toolbarSearch.columnId === columnId
+}
+
+function getColumnFilterFn<TData>(filter: ColumnFilterMeta<TData>) {
+  if (filter.onFilter) {
+    return ((row, _columnId, filterValue) => {
+      if (filterValue === undefined || filterValue === null || filterValue === '') return true
+      if (Array.isArray(filterValue)) {
+        if (filterValue.length === 0) return true
+        return filterValue.some((value) => filter.onFilter?.(String(value), row.original))
+      }
+      return !!filter.onFilter?.(String(filterValue), row.original)
+    }) satisfies FilterFn<TData>
+  }
+
+  if (filter.multiple) {
+    return ((row, columnId, filterValue) => {
+      if (filterValue === undefined || filterValue === null || filterValue === '') return true
+      const rowValue = row.getValue(columnId)
+      if (Array.isArray(filterValue)) {
+        if (filterValue.length === 0) return true
+        return filterValue.includes(rowValue)
+      }
+      return filterValue === rowValue
+    }) satisfies FilterFn<TData>
+  }
+
+  return 'equals'
+}
+
+function renderToolbarSlot<TData>(
+  toolbar: ProTableProps<TData>['toolbar'] | ProTableProps<TData>['bulkToolbar'],
+  context: ProTableRenderContext<TData>,
+) {
+  if (toolbar === false) return undefined
+  if (typeof toolbar === 'function') return toolbar(context)
+  return toolbar
+}
+
+function getTablePaddingClass(size: TableSize) {
+  if (size === 'compact') return 'py-1'
+  if (size === 'middle') return 'py-2'
+  return 'py-3'
+}
+
+function getAriaSort(canSort: boolean, sorted: false | 'asc' | 'desc') {
+  if (!canSort) return undefined
+  if (sorted === 'asc') return 'ascending'
+  if (sorted === 'desc') return 'descending'
+  return 'none'
+}
+
+function renderSortIcon(sorted: false | 'asc' | 'desc') {
+  if (sorted === 'asc') return <ArrowUp size={14} />
+  if (sorted === 'desc') return <ArrowDown size={14} />
+  return <ArrowUpDown size={14} className="opacity-40" />
 }
 
 const collator = new Intl.Collator(undefined, {
@@ -918,7 +948,7 @@ export function ProTable<TData, TValue>({
     setRequestLoading(true)
     setRequestError(undefined)
 
-    void Promise.resolve(request(state))
+    Promise.resolve(request(state))
       .then((result) => {
         if (canceled) return
         setTableData(result.data)
@@ -961,22 +991,11 @@ export function ProTable<TData, TValue>({
   })
   const isFullLayout = (layout ?? 'full') === 'full'
   const headerContent = typeof header === 'function' ? header(proTable.renderContext) : header
-  const toolbarActions =
-    toolbar === false
-      ? undefined
-      : typeof toolbar === 'function'
-        ? toolbar(proTable.renderContext)
-        : toolbar
-  const bulkActions =
-    bulkToolbar === false
-      ? undefined
-      : typeof bulkToolbar === 'function'
-        ? bulkToolbar(proTable.renderContext)
-        : bulkToolbar
+  const toolbarActions = renderToolbarSlot(toolbar, proTable.renderContext)
+  const bulkActions = renderToolbarSlot(bulkToolbar, proTable.renderContext)
   const tableState = proTable.table.getState()
   const stickyHeader = table?.stickyHeader ?? true
-  const paddingClass =
-    proTable.tableSize === 'compact' ? 'py-1' : proTable.tableSize === 'middle' ? 'py-2' : 'py-3'
+  const paddingClass = getTablePaddingClass(proTable.tableSize)
   const content = (
     <>
       <div
@@ -1017,25 +1036,13 @@ export function ProTable<TData, TValue>({
                   const align =
                     header.column.columnDef.meta?.align ??
                     (pinned === 'right' ? 'right' : pinned || undefined)
-                  const ariaSort = canSort
-                    ? sorted === 'asc'
-                      ? 'ascending'
-                      : sorted === 'desc'
-                        ? 'descending'
-                        : 'none'
-                    : undefined
+                  const ariaSort = getAriaSort(canSort, sorted)
                   const headerContent = header.isPlaceholder ? null : (
                     <div className="flex items-center gap-1.5">
                       {flexRender(header.column.columnDef.header, header.getContext())}
                       {canSort && (
                         <span className="text-muted-foreground" aria-hidden="true">
-                          {sorted === 'asc' ? (
-                            <ArrowUp size={14} />
-                          ) : sorted === 'desc' ? (
-                            <ArrowDown size={14} />
-                          ) : (
-                            <ArrowUpDown size={14} className="opacity-40" />
-                          )}
+                          {renderSortIcon(sorted)}
                         </span>
                       )}
                     </div>
@@ -1296,6 +1303,32 @@ function ProTableBulkActions<TData>({
   )
 }
 
+function getSearchPlaceholder<TData>(
+  searchColumn: Column<TData, unknown> | undefined,
+  search: ProTableSearch | undefined,
+  columnSearchPlaceholder: string | undefined,
+) {
+  if (!searchColumn) return undefined
+  const fallback = columnSearchPlaceholder ?? `Search ${searchColumn.id}...`
+  if (typeof search === 'object') return search.placeholder ?? fallback
+  return fallback
+}
+
+function getFilterValue(rawFilterValue: unknown, values: string[]) {
+  if (typeof rawFilterValue === 'string') return rawFilterValue
+  if (Array.isArray(rawFilterValue) && values.length === rawFilterValue.length) return values
+  return undefined
+}
+
+function getAutoFilterValues(autoRender: boolean, cellValue: unknown) {
+  if (!autoRender) return []
+  if (typeof cellValue === 'string') return [cellValue]
+  if (Array.isArray(cellValue) && cellValue.every((item) => typeof item === 'string')) {
+    return cellValue
+  }
+  return []
+}
+
 function ProTableToolbar<TData>({
   table,
   defaultColumnOrder,
@@ -1332,11 +1365,7 @@ function ProTableToolbar<TData>({
     typeof searchColumn?.columnDef.meta?.search === 'object'
       ? searchColumn.columnDef.meta.search.placeholder
       : undefined
-  const searchPlaceholder = searchColumn
-    ? typeof search === 'object'
-      ? (search.placeholder ?? columnSearchPlaceholder ?? `Search ${searchColumn.id}...`)
-      : (columnSearchPlaceholder ?? `Search ${searchColumn.id}...`)
-    : undefined
+  const searchPlaceholder = getSearchPlaceholder(searchColumn, search, columnSearchPlaceholder)
   const filterControls = table.getAllColumns().flatMap((column) => {
     const filter = column.columnDef.meta?.filter
     if (!filter) return []
@@ -1344,12 +1373,7 @@ function ProTableToolbar<TData>({
     const values = Array.isArray(rawFilterValue)
       ? rawFilterValue.filter((item): item is string => typeof item === 'string')
       : []
-    const filterValue =
-      typeof rawFilterValue === 'string'
-        ? rawFilterValue
-        : values.length === rawFilterValue?.length
-          ? values
-          : undefined
+    const filterValue = getFilterValue(rawFilterValue, values)
 
     return [
       <Select
@@ -1827,17 +1851,16 @@ function BodyCell<TData>({
   const filter = meta?.filter
   const autoRender = !!filter && cell.column.columnDef.cell === undefined
   const cellValue = cell.getValue()
-  const autoFilterValues =
-    autoRender && typeof cellValue === 'string'
-      ? [cellValue]
-      : autoRender &&
-          Array.isArray(cellValue) &&
-          cellValue.every((item) => typeof item === 'string')
-        ? cellValue
-        : []
+  const autoFilterValues = getAutoFilterValues(autoRender, cellValue)
   const autoFilterLabels = new Map(
     autoRender ? filter.options.map((option) => [option.value, option.label] as const) : [],
   )
+  const cellContent = renderTableCellContent({
+    autoRender,
+    autoFilterValues,
+    autoFilterLabels,
+    cell,
+  })
   return (
     <td
       data-slot="pro-table-cell"
@@ -1855,25 +1878,38 @@ function BodyCell<TData>({
       style={getPinnedColumnStyle(cell.column, pinnedOffsets, dragSort ? 32 : 0)}
       data-pro-table-column-id={cell.column.id}
     >
-      {autoRender && autoFilterValues.length === 0 ? (
-        <span className="text-muted-foreground">-</span>
-      ) : autoRender ? (
-        <div className="flex flex-wrap gap-1">
-          {autoFilterValues.map((itemValue) => (
-            <span
-              key={itemValue}
-              className={
-                'inline-flex shrink-0 items-center justify-center rounded-sm bg-secondary px-2 py-0.5 text-xs font-normal text-secondary-foreground'
-              }
-            >
-              {autoFilterLabels.get(itemValue) ?? itemValue}
-            </span>
-          ))}
-        </div>
-      ) : (
-        flexRender(cell.column.columnDef.cell, cell.getContext())
-      )}
+      {cellContent}
     </td>
+  )
+}
+
+function renderTableCellContent<TData>({
+  autoRender,
+  autoFilterValues,
+  autoFilterLabels,
+  cell,
+}: {
+  autoRender: boolean
+  autoFilterValues: string[]
+  autoFilterLabels: Map<string, string>
+  cell: Cell<TData, unknown>
+}) {
+  if (!autoRender) return flexRender(cell.column.columnDef.cell, cell.getContext())
+  if (autoFilterValues.length === 0) return <span className="text-muted-foreground">-</span>
+
+  return (
+    <div className="flex flex-wrap gap-1">
+      {autoFilterValues.map((itemValue) => (
+        <span
+          key={itemValue}
+          className={
+            'inline-flex shrink-0 items-center justify-center rounded-sm bg-secondary px-2 py-0.5 text-xs font-normal text-secondary-foreground'
+          }
+        >
+          {autoFilterLabels.get(itemValue) ?? itemValue}
+        </span>
+      ))}
+    </div>
   )
 }
 

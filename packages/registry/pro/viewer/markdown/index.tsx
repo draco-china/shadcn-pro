@@ -15,7 +15,7 @@ import remarkToc from 'remark-toc'
 import { cn } from '@/lib/utils'
 import { CodeViewer } from '../code'
 
-type MarkdownNode = {
+interface MarkdownNode {
   type?: string
   lang?: string
   value?: string
@@ -377,7 +377,7 @@ function remarkMathCodeBlocks() {
     walkMarkdownNode(tree, (node) => {
       if (node.type !== 'code' || node.lang !== 'math') return
       node.type = 'math'
-      delete node.lang
+      node.lang = undefined
     })
   }
 }
@@ -429,9 +429,9 @@ function isEmptyAlertLeadNode(node: MarkdownNode) {
 function walkMarkdownNode(node: MarkdownNode, visitor: (node: MarkdownNode) => void) {
   visitor(node)
   if (!node.children) return
-  node.children.forEach((child) => {
+  for (const child of node.children) {
     walkMarkdownNode(child, visitor)
-  })
+  }
 }
 
 function withoutMarkdownNode<TProps extends { node?: unknown }>(props: TProps) {

@@ -240,6 +240,7 @@ function useEditorState({
   const PreviewComponent = preview?.component
   const hasPreview = !!PreviewComponent
   const controlledMode = preview?.mode
+  const onPreviewModeChange = preview?.onModeChange
   const effectiveMode: EditorViewMode = hasPreview ? (controlledMode ?? uncontrolledMode) : 'edit'
   const showEditorPane = effectiveMode !== 'preview'
   const showPreviewPane = hasPreview && effectiveMode !== 'edit'
@@ -279,14 +280,14 @@ function useEditorState({
     (nextMode: EditorViewMode) => {
       const next = hasPreview ? nextMode : 'edit'
       if (controlledMode === undefined) setUncontrolledMode(next)
-      preview?.onModeChange?.(next)
+      onPreviewModeChange?.(next)
     },
-    [controlledMode, hasPreview, preview],
+    [controlledMode, hasPreview, onPreviewModeChange],
   )
 
   useEffect(() => {
     previewScroll.setSyncEnabled(isSplitView)
-  }, [isSplitView, previewScroll])
+  }, [isSplitView, previewScroll.setSyncEnabled])
 
   const toolbarContext: EditorToolbarActionContext = {
     value: localValue,
@@ -343,6 +344,7 @@ function useMonacoEditor({
   const themeRef = useRef(theme ?? 'dark')
   const editorRef = useRef<MonacoEditorInstance | null>(null)
   const monacoRef = useRef<Monaco | null>(null)
+  const { scrollDisposableRef, syncPreviewFromEditor } = previewScroll
 
   useEffect(() => {
     themeRef.current = theme ?? 'dark'
@@ -352,10 +354,8 @@ function useMonacoEditor({
     (editor: MonacoEditorInstance, monaco: Monaco) => {
       editorRef.current = editor
       monacoRef.current = monaco
-      previewScroll.scrollDisposableRef.current?.dispose()
-      previewScroll.scrollDisposableRef.current = editor.onDidScrollChange(() =>
-        previewScroll.syncPreviewFromEditor(editor),
-      )
+      scrollDisposableRef.current?.dispose()
+      scrollDisposableRef.current = editor.onDidScrollChange(() => syncPreviewFromEditor(editor))
       monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
         jsx: monaco.languages.typescript.JsxEmit.ReactJSX,
         allowNonTsExtensions: true,
@@ -369,14 +369,14 @@ function useMonacoEditor({
         )
         hasRegisteredTsxTypes = true
       }
-      void applyShadcnTheme(monaco, themeRef.current)
+      applyShadcnTheme(monaco, themeRef.current).catch(() => {})
     },
-    [previewScroll],
+    [scrollDisposableRef, syncPreviewFromEditor],
   )
 
   useEffect(() => {
     const monaco = monacoRef.current
-    if (monaco) void applyShadcnTheme(monaco, theme ?? 'dark')
+    if (monaco) applyShadcnTheme(monaco, theme ?? 'dark').catch(() => {})
   }, [theme])
 
   const handleFormat = useCallback(() => {
@@ -619,15 +619,7 @@ export function ProEditor({
                 <MonacoEditor
                   height="100%"
                   language={language === 'tsx' ? 'typescript' : language}
-                  path={
-                    language === 'tsx'
-                      ? 'file:///index.tsx'
-                      : language === 'typescript'
-                        ? 'file:///index.ts'
-                        : language === 'javascript'
-                          ? 'file:///index.jsx'
-                          : `file:///index.${language}`
-                  }
+                  path={getEditorPath(language)}
                   value={editor.localValue}
                   theme={theme === 'dark' ? 'vs-dark' : 'vs'}
                   onMount={editor.handleMount}
@@ -688,4 +680,11 @@ export function ProEditor({
       </div>
     </div>
   )
+}
+
+function getEditorPath(language: string) {
+  if (language === 'tsx') return 'file:///index.tsx'
+  if (language === 'typescript') return 'file:///index.ts'
+  if (language === 'javascript') return 'file:///index.jsx'
+  return `file:///index.${language}`
 }

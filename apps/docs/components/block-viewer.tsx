@@ -37,20 +37,20 @@ import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 
 // ---- Types ----
 
-export type BlockFile = {
+export interface BlockFile {
   path?: string
   target?: string
   content?: string
   highlightedContent?: string
 }
 
-export type FileTree = {
+export interface FileTree {
   name: string
   path?: string
   children?: FileTree[]
 }
 
-export type BlockItem = {
+export interface BlockItem {
   name: string
   description?: string
   iframeHeight?: string
@@ -91,7 +91,7 @@ function getCodeHeight(height?: string) {
 
 // ---- Context ----
 
-type BlockViewerContext = {
+interface BlockViewerContext {
   item: BlockItem
   view: 'code' | 'preview'
   setView: (view: 'code' | 'preview') => void
@@ -104,6 +104,11 @@ type BlockViewerContext = {
   setIframeKey?: React.Dispatch<React.SetStateAction<number>>
 }
 
+interface BlockViewerProviderProps
+  extends Pick<BlockViewerContext, 'item' | 'tree' | 'highlightedFiles'> {
+  children: React.ReactNode
+}
+
 const BlockViewerContext = React.createContext<BlockViewerContext | null>(null)
 
 function useBlockViewer() {
@@ -114,14 +119,7 @@ function useBlockViewer() {
   return context
 }
 
-function BlockViewerProvider({
-  item,
-  tree,
-  highlightedFiles,
-  children,
-}: Pick<BlockViewerContext, 'item' | 'tree' | 'highlightedFiles'> & {
-  children: React.ReactNode
-}) {
+function BlockViewerProvider({ item, tree, highlightedFiles, children }: BlockViewerProviderProps) {
   const [view, setView] = React.useState<BlockViewerContext['view']>('preview')
   const [activeFile, setActiveFile] = React.useState<BlockViewerContext['activeFile']>(
     highlightedFiles?.[0]?.target ?? null,

@@ -75,15 +75,8 @@ export function DiffViewer({
   useEffect(() => {
     let cancelled = false
     const normalizedLang = lang.toLowerCase()
-    const highlightLang: BundledLanguage =
-      normalizedLang in bundledLanguages
-        ? (normalizedLang as BundledLanguage)
-        : normalizedLang === 'typescript' || normalizedLang === 'ts'
-          ? 'tsx'
-          : normalizedLang === 'javascript' || normalizedLang === 'js'
-            ? 'jsx'
-            : 'javascript'
-    void Promise.all(
+    const highlightLang = getBundledLanguage(normalizedLang)
+    Promise.all(
       Array.from(new Set(unified.map((line) => line.content)), async (line) => {
         const tokenLines = await codeToTokensBase(line || ' ', {
           lang: highlightLang,
@@ -160,7 +153,7 @@ export function DiffViewer({
                       'w-4 select-none py-0 pl-2 pr-1 font-mono text-xs text-muted-foreground'
                     }
                   >
-                    {line.type === 'added' ? '+' : line.type === 'removed' ? '-' : ' '}
+                    {getDiffSign(line.type)}
                   </td>
                   {renderHighlightedLine(line.content, htmlMap)}
                 </tr>
@@ -176,6 +169,19 @@ export function DiffViewer({
       )}
     </div>
   )
+}
+
+function getBundledLanguage(normalizedLang: string): BundledLanguage {
+  if (normalizedLang in bundledLanguages) return normalizedLang as BundledLanguage
+  if (normalizedLang === 'typescript' || normalizedLang === 'ts') return 'tsx'
+  if (normalizedLang === 'javascript' || normalizedLang === 'js') return 'jsx'
+  return 'javascript'
+}
+
+function getDiffSign(type: DiffLine['type']) {
+  if (type === 'added') return '+'
+  if (type === 'removed') return '-'
+  return ' '
 }
 
 function SplitDiffPane({

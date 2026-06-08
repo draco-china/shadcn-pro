@@ -57,12 +57,12 @@ type ProSchemaFormValue =
 
 type ProSchemaFormValues = Record<string, ProSchemaFormValue>
 
-type ProSchemaValueField = {
+interface ProSchemaValueField {
   value: ProSchemaFormValue
   onChange: (value: ProSchemaFormValue) => void
 }
 
-type ProSchemaFormItem = {
+interface ProSchemaFormItem {
   name: string
   label?: ReactNode
   valueType?:
@@ -127,22 +127,16 @@ export function ProForm({
   return (
     <form
       ref={formRef}
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault()
-        void submit()
+        await submit()
       }}
       className={className}
     >
       <div className="mb-4">{children}</div>
       {submitter !== false && (
         <div data-slot="pro-form-actions" className="flex flex-wrap items-center gap-2 pt-2">
-          {typeof submitter === 'function'
-            ? submitter({ submitting: loading, reset })
-            : (submitter ?? (
-                <ProButton type="submit" loading={loading}>
-                  {loading ? 'Submitting...' : 'Submit'}
-                </ProButton>
-              ))}
+          {renderFormSubmitter(submitter, loading, reset)}
         </div>
       )}
     </form>
@@ -200,9 +194,9 @@ export function ModalForm({
     >
       <form
         ref={formRef}
-        onSubmit={(event) => {
+        onSubmit={async (event) => {
           event.preventDefault()
-          void handleSubmit()
+          await handleSubmit()
         }}
         className={cn('flex flex-1 flex-col overflow-hidden', className)}
       >
@@ -259,9 +253,9 @@ export function DrawerForm({
     >
       <form
         ref={formRef}
-        onSubmit={(event) => {
+        onSubmit={async (event) => {
           event.preventDefault()
-          void handleSubmit()
+          await handleSubmit()
         }}
         className={cn('flex flex-1 flex-col overflow-hidden', className)}
       >
@@ -344,20 +338,63 @@ function OverlayFormFooter({
 }) {
   return (
     <div data-slot={slot} className={cn('flex shrink-0 gap-2', className)}>
-      {typeof submitter === 'function'
-        ? submitter({ submitting, cancel })
-        : (submitter ?? (
-            <>
-              <ProButton variant="outline" disabled={submitting} onClick={cancel}>
-                Cancel
-              </ProButton>
-              <ProButton type="submit" loading={submitting}>
-                {submitting ? 'Submitting...' : 'Submit'}
-              </ProButton>
-            </>
-          ))}
+      {renderOverlaySubmitter(submitter, submitting, cancel)}
     </div>
   )
+}
+
+function renderFormSubmitter(
+  submitter: ProFormProps['submitter'],
+  submitting: boolean,
+  reset: () => void | Promise<void>,
+) {
+  if (typeof submitter === 'function') return submitter({ submitting, reset })
+  if (submitter !== undefined && submitter !== null && submitter !== false) return submitter
+  return (
+    <ProButton type="submit" loading={submitting}>
+      {submitting ? 'Submitting...' : 'Submit'}
+    </ProButton>
+  )
+}
+
+function renderOverlaySubmitter(
+  submitter: OverlayFormSubmitter | undefined,
+  submitting: boolean,
+  cancel: () => void | Promise<void>,
+) {
+  if (typeof submitter === 'function') return submitter({ submitting, cancel })
+  if (submitter !== undefined && submitter !== null) return submitter
+  return (
+    <>
+      <ProButton variant="outline" disabled={submitting} onClick={cancel}>
+        Cancel
+      </ProButton>
+      <ProButton type="submit" loading={submitting}>
+        {submitting ? 'Submitting...' : 'Submit'}
+      </ProButton>
+    </>
+  )
+}
+
+function appendFormValue(currentValue: unknown, value: FormDataEntryValue) {
+  if (currentValue === undefined) return value
+  if (Array.isArray(currentValue)) return [...currentValue, value]
+  return [currentValue, value]
+}
+
+function getHiddenValues(value: ProSchemaFormValue) {
+  if (Array.isArray(value)) return value
+  if (value instanceof Date) return [value.toISOString()]
+  if (typeof value === 'object' && value != null) {
+    return [
+      JSON.stringify({
+        from: value.from?.toISOString(),
+        to: value.to?.toISOString(),
+      }),
+    ]
+  }
+  if (value != null) return [String(value)]
+  return []
 }
 
 function getFormValues(form: HTMLFormElement | null) {
@@ -366,12 +403,7 @@ function getFormValues(form: HTMLFormElement | null) {
   const values: Record<string, unknown> = {}
   for (const [key, value] of new FormData(form).entries()) {
     const currentValue = values[key]
-    values[key] =
-      currentValue === undefined
-        ? value
-        : Array.isArray(currentValue)
-          ? [...currentValue, value]
-          : [currentValue, value]
+    values[key] = appendFormValue(currentValue, value)
   }
   return values
 }
@@ -465,20 +497,7 @@ function ProSchemaFields({
           onChange: (nextValue: ProSchemaFormValue) =>
             setValues((current) => ({ ...current, [item.name]: nextValue })),
         }
-        const hiddenValues = Array.isArray(field.value)
-          ? field.value
-          : field.value instanceof Date
-            ? [field.value.toISOString()]
-            : typeof field.value === 'object' && field.value != null
-              ? [
-                  JSON.stringify({
-                    from: field.value.from?.toISOString(),
-                    to: field.value.to?.toISOString(),
-                  }),
-                ]
-              : field.value != null
-                ? [String(field.value)]
-                : []
+        const hiddenValues = getHiddenValues(field.value)
 
         return (
           <FormItem

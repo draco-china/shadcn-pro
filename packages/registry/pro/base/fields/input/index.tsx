@@ -6,8 +6,8 @@ import {
   type ChangeEvent,
   type ChangeEventHandler,
   type ComponentProps,
-  forwardRef,
   type ReactNode,
+  type Ref,
   useEffect,
   useRef,
   useState,
@@ -19,7 +19,7 @@ import { FieldClearButton, fieldShellClassName } from '../shared/field'
 interface InputProps
   extends Omit<
     ComponentProps<'input'>,
-    'children' | 'className' | 'defaultValue' | 'onChange' | 'prefix' | 'value'
+    'children' | 'className' | 'defaultValue' | 'onChange' | 'prefix' | 'ref' | 'value'
   > {
   value?: string | number | readonly string[]
   defaultValue?: string | number | readonly string[]
@@ -30,140 +30,151 @@ interface InputProps
   suffix?: ReactNode
   allowClear?: boolean
   onClear?: () => void
+  ref?: Ref<HTMLInputElement>
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      prefix,
-      suffix,
-      allowClear = true,
-      onClear,
-      className,
-      inputClassName,
-      type,
-      value,
-      defaultValue,
-      onChange,
-      disabled,
-      readOnly,
-      ...props
-    },
-    ref,
-  ) => {
-    const inputRef = useRef<HTMLInputElement>(null)
-    function setInputRef(node: HTMLInputElement | null) {
-      inputRef.current = node
-      if (typeof ref === 'function') {
-        ref(node)
-        return
-      }
-      if (ref) ref.current = node
+export function Input({
+  prefix,
+  suffix,
+  allowClear = true,
+  onClear,
+  className,
+  inputClassName,
+  type,
+  value,
+  defaultValue,
+  onChange,
+  disabled,
+  readOnly,
+  ref,
+  ...props
+}: InputProps) {
+  const inputRef = useRef<HTMLInputElement>(null)
+  function setInputRef(node: HTMLInputElement | null) {
+    inputRef.current = node
+    if (typeof ref === 'function') {
+      ref(node)
+      return
     }
+    if (ref) ref.current = node
+  }
 
-    const [internalValue, setInternalValue] = useState(defaultValue ?? '')
-    const currentValue = value ?? internalValue
-    const showClear =
-      !!allowClear && currentValue !== '' && currentValue != null && !disabled && !readOnly
-    const hasPrefix = prefix != null && prefix !== false
-    const hasSuffix = (suffix != null && suffix !== false) || showClear
+  const [internalValue, setInternalValue] = useState(defaultValue ?? '')
+  const currentValue = value ?? internalValue
+  const showClear =
+    !!allowClear && currentValue !== '' && currentValue != null && !disabled && !readOnly
+  const hasPrefix = prefix != null && prefix !== false
+  const hasSuffix = (suffix != null && suffix !== false) || showClear
 
-    function emitValue(nextValue: string, event?: ChangeEvent<HTMLInputElement>) {
-      if (value === undefined) setInternalValue(nextValue)
-      const inputEl = inputRef.current
-      if (!inputEl) return
+  function emitValue(nextValue: string, event?: ChangeEvent<HTMLInputElement>) {
+    if (value === undefined) setInternalValue(nextValue)
+    const inputEl = inputRef.current
+    if (!inputEl) return
 
-      inputEl.value = nextValue
-      onChange?.({
-        ...event,
-        target: inputEl,
-        currentTarget: inputEl,
-      } as ChangeEvent<HTMLInputElement>)
-    }
+    inputEl.value = nextValue
+    onChange?.({
+      ...event,
+      target: inputEl,
+      currentTarget: inputEl,
+    } as ChangeEvent<HTMLInputElement>)
+  }
 
-    return (
-      <div
+  return (
+    <div
+      className={cn(
+        fieldShellClassName,
+        hasPrefix && 'pl-0',
+        hasSuffix && 'pr-0',
+        disabled && 'pointer-events-none opacity-50',
+        className,
+      )}
+    >
+      {hasPrefix && <div className="flex shrink-0 items-center">{prefix}</div>}
+
+      <input
+        ref={setInputRef}
+        type={type}
+        data-slot="input"
+        value={String(currentValue ?? '')}
+        onChange={(event) => emitValue(event.target.value, event)}
+        disabled={disabled}
+        readOnly={readOnly}
         className={cn(
-          fieldShellClassName,
-          hasPrefix && 'pl-0',
-          hasSuffix && 'pr-0',
-          disabled && 'pointer-events-none opacity-50',
-          className,
+          'h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 text-base shadow-none outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:ring-0 disabled:pointer-events-none disabled:cursor-not-allowed md:text-sm dark:bg-transparent',
+          inputClassName,
         )}
-      >
-        {hasPrefix && <div className="flex shrink-0 items-center">{prefix}</div>}
-
-        <input
-          ref={setInputRef}
-          type={type}
-          data-slot="input"
-          value={String(currentValue ?? '')}
-          onChange={(event) => emitValue(event.target.value, event)}
-          disabled={disabled}
-          readOnly={readOnly}
-          className={cn(
-            'h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 text-base shadow-none outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:ring-0 disabled:pointer-events-none disabled:cursor-not-allowed md:text-sm dark:bg-transparent',
-            inputClassName,
-          )}
-          {...props}
-        />
-
-        {hasSuffix && (
-          <div className="flex shrink-0 items-center">
-            {showClear && (
-              <FieldClearButton
-                label="Clear input"
-                className="ml-0"
-                onClear={() => {
-                  onClear?.()
-                  emitValue('')
-                }}
-              />
-            )}
-            {suffix}
-          </div>
-        )}
-      </div>
-    )
-  },
-)
-Input.displayName = 'Input'
-
-export const Password = forwardRef<HTMLInputElement, Omit<InputProps, 'type'>>(
-  ({ className, suffix, inputClassName, ...props }, ref) => {
-    const [visible, setVisible] = useState(false)
-
-    return (
-      <Input
-        ref={ref}
         {...props}
-        type={visible ? 'text' : 'password'}
-        className={className}
-        inputClassName={inputClassName}
-        suffix={
-          <>
-            {suffix}
-            <ProButton
-              variant="ghost"
-              size="icon-sm"
-              tabIndex={-1}
-              onClick={() => setVisible((value) => !value)}
-              aria-label={visible ? 'Hide password' : 'Show password'}
-            >
-              {visible ? <EyeOff /> : <Eye />}
-            </ProButton>
-          </>
-        }
       />
-    )
-  },
-)
-Password.displayName = 'Password'
 
-export const Textarea = forwardRef<
-  HTMLTextAreaElement,
-  ComponentProps<'textarea'> & { onClear?: () => void }
->(({ onClear, className, value, defaultValue, onChange, disabled, readOnly, ...props }, ref) => {
+      {hasSuffix && (
+        <div className="flex shrink-0 items-center">
+          {showClear && (
+            <FieldClearButton
+              label="Clear input"
+              className="ml-0"
+              onClear={() => {
+                onClear?.()
+                emitValue('')
+              }}
+            />
+          )}
+          {suffix}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export function Password({
+  className,
+  suffix,
+  inputClassName,
+  ref,
+  ...props
+}: Omit<InputProps, 'type'>) {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <Input
+      ref={ref}
+      {...props}
+      type={visible ? 'text' : 'password'}
+      className={className}
+      inputClassName={inputClassName}
+      suffix={
+        <>
+          {suffix}
+          <ProButton
+            variant="ghost"
+            size="icon-sm"
+            tabIndex={-1}
+            onClick={() => setVisible((value) => !value)}
+            aria-label={visible ? 'Hide password' : 'Show password'}
+          >
+            {visible ? <EyeOff /> : <Eye />}
+          </ProButton>
+        </>
+      }
+    />
+  )
+}
+
+interface TextareaProps extends Omit<ComponentProps<'textarea'>, 'ref'> {
+  onClear?: () => void
+  ref?: Ref<HTMLTextAreaElement>
+}
+
+export function Textarea({
+  onClear,
+  className,
+  value,
+  defaultValue,
+  onChange,
+  disabled,
+  readOnly,
+  ref,
+  ...props
+}: TextareaProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   function setTextareaRef(node: HTMLTextAreaElement | null) {
     textareaRef.current = node
@@ -217,8 +228,7 @@ export const Textarea = forwardRef<
       )}
     </div>
   )
-})
-Textarea.displayName = 'Textarea'
+}
 
 export function Digit({
   value,
