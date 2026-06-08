@@ -40,6 +40,43 @@ export function FieldClearButton({
   )
 }
 
+export function FieldClearAction({
+  label = 'Clear value',
+  className,
+  onClear,
+}: {
+  label?: string
+  className?: string
+  onClear: () => void
+}) {
+  function clear(event: { preventDefault: () => void; stopPropagation: () => void }) {
+    event.preventDefault()
+    event.stopPropagation()
+    onClear()
+  }
+
+  return (
+    // biome-ignore lint/a11y/useSemanticElements: field triggers are buttons, so the clear affordance cannot be a nested button.
+    <span
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+      className={cn(
+        "inline-flex size-4 items-center justify-center rounded-sm outline-hidden [&_svg:not([class*='size-'])]:size-4",
+        className,
+      )}
+      onPointerDown={clear}
+      onClick={clear}
+      onKeyDown={(event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return
+        clear(event)
+      }}
+    >
+      <X />
+    </span>
+  )
+}
+
 export function FieldPopoverContent({
   className,
   align = 'center',

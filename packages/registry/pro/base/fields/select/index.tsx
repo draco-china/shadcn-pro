@@ -1,13 +1,13 @@
 'use client'
 
 import { Command as CommandPrimitive } from 'cmdk'
-import { Check, ChevronDown, ChevronRight, ChevronUp, SearchIcon, X } from 'lucide-react'
+import { Check, ChevronDown, ChevronRight, ChevronUp, SearchIcon } from 'lucide-react'
 import { Popover as PopoverPrimitive, Select as SelectPrimitive } from 'radix-ui'
 import { type ReactNode, useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../../button'
 import { CheckboxControl } from '../checkbox'
-import { FieldPopoverContent, fieldTriggerClassName } from '../shared/field'
+import { FieldClearAction, FieldPopoverContent, fieldTriggerClassName } from '../shared/field'
 
 interface NestedOption {
   label: string
@@ -18,43 +18,6 @@ interface NestedOption {
 
 const EMPTY_CASCADER_OPTIONS: NestedOption[] = []
 const EMPTY_CASCADER_VALUE: string[] = []
-
-function SelectClearAction({
-  label,
-  onClear,
-  className,
-}: {
-  label: string
-  onClear: () => void
-  className?: string
-}) {
-  function clear(event: { preventDefault: () => void; stopPropagation: () => void }) {
-    event.preventDefault()
-    event.stopPropagation()
-    onClear()
-  }
-
-  return (
-    // biome-ignore lint/a11y/useSemanticElements: select triggers are buttons, so the clear affordance cannot be a nested button.
-    <span
-      role="button"
-      tabIndex={0}
-      aria-label={label}
-      className={cn(
-        "inline-flex size-4 items-center justify-center rounded-sm outline-hidden [&_svg:not([class*='size-'])]:size-4",
-        className,
-      )}
-      onPointerDown={clear}
-      onClick={clear}
-      onKeyDown={(event) => {
-        if (event.key !== 'Enter' && event.key !== ' ') return
-        clear(event)
-      }}
-    >
-      <X />
-    </span>
-  )
-}
 
 export function Select({
   value,
@@ -169,7 +132,7 @@ export function Select({
             </span>
             <span className="relative flex size-4 shrink-0 items-center justify-center">
               {showClear && (
-                <SelectClearAction
+                <FieldClearAction
                   label="Clear selection"
                   onClear={() => handleChange(undefined)}
                   className={
@@ -271,7 +234,7 @@ export function Select({
         </span>
         <span className="relative flex size-4 shrink-0 items-center justify-center">
           {showClear && (
-            <SelectClearAction
+            <FieldClearAction
               label="Clear selection"
               onClear={() => handleChange(undefined)}
               className={
@@ -423,7 +386,7 @@ export function Cascader({
           </button>
         </PopoverPrimitive.Trigger>
         {selectedPath.length > 0 && !disabled && !required && (
-          <SelectClearAction
+          <FieldClearAction
             label="Clear selection"
             onClear={() => {
               onChange?.([])
@@ -537,7 +500,7 @@ export function TreeSelect({
           </button>
         </PopoverPrimitive.Trigger>
         {value.length > 0 && !disabled && !required && (
-          <SelectClearAction
+          <FieldClearAction
             label="Clear selection"
             onClear={() => {
               onChange?.([])

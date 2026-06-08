@@ -5,7 +5,7 @@ import { CalendarIcon } from 'lucide-react'
 import { Popover as PopoverPrimitive } from 'radix-ui'
 import { cn } from '@/lib/utils'
 import { FieldCalendar } from '../shared/calendar'
-import { FieldClearButton, FieldPopoverContent, fieldTriggerClassName } from '../shared/field'
+import { FieldClearAction, FieldPopoverContent, fieldTriggerClassName } from '../shared/field'
 
 export function DatePicker({
   value,
@@ -22,7 +22,7 @@ export function DatePicker({
 }) {
   return (
     <PopoverPrimitive.Root data-slot="field-popover">
-      <div className={cn('relative w-full', className)}>
+      <div className={cn('group/date-field relative w-full', className)}>
         <PopoverPrimitive.Trigger data-slot="field-popover-trigger" asChild>
           <button
             type="button"
@@ -30,22 +30,24 @@ export function DatePicker({
             className={cn(
               fieldTriggerClassName,
               !value && 'text-muted-foreground',
-              value && !disabled && 'pr-8',
+              value && !disabled && 'pr-3',
             )}
           >
             <CalendarIcon className="mr-2 size-4" />
             <span className="min-w-0 flex-1 truncate text-left">
               {value ? format(value, 'PPP') : placeholder}
             </span>
+            <span className="relative flex size-4 shrink-0 items-center justify-center">
+              {value && !disabled && (
+                <FieldClearAction
+                  label="Clear date"
+                  onClear={() => onChange?.(undefined)}
+                  className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover/date-field:pointer-events-auto group-hover/date-field:opacity-100 group-focus-within/date-field:pointer-events-auto group-focus-within/date-field:opacity-100"
+                />
+              )}
+            </span>
           </button>
         </PopoverPrimitive.Trigger>
-        {value && !disabled && (
-          <FieldClearButton
-            label="Clear date"
-            onClear={() => onChange?.(undefined)}
-            className="absolute top-1/2 right-2 z-10 ml-0 -translate-y-1/2"
-          />
-        )}
       </div>
       <FieldPopoverContent className="w-auto p-0" align="start">
         <FieldCalendar mode="single" selected={value} onSelect={onChange} />
@@ -72,7 +74,7 @@ export function DateRangePicker({
 
   return (
     <PopoverPrimitive.Root data-slot="field-popover">
-      <div className={cn('relative w-full', className)}>
+      <div className={cn('group/date-field relative w-full', className)}>
         <PopoverPrimitive.Trigger data-slot="field-popover-trigger" asChild>
           <button
             type="button"
@@ -80,7 +82,7 @@ export function DateRangePicker({
             className={cn(
               fieldTriggerClassName,
               !from && 'text-muted-foreground',
-              from && !disabled && 'pr-8',
+              from && !disabled && 'pr-3',
             )}
           >
             <CalendarIcon className="mr-2 size-4" />
@@ -91,15 +93,17 @@ export function DateRangePicker({
                   ? format(from, 'LLL dd, y')
                   : placeholder}
             </span>
+            <span className="relative flex size-4 shrink-0 items-center justify-center">
+              {from && !disabled && (
+                <FieldClearAction
+                  label="Clear date range"
+                  onClear={() => onChange?.(undefined)}
+                  className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover/date-field:pointer-events-auto group-hover/date-field:opacity-100 group-focus-within/date-field:pointer-events-auto group-focus-within/date-field:opacity-100"
+                />
+              )}
+            </span>
           </button>
         </PopoverPrimitive.Trigger>
-        {from && !disabled && (
-          <FieldClearButton
-            label="Clear date range"
-            onClear={() => onChange?.(undefined)}
-            className="absolute top-1/2 right-2 z-10 ml-0 -translate-y-1/2"
-          />
-        )}
       </div>
       <FieldPopoverContent className="w-auto p-0" align="start">
         <FieldCalendar

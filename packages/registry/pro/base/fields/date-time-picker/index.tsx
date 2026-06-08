@@ -6,7 +6,7 @@ import { Popover as PopoverPrimitive, Select as SelectPrimitive } from 'radix-ui
 import { cn } from '@/lib/utils'
 import { FieldCalendar } from '../shared/calendar'
 import {
-  FieldClearButton,
+  FieldClearAction,
   FieldPopoverContent,
   fieldShellClassName,
   fieldTriggerClassName,
@@ -39,7 +39,7 @@ export function DateTimePicker({
 
   return (
     <PopoverPrimitive.Root data-slot="field-popover">
-      <div className={cn('relative w-full', className)}>
+      <div className={cn('group/date-field relative w-full', className)}>
         <PopoverPrimitive.Trigger data-slot="field-popover-trigger" asChild>
           <button
             type="button"
@@ -47,22 +47,24 @@ export function DateTimePicker({
             className={cn(
               fieldTriggerClassName,
               !value && 'text-muted-foreground',
-              value && !disabled && 'pr-8',
+              value && !disabled && 'pr-3',
             )}
           >
             <CalendarIcon className="mr-2 size-4" />
             <span className="min-w-0 flex-1 truncate text-left">
               {value ? format(value, 'PPP HH:mm:ss') : placeholder}
             </span>
+            <span className="relative flex size-4 shrink-0 items-center justify-center">
+              {value && !disabled && (
+                <FieldClearAction
+                  label="Clear date and time"
+                  onClear={() => onChange?.(undefined)}
+                  className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover/date-field:pointer-events-auto group-hover/date-field:opacity-100 group-focus-within/date-field:pointer-events-auto group-focus-within/date-field:opacity-100"
+                />
+              )}
+            </span>
           </button>
         </PopoverPrimitive.Trigger>
-        {value && !disabled && (
-          <FieldClearButton
-            label="Clear date and time"
-            onClear={() => onChange?.(undefined)}
-            className="absolute top-1/2 right-2 z-10 ml-0 -translate-y-1/2"
-          />
-        )}
       </div>
       <FieldPopoverContent className="w-auto p-0" align="start">
         <FieldCalendar
@@ -132,8 +134,8 @@ export function TimePicker({
     <div
       className={cn(
         fieldShellClassName,
-        'relative w-fit gap-1',
-        value && !disabled && 'pr-8',
+        'group/date-field relative w-fit gap-1',
+        value && !disabled && 'pr-3',
         disabled && 'pointer-events-none opacity-50',
         className,
       )}
@@ -161,13 +163,15 @@ export function TimePicker({
         disabled={disabled}
         onChange={(next) => emit(hour, minute, next)}
       />
-      {value && !disabled && (
-        <FieldClearButton
-          label="Clear time"
-          onClear={() => onChange?.(undefined)}
-          className="absolute top-1/2 right-2 z-10 ml-0 -translate-y-1/2"
-        />
-      )}
+      <span className="relative flex size-4 shrink-0 items-center justify-center">
+        {value && !disabled && (
+          <FieldClearAction
+            label="Clear time"
+            onClear={() => onChange?.(undefined)}
+            className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover/date-field:pointer-events-auto group-hover/date-field:opacity-100 group-focus-within/date-field:pointer-events-auto group-focus-within/date-field:opacity-100"
+          />
+        )}
+      </span>
     </div>
   )
 }
