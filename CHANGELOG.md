@@ -1,3 +1,10 @@
+## [1.16.25](https://github.com/draco-china/shadcn-pro/compare/v1.16.24...v1.16.25) (2026-06-08)
+
+
+### Bug Fixes
+
+* render uncontrolled nested select values ([0dd58eb](https://github.com/draco-china/shadcn-pro/commit/0dd58eba966b564fa0cb5af3885e823457a3bc27))
+
 ## [1.16.24](https://github.com/draco-china/shadcn-pro/compare/v1.16.23...v1.16.24) (2026-06-08)
 
 
