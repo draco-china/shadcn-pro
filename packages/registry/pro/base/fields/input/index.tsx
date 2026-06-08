@@ -303,7 +303,7 @@ export function DigitRange({
       data-slot="digit-range"
       className={cn(
         fieldShellClassName,
-        'overflow-hidden [&_input]:h-auto [&_input]:w-0 [&_input]:min-w-0 [&_input]:flex-1 [&_input]:rounded-none [&_input]:border-0 [&_input]:bg-transparent [&_input]:p-0 [&_input]:text-base [&_input]:shadow-none [&_input]:outline-none [&_input]:selection:bg-primary [&_input]:selection:text-primary-foreground [&_input]:placeholder:text-muted-foreground [&_input]:focus-visible:ring-0 [&_input]:disabled:pointer-events-none [&_input]:disabled:cursor-not-allowed md:[&_input]:text-sm dark:[&_input]:bg-transparent',
+        'overflow-hidden [&_input]:h-auto [&_input]:w-0 [&_input]:min-w-0 [&_input]:flex-1 [&_input]:rounded-none [&_input]:border-0 [&_input]:bg-transparent [&_input]:p-0 [&_input]:text-center [&_input]:text-base [&_input]:shadow-none [&_input]:outline-none [&_input]:selection:bg-primary [&_input]:selection:text-primary-foreground [&_input]:placeholder:text-muted-foreground [&_input]:focus-visible:ring-0 [&_input]:disabled:pointer-events-none [&_input]:disabled:cursor-not-allowed md:[&_input]:text-sm dark:[&_input]:bg-transparent',
         showClear && 'pr-0',
         disabled && 'pointer-events-none opacity-50',
         className,
@@ -327,7 +327,6 @@ export function DigitRange({
         onChange={(event) => updateRange('max', event.target.value)}
         placeholder={placeholder[1]}
         disabled={disabled}
-        className="text-right"
       />
       {showClear && (
         <FieldClearButton
