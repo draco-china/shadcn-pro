@@ -310,6 +310,7 @@ export function Select({
 
 export function Cascader({
   value,
+  defaultValue,
   onChange,
   options,
   placeholder = 'Select...',
@@ -318,6 +319,7 @@ export function Cascader({
   className,
 }: {
   value?: string[]
+  defaultValue?: string[]
   onChange?: (value: string[]) => void
   options?: NestedOption[]
   placeholder?: string
@@ -325,7 +327,8 @@ export function Cascader({
   required?: boolean
   className?: string
 }) {
-  const selectedPath = value ?? EMPTY_CASCADER_VALUE
+  const [internalValue, setInternalValue] = useState<string[]>(defaultValue ?? EMPTY_CASCADER_VALUE)
+  const selectedPath = value ?? internalValue
   const optionColumns = options ?? EMPTY_CASCADER_OPTIONS
   const [open, setOpen] = useState(false)
   const [columns, setColumns] = useState<NestedOption[][]>([optionColumns])
@@ -358,6 +361,7 @@ export function Cascader({
     if (childOptions.length) return
 
     onChange?.(nextSelected)
+    if (value === undefined) setInternalValue(nextSelected)
     setOpen(false)
   }
 
@@ -389,6 +393,7 @@ export function Cascader({
           <FieldClearAction
             label="Clear selection"
             onClear={() => {
+              if (value === undefined) setInternalValue(EMPTY_CASCADER_VALUE)
               onChange?.([])
               setOpen(false)
             }}
@@ -432,7 +437,8 @@ export function Cascader({
 }
 
 export function TreeSelect({
-  value = [],
+  value,
+  defaultValue,
   onChange,
   options = [],
   placeholder = 'Select...',
@@ -442,6 +448,7 @@ export function TreeSelect({
   className,
 }: {
   value?: string[]
+  defaultValue?: string[]
   onChange?: (value: string[]) => void
   options?: NestedOption[]
   placeholder?: string
@@ -451,7 +458,9 @@ export function TreeSelect({
   className?: string
 }) {
   const [open, setOpen] = useState(false)
-  const selectedValues = new Set(value)
+  const [internalValue, setInternalValue] = useState<string[]>(defaultValue ?? [])
+  const currentValue = value ?? internalValue
+  const selectedValues = new Set(currentValue)
   const selectedLabels: string[] = []
   const optionStack = [...options].reverse()
   while (optionStack.length) {
@@ -468,15 +477,21 @@ export function TreeSelect({
   function toggle(val: string) {
     if (multiple) {
       if (!selectedValues.has(val)) {
-        onChange?.([...value, val])
+        const nextValue = [...currentValue, val]
+        if (value === undefined) setInternalValue(nextValue)
+        onChange?.(nextValue)
         return
       }
 
-      onChange?.(value.filter((item) => item !== val))
+      const nextValue = currentValue.filter((item) => item !== val)
+      if (value === undefined) setInternalValue(nextValue)
+      onChange?.(nextValue)
       return
     }
 
-    onChange?.([val])
+    const nextValue = [val]
+    if (value === undefined) setInternalValue(nextValue)
+    onChange?.(nextValue)
     setOpen(false)
   }
 
@@ -490,8 +505,8 @@ export function TreeSelect({
             aria-expanded={open}
             className={cn(
               fieldTriggerClassName,
-              value.length === 0 && 'text-muted-foreground',
-              value.length > 0 && !disabled && !required && 'pr-8',
+              currentValue.length === 0 && 'text-muted-foreground',
+              currentValue.length > 0 && !disabled && !required && 'pr-8',
             )}
           >
             <span className="flex-1 truncate text-left">
@@ -499,10 +514,11 @@ export function TreeSelect({
             </span>
           </button>
         </PopoverPrimitive.Trigger>
-        {value.length > 0 && !disabled && !required && (
+        {currentValue.length > 0 && !disabled && !required && (
           <FieldClearAction
             label="Clear selection"
             onClear={() => {
+              if (value === undefined) setInternalValue([])
               onChange?.([])
               setOpen(false)
             }}
