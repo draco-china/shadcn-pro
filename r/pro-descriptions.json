@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pro-descriptions",
+  "type": "registry:component",
+  "title": "pro-descriptions",
+  "description": "Key-value display component for detail pages, supporting grid layout, bordered style, and horizontal/vertical modes",
+  "author": "draco-china <https://github.com/draco-china>",
+  "dependencies": ["class-variance-authority"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "packages/registry/pro/descriptions/index.tsx",
+      "content": "import { cva } from 'class-variance-authority'\nimport type { Key, ReactNode } from 'react'\nimport { cn } from '@/lib/utils'\n\nconst descriptionsGridVariants = cva('grid gap-0', {\n  variants: {\n    columns: {\n      1: 'grid-cols-1',\n      2: 'grid-cols-1 sm:grid-cols-2',\n      3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',\n      4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',\n    },\n    bordered: {\n      true: 'overflow-hidden rounded-md border',\n    },\n  },\n  defaultVariants: {\n    columns: 2,\n    bordered: false,\n  },\n})\n\nconst descriptionsItemVariants = cva('flex', {\n  variants: {\n    span: {\n      1: 'col-span-1',\n      2: 'col-span-1 sm:col-span-2',\n      3: 'col-span-1 sm:col-span-2 lg:col-span-3',\n      4: 'col-span-1 sm:col-span-2 lg:col-span-4',\n    },\n    layout: {\n      horizontal: 'flex-col sm:flex-row',\n      vertical: 'flex-col',\n    },\n    bordered: {\n      true: 'border-r border-b',\n    },\n  },\n  defaultVariants: {\n    span: 1,\n    layout: 'horizontal',\n    bordered: false,\n  },\n})\n\nconst descriptionsLabelVariants = cva('shrink-0 text-sm font-medium text-muted-foreground', {\n  variants: {\n    layout: {\n      horizontal: 'sm:w-32',\n      vertical: 'mb-1',\n    },\n    bordered: {\n      true: 'bg-muted/40 px-4 py-3',\n      false: 'py-2 pr-4',\n    },\n  },\n  defaultVariants: {\n    layout: 'horizontal',\n    bordered: false,\n  },\n})\n\nconst descriptionsValueVariants = cva('flex-1 text-sm text-foreground', {\n  variants: {\n    bordered: {\n      true: 'px-4 py-3',\n      false: 'py-2',\n    },\n  },\n  defaultVariants: {\n    bordered: false,\n  },\n})\n\nexport function ProDescriptions({\n  title,\n  items,\n  columns = 2,\n  bordered = false,\n  layout = 'horizontal',\n  className,\n}: {\n  title?: ReactNode\n  items: {\n    key?: Key\n    label: ReactNode\n    value?: ReactNode\n    span?: 1 | 2 | 3 | 4\n    className?: string\n  }[]\n  columns?: 1 | 2 | 3 | 4\n  bordered?: boolean\n  layout?: 'horizontal' | 'vertical'\n  className?: string\n}) {\n  return (\n    <div className={cn('w-full', className)}>\n      {title != null && <div className=\"mb-4 text-base font-semibold text-foreground\">{title}</div>}\n      <div className={descriptionsGridVariants({ columns, bordered })}>\n        {items.map((item, index) => (\n          <div\n            key={item.key ?? index}\n            className={descriptionsItemVariants({\n              span: item.span,\n              layout,\n              bordered,\n              className: item.className,\n            })}\n          >\n            <div\n              className={descriptionsLabelVariants({\n                layout,\n                bordered,\n              })}\n            >\n              {item.label}\n            </div>\n            <div className={descriptionsValueVariants({ bordered })}>\n              {item.value ?? <span className=\"text-muted-foreground\">—</span>}\n            </div>\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/pro/descriptions/index.tsx"
+    }
+  ],
+  "categories": ["display"],
+  "meta": {
+    "version": "1.17.0",
+    "docs": "https://draco-china.github.io/shadcn-pro/docs/components/pro-descriptions"
+  }
+}

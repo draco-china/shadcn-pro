@@ -1,0 +1,105 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "shadcn-pro",
+  "homepage": "https://draco-china.github.io/shadcn-pro",
+  "items": [
+    {
+      "name": "pro-base",
+      "type": "registry:component",
+      "title": "pro-base",
+      "description": "Shared low-level primitives for Pro components.",
+      "categories": ["base"]
+    },
+    {
+      "name": "pro-fields",
+      "type": "registry:component",
+      "title": "pro-fields",
+      "description": "Shared field components for ProForm, including input, password, select, switch, checkbox, radio, textarea, date, numeric, upload, and hierarchical select fields.",
+      "categories": ["form"]
+    },
+    {
+      "name": "pro-pagination",
+      "type": "registry:component",
+      "title": "pro-pagination",
+      "description": "Reusable pagination control for table and non-table views.",
+      "categories": ["base"]
+    },
+    {
+      "name": "pro-list",
+      "type": "registry:component",
+      "title": "pro-list",
+      "description": "Data list container with search, filters, request loading, and pagination.",
+      "categories": ["list"]
+    },
+    {
+      "name": "pro-overlay",
+      "type": "registry:component",
+      "title": "pro-overlay",
+      "description": "Reusable modal, drawer, and confirm overlay primitives.",
+      "categories": ["base"]
+    },
+    {
+      "name": "pro-form",
+      "type": "registry:component",
+      "title": "pro-form",
+      "description": "shadcn/ui driven form layout and overlay form components",
+      "categories": ["form"]
+    },
+    {
+      "name": "pro-table",
+      "type": "registry:component",
+      "title": "pro-table",
+      "description": "TanStack Table + shadcn/ui data table with search and pagination",
+      "categories": ["table"]
+    },
+    {
+      "name": "pro-editor",
+      "type": "registry:component",
+      "title": "pro-editor",
+      "description": "Monaco-powered editor with controlled language, theme, view mode, and external preview slot.",
+      "categories": ["content"]
+    },
+    {
+      "name": "pro-descriptions",
+      "type": "registry:component",
+      "title": "pro-descriptions",
+      "description": "Key-value display component for detail pages, supporting grid layout, bordered style, and horizontal/vertical modes",
+      "categories": ["display"]
+    },
+    {
+      "name": "code-viewer",
+      "type": "registry:component",
+      "title": "code-viewer",
+      "description": "Shiki-powered code viewer with One themes, copy, line numbers, folding, and empty/error states.",
+      "categories": ["display"]
+    },
+    {
+      "name": "diff-viewer",
+      "type": "registry:component",
+      "title": "diff-viewer",
+      "description": "Split and unified diff viewer with shared Shiki One syntax highlighting.",
+      "categories": ["display"]
+    },
+    {
+      "name": "html-viewer",
+      "type": "registry:component",
+      "title": "html-viewer",
+      "description": "Sandboxed HTML preview surface.",
+      "categories": ["display"]
+    },
+    {
+      "name": "image-viewer",
+      "type": "registry:component",
+      "title": "image-viewer",
+      "description": "Fullscreen image viewer with zoom, pan, rotate, fullscreen, thumbnails, and keyboard navigation.",
+      "categories": ["display"]
+    },
+    {
+      "name": "markdown-viewer",
+      "type": "registry:component",
+      "title": "markdown-viewer",
+      "description": "GitHub Flavored Markdown viewer with alerts, math, sanitized raw HTML, tables, and shared CodeViewer-powered code blocks.",
+      "categories": ["display"]
+    }
+  ]
+}
