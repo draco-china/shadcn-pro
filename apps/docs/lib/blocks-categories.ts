@@ -97,6 +97,22 @@ export const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: 'pro-list',
+    label: 'ProList',
+    blocks: [
+      {
+        name: 'pro-list-demo',
+        description: 'Data list with search, filters, custom item rendering, and pagination.',
+        iframeHeight: '560px',
+        files: [
+          demoFile('pro-list-demo'),
+          ...componentFiles('list', ['index.tsx']),
+          ...componentFiles('pagination', ['index.tsx']),
+        ],
+      },
+    ],
+  },
+  {
     id: 'pro-form',
     label: 'ProForm',
     blocks: [

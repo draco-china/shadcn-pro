@@ -1,0 +1,90 @@
+---
+title: ProList
+description: Data list container with search, filters, request loading, and pagination.
+---
+
+<ComponentPreview name="pro-list-demo" previewClassName="min-h-[560px] p-0" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-list
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+bun add lucide-react
+```
+
+<Step>Install or copy `pro-base` and `pro-pagination`.</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="pro-list" title="components/pro/list/index.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ProList } from "@/components/pro/list"
+
+<ProList
+  data={projects}
+  rowKey="id"
+  variant="outline"
+  direction="vertical"
+  split
+  search={{ placeholder: "Search projects..." }}
+  filters={[
+    {
+      key: "status",
+      placeholder: "Status",
+      options: [
+        { label: "Active", value: "active" },
+        { label: "Paused", value: "paused" },
+      ],
+    },
+  ]}
+  renderItem={(project) => <ProjectItem project={project} />}
+/>
+```
+
+Use `request` when pagination, search, and filters should be handled by your API.
+
+```tsx
+<ProList
+  rowKey="id"
+  request={(state) =>
+    fetchProjects({
+      page: state.pagination.pageIndex + 1,
+      pageSize: state.pagination.pageSize,
+      keyword: state.search,
+      status: state.filters.status,
+    })
+  }
+  renderItem={(project) => <ProjectItem project={project} />}
+/>
+```

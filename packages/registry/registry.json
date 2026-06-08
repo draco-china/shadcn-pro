@@ -48,6 +48,14 @@
       "files": ["pro/pagination/index.tsx"]
     },
     {
+      "name": "pro-list",
+      "category": "list",
+      "description": "Data list container with search, filters, request loading, and pagination.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["pro-fields", "pro-base", "pro-pagination"],
+      "files": ["pro/list/index.tsx"]
+    },
+    {
       "name": "pro-overlay",
       "category": "base",
       "description": "Reusable modal, drawer, and confirm overlay primitives.",

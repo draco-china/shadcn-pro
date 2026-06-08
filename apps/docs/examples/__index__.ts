@@ -16,6 +16,11 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       filePath: 'registry/new-york-v4/examples/pro-pagination-demo.tsx',
       component: lazy(() => import('@/registry/new-york-v4/examples/pro-pagination-demo')),
     },
+    'pro-list-demo': {
+      name: 'pro-list-demo',
+      filePath: 'registry/new-york-v4/examples/pro-list-demo.tsx',
+      component: lazy(() => import('@/registry/new-york-v4/examples/pro-list-demo')),
+    },
     'pro-overlay-demo': {
       name: 'pro-overlay-demo',
       filePath: 'registry/new-york-v4/examples/pro-overlay-demo.tsx',

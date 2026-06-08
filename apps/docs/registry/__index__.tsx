@@ -319,6 +319,14 @@ export const Index: Record<string, Record<string, any>> = {
       ],
       component: lazy(() => import("@/registry/new-york-v4/pro/pagination/index")),
     },
+    "pro-list": {
+      name: "pro-list",
+      type: "registry:ui",
+      files: [
+        { path: "registry/new-york-v4/pro/list/index.tsx", type: "registry:ui" },
+      ],
+      component: lazy(() => import("@/registry/new-york-v4/pro/list/index")),
+    },
     "pro-overlay": {
       name: "pro-overlay",
       type: "registry:ui",

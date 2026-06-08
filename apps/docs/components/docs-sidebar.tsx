@@ -23,13 +23,14 @@ const TOP_LEVEL_SECTIONS = [
 
 const COMPONENTS = [
   { name: 'ProBase', href: '/docs/components/pro-base' },
-  { name: 'ProDescriptions', href: '/docs/components/pro-descriptions' },
-  { name: 'ProEditor', href: '/docs/components/pro-editor' },
-  { name: 'ProFields', href: '/docs/components/pro-fields' },
   { name: 'ProPagination', href: '/docs/components/pro-pagination' },
   { name: 'ProOverlay', href: '/docs/components/pro-overlay' },
+  { name: 'ProFields', href: '/docs/components/pro-fields' },
   { name: 'ProForm', href: '/docs/components/pro-form' },
+  { name: 'ProList', href: '/docs/components/pro-list' },
   { name: 'ProTable', href: '/docs/components/pro-table' },
+  { name: 'ProDescriptions', href: '/docs/components/pro-descriptions' },
+  { name: 'ProEditor', href: '/docs/components/pro-editor' },
   { name: 'CodeViewer', href: '/docs/components/code-viewer' },
   { name: 'DiffViewer', href: '/docs/components/diff-viewer' },
   { name: 'HtmlViewer', href: '/docs/components/html-viewer' },
