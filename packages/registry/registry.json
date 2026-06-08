@@ -6,16 +6,9 @@
       "name": "pro-base",
       "category": "base",
       "description": "Shared low-level primitives for Pro components.",
-      "dependencies": [
-        "class-variance-authority",
-        "lucide-react",
-        "radix-ui"
-      ],
+      "dependencies": ["class-variance-authority", "lucide-react", "radix-ui"],
       "registryDependencies": [],
-      "files": [
-        "pro/base/hooks/use-fullscreen.ts",
-        "pro/base/button/index.tsx"
-      ]
+      "files": ["pro/base/hooks/use-fullscreen.ts", "pro/base/button/index.tsx"]
     },
     {
       "name": "pro-fields",
@@ -32,9 +25,7 @@
         "radix-ui",
         "react-day-picker"
       ],
-      "registryDependencies": [
-        "pro-base"
-      ],
+      "registryDependencies": ["pro-base"],
       "files": [
         "pro/base/fields/shared/field.tsx",
         "pro/base/fields/shared/calendar.tsx",
@@ -52,64 +43,33 @@
       "name": "pro-pagination",
       "category": "base",
       "description": "Reusable pagination control for table and non-table views.",
-      "dependencies": [
-        "lucide-react",
-        "radix-ui"
-      ],
-      "registryDependencies": [
-        "pro-base"
-      ],
-      "files": [
-        "pro/pagination/index.tsx"
-      ]
+      "dependencies": ["lucide-react", "radix-ui"],
+      "registryDependencies": ["pro-base"],
+      "files": ["pro/pagination/index.tsx"]
     },
     {
       "name": "pro-list",
       "category": "list",
       "description": "Data list container with search, filters, request loading, and pagination.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "pro-fields",
-        "pro-base",
-        "pro-pagination"
-      ],
-      "files": [
-        "pro/list/index.tsx"
-      ]
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["pro-fields", "pro-base", "pro-pagination"],
+      "files": ["pro/list/index.tsx"]
     },
     {
       "name": "pro-overlay",
       "category": "base",
       "description": "Reusable modal, drawer, and confirm overlay primitives.",
-      "dependencies": [
-        "lucide-react",
-        "radix-ui",
-        "vaul"
-      ],
-      "registryDependencies": [
-        "pro-base"
-      ],
-      "files": [
-        "pro/overlay/index.tsx"
-      ]
+      "dependencies": ["lucide-react", "radix-ui", "vaul"],
+      "registryDependencies": ["pro-base"],
+      "files": ["pro/overlay/index.tsx"]
     },
     {
       "name": "pro-form",
       "category": "form",
       "description": "shadcn/ui driven form layout and overlay form components",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "pro-fields",
-        "pro-base",
-        "pro-overlay"
-      ],
-      "files": [
-        "pro/form/index.tsx"
-      ]
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["pro-fields", "pro-base", "pro-overlay"],
+      "files": ["pro/form/index.tsx"]
     },
     {
       "name": "pro-table",
@@ -124,14 +84,8 @@
         "lucide-react",
         "radix-ui"
       ],
-      "registryDependencies": [
-        "pro-fields",
-        "pro-base",
-        "pro-pagination"
-      ],
-      "files": [
-        "pro/table/index.tsx"
-      ]
+      "registryDependencies": ["pro-fields", "pro-base", "pro-pagination"],
+      "files": ["pro/table/index.tsx"]
     },
     {
       "name": "pro-editor",
@@ -144,54 +98,32 @@
         "monaco-editor",
         "shiki"
       ],
-      "registryDependencies": [
-        "pro-base"
-      ],
-      "files": [
-        "pro/editor/index.tsx"
-      ]
+      "registryDependencies": ["pro-base"],
+      "files": ["pro/editor/index.tsx"]
     },
     {
       "name": "pro-descriptions",
       "category": "display",
       "description": "Key-value display component for detail pages, supporting grid layout, bordered style, and horizontal/vertical modes",
-      "dependencies": [
-        "class-variance-authority"
-      ],
+      "dependencies": ["class-variance-authority"],
       "registryDependencies": [],
-      "files": [
-        "pro/descriptions/index.tsx"
-      ]
+      "files": ["pro/descriptions/index.tsx"]
     },
     {
       "name": "code-viewer",
       "category": "display",
       "description": "Shiki-powered code viewer with One themes, copy, line numbers, folding, and empty/error states.",
-      "dependencies": [
-        "shiki",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "pro-base"
-      ],
-      "files": [
-        "pro/viewer/code/index.tsx"
-      ]
+      "dependencies": ["shiki", "lucide-react"],
+      "registryDependencies": ["pro-base"],
+      "files": ["pro/viewer/code/index.tsx"]
     },
     {
       "name": "diff-viewer",
       "category": "display",
       "description": "Split and unified diff viewer with shared Shiki One syntax highlighting.",
-      "dependencies": [
-        "diff",
-        "shiki"
-      ],
-      "registryDependencies": [
-        "pro-base"
-      ],
-      "files": [
-        "pro/viewer/diff/index.tsx"
-      ]
+      "dependencies": ["diff", "shiki"],
+      "registryDependencies": ["pro-base"],
+      "files": ["pro/viewer/diff/index.tsx"]
     },
     {
       "name": "html-viewer",
@@ -199,23 +131,15 @@
       "description": "Sandboxed HTML preview surface.",
       "dependencies": [],
       "registryDependencies": [],
-      "files": [
-        "pro/viewer/html/index.tsx"
-      ]
+      "files": ["pro/viewer/html/index.tsx"]
     },
     {
       "name": "image-viewer",
       "category": "display",
       "description": "Fullscreen image viewer with zoom, pan, rotate, fullscreen, thumbnails, and keyboard navigation.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "pro-base"
-      ],
-      "files": [
-        "pro/viewer/image/index.tsx"
-      ]
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["pro-base"],
+      "files": ["pro/viewer/image/index.tsx"]
     },
     {
       "name": "markdown-viewer",
@@ -233,12 +157,8 @@
         "remark-math",
         "remark-toc"
       ],
-      "registryDependencies": [
-        "code-viewer"
-      ],
-      "files": [
-        "pro/viewer/markdown/index.tsx"
-      ]
+      "registryDependencies": ["code-viewer"],
+      "files": ["pro/viewer/markdown/index.tsx"]
     }
   ]
 }

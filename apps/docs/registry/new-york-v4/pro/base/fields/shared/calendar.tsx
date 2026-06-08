@@ -11,14 +11,16 @@ import {
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '../../button'
 
-export function FieldCalendar({
-  className,
-  showOutsideDays = true,
-  ...props
-}: Omit<
-  DayPickerProps,
-  'captionLayout' | 'classNames' | 'components' | 'formatters' | 'showWeekNumber'
->) {
+type FieldCalendarProps = DayPickerProps extends infer TDayPickerProps
+  ? TDayPickerProps extends DayPickerProps
+    ? Omit<
+        TDayPickerProps,
+        'captionLayout' | 'classNames' | 'components' | 'formatters' | 'showWeekNumber'
+      >
+    : never
+  : never
+
+export function FieldCalendar({ className, showOutsideDays = true, ...props }: FieldCalendarProps) {
   const defaultClassNames = getDefaultClassNames()
 
   return (
