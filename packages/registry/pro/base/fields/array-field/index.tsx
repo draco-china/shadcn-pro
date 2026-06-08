@@ -33,7 +33,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   renderItem,
   max,
   min = 0,
-  sortable = 'button',
+  sortable = 'drag',
   disabled,
   className,
 }: {
