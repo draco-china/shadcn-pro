@@ -5370,7 +5370,7 @@ export function UploadFileList({ className }: { className?: string }) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">ul</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>17:T212a,'use client'
+<span class="line" data-line=""></span></code></pre>17:T21d5,'use client'
 
 import {
   closestCenter,
@@ -5406,6 +5406,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   max,
   min = 0,
   sortable = 'drag',
+  variant = 'outline',
   disabled,
   className,
 }: {
@@ -5427,6 +5428,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   max?: number
   min?: number
   sortable?: 'button' | 'drag' | false
+  variant?: 'outline' | 'ghost'
   disabled?: boolean
   className?: string
 }) {
@@ -5499,6 +5501,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
       onMoveDown: () => move(index, index + 1),
       disabled,
       sortMode,
+      variant,
       canDuplicate: canAddItem,
       canRemove: items.length > min,
       canMoveUp: index > 0,
@@ -5588,6 +5591,7 @@ interface ArrayFieldItemProps {
   onMoveDown: () => void
   disabled?: boolean
   sortMode: 'button' | 'drag' | 'none'
+  variant: 'outline' | 'ghost'
   canDuplicate?: boolean
   canRemove?: boolean
   canMoveUp?: boolean
@@ -5607,6 +5611,7 @@ function ArrayFieldItem({
   onMoveDown,
   disabled,
   sortMode,
+  variant,
   canDuplicate = true,
   canRemove = true,
   canMoveUp = true,
@@ -5617,7 +5622,10 @@ function ArrayFieldItem({
     <div
       ref={ref}
       style={style}
-      className="group relative flex items-start gap-2 rounded-md border bg-card p-3"
+      className={cn(
+        'group relative flex items-start gap-2',
+        variant === 'outline' && 'rounded-md border bg-card p-3',
+      )}
     >
       <div className="min-w-0 flex-1 space-y-3">{children}</div>
 
@@ -5688,7 +5696,7 @@ function ArrayFieldItem({
     </div>
   )
 }
-18:T1b556,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+18:T1be8b,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  closestCenter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -5724,6 +5732,7 @@ function ArrayFieldItem({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  max</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  min</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  sortable</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'drag'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  variant</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -5745,6 +5754,7 @@ function ArrayFieldItem({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  max</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  min</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  sortable</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'button'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'drag'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> false</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
@@ -5817,6 +5827,7 @@ function ArrayFieldItem({
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      onMoveDown</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#4078F2;--shiki-dark:#61AFEF"> move</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">index</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">index</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> +</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span><span style="color:#383A42;--shiki-dark:#ABB2BF">),</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      sortMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      variant</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      canDuplicate</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> canAddItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      canRemove</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#E45649;--shiki-dark:#E5C07B"> items</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ></span><span style="color:#383A42;--shiki-dark:#E06C75"> min</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      canMoveUp</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> index</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -5906,6 +5917,7 @@ function ArrayFieldItem({
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onMoveDown</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> () </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  disabled</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  sortMode</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'button'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'drag'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'none'</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'ghost'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  canDuplicate</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  canRemove</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  canMoveUp</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
@@ -5925,6 +5937,7 @@ function ArrayFieldItem({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onMoveDown</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  sortMode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  variant</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  canDuplicate</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  canRemove</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  canMoveUp</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> true</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -5935,7 +5948,10 @@ function ArrayFieldItem({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      ref</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">ref</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      style</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">style</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
-<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"group relative flex items-start gap-2 rounded-md border bg-card p-3"</span></span>
+<span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">      className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">        'group relative flex items-start gap-2'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">        variant</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'outline'</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'rounded-md border bg-card p-3'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"min-w-0 flex-1 space-y-3"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">children</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""></span>
@@ -6006,7 +6022,7 @@ function ArrayFieldItem({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-fields-demo",{"item":{"name":"pro-fields-demo","description":"Advanced field types: select, date, switch, and more.","iframeHeight":"388px","installName":"pro-fields"},"tree":[{"name":"examples","children":[{"name":"pro-fields-demo.tsx","path":"examples/pro-fields-demo.tsx"}]},{"name":"base","children":[{"name":"fields","children":[{"name":"shared","children":[{"name":"field.tsx","path":"base/fields/shared/field.tsx"},{"name":"calendar.tsx","path":"base/fields/shared/calendar.tsx"}]},{"name":"input","children":[{"name":"index.tsx","path":"base/fields/input/index.tsx"}]},{"name":"select","children":[{"name":"index.tsx","path":"base/fields/select/index.tsx"}]},{"name":"checkbox","children":[{"name":"index.tsx","path":"base/fields/checkbox/index.tsx"}]},{"name":"radio","children":[{"name":"index.tsx","path":"base/fields/radio/index.tsx"}]},{"name":"date-picker","children":[{"name":"index.tsx","path":"base/fields/date-picker/index.tsx"}]},{"name":"date-time-picker","children":[{"name":"index.tsx","path":"base/fields/date-time-picker/index.tsx"}]},{"name":"upload","children":[{"name":"index.tsx","path":"base/fields/upload/index.tsx"}]},{"name":"array-field","children":[{"name":"index.tsx","path":"base/fields/array-field/index.tsx"}]}]}]}],"highlightedFiles":[{"target":"examples/pro-fields-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"base/fields/shared/field.tsx","content":"$5","highlightedContent":"$6"},{"target":"base/fields/shared/calendar.tsx","content":"$7","highlightedContent":"$8"},{"target":"base/fields/input/index.tsx","content":"$9","highlightedContent":"$a"},{"target":"base/fields/select/index.tsx","content":"$b","highlightedContent":"$c"},{"target":"base/fields/checkbox/index.tsx","content":"$d","highlightedContent":"$e"},{"target":"base/fields/radio/index.tsx","content":"$f","highlightedContent":"$10"},{"target":"base/fields/date-picker/index.tsx","content":"$11","highlightedContent":"$12"},{"target":"base/fields/date-time-picker/index.tsx","content":"$13","highlightedContent":"$14"},{"target":"base/fields/upload/index.tsx","content":"$15","highlightedContent":"$16"},{"target":"base/fields/array-field/index.tsx","content":"$17","highlightedContent":"$18"}]}],"$L19","$L1a","$L1b","$L1c","$L1d","$L1e","$L1f","$L20"]}],["$L21"],"$L22"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"IIIvX30P4ASoZJ-y7E-CN"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-fields-demo",{"item":{"name":"pro-fields-demo","description":"Advanced field types: select, date, switch, and more.","iframeHeight":"388px","installName":"pro-fields"},"tree":[{"name":"examples","children":[{"name":"pro-fields-demo.tsx","path":"examples/pro-fields-demo.tsx"}]},{"name":"base","children":[{"name":"fields","children":[{"name":"shared","children":[{"name":"field.tsx","path":"base/fields/shared/field.tsx"},{"name":"calendar.tsx","path":"base/fields/shared/calendar.tsx"}]},{"name":"input","children":[{"name":"index.tsx","path":"base/fields/input/index.tsx"}]},{"name":"select","children":[{"name":"index.tsx","path":"base/fields/select/index.tsx"}]},{"name":"checkbox","children":[{"name":"index.tsx","path":"base/fields/checkbox/index.tsx"}]},{"name":"radio","children":[{"name":"index.tsx","path":"base/fields/radio/index.tsx"}]},{"name":"date-picker","children":[{"name":"index.tsx","path":"base/fields/date-picker/index.tsx"}]},{"name":"date-time-picker","children":[{"name":"index.tsx","path":"base/fields/date-time-picker/index.tsx"}]},{"name":"upload","children":[{"name":"index.tsx","path":"base/fields/upload/index.tsx"}]},{"name":"array-field","children":[{"name":"index.tsx","path":"base/fields/array-field/index.tsx"}]}]}]}],"highlightedFiles":[{"target":"examples/pro-fields-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"base/fields/shared/field.tsx","content":"$5","highlightedContent":"$6"},{"target":"base/fields/shared/calendar.tsx","content":"$7","highlightedContent":"$8"},{"target":"base/fields/input/index.tsx","content":"$9","highlightedContent":"$a"},{"target":"base/fields/select/index.tsx","content":"$b","highlightedContent":"$c"},{"target":"base/fields/checkbox/index.tsx","content":"$d","highlightedContent":"$e"},{"target":"base/fields/radio/index.tsx","content":"$f","highlightedContent":"$10"},{"target":"base/fields/date-picker/index.tsx","content":"$11","highlightedContent":"$12"},{"target":"base/fields/date-time-picker/index.tsx","content":"$13","highlightedContent":"$14"},{"target":"base/fields/upload/index.tsx","content":"$15","highlightedContent":"$16"},{"target":"base/fields/array-field/index.tsx","content":"$17","highlightedContent":"$18"}]}],"$L19","$L1a","$L1b","$L1c","$L1d","$L1e","$L1f","$L20"]}],["$L21"],"$L22"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"3luXFi0KESAqMizq72f28"}
 23:T28c4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">FormItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> "@/registry/new-york-v4/pro/form"</span></span>
