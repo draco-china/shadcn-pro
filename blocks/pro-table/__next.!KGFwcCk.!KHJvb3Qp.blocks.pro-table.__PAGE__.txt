@@ -690,7 +690,7 @@ export default function ProTableDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>5:Tf933,'use client'
+<span class="line" data-line=""></span></code></pre>5:Tf958,'use client'
 
 import {
   closestCenter,
@@ -2054,7 +2054,7 @@ function ProTableToolbar<TData>({
     ]
   })
   return (
-    <div className="flex flex-wrap items-start gap-2 md:items-center">
+    <div className="flex w-full flex-col gap-2 md:flex-row md:items-center md:justify-between">
       <div className="flex min-w-0 flex-1 flex-wrap items-start gap-2 md:items-center">
         {searchColumn && (
           <Input
@@ -2080,7 +2080,7 @@ function ProTableToolbar<TData>({
           </ProButton>
         )}
       </div>
-      <div className="flex flex-wrap items-center justify-end gap-2 md:ml-auto">
+      <div className="flex flex-wrap items-center justify-end gap-2 md:ml-auto md:shrink-0">
         {actions}
         {refresh && (
           <ProButton variant="ghost" tooltip="Refresh" disabled={disabled} onClick={refresh}>
@@ -2635,7 +2635,7 @@ function getPinnedColumnStyle<TData>(
 
   return style
 }
-6:Ta6e55,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+6:Ta6e7a,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  closestCenter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -3999,7 +3999,7 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    ]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  })</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex flex-wrap items-start gap-2 md:items-center"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex w-full flex-col gap-2 md:flex-row md:items-center md:justify-between"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex min-w-0 flex-1 flex-wrap items-start gap-2 md:items-center"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#383A42;--shiki-dark:#E06C75">searchColumn</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Input</span></span>
@@ -4025,7 +4025,7 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex flex-wrap items-center justify-end gap-2 md:ml-auto"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex flex-wrap items-center justify-end gap-2 md:ml-auto md:shrink-0"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#383A42;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#383A42;--shiki-dark:#E06C75">refresh</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Refresh"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">refresh</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -5020,7 +5020,7 @@ export function ProPagination({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-table-demo",{"item":{"name":"pro-table-demo","description":"Full-featured data table with filtering, sorting, and pagination.","iframeHeight":"676px","installName":"pro-table"},"tree":[{"name":"examples","children":[{"name":"pro-table-demo.tsx","path":"examples/pro-table-demo.tsx"}]},{"name":"table","children":[{"name":"index.tsx","path":"table/index.tsx"}]},{"name":"pagination","children":[{"name":"index.tsx","path":"pagination/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-table-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"table/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pagination/index.tsx","content":"$7","highlightedContent":"$8"}]}],"$L9"]}],["$La"],"$Lb"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"51ruPRaYFakw35wH9EeSN"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-table-demo",{"item":{"name":"pro-table-demo","description":"Full-featured data table with filtering, sorting, and pagination.","iframeHeight":"676px","installName":"pro-table"},"tree":[{"name":"examples","children":[{"name":"pro-table-demo.tsx","path":"examples/pro-table-demo.tsx"}]},{"name":"table","children":[{"name":"index.tsx","path":"table/index.tsx"}]},{"name":"pagination","children":[{"name":"index.tsx","path":"pagination/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-table-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"table/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pagination/index.tsx","content":"$7","highlightedContent":"$8"}]}],"$L9"]}],["$La"],"$Lb"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"YQb1AuHbazUEUOjnGzCLo"}
 c:T9b8,'use client'
 
 import { type ColumnDef } from '@tanstack/react-table'
@@ -5191,7 +5191,7 @@ d:T8325,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscr
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>e:Tf933,'use client'
+<span class="line" data-line=""></span></code></pre>e:Tf958,'use client'
 
 import {
   closestCenter,
@@ -6555,7 +6555,7 @@ function ProTableToolbar<TData>({
     ]
   })
   return (
-    <div className="flex flex-wrap items-start gap-2 md:items-center">
+    <div className="flex w-full flex-col gap-2 md:flex-row md:items-center md:justify-between">
       <div className="flex min-w-0 flex-1 flex-wrap items-start gap-2 md:items-center">
         {searchColumn && (
           <Input
@@ -6581,7 +6581,7 @@ function ProTableToolbar<TData>({
           </ProButton>
         )}
       </div>
-      <div className="flex flex-wrap items-center justify-end gap-2 md:ml-auto">
+      <div className="flex flex-wrap items-center justify-end gap-2 md:ml-auto md:shrink-0">
         {actions}
         {refresh && (
           <ProButton variant="ghost" tooltip="Refresh" disabled={disabled} onClick={refresh}>
@@ -7136,7 +7136,7 @@ function getPinnedColumnStyle<TData>(
 
   return style
 }
-f:Ta6e55,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+f:Ta6e7a,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  closestCenter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -8500,7 +8500,7 @@ f:Ta6e55,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    ]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  })</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex flex-wrap items-start gap-2 md:items-center"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex w-full flex-col gap-2 md:flex-row md:items-center md:justify-between"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex min-w-0 flex-1 flex-wrap items-start gap-2 md:items-center"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#383A42;--shiki-dark:#E06C75">searchColumn</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">Input</span></span>
@@ -8526,7 +8526,7 @@ f:Ta6e55,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex flex-wrap items-center justify-end gap-2 md:ml-auto"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex flex-wrap items-center justify-end gap-2 md:ml-auto md:shrink-0"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#383A42;--shiki-dark:#E06C75">actions</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#383A42;--shiki-dark:#E06C75">refresh</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> tooltip</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Refresh"</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> onClick</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">refresh</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
