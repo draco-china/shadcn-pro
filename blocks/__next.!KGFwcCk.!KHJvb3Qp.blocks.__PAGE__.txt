@@ -521,7 +521,7 @@ async function copyToClipboard(text: string) {
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">    document</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E5C07B">body</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">removeChild</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">textarea</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-16 md:gap-24","children":[["$","section","pro-base",{"id":"pro-base","className":"scroll-mt-28","children":[["$","div",null,{"className":"mb-6","children":[["$","h2",null,{"className":"text-2xl font-semibold tracking-tight","children":"ProBase"}],["$","p",null,{"className":"mt-1 text-sm text-muted-foreground","children":[1," variants"]}]]}],["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-base-demo",{"item":{"name":"pro-base-demo","description":"Shared primitives for button, copy feedback, loading, and fullscreen state.","iframeHeight":"240px","installName":"pro-base"},"tree":[{"name":"examples","children":[{"name":"pro-base-demo.tsx","path":"examples/pro-base-demo.tsx"}]},{"name":"base","children":[{"name":"hooks","children":[{"name":"use-fullscreen.ts","path":"base/hooks/use-fullscreen.ts"}]},{"name":"button","children":[{"name":"index.tsx","path":"base/button/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/pro-base-demo.tsx","content":"\"use client\"\n\nimport { Maximize2, RefreshCw } from \"lucide-react\"\n\nimport { CopyButton, ProButton } from \"@/registry/new-york-v4/pro/base/button\"\n\nexport default function ProBaseDemo() {\n  return (\n    <div className=\"flex items-center gap-2 rounded-lg border p-4\">\n      <ProButton\n        tooltip=\"Refresh\"\n        variant=\"outline\"\n        onClick={() => {}}\n      >\n        <RefreshCw className=\"size-4\" />\n        Refresh\n      </ProButton>\n      <CopyButton\n        icon={<RefreshCw className=\"size-4\" />}\n        tooltip=\"Copy\"\n        variant=\"outline\"\n        copy=\"https://shadcn-pro.draco.run\"\n      >\n        Copy\n      </CopyButton>\n      <ProButton\n        tooltip=\"Fullscreen\"\n        variant=\"outline\"\n        size=\"icon\"\n      >\n        <Maximize2 className=\"size-4\" />\n      </ProButton>\n    </div>\n  )\n}\n","highlightedContent":"$3"},{"target":"base/hooks/use-fullscreen.ts","content":"$4","highlightedContent":"$5"},{"target":"base/button/index.tsx","content":"$6","highlightedContent":"$7"}]}]]}]]}],"$L8","$L9","$La","$Lb","$Lc","$Ld","$Le"]}],["$Lf"],"$L10"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"BJg5GgZrEdqmHwidH969X"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-16 md:gap-24","children":[["$","section","pro-base",{"id":"pro-base","className":"scroll-mt-28","children":[["$","div",null,{"className":"mb-6","children":[["$","h2",null,{"className":"text-2xl font-semibold tracking-tight","children":"ProBase"}],["$","p",null,{"className":"mt-1 text-sm text-muted-foreground","children":[1," variants"]}]]}],["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-base-demo",{"item":{"name":"pro-base-demo","description":"Shared primitives for button, copy feedback, loading, and fullscreen state.","iframeHeight":"240px","installName":"pro-base"},"tree":[{"name":"examples","children":[{"name":"pro-base-demo.tsx","path":"examples/pro-base-demo.tsx"}]},{"name":"base","children":[{"name":"hooks","children":[{"name":"use-fullscreen.ts","path":"base/hooks/use-fullscreen.ts"}]},{"name":"button","children":[{"name":"index.tsx","path":"base/button/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/pro-base-demo.tsx","content":"\"use client\"\n\nimport { Maximize2, RefreshCw } from \"lucide-react\"\n\nimport { CopyButton, ProButton } from \"@/registry/new-york-v4/pro/base/button\"\n\nexport default function ProBaseDemo() {\n  return (\n    <div className=\"flex items-center gap-2 rounded-lg border p-4\">\n      <ProButton\n        tooltip=\"Refresh\"\n        variant=\"outline\"\n        onClick={() => {}}\n      >\n        <RefreshCw className=\"size-4\" />\n        Refresh\n      </ProButton>\n      <CopyButton\n        icon={<RefreshCw className=\"size-4\" />}\n        tooltip=\"Copy\"\n        variant=\"outline\"\n        copy=\"https://shadcn-pro.draco.run\"\n      >\n        Copy\n      </CopyButton>\n      <ProButton\n        tooltip=\"Fullscreen\"\n        variant=\"outline\"\n        size=\"icon\"\n      >\n        <Maximize2 className=\"size-4\" />\n      </ProButton>\n    </div>\n  )\n}\n","highlightedContent":"$3"},{"target":"base/hooks/use-fullscreen.ts","content":"$4","highlightedContent":"$5"},{"target":"base/button/index.tsx","content":"$6","highlightedContent":"$7"}]}]]}]]}],"$L8","$L9","$La","$Lb","$Lc","$Ld","$Le"]}],["$Lf"],"$L10"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"BZDXr8WIA7xb04vBwM4n2"}
 11:T1c7a,"use client"
 
 import { type ColumnDef } from "@tanstack/react-table"
@@ -13142,7 +13142,7 @@ function FieldCalendarDayButton({ className, day, modifiers, ...props }: DayButt
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>41:T3894,'use client'
+<span class="line" data-line=""></span></code></pre>41:T3891,'use client'
 
 import { Eye, EyeOff } from 'lucide-react'
 import { Slider as SliderPrimitive } from 'radix-ui'
@@ -13531,7 +13531,7 @@ export function Slider({
       <SliderPrimitive.Thumb
         data-slot="slider-thumb"
         className={
-          'block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
+          'block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
         }
       />
     </SliderPrimitive.Root>
@@ -13633,7 +13633,7 @@ export function Captcha({
     />
   )
 }
-42:T29c81,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+42:T29c7e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Eye</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">EyeOff</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Slider</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> SliderPrimitive</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'radix-ui'</span></span>
@@ -14022,7 +14022,7 @@ export function Captcha({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">SliderPrimitive.Thumb</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"slider-thumb"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">SliderPrimitive.Root</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -37052,7 +37052,7 @@ export function FieldPopoverContent({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">PopoverPrimitive.Portal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>97:T3894,'use client'
+<span class="line" data-line=""></span></code></pre>97:T3891,'use client'
 
 import { Eye, EyeOff } from 'lucide-react'
 import { Slider as SliderPrimitive } from 'radix-ui'
@@ -37441,7 +37441,7 @@ export function Slider({
       <SliderPrimitive.Thumb
         data-slot="slider-thumb"
         className={
-          'block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
+          'block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
         }
       />
     </SliderPrimitive.Root>
@@ -37543,7 +37543,7 @@ export function Captcha({
     />
   )
 }
-98:T29c81,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+98:T29c7e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Eye</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">EyeOff</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Slider</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> SliderPrimitive</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'radix-ui'</span></span>
@@ -37932,7 +37932,7 @@ export function Captcha({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">SliderPrimitive.Thumb</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"slider-thumb"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">SliderPrimitive.Root</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -42683,7 +42683,7 @@ ae:T7339,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">PopoverPrimitive.Portal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>af:T3894,'use client'
+<span class="line" data-line=""></span></code></pre>af:T3891,'use client'
 
 import { Eye, EyeOff } from 'lucide-react'
 import { Slider as SliderPrimitive } from 'radix-ui'
@@ -43072,7 +43072,7 @@ export function Slider({
       <SliderPrimitive.Thumb
         data-slot="slider-thumb"
         className={
-          'block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
+          'block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
         }
       />
     </SliderPrimitive.Root>
@@ -43174,7 +43174,7 @@ export function Captcha({
     />
   )
 }
-b0:T29c81,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+b0:T29c7e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Eye</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">EyeOff</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Slider</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> SliderPrimitive</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'radix-ui'</span></span>
@@ -43563,7 +43563,7 @@ b0:T29c81,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overs
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">SliderPrimitive.Thumb</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"slider-thumb"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">SliderPrimitive.Root</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -43886,7 +43886,7 @@ b3:T7339,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">PopoverPrimitive.Portal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>b4:T3894,'use client'
+<span class="line" data-line=""></span></code></pre>b4:T3891,'use client'
 
 import { Eye, EyeOff } from 'lucide-react'
 import { Slider as SliderPrimitive } from 'radix-ui'
@@ -44275,7 +44275,7 @@ export function Slider({
       <SliderPrimitive.Thumb
         data-slot="slider-thumb"
         className={
-          'block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
+          'block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
         }
       />
     </SliderPrimitive.Root>
@@ -44377,7 +44377,7 @@ export function Captcha({
     />
   )
 }
-b5:T29c81,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+b5:T29c7e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Eye</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">EyeOff</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Slider</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> SliderPrimitive</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'radix-ui'</span></span>
@@ -44766,7 +44766,7 @@ b5:T29c81,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overs
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">SliderPrimitive.Thumb</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"slider-thumb"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">SliderPrimitive.Root</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
