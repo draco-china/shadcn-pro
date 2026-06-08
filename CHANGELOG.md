@@ -1,3 +1,10 @@
+## [1.16.23](https://github.com/draco-china/shadcn-pro/compare/v1.16.22...v1.16.23) (2026-06-08)
+
+
+### Bug Fixes
+
+* default array field sorting to drag ([0511f94](https://github.com/draco-china/shadcn-pro/commit/0511f94b0d10b0a570fb5190487dbbad33330e22))
+
 ## [1.16.22](https://github.com/draco-china/shadcn-pro/compare/v1.16.21...v1.16.22) (2026-06-08)
 
 
