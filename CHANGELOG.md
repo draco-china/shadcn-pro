@@ -1,3 +1,10 @@
+## [1.16.19](https://github.com/draco-china/shadcn-pro/compare/v1.16.18...v1.16.19) (2026-06-08)
+
+
+### Bug Fixes
+
+* avoid copy button loading state ([98bc908](https://github.com/draco-china/shadcn-pro/commit/98bc908c89dc7d7db9aac742bb655c15b379ba91))
+
 ## [1.16.18](https://github.com/draco-china/shadcn-pro/compare/v1.16.17...v1.16.18) (2026-06-08)
 
 
