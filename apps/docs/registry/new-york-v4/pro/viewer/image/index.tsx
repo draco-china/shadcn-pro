@@ -229,7 +229,7 @@ export function ImageViewer({
               }}
               aria-label="Previous image"
             >
-              <ChevronLeft />
+              <ChevronLeft className="size-5" />
             </ProButton>
             <ProButton
               variant="ghost"
@@ -241,7 +241,7 @@ export function ImageViewer({
               }}
               aria-label="Next image"
             >
-              <ChevronRight />
+              <ChevronRight className="size-5" />
             </ProButton>
           </>
         )}
