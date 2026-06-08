@@ -1,3 +1,10 @@
+## [1.16.26](https://github.com/draco-china/shadcn-pro/compare/v1.16.25...v1.16.26) (2026-06-08)
+
+
+### Bug Fixes
+
+* support ghost array field variant ([49c36b4](https://github.com/draco-china/shadcn-pro/commit/49c36b42de822223e3ca5537517e0a95a5960915))
+
 ## [1.16.25](https://github.com/draco-china/shadcn-pro/compare/v1.16.24...v1.16.25) (2026-06-08)
 
 
