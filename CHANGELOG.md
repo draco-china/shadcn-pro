@@ -1,3 +1,10 @@
+## [1.16.22](https://github.com/draco-china/shadcn-pro/compare/v1.16.21...v1.16.22) (2026-06-08)
+
+
+### Bug Fixes
+
+* support array field sort modes ([ccc900d](https://github.com/draco-china/shadcn-pro/commit/ccc900de7c02b39de377f9bac3035507144d653f))
+
 ## [1.16.21](https://github.com/draco-china/shadcn-pro/compare/v1.16.20...v1.16.21) (2026-06-08)
 
 
