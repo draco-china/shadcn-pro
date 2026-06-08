@@ -1,3 +1,10 @@
+## [1.16.29](https://github.com/draco-china/shadcn-pro/compare/v1.16.28...v1.16.29) (2026-06-08)
+
+
+### Bug Fixes
+
+* keep slider thumb visible ([ce43e7a](https://github.com/draco-china/shadcn-pro/commit/ce43e7a9adf2160e7e4cc54580e6d76da3ef5227))
+
 ## [1.16.28](https://github.com/draco-china/shadcn-pro/compare/v1.16.27...v1.16.28) (2026-06-08)
 
 
