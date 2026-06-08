@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/draco-china/shadcn-pro/compare/v1.16.29...v1.17.0) (2026-06-08)
+
+
+### Features
+
+* add pro list component ([ca30884](https://github.com/draco-china/shadcn-pro/commit/ca3088478ea3d242c9c261db8acf311139a38375))
+
 ## [1.16.29](https://github.com/draco-china/shadcn-pro/compare/v1.16.28...v1.16.29) (2026-06-08)
 
 
