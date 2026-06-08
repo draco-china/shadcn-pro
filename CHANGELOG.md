@@ -1,3 +1,10 @@
+## [1.16.21](https://github.com/draco-china/shadcn-pro/compare/v1.16.20...v1.16.21) (2026-06-08)
+
+
+### Bug Fixes
+
+* improve array field item actions ([e1cc5e5](https://github.com/draco-china/shadcn-pro/commit/e1cc5e5468ac37995518a9a46675b8146fa44747))
+
 ## [1.16.20](https://github.com/draco-china/shadcn-pro/compare/v1.16.19...v1.16.20) (2026-06-08)
 
 
