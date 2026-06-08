@@ -1,3 +1,10 @@
+## [1.16.14](https://github.com/draco-china/shadcn-pro/compare/v1.16.13...v1.16.14) (2026-06-08)
+
+
+### Bug Fixes
+
+* restore image viewer navigation icon size ([fd82777](https://github.com/draco-china/shadcn-pro/commit/fd82777698c9b7bf8ff242febde8939e81011e54))
+
 ## [1.16.13](https://github.com/draco-china/shadcn-pro/compare/v1.16.12...v1.16.13) (2026-06-08)
 
 
