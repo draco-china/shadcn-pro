@@ -1,3 +1,10 @@
+## [1.18.3](https://github.com/draco-china/shadcn-pro/compare/v1.18.2...v1.18.3) (2026-06-08)
+
+
+### Bug Fixes
+
+* preserve calendar and code viewer types ([395c9c3](https://github.com/draco-china/shadcn-pro/commit/395c9c3e2dacca8eefd2d39a9b1da7ff004a58a6))
+
 ## [1.18.2](https://github.com/draco-china/shadcn-pro/compare/v1.18.1...v1.18.2) (2026-06-08)
 
 
