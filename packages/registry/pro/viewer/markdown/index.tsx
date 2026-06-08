@@ -400,6 +400,9 @@ function remarkGitHubAlerts() {
       if (!(type in alerts)) return
 
       firstText.value = firstText.value.slice(match[0].length).replace(/^\s+/, '')
+      if (firstText.value.length === 0 && firstParagraph.children?.length === 1) {
+        node.children?.shift()
+      }
       node.data = {
         hName: 'div',
         hProperties: { className: `markdown-alert markdown-alert-${type}`, dataAlert: type },
