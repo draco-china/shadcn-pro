@@ -2,7 +2,7 @@
 
 import type { ColumnDef } from "@tanstack/react-table"
 
-import { ProTable } from "@/registry/new-york-v4/pro/table/index"
+import { ProTable } from "@/registry/new-york-v4/pro/table"
 import { Badge } from "@/registry/new-york-v4/ui/badge"
 
 type User = {
@@ -40,7 +40,6 @@ export default function ProTableDocsDemo() {
         columns={columns}
         data={data}
         header={<h3 className="text-base font-semibold">Team members</h3>}
-        pagination={{ pageSizeOptions: [4, 10] }}
       />
     </div>
   )

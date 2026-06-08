@@ -96,18 +96,19 @@ Install the dependencies for the component you copy:
 
 | Component | Dependencies |
 | --- | --- |
-| `pro-base` | `lucide-react` |
-| `pro-fields` | `@dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities date-fns lucide-react` |
-| `pro-form` | `@formily/core @formily/react @formily/reactive-react date-fns lucide-react` |
-| `pro-table` | `@tanstack/react-table @tanstack/match-sorter-utils @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react` |
-| `pro-editor` | `@monaco-editor/react @shikijs/monaco monaco-editor shiki lucide-react` |
-| `pro-descriptions` | `lucide-react` through `pro-base` |
-| `pro-input` | `lucide-react` |
-| `code-viewer` | `shiki lucide-react` |
-| `diff-viewer` | `diff shiki` |
+| `pro-base` | `class-variance-authority lucide-react radix-ui` |
+| `pro-fields` | `@dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities class-variance-authority cmdk date-fns lucide-react radix-ui react-day-picker` plus `pro-base` |
+| `pro-pagination` | `lucide-react radix-ui` plus `pro-base` |
+| `pro-overlay` | `lucide-react radix-ui vaul` plus `pro-base` |
+| `pro-form` | `lucide-react` plus `pro-fields`, `pro-base`, and `pro-overlay` |
+| `pro-table` | `@tanstack/react-table @tanstack/match-sorter-utils @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react radix-ui` plus `pro-fields`, `pro-base`, and `pro-pagination` |
+| `pro-editor` | `@monaco-editor/react @shikijs/monaco monaco-editor shiki lucide-react` plus `pro-base` |
+| `pro-descriptions` | `class-variance-authority` |
+| `code-viewer` | `shiki lucide-react` plus `pro-base` |
+| `diff-viewer` | `diff shiki` plus `pro-base` |
 | `html-viewer` | None |
-| `image-viewer` | `lucide-react` |
-| `markdown-viewer` | `react-markdown shiki lucide-react remark-gfm remark-breaks remark-math remark-toc rehype-raw rehype-sanitize rehype-mathjax` |
+| `image-viewer` | `lucide-react` plus `pro-base` |
+| `markdown-viewer` | `class-variance-authority react-markdown lucide-react remark-gfm remark-breaks remark-math remark-toc rehype-raw rehype-sanitize rehype-mathjax` plus `code-viewer` |
 
 For example:
 
@@ -117,21 +118,19 @@ bun add react-markdown shiki lucide-react remark-gfm remark-breaks remark-math r
 
 ### 2. Copy the component
 
-Browse the component source on GitHub and copy each component folder into your project. Prefer the registry installer because it also copies shared Pro dependencies and internal registry dependencies such as `pro-toolbar`.
+Browse the component source on GitHub and copy each component folder into your project. Prefer the registry installer because it also copies shared Pro dependencies such as `pro-base`.
 
 - `ProBase` → `components/pro/base/`
 - `ProFields` → `components/pro/base/fields/`
 - `ProForm` → `components/pro/form/`
 - `ProTable` → `components/pro/table/`
 - `ProEditor` → `components/pro/editor/`
-- `ProDescriptions` → `components/pro/descriptions/` and `components/pro/base/`
+- `ProDescriptions` → `components/pro/descriptions/`
 - `CodeViewer` → `components/pro/viewer/code/`
 - `DiffViewer` → `components/pro/viewer/diff/`
 - `HtmlViewer` → `components/pro/viewer/html/`
 - `ImageViewer` → `components/pro/viewer/image/`
 - `MarkdownViewer` → `components/pro/viewer/markdown/index.tsx` and `components/pro/viewer/code/`
-
-`ProInput` is a focused subset of ProFields. Copy `components/pro/base/fields/input/`, `components/pro/base/fields/password/`, and the shared field helpers they import.
 
 ### 3. Import and use
 
@@ -180,23 +179,20 @@ const tableState = useProTableUrlState({
 <ProTable columns={columns} request={request} {...tableState} />
 ```
 
-### JSON schema forms
+### Schema forms
 
 ```tsx
-<ProForm
-  schema={{
-    type: "object",
-    properties: {
-      name: { type: "string", title: "Name" },
-      age: { type: "number", title: "Age" },
-      enabled: { type: "boolean", title: "Enabled" },
-      role: { type: "string", title: "Role", enum: ["admin", "user"] },
-    },
-  }}
-/>
+<ProForm onFinish={saveValues}>
+  <FormItem label="Name" htmlFor="name">
+    <Input id="name" name="name" />
+  </FormItem>
+  <FormItem label="Role" htmlFor="role">
+    <Select id="role" name="role" options={roleOptions} />
+  </FormItem>
+</ProForm>
 ```
 
-Use Formily `x-reactions` for conditional visibility and linkage. `ModalForm` and `DrawerForm` accept the same `schema` and `schemaComponents` props, and can be controlled with `open` / `onOpenChange` without a trigger.
+Use `ProSchemaForm` when a light schema-to-field mapping is enough, and ordinary React state for conditional visibility and linkage. `ModalForm` and `DrawerForm` can be controlled with `open` / `onOpenChange` without a trigger, while reusable modal, drawer, and confirm shells live in `pro-overlay`.
 
 ## TypeScript
 

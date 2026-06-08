@@ -26,19 +26,15 @@ npx @draco-china/shadcn-pro@latest add pro-descriptions
 
 <Steps className="mb-0 pt-2">
 
-<Step>Install or copy `pro-base`.</Step>
+<Step>Install the following dependencies:</Step>
+
+```bash
+bun add class-variance-authority
+```
 
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="pro-descriptions" title="components/pro/descriptions/index.tsx" />
-
-Manual installs also need the sibling files used by the entry component:
-
-- `components/pro/descriptions/item.tsx`
-- `components/pro/descriptions/styles.ts`
-- `components/pro/descriptions/types.ts`
-- `components/pro/descriptions/utils.ts`
-- `components/pro/base/utils/react-node.ts`
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -100,14 +96,13 @@ const items = [
 | `bordered` | `boolean` | `false` | Show bordered style |
 | `layout` | `"horizontal" \| "vertical"` | `"horizontal"` | Label/value layout. |
 | `className` | `string` | — | Root class name. |
-| `labelClassName` | `string` | — | Class name for every label cell. |
-| `valueClassName` | `string` | — | Class name for every value cell. |
 
 ### DescriptionsItem
 
-| Prop | Type | Description |
-|---|---|---|
-| `label` | `ReactNode` | Item label. |
-| `value` | `ReactNode` | Item value. Empty values render a muted dash. |
-| `span` | `number` | Column span (default: 1) |
-| `className` | `string` | Class name for this item. |
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `key` | `Key` | index | Stable item key. |
+| `label` | `ReactNode` | — | Item label. |
+| `value` | `ReactNode` | — | Item value. Empty values render a muted dash. |
+| `span` | `1 \| 2 \| 3 \| 4` | `1` | Column span. |
+| `className` | `string` | — | Class name for this item. |

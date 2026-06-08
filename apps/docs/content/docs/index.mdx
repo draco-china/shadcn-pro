@@ -1,6 +1,6 @@
 ---
 title: Introduction
-description: Pro-grade components built on shadcn/ui — schema-driven forms, data tables, rich editors, and more.
+description: Pro-grade components built on shadcn/ui — composable forms, data tables, rich editors, and more.
 ---
 
 **shadcn-pro** is a collection of higher-level components built on top of [shadcn/ui](https://ui.shadcn.com), designed for complex admin and data-heavy interfaces.
@@ -8,11 +8,11 @@ description: Pro-grade components built on shadcn/ui — schema-driven forms, da
 Inspired by [Ant Design Pro Components](https://procomponents.ant.design/), shadcn-pro brings the same productivity gains to the shadcn/ui ecosystem:
 
 - **ProFields** — Standalone field primitives (Input, Textarea, Select, Checkbox, Switch, Radio, DatePicker, Upload, Captcha, and more) you can use directly or compose into forms.
-- **ProForm** — Schema-driven forms powered by [FormilyJS](https://formilyjs.org), with built-in validation, field linkage, and dynamic fields.
+- **ProOverlay** — Reusable modal, drawer, and confirm shells.
+- **ProForm** — Composable form layout, lightweight schema forms, ModalForm, and DrawerForm.
 - **ProTable** — Feature-rich data tables powered by [TanStack Table](https://tanstack.com/table), with search, pagination, sorting, and column management built in.
 - **ProEditor** — Monaco-powered editor with controlled language, theme, view mode, and external preview slots.
 - **ProDescriptions** — Key-value detail panels for displaying structured record data.
-- **ProInput** — Enhanced shadcn/ui input and password fields with prefix/suffix slots, clear actions, and visibility controls.
 - **CodeViewer** — Shiki-powered read-only code viewer with copy, line numbers, folding, and loading/error states.
 - **DiffViewer** — Split and unified code diff viewer with shared Shiki highlighting.
 - **HtmlViewer** — Sandboxed HTML preview surface for rendering raw HTML in an iframe.
@@ -32,14 +32,14 @@ npx @draco-china/shadcn-pro@latest add markdown-viewer
 
 ## Key Features
 
-### Schema-Driven Forms
-Define entire forms with a JSON schema. ProForm uses FormilyJS under the hood for powerful field linkage, async data sources, and nested structures — without the boilerplate.
+### Composable Forms
+Build form layouts from `ProForm`, `FormItem`, and standalone ProFields. Values are collected from native `FormData`, so you can bring your own validation and state model.
 
 ### CLI Installation
 Add any component with a single command. The CLI copies source files directly into your project, respecting your existing folder structure.
 
 ### ProFields — Reusable Field Primitives
-Each field primitive (for example `Input`, `Select`, or `DatePicker`) is independently usable. Install `pro-form` when you need the Formily adapters for schema rendering.
+Each field primitive (for example `Input`, `Select`, or `DatePicker`) is independently usable. Compose them with `FormItem` and `ProForm` when you need consistent form layout and submitter actions.
 
 ## When to use
 
@@ -47,7 +47,7 @@ Each field primitive (for example `Input`, `Select`, or `DatePicker`) is indepen
 |---|---|
 | Simple one-off forms | shadcn/ui `<Form>` + react-hook-form |
 | Complex forms with dynamic fields, linkage, array/object nesting | **ProForm** |
-| Standalone inputs and reusable field primitives | **ProFields** or **ProInput** |
+| Standalone inputs and reusable field primitives | **ProFields** |
 | Simple lists | shadcn/ui `<Table>` |
 | Data tables with search, filter, pagination, column management | **ProTable** |
 | Read-only code, diffs, markdown, HTML, or image previews | **CodeViewer**, **DiffViewer**, **MarkdownViewer**, **HtmlViewer**, or **ImageViewer** |
@@ -60,7 +60,6 @@ Ready to try it out? Follow the [installation guide](/docs/installation) to add 
 ## Tech Stack
 
 - [shadcn/ui](https://ui.shadcn.com) — UI primitives
-- [FormilyJS](https://formilyjs.org) — Form state management (`@formily/react`, `@formily/core`)
 - [TanStack Table v8](https://tanstack.com/table) — Headless table engine
 - [Zod](https://zod.dev) — Schema validation
 - [Tailwind CSS v4](https://tailwindcss.com) — Styling

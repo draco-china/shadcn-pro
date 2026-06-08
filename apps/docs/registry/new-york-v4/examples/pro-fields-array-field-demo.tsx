@@ -22,7 +22,6 @@ export default function ProFieldsArrayFieldDemo() {
         value={value}
         onChange={setValue}
         newItem={() => ({ name: "", email: "" })}
-        addText="Add contact"
         min={1}
         renderItem={(item, _index, { update }) => (
           <div className="space-y-2">

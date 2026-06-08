@@ -1,7 +1,7 @@
 "use client"
 
 import type { ColumnDef } from "@tanstack/react-table"
-import { ProTable } from "@/registry/new-york-v4/pro/table/index"
+import { ProTable } from "@/registry/new-york-v4/pro/table"
 
 type User = {
   name: string
@@ -47,7 +47,6 @@ const columns: ColumnDef<User>[] = [
     meta: {
       filter: {
         placeholder: "Status",
-        variant: "text",
         options: [
           { label: "Active", value: "active" },
           { label: "Inactive", value: "inactive" },
@@ -60,7 +59,7 @@ const columns: ColumnDef<User>[] = [
 export default function ProTableFilterDemo() {
   return (
     <div className="h-[460px] w-full p-4">
-      <ProTable columns={columns} data={data} pagination={{ pageSizeOptions: [6, 10] }} />
+      <ProTable columns={columns} data={data} />
     </div>
   )
 }

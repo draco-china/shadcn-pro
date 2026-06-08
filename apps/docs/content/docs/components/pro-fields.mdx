@@ -1,6 +1,6 @@
 ---
 title: ProFields
-description: Standalone field primitives for forms — Input, Password, Textarea, Digit, Select, DatePicker, Upload, Captcha, ArrayField, ObjectField, and more.
+description: Standalone field primitives for forms — Input, Password, Textarea, Digit, Select, DatePicker, Upload, Captcha, ArrayField, and more.
 ---
 
 ## Installation
@@ -27,10 +27,10 @@ npx @draco-china/shadcn-pro@latest add pro-fields
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities class-variance-authority date-fns lucide-react radix-ui react-day-picker
+bun add @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities class-variance-authority cmdk date-fns lucide-react radix-ui react-day-picker
 ```
 
-<Step>No additional shadcn/ui components are required.</Step>
+<Step>Install or copy `pro-base`.</Step>
 
 <Step>
   Copy and paste the component files into your project under
@@ -40,153 +40,15 @@ bun add @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities class-variance-author
 Manual installs include these field files:
 
 - `components/pro/base/fields/shared/field.tsx`
-- `components/pro/base/fields/shared/classes.ts`
 - `components/pro/base/fields/shared/calendar.tsx`
-- `components/pro/base/fields/shared/calendar-class-names.ts`
-- `components/pro/base/fields/shared/calendar-day-button.tsx`
-- `components/pro/base/fields/shared/change-event.ts`
-- `components/pro/base/fields/shared/popover.tsx`
-- `components/pro/base/fields/shared/select-classes.ts`
-- `components/pro/base/fields/shared/select-content.tsx`
-- `components/pro/base/fields/shared/select-item.tsx`
-- `components/pro/base/fields/shared/select.tsx`
-- `components/pro/base/fields/shared/trigger.tsx`
 - `components/pro/base/fields/input/index.tsx`
-- `components/pro/base/fields/input/affix.tsx`
-- `components/pro/base/fields/input/affix-types.ts`
-- `components/pro/base/fields/input/classes.ts`
-- `components/pro/base/fields/input/clear.ts`
-- `components/pro/base/fields/input/types.ts`
-- `components/pro/base/fields/input/affix-utils.ts`
-- `components/pro/base/fields/input/affix-value.ts`
-- `components/pro/base/fields/input/affix-select.tsx`
-- `components/pro/base/fields/input/use-affix-selection.ts`
-- `components/pro/base/fields/input/use-input-affix.ts`
-- `components/pro/base/fields/input/use-input-value.ts`
-- `components/pro/base/fields/password/index.tsx`
-- `components/pro/base/fields/password/types.ts`
-- `components/pro/base/fields/textarea/index.tsx`
-- `components/pro/base/fields/textarea/classes.ts`
-- `components/pro/base/fields/textarea/types.ts`
-- `components/pro/base/fields/select/classes.ts`
 - `components/pro/base/fields/select/index.tsx`
-- `components/pro/base/fields/select/multi-select.tsx`
-- `components/pro/base/fields/select/multi-trigger.tsx`
-- `components/pro/base/fields/select/single-select.tsx`
-- `components/pro/base/fields/select/single-trigger.tsx`
-- `components/pro/base/fields/select/types.ts`
-- `components/pro/base/fields/select/content.tsx`
-- `components/pro/base/fields/select/command-options.tsx`
-- `components/pro/base/fields/select/use-select.tsx`
-- `components/pro/base/fields/select/utils.tsx`
 - `components/pro/base/fields/checkbox/index.tsx`
-- `components/pro/base/fields/checkbox/classes.ts`
-- `components/pro/base/fields/checkbox/control.tsx`
-- `components/pro/base/fields/checkbox/group.tsx`
-- `components/pro/base/fields/checkbox/use-checkbox-group.ts`
-- `components/pro/base/fields/checkbox/types.ts`
-- `components/pro/base/fields/switch/index.tsx`
-- `components/pro/base/fields/switch/classes.ts`
-- `components/pro/base/fields/switch/types.ts`
 - `components/pro/base/fields/radio/index.tsx`
-- `components/pro/base/fields/radio/classes.ts`
-- `components/pro/base/fields/radio/item.tsx`
-- `components/pro/base/fields/radio/types.ts`
-- `components/pro/base/fields/shared/date.ts`
 - `components/pro/base/fields/date-picker/index.tsx`
-- `components/pro/base/fields/date-picker/types.ts`
-- `components/pro/base/fields/date-range-picker/index.tsx`
-- `components/pro/base/fields/date-range-picker/types.ts`
-- `components/pro/base/fields/date-time-picker/content.tsx`
-- `components/pro/base/fields/date-time-picker/classes.ts`
 - `components/pro/base/fields/date-time-picker/index.tsx`
-- `components/pro/base/fields/date-time-picker/time-select.tsx`
-- `components/pro/base/fields/date-time-picker/trigger.tsx`
-- `components/pro/base/fields/date-time-picker/types.ts`
-- `components/pro/base/fields/time-picker/classes.ts`
-- `components/pro/base/fields/time-picker/index.tsx`
-- `components/pro/base/fields/time-picker/time-part-select.tsx`
-- `components/pro/base/fields/time-picker/types.ts`
-- `components/pro/base/fields/time-picker/utils.ts`
-- `components/pro/base/fields/shared/number.ts`
-- `components/pro/base/fields/shared/use-clearable-field.ts`
-- `components/pro/base/fields/digit/index.tsx`
-- `components/pro/base/fields/digit/types.ts`
-- `components/pro/base/fields/digit-range/classes.ts`
-- `components/pro/base/fields/digit-range/index.tsx`
-- `components/pro/base/fields/digit-range/types.ts`
-- `components/pro/base/fields/slider/index.tsx`
-- `components/pro/base/fields/slider/classes.ts`
-- `components/pro/base/fields/slider/types.ts`
-- `components/pro/base/fields/rate/index.tsx`
-- `components/pro/base/fields/rate/classes.ts`
-- `components/pro/base/fields/rate/star.tsx`
-- `components/pro/base/fields/rate/types.ts`
-- `components/pro/base/fields/segmented/index.tsx`
-- `components/pro/base/fields/segmented/classes.ts`
-- `components/pro/base/fields/segmented/types.ts`
-- `components/pro/base/fields/cascader/classes.ts`
-- `components/pro/base/fields/cascader/index.tsx`
-- `components/pro/base/fields/cascader/panel.tsx`
-- `components/pro/base/fields/cascader/types.ts`
-- `components/pro/base/fields/cascader/utils.ts`
-- `components/pro/base/fields/tree-select/classes.ts`
-- `components/pro/base/fields/tree-select/index.tsx`
-- `components/pro/base/fields/tree-select/expand-button.tsx`
-- `components/pro/base/fields/tree-select/option-button.tsx`
-- `components/pro/base/fields/tree-select/tree-node.tsx`
-- `components/pro/base/fields/tree-select/types.ts`
-- `components/pro/base/fields/tree-select/utils.ts`
 - `components/pro/base/fields/upload/index.tsx`
-- `components/pro/base/fields/upload/classes.ts`
-- `components/pro/base/fields/upload/upload.tsx`
-- `components/pro/base/fields/upload/image-upload.tsx`
-- `components/pro/base/fields/upload/file-list.tsx`
-- `components/pro/base/fields/upload/trigger-types.ts`
-- `components/pro/base/fields/upload/input-trigger.tsx`
-- `components/pro/base/fields/upload/compact-trigger.tsx`
-- `components/pro/base/fields/upload/dropzone-trigger.tsx`
-- `components/pro/base/fields/upload/state.ts`
-- `components/pro/base/fields/upload/types.ts`
-- `components/pro/base/fields/upload/use-upload.ts`
-- `components/pro/base/fields/upload/use-upload-actions.ts`
-- `components/pro/base/fields/upload/use-upload-drag.ts`
-- `components/pro/base/fields/upload/use-upload-files.ts`
-- `components/pro/base/fields/upload/upload-file.ts`
-- `components/pro/base/fields/upload/url-file.ts`
-- `components/pro/base/fields/upload/utils.ts`
-- `components/pro/base/fields/captcha/index.tsx`
-- `components/pro/base/fields/captcha/classes.ts`
-- `components/pro/base/fields/captcha/sms/index.tsx`
-- `components/pro/base/fields/captcha/sms/send-button.tsx`
-- `components/pro/base/fields/captcha/sms/types.ts`
-- `components/pro/base/hooks/use-countdown.ts`
-- `components/pro/base/fields/captcha/visual/index.tsx`
-- `components/pro/base/fields/captcha/visual/types.ts`
-- `components/pro/base/fields/captcha/visual/visual-addon.tsx`
-- `components/pro/base/fields/money/index.tsx`
-- `components/pro/base/fields/money/types.ts`
 - `components/pro/base/fields/array-field/index.tsx`
-- `components/pro/base/fields/array-field/classes.ts`
-- `components/pro/base/fields/array-field/sortable-item.tsx`
-- `components/pro/base/fields/array-field/types.ts`
-- `components/pro/base/fields/array-field/use-array-field-ids.ts`
-- `components/pro/base/fields/array-field/use-array-field-sensors.ts`
-- `components/pro/base/fields/array-field/use-array-field.ts`
-- `components/pro/base/fields/object-field/classes.ts`
-- `components/pro/base/fields/object-field/index.tsx`
-- `components/pro/base/fields/object-field/body.tsx`
-- `components/pro/base/fields/object-field/collapsible.tsx`
-- `components/pro/base/fields/object-field/content.tsx`
-- `components/pro/base/fields/object-field/header.tsx`
-- `components/pro/base/fields/object-field/types.ts`
-- `components/pro/base/fields/object-field/utils.ts`
-- `components/pro/base/filter/faceted-filter/classes.ts`
-- `components/pro/base/filter/faceted-filter/index.tsx`
-- `components/pro/base/filter/faceted-filter/options.tsx`
-- `components/pro/base/filter/faceted-filter/trigger.tsx`
-- `components/pro/base/filter/faceted-filter/types.ts`
-- `components/pro/base/hooks/use-faceted-filter.ts`
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -198,365 +60,12 @@ Manual installs include these field files:
 
 ## Usage
 
-Every field is a plain React/shadcn component. Simple fields preserve the underlying shadcn/ui prop surface where practical; shadcn-pro adds only small behaviors such as `allowClear`, prefix/suffix slots, options mapping, and composed field layouts. Formily adapters live under `pro-form/formily-fields`, so schema-driven forms can use the same field primitives without making the base fields depend on Formily.
+Every field is a plain React/shadcn component. Simple fields preserve the underlying shadcn/ui prop surface where practical; shadcn-pro adds only small behaviors such as clear actions, affix slots, and options mapping. Compose section layouts at the call site.
 
-```tsx
-import { Input } from "@/components/pro/base/fields/input"
+`Input` only applies the default horizontal padding when no affix is present. When `prefix` or `suffix` is provided, the shell keeps the slot flush and the passed content owns its own spacing, such as `px-3` on a currency prefix.
 
-export default function Example() {
-  return <Input placeholder="Enter username" />
-}
-```
-
-For schema-driven forms, install `pro-form` and import the Formily adapters from `pro-form/formily-fields`.
-
-```tsx
-import { createForm } from "@formily/core"
-import { Field, FormProvider } from "@formily/react"
-
-import { FormItem } from "@/components/pro/form/form-item"
-import { FormilyInput } from "@/components/pro/form/formily-fields"
-
-const form = createForm()
-
-export default function Example() {
-  return (
-    <FormProvider form={form}>
-      <Field
-        name="username"
-        title="Username"
-        decorator={[FormItem]}
-        component={[FormilyInput, { placeholder: "Enter username" }]}
-      />
-    </FormProvider>
-  )
-}
-```
 
 ---
-
-## FacetedFilter
-
-A Popover + Checkbox filter component designed for faceted search — auto-used by `ProTable` when `meta.filter.options` is set on a column, and available standalone for forms or custom toolbars. Supports single-select and multi-select behavior with `multiple`.
-
-<ComponentPreview
-  name="pro-fields-faceted-filter-demo"
-  previewClassName="min-h-[260px] items-start p-6"
-  align="start"
-/>
-
-### API Reference
-
-| Prop          | Type                                | Default     | Description                                              |
-| ------------- | ----------------------------------- | ----------- | -------------------------------------------------------- |
-| `value`       | `string \| string[]`                | —           | Controlled selected value(s)                             |
-| `onChange`    | `(value: string \| string[] \| undefined) => void` | — | Change handler                              |
-| `options`     | `{ label: string; value: string; icon?: ComponentType }[]` | `[]` | Filter options                      |
-| `placeholder` | `string`                            | `'Filter...'` | Button label / search placeholder                      |
-| `multiple`    | `boolean`                           | `false`     | Return `string[]` values when true; return a single `string` when false |
-| `facets`      | `Map<string, number>`               | —           | Optional count map, usually from TanStack Table's `getFacetedUniqueValues()`. |
-| `className`   | `string`                            | —           | Additional CSS classes                                   |
-
-```tsx
-import { FacetedFilter } from "@/components/pro/base/filter/faceted-filter"
-
-<FacetedFilter
-  placeholder="Status"
-  multiple
-  options={[
-    { label: "Active", value: "active" },
-    { label: "Inactive", value: "inactive" },
-  ]}
-  value={selected}
-  onChange={setSelected}
-/>
-```
-
----
-
-## Slider
-
-<ComponentPreview
-  name="pro-fields-slider-demo"
-  previewClassName="min-h-[320px] items-start p-6"
-  align="start"
-/>
-
-### API Reference
-
-| Prop        | Type                      | Default | Description              |
-| ----------- | ------------------------- | ------- | ------------------------ |
-| `value`     | `number`                  | —       | Controlled value         |
-| `onChange`  | `(value: number) => void` | —       | Change handler           |
-| `min`       | `number`                  | `0`     | Minimum value            |
-| `max`       | `number`                  | `100`   | Maximum value            |
-| `step`      | `number`                  | `1`     | Step increment           |
-| `showValue` | `boolean`                 | `false` | Show current value badge |
-| `disabled`  | `boolean`                 | `false` | Disable interaction      |
-| `className` | `string`                  | —       | Additional CSS classes   |
-
----
-
-## Rate
-
-<ComponentPreview
-  name="pro-fields-rate-demo"
-  previewClassName="min-h-[280px] items-start p-6"
-  align="start"
-/>
-
-### API Reference
-
-| Prop        | Type                      | Default | Description                |
-| ----------- | ------------------------- | ------- | -------------------------- |
-| `value`     | `number`                  | `0`     | Controlled value (0–count) |
-| `onChange`  | `(value: number) => void` | —       | Change handler             |
-| `count`     | `number`                  | `5`     | Total number of stars      |
-| `disabled`  | `boolean`                 | `false` | Disable interaction        |
-| `className` | `string`                  | —       | Additional CSS classes     |
-
----
-
-## Segmented
-
-<ComponentPreview
-  name="pro-fields-segmented-demo"
-  previewClassName="min-h-[260px] items-start p-6"
-  align="start"
-/>
-
-### API Reference
-
-| Prop        | Type                                                     | Default | Description               |
-| ----------- | -------------------------------------------------------- | ------- | ------------------------- |
-| `value`     | `string`                                                 | —       | Controlled selected value |
-| `onChange`  | `(value: string) => void`                                | —       | Change handler            |
-| `options`   | `{ label: string; value: string; disabled?: boolean }[]` | `[]`    | Segment options           |
-| `disabled`  | `boolean`                                                | `false` | Disable all segments      |
-| `className` | `string`                                                 | —       | Additional CSS classes    |
-
----
-
-## Cascader
-
-<ComponentPreview
-  name="pro-fields-cascader-demo"
-  previewClassName="min-h-[300px] items-start p-6"
-  align="start"
-/>
-
-### API Reference
-
-| Prop          | Type                        | Default       | Description            |
-| ------------- | --------------------------- | ------------- | ---------------------- |
-| `value`       | `string[]`                  | —             | Selected path values   |
-| `onChange`    | `(value: string[]) => void` | —             | Change handler         |
-| `options`     | `CascaderOption[]`          | `[]`          | Nested option tree     |
-| `placeholder` | `string`                    | `'Select...'` | Placeholder text       |
-| `disabled`    | `boolean`                   | `false`       | Disable interaction    |
-| `className`   | `string`                    | —             | Additional CSS classes |
-
-```ts
-interface CascaderOption {
-  label: string
-  value: string
-  disabled?: boolean
-  children?: CascaderOption[]
-}
-```
-
----
-
-## TreeSelect
-
-<ComponentPreview
-  name="pro-fields-tree-select-demo"
-  previewClassName="min-h-[320px] items-start p-6"
-  align="start"
-/>
-
-### API Reference
-
-| Prop          | Type                        | Default       | Description                                                         |
-| ------------- | --------------------------- | ------------- | ------------------------------------------------------------------- |
-| `value`       | `string[]`                  | —             | Selected node values                                                |
-| `onChange`    | `(value: string[]) => void` | —             | Change handler                                                      |
-| `options`     | `TreeSelectOption[]`        | `[]`          | Nested tree data                                                    |
-| `placeholder` | `string`                    | `'Select...'` | Placeholder text                                                    |
-| `multiple`    | `boolean`                   | `false`       | Allow multiple selection                                            |
-| `allowClear`  | `boolean`                   | `true`        | Show a clear button when the field has a value and is not required. |
-| `disabled`    | `boolean`                   | `false`       | Disable interaction                                                 |
-| `className`   | `string`                    | —             | Additional CSS classes                                              |
-
-```ts
-interface TreeSelectOption {
-  label: string
-  value: string
-  disabled?: boolean
-  children?: TreeSelectOption[]
-}
-```
-
----
-
-## Upload
-
-<ComponentPreview
-  name="pro-fields-upload-demo"
-  previewClassName="min-h-[320px] items-start p-6"
-  align="start"
-/>
-
-### API Reference
-
-| Prop          | Type                            | Default                     | Description          |
-| ------------- | ------------------------------- | --------------------------- | -------------------- |
-| `value`       | `UploadFile[]`                  | —                           | Controlled file list |
-| `onChange`    | `(files: UploadFile[]) => void` | —                           | Change handler       |
-| `upload` | `(files, context) => UploadResult \| UploadResult[] \| Promise<...>` | — | Custom upload behavior for the selected files. Return URL strings, `UploadFile` patches, `false`/`null` to skip, or nothing to use the default object URL. |
-| `accept`      | `string`                        | —                           | Accepted MIME types  |
-| `multiple`    | `boolean`                       | `true`                      | Allow multiple files |
-| `maxCount`    | `number`                        | —                           | Maximum file count   |
-| `disabled`    | `boolean`                       | `false`                     | Disable interaction  |
-| `placeholder` | `string`                        | `'Click or drag to upload'` | Trigger label or URL input placeholder |
-| `presentation` | `'dropzone' \| 'compact' \| 'input'` | `'dropzone'` | Trigger layout. Every presentation supports click and drag upload; `input` also supports URL entry. |
-| `preview` | `boolean` | `true` in input presentation | Show the prefix preview in `input` presentation; set `false` to hide it. |
-| `fileList` | `boolean` | `true` in dropzone presentation | Show the selected file list below the trigger. |
-
-```ts
-interface UploadFile {
-  uid: string
-  name: string
-  url?: string
-  status?: "uploading" | "done" | "error"
-  size?: number
-}
-
-type UploadResult = string | Partial<UploadFile> | null | false | undefined
-
-interface UploadContext {
-  maxCount?: number
-  multiple: boolean
-}
-```
-
-```tsx
-<Upload
-  presentation="input"
-  multiple={false}
-  upload={async ([file]) => {
-    const url = await uploadAvatar(file)
-    return { url, name: file.name, status: "done" }
-  }}
-/>
-```
-
-```tsx
-<Upload
-  multiple
-  upload={async (files) => {
-    const urls = await uploadAttachments(files)
-    return urls.map((url, index) => ({ url, name: files[index].name }))
-  }}
-/>
-```
-
----
-
-## Captcha
-
-<ComponentPreview
-  name="pro-fields-captcha-demo"
-  previewClassName="min-h-[260px] items-start p-6"
-  align="start"
-/>
-
-### API Reference
-
-| Prop              | Type          | Default           | Description                                                                                    |
-| ----------------- | ------------- | ----------------- | ---------------------------------------------------------------------------------------------- |
-| `value`           | `string`      | —                 | Controlled input value                                                                         |
-| `onChange`        | `(e) => void` | —                 | Input change handler                                                                           |
-| `onSend`          | `() => void \| Promise<void>`  | —       | Called before the SMS send-code countdown starts.                                              |
-| `buttonText`      | `string`      | `'Get code'`      | Text for the trailing send-code button.                                                        |
-| `countdown`       | `number`      | `60000`           | Countdown duration in milliseconds after clicking the trailing send-code button. Set `0` to disable countdown. |
-| `prefix`          | `ReactNode \| object` | —          | Same prefix slot as `Input`, including compact select affix config.                            |
-| `suffix`          | `ReactNode \| object` | —          | Same suffix slot as `Input`; the send-code button is appended after it.                        |
-| `allowClear`      | `boolean`     | `true`            | Show the shared `Input` clear button when the field has a value.                               |
-| `onClear`         | `() => void`  | —                 | Called when the shared clear button is clicked.                                                |
-| `placeholder`     | `string`      | `'Enter captcha'` | Input placeholder                                                                              |
-| `disabled`        | `boolean`     | `false`           | Disable interaction                                                                            |
-| `inputClassName`  | `string`      | —                 | Additional className for the input.                                                            |
-| `buttonClassName` | `string`      | —                 | Additional className for the trailing send-code button.                                        |
-| `className`       | `string`      | —                 | Additional CSS classes                                                                         |
-
-`VisualCaptcha` is the visual captcha variant. Choose it explicitly when the suffix should render an image or text captcha instead of the SMS send-code button.
-
-| Prop              | Type          | Default           | Description                                                                                    |
-| ----------------- | ------------- | ----------------- | ---------------------------------------------------------------------------------------------- |
-| `value`           | `string`      | —                 | Controlled input value                                                                         |
-| `onChange`        | `(e) => void` | —                 | Input change handler                                                                           |
-| `onRefresh`       | `() => void \| Promise<void>`  | —       | Called when the visual captcha refresh button is clicked.                                      |
-| `captchaUrl`      | `string`      | —                 | Image URL for image captcha.                                                                   |
-| `captchaText`     | `string`      | —                 | Text captcha fallback when no image URL is provided.                                           |
-| `prefix`          | `ReactNode \| object` | —          | Same prefix slot as `Input`, including compact select affix config.                            |
-| `suffix`          | `ReactNode \| object` | —          | Same suffix slot as `Input`; the visual captcha is appended after it.                          |
-| `allowClear`      | `boolean`     | `true`            | Show the shared `Input` clear button when the field has a value.                               |
-| `onClear`         | `() => void`  | —                 | Called when the shared clear button is clicked.                                                |
-| `placeholder`     | `string`      | `'Enter captcha'` | Input placeholder                                                                              |
-| `disabled`        | `boolean`     | `false`           | Disable interaction                                                                            |
-| `inputClassName`  | `string`      | —                 | Additional className for the input.                                                            |
-| `className`       | `string`      | —                 | Additional CSS classes                                                                         |
-
----
-
-## Money
-
-<ComponentPreview
-  name="pro-fields-money-demo"
-  previewClassName="min-h-[280px] items-start p-6"
-  align="start"
-/>
-
-### API Reference
-
-| Prop          | Type                                   | Default | Description              |
-| ------------- | -------------------------------------- | ------- | ------------------------ |
-| `value`       | `number`                               | —       | Controlled numeric value |
-| `onChange`    | `(value: number \| undefined) => void` | —       | Change handler           |
-| `currency`    | `string`                               | `'$'`   | Currency symbol prefix   |
-| `precision`   | `number`                               | `2`     | Decimal places           |
-| `placeholder` | `string`                               | —       | Input placeholder        |
-| `disabled`    | `boolean`                              | `false` | Disable interaction      |
-| `className`   | `string`                               | —       | Additional CSS classes   |
-
----
-
-Use `FormilyCaptcha` for Formily schema integration.
-
-## Core Fields
-
-The following fields cover the full ProFields surface. Use the standalone field primitives directly, or use the matching Formily adapter from `pro-form/formily-fields` when building schema-driven forms.
-
-### Input
-
-<ComponentPreview
-  name="pro-fields-input-demo"
-  previewClassName="min-h-[160px] items-start p-6"
-  align="start"
-/>
-
-```tsx
-<Field
-  name="email"
-  title="Email"
-  decorator={[FormItem]}
-  component={[
-    FormilyInput,
-    { placeholder: "you@example.com", type: "email", allowClear: true },
-  ]}
-/>
-```
 
 ### Textarea
 
@@ -566,17 +75,6 @@ The following fields cover the full ProFields surface. Use the standalone field 
   align="start"
 />
 
-```tsx
-<Field
-  name="bio"
-  title="Bio"
-  decorator={[FormItem]}
-  component={[
-    FormilyTextarea,
-    { rows: 4, placeholder: "Tell us about yourself" },
-  ]}
-/>
-```
 
 ### Password
 
@@ -586,14 +84,6 @@ The following fields cover the full ProFields surface. Use the standalone field 
   align="start"
 />
 
-```tsx
-<Field
-  name="password"
-  title="Password"
-  decorator={[FormItem]}
-  component={[FormilyPassword, { placeholder: "Enter password" }]}
-/>
-```
 
 ### Digit
 
@@ -603,14 +93,6 @@ The following fields cover the full ProFields surface. Use the standalone field 
   align="start"
 />
 
-```tsx
-<Field
-  name="quantity"
-  title="Quantity"
-  decorator={[FormItem]}
-  component={[FormilyDigit, { min: 1, max: 999, allowClear: true }]}
-/>
-```
 
 ### DigitRange
 
@@ -620,17 +102,8 @@ The following fields cover the full ProFields surface. Use the standalone field 
   align="start"
 />
 
-```tsx
-<Field
-  name="budgetRange"
-  title="Budget Range"
-  decorator={[FormItem]}
-  component={[
-    FormilyDigitRange,
-    { placeholder: ["Min budget", "Max budget"], allowClear: true },
-  ]}
-/>
-```
+`DigitRange` renders the min and max controls in one input shell with a built-in separator and clear action.
+
 
 ### Money
 
@@ -640,17 +113,6 @@ The following fields cover the full ProFields surface. Use the standalone field 
   align="start"
 />
 
-```tsx
-<Field
-  name="amount"
-  title="Amount"
-  decorator={[FormItem]}
-  component={[
-    FormilyMoney,
-    { currency: "$", precision: 2, placeholder: "0.00" },
-  ]}
-/>
-```
 
 ### Select
 
@@ -660,56 +122,11 @@ The following fields cover the full ProFields surface. Use the standalone field 
   align="start"
 />
 
-```tsx
-<Field
-  name="role"
-  title="Role"
-  decorator={[FormItem]}
-  component={[
-    FormilySelect,
-    {
-      allowClear: true,
-      searchable: true,
-      options: [
-        {
-          label: "Admin",
-          value: "admin",
-          description: "Full access to team settings.",
-        },
-        {
-          label: "User",
-          value: "user",
-          description: "Can view and update assigned work.",
-        },
-      ],
-    },
-  ]}
-/>
-```
 
-Most clearable fields enable `allowClear` by default. `Select` keeps `allowClear` disabled by default and only shows the clear button when you enable it explicitly. Clearing `Select` sends `undefined` so Formily can return to an empty value.
+Some fields expose `allowClear` when clearing is an optional behavior. Digit, DigitRange, date, time, Cascader, and TreeSelect fields keep clearing built in: when they have a value, the clear button is shown automatically.
 
 `Select`, `Radio`, and grouped `Checkbox` options support `description` for consistent option help text. `Select` also supports `searchable` and `multiple`; multiple mode uses a `string[]` value.
 
-```tsx
-<Field
-  name="roles"
-  title="Roles"
-  decorator={[FormItem]}
-  component={[
-    FormilySelect,
-    {
-      multiple: true,
-      searchable: true,
-      placeholder: "Select roles",
-      options: [
-        { label: "Admin", value: "admin", description: "Full access." },
-        { label: "Editor", value: "editor", description: "Can edit content." },
-      ],
-    },
-  ]}
-/>
-```
 
 ### Checkbox
 
@@ -719,41 +136,9 @@ Most clearable fields enable `allowClear` by default. `Select` keeps `allowClear
   align="start"
 />
 
-```tsx
-<Field
-  name="agree"
-  title="Agree to terms"
-  decorator={[FormItem]}
-  component={[FormilyCheckbox]}
-/>
-```
 
 Use `options` for checkbox group mode. In group mode the value is `string[]`; without `options`, Checkbox uses boolean switch semantics.
 
-```tsx
-<Field
-  name="roles"
-  title="Roles"
-  decorator={[FormItem]}
-  component={[
-    FormilyCheckbox,
-    {
-      options: [
-        {
-          label: "Admin",
-          value: "admin",
-          description: "Can manage workspace settings.",
-        },
-        {
-          label: "Editor",
-          value: "editor",
-          description: "Can edit shared content.",
-        },
-      ],
-    },
-  ]}
-/>
-```
 
 ### Switch
 
@@ -763,14 +148,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="enabled"
-  title="Enable notifications"
-  decorator={[FormItem]}
-  component={[FormilySwitch]}
-/>
-```
 
 ### Radio
 
@@ -780,22 +157,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="gender"
-  title="Gender"
-  decorator={[FormItem]}
-  component={[
-    FormilyRadio,
-    {
-      options: [
-        { label: "Personal", value: "personal", description: "For individual accounts." },
-        { label: "Company", value: "company", description: "For organizations and teams." },
-      ],
-    },
-  ]}
-/>
-```
 
 ### Segmented
 
@@ -805,22 +166,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="billingCycle"
-  title="Billing Cycle"
-  decorator={[FormItem]}
-  component={[
-    FormilySegmented,
-    {
-      options: [
-        { label: "Monthly", value: "monthly" },
-        { label: "Yearly", value: "yearly" },
-      ],
-    },
-  ]}
-/>
-```
 
 ### Slider
 
@@ -830,14 +175,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="progress"
-  title="Progress"
-  decorator={[FormItem]}
-  component={[FormilySlider, { min: 0, max: 100, step: 5, showValue: true }]}
-/>
-```
 
 ### Rate
 
@@ -847,14 +184,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="score"
-  title="Score"
-  decorator={[FormItem]}
-  component={[FormilyRate, { count: 5 }]}
-/>
-```
 
 ### DatePicker
 
@@ -864,14 +193,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="birthday"
-  title="Birthday"
-  decorator={[FormItem]}
-  component={[FormilyDatePicker]}
-/>
-```
 
 ### DateRangePicker
 
@@ -881,14 +202,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="reservation"
-  title="Reservation"
-  decorator={[FormItem]}
-  component={[FormilyDateRangePicker, { allowClear: true }]}
-/>
-```
 
 ### DateTimePicker
 
@@ -898,14 +211,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="startsAt"
-  title="Starts At"
-  decorator={[FormItem]}
-  component={[FormilyDateTimePicker]}
-/>
-```
 
 ### TimePicker
 
@@ -915,14 +220,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="reminderTime"
-  title="Reminder Time"
-  decorator={[FormItem]}
-  component={[FormilyTimePicker, { allowClear: true }]}
-/>
-```
 
 ### Cascader
 
@@ -932,26 +229,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="region"
-  title="Region"
-  decorator={[FormItem]}
-  component={[
-    FormilyCascader,
-    {
-      allowClear: true,
-      options: [
-        {
-          label: "China",
-          value: "china",
-          children: [{ label: "Shanghai", value: "shanghai" }],
-        },
-      ],
-    },
-  ]}
-/>
-```
 
 ### TreeSelect
 
@@ -961,26 +238,6 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="department"
-  title="Department"
-  decorator={[FormItem]}
-  component={[
-    FormilyTreeSelect,
-    {
-      allowClear: true,
-      options: [
-        {
-          label: "Engineering",
-          value: "engineering",
-          children: [{ label: "Frontend", value: "frontend" }],
-        },
-      ],
-    },
-  ]}
-/>
-```
 
 ### Upload
 
@@ -990,34 +247,11 @@ Use `options` for checkbox group mode. In group mode the value is `string[]`; wi
   align="start"
 />
 
-```tsx
-<Field
-  name="attachments"
-  title="Attachments"
-  decorator={[FormItem]}
-  component={[FormilyUpload, { multiple: true, maxCount: 3 }]}
-/>
-```
 
-```tsx
-<Field
-  name="avatarUrl"
-  title="Avatar URL"
-  decorator={[FormItem]}
-  component={[
-    FormilyUpload,
-    {
-      accept: "image/*",
-      presentation: "input",
-      multiple: false,
-      maxCount: 1,
-      placeholder: "Paste image URL or upload",
-    },
-  ]}
-/>
-```
+`UploadTrigger` supports `dropzone` and `compact` variants. Compose it with `UploadFileList` inside the root, and keep custom URL inputs outside with your own controlled `Input` state.
 
-Input mode is intended for single-file inputs, such as avatar or image URL fields. The value remains an `UploadFile[]`, so pasted URLs and locally selected files use the same data shape.
+
+For single-file URL fields, store the pasted URL as an `UploadFile[]` yourself and pass the same value to `Upload` when you also want local file selection.
 
 ### Captcha
 
@@ -1027,14 +261,6 @@ Input mode is intended for single-file inputs, such as avatar or image URL field
   align="start"
 />
 
-```tsx
-<Field
-  name="captcha"
-  title="Verification Code"
-  decorator={[FormItem]}
-  component={[FormilyCaptcha, { buttonText: "Send code", countdown: 60000 }]}
-/>
-```
 
 ### ArrayField
 
@@ -1052,27 +278,7 @@ Drag-to-reorder list with built-in state management. Supports controlled (`value
 | `onChange` | `(value: TItem[]) => void` | — | Called on any change |
 | `defaultValue` | `TItem[]` | `[]` | Initial value (uncontrolled) |
 | `newItem` | `() => TItem` | — | Factory for blank items |
-| `renderItem` | `(item, index, helpers) => ReactNode` | — | Render each item. `helpers.update` accepts a full replacement value or an updater function; `helpers.remove` removes the row. |
-| `addText` | `ReactNode` | `'Add item'` | Add button label |
+| `renderItem` | `(item, index, helpers) => ReactNode` | — | Render each item. `helpers.update` accepts a replacement value or updater function; `helpers.duplicate` copies the row; `helpers.remove` removes it. |
 | `max` | `number` | — | Hide Add button when reached |
 | `min` | `number` | `0` | Hide Remove button when at minimum |
 | `disabled` | `boolean` | `false` | Disables all controls |
-
-### ObjectField
-
-Lightweight fieldset with title, description, action slot, collapsible support, and two visual variants.
-
-<ComponentPreview
-  name="pro-fields-object-field-demo"
-  previewClassName="min-h-[260px] items-start p-6"
-  align="start"
-/>
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `title` | `ReactNode` | — | Section heading |
-| `description` | `ReactNode` | — | Helper text below title |
-| `action` | `ReactNode` | — | Element rendered to the right of the title |
-| `variant` | `'separated' \| 'bordered' \| 'none'` | `'separated'` | Visual style |
-| `collapsible` | `boolean` | `false` | Whether section can be toggled |
-| `defaultOpen` | `boolean` | `true` | Initial open state when collapsible |

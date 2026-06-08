@@ -36,40 +36,11 @@ npx @draco-china/shadcn-pro@latest add pro-editor
 bun add @monaco-editor/react @shikijs/monaco monaco-editor shiki lucide-react
 ```
 
-<Step>Install or copy `pro-base`. The registry installer includes the private toolbar dependency automatically; fully manual copies also need `components/pro/base/toolbar/`.</Step>
+<Step>Install or copy `pro-base` for the button and fullscreen utilities.</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="pro-editor" title="components/pro/editor/index.tsx" />
-
-Manual installs also need the sibling files used by the entry component:
-
-- `components/pro/editor/toolbar/index.tsx`
-- `components/pro/editor/toolbar/actions.tsx`
-- `components/pro/editor/toolbar/options.ts`
-- `components/pro/editor/toolbar/right-items.tsx`
-- `components/pro/editor/toolbar/types.ts`
-- `components/pro/editor/classes.ts`
-- `components/pro/editor/editor-content.tsx`
-- `components/pro/editor/editor-pane.tsx`
-- `components/pro/editor/editor-shell.tsx`
-- `components/pro/editor/editor-toolbar-section.tsx`
-- `components/pro/editor/preview-pane.tsx`
-- `components/pro/editor/use-editor-state.ts`
-- `components/pro/editor/use-editor-value.ts`
-- `components/pro/editor/use-monaco-editor.ts`
-- `components/pro/editor/preview-state.ts`
-- `components/pro/editor/layout.ts`
-- `components/pro/editor/core-types.ts`
-- `components/pro/editor/preview/scroll-sync.ts`
-- `components/pro/editor/preview/styles.ts`
-- `components/pro/editor/preview/types.ts`
-- `components/pro/editor/language/index.ts`
-- `components/pro/editor/types.ts`
-- `components/pro/editor/monaco/index.ts`
-- `components/pro/editor/monaco/shiki.ts`
-- `components/pro/editor/monaco/theme.ts`
-- `components/pro/editor/monaco/typescript.ts`
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -96,14 +67,10 @@ export default function EditorPage() {
       value={value}
       onChange={setValue}
       disabled={readOnly}
-      toolbar={{
-        options: {
-          fullscreen: {
-            value: fullscreen,
-            onChange: setFullscreen,
-            mode: "fixed",
-          },
-        },
+      fullscreen={{
+        value: fullscreen,
+        onChange: setFullscreen,
+        mode: "fixed",
       }}
       height={400}
     />
@@ -117,16 +84,16 @@ export default function EditorPage() {
 
 Omit `height` when the editor should fill its parent container; set an explicit parent height with CSS such as `h-[520px]`, `h-full`, or `flex-1`.
 
-The toolbar is part of `ProEditor`. Use `toolbar.actions` for custom actions and `toolbar.options` to hide built-in controls. Action buttons default to `type="button"`; pass `type: "submit"` only when the editor lives inside a form and the action should submit it. Set `toolbar.options` to `false` to hide all built-in toolbar buttons.
+The toolbar is part of `ProEditor`. Pass `toolbar` as JSX or a render function for custom actions, use `toolbarTitle` to replace the title area, and use `toolbarMode`, `toolbarFormat`, `toolbarCopy`, or `fullscreen={false}` to hide built-in controls. Action buttons default to `type="button"`; pass `type: "submit"` only when the editor lives inside a form and the action should submit it.
 
 `disabled` makes Monaco read-only and disables built-in actions that mutate or copy content, while preview and fullscreen controls remain available.
 
 Fullscreen supports two modes:
 
-- `toolbar.options.fullscreen.mode: "fixed"` uses a fixed-position simulated fullscreen panel.
-- `toolbar.options.fullscreen.mode: "screen"` uses the browser Fullscreen API.
+- `fullscreen.mode: "fixed"` uses a fixed-position simulated fullscreen panel.
+- `fullscreen.mode: "screen"` uses the browser Fullscreen API.
 
-Hide the built-in fullscreen button with `toolbar={{ options: { fullscreen: false } }}`.
+Hide the built-in fullscreen button with `fullscreen={false}`.
 
 ## Examples
 
@@ -181,14 +148,10 @@ const [fullscreen, setFullscreen] = useState(false)
   language="typescript"
   value={code}
   onChange={setCode}
-  toolbar={{
-    options: {
-      fullscreen: {
-        value: fullscreen,
-        onChange: setFullscreen,
-        mode: "screen",
-      },
-    },
+  fullscreen={{
+    value: fullscreen,
+    onChange: setFullscreen,
+    mode: "screen",
   }}
 />
 ```
@@ -197,48 +160,38 @@ const [fullscreen, setFullscreen] = useState(false)
 
 ```tsx
 import { FocusIcon } from "lucide-react"
+import { ProButton } from "@/components/pro/base/button"
 
 <ProEditor
   language="typescript"
   value={code}
   onChange={setCode}
-  toolbar={{
-    title: ({ language }) => (
-      <span className="flex items-center gap-2">
-        <span>Example editor</span>
-        <span className="text-muted-foreground uppercase">{language}</span>
-      </span>
-    ),
-    actions: [
-      {
-        key: "run",
-        label: "Run",
-        onClick: ({ value }) => runCode(value),
-      },
-      {
-        key: "focus",
-        icon: <FocusIcon className="size-3.5" />,
-        tooltip: "Focus editor",
-        "aria-label": "Focus editor",
-        position: "before",
-        size: "icon-xs",
-        variant: "ghost",
-        onClick: ({ editor }) => editor?.focus(),
-      },
-      {
-        key: "prettier",
-        label: "Prettier",
-        position: "after",
-        onClick: ({ format }) => format(),
-      },
-    ],
-  }}
+  toolbarTitle={({ language }) => (
+    <span className="flex items-center gap-2">
+      <span>Example editor</span>
+      <span className="text-muted-foreground uppercase">{language}</span>
+    </span>
+  )}
+  toolbar={({ value, editor, format }) => (
+    <>
+      <ProButton onClick={() => runCode(value)}>Run</ProButton>
+      <ProButton
+        tooltip="Focus editor"
+        size="icon-xs"
+        variant="ghost"
+        onClick={() => editor?.focus()}
+      >
+        <FocusIcon className="size-3.5" />
+      </ProButton>
+      <ProButton onClick={format}>Prettier</ProButton>
+    </>
+  )}
 />
 ```
 
-Toolbar actions use the shared toolbar item shape, so labels, icons, tooltips, hidden/disabled/loading state, menus, separators, copy behavior, and custom `render` items are available without installing the internal toolbar directly.
+Toolbar actions are a slot: pass JSX directly, or a function that receives the editor context and returns JSX.
 
-Use `toolbar.title` to customize the left title. Use `position: "before"` for custom right-side icon actions before the built-in format, copy, and fullscreen buttons; this is also the default when `position` is omitted. Use `position: "after"` for actions after the built-in buttons.
+Use `toolbarTitle` to customize the title area. Custom actions render before the built-in format, copy, and fullscreen buttons.
 
 ## API Reference
 
@@ -249,20 +202,23 @@ Use `toolbar.title` to customize the left title. Use `position: "before"` for cu
 | `value`       | `string`                              | `""`           | Controlled editor content                              |
 | `onChange`    | `(value: string) => void`             | —              | Content change callback                                |
 | `disabled`    | `boolean`                             | `false`        | Makes the editor read-only and disables format/copy toolbar actions. |
-| `language`    | `string`                              | Required       | Language id; use `tsx` for React/JSX snippets and `typescript` for plain TypeScript |
+| `language`    | `string`                              | `'plaintext'`  | Language id; use `tsx` for React/JSX snippets and `typescript` for plain TypeScript |
 | `theme`       | `'light' \| 'dark'`          | `'dark'`         | Editor theme. Internally maps to One Light / One Dark Pro syntax themes. |
 | `className`   | `string`                              | —              | Additional CSS class for the editor root. |
 | `height`      | `string \| number`                    | —              | Content height. When omitted, the editor fills its parent container. |
-| `toolbar`     | `false \| { title?, actions?, options? }` | —           | Toolbar config. Pass `false` to hide the toolbar; pass `options: false` to hide built-in buttons. |
+| `toolbar`     | `false \| ReactNode \| (context) => ReactNode` | — | Custom toolbar actions. Pass `false` to hide the toolbar. |
+| `toolbarTitle` | `ReactNode \| (context) => ReactNode` | Current language | Toolbar title content. |
+| `toolbarMode` | `boolean` | `true` | Shows preview/split buttons when `preview` is enabled. |
+| `toolbarFormat` | `boolean` | `true` | Shows the format button. |
+| `toolbarCopy` | `boolean` | `true` | Shows the copy button. |
+| `fullscreen` | `false \| { value?, defaultValue?, onChange?, mode? }` | — | Fullscreen toolbar control and behavior config. Set `false` to hide the button. |
 | `preview`     | `{ component, mode?, defaultMode?, onModeChange? }` | — | External preview renderer and preview mode state; enables preview and split modes. |
 
 ### Toolbar Fullscreen
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `toolbar.options.fullscreen` | `boolean \| { enabled?, value?, defaultValue?, onChange?, mode? }` | `true` | Fullscreen toolbar control and behavior config. |
-| `toolbar.options.fullscreen.enabled` | `boolean` | `true` | Show or hide the fullscreen button. |
-| `toolbar.options.fullscreen.value` | `boolean` | — | Controlled fullscreen state. |
-| `toolbar.options.fullscreen.defaultValue` | `boolean` | `false` | Initial fullscreen state for uncontrolled usage. |
-| `toolbar.options.fullscreen.onChange` | `(fullscreen: boolean) => void` | — | Called when the toolbar or browser fullscreen state changes. |
-| `toolbar.options.fullscreen.mode` | `'fixed' \| 'screen'` | `'fixed'` | Fixed-position simulated fullscreen or browser Fullscreen API. |
+| `fullscreen.value` | `boolean` | — | Controlled fullscreen state. |
+| `fullscreen.defaultValue` | `boolean` | `false` | Initial fullscreen state for uncontrolled usage. |
+| `fullscreen.onChange` | `(fullscreen: boolean) => void` | — | Called when the toolbar or browser fullscreen state changes. |
+| `fullscreen.mode` | `'fixed' \| 'screen'` | `'fixed'` | Fixed-position simulated fullscreen or browser Fullscreen API. |

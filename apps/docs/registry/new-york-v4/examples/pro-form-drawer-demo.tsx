@@ -2,56 +2,19 @@
 
 import { useState } from 'react'
 import { ProButton as Button } from '@/registry/new-york-v4/pro/base/button'
-import { DrawerForm } from '@/registry/new-york-v4/pro/form/index'
+import { Switch } from '@/registry/new-york-v4/pro/base/fields/checkbox'
+import { DatePicker } from '@/registry/new-york-v4/pro/base/fields/date-picker'
+import { Input, Textarea } from '@/registry/new-york-v4/pro/base/fields/input'
+import { Rate } from '@/registry/new-york-v4/pro/base/fields/radio'
+import { Select } from '@/registry/new-york-v4/pro/base/fields/select'
+import { DrawerForm, FormItem } from '@/registry/new-york-v4/pro/form'
 
-const schema = {
-  type: 'object',
-  properties: {
-    name: {
-      type: 'string',
-      title: 'Full Name',
-      required: true,
-      'x-component-props': { placeholder: 'Your name' },
-    },
-    bio: {
-      type: 'string',
-      title: 'Bio',
-      'x-component': 'Textarea',
-      'x-component-props': { placeholder: 'Tell us about yourself', rows: 4 },
-    },
-    role: {
-      type: 'string',
-      title: 'Role',
-      enum: [
-        { label: 'Admin', value: 'admin' },
-        { label: 'Developer', value: 'developer' },
-        { label: 'Designer', value: 'designer' },
-        { label: 'Viewer', value: 'viewer' },
-      ],
-      'x-component-props': {
-        placeholder: 'Select role',
-      },
-    },
-    start_date: {
-      type: 'string',
-      title: 'Start Date',
-      'x-component': 'DatePicker',
-      'x-component-props': { placeholder: 'Pick a date' },
-    },
-    rating: {
-      type: 'number',
-      title: 'Self Rating',
-      'x-component': 'Rate',
-      'x-component-props': { count: 5 },
-    },
-    notifications: {
-      type: 'boolean',
-      title: 'Notifications',
-      default: true,
-      description: 'Receive email notifications.',
-    },
-  },
-}
+const roleOptions = [
+  { label: 'Admin', value: 'admin' },
+  { label: 'Developer', value: 'developer' },
+  { label: 'Designer', value: 'designer' },
+  { label: 'Viewer', value: 'viewer' },
+]
 
 export default function ProFormDrawerDemo() {
   const [result, setResult] = useState<Record<string, unknown> | null>(null)
@@ -62,14 +25,31 @@ export default function ProFormDrawerDemo() {
         trigger={<Button variant="outline">Edit Profile</Button>}
         title="Edit Profile"
         description="Update your profile information."
-        submitter={{ submit: { text: "Save Changes" } }}
         side="right"
-        schema={schema}
         onFinish={async (values) => {
-          await new Promise((r) => setTimeout(r, 800))
+          await new Promise((resolve) => setTimeout(resolve, 800))
           setResult(values)
         }}
-      />
+      >
+        <FormItem label="Full Name" required htmlFor="name">
+          <Input id="name" name="name" required placeholder="Your name" />
+        </FormItem>
+        <FormItem label="Bio" htmlFor="bio">
+          <Textarea id="bio" name="bio" placeholder="Tell us about yourself" rows={4} />
+        </FormItem>
+        <FormItem label="Role" htmlFor="role">
+          <Select id="role" name="role" placeholder="Select role" options={roleOptions} />
+        </FormItem>
+        <FormItem label="Start Date" htmlFor="start_date">
+          <DatePicker id="start_date" name="start_date" placeholder="Pick a date" />
+        </FormItem>
+        <FormItem label="Self Rating" htmlFor="rating">
+          <Rate id="rating" name="rating" />
+        </FormItem>
+        <FormItem label="Notifications" htmlFor="notifications" extra="Receive email notifications.">
+          <Switch id="notifications" name="notifications" value="true" defaultChecked />
+        </FormItem>
+      </DrawerForm>
 
       {result && (
         <div className="w-full max-w-sm rounded-md border bg-muted/40 p-4">

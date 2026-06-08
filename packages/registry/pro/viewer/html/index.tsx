@@ -1,30 +1,22 @@
-'use client'
-
-import type { IframeHTMLAttributes } from 'react'
+import type { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
-import { htmlViewerFrameClassName } from './classes'
-
-export const DEFAULT_HTML_VIEWER_SANDBOX = 'allow-scripts'
-
-export interface HtmlViewerProps {
-  content: string
-  sandbox?: IframeHTMLAttributes<HTMLIFrameElement>['sandbox']
-  title?: string
-  className?: string
-}
 
 export function HtmlViewer({
   content,
-  sandbox = DEFAULT_HTML_VIEWER_SANDBOX,
-  title = 'HTML preview',
+  sandbox = 'allow-scripts',
   className,
-}: HtmlViewerProps) {
+  title = 'HTML preview',
+  ...props
+}: Omit<ComponentProps<'iframe'>, 'srcDoc'> & {
+  content: string
+}) {
   return (
     <iframe
       srcDoc={content}
       sandbox={sandbox}
-      className={cn(htmlViewerFrameClassName, className)}
+      className={cn('size-full border-0 bg-background', className)}
       title={title}
+      {...props}
     />
   )
 }

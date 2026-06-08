@@ -1,0 +1,71 @@
+---
+title: ProOverlay
+description: Reusable modal and drawer overlay primitives.
+---
+
+<ComponentPreview name="pro-overlay-demo" previewClassName="min-h-[220px]" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-overlay
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies.</Step>
+
+```bash
+bun add lucide-react radix-ui vaul
+```
+
+<Step>Install or copy `pro-base`.</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="pro-overlay" title="components/pro/overlay/index.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ProConfirm, ProDrawer, ProModal } from "@/components/pro/overlay"
+
+<ProModal trigger={<button type="button">Open</button>} title="Preview">
+  Content
+</ProModal>
+
+<ProDrawer trigger={<button type="button">Details</button>} title="Details">
+  Content
+</ProDrawer>
+
+<ProConfirm
+  trigger={<button type="button">Delete</button>}
+  title="Delete record?"
+  description="This action cannot be undone."
+  confirmText="Delete"
+  onConfirm={remove}
+/>
+```
+
+`ProModal` and `ProDrawer` own only the overlay shell. Use `ProConfirm` for ordinary confirmation flows, and put forms, filters, panels, custom content, and action buttons inside modal or drawer shells at the call site.

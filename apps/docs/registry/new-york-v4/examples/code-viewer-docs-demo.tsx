@@ -7,7 +7,7 @@ const CODE = `export function cn(...classes: string[]) {
 export default function CodeViewerDocsDemo() {
   return (
     <div className="w-full p-4">
-      <CodeViewer code={CODE} lang="typescript" title="utils.ts" showLineNumbers />
+      <CodeViewer code={CODE} lang="typescript" title="utils.ts" />
     </div>
   )
 }

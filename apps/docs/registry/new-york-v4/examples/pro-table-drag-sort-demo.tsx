@@ -3,7 +3,7 @@
 import { type ColumnDef } from '@tanstack/react-table'
 import { useState } from 'react'
 import { Badge } from '@/registry/new-york-v4/ui/badge'
-import { ProTable } from '@/registry/new-york-v4/pro/table/index'
+import { ProTable } from '@/registry/new-york-v4/pro/table'
 
 type Task = {
   id: string
@@ -74,7 +74,6 @@ export default function ProTableDragSortDemo() {
           rowKey: "id",
           onDragSortEnd: (newData) => setOrder(newData.map((d) => d.title)),
         }}
-        pagination={{ pageSizeOptions: [5, 10] }}
       />
       {order.length > 0 && (
         <p className="text-xs text-muted-foreground px-1">

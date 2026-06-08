@@ -2,10 +2,12 @@
 
 import { useState } from "react"
 
-import {
-  DateRangePicker,
-  type DateRangeValue,
-} from "@/registry/new-york-v4/pro/base/fields/date-range-picker"
+import { DateRangePicker } from "@/registry/new-york-v4/pro/base/fields/date-picker"
+
+type DateRangeValue = {
+  from?: Date
+  to?: Date
+}
 
 export default function ProFieldsDateRangePickerDemo() {
   const [value, setValue] = useState<DateRangeValue | undefined>({
@@ -15,7 +17,7 @@ export default function ProFieldsDateRangePickerDemo() {
 
   return (
     <div className="w-full max-w-sm p-4">
-      <DateRangePicker value={value} onChange={setValue} allowClear />
+      <DateRangePicker value={value} onChange={setValue} />
     </div>
   )
 }

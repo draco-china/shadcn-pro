@@ -3,7 +3,8 @@
 import { type ColumnDef } from "@tanstack/react-table"
 import { Download, Plus, Trash2 } from "lucide-react"
 
-import { ProTable } from "@/registry/new-york-v4/pro/table/index"
+import { ProButton } from "@/registry/new-york-v4/pro/base/button"
+import { ProTable } from "@/registry/new-york-v4/pro/table"
 import { Checkbox } from "@/registry/new-york-v4/ui/checkbox"
 
 type User = {
@@ -265,7 +266,6 @@ const columns: ColumnDef<User>[] = [
           { label: "Editor", value: "editor" },
           { label: "User", value: "user" },
         ],
-        variant: "badge" as const,
       },
     },
     enableSorting: true,
@@ -281,7 +281,6 @@ const columns: ColumnDef<User>[] = [
           { label: "Active", value: "active" },
           { label: "Inactive", value: "inactive" },
         ],
-        variant: "badge" as const,
       },
     },
     enableSorting: true,
@@ -310,47 +309,35 @@ export default function ProTableDemo() {
             </div>
           </div>
         )}
-        pagination={{ pageSizeOptions: [5, 10, 25] }}
-        bulkToolbar={{
-          entityName: "user",
-          actions: [
-            {
-              key: "export-selected",
-              label: ({ selectedRows }) => `Export ${selectedRows.length}`,
-              icon: <Download size={16} />,
-              tooltip: "Export selected users",
-              onClick: ({ table }) => table.resetRowSelection(),
-            },
-            {
-              key: "delete-selected",
-              label: "Delete",
-              icon: <Trash2 size={16} />,
-              className: "h-8 text-destructive hover:text-destructive",
-              tooltip: "Delete selected users",
-              onClick: ({ table }) => table.resetRowSelection(),
-            },
-          ],
-        }}
-        toolbar={{
-          options: {
-            refresh: () => {},
-          },
-          actions: [
-            {
-              key: "add",
-              label: "New",
-              icon: <Plus size={16} />,
-              variant: "default",
-              tooltip: "Create user",
-            },
-            {
-              key: "export",
-              label: "Export",
-              icon: <Download size={16} />,
-              tooltip: "Export users",
-            },
-          ],
-        }}
+        bulkToolbar={({ selectedRows, table }) => (
+          <>
+            <ProButton tooltip="Export selected users" onClick={() => table.resetRowSelection()}>
+              <Download size={16} />
+              Export {selectedRows.length}
+            </ProButton>
+            <ProButton
+              tooltip="Delete selected users"
+              className="h-8 text-destructive hover:text-destructive"
+              onClick={() => table.resetRowSelection()}
+            >
+              <Trash2 size={16} />
+              Delete
+            </ProButton>
+          </>
+        )}
+        onRefresh={() => {}}
+        toolbar={
+          <>
+            <ProButton variant="default" tooltip="Create user">
+              <Plus size={16} />
+              New
+            </ProButton>
+            <ProButton tooltip="Export users">
+              <Download size={16} />
+              Export
+            </ProButton>
+          </>
+        }
       />
     </div>
   )
