@@ -33,6 +33,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   renderItem,
   max,
   min = 0,
+  sortable = 'button',
   disabled,
   className,
 }: {
@@ -53,6 +54,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   ) => ReactNode
   max?: number
   min?: number
+  sortable?: 'button' | 'drag' | false
   disabled?: boolean
   className?: string
 }) {
@@ -66,6 +68,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   )
   const canAddItem = max === undefined || items.length < max
+  const sortMode = sortable === false ? 'none' : sortable
 
   useEffect(() => {
     setIds((prev) => {
@@ -108,48 +111,59 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
     commit(arrayMove(items, index, nextIndex))
   }
 
+  const itemNodes = items.map((item, index) => {
+    const itemContent = renderItem(item, index, {
+      update: (next) => update(index, next),
+      duplicate: () => duplicate(index),
+      remove: () => remove(index),
+      moveUp: () => move(index, index - 1),
+      moveDown: () => move(index, index + 1),
+    })
+
+    const itemProps = {
+      onDuplicate: () => duplicate(index),
+      onRemove: () => remove(index),
+      onMoveUp: () => move(index, index - 1),
+      onMoveDown: () => move(index, index + 1),
+      disabled,
+      sortMode,
+      canDuplicate: canAddItem,
+      canRemove: items.length > min,
+      canMoveUp: index > 0,
+      canMoveDown: index < items.length - 1,
+      children: itemContent,
+    }
+
+    return sortMode === 'drag' ? (
+      <SortableArrayFieldItem key={ids[index]} id={ids[index]} {...itemProps} />
+    ) : (
+      <ArrayFieldItem key={ids[index]} {...itemProps} />
+    )
+  })
+
   return (
     <div className={cn('space-y-2', className)}>
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={({ active, over }) => {
-          if (!over || active.id === over.id) return
+      {sortMode === 'drag' ? (
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={({ active, over }) => {
+            if (!over || active.id === over.id) return
 
-          const oldIndex = ids.indexOf(String(active.id))
-          const newIndex = ids.indexOf(String(over.id))
-          if (oldIndex === -1 || newIndex === -1) return
+            const oldIndex = ids.indexOf(String(active.id))
+            const newIndex = ids.indexOf(String(over.id))
+            if (oldIndex === -1 || newIndex === -1) return
 
-          setIds((prev) => arrayMove(prev, oldIndex, newIndex))
-          commit(arrayMove(items, oldIndex, newIndex))
-        }}
-      >
-        <SortableContext items={ids} strategy={verticalListSortingStrategy}>
-          {items.map((item, index) => (
-            <SortableItem
-              key={ids[index]}
-              id={ids[index]}
-              onDuplicate={() => duplicate(index)}
-              onRemove={() => remove(index)}
-              onMoveUp={() => move(index, index - 1)}
-              onMoveDown={() => move(index, index + 1)}
-              disabled={disabled}
-              canDuplicate={canAddItem}
-              canRemove={items.length > min}
-              canMoveUp={index > 0}
-              canMoveDown={index < items.length - 1}
-            >
-              {renderItem(item, index, {
-                update: (next) => update(index, next),
-                duplicate: () => duplicate(index),
-                remove: () => remove(index),
-                moveUp: () => move(index, index - 1),
-                moveDown: () => move(index, index + 1),
-              })}
-            </SortableItem>
-          ))}
-        </SortableContext>
-      </DndContext>
+            move(oldIndex, newIndex)
+          }}
+        >
+          <SortableContext items={ids} strategy={verticalListSortingStrategy}>
+            {itemNodes}
+          </SortableContext>
+        </DndContext>
+      ) : (
+        itemNodes
+      )}
 
       {canAddItem && (
         <ProButton
@@ -169,30 +183,11 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   )
 }
 
-function SortableItem({
+function SortableArrayFieldItem({
   id,
-  children,
-  onDuplicate,
-  onRemove,
-  onMoveUp,
-  onMoveDown,
-  disabled,
-  canDuplicate = true,
-  canRemove = true,
-  canMoveUp = true,
-  canMoveDown = true,
-}: {
+  ...props
+}: ArrayFieldItemProps & {
   id: string
-  children: ReactNode
-  onDuplicate: () => void
-  onRemove: () => void
-  onMoveUp: () => void
-  onMoveDown: () => void
-  disabled?: boolean
-  canDuplicate?: boolean
-  canRemove?: boolean
-  canMoveUp?: boolean
-  canMoveDown?: boolean
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id,
@@ -204,14 +199,57 @@ function SortableItem({
   }
 
   return (
-    <div
+    <ArrayFieldItem
       ref={setNodeRef}
+      style={style}
+      dragHandleProps={{ ...attributes, ...listeners }}
+      {...props}
+    />
+  )
+}
+
+interface ArrayFieldItemProps {
+  children: ReactNode
+  onDuplicate: () => void
+  onRemove: () => void
+  onMoveUp: () => void
+  onMoveDown: () => void
+  disabled?: boolean
+  sortMode: 'button' | 'drag' | 'none'
+  canDuplicate?: boolean
+  canRemove?: boolean
+  canMoveUp?: boolean
+  canMoveDown?: boolean
+  ref?: (node: HTMLDivElement | null) => void
+  style?: CSSProperties
+  dragHandleProps?: Record<string, unknown>
+}
+
+function ArrayFieldItem({
+  ref,
+  style,
+  children,
+  onDuplicate,
+  onRemove,
+  onMoveUp,
+  onMoveDown,
+  disabled,
+  sortMode,
+  canDuplicate = true,
+  canRemove = true,
+  canMoveUp = true,
+  canMoveDown = true,
+  dragHandleProps,
+}: ArrayFieldItemProps) {
+  return (
+    <div
+      ref={ref}
       style={style}
       className="group relative flex items-start gap-2 rounded-md border bg-card p-3"
     >
       <div className="min-w-0 flex-1 space-y-3">{children}</div>
 
-      {(canDuplicate || canRemove || canMoveUp || canMoveDown) && (
+      {(canDuplicate || canRemove || sortMode !== 'none') && (
         <div className="mt-0.5 flex shrink-0 items-center gap-1">
           {canDuplicate && (
             <ProButton
@@ -227,47 +265,52 @@ function SortableItem({
 
           {canRemove && (
             <ProButton
-              variant="destructive"
+              variant="ghost"
               size="icon-sm"
               disabled={disabled}
               onClick={onRemove}
               aria-label="Remove item"
             >
-              <Trash2 />
+              <Trash2 className="text-destructive" />
             </ProButton>
           )}
 
-          <ProButton
-            {...attributes}
-            {...listeners}
-            variant="ghost"
-            size="icon-sm"
-            disabled={disabled}
-            className="cursor-grab active:cursor-grabbing disabled:cursor-not-allowed"
-            aria-label="Drag to reorder"
-          >
-            <GripVertical />
-          </ProButton>
+          {sortMode === 'drag' && (
+            <ProButton
+              {...dragHandleProps}
+              variant="ghost"
+              size="icon-sm"
+              disabled={disabled}
+              className="cursor-grab active:cursor-grabbing disabled:cursor-not-allowed"
+              aria-label="Drag to reorder"
+            >
+              <GripVertical />
+            </ProButton>
+          )}
 
-          <ProButton
-            variant="ghost"
-            size="icon-sm"
-            disabled={disabled || !canMoveUp}
-            onClick={onMoveUp}
-            aria-label="Move item up"
-          >
-            <ArrowUp />
-          </ProButton>
+          {sortMode === 'button' && (
+            <>
+              <ProButton
+                variant="ghost"
+                size="icon-sm"
+                disabled={disabled || !canMoveUp}
+                onClick={onMoveUp}
+                aria-label="Move item up"
+              >
+                <ArrowUp />
+              </ProButton>
 
-          <ProButton
-            variant="ghost"
-            size="icon-sm"
-            disabled={disabled || !canMoveDown}
-            onClick={onMoveDown}
-            aria-label="Move item down"
-          >
-            <ArrowDown />
-          </ProButton>
+              <ProButton
+                variant="ghost"
+                size="icon-sm"
+                disabled={disabled || !canMoveDown}
+                onClick={onMoveDown}
+                aria-label="Move item down"
+              >
+                <ArrowDown />
+              </ProButton>
+            </>
+          )}
         </div>
       )}
     </div>
