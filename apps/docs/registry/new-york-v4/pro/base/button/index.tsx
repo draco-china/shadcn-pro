@@ -118,7 +118,7 @@ export function CopyButton({
   icon?: ReactNode
 }) {
   const [status, setStatus] = useState<'idle' | 'copying' | 'success' | 'error'>('idle')
-  const isLoading = status === 'copying' || loading
+  const isCopying = status === 'copying'
   const copyTooltip = status === 'success' ? 'Copied' : status === 'error' ? 'Copy failed' : tooltip
   const copyIcon =
     status === 'success' ? (
@@ -137,7 +137,7 @@ export function CopyButton({
 
   async function handleClick(event: MouseEvent<HTMLButtonElement>) {
     event.stopPropagation()
-    if (isLoading) return
+    if (isCopying || loading) return
 
     setStatus('copying')
     try {
@@ -150,7 +150,7 @@ export function CopyButton({
   }
 
   return (
-    <ProButton {...props} tooltip={copyTooltip} loading={isLoading} onClick={handleClick}>
+    <ProButton {...props} tooltip={copyTooltip} loading={loading} onClick={handleClick}>
       {copyIcon}
       {children}
     </ProButton>
