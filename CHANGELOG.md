@@ -1,3 +1,10 @@
+## [1.18.4](https://github.com/draco-china/shadcn-pro/compare/v1.18.3...v1.18.4) (2026-06-08)
+
+
+### Bug Fixes
+
+* align editor monaco theme names ([771ccc9](https://github.com/draco-china/shadcn-pro/commit/771ccc939f1c075833efaf759107cc6158df1b01))
+
 ## [1.18.3](https://github.com/draco-china/shadcn-pro/compare/v1.18.2...v1.18.3) (2026-06-08)
 
 
