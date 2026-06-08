@@ -1,3 +1,10 @@
+## [1.16.24](https://github.com/draco-china/shadcn-pro/compare/v1.16.23...v1.16.24) (2026-06-08)
+
+
+### Bug Fixes
+
+* align temporal field clear action ([643abbd](https://github.com/draco-china/shadcn-pro/commit/643abbdf19055099f17e72de8371711c60d0ad01))
+
 ## [1.16.23](https://github.com/draco-china/shadcn-pro/compare/v1.16.22...v1.16.23) (2026-06-08)
 
 
