@@ -1,3 +1,10 @@
+## [1.16.20](https://github.com/draco-china/shadcn-pro/compare/v1.16.19...v1.16.20) (2026-06-08)
+
+
+### Bug Fixes
+
+* keep copy button icon singular ([ece6d4f](https://github.com/draco-china/shadcn-pro/commit/ece6d4f1466905c12c47b0879da0f113319fc4a7))
+
 ## [1.16.19](https://github.com/draco-china/shadcn-pro/compare/v1.16.18...v1.16.19) (2026-06-08)
 
 
