@@ -186,7 +186,7 @@ export default function MarkdownViewerDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>5:T42a7,'use client'
+<span class="line" data-line=""></span></code></pre>5:T42ab,'use client'
 
 import { cva } from 'class-variance-authority'
 import { CircleCheckIcon, InfoIcon, type LucideIcon, TriangleAlertIcon } from 'lucide-react'
@@ -291,8 +291,8 @@ const alertVariants = cva('', {
   variants: {
     element: {
       surface:
-        'not-prose my-5 rounded-lg border px-4 py-3 text-sm text-foreground shadow-sm [&_p]:my-0 [&_p+p]:mt-2',
-      title: 'mb-2 flex items-start gap-2 font-semibold',
+        'not-prose my-5 rounded-lg border px-4 py-2.5 text-sm text-foreground shadow-sm [&_p]:my-0 [&_p+p]:mt-1.5',
+      title: 'mb-1 flex items-start gap-2 font-semibold',
     },
     variant: {
       note: '',
@@ -735,7 +735,7 @@ const markdownBlockElements: Pick<
     return <ul className={cn('my-5 ml-6 list-disc space-y-1', className)} {...elementProps} />
   },
 }
-6:T2f9ca,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+6:T2f9ce,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cva</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'class-variance-authority'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">CircleCheckIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">InfoIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> LucideIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">TriangleAlertIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
@@ -840,8 +840,8 @@ const markdownBlockElements: Pick<
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  variants</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    element</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      surface</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">        'not-prose my-5 rounded-lg border px-4 py-3 text-sm text-foreground shadow-sm [&#x26;_p]:my-0 [&#x26;_p+p]:mt-2'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      title</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'mb-2 flex items-start gap-2 font-semibold'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">        'not-prose my-5 rounded-lg border px-4 py-2.5 text-sm text-foreground shadow-sm [&#x26;_p]:my-0 [&#x26;_p+p]:mt-1.5'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      title</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'mb-1 flex items-start gap-2 font-semibold'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    },</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    variant</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">      note</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#50A14F;--shiki-dark:#98C379"> ''</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1816,7 +1816,7 @@ function renderTokenLineHtml(tokens: ThemedToken[]) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    })</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    .</span><span style="color:#4078F2;--shiki-dark:#61AFEF">join</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">''</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","markdown-viewer-demo",{"item":{"name":"markdown-viewer-demo","description":"Render Markdown with GFM syntax, tables, and code blocks.","iframeHeight":"674px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"markdown-viewer-demo.tsx","path":"examples/markdown-viewer-demo.tsx"}]},{"name":"viewer","children":[{"name":"markdown","children":[{"name":"index.tsx","path":"viewer/markdown/index.tsx"}]},{"name":"code","children":[{"name":"index.tsx","path":"viewer/code/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/markdown-viewer-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"viewer/markdown/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"viewer/code/index.tsx","content":"$7","highlightedContent":"$8"}]}],"$L9","$La","$Lb","$Lc","$Ld"]}],["$Le"],"$Lf"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"GPtu89OEeXkDaY23aGtPE"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","markdown-viewer-demo",{"item":{"name":"markdown-viewer-demo","description":"Render Markdown with GFM syntax, tables, and code blocks.","iframeHeight":"674px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"markdown-viewer-demo.tsx","path":"examples/markdown-viewer-demo.tsx"}]},{"name":"viewer","children":[{"name":"markdown","children":[{"name":"index.tsx","path":"viewer/markdown/index.tsx"}]},{"name":"code","children":[{"name":"index.tsx","path":"viewer/code/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/markdown-viewer-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"viewer/markdown/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"viewer/code/index.tsx","content":"$7","highlightedContent":"$8"}]}],"$L9","$La","$Lb","$Lc","$Ld"]}],["$Le"],"$Lf"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"wBYso063NX4GmKkw54tCq"}
 10:T4c2,'use client'
 
 import { CodeViewer } from '@/registry/new-york-v4/pro/viewer/code'
