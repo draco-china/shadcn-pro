@@ -34,6 +34,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   max,
   min = 0,
   sortable = 'drag',
+  variant = 'outline',
   disabled,
   className,
 }: {
@@ -55,6 +56,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   max?: number
   min?: number
   sortable?: 'button' | 'drag' | false
+  variant?: 'outline' | 'ghost'
   disabled?: boolean
   className?: string
 }) {
@@ -127,6 +129,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
       onMoveDown: () => move(index, index + 1),
       disabled,
       sortMode,
+      variant,
       canDuplicate: canAddItem,
       canRemove: items.length > min,
       canMoveUp: index > 0,
@@ -216,6 +219,7 @@ interface ArrayFieldItemProps {
   onMoveDown: () => void
   disabled?: boolean
   sortMode: 'button' | 'drag' | 'none'
+  variant: 'outline' | 'ghost'
   canDuplicate?: boolean
   canRemove?: boolean
   canMoveUp?: boolean
@@ -235,6 +239,7 @@ function ArrayFieldItem({
   onMoveDown,
   disabled,
   sortMode,
+  variant,
   canDuplicate = true,
   canRemove = true,
   canMoveUp = true,
@@ -245,7 +250,10 @@ function ArrayFieldItem({
     <div
       ref={ref}
       style={style}
-      className="group relative flex items-start gap-2 rounded-md border bg-card p-3"
+      className={cn(
+        'group relative flex items-start gap-2',
+        variant === 'outline' && 'rounded-md border bg-card p-3',
+      )}
     >
       <div className="min-w-0 flex-1 space-y-3">{children}</div>
 
