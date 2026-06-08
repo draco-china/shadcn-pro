@@ -1,3 +1,10 @@
+## [1.16.8](https://github.com/draco-china/shadcn-pro/compare/v1.16.7...v1.16.8) (2026-06-08)
+
+
+### Bug Fixes
+
+* restore docs sidebar navigation ([25ef7dd](https://github.com/draco-china/shadcn-pro/commit/25ef7dd51a7015688f07e3ec9766bed5e2e12cea))
+
 ## [1.16.7](https://github.com/draco-china/shadcn-pro/compare/v1.16.6...v1.16.7) (2026-06-02)
 
 
