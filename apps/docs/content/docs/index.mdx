@@ -24,10 +24,10 @@ Inspired by [Ant Design Pro Components](https://procomponents.ant.design/), shad
 shadcn-pro follows the same principle as shadcn/ui: **the code is yours**. Components are copied into your project, not installed as a black-box library. You own every line — customize, extend, or replace as needed.
 
 ```bash
-npx @draco-china/shadcn-pro@latest add pro-fields
-npx @draco-china/shadcn-pro@latest add pro-form
-npx @draco-china/shadcn-pro@latest add pro-table
-npx @draco-china/shadcn-pro@latest add markdown-viewer
+npx shadcn@latest add https://draco-china.github.io/shadcn-pro/r/pro-fields.json
+npx shadcn@latest add https://draco-china.github.io/shadcn-pro/r/pro-form.json
+npx shadcn@latest add https://draco-china.github.io/shadcn-pro/r/pro-table.json
+npx shadcn@latest add https://draco-china.github.io/shadcn-pro/r/markdown-viewer.json
 ```
 
 ## Key Features
@@ -35,8 +35,8 @@ npx @draco-china/shadcn-pro@latest add markdown-viewer
 ### Composable Forms
 Build form layouts from `ProForm`, `FormItem`, and standalone ProFields. Values are collected from native `FormData`, so you can bring your own validation and state model.
 
-### CLI Installation
-Add any component with a single command. The CLI copies source files directly into your project, respecting your existing folder structure.
+### Registry Installation
+Add any component with the official shadcn CLI. The registry copies source files directly into your project, respecting your existing folder structure.
 
 ### ProFields — Reusable Field Primitives
 Each field primitive (for example `Input`, `Select`, or `DatePicker`) is independently usable. Compose them with `FormItem` and `ProForm` when you need consistent form layout and submitter actions.

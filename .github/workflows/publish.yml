@@ -1,4 +1,4 @@
-name: Release
+name: Registry Release
 
 on:
   push:
@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  packages: write
   issues: write
   pull-requests: write
   id-token: write
@@ -45,12 +44,6 @@ jobs:
         with:
           bun-version: latest
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@draco-china'
-
       - name: Configure git identity
         run: |
           git config --global user.name "github-actions[bot]"
@@ -65,7 +58,6 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          NODE_AUTH_TOKEN: ${{ github.token }}
           LEFTHOOK: '0'
           npm_config_ignore_scripts: 'true'
         run: bun run release

@@ -69,14 +69,18 @@ function getIframeSrc(item: BlockItem) {
   return item.iframeSrc ?? withBasePath(`/view/new-york-v4/${item.name}`)
 }
 
+function getRegistryItemUrl(item: BlockItem) {
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL ?? `https://draco-china.github.io${withBasePath('')}`
+  return `${appUrl.replace(/\/$/, '')}/r/${item.installName ?? item.name}.json`
+}
+
 function getInstallCommand(item: BlockItem) {
-  return (
-    item.installCommand ?? `npx @draco-china/shadcn-pro@latest add ${item.installName ?? item.name}`
-  )
+  return item.installCommand ?? `npx shadcn@latest add ${getRegistryItemUrl(item)}`
 }
 
 function getInstallLabel(item: BlockItem) {
-  return item.installCommand ?? `npx shadcn-pro add ${item.installName ?? item.name}`
+  return item.installCommand ?? `npx shadcn add ${getRegistryItemUrl(item)}`
 }
 
 function getCodeHeight(height?: string) {

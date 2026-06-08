@@ -3,14 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "shadcn-pro",
-      "dependencies": {
-        "@clack/prompts": "^1.4.0",
-        "commander": "^14.0.3",
-        "fs-extra": "^11.3.5",
-        "ora": "^9.4.0",
-        "picocolors": "^1.1.1",
-      },
+      "name": "@draco-china/shadcn-pro",
       "devDependencies": {
         "@biomejs/biome": "^2.4.15",
         "@commitlint/cli": "^21.0.1",
@@ -19,7 +12,6 @@
         "@semantic-release/exec": "^7.1.0",
         "@semantic-release/git": "^10.0.1",
         "@semantic-release/github": "^12.0.8",
-        "@semantic-release/npm": "^13.1.5",
         "lefthook": "^2.1.8",
         "semantic-release": "^25.0.3",
         "turbo": "^2.9.14",
@@ -130,21 +122,6 @@
         "typescript": "^6",
         "unist-builder": "4.0.0",
         "unist-util-visit": "^5.1.0",
-      },
-    },
-    "packages/cli": {
-      "name": "cli",
-      "dependencies": {
-        "@clack/prompts": "^1.4.0",
-        "commander": "^14.0.3",
-        "fs-extra": "^11.3.5",
-        "ora": "^9.4.0",
-        "picocolors": "^1.1.1",
-      },
-      "devDependencies": {
-        "@types/fs-extra": "^11.0.4",
-        "@types/node": "^25.9.1",
-        "typescript": "^6.0.3",
       },
     },
     "packages/registry": {
@@ -1142,8 +1119,6 @@
     "class-variance-authority": ["class-variance-authority@0.7.1", "", { "dependencies": { "clsx": "^2.1.1" } }, "sha512-Ka+9Trutv7G8M6WT6SeiRWz792K5qEqIGEGzXKhAE6xOWAY6pPH8U+9IY3oCMv6kqTmLsv7Xh/2w2RigkePMsg=="],
 
     "clean-stack": ["clean-stack@2.2.0", "", {}, "sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A=="],
-
-    "cli": ["cli@workspace:packages/cli"],
 
     "cli-cursor": ["cli-cursor@5.0.0", "", { "dependencies": { "restore-cursor": "^5.0.0" } }, "sha512-aCj4O5wKyszjMmDT4tZj93kxyydN/K5zPWSCe6/0AV/AA1pqe5ZBIw0a2ZfPQV7lL5/yb5HsUreJ6UFAF1tEQw=="],
 

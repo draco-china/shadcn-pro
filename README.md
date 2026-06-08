@@ -5,7 +5,7 @@
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&pause=1000&color=00B8D9&center=true&vCenter=true&width=600&lines=shadcn-pro;Pro+components+for+shadcn%2Fui;Copy+%26+own.+No+lock-in.)](https://git.io/typing-svg)
 
 [![CI](https://img.shields.io/github/actions/workflow/status/draco-china/shadcn-pro/ci.yml?style=for-the-badge&label=CI&logo=githubactions&logoColor=white)](https://github.com/draco-china/shadcn-pro/actions/workflows/ci.yml)
-[![version](https://img.shields.io/github/package-json/v/draco-china/shadcn-pro?style=for-the-badge&label=shadcn-pro&color=00B8D9&logo=npm&logoColor=white)](https://github.com/draco-china/shadcn-pro/pkgs/npm/shadcn-pro)
+[![registry](https://img.shields.io/badge/registry-shadcn-00B8D9?style=for-the-badge&logo=shadcnui&logoColor=white)](https://draco-china.github.io/shadcn-pro/r/shadcn-pro.json)
 [![docs](https://img.shields.io/badge/docs-online-00B8D9?style=for-the-badge&logo=gitbook&logoColor=white)](https://draco-china.github.io/shadcn-pro)
 [![license](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](https://github.com/draco-china/shadcn-pro/blob/main/LICENSE)
 
@@ -31,17 +31,10 @@ Copy into your project. Own it completely. No shadcn-pro runtime dependency, no 
 
 ## 🚀 Quick Start
 
-shadcn-pro is published to **GitHub Packages**. Add the registry to your project's `.npmrc`:
+Install any component with the official shadcn CLI:
 
 ```bash
-# .npmrc (project root)
-@draco-china:registry=https://npm.pkg.github.com
-```
-
-Then install any component:
-
-```bash
-npx @draco-china/shadcn-pro@latest add pro-form
+npx shadcn@latest add https://draco-china.github.io/shadcn-pro/r/pro-form.json
 ```
 
 ```tsx
