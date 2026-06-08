@@ -1,3 +1,10 @@
+## [1.16.27](https://github.com/draco-china/shadcn-pro/compare/v1.16.26...v1.16.27) (2026-06-08)
+
+
+### Bug Fixes
+
+* center digit range input text ([c430bc3](https://github.com/draco-china/shadcn-pro/commit/c430bc355129703c93c0359def70662c05be6583))
+
 ## [1.16.26](https://github.com/draco-china/shadcn-pro/compare/v1.16.25...v1.16.26) (2026-06-08)
 
 
