@@ -521,7 +521,7 @@ async function copyToClipboard(text: string) {
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">    document</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E5C07B">body</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">removeChild</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">textarea</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-16 md:gap-24","children":[["$","section","pro-base",{"id":"pro-base","className":"scroll-mt-28","children":[["$","div",null,{"className":"mb-6","children":[["$","h2",null,{"className":"text-2xl font-semibold tracking-tight","children":"ProBase"}],["$","p",null,{"className":"mt-1 text-sm text-muted-foreground","children":[1," variants"]}]]}],["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-base-demo",{"item":{"name":"pro-base-demo","description":"Shared primitives for button, copy feedback, loading, and fullscreen state.","iframeHeight":"240px","installName":"pro-base"},"tree":[{"name":"examples","children":[{"name":"pro-base-demo.tsx","path":"examples/pro-base-demo.tsx"}]},{"name":"base","children":[{"name":"hooks","children":[{"name":"use-fullscreen.ts","path":"base/hooks/use-fullscreen.ts"}]},{"name":"button","children":[{"name":"index.tsx","path":"base/button/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/pro-base-demo.tsx","content":"\"use client\"\n\nimport { Maximize2, RefreshCw } from \"lucide-react\"\n\nimport { CopyButton, ProButton } from \"@/registry/new-york-v4/pro/base/button\"\n\nexport default function ProBaseDemo() {\n  return (\n    <div className=\"flex items-center gap-2 rounded-lg border p-4\">\n      <ProButton\n        tooltip=\"Refresh\"\n        variant=\"outline\"\n        onClick={() => {}}\n      >\n        <RefreshCw className=\"size-4\" />\n        Refresh\n      </ProButton>\n      <CopyButton\n        icon={<RefreshCw className=\"size-4\" />}\n        tooltip=\"Copy\"\n        variant=\"outline\"\n        copy=\"https://shadcn-pro.draco.run\"\n      >\n        Copy\n      </CopyButton>\n      <ProButton\n        tooltip=\"Fullscreen\"\n        variant=\"outline\"\n        size=\"icon\"\n      >\n        <Maximize2 className=\"size-4\" />\n      </ProButton>\n    </div>\n  )\n}\n","highlightedContent":"$3"},{"target":"base/hooks/use-fullscreen.ts","content":"$4","highlightedContent":"$5"},{"target":"base/button/index.tsx","content":"$6","highlightedContent":"$7"}]}]]}]]}],"$L8","$L9","$La","$Lb","$Lc","$Ld","$Le","$Lf"]}],["$L10"],"$L11"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"uxNkSuWi-NqQXlIEdorq4"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-16 md:gap-24","children":[["$","section","pro-base",{"id":"pro-base","className":"scroll-mt-28","children":[["$","div",null,{"className":"mb-6","children":[["$","h2",null,{"className":"text-2xl font-semibold tracking-tight","children":"ProBase"}],["$","p",null,{"className":"mt-1 text-sm text-muted-foreground","children":[1," variants"]}]]}],["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-base-demo",{"item":{"name":"pro-base-demo","description":"Shared primitives for button, copy feedback, loading, and fullscreen state.","iframeHeight":"240px","installName":"pro-base"},"tree":[{"name":"examples","children":[{"name":"pro-base-demo.tsx","path":"examples/pro-base-demo.tsx"}]},{"name":"base","children":[{"name":"hooks","children":[{"name":"use-fullscreen.ts","path":"base/hooks/use-fullscreen.ts"}]},{"name":"button","children":[{"name":"index.tsx","path":"base/button/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/pro-base-demo.tsx","content":"\"use client\"\n\nimport { Maximize2, RefreshCw } from \"lucide-react\"\n\nimport { CopyButton, ProButton } from \"@/registry/new-york-v4/pro/base/button\"\n\nexport default function ProBaseDemo() {\n  return (\n    <div className=\"flex items-center gap-2 rounded-lg border p-4\">\n      <ProButton\n        tooltip=\"Refresh\"\n        variant=\"outline\"\n        onClick={() => {}}\n      >\n        <RefreshCw className=\"size-4\" />\n        Refresh\n      </ProButton>\n      <CopyButton\n        icon={<RefreshCw className=\"size-4\" />}\n        tooltip=\"Copy\"\n        variant=\"outline\"\n        copy=\"https://shadcn-pro.draco.run\"\n      >\n        Copy\n      </CopyButton>\n      <ProButton\n        tooltip=\"Fullscreen\"\n        variant=\"outline\"\n        size=\"icon\"\n      >\n        <Maximize2 className=\"size-4\" />\n      </ProButton>\n    </div>\n  )\n}\n","highlightedContent":"$3"},{"target":"base/hooks/use-fullscreen.ts","content":"$4","highlightedContent":"$5"},{"target":"base/button/index.tsx","content":"$6","highlightedContent":"$7"}]}]]}]]}],"$L8","$L9","$La","$Lb","$Lc","$Ld","$Le","$Lf"]}],["$L10"],"$L11"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"YZwFjcctn3yAng11-Rsix"}
 12:T1c7a,"use client"
 
 import { type ColumnDef } from "@tanstack/react-table"
@@ -1210,7 +1210,7 @@ export default function ProTableDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>14:Tf951,'use client'
+<span class="line" data-line=""></span></code></pre>14:Tf938,'use client'
 
 import {
   closestCenter,
@@ -2216,7 +2216,7 @@ export function ProTable<TData, TValue>({
                     data-slot="pro-table-head-cell"
                     className={cn(
                       'h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
-                      'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 hover:bg-muted',
+                      'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 hover:bg-muted',
                       stickyHeader && 'top-0 z-30',
                     )}
                   />
@@ -2946,7 +2946,7 @@ function ProTableBody<TData>({
           <td
             data-slot="pro-table-cell"
             className={
-              'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 group-hover/row:bg-muted'
+              'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted'
             }
           >
             <div
@@ -3123,7 +3123,7 @@ function SortableRow<TData>({
         className={cn(
           'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
           paddingClass,
-          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
+          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
         )}
       >
         <ProButton
@@ -3150,10 +3150,10 @@ function getPinnedColumnClassName<TData>(column: Column<TData, unknown>, classNa
       'sticky z-10 bg-background transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
     pinned === 'left' &&
       column.getIsLastColumn('left') &&
-      'shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))]',
+      'shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)]',
     pinned === 'right' &&
       column.getIsFirstColumn('right') &&
-      'shadow-[-6px_0_10px_-10px_hsl(var(--foreground)/0.45),-1px_0_0_0_hsl(var(--border))]',
+      'shadow-[-6px_0_10px_-10px_hsl(var(--foreground)/0.45),-1px_0_0_0_var(--border)]',
     className,
   )
 }
@@ -3176,7 +3176,7 @@ function getPinnedColumnStyle<TData>(
 
   return style
 }
-15:Ta6fee,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+15:Ta6fd5,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  closestCenter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -4182,7 +4182,7 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-table-head-cell"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">                      'h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground [&#x26;:has([role=checkbox])]:pr-0 [&#x26;>[role=checkbox]]:translate-y-[2px]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">                      'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 hover:bg-muted'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">                      'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 hover:bg-muted'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">                      stickyHeader</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'top-0 z-30'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  /></span></span>
@@ -4912,7 +4912,7 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">td</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-table-cell"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">              'p-2 align-middle whitespace-nowrap [&#x26;:has([role=checkbox])]:pr-0 [&#x26;>[role=checkbox]]:translate-y-[2px] sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 group-hover/row:bg-muted'</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">              'p-2 align-middle whitespace-nowrap [&#x26;:has([role=checkbox])]:pr-0 [&#x26;>[role=checkbox]]:translate-y-[2px] sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">            }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
@@ -5089,7 +5089,7 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'p-2 align-middle whitespace-nowrap [&#x26;:has([role=checkbox])]:pr-0 [&#x26;>[role=checkbox]]:translate-y-[2px]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">          paddingClass</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
@@ -5116,10 +5116,10 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'sticky z-10 bg-background transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    pinned</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'left'</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> &#x26;&#x26;</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">      column</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">getIsLastColumn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'left'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#56B6C2">&#x26;&#x26;</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    pinned</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'right'</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> &#x26;&#x26;</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">      column</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">getIsFirstColumn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'right'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#56B6C2">&#x26;&#x26;</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'shadow-[-6px_0_10px_-10px_hsl(var(--foreground)/0.45),-1px_0_0_0_hsl(var(--border))]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'shadow-[-6px_0_10px_-10px_hsl(var(--foreground)/0.45),-1px_0_0_0_var(--border)]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
@@ -20094,7 +20094,7 @@ export default function ProTableDragSortDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>65:Tf951,'use client'
+<span class="line" data-line=""></span></code></pre>65:Tf938,'use client'
 
 import {
   closestCenter,
@@ -21100,7 +21100,7 @@ export function ProTable<TData, TValue>({
                     data-slot="pro-table-head-cell"
                     className={cn(
                       'h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
-                      'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 hover:bg-muted',
+                      'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 hover:bg-muted',
                       stickyHeader && 'top-0 z-30',
                     )}
                   />
@@ -21830,7 +21830,7 @@ function ProTableBody<TData>({
           <td
             data-slot="pro-table-cell"
             className={
-              'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 group-hover/row:bg-muted'
+              'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted'
             }
           >
             <div
@@ -22007,7 +22007,7 @@ function SortableRow<TData>({
         className={cn(
           'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
           paddingClass,
-          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
+          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
         )}
       >
         <ProButton
@@ -22034,10 +22034,10 @@ function getPinnedColumnClassName<TData>(column: Column<TData, unknown>, classNa
       'sticky z-10 bg-background transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
     pinned === 'left' &&
       column.getIsLastColumn('left') &&
-      'shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))]',
+      'shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)]',
     pinned === 'right' &&
       column.getIsFirstColumn('right') &&
-      'shadow-[-6px_0_10px_-10px_hsl(var(--foreground)/0.45),-1px_0_0_0_hsl(var(--border))]',
+      'shadow-[-6px_0_10px_-10px_hsl(var(--foreground)/0.45),-1px_0_0_0_var(--border)]',
     className,
   )
 }
@@ -22060,7 +22060,7 @@ function getPinnedColumnStyle<TData>(
 
   return style
 }
-66:Ta6fee,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+66:Ta6fd5,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  closestCenter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -23066,7 +23066,7 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-table-head-cell"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">                    className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">                      'h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground [&#x26;:has([role=checkbox])]:pr-0 [&#x26;>[role=checkbox]]:translate-y-[2px]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">                      'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 hover:bg-muted'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">                      'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 hover:bg-muted'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">                      stickyHeader</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'top-0 z-30'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                    )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">                  /></span></span>
@@ -23796,7 +23796,7 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">td</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            data-slot</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"pro-table-cell"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">              'p-2 align-middle whitespace-nowrap [&#x26;:has([role=checkbox])]:pr-0 [&#x26;>[role=checkbox]]:translate-y-[2px] sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 group-hover/row:bg-muted'</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">              'p-2 align-middle whitespace-nowrap [&#x26;:has([role=checkbox])]:pr-0 [&#x26;>[role=checkbox]]:translate-y-[2px] sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted'</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">            }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span></span>
@@ -23973,7 +23973,7 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">        className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'p-2 align-middle whitespace-nowrap [&#x26;:has([role=checkbox])]:pr-0 [&#x26;>[role=checkbox]]:translate-y-[2px]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">          paddingClass</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))] transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
@@ -24000,10 +24000,10 @@ function getPinnedColumnStyle<TData>(
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'sticky z-10 bg-background transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    pinned</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'left'</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> &#x26;&#x26;</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">      column</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">getIsLastColumn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'left'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#56B6C2">&#x26;&#x26;</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_hsl(var(--border))]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    pinned</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'right'</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> &#x26;&#x26;</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">      column</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">getIsFirstColumn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">'right'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#0184BC;--shiki-dark:#56B6C2">&#x26;&#x26;</span></span>
-<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'shadow-[-6px_0_10px_-10px_hsl(var(--foreground)/0.45),-1px_0_0_0_hsl(var(--border))]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">      'shadow-[-6px_0_10px_-10px_hsl(var(--foreground)/0.45),-1px_0_0_0_var(--border)]'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
