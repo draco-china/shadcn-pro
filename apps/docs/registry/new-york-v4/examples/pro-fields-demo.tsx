@@ -129,7 +129,8 @@ export default function ProFieldsDemo() {
             value={money}
             onChange={setMoney}
             placeholder="0.00"
-            prefix={<span className="px-3">USD</span>}
+            prefix="$"
+            suffix="USD"
           />
         </Field>
         <Field label="Slider">

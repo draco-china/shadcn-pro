@@ -7,13 +7,13 @@ export default function ProFieldsMoneyDemo() {
   return (
     <div className="w-full max-w-sm space-y-6 p-4">
       <FormItem label="Price (USD)">
-        <Money name="price" placeholder="0.00" />
+        <Money name="price" placeholder="0.00" suffix="USD" />
       </FormItem>
       <FormItem label="Budget (EUR)">
-        <Money name="budget" prefix={<span className="px-3">€</span>} placeholder="0.00" />
+        <Money name="budget" prefix="€" suffix="EUR" placeholder="0.00" />
       </FormItem>
       <FormItem label="Amount (JPY)">
-        <Money name="amount" prefix={<span className="px-3">¥</span>} placeholder="0" />
+        <Money name="amount" prefix="¥" suffix="JPY" placeholder="0" />
       </FormItem>
     </div>
   )
