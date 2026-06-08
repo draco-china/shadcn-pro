@@ -1,13 +1,13 @@
 'use client'
 
 import { Command as CommandPrimitive } from 'cmdk'
-import { Check, ChevronDown, ChevronRight, ChevronUp, SearchIcon } from 'lucide-react'
+import { Check, ChevronDown, ChevronRight, ChevronUp, SearchIcon, X } from 'lucide-react'
 import { Popover as PopoverPrimitive, Select as SelectPrimitive } from 'radix-ui'
 import { type ReactNode, useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../../button'
 import { CheckboxControl } from '../checkbox'
-import { FieldClearButton, FieldPopoverContent, fieldTriggerClassName } from '../shared/field'
+import { FieldPopoverContent, fieldTriggerClassName } from '../shared/field'
 
 interface NestedOption {
   label: string
@@ -18,6 +18,43 @@ interface NestedOption {
 
 const EMPTY_CASCADER_OPTIONS: NestedOption[] = []
 const EMPTY_CASCADER_VALUE: string[] = []
+
+function SelectClearAction({
+  label,
+  onClear,
+  className,
+}: {
+  label: string
+  onClear: () => void
+  className?: string
+}) {
+  function clear(event: { preventDefault: () => void; stopPropagation: () => void }) {
+    event.preventDefault()
+    event.stopPropagation()
+    onClear()
+  }
+
+  return (
+    // biome-ignore lint/a11y/useSemanticElements: select triggers are buttons, so the clear affordance cannot be a nested button.
+    <span
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+      className={cn(
+        "inline-flex size-4 items-center justify-center rounded-sm outline-hidden [&_svg:not([class*='size-'])]:size-4",
+        className,
+      )}
+      onPointerDown={clear}
+      onClick={clear}
+      onKeyDown={(event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return
+        clear(event)
+      }}
+    >
+      <X />
+    </span>
+  )
+}
 
 export function Select({
   value,
@@ -132,11 +169,11 @@ export function Select({
             </span>
             <span className="relative flex size-4 shrink-0 items-center justify-center">
               {showClear && (
-                <FieldClearButton
+                <SelectClearAction
                   label="Clear selection"
                   onClear={() => handleChange(undefined)}
                   className={
-                    'pointer-events-none absolute inset-0 z-10 ml-0 size-4 rounded-sm opacity-0 group-hover/select:pointer-events-auto group-hover/select:opacity-100 group-focus-within/select:pointer-events-auto group-focus-within/select:opacity-100'
+                    'pointer-events-none absolute inset-0 z-10 opacity-0 group-hover/select:pointer-events-auto group-hover/select:opacity-100 group-focus-within/select:pointer-events-auto group-focus-within/select:opacity-100'
                   }
                 />
               )}
@@ -234,11 +271,11 @@ export function Select({
         </span>
         <span className="relative flex size-4 shrink-0 items-center justify-center">
           {showClear && (
-            <FieldClearButton
+            <SelectClearAction
               label="Clear selection"
               onClear={() => handleChange(undefined)}
               className={
-                'pointer-events-none absolute inset-0 z-10 ml-0 size-4 rounded-sm opacity-0 group-hover/select:pointer-events-auto group-hover/select:opacity-100 group-focus-within/select:pointer-events-auto group-focus-within/select:opacity-100'
+                'pointer-events-none absolute inset-0 z-10 opacity-0 group-hover/select:pointer-events-auto group-hover/select:opacity-100 group-focus-within/select:pointer-events-auto group-focus-within/select:opacity-100'
               }
             />
           )}
@@ -386,13 +423,13 @@ export function Cascader({
           </button>
         </PopoverPrimitive.Trigger>
         {selectedPath.length > 0 && !disabled && !required && (
-          <FieldClearButton
+          <SelectClearAction
             label="Clear selection"
             onClear={() => {
               onChange?.([])
               setOpen(false)
             }}
-            className="absolute top-1/2 right-2 z-10 ml-0 -translate-y-1/2"
+            className="absolute top-1/2 right-3 z-10 -translate-y-1/2"
           />
         )}
       </div>
@@ -500,13 +537,13 @@ export function TreeSelect({
           </button>
         </PopoverPrimitive.Trigger>
         {value.length > 0 && !disabled && !required && (
-          <FieldClearButton
+          <SelectClearAction
             label="Clear selection"
             onClear={() => {
               onChange?.([])
               setOpen(false)
             }}
-            className="absolute top-1/2 right-2 z-10 ml-0 -translate-y-1/2"
+            className="absolute top-1/2 right-3 z-10 -translate-y-1/2"
           />
         )}
       </div>

@@ -419,9 +419,9 @@ export function FormItem({
               variant="ghost"
               size="icon-xs"
               tooltip={tooltip ?? description}
-              className="size-4 cursor-help text-muted-foreground hover:text-foreground"
+              className="cursor-help"
             >
-              <InfoIcon className="size-3.5" />
+              <InfoIcon />
             </ProButton>
           )}
           {required && (

@@ -125,10 +125,9 @@ export function ProPagination({
               disabled={isFirstPage}
               variant="ghost"
               size="icon-sm"
-              className="size-8"
               onClick={() => onPageChange(1)}
             >
-              <ChevronsLeft size={14} />
+              <ChevronsLeft />
             </ProButton>
           </li>
           <li data-slot="pro-pagination-item">
@@ -138,10 +137,9 @@ export function ProPagination({
               disabled={isFirstPage}
               variant="ghost"
               size="icon-sm"
-              className="size-8"
               onClick={() => onPageChange(currentPage - 1)}
             >
-              <ChevronLeft size={14} />
+              <ChevronLeft />
             </ProButton>
           </li>
           {pageRange.map((page, index) => {
@@ -174,7 +172,7 @@ export function ProPagination({
                   data-active={page === currentPage}
                   variant={page === currentPage ? 'outline' : 'ghost'}
                   size="icon-sm"
-                  className={cn('size-8', page === currentPage && 'pointer-events-none')}
+                  className={page === currentPage ? 'pointer-events-none' : undefined}
                   onClick={() => onPageChange(page)}
                 >
                   {page}
@@ -194,10 +192,9 @@ export function ProPagination({
               disabled={isLastPage}
               variant="ghost"
               size="icon-sm"
-              className="size-8"
               onClick={() => onPageChange(currentPage + 1)}
             >
-              <ChevronRight size={14} />
+              <ChevronRight />
             </ProButton>
           </li>
           <li data-slot="pro-pagination-item">
@@ -207,10 +204,9 @@ export function ProPagination({
               disabled={isLastPage}
               variant="ghost"
               size="icon-sm"
-              className="size-8"
               onClick={() => onPageChange(safePageCount)}
             >
-              <ChevronsRight size={14} />
+              <ChevronsRight />
             </ProButton>
           </li>
         </ul>

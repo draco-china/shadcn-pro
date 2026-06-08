@@ -33,9 +33,9 @@ export function FieldClearButton({
         event.stopPropagation()
         onClear()
       }}
-      className={cn('ml-1.5 text-muted-foreground hover:text-foreground', className)}
+      className={cn('ml-1.5', className)}
     >
-      <X size={14} />
+      <X />
     </ProButton>
   )
 }

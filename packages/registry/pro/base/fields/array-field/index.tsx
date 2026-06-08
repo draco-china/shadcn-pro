@@ -145,9 +145,9 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
             setIds((prev) => [...prev, createArrayFieldId()])
             commit([...items, newItem()])
           }}
-          className="w-full border-dashed text-muted-foreground hover:text-foreground"
+          className="w-full border-dashed"
         >
-          <Plus className="size-4" />
+          <Plus />
           Add item
         </ProButton>
       )}
@@ -193,12 +193,10 @@ function SortableItem({
         variant="ghost"
         size="icon-sm"
         disabled={disabled}
-        className={
-          'mt-1 cursor-grab text-muted-foreground active:cursor-grabbing disabled:cursor-not-allowed'
-        }
+        className={'mt-1 cursor-grab active:cursor-grabbing disabled:cursor-not-allowed'}
         aria-label="Drag to reorder"
       >
-        <GripVertical className="size-4" />
+        <GripVertical />
       </ProButton>
 
       <div className="min-w-0 flex-1 space-y-3">{children}</div>
@@ -208,11 +206,11 @@ function SortableItem({
           variant="ghost"
           size="icon-sm"
           disabled={disabled}
-          className="shrink-0 text-muted-foreground hover:text-foreground"
+          className="shrink-0"
           onClick={onDuplicate}
           aria-label="Duplicate item"
         >
-          <Copy className="size-3.5" />
+          <Copy />
         </ProButton>
       )}
 
@@ -221,11 +219,11 @@ function SortableItem({
           variant="ghost"
           size="icon-sm"
           disabled={disabled}
-          className="shrink-0 text-destructive/60 hover:bg-destructive/10 hover:text-destructive"
+          className="shrink-0"
           onClick={onRemove}
           aria-label="Remove item"
         >
-          <Trash2 className="size-3.5" />
+          <Trash2 />
         </ProButton>
       )}
     </div>

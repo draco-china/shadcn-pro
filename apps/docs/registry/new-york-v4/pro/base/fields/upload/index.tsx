@@ -250,9 +250,9 @@ export function UploadFileList({ className }: { className?: string }) {
               size="icon-xs"
               aria-label={`Remove ${file.name}`}
               onClick={() => upload.removeFile(file.uid)}
-              className="shrink-0 text-muted-foreground hover:text-foreground"
+              className="shrink-0"
             >
-              <X className="size-3.5" />
+              <X />
             </ProButton>
           )}
         </li>

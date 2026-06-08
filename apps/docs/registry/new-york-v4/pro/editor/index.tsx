@@ -18,7 +18,7 @@ import {
 } from 'react'
 import { createHighlighter, type Highlighter } from 'shiki'
 import { cn } from '@/lib/utils'
-import { CopyButton, ProButton } from '../base/button'
+import { CopyButton, ProButton, type ProButtonSize } from '../base/button'
 import { useFullscreen } from '../base/hooks/use-fullscreen'
 
 type EditorTheme = 'light' | 'dark'
@@ -33,6 +33,7 @@ interface EditorToolbarActionContext {
   disabled: boolean
   language: string
   theme: EditorTheme
+  size?: ProButtonSize
   mode: EditorViewMode
   hasPreview: boolean
   isSplitView: boolean
@@ -52,6 +53,7 @@ interface EditorProps {
   theme?: EditorTheme
   className?: string
   height?: string | number
+  size?: ProButtonSize
   toolbar?: false | EditorToolbarSlot
   toolbarTitle?: EditorToolbarSlot
   toolbarMode?: boolean
@@ -215,12 +217,21 @@ function useEditorState({
   disabled,
   language = 'plaintext',
   theme,
+  size,
   height,
   fullscreen,
   preview,
 }: Pick<
   EditorProps,
-  'value' | 'onChange' | 'disabled' | 'language' | 'theme' | 'height' | 'fullscreen' | 'preview'
+  | 'value'
+  | 'onChange'
+  | 'disabled'
+  | 'language'
+  | 'theme'
+  | 'size'
+  | 'height'
+  | 'fullscreen'
+  | 'preview'
 >) {
   const [localValue, setLocalValue] = useState(value ?? '')
   const [uncontrolledMode, setUncontrolledMode] = useState<EditorViewMode>(
@@ -282,6 +293,7 @@ function useEditorState({
     disabled: disabled ?? false,
     language,
     theme: theme ?? 'dark',
+    size,
     mode: effectiveMode,
     hasPreview,
     isSplitView,
@@ -465,6 +477,7 @@ export function ProEditor({
   theme = 'dark',
   className,
   height,
+  size = 'icon',
   toolbar,
   toolbarTitle,
   toolbarMode = true,
@@ -479,6 +492,7 @@ export function ProEditor({
     disabled,
     language,
     theme,
+    size,
     height,
     fullscreen,
     preview,
@@ -538,37 +552,41 @@ export function ProEditor({
               {editor.hasPreview && toolbarMode && (
                 <>
                   <ProButton
+                    size={size}
                     variant={previewModeActive ? 'secondary' : 'ghost'}
                     tooltip={previewModeActive ? 'Hide Preview' : 'Preview'}
                     onClick={() => editor.setMode(previewModeActive ? 'edit' : 'preview')}
                   >
-                    {previewModeActive ? <EyeOff size={16} /> : <Eye size={16} />}
+                    {previewModeActive ? <EyeOff /> : <Eye />}
                   </ProButton>
                   <ProButton
+                    size={size}
                     variant={editor.isSplitView ? 'secondary' : 'ghost'}
                     tooltip="Split View"
                     onClick={() =>
                       editor.setMode(editor.effectiveMode === 'split' ? 'edit' : 'split')
                     }
                   >
-                    <Columns2 size={16} />
+                    <Columns2 />
                   </ProButton>
                 </>
               )}
               {toolbarFormat && (
                 <ProButton
+                  size={size}
                   variant="ghost"
                   tooltip="Format"
                   disabled={disabled}
                   onClick={editor.handleFormat}
                 >
-                  <WandSparkles size={16} />
+                  <WandSparkles />
                 </ProButton>
               )}
               {toolbarCopy && (
                 <CopyButton
+                  size={size}
                   variant="ghost"
-                  icon={<Copy size={16} />}
+                  icon={<Copy />}
                   tooltip="Copy"
                   disabled={disabled}
                   copy={editor.toolbarContext.value}
@@ -576,11 +594,12 @@ export function ProEditor({
               )}
               {fullscreen !== false && (
                 <ProButton
+                  size={size}
                   variant="ghost"
                   tooltip={editor.fullscreen ? 'Exit fullscreen' : 'Fullscreen'}
                   onClick={() => editor.setFullscreen(!editor.fullscreen)}
                 >
-                  {editor.fullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+                  {editor.fullscreen ? <Minimize2 /> : <Maximize2 />}
                 </ProButton>
               )}
             </div>

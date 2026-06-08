@@ -15,7 +15,7 @@ import {
 import { type MouseEvent, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { cn } from '@/lib/utils'
-import { ProButton } from '../../base/button'
+import { ProButton, type ProButtonSize } from '../../base/button'
 import { useFullscreen } from '../../base/hooks/use-fullscreen'
 
 const DEFAULT_IMAGE_TRANSFORM = { scale: 1, rotate: 0, x: 0, y: 0 }
@@ -31,6 +31,7 @@ export function ImageViewer({
   alt = 'Image',
   container,
   className,
+  size = 'icon',
 }: {
   images: string | string[]
   open: boolean
@@ -41,6 +42,7 @@ export function ImageViewer({
   alt?: string
   container?: Element | DocumentFragment | null
   className?: string
+  size?: ProButtonSize
 }) {
   const list = Array.isArray(images) ? images : [images]
   const [uncontrolledIndex, setUncontrolledIndex] = useState(initialIndex)
@@ -142,36 +144,53 @@ export function ImageViewer({
       }}
     >
       <div className="flex flex-wrap items-center gap-2 px-4 py-3 text-foreground">
-        <ProButton variant="ghost" tooltip="Zoom out" onClick={() => zoomBy(-IMAGE_SCALE_STEP)}>
-          <ZoomOut className="size-4" />
+        <ProButton
+          size={size}
+          variant="ghost"
+          tooltip="Zoom out"
+          onClick={() => zoomBy(-IMAGE_SCALE_STEP)}
+        >
+          <ZoomOut />
         </ProButton>
         <span className="min-w-[48px] text-center text-sm tabular-nums">
           {Math.round(transform.scale * 100)}%
         </span>
-        <ProButton variant="ghost" tooltip="Zoom in" onClick={() => zoomBy(IMAGE_SCALE_STEP)}>
-          <ZoomIn className="size-4" />
+        <ProButton
+          size={size}
+          variant="ghost"
+          tooltip="Zoom in"
+          onClick={() => zoomBy(IMAGE_SCALE_STEP)}
+        >
+          <ZoomIn />
         </ProButton>
         <div aria-hidden="true" className="mx-1 hidden h-5 w-px shrink-0 bg-border sm:block" />
-        <ProButton variant="ghost" tooltip="Rotate counterclockwise" onClick={() => rotateBy(-90)}>
-          <RotateCcw className="size-4" />
-        </ProButton>
-        <ProButton variant="ghost" tooltip="Rotate clockwise" onClick={() => rotateBy(90)}>
-          <RotateCw className="size-4" />
-        </ProButton>
-        <div aria-hidden="true" className="mx-1 hidden h-5 w-px shrink-0 bg-border sm:block" />
-        <ProButton variant="ghost" tooltip="Reset image" onClick={reset}>
-          <RotateCcwSquare className="size-4" />
+        <ProButton
+          size={size}
+          variant="ghost"
+          tooltip="Rotate counterclockwise"
+          onClick={() => rotateBy(-90)}
+        >
+          <RotateCcw />
         </ProButton>
         <ProButton
+          size={size}
+          variant="ghost"
+          tooltip="Rotate clockwise"
+          onClick={() => rotateBy(90)}
+        >
+          <RotateCw />
+        </ProButton>
+        <div aria-hidden="true" className="mx-1 hidden h-5 w-px shrink-0 bg-border sm:block" />
+        <ProButton size={size} variant="ghost" tooltip="Reset image" onClick={reset}>
+          <RotateCcwSquare />
+        </ProButton>
+        <ProButton
+          size={size}
           variant="ghost"
           tooltip={fullscreen.fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
           onClick={() => fullscreen.setFullscreen(!fullscreen.fullscreen)}
         >
-          {fullscreen.fullscreen ? (
-            <Minimize2 className="size-4" />
-          ) : (
-            <Maximize2 className="size-4" />
-          )}
+          {fullscreen.fullscreen ? <Minimize2 /> : <Maximize2 />}
         </ProButton>
         <span className="hidden flex-1 md:block" />
         {hasMultipleImages && (
@@ -180,8 +199,8 @@ export function ImageViewer({
           </span>
         )}
         <span className="hidden flex-1 md:block" />
-        <ProButton variant="ghost" tooltip="Close image viewer" onClick={onClose}>
-          <X className="size-5" />
+        <ProButton size={size} variant="ghost" tooltip="Close image viewer" onClick={onClose}>
+          <X />
         </ProButton>
       </div>
 
@@ -212,7 +231,7 @@ export function ImageViewer({
               }}
               aria-label="Previous image"
             >
-              <ChevronLeft className="size-5" />
+              <ChevronLeft />
             </ProButton>
             <ProButton
               variant="ghost"
@@ -224,7 +243,7 @@ export function ImageViewer({
               }}
               aria-label="Next image"
             >
-              <ChevronRight className="size-5" />
+              <ChevronRight />
             </ProButton>
           </>
         )}

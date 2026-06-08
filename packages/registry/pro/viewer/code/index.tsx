@@ -162,15 +162,12 @@ export function CodeViewer({
         <CopyButton
           variant="ghost"
           size="icon-xs"
-          icon={<Copy className="size-3.5" />}
+          icon={<Copy />}
           tooltip="Copy code"
           copy={code}
-          className={cn(
-            'size-6 opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100',
-            isLight
-              ? 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-              : 'text-muted-foreground hover:bg-accent/70 hover:text-foreground',
-          )}
+          className={
+            'opacity-0 transition-opacity group-hover/code-viewer:opacity-100 group-focus-within/code-viewer:opacity-100'
+          }
         />
       </div>
       <div
@@ -214,13 +211,11 @@ export function CodeViewer({
                           variant="ghost"
                           size="icon-xs"
                           onClick={() => toggleFold(line.index)}
-                          className={
-                            'flex h-full w-4 items-center justify-center text-muted-foreground hover:text-foreground'
-                          }
+                          className="flex h-full w-4 items-center justify-center"
                           aria-label={isFolded ? 'Expand' : 'Collapse'}
                         >
                           <ChevronRight
-                            className={cn('size-3 transition-transform', !isFolded && 'rotate-90')}
+                            className={cn('transition-transform', !isFolded && 'rotate-90')}
                           />
                         </ProButton>
                       ) : null}

@@ -37,6 +37,8 @@ export const buttonVariants = cva(
   },
 )
 
+export type ProButtonSize = VariantProps<typeof buttonVariants>['size']
+
 interface ProButtonProps
   extends Omit<ComponentProps<'button'>, 'children' | 'size'>,
     VariantProps<typeof buttonVariants> {

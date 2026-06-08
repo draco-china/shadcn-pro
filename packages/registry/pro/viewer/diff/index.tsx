@@ -113,16 +113,14 @@ export function DiffViewer({
         <div className="flex gap-1 rounded-md border border-border p-0.5">
           <ProButton
             variant={view === 'split' ? 'secondary' : 'ghost'}
-            size="sm"
-            className="h-6 px-2 text-xs"
+            size="xs"
             onClick={() => setView('split')}
           >
             Split
           </ProButton>
           <ProButton
             variant={view === 'unified' ? 'secondary' : 'ghost'}
-            size="sm"
-            className="h-6 px-2 text-xs"
+            size="xs"
             onClick={() => setView('unified')}
           >
             Unified

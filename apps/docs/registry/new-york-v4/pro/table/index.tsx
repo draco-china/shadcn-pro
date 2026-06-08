@@ -75,7 +75,7 @@ import {
   useState,
 } from 'react'
 import { cn } from '@/lib/utils'
-import { ProButton } from '../base/button'
+import { ProButton, type ProButtonSize } from '../base/button'
 import { CheckboxControl } from '../base/fields/checkbox'
 import { Input } from '../base/fields/input'
 import { Select } from '../base/fields/select'
@@ -123,6 +123,7 @@ interface ProTableRenderContext<TData> {
   rows: Row<TData>[]
   selectedRows: Row<TData>[]
   tableSize: TableSize
+  size?: ProButtonSize
 }
 
 type ProTableToolbarSlot<TData> = ReactNode | ((context: ProTableRenderContext<TData>) => ReactNode)
@@ -328,6 +329,7 @@ function useProTable<TData, TValue>({
   data,
   setData,
   toolbarSearch,
+  size,
   paginationOptions,
   dragSort,
   tableOptions,
@@ -350,6 +352,7 @@ function useProTable<TData, TValue>({
   columnFilters: ColumnFiltersState
   setColumnFilters: Dispatch<SetStateAction<ColumnFiltersState>>
   toolbarSearch?: ProTableSearch
+  size?: ProButtonSize
   paginationOptions?: false
   dragSort?: false | ProTableDragSortOptions<TData>
   tableOptions?: ProTableTableOptions
@@ -488,7 +491,13 @@ function useProTable<TData, TValue>({
   const selectedRows = table.getFilteredSelectedRowModel().rows
   const visibleColumns = table.getVisibleLeafColumns()
   const visibleColumnCount = visibleColumns.length + (dragSortEnabled ? 1 : 0)
-  const renderContext: ProTableRenderContext<TData> = { table, rows, selectedRows, tableSize }
+  const renderContext: ProTableRenderContext<TData> = {
+    table,
+    rows,
+    selectedRows,
+    tableSize,
+    size,
+  }
 
   return {
     table,
@@ -830,6 +839,7 @@ export function ProTable<TData, TValue>({
   header,
   toolbar,
   toolbarSearch,
+  size,
   toolbarDensity,
   toolbarColumns,
   onRefresh,
@@ -851,6 +861,7 @@ export function ProTable<TData, TValue>({
   header?: ReactNode | ((context: ProTableRenderContext<TData>) => ReactNode)
   toolbar?: false | ProTableToolbarSlot<TData>
   toolbarSearch?: ProTableSearch
+  size?: ProButtonSize
   toolbarDensity?: boolean
   toolbarColumns?: boolean
   onRefresh?: () => void
@@ -866,6 +877,7 @@ export function ProTable<TData, TValue>({
   table?: ProTableTableOptions
   className?: string
 }) {
+  const toolbarButtonSize = size ?? 'icon'
   const [tableData, setTableData] = useState<TData[]>(data ?? [])
   const [requestLoading, setRequestLoading] = useState(false)
   const [requestError, setRequestError] = useState<unknown>()
@@ -934,6 +946,7 @@ export function ProTable<TData, TValue>({
     data: tableData,
     setData: setTableData,
     toolbarSearch,
+    size: toolbarButtonSize,
     paginationOptions: pagination,
     dragSort,
     tableOptions: table,
@@ -1121,6 +1134,7 @@ export function ProTable<TData, TValue>({
           disabled={loadingEnabled}
           search={toolbarSearch}
           actions={toolbarActions}
+          size={size}
           columns={toolbarColumns ?? true}
           density={toolbarDensity ?? true}
           refresh={onRefresh}
@@ -1253,7 +1267,7 @@ function ProTableBulkActions<TData>({
             tooltip="Clear selection (Escape)"
             onClick={() => table.resetRowSelection()}
           >
-            <X size={14} />
+            <X />
           </ProButton>
 
           <div aria-hidden="true" className="h-5 w-px shrink-0 bg-border" />
@@ -1288,6 +1302,7 @@ function ProTableToolbar<TData>({
   defaultColumnPinning,
   search,
   actions,
+  size,
   columns = true,
   density = true,
   refresh,
@@ -1300,6 +1315,7 @@ function ProTableToolbar<TData>({
   defaultColumnPinning: ColumnPinningState
   search?: ProTableSearch
   actions?: ReactNode
+  size?: ProButtonSize
   columns?: boolean
   density?: boolean
   refresh?: () => void
@@ -1307,6 +1323,8 @@ function ProTableToolbar<TData>({
   tableSize?: TableSize
   onTableSizeChange?: (size: TableSize) => void
 }) {
+  const toolbarButtonSize = size ?? 'icon'
+  const resetButtonSize = size ?? 'sm'
   const searchColumn = getTableSearchColumn(table, search)
   const rawSearchValue = searchColumn?.getFilterValue()
   const searchValue = typeof rawSearchValue === 'string' ? rawSearchValue : ''
@@ -1379,11 +1397,11 @@ function ProTableToolbar<TData>({
         {table.getState().columnFilters.length > 0 && (
           <ProButton
             variant="ghost"
-            className="h-8 px-2 text-muted-foreground"
+            size={resetButtonSize}
             disabled={disabled}
             onClick={() => table.resetColumnFilters()}
           >
-            <X className="size-4" />
+            <X />
             Reset
           </ProButton>
         )}
@@ -1391,15 +1409,26 @@ function ProTableToolbar<TData>({
       <div className="flex flex-wrap items-center justify-end gap-2 md:ml-auto md:shrink-0">
         {actions}
         {refresh && (
-          <ProButton variant="ghost" tooltip="Refresh" disabled={disabled} onClick={refresh}>
-            <RefreshCw className="size-4" />
+          <ProButton
+            size={toolbarButtonSize}
+            variant="ghost"
+            tooltip="Refresh"
+            disabled={disabled}
+            onClick={refresh}
+          >
+            <RefreshCw />
           </ProButton>
         )}
         {density && onTableSizeChange && (
           <DropdownMenuPrimitive.Root>
             <DropdownMenuPrimitive.Trigger asChild>
-              <ProButton variant="ghost" tooltip="Density" disabled={disabled}>
-                <AlignJustify size={16} />
+              <ProButton
+                size={toolbarButtonSize}
+                variant="ghost"
+                tooltip="Density"
+                disabled={disabled}
+              >
+                <AlignJustify />
               </ProButton>
             </DropdownMenuPrimitive.Trigger>
             <DropdownMenuPrimitive.Portal>
@@ -1434,8 +1463,13 @@ function ProTableToolbar<TData>({
         {columns && (
           <DropdownMenuPrimitive.Root>
             <DropdownMenuPrimitive.Trigger asChild>
-              <ProButton variant="ghost" tooltip="Columns" disabled={disabled}>
-                <SlidersHorizontal size={16} />
+              <ProButton
+                size={toolbarButtonSize}
+                variant="ghost"
+                tooltip="Columns"
+                disabled={disabled}
+              >
+                <SlidersHorizontal />
               </ProButton>
             </DropdownMenuPrimitive.Trigger>
             <DropdownMenuPrimitive.Portal>
@@ -1516,14 +1550,13 @@ function ProTableColumnSettings<TData>({
         <ProButton
           variant="ghost"
           size="xs"
-          className="text-muted-foreground"
           onClick={() => {
             table.resetColumnVisibility()
             table.setColumnOrder(defaultColumnOrder)
             if (canPinColumns) table.setColumnPinning(defaultColumnPinning)
           }}
         >
-          <RotateCcw size={12} className="mr-1" />
+          <RotateCcw className="mr-1" />
           Reset
         </ProButton>
       </div>
@@ -1586,21 +1619,16 @@ function SortableColumnItem<TData>({
         size="icon-xs"
         {...attributes}
         {...listeners}
-        className="cursor-grab text-muted-foreground hover:text-foreground active:cursor-grabbing"
+        className="cursor-grab active:cursor-grabbing"
         aria-label="Drag to reorder"
       >
-        <GripVertical size={14} />
+        <GripVertical />
       </ProButton>
       {canPinColumn && (
         <ProButton
-          variant="ghost"
+          variant={leftPinned ? 'secondary' : 'ghost'}
           size="icon-xs"
-          className={cn(
-            'shrink-0',
-            leftPinned
-              ? 'bg-secondary text-secondary-foreground'
-              : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
-          )}
+          className="shrink-0"
           aria-pressed={leftPinned}
           aria-label={leftPinned ? 'Unpin left' : 'Pin left'}
           title={leftPinned ? 'Unpin left' : 'Pin left'}
@@ -1610,7 +1638,7 @@ function SortableColumnItem<TData>({
             column.pin(leftPinned ? false : 'left')
           }}
         >
-          {leftPinned ? <PinOff size={14} /> : <Pin size={14} />}
+          {leftPinned ? <PinOff /> : <Pin />}
         </ProButton>
       )}
       <label
@@ -1630,14 +1658,9 @@ function SortableColumnItem<TData>({
       </label>
       {canPinColumn && (
         <ProButton
-          variant="ghost"
+          variant={rightPinned ? 'secondary' : 'ghost'}
           size="icon-xs"
-          className={cn(
-            'shrink-0',
-            rightPinned
-              ? 'bg-secondary text-secondary-foreground'
-              : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
-          )}
+          className="shrink-0"
           aria-pressed={rightPinned}
           aria-label={rightPinned ? 'Unpin right' : 'Pin right'}
           title={rightPinned ? 'Unpin right' : 'Pin right'}
@@ -1647,7 +1670,7 @@ function SortableColumnItem<TData>({
             column.pin(rightPinned ? false : 'right')
           }}
         >
-          {rightPinned ? <PinOff size={14} /> : <Pin size={14} />}
+          {rightPinned ? <PinOff /> : <Pin />}
         </ProButton>
       )}
     </div>
@@ -1896,12 +1919,10 @@ function SortableRow<TData>({
           size="icon-xs"
           {...attributes}
           {...listeners}
-          className={
-            'cursor-grab text-muted-foreground hover:text-foreground active:cursor-grabbing'
-          }
+          className="cursor-grab active:cursor-grabbing"
           aria-label="Drag to reorder"
         >
-          <GripVertical size={16} />
+          <GripVertical />
         </ProButton>
       </td>
       {children}
