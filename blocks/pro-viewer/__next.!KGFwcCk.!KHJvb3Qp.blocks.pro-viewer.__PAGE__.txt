@@ -1816,7 +1816,7 @@ function renderTokenLineHtml(tokens: ThemedToken[]) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    })</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    .</span><span style="color:#4078F2;--shiki-dark:#61AFEF">join</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#50A14F;--shiki-dark:#98C379">''</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","markdown-viewer-demo",{"item":{"name":"markdown-viewer-demo","description":"Render Markdown with GFM syntax, tables, and code blocks.","iframeHeight":"674px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"markdown-viewer-demo.tsx","path":"examples/markdown-viewer-demo.tsx"}]},{"name":"viewer","children":[{"name":"markdown","children":[{"name":"index.tsx","path":"viewer/markdown/index.tsx"}]},{"name":"code","children":[{"name":"index.tsx","path":"viewer/code/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/markdown-viewer-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"viewer/markdown/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"viewer/code/index.tsx","content":"$7","highlightedContent":"$8"}]}],"$L9","$La","$Lb","$Lc","$Ld"]}],["$Le"],"$Lf"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"plxCqxG8CvECjurQjU7cE"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","markdown-viewer-demo",{"item":{"name":"markdown-viewer-demo","description":"Render Markdown with GFM syntax, tables, and code blocks.","iframeHeight":"674px","installName":"pro-viewer"},"tree":[{"name":"examples","children":[{"name":"markdown-viewer-demo.tsx","path":"examples/markdown-viewer-demo.tsx"}]},{"name":"viewer","children":[{"name":"markdown","children":[{"name":"index.tsx","path":"viewer/markdown/index.tsx"}]},{"name":"code","children":[{"name":"index.tsx","path":"viewer/code/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/markdown-viewer-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"viewer/markdown/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"viewer/code/index.tsx","content":"$7","highlightedContent":"$8"}]}],"$L9","$La","$Lb","$Lc","$Ld"]}],["$Le"],"$Lf"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"j9PrFmXq0G4i-yVoWEbwd"}
 10:T4c2,'use client'
 
 import { CodeViewer } from '@/registry/new-york-v4/pro/viewer/code'
@@ -2600,7 +2600,7 @@ export default function ImageViewerDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>17:T2313,'use client'
+<span class="line" data-line=""></span></code></pre>17:T2339,'use client'
 
 import {
   ChevronLeft,
@@ -2831,7 +2831,7 @@ export function ImageViewer({
               }}
               aria-label="Previous image"
             >
-              <ChevronLeft />
+              <ChevronLeft className="size-5" />
             </ProButton>
             <ProButton
               variant="ghost"
@@ -2843,7 +2843,7 @@ export function ImageViewer({
               }}
               aria-label="Next image"
             >
-              <ChevronRight />
+              <ChevronRight className="size-5" />
             </ProButton>
           </>
         )}
@@ -2891,7 +2891,7 @@ export function ImageViewer({
   if (portalTarget) return createPortal(content, portalTarget)
   return content
 }
-18:T19e0d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+18:T1a003,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  ChevronLeft</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -3122,7 +3122,7 @@ export function ImageViewer({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              aria-label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Previous image"</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ChevronLeft</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ChevronLeft</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              variant</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"ghost"</span></span>
@@ -3134,7 +3134,7 @@ export function ImageViewer({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">              aria-label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Next image"</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            ></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ChevronRight</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">              &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">ChevronRight</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"size-5"</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
