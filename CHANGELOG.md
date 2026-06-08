@@ -1,3 +1,10 @@
+## [1.16.11](https://github.com/draco-china/shadcn-pro/compare/v1.16.10...v1.16.11) (2026-06-08)
+
+
+### Bug Fixes
+
+* inherit editor toolbar button size ([e854a1c](https://github.com/draco-china/shadcn-pro/commit/e854a1c81171c1abcbfcf324364bcfe1417748c0))
+
 ## [1.16.10](https://github.com/draco-china/shadcn-pro/compare/v1.16.9...v1.16.10) (2026-06-08)
 
 
