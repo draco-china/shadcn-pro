@@ -15,7 +15,7 @@ import {
 import { type MouseEvent, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { cn } from '@/lib/utils'
-import { ProButton, type ProButtonSize } from '../../base/button'
+import { ProButton } from '../../base/button'
 import { useFullscreen } from '../../base/hooks/use-fullscreen'
 
 const DEFAULT_IMAGE_TRANSFORM = { scale: 1, rotate: 0, x: 0, y: 0 }
@@ -31,7 +31,6 @@ export function ImageViewer({
   alt = 'Image',
   container,
   className,
-  size = 'icon',
 }: {
   images: string | string[]
   open: boolean
@@ -42,7 +41,6 @@ export function ImageViewer({
   alt?: string
   container?: Element | DocumentFragment | null
   className?: string
-  size?: ProButtonSize
 }) {
   const list = Array.isArray(images) ? images : [images]
   const [uncontrolledIndex, setUncontrolledIndex] = useState(initialIndex)
@@ -145,7 +143,7 @@ export function ImageViewer({
     >
       <div className="flex flex-wrap items-center gap-2 px-4 py-3 text-foreground">
         <ProButton
-          size={size}
+          size="icon"
           variant="ghost"
           tooltip="Zoom out"
           onClick={() => zoomBy(-IMAGE_SCALE_STEP)}
@@ -156,7 +154,7 @@ export function ImageViewer({
           {Math.round(transform.scale * 100)}%
         </span>
         <ProButton
-          size={size}
+          size="icon"
           variant="ghost"
           tooltip="Zoom in"
           onClick={() => zoomBy(IMAGE_SCALE_STEP)}
@@ -165,7 +163,7 @@ export function ImageViewer({
         </ProButton>
         <div aria-hidden="true" className="mx-1 hidden h-5 w-px shrink-0 bg-border sm:block" />
         <ProButton
-          size={size}
+          size="icon"
           variant="ghost"
           tooltip="Rotate counterclockwise"
           onClick={() => rotateBy(-90)}
@@ -173,7 +171,7 @@ export function ImageViewer({
           <RotateCcw />
         </ProButton>
         <ProButton
-          size={size}
+          size="icon"
           variant="ghost"
           tooltip="Rotate clockwise"
           onClick={() => rotateBy(90)}
@@ -181,11 +179,11 @@ export function ImageViewer({
           <RotateCw />
         </ProButton>
         <div aria-hidden="true" className="mx-1 hidden h-5 w-px shrink-0 bg-border sm:block" />
-        <ProButton size={size} variant="ghost" tooltip="Reset image" onClick={reset}>
+        <ProButton size="icon" variant="ghost" tooltip="Reset image" onClick={reset}>
           <RotateCcwSquare />
         </ProButton>
         <ProButton
-          size={size}
+          size="icon"
           variant="ghost"
           tooltip={fullscreen.fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
           onClick={() => fullscreen.setFullscreen(!fullscreen.fullscreen)}
@@ -199,7 +197,7 @@ export function ImageViewer({
           </span>
         )}
         <span className="hidden flex-1 md:block" />
-        <ProButton size={size} variant="ghost" tooltip="Close image viewer" onClick={onClose}>
+        <ProButton size="icon" variant="ghost" tooltip="Close image viewer" onClick={onClose}>
           <X />
         </ProButton>
       </div>
