@@ -1,3 +1,10 @@
+## [1.18.2](https://github.com/draco-china/shadcn-pro/compare/v1.18.1...v1.18.2) (2026-06-08)
+
+
+### Bug Fixes
+
+* preserve day picker mode props ([be13e12](https://github.com/draco-china/shadcn-pro/commit/be13e1230edbc539bc524de1859855e8d8f500c3))
+
 ## [1.18.1](https://github.com/draco-china/shadcn-pro/compare/v1.18.0...v1.18.1) (2026-06-08)
 
 
