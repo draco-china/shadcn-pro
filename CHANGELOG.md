@@ -1,3 +1,10 @@
+## [1.16.17](https://github.com/draco-china/shadcn-pro/compare/v1.16.16...v1.16.17) (2026-06-08)
+
+
+### Bug Fixes
+
+* remove leading markdown alert break ([6f51eba](https://github.com/draco-china/shadcn-pro/commit/6f51eba3e76cb9aecef31aa7d68dee998e5c0e24))
+
 ## [1.16.16](https://github.com/draco-china/shadcn-pro/compare/v1.16.15...v1.16.16) (2026-06-08)
 
 
