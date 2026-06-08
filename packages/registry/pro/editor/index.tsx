@@ -538,41 +538,37 @@ export function ProEditor({
               {editor.hasPreview && toolbarMode && (
                 <>
                   <ProButton
-                    size="icon-xs"
                     variant={previewModeActive ? 'secondary' : 'ghost'}
                     tooltip={previewModeActive ? 'Hide Preview' : 'Preview'}
                     onClick={() => editor.setMode(previewModeActive ? 'edit' : 'preview')}
                   >
-                    {previewModeActive ? <EyeOff size={14} /> : <Eye size={14} />}
+                    {previewModeActive ? <EyeOff size={16} /> : <Eye size={16} />}
                   </ProButton>
                   <ProButton
-                    size="icon-xs"
                     variant={editor.isSplitView ? 'secondary' : 'ghost'}
                     tooltip="Split View"
                     onClick={() =>
                       editor.setMode(editor.effectiveMode === 'split' ? 'edit' : 'split')
                     }
                   >
-                    <Columns2 size={14} />
+                    <Columns2 size={16} />
                   </ProButton>
                 </>
               )}
               {toolbarFormat && (
                 <ProButton
-                  size="icon-xs"
                   variant="ghost"
                   tooltip="Format"
                   disabled={disabled}
                   onClick={editor.handleFormat}
                 >
-                  <WandSparkles size={14} />
+                  <WandSparkles size={16} />
                 </ProButton>
               )}
               {toolbarCopy && (
                 <CopyButton
-                  size="icon-xs"
                   variant="ghost"
-                  icon={<Copy size={14} />}
+                  icon={<Copy size={16} />}
                   tooltip="Copy"
                   disabled={disabled}
                   copy={editor.toolbarContext.value}
@@ -580,12 +576,11 @@ export function ProEditor({
               )}
               {fullscreen !== false && (
                 <ProButton
-                  size="icon-xs"
                   variant="ghost"
                   tooltip={editor.fullscreen ? 'Exit fullscreen' : 'Fullscreen'}
                   onClick={() => editor.setFullscreen(!editor.fullscreen)}
                 >
-                  {editor.fullscreen ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+                  {editor.fullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
                 </ProButton>
               )}
             </div>
