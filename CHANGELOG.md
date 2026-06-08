@@ -1,3 +1,11 @@
+## [1.16.15](https://github.com/draco-china/shadcn-pro/compare/v1.16.14...v1.16.15) (2026-06-08)
+
+
+### Bug Fixes
+
+* center image viewer header count ([56a5577](https://github.com/draco-china/shadcn-pro/commit/56a55773474f09bf08ceb9f7e492c61c6a4820cd))
+* tighten markdown alert spacing ([3d29dd7](https://github.com/draco-china/shadcn-pro/commit/3d29dd75b2ccca6b29429998715fc41d80c110e5))
+
 ## [1.16.14](https://github.com/draco-china/shadcn-pro/compare/v1.16.13...v1.16.14) (2026-06-08)
 
 
