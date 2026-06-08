@@ -1,3 +1,10 @@
+## [1.16.9](https://github.com/draco-china/shadcn-pro/compare/v1.16.8...v1.16.9) (2026-06-08)
+
+
+### Bug Fixes
+
+* align table toolbar actions ([3e20408](https://github.com/draco-china/shadcn-pro/commit/3e2040829cee2682f4c19abeb7f3b25e86a65fb8))
+
 ## [1.16.8](https://github.com/draco-china/shadcn-pro/compare/v1.16.7...v1.16.8) (2026-06-08)
 
 
