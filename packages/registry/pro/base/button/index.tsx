@@ -120,14 +120,13 @@ export function CopyButton({
   const [status, setStatus] = useState<'idle' | 'copying' | 'success' | 'error'>('idle')
   const isCopying = status === 'copying'
   const copyTooltip = status === 'success' ? 'Copied' : status === 'error' ? 'Copy failed' : tooltip
-  const copyIcon =
-    status === 'success' ? (
-      <Check className="size-4 text-green-600 dark:text-green-400" />
-    ) : status === 'error' ? (
-      <X className="size-4 text-destructive" />
-    ) : (
-      icon
-    )
+  const copyIcon = loading ? null : status === 'success' ? (
+    <Check className="size-4 text-green-600 dark:text-green-400" />
+  ) : status === 'error' ? (
+    <X className="size-4 text-destructive" />
+  ) : (
+    icon
+  )
 
   useEffect(() => {
     if (status !== 'success' && status !== 'error') return
