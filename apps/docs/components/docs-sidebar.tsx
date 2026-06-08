@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { PAGES_NEW } from '@/lib/docs'
-import { getPagesFromFolder } from '@/lib/page-tree'
 import type { source } from '@/lib/source'
 import {
   Sidebar,
@@ -23,15 +22,27 @@ const TOP_LEVEL_SECTIONS = [
   { name: 'Changelog', href: '/docs/changelog' },
 ]
 
+const COMPONENTS = [
+  { name: 'ProBase', href: '/docs/components/pro-base' },
+  { name: 'ProDescriptions', href: '/docs/components/pro-descriptions' },
+  { name: 'ProEditor', href: '/docs/components/pro-editor' },
+  { name: 'ProFields', href: '/docs/components/pro-fields' },
+  { name: 'ProPagination', href: '/docs/components/pro-pagination' },
+  { name: 'ProOverlay', href: '/docs/components/pro-overlay' },
+  { name: 'ProForm', href: '/docs/components/pro-form' },
+  { name: 'ProTable', href: '/docs/components/pro-table' },
+  { name: 'CodeViewer', href: '/docs/components/code-viewer' },
+  { name: 'DiffViewer', href: '/docs/components/diff-viewer' },
+  { name: 'HtmlViewer', href: '/docs/components/html-viewer' },
+  { name: 'ImageViewer', href: '/docs/components/image-viewer' },
+  { name: 'MarkdownViewer', href: '/docs/components/markdown-viewer' },
+]
+
 export function DocsSidebar({
-  tree,
+  tree: _tree,
   ...props
 }: React.ComponentProps<typeof Sidebar> & { tree: typeof source.pageTree }) {
   const pathname = usePathname()
-  const componentsFolder = tree.children.find(
-    (node) => node.type === 'folder' && node.$id === 'components',
-  )
-  const components = componentsFolder ? getPagesFromFolder(componentsFolder, '') : []
 
   return (
     <Sidebar
@@ -78,17 +89,17 @@ export function DocsSidebar({
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="gap-0.5">
-              {components.map(({ name, url }) => (
-                <SidebarMenuItem key={url}>
+              {COMPONENTS.map(({ name, href }) => (
+                <SidebarMenuItem key={href}>
                   <SidebarMenuButton
                     asChild
-                    isActive={pathname === url || pathname.startsWith(`${url}/`)}
+                    isActive={pathname === href || pathname.startsWith(`${href}/`)}
                     className="relative h-7.5 w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
                   >
-                    <Link href={url}>
+                    <Link href={href}>
                       <span className="absolute inset-0 flex w-(--sidebar-menu-width) bg-transparent" />
                       {name}
-                      {PAGES_NEW.includes(url) && (
+                      {PAGES_NEW.includes(href) && (
                         <span className="flex size-2 rounded-full bg-blue-500" title="New" />
                       )}
                     </Link>
