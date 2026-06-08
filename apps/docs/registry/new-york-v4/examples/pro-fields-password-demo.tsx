@@ -1,6 +1,6 @@
 "use client"
 
-import { Password } from "@/registry/new-york-v4/pro/base/fields/password"
+import { Password } from "@/registry/new-york-v4/pro/base/fields/input"
 
 export default function ProFieldsPasswordDemo() {
   return (

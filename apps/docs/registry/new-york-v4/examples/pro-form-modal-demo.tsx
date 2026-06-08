@@ -2,44 +2,13 @@
 
 import { useState } from 'react'
 import { ProButton as Button } from '@/registry/new-york-v4/pro/base/button'
-import { ModalForm } from '@/registry/new-york-v4/pro/form/index'
+import { ModalForm } from '@/registry/new-york-v4/pro/form'
 
-const schema = {
-  type: 'object',
-  properties: {
-    name: {
-      type: 'string',
-      title: 'Name',
-      required: true,
-      'x-component-props': { placeholder: 'Full name' },
-    },
-    email: {
-      type: 'string',
-      title: 'Email',
-      required: true,
-      'x-validator': 'email',
-      'x-component-props': { placeholder: 'user@example.com' },
-    },
-    role: {
-      type: 'string',
-      title: 'Role',
-      required: true,
-      enum: [
-        { label: 'Admin', value: 'admin' },
-        { label: 'Developer', value: 'developer' },
-        { label: 'Viewer', value: 'viewer' },
-      ],
-      'x-component-props': {
-        placeholder: 'Select a role',
-      },
-    },
-    active: {
-      type: 'boolean',
-      title: 'Active',
-      default: true,
-    },
-  },
-}
+const roleOptions = [
+  { label: 'Admin', value: 'admin' },
+  { label: 'Developer', value: 'developer' },
+  { label: 'Viewer', value: 'viewer' },
+]
 
 export default function ProFormModalDemo() {
   const [result, setResult] = useState<Record<string, unknown> | null>(null)
@@ -50,10 +19,37 @@ export default function ProFormModalDemo() {
         trigger={<Button>New Member</Button>}
         title="Add Team Member"
         description="Fill in the details below to add a new team member."
-        submitter={{ submit: { text: "Add Member" } }}
-        schema={schema}
+        initialValues={{ active: true }}
+        schema={[
+          {
+            name: 'name',
+            label: 'Name',
+            required: true,
+            fieldProps: { placeholder: 'Full name' },
+          },
+          {
+            name: 'email',
+            label: 'Email',
+            valueType: 'email',
+            required: true,
+            fieldProps: { placeholder: 'user@example.com' },
+          },
+          {
+            name: 'role',
+            label: 'Role',
+            valueType: 'select',
+            required: true,
+            fieldProps: { placeholder: 'Select a role', options: roleOptions },
+          },
+          {
+            name: 'active',
+            label: 'Active',
+            valueType: 'switch',
+            extra: 'Enable this account immediately.',
+          },
+        ]}
         onFinish={async (values) => {
-          await new Promise((r) => setTimeout(r, 800))
+          await new Promise((resolve) => setTimeout(resolve, 800))
           setResult(values)
         }}
       />

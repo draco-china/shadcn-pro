@@ -1,110 +1,41 @@
 'use client'
 
-import { createForm } from '@formily/core'
-import { useMemo } from 'react'
-import { z } from 'zod'
-import { ProForm } from '@/registry/new-york-v4/pro/form/index'
+import { Input, Password } from '@/registry/new-york-v4/pro/base/fields/input'
+import { Select } from '@/registry/new-york-v4/pro/base/fields/select'
+import { FormItem, ProForm } from '@/registry/new-york-v4/pro/form'
 
-const schema = {
-  type: 'object',
-  properties: {
-    email: {
-      type: 'string',
-      title: 'Email',
-      required: true,
-      'x-component-props': {
-        placeholder: 'your@email.com',
-      },
-      'x-validator': z.string().email('Please enter a valid email address'),
-    },
-    password: {
-      type: 'string',
-      title: 'Password',
-      required: true,
-      'x-component': 'Password',
-      'x-component-props': {
-        placeholder: 'At least 8 characters',
-      },
-      'x-validator': z
-        .string()
-        .min(8, 'Password must be at least 8 characters')
-        .regex(/[A-Z]/, 'Password must include an uppercase letter'),
-    },
-    confirmPassword: {
-      type: 'string',
-      title: 'Confirm Password',
-      required: true,
-      'x-component': 'Password',
-      'x-component-props': {
-        placeholder: 'Re-enter password',
-      },
-      'x-validator': [
-        { required: true, message: 'Please confirm your password' },
-        {
-          validator: (
-            value: string,
-            rule: unknown,
-            ctx: { field: { query: (path: string) => { value: () => string } } },
-          ) => {
-            void rule
-            const pwd = ctx.field.query('password').value()
-            if (value !== pwd) return 'Passwords do not match'
-            return ''
-          },
-        },
-      ],
-    },
-    role: {
-      type: 'string',
-      title: 'Role',
-      required: true,
-      enum: [
-        { label: 'Admin', value: 'admin' },
-        { label: 'Editor', value: 'editor' },
-        { label: 'User', value: 'user' },
-      ],
-      'x-component-props': {
-        placeholder: 'Select a role',
-      },
-      'x-validator': [{ required: true, message: 'Please select a role' }],
-    },
-    agree: {
-      type: 'boolean',
-      title: 'Agree to Terms of Service',
-      required: true,
-      'x-component': 'Checkbox',
-      'x-validator': [
-        {
-          validator: (value: boolean) => (value ? '' : 'You must agree to the terms of service'),
-        },
-      ],
-    },
-  },
-}
+const roleOptions = [
+  { label: 'Admin', value: 'admin' },
+  { label: 'Editor', value: 'editor' },
+  { label: 'User', value: 'user' },
+]
 
 export default function ProFormValidationDemo() {
-  const form = useMemo(
-    () =>
-      createForm({
-        validateFirst: true,
-      }),
-    [],
-  )
-
   async function handleFinish(values: Record<string, unknown>) {
-    await new Promise((r) => setTimeout(r, 800))
+    await new Promise((resolve) => setTimeout(resolve, 800))
     alert(`Submitted successfully:\n${JSON.stringify(values, null, 2)}`)
   }
 
   return (
     <div className="w-full max-w-md p-6">
       <h2 className="mb-4 text-lg font-semibold">Create Account</h2>
-      <ProForm
-        form={form}
-        schema={schema}
-        onFinish={handleFinish}
-        submitter={{ submit: { text: "Register" }, reset: {} }}
-      />
+      <ProForm onFinish={handleFinish}>
+        <FormItem label="Email" required htmlFor="email">
+          <Input id="email" name="email" type="email" required placeholder="your@email.com" />
+        </FormItem>
+        <FormItem label="Password" required htmlFor="password">
+          <Password
+            id="password"
+            name="password"
+            required
+            minLength={8}
+            placeholder="At least 8 characters"
+          />
+        </FormItem>
+        <FormItem label="Role" required htmlFor="role">
+          <Select id="role" name="role" required placeholder="Select a role" options={roleOptions} />
+        </FormItem>
+      </ProForm>
     </div>
   )
 }

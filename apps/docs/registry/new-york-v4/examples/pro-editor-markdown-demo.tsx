@@ -1,9 +1,12 @@
 "use client"
 
-import { useState } from "react"
-import { ProEditor } from "@/registry/new-york-v4/pro/editor/index"
-import type { PreviewProps } from "@/registry/new-york-v4/pro/editor/index"
+import { type ComponentProps, useState } from "react"
+import { ProEditor } from "@/registry/new-york-v4/pro/editor"
 import { MarkdownViewer } from "@/registry/new-york-v4/pro/viewer/markdown"
+
+type PreviewProps = Parameters<
+  NonNullable<NonNullable<ComponentProps<typeof ProEditor>["preview"]>["component"]>
+>[0]
 
 const INITIAL = `# Getting Started
 

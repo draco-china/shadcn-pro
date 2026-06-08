@@ -1,45 +1,20 @@
 "use client"
 
-import { createForm } from "@formily/core"
-import { Field, FormProvider } from "@formily/react"
-
-import { FormItem } from "@/registry/new-york-v4/pro/form/form-item"
-import { FormilyMoney } from "@/registry/new-york-v4/pro/form/formily-fields"
-
-const form = createForm()
+import { FormItem } from "@/registry/new-york-v4/pro/form"
+import { Money } from "@/registry/new-york-v4/pro/base/fields/input"
 
 export default function ProFieldsMoneyDemo() {
   return (
-    <FormProvider form={form}>
-      <div className="w-full max-w-sm space-y-6 p-4">
-        <Field
-          name="price"
-          title="Price (USD)"
-          decorator={[FormItem]}
-          component={[
-            FormilyMoney,
-            { currency: "$", precision: 2, placeholder: "0.00" },
-          ]}
-        />
-        <Field
-          name="budget"
-          title="Budget (EUR)"
-          decorator={[FormItem]}
-          component={[
-            FormilyMoney,
-            { currency: "€", precision: 2, placeholder: "0.00" },
-          ]}
-        />
-        <Field
-          name="amount"
-          title="Amount (JPY)"
-          decorator={[FormItem]}
-          component={[
-            FormilyMoney,
-            { currency: "¥", precision: 0, placeholder: "0" },
-          ]}
-        />
-      </div>
-    </FormProvider>
+    <div className="w-full max-w-sm space-y-6 p-4">
+      <FormItem label="Price (USD)">
+        <Money name="price" placeholder="0.00" />
+      </FormItem>
+      <FormItem label="Budget (EUR)">
+        <Money name="budget" prefix={<span className="px-3">€</span>} placeholder="0.00" />
+      </FormItem>
+      <FormItem label="Amount (JPY)">
+        <Money name="amount" prefix={<span className="px-3">¥</span>} placeholder="0" />
+      </FormItem>
+    </div>
   )
 }

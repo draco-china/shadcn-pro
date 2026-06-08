@@ -1,13 +1,15 @@
 "use client"
 
-import { useState } from 'react'
+import { type ComponentProps, useState } from 'react'
 import { useTheme } from 'next-themes'
 import { Focus, RotateCcw } from 'lucide-react'
-import { ProEditor } from "@/registry/new-york-v4/pro/editor/index"
-import type {
-  EditorViewMode,
-  PreviewProps,
-} from "@/registry/new-york-v4/pro/editor/index"
+import { ProButton } from "@/registry/new-york-v4/pro/base/button"
+import { ProEditor } from "@/registry/new-york-v4/pro/editor"
+
+type ViewMode = NonNullable<NonNullable<ComponentProps<typeof ProEditor>["preview"]>["mode"]>
+type PreviewProps = Parameters<
+  NonNullable<NonNullable<ComponentProps<typeof ProEditor>["preview"]>["component"]>
+>[0]
 
 const INITIAL_CODE = `import { useState } from "react"
 
@@ -39,7 +41,7 @@ const LANGUAGE_OPTIONS = [
   { label: "JSON", value: "json" },
 ]
 
-const VIEW_MODE_OPTIONS: { label: string; value: EditorViewMode }[] = [
+const VIEW_MODE_OPTIONS: { label: string; value: ViewMode }[] = [
   { label: "Edit", value: "edit" },
   { label: "Preview", value: "preview" },
   { label: "Split", value: "split" },
@@ -58,7 +60,7 @@ export default function ProEditorDemo() {
   const [language, setLanguage] = useState("tsx")
   const { resolvedTheme } = useTheme()
   const theme = resolvedTheme === 'light' ? 'light' : 'dark'
-  const [mode, setMode] = useState<EditorViewMode>("split")
+  const [mode, setMode] = useState<ViewMode>("split")
 
   return (
     <div className="w-full space-y-3 p-4">
@@ -77,7 +79,7 @@ export default function ProEditorDemo() {
         </select>
         <select
           value={mode}
-          onChange={(event) => setMode(event.target.value as EditorViewMode)}
+          onChange={(event) => setMode(event.target.value as ViewMode)}
           className="h-9 rounded-md border border-input bg-background px-3 text-sm shadow-xs"
           aria-label="Editor view mode"
         >
@@ -93,33 +95,28 @@ export default function ProEditorDemo() {
         theme={theme}
         value={value}
         onChange={setValue}
-        toolbar={{
-          title: ({ language }) => (
-            <span className="flex items-center gap-2">
-              <span>Example editor</span>
-              <span className="text-muted-foreground uppercase">{language}</span>
-            </span>
-          ),
-          actions: [
-            {
-              key: "focus",
-              icon: <Focus size={14} />,
-              tooltip: "Focus editor",
-              "aria-label": "Focus editor",
-              position: "before",
-              size: "icon-xs",
-              variant: "ghost",
-              onClick: ({ editor }) => editor?.focus(),
-            },
-            {
-              key: "reset",
-              label: "Reset",
-              icon: <RotateCcw size={14} />,
-              position: "after",
-              onClick: () => setValue(INITIAL_CODE),
-            },
-          ],
-        }}
+        toolbarTitle={({ language }) => (
+          <span className="flex items-center gap-2">
+            <span>Example editor</span>
+            <span className="text-muted-foreground uppercase">{language}</span>
+          </span>
+        )}
+        toolbar={({ editor }) => (
+          <>
+            <ProButton
+              tooltip="Focus editor"
+              size="icon-xs"
+              variant="ghost"
+              onClick={() => editor?.focus()}
+            >
+              <Focus size={14} />
+            </ProButton>
+            <ProButton onClick={() => setValue(INITIAL_CODE)}>
+              <RotateCcw size={14} />
+              Reset
+            </ProButton>
+          </>
+        )}
         preview={{
           component: PlainPreview,
           mode,

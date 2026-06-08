@@ -2,10 +2,12 @@
 
 import { useState } from "react"
 
-import {
-  DigitRange,
-  type DigitRangeValue,
-} from "@/registry/new-york-v4/pro/base/fields/digit-range"
+import { DigitRange } from "@/registry/new-york-v4/pro/base/fields/input"
+
+type DigitRangeValue = {
+  min?: number
+  max?: number
+}
 
 export default function ProFieldsDigitRangeDemo() {
   const [value, setValue] = useState<DigitRangeValue | undefined>({
@@ -15,7 +17,7 @@ export default function ProFieldsDigitRangeDemo() {
 
   return (
     <div className="w-full max-w-sm p-4">
-      <DigitRange value={value} onChange={setValue} allowClear />
+      <DigitRange value={value} onChange={setValue} />
     </div>
   )
 }

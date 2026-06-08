@@ -1,14 +1,13 @@
 "use client"
 
-import { createForm } from "@formily/core"
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import { Badge } from "@/registry/new-york-v4/ui/badge"
 import { Button } from "@/registry/new-york-v4/ui/button"
-import { ProDescriptions } from "@/registry/new-york-v4/pro/descriptions/index"
-import {
-  ProForm,
-  SchemaField,
-} from "@/registry/new-york-v4/pro/form/index"
+import { ProButton } from "@/registry/new-york-v4/pro/base/button"
+import { Input } from "@/registry/new-york-v4/pro/base/fields/input"
+import { Select } from "@/registry/new-york-v4/pro/base/fields/select"
+import { ProDescriptions } from "@/registry/new-york-v4/pro/descriptions"
+import { FormItem, ProForm } from "@/registry/new-york-v4/pro/form"
 
 interface UserData {
   name: string
@@ -30,6 +29,18 @@ const DEFAULT_DATA: UserData = {
   bio: "Full-stack engineer focused on frontend architecture and developer experience.",
 }
 
+const roleOptions = [
+  { label: "Admin", value: "admin" },
+  { label: "Developer", value: "developer" },
+  { label: "Viewer", value: "viewer" },
+]
+
+const statusOptions = [
+  { label: "Active", value: "active" },
+  { label: "Inactive", value: "inactive" },
+  { label: "Suspended", value: "suspended" },
+]
+
 const ROLE_LABELS: Record<string, string> = {
   admin: "Admin",
   developer: "Developer",
@@ -46,16 +57,9 @@ export default function ProDescriptionsDemo() {
   const [data, setData] = useState<UserData>(DEFAULT_DATA)
   const [mode, setMode] = useState<"view" | "edit">("view")
 
-  const form = useMemo(
-    () => createForm({ initialValues: { ...data } }),
-    // recreate form with latest data each time we enter edit mode
-    // biome-ignore lint/correctness/useExhaustiveDependencies: intentional — recreate on mode change
-    [mode]
-  )
-
   async function handleFinish(values: Record<string, unknown>) {
-    await new Promise((r) => setTimeout(r, 600))
-    setData(values as unknown as UserData)
+    await new Promise((resolve) => setTimeout(resolve, 600))
+    setData((current) => ({ ...current, ...(values as Partial<UserData>) }))
     setMode("view")
   }
 
@@ -64,9 +68,7 @@ export default function ProDescriptionsDemo() {
     { label: "Email", value: data.email },
     {
       label: "Role",
-      value: (
-        <Badge variant="outline">{ROLE_LABELS[data.role] ?? data.role}</Badge>
-      ),
+      value: <Badge variant="outline">{ROLE_LABELS[data.role] ?? data.role}</Badge>,
     },
     {
       label: "Status",
@@ -87,9 +89,7 @@ export default function ProDescriptionsDemo() {
         <div>
           <h3 className="text-base font-semibold">User Profile</h3>
           <p className="text-sm text-muted-foreground">
-            {mode === "view"
-              ? "View user details."
-              : "Update user information and save changes."}
+            {mode === "view" ? "View user details." : "Update user information and save changes."}
           </p>
         </div>
         {mode === "view" && (
@@ -103,69 +103,59 @@ export default function ProDescriptionsDemo() {
         <ProDescriptions items={items} columns={2} bordered />
       ) : (
         <ProForm
-          form={form}
           onFinish={handleFinish}
-          submitter={{
-            submit: { text: "Save" },
-            cancel: { text: "Cancel", onClick: () => setMode("view") },
-          }}
+          submitter={({ submitting }) => (
+            <>
+              <ProButton
+                type="button"
+                variant="outline"
+                disabled={submitting}
+                onClick={() => setMode("view")}
+              >
+                Cancel
+              </ProButton>
+              <ProButton type="submit" loading={submitting} disabled={submitting}>
+                {submitting ? "Submitting..." : "Submit"}
+              </ProButton>
+            </>
+          )}
         >
-          <SchemaField>
-            <SchemaField.String
-              name="name"
-              title="Name"
-              required
-              x-decorator="FormItem"
-              x-component="Input"
-              x-component-props={{ placeholder: "Full name" }}
-            />
-            <SchemaField.String
+          <FormItem label="Name" required htmlFor="name">
+            <Input id="name" name="name" required defaultValue={data.name} placeholder="Full name" />
+          </FormItem>
+          <FormItem label="Email" required htmlFor="email">
+            <Input
+              id="email"
               name="email"
-              title="Email"
+              type="email"
               required
-              x-validator="email"
-              x-decorator="FormItem"
-              x-component="Input"
-              x-component-props={{ placeholder: "user@example.com" }}
+              defaultValue={data.email}
+              placeholder="user@example.com"
             />
-            <SchemaField.String
+          </FormItem>
+          <FormItem label="Role" required htmlFor="role">
+            <Select
+              id="role"
               name="role"
-              title="Role"
               required
-              x-decorator="FormItem"
-              x-component="Select"
-              x-component-props={{
-                placeholder: "Select role",
-                options: [
-                  { label: "Admin", value: "admin" },
-                  { label: "Developer", value: "developer" },
-                  { label: "Viewer", value: "viewer" },
-                ],
-              }}
+              defaultValue={data.role}
+              placeholder="Select role"
+              options={roleOptions}
             />
-            <SchemaField.String
+          </FormItem>
+          <FormItem label="Status" required htmlFor="status">
+            <Select
+              id="status"
               name="status"
-              title="Status"
               required
-              x-decorator="FormItem"
-              x-component="Select"
-              x-component-props={{
-                placeholder: "Select status",
-                options: [
-                  { label: "Active", value: "active" },
-                  { label: "Inactive", value: "inactive" },
-                  { label: "Suspended", value: "suspended" },
-                ],
-              }}
+              defaultValue={data.status}
+              placeholder="Select status"
+              options={statusOptions}
             />
-            <SchemaField.String
-              name="bio"
-              title="Bio"
-              x-decorator="FormItem"
-              x-component="Input"
-              x-component-props={{ placeholder: "Short bio" }}
-            />
-          </SchemaField>
+          </FormItem>
+          <FormItem label="Bio" htmlFor="bio">
+            <Input id="bio" name="bio" defaultValue={data.bio} placeholder="Short bio" />
+          </FormItem>
         </ProForm>
       )}
     </div>

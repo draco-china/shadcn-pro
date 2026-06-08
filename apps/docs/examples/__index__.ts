@@ -11,15 +11,20 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       filePath: 'registry/new-york-v4/examples/pro-base-demo.tsx',
       component: lazy(() => import('@/registry/new-york-v4/examples/pro-base-demo')),
     },
+    'pro-pagination-demo': {
+      name: 'pro-pagination-demo',
+      filePath: 'registry/new-york-v4/examples/pro-pagination-demo.tsx',
+      component: lazy(() => import('@/registry/new-york-v4/examples/pro-pagination-demo')),
+    },
+    'pro-overlay-demo': {
+      name: 'pro-overlay-demo',
+      filePath: 'registry/new-york-v4/examples/pro-overlay-demo.tsx',
+      component: lazy(() => import('@/registry/new-york-v4/examples/pro-overlay-demo')),
+    },
     'pro-fields-demo': {
       name: 'pro-fields-demo',
       filePath: 'registry/new-york-v4/examples/pro-fields-demo.tsx',
       component: lazy(() => import('@/registry/new-york-v4/examples/pro-fields-demo')),
-    },
-    'pro-fields-docs-demo': {
-      name: 'pro-fields-docs-demo',
-      filePath: 'registry/new-york-v4/examples/pro-fields-docs-demo.tsx',
-      component: lazy(() => import('@/registry/new-york-v4/examples/pro-fields-docs-demo')),
     },
     'pro-form-demo': {
       name: 'pro-form-demo',
@@ -36,10 +41,10 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       filePath: 'registry/new-york-v4/examples/pro-form-drawer-demo.tsx',
       component: lazy(() => import('@/registry/new-york-v4/examples/pro-form-drawer-demo')),
     },
-    'pro-form-docs-demo': {
-      name: 'pro-form-docs-demo',
-      filePath: 'registry/new-york-v4/examples/pro-form-docs-demo.tsx',
-      component: lazy(() => import('@/registry/new-york-v4/examples/pro-form-docs-demo')),
+    'pro-form-schema-demo': {
+      name: 'pro-form-schema-demo',
+      filePath: 'registry/new-york-v4/examples/pro-form-schema-demo.tsx',
+      component: lazy(() => import('@/registry/new-york-v4/examples/pro-form-schema-demo')),
     },
     'pro-table-demo': {
       name: 'pro-table-demo',
@@ -148,21 +153,6 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       filePath: 'registry/new-york-v4/examples/json-viewer-demo.tsx',
       component: lazy(() => import('@/registry/new-york-v4/examples/json-viewer-demo')),
     },
-    'pro-input-demo': {
-      name: 'pro-input-demo',
-      filePath: 'registry/new-york-v4/examples/pro-input-demo.tsx',
-      component: lazy(() => import('@/registry/new-york-v4/examples/pro-input-demo')),
-    },
-    'pro-input-docs-demo': {
-      name: 'pro-input-docs-demo',
-      filePath: 'registry/new-york-v4/examples/pro-input-docs-demo.tsx',
-      component: lazy(() => import('@/registry/new-york-v4/examples/pro-input-docs-demo')),
-    },
-    'pro-editor-codemirror-demo': {
-      name: 'pro-editor-codemirror-demo',
-      filePath: 'registry/new-york-v4/examples/pro-editor-codemirror-demo.tsx',
-      component: lazy(() => import('@/registry/new-york-v4/examples/pro-editor-codemirror-demo')),
-    },
     'pro-editor-monaco-demo': {
       name: 'pro-editor-monaco-demo',
       filePath: 'registry/new-york-v4/examples/pro-editor-monaco-demo.tsx',
@@ -172,11 +162,6 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       name: 'pro-editor-markdown-demo',
       filePath: 'registry/new-york-v4/examples/pro-editor-markdown-demo.tsx',
       component: lazy(() => import('@/registry/new-york-v4/examples/pro-editor-markdown-demo')),
-    },
-    'pro-fields-input-demo': {
-      name: 'pro-fields-input-demo',
-      filePath: 'registry/new-york-v4/examples/pro-fields-input-demo.tsx',
-      component: lazy(() => import('@/registry/new-york-v4/examples/pro-fields-input-demo')),
     },
     'pro-fields-password-demo': {
       name: 'pro-fields-password-demo',
@@ -257,13 +242,6 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       filePath: 'registry/new-york-v4/examples/pro-fields-segmented-demo.tsx',
       component: lazy(() => import('@/registry/new-york-v4/examples/pro-fields-segmented-demo')),
     },
-    'pro-fields-faceted-filter-demo': {
-      name: 'pro-fields-faceted-filter-demo',
-      filePath: 'registry/new-york-v4/examples/pro-fields-faceted-filter-demo.tsx',
-      component: lazy(
-        () => import('@/registry/new-york-v4/examples/pro-fields-faceted-filter-demo'),
-      ),
-    },
     'pro-fields-cascader-demo': {
       name: 'pro-fields-cascader-demo',
       filePath: 'registry/new-york-v4/examples/pro-fields-cascader-demo.tsx',
@@ -293,11 +271,6 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       name: 'pro-fields-array-field-demo',
       filePath: 'registry/new-york-v4/examples/pro-fields-array-field-demo.tsx',
       component: lazy(() => import('@/registry/new-york-v4/examples/pro-fields-array-field-demo')),
-    },
-    'pro-fields-object-field-demo': {
-      name: 'pro-fields-object-field-demo',
-      filePath: 'registry/new-york-v4/examples/pro-fields-object-field-demo.tsx',
-      component: lazy(() => import('@/registry/new-york-v4/examples/pro-fields-object-field-demo')),
     },
   },
 }

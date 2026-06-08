@@ -11,7 +11,7 @@ export default function ProFieldsDatePickerDemo() {
 
   return (
     <div className="w-full max-w-sm p-4">
-      <DatePicker value={value} onChange={setValue} allowClear />
+      <DatePicker value={value} onChange={setValue} />
     </div>
   )
 }

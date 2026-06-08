@@ -18,10 +18,9 @@ Copy into your project. Own it completely. No shadcn-pro runtime dependency, no 
 
 | Component | Stack | Description |
 | --- | --- | --- |
-| `pro-form` | Formily + shadcn/ui | Schema-driven forms with validation, linkage & dynamic fields |
+| `pro-form` | shadcn/ui | Composable form layout, actions, ModalForm & DrawerForm |
 | `pro-table` | TanStack Table + shadcn/ui | Headless data table with search, filters, sort & pagination |
-| `pro-fields` | shadcn/ui | Standalone field primitives (Input, Select, DatePicker, Upload, Captcha, FacetedFilter…) |
-| `pro-input` | shadcn/ui | Enhanced input with prefix, suffix, clear, and password helpers |
+| `pro-fields` | shadcn/ui | Standalone field primitives (Input, Select, DatePicker, Upload, Captcha, TreeSelect…) |
 | `pro-editor` | Monaco | Code and markdown editor with controlled language, theme, and view mode |
 | `pro-descriptions` | shadcn/ui | Key-value description panels |
 | `image-viewer` | shadcn/ui | Full-screen image viewer with zoom, rotate & multi-image navigation |
@@ -46,35 +45,24 @@ npx @draco-china/shadcn-pro@latest add pro-form
 ```
 
 ```tsx
-import { ProForm, SchemaField, createForm } from '@/components/pro/pro-form'
+import { Input } from '@/components/pro/base/fields/input'
+import { Select } from '@/components/pro/base/fields/select'
+import { FormItem, ProForm } from '@/components/pro/form'
 
-const form = createForm()
+const roleOptions = [
+  { label: 'Admin', value: 'admin' },
+  { label: 'User', value: 'user' },
+]
 
 export default function Page() {
   return (
-    <ProForm form={form} onFinish={console.log}>
-      <SchemaField
-        schema={{
-          type: 'object',
-          properties: {
-            username: {
-              type: 'string',
-              title: 'Username',
-              required: true,
-              'x-component': 'Input',
-            },
-            role: {
-              type: 'string',
-              title: 'Role',
-              'x-component': 'Select',
-              enum: [
-                { label: 'Admin', value: 'admin' },
-                { label: 'User', value: 'user' },
-              ],
-            },
-          },
-        }}
-      />
+    <ProForm onFinish={console.log}>
+      <FormItem label="Username" required htmlFor="username">
+        <Input id="username" name="username" required />
+      </FormItem>
+      <FormItem label="Role" htmlFor="role">
+        <Select id="role" name="role" options={roleOptions} />
+      </FormItem>
     </ProForm>
   )
 }
@@ -86,7 +74,6 @@ export default function Page() {
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![Formily](https://img.shields.io/badge/Formily-6E3FF3?style=for-the-badge&logoColor=white)](https://formilyjs.org)
 [![TanStack Table](https://img.shields.io/badge/TanStack%20Table-FF4154?style=for-the-badge&logo=reacttable&logoColor=white)](https://tanstack.com/table)
 [![Radix UI](https://img.shields.io/badge/Radix%20UI-161618?style=for-the-badge&logo=radixui&logoColor=white)](https://www.radix-ui.com)
 [![Turborepo](https://img.shields.io/badge/Turborepo-EF4444?style=for-the-badge&logo=turborepo&logoColor=white)](https://turbo.build)
@@ -95,7 +82,7 @@ export default function Page() {
 ## 💡 Philosophy
 
 - **Copy, don't install** — components live in your codebase, styled with your Tailwind tokens
-- **Schema-driven** — define complex forms and tables as plain JSON/TS objects
+- **Composable** — build forms and tables from typed primitives that stay easy to customize
 - **shadcn/ui native** — built on Radix primitives, same design language
 - **Zero opinions on state** — bring your own server state (SWR, React Query, etc.)
 

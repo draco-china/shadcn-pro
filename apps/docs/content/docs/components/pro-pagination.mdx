@@ -1,0 +1,62 @@
+---
+title: ProPagination
+description: Reusable pagination control for table and non-table views.
+---
+
+<ComponentPreview name="pro-pagination-demo" previewClassName="min-h-[180px] p-6" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx @draco-china/shadcn-pro@latest add pro-pagination
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+bun add lucide-react radix-ui
+```
+
+<Step>Install or copy `pro-base`.</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="pro-pagination" title="components/pro/pagination/index.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ProPagination } from "@/components/pro/pagination"
+
+<ProPagination
+  current={page}
+  pageCount={pageCount}
+  pageSize={pageSize}
+  total={total}
+  onPageChange={setPage}
+  onPageSizeChange={setPageSize}
+/>
+```

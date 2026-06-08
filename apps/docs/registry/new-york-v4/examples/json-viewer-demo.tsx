@@ -35,7 +35,6 @@ export default function JsonViewerDemo() {
         code={JSON.stringify(SAMPLE_DATA, null, 2)}
         lang="json"
         title="package.json"
-        showLineNumbers
       />
     </div>
   )

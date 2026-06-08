@@ -38,18 +38,6 @@ bun add diff shiki
 
 <ComponentSource name="diff-viewer" title="components/pro/viewer/diff/index.tsx" />
 
-Manual installs also need the sibling/shared files used by the entry component:
-
-- `components/pro/viewer/diff/classes.ts`
-- `components/pro/viewer/diff/content.tsx`
-- `components/pro/viewer/diff/header.tsx`
-- `components/pro/viewer/diff/line-cell.tsx`
-- `components/pro/viewer/diff/split-pane.tsx`
-- `components/pro/viewer/diff/table.tsx`
-- `components/pro/viewer/diff/use-diff-highlight.ts`
-- `components/pro/viewer/diff/utils.ts`
-- `components/pro/viewer/shared/syntax.ts`
-
 <Step>Update the import paths to match your project setup.</Step>
 
 </Steps>
@@ -89,5 +77,4 @@ export default function Example() {
 | `theme` | `"light" \| "dark"` | `"dark"` | Shared One syntax theme used by Shiki. |
 | `oldTitle` | `string` | `"Before"` | Label shown above the original code panel. |
 | `newTitle` | `string` | `"After"` | Label shown above the modified code panel. |
-| `defaultView` | `"split" \| "unified"` | `"split"` | Initial view mode. |
 | `className` | `string` | — | Additional CSS class for the root element. |

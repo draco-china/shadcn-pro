@@ -32,10 +32,6 @@ npx @draco-china/shadcn-pro@latest add html-viewer
 
 <ComponentSource name="html-viewer" title="components/pro/viewer/html/index.tsx" />
 
-Manual installs also need the sibling files used by the entry component:
-
-- `components/pro/viewer/html/classes.ts`
-
 <Step>Update the import paths to match your project setup.</Step>
 
 </Steps>
@@ -67,5 +63,4 @@ export default function Example() {
 |------|------|---------|-------------|
 | `content` | `string` | — | Raw HTML string to render inside the sandboxed iframe. |
 | `sandbox` | `IframeHTMLAttributes<HTMLIFrameElement>["sandbox"]` | `"allow-scripts"` | Sandbox policy for the iframe. Pass a stricter value when rendering untrusted HTML. |
-| `title` | `string` | `"HTML preview"` | Accessible title for the iframe. |
 | `className` | `string` | `undefined` | Additional CSS classes applied to the iframe element. |

@@ -3,41 +3,33 @@
 import { type ReactNode, useState } from 'react'
 
 import { ArrayField } from '@/registry/new-york-v4/pro/base/fields/array-field'
-import { Captcha } from '@/registry/new-york-v4/pro/base/fields/captcha'
-import { Cascader } from '@/registry/new-york-v4/pro/base/fields/cascader'
-import { Checkbox } from '@/registry/new-york-v4/pro/base/fields/checkbox'
-import { DatePicker } from '@/registry/new-york-v4/pro/base/fields/date-picker'
-import { DateRangePicker } from '@/registry/new-york-v4/pro/base/fields/date-range-picker'
-import { DateTimePicker } from '@/registry/new-york-v4/pro/base/fields/date-time-picker'
-import { Digit } from '@/registry/new-york-v4/pro/base/fields/digit'
+import { Checkbox, Switch } from '@/registry/new-york-v4/pro/base/fields/checkbox'
+import { DatePicker, DateRangePicker } from '@/registry/new-york-v4/pro/base/fields/date-picker'
+import { DateTimePicker, TimePicker } from '@/registry/new-york-v4/pro/base/fields/date-time-picker'
 import {
+  Captcha,
+  Digit,
   DigitRange,
-  type DigitRangeValue,
-} from '@/registry/new-york-v4/pro/base/fields/digit-range'
-import { FacetedFilter } from '@/registry/new-york-v4/pro/base/filter/faceted-filter'
-import { Input } from '@/registry/new-york-v4/pro/base/fields/input'
-import { Money } from '@/registry/new-york-v4/pro/base/fields/money'
-import { ObjectField } from '@/registry/new-york-v4/pro/base/fields/object-field'
-import { Password } from '@/registry/new-york-v4/pro/base/fields/password'
-import { Radio } from '@/registry/new-york-v4/pro/base/fields/radio'
-import { Rate } from '@/registry/new-york-v4/pro/base/fields/rate'
-import { Segmented } from '@/registry/new-york-v4/pro/base/fields/segmented'
-import { Select } from '@/registry/new-york-v4/pro/base/fields/select'
-import { Slider } from '@/registry/new-york-v4/pro/base/fields/slider'
-import { Switch } from '@/registry/new-york-v4/pro/base/fields/switch'
-import { Textarea } from '@/registry/new-york-v4/pro/base/fields/textarea'
-import { TimePicker } from '@/registry/new-york-v4/pro/base/fields/time-picker'
-import { TreeSelect } from '@/registry/new-york-v4/pro/base/fields/tree-select'
-import { Upload } from '@/registry/new-york-v4/pro/base/fields/upload'
-import { ProLabel as Label } from '@/registry/new-york-v4/pro/base/label'
-import { ProSeparator as Separator } from '@/registry/new-york-v4/pro/base/separator'
+  Input,
+  Money,
+  Password,
+  Slider,
+  Textarea,
+} from '@/registry/new-york-v4/pro/base/fields/input'
+import { Radio, Rate, Segmented } from '@/registry/new-york-v4/pro/base/fields/radio'
+import { Cascader, Select, TreeSelect } from '@/registry/new-york-v4/pro/base/fields/select'
+import {
+  Upload,
+  UploadFileList,
+  UploadTrigger,
+} from '@/registry/new-york-v4/pro/base/fields/upload'
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="space-y-4">
       <div>
         <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">{title}</h3>
-        <Separator className="mt-2" />
+        <div role="separator" className="mt-2 h-px w-full bg-border" />
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">{children}</div>
     </div>
@@ -47,7 +39,9 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="space-y-1.5">
-      <Label className="text-xs text-muted-foreground">{label}</Label>
+      <label className="text-xs leading-none font-medium text-muted-foreground select-none">
+        {label}
+      </label>
       {children}
     </div>
   )
@@ -98,12 +92,6 @@ const statusOptions = [
   { label: 'Done', value: 'done' },
 ]
 
-const statusFacets = new Map([
-  ['backlog', 12],
-  ['in-progress', 8],
-  ['done', 24],
-])
-
 export default function ProFieldsDemo() {
   const [date, setDate] = useState<Date>()
   const [dateTime, setDateTime] = useState<Date>()
@@ -112,7 +100,7 @@ export default function ProFieldsDemo() {
   const [rate, setRate] = useState(3)
   const [money, setMoney] = useState<number>()
   const [digit, setDigit] = useState<number>()
-  const [digitRange, setDigitRange] = useState<DigitRangeValue>()
+  const [digitRange, setDigitRange] = useState<{ min?: number; max?: number }>()
   const [statusFilter, setStatusFilter] = useState<string[]>(['in-progress'])
   const [contacts, setContacts] = useState([{ name: 'Alice', email: 'alice@example.com' }])
 
@@ -124,11 +112,7 @@ export default function ProFieldsDemo() {
         <Field label="Password"><Password placeholder="Enter password" /></Field>
         <Field label="Textarea"><Textarea placeholder="Enter multi-line text" rows={3} /></Field>
         <Field label="Captcha">
-          <Captcha
-            placeholder="Enter code"
-            buttonText="Send code"
-            onSend={() => {}}
-          />
+          <Captcha placeholder="Enter code" onSend={() => {}} />
         </Field>
       </Section>
 
@@ -141,7 +125,12 @@ export default function ProFieldsDemo() {
           <DigitRange value={digitRange} onChange={setDigitRange} />
         </Field>
         <Field label="Money">
-          <Money value={money} onChange={setMoney} placeholder="0.00" currency="USD" />
+          <Money
+            value={money}
+            onChange={setMoney}
+            placeholder="0.00"
+            prefix={<span className="px-3">USD</span>}
+          />
         </Field>
         <Field label="Slider">
           <div className="pt-2">
@@ -150,7 +139,7 @@ export default function ProFieldsDemo() {
           </div>
         </Field>
         <Field label="Rate">
-          <Rate value={rate} onChange={setRate} count={5} />
+          <Rate value={rate} onChange={setRate} />
         </Field>
       </Section>
 
@@ -191,12 +180,14 @@ export default function ProFieldsDemo() {
             defaultValue="week"
           />
         </Field>
-        <Field label="Faceted Filter">
-          <FacetedFilter
+        <Field label="Multi Select">
+          <Select
             placeholder="Status"
+            multiple
+            searchable
+            allowClear
             value={statusFilter}
             options={statusOptions}
-            facets={statusFacets}
             onChange={(nextValue) => {
               setStatusFilter(Array.isArray(nextValue) ? nextValue : nextValue ? [nextValue] : [])
             }}
@@ -230,7 +221,10 @@ export default function ProFieldsDemo() {
         </Field>
         <div className="sm:col-span-2">
           <Field label="Upload">
-            <Upload accept="image/*" maxCount={3} />
+            <Upload accept="image/*" maxCount={3}>
+              <UploadTrigger />
+              <UploadFileList />
+            </Upload>
           </Field>
         </div>
       </Section>
@@ -239,15 +233,15 @@ export default function ProFieldsDemo() {
       <div className="space-y-4">
         <div>
           <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Structural</h3>
-          <Separator className="mt-2" />
+          <div role="separator" className="mt-2 h-px w-full bg-border" />
         </div>
 
-        <ObjectField
-          title="Object Field"
-          description="Group related fields into a collapsible section."
-          variant="separated"
-          collapsible
-        >
+        <section className="space-y-4">
+          <div className="space-y-1">
+            <h3 className="text-sm font-medium leading-none">Field Group</h3>
+            <p className="text-xs text-muted-foreground">Compose related fields with regular layout.</p>
+          </div>
+          <div role="separator" className="h-px w-full bg-border" />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Field label="First Name"><Input placeholder="First name" /></Field>
             <Field label="Last Name"><Input placeholder="Last name" /></Field>
@@ -262,18 +256,20 @@ export default function ProFieldsDemo() {
               />
             </Field>
           </div>
-        </ObjectField>
+        </section>
 
-        <ObjectField
-          title="Array Field"
-          description="Drag to reorder. Add or remove items dynamically."
-          variant="bordered"
-        >
+        <section className="space-y-4 border-l-2 border-border pl-4">
+          <div className="space-y-1">
+            <h3 className="text-sm font-medium leading-none">Array Field</h3>
+            <p className="text-xs text-muted-foreground">
+              Drag to reorder. Add or remove items dynamically.
+            </p>
+          </div>
+          <div role="separator" className="h-px w-full bg-border" />
           <ArrayField<{ name: string; email: string }>
             value={contacts}
             onChange={setContacts}
             newItem={() => ({ name: '', email: '' })}
-            addText="Add contact"
             min={1}
             renderItem={(item, _index, { update }) => (
               <div className="grid grid-cols-2 gap-2">
@@ -290,7 +286,7 @@ export default function ProFieldsDemo() {
               </div>
             )}
           />
-        </ObjectField>
+        </section>
       </div>
     </div>
   )

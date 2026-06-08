@@ -42,12 +42,7 @@ export default function CodeViewerDemo() {
           Read-only syntax-highlighted code viewer with copy, line numbers, and multi-language theme support.
         </p>
       </div>
-      <CodeViewer
-        code={SAMPLE_CODE}
-        lang="typescript"
-        title="useTodos.ts"
-        showLineNumbers
-      />
+      <CodeViewer code={SAMPLE_CODE} lang="typescript" title="useTodos.ts" />
     </div>
   )
 }

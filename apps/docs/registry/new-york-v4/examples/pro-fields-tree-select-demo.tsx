@@ -1,69 +1,36 @@
 "use client"
 
-import { createForm } from "@formily/core"
-import { Field, FormProvider } from "@formily/react"
+import { FormItem } from "@/registry/new-york-v4/pro/form"
+import { TreeSelect } from "@/registry/new-york-v4/pro/base/fields/select"
 
-import { FormItem } from "@/registry/new-york-v4/pro/form/form-item"
-import { FormilyTreeSelect } from "@/registry/new-york-v4/pro/form/formily-fields"
-
-const deptOptions = [
+const options = [
   {
     label: "Engineering",
     value: "eng",
     children: [
-      { label: "Frontend", value: "frontend" },
-      { label: "Backend", value: "backend" },
-      { label: "DevOps", value: "devops" },
+      { label: "Frontend", value: "fe" },
+      { label: "Backend", value: "be" },
     ],
   },
   {
-    label: "Design",
-    value: "design",
+    label: "Product",
+    value: "product",
     children: [
-      { label: "UI/UX", value: "uiux" },
-      { label: "Brand", value: "brand" },
+      { label: "Design", value: "design" },
+      { label: "Research", value: "research" },
     ],
-  },
-  {
-    label: "Marketing",
-    value: "marketing",
   },
 ]
 
-const form = createForm()
-
 export default function ProFieldsTreeSelectDemo() {
   return (
-    <FormProvider form={form}>
-      <div className="w-full max-w-sm space-y-6 p-4">
-        <Field
-          name="department"
-          title="Department (single)"
-          decorator={[FormItem]}
-          component={[
-            FormilyTreeSelect,
-            {
-              options: deptOptions,
-              placeholder: "Select department",
-              allowClear: true,
-            },
-          ]}
-        />
-        <Field
-          name="teams"
-          title="Teams (multi-select)"
-          decorator={[FormItem]}
-          component={[
-            FormilyTreeSelect,
-            {
-              options: deptOptions,
-              placeholder: "Select teams",
-              multiple: true,
-              allowClear: true,
-            },
-          ]}
-        />
-      </div>
-    </FormProvider>
+    <div className="w-full max-w-sm space-y-6 p-4">
+      <FormItem label="Team">
+        <TreeSelect name="team" placeholder="Select a team" options={options} />
+      </FormItem>
+      <FormItem label="Teams">
+        <TreeSelect name="teams" placeholder="Select teams" options={options} multiple />
+      </FormItem>
+    </div>
   )
 }

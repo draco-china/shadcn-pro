@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { Switch } from "@/registry/new-york-v4/pro/base/fields/switch"
+import { Switch } from "@/registry/new-york-v4/pro/base/fields/checkbox"
 
 export default function ProFieldsSwitchDemo() {
   const [enabled, setEnabled] = useState(true)

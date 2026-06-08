@@ -32,35 +32,11 @@ npx @draco-china/shadcn-pro@latest add image-viewer
 bun add lucide-react
 ```
 
-<Step>Install or copy `pro-base`. The registry installer includes the private toolbar dependency automatically; fully manual copies also need `components/pro/base/toolbar/`.</Step>
-
-```bash
-npx shadcn@latest add badge command dropdown-menu popover separator tooltip
-```
+<Step>Install or copy `pro-base` for the button and fullscreen utilities.</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="image-viewer" title="components/pro/viewer/image/index.tsx" />
-
-Manual installs also need the sibling files used by the entry component:
-
-- `components/pro/viewer/image/classes.ts`
-- `components/pro/viewer/image/nav.tsx`
-- `components/pro/viewer/image/portal.tsx`
-- `components/pro/viewer/image/stage.tsx`
-- `components/pro/viewer/image/state.ts`
-- `components/pro/viewer/image/types.ts`
-- `components/pro/viewer/image/use-image-drag.ts`
-- `components/pro/viewer/image/use-image-keyboard.ts`
-- `components/pro/viewer/image/use-image-transform.ts`
-- `components/pro/viewer/image/use-image-viewer.ts`
-- `components/pro/viewer/image/toolbar.tsx`
-- `components/pro/viewer/image/toolbar-button.tsx`
-- `components/pro/viewer/image/toolbar-items.tsx`
-- `components/pro/viewer/image/toolbar-items-center.tsx`
-- `components/pro/viewer/image/toolbar-items-left.tsx`
-- `components/pro/viewer/image/toolbar-items-right.tsx`
-- `components/pro/viewer/image/thumbnails.tsx`
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -108,8 +84,6 @@ export default function Example() {
 | `alt` | `string` | `"Image"` | Alt text prefix applied to each image. |
 | `container` | `Element \| DocumentFragment \| null` | `document.body` | Portal target. Pass `null` or a custom element to control where the viewer renders. |
 | `className` | `string` | — | Additional CSS class for the fullscreen overlay. |
-| `toolbarClassName` | `string` | — | Additional CSS class for the toolbar. |
-| `thumbnailsClassName` | `string` | — | Additional CSS class for the thumbnails strip. |
 
 ## Keyboard Shortcuts
 
