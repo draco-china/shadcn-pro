@@ -141,65 +141,69 @@ export function ImageViewer({
         zoomBy(event.deltaY > 0 ? -IMAGE_SCALE_STEP : IMAGE_SCALE_STEP)
       }}
     >
-      <div className="flex flex-wrap items-center gap-2 px-4 py-3 text-foreground">
-        <ProButton
-          size="icon"
-          variant="ghost"
-          tooltip="Zoom out"
-          onClick={() => zoomBy(-IMAGE_SCALE_STEP)}
-        >
-          <ZoomOut />
-        </ProButton>
-        <span className="min-w-[48px] text-center text-sm tabular-nums">
-          {Math.round(transform.scale * 100)}%
-        </span>
-        <ProButton
-          size="icon"
-          variant="ghost"
-          tooltip="Zoom in"
-          onClick={() => zoomBy(IMAGE_SCALE_STEP)}
-        >
-          <ZoomIn />
-        </ProButton>
-        <div aria-hidden="true" className="mx-1 hidden h-5 w-px shrink-0 bg-border sm:block" />
-        <ProButton
-          size="icon"
-          variant="ghost"
-          tooltip="Rotate counterclockwise"
-          onClick={() => rotateBy(-90)}
-        >
-          <RotateCcw />
-        </ProButton>
-        <ProButton
-          size="icon"
-          variant="ghost"
-          tooltip="Rotate clockwise"
-          onClick={() => rotateBy(90)}
-        >
-          <RotateCw />
-        </ProButton>
-        <div aria-hidden="true" className="mx-1 hidden h-5 w-px shrink-0 bg-border sm:block" />
-        <ProButton size="icon" variant="ghost" tooltip="Reset image" onClick={reset}>
-          <RotateCcwSquare />
-        </ProButton>
-        <ProButton
-          size="icon"
-          variant="ghost"
-          tooltip={fullscreen.fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
-          onClick={() => fullscreen.setFullscreen(!fullscreen.fullscreen)}
-        >
-          {fullscreen.fullscreen ? <Minimize2 /> : <Maximize2 />}
-        </ProButton>
-        <span className="hidden flex-1 md:block" />
-        {hasMultipleImages && (
-          <span className="text-sm text-muted-foreground">
-            {index + 1} / {list.length}
+      <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 px-4 py-3 text-foreground">
+        <div className="flex min-w-0 flex-wrap items-center gap-2">
+          <ProButton
+            size="icon"
+            variant="ghost"
+            tooltip="Zoom out"
+            onClick={() => zoomBy(-IMAGE_SCALE_STEP)}
+          >
+            <ZoomOut />
+          </ProButton>
+          <span className="min-w-[48px] text-center text-sm tabular-nums">
+            {Math.round(transform.scale * 100)}%
           </span>
-        )}
-        <span className="hidden flex-1 md:block" />
-        <ProButton size="icon" variant="ghost" tooltip="Close image viewer" onClick={onClose}>
-          <X />
-        </ProButton>
+          <ProButton
+            size="icon"
+            variant="ghost"
+            tooltip="Zoom in"
+            onClick={() => zoomBy(IMAGE_SCALE_STEP)}
+          >
+            <ZoomIn />
+          </ProButton>
+          <div aria-hidden="true" className="mx-1 hidden h-5 w-px shrink-0 bg-border sm:block" />
+          <ProButton
+            size="icon"
+            variant="ghost"
+            tooltip="Rotate counterclockwise"
+            onClick={() => rotateBy(-90)}
+          >
+            <RotateCcw />
+          </ProButton>
+          <ProButton
+            size="icon"
+            variant="ghost"
+            tooltip="Rotate clockwise"
+            onClick={() => rotateBy(90)}
+          >
+            <RotateCw />
+          </ProButton>
+          <div aria-hidden="true" className="mx-1 hidden h-5 w-px shrink-0 bg-border sm:block" />
+          <ProButton size="icon" variant="ghost" tooltip="Reset image" onClick={reset}>
+            <RotateCcwSquare />
+          </ProButton>
+          <ProButton
+            size="icon"
+            variant="ghost"
+            tooltip={fullscreen.fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+            onClick={() => fullscreen.setFullscreen(!fullscreen.fullscreen)}
+          >
+            {fullscreen.fullscreen ? <Minimize2 /> : <Maximize2 />}
+          </ProButton>
+        </div>
+        <div className="justify-self-center">
+          {hasMultipleImages && (
+            <span className="text-sm text-muted-foreground">
+              {index + 1} / {list.length}
+            </span>
+          )}
+        </div>
+        <div className="flex justify-end">
+          <ProButton size="icon" variant="ghost" tooltip="Close image viewer" onClick={onClose}>
+            <X />
+          </ProButton>
+        </div>
       </div>
 
       <span className="sr-only" aria-live="polite" aria-atomic="true">
