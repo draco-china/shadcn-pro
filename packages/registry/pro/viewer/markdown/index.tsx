@@ -400,7 +400,10 @@ function remarkGitHubAlerts() {
       if (!(type in alerts)) return
 
       firstText.value = firstText.value.slice(match[0].length).replace(/^\s+/, '')
-      if (firstText.value.length === 0 && firstParagraph.children?.length === 1) {
+      while (firstParagraph.children?.[0] && isEmptyAlertLeadNode(firstParagraph.children[0])) {
+        firstParagraph.children.shift()
+      }
+      if (firstParagraph.children?.length === 0) {
         node.children?.shift()
       }
       node.data = {
@@ -417,6 +420,10 @@ function remarkGitHubAlerts() {
       })
     })
   }
+}
+
+function isEmptyAlertLeadNode(node: MarkdownNode) {
+  return (node.type === 'text' && (node.value ?? '').trim().length === 0) || node.type === 'break'
 }
 
 function walkMarkdownNode(node: MarkdownNode, visitor: (node: MarkdownNode) => void) {
