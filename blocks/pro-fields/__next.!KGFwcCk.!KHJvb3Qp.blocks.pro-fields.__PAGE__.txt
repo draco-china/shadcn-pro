@@ -2062,7 +2062,7 @@ a:T2966e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    /></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>b:T5797,'use client'
+<span class="line" data-line=""></span></code></pre>b:T5acc,'use client'
 
 import { Command as CommandPrimitive } from 'cmdk'
 import { Check, ChevronDown, ChevronRight, ChevronUp, SearchIcon } from 'lucide-react'
@@ -2374,6 +2374,7 @@ export function Select({
 
 export function Cascader({
   value,
+  defaultValue,
   onChange,
   options,
   placeholder = 'Select...',
@@ -2382,6 +2383,7 @@ export function Cascader({
   className,
 }: {
   value?: string[]
+  defaultValue?: string[]
   onChange?: (value: string[]) => void
   options?: NestedOption[]
   placeholder?: string
@@ -2389,7 +2391,8 @@ export function Cascader({
   required?: boolean
   className?: string
 }) {
-  const selectedPath = value ?? EMPTY_CASCADER_VALUE
+  const [internalValue, setInternalValue] = useState<string[]>(defaultValue ?? EMPTY_CASCADER_VALUE)
+  const selectedPath = value ?? internalValue
   const optionColumns = options ?? EMPTY_CASCADER_OPTIONS
   const [open, setOpen] = useState(false)
   const [columns, setColumns] = useState<NestedOption[][]>([optionColumns])
@@ -2422,6 +2425,7 @@ export function Cascader({
     if (childOptions.length) return
 
     onChange?.(nextSelected)
+    if (value === undefined) setInternalValue(nextSelected)
     setOpen(false)
   }
 
@@ -2453,6 +2457,7 @@ export function Cascader({
           <FieldClearAction
             label="Clear selection"
             onClear={() => {
+              if (value === undefined) setInternalValue(EMPTY_CASCADER_VALUE)
               onChange?.([])
               setOpen(false)
             }}
@@ -2496,7 +2501,8 @@ export function Cascader({
 }
 
 export function TreeSelect({
-  value = [],
+  value,
+  defaultValue,
   onChange,
   options = [],
   placeholder = 'Select...',
@@ -2506,6 +2512,7 @@ export function TreeSelect({
   className,
 }: {
   value?: string[]
+  defaultValue?: string[]
   onChange?: (value: string[]) => void
   options?: NestedOption[]
   placeholder?: string
@@ -2515,7 +2522,9 @@ export function TreeSelect({
   className?: string
 }) {
   const [open, setOpen] = useState(false)
-  const selectedValues = new Set(value)
+  const [internalValue, setInternalValue] = useState<string[]>(defaultValue ?? [])
+  const currentValue = value ?? internalValue
+  const selectedValues = new Set(currentValue)
   const selectedLabels: string[] = []
   const optionStack = [...options].reverse()
   while (optionStack.length) {
@@ -2532,15 +2541,21 @@ export function TreeSelect({
   function toggle(val: string) {
     if (multiple) {
       if (!selectedValues.has(val)) {
-        onChange?.([...value, val])
+        const nextValue = [...currentValue, val]
+        if (value === undefined) setInternalValue(nextValue)
+        onChange?.(nextValue)
         return
       }
 
-      onChange?.(value.filter((item) => item !== val))
+      const nextValue = currentValue.filter((item) => item !== val)
+      if (value === undefined) setInternalValue(nextValue)
+      onChange?.(nextValue)
       return
     }
 
-    onChange?.([val])
+    const nextValue = [val]
+    if (value === undefined) setInternalValue(nextValue)
+    onChange?.(nextValue)
     setOpen(false)
   }
 
@@ -2554,8 +2569,8 @@ export function TreeSelect({
             aria-expanded={open}
             className={cn(
               fieldTriggerClassName,
-              value.length === 0 && 'text-muted-foreground',
-              value.length > 0 && !disabled && !required && 'pr-8',
+              currentValue.length === 0 && 'text-muted-foreground',
+              currentValue.length > 0 && !disabled && !required && 'pr-8',
             )}
           >
             <span className="flex-1 truncate text-left">
@@ -2563,10 +2578,11 @@ export function TreeSelect({
             </span>
           </button>
         </PopoverPrimitive.Trigger>
-        {value.length > 0 && !disabled && !required && (
+        {currentValue.length > 0 && !disabled && !required && (
           <FieldClearAction
             label="Clear selection"
             onClear={() => {
+              if (value === undefined) setInternalValue([])
               onChange?.([])
               setOpen(false)
             }}
@@ -2681,7 +2697,7 @@ function TreeNode({
     </li>
   )
 }
-c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+c:T357a4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Command</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> CommandPrimitive</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'cmdk'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Check</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronDown</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronRight</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronUp</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SearchIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
@@ -2993,6 +3009,7 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Cascader</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  defaultValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  options</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  placeholder</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Select...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -3001,6 +3018,7 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  value</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  defaultValue</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">value</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  options</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NestedOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  placeholder</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
@@ -3008,7 +3026,8 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  required</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedPath</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#E5C07B"> EMPTY_CASCADER_VALUE</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">internalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]>(</span><span style="color:#383A42;--shiki-dark:#E06C75">defaultValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#E5C07B"> EMPTY_CASCADER_VALUE</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedPath</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> internalValue</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> optionColumns</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> options</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#E5C07B"> EMPTY_CASCADER_OPTIONS</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">open</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">columns</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setColumns</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">NestedOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[][]>([</span><span style="color:#383A42;--shiki-dark:#E06C75">optionColumns</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
@@ -3041,6 +3060,7 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#E45649;--shiki-dark:#E5C07B">childOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextSelected</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextSelected</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""></span>
@@ -3072,6 +3092,7 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">FieldClearAction</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Clear selection"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            onClear</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">              if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#E5C07B">EMPTY_CASCADER_VALUE</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([])</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -3115,7 +3136,8 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> TreeSelect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [],</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  defaultValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  options</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [],</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  placeholder</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Select...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -3125,6 +3147,7 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  value</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  defaultValue</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">value</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  options</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NestedOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  placeholder</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
@@ -3134,7 +3157,9 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">open</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedValues</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#A626A4;--shiki-dark:#C678DD"> new</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Set</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">internalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]>(</span><span style="color:#383A42;--shiki-dark:#E06C75">defaultValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [])</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> currentValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> internalValue</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedValues</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#A626A4;--shiki-dark:#C678DD"> new</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Set</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedLabels</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> []</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> optionStack</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#383A42;--shiki-dark:#ABB2BF">].</span><span style="color:#4078F2;--shiki-dark:#61AFEF">reverse</span><span style="color:#383A42;--shiki-dark:#ABB2BF">()</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  while</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#E45649;--shiki-dark:#E5C07B">optionStack</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
@@ -3151,15 +3176,21 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> toggle</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">val</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">multiple</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#0184BC;--shiki-dark:#56B6C2">!</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">has</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)) {</span></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">        onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        const</span><span style="color:#986801;--shiki-dark:#E5C07B"> nextValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">        onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        return</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      }</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#E45649;--shiki-dark:#E5C07B">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">filter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">item</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#E06C75"> item</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> !==</span><span style="color:#383A42;--shiki-dark:#E06C75"> val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">))</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      const</span><span style="color:#986801;--shiki-dark:#E5C07B"> nextValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#E45649;--shiki-dark:#E5C07B"> currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">filter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">item</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#E06C75"> item</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> !==</span><span style="color:#383A42;--shiki-dark:#E06C75"> val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      return</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([</span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    const</span><span style="color:#986801;--shiki-dark:#E5C07B"> nextValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""></span>
@@ -3173,8 +3204,8 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            aria-expanded</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">open</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">              fieldTriggerClassName</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'pr-8'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'pr-8'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex-1 truncate text-left"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -3182,10 +3213,11 @@ c:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto oversc
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">PopoverPrimitive.Trigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#E45649;--shiki-dark:#E5C07B">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#E45649;--shiki-dark:#E5C07B">currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">FieldClearAction</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Clear selection"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            onClear</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">              if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">([])</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([])</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -5974,7 +6006,7 @@ function ArrayFieldItem({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-fields-demo",{"item":{"name":"pro-fields-demo","description":"Advanced field types: select, date, switch, and more.","iframeHeight":"388px","installName":"pro-fields"},"tree":[{"name":"examples","children":[{"name":"pro-fields-demo.tsx","path":"examples/pro-fields-demo.tsx"}]},{"name":"base","children":[{"name":"fields","children":[{"name":"shared","children":[{"name":"field.tsx","path":"base/fields/shared/field.tsx"},{"name":"calendar.tsx","path":"base/fields/shared/calendar.tsx"}]},{"name":"input","children":[{"name":"index.tsx","path":"base/fields/input/index.tsx"}]},{"name":"select","children":[{"name":"index.tsx","path":"base/fields/select/index.tsx"}]},{"name":"checkbox","children":[{"name":"index.tsx","path":"base/fields/checkbox/index.tsx"}]},{"name":"radio","children":[{"name":"index.tsx","path":"base/fields/radio/index.tsx"}]},{"name":"date-picker","children":[{"name":"index.tsx","path":"base/fields/date-picker/index.tsx"}]},{"name":"date-time-picker","children":[{"name":"index.tsx","path":"base/fields/date-time-picker/index.tsx"}]},{"name":"upload","children":[{"name":"index.tsx","path":"base/fields/upload/index.tsx"}]},{"name":"array-field","children":[{"name":"index.tsx","path":"base/fields/array-field/index.tsx"}]}]}]}],"highlightedFiles":[{"target":"examples/pro-fields-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"base/fields/shared/field.tsx","content":"$5","highlightedContent":"$6"},{"target":"base/fields/shared/calendar.tsx","content":"$7","highlightedContent":"$8"},{"target":"base/fields/input/index.tsx","content":"$9","highlightedContent":"$a"},{"target":"base/fields/select/index.tsx","content":"$b","highlightedContent":"$c"},{"target":"base/fields/checkbox/index.tsx","content":"$d","highlightedContent":"$e"},{"target":"base/fields/radio/index.tsx","content":"$f","highlightedContent":"$10"},{"target":"base/fields/date-picker/index.tsx","content":"$11","highlightedContent":"$12"},{"target":"base/fields/date-time-picker/index.tsx","content":"$13","highlightedContent":"$14"},{"target":"base/fields/upload/index.tsx","content":"$15","highlightedContent":"$16"},{"target":"base/fields/array-field/index.tsx","content":"$17","highlightedContent":"$18"}]}],"$L19","$L1a","$L1b","$L1c","$L1d","$L1e","$L1f","$L20"]}],["$L21"],"$L22"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"5eLhJ8rCAXIpFPZfCwaIV"}
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-fields-demo",{"item":{"name":"pro-fields-demo","description":"Advanced field types: select, date, switch, and more.","iframeHeight":"388px","installName":"pro-fields"},"tree":[{"name":"examples","children":[{"name":"pro-fields-demo.tsx","path":"examples/pro-fields-demo.tsx"}]},{"name":"base","children":[{"name":"fields","children":[{"name":"shared","children":[{"name":"field.tsx","path":"base/fields/shared/field.tsx"},{"name":"calendar.tsx","path":"base/fields/shared/calendar.tsx"}]},{"name":"input","children":[{"name":"index.tsx","path":"base/fields/input/index.tsx"}]},{"name":"select","children":[{"name":"index.tsx","path":"base/fields/select/index.tsx"}]},{"name":"checkbox","children":[{"name":"index.tsx","path":"base/fields/checkbox/index.tsx"}]},{"name":"radio","children":[{"name":"index.tsx","path":"base/fields/radio/index.tsx"}]},{"name":"date-picker","children":[{"name":"index.tsx","path":"base/fields/date-picker/index.tsx"}]},{"name":"date-time-picker","children":[{"name":"index.tsx","path":"base/fields/date-time-picker/index.tsx"}]},{"name":"upload","children":[{"name":"index.tsx","path":"base/fields/upload/index.tsx"}]},{"name":"array-field","children":[{"name":"index.tsx","path":"base/fields/array-field/index.tsx"}]}]}]}],"highlightedFiles":[{"target":"examples/pro-fields-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"base/fields/shared/field.tsx","content":"$5","highlightedContent":"$6"},{"target":"base/fields/shared/calendar.tsx","content":"$7","highlightedContent":"$8"},{"target":"base/fields/input/index.tsx","content":"$9","highlightedContent":"$a"},{"target":"base/fields/select/index.tsx","content":"$b","highlightedContent":"$c"},{"target":"base/fields/checkbox/index.tsx","content":"$d","highlightedContent":"$e"},{"target":"base/fields/radio/index.tsx","content":"$f","highlightedContent":"$10"},{"target":"base/fields/date-picker/index.tsx","content":"$11","highlightedContent":"$12"},{"target":"base/fields/date-time-picker/index.tsx","content":"$13","highlightedContent":"$14"},{"target":"base/fields/upload/index.tsx","content":"$15","highlightedContent":"$16"},{"target":"base/fields/array-field/index.tsx","content":"$17","highlightedContent":"$18"}]}],"$L19","$L1a","$L1b","$L1c","$L1d","$L1e","$L1f","$L20"]}],["$L21"],"$L22"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"IIIvX30P4ASoZJ-y7E-CN"}
 23:T28c4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">FormItem</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> "@/registry/new-york-v4/pro/form"</span></span>
@@ -8280,7 +8312,7 @@ export function FieldPopoverContent({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">PopoverPrimitive.Portal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>31:T5797,'use client'
+<span class="line" data-line=""></span></code></pre>31:T5acc,'use client'
 
 import { Command as CommandPrimitive } from 'cmdk'
 import { Check, ChevronDown, ChevronRight, ChevronUp, SearchIcon } from 'lucide-react'
@@ -8592,6 +8624,7 @@ export function Select({
 
 export function Cascader({
   value,
+  defaultValue,
   onChange,
   options,
   placeholder = 'Select...',
@@ -8600,6 +8633,7 @@ export function Cascader({
   className,
 }: {
   value?: string[]
+  defaultValue?: string[]
   onChange?: (value: string[]) => void
   options?: NestedOption[]
   placeholder?: string
@@ -8607,7 +8641,8 @@ export function Cascader({
   required?: boolean
   className?: string
 }) {
-  const selectedPath = value ?? EMPTY_CASCADER_VALUE
+  const [internalValue, setInternalValue] = useState<string[]>(defaultValue ?? EMPTY_CASCADER_VALUE)
+  const selectedPath = value ?? internalValue
   const optionColumns = options ?? EMPTY_CASCADER_OPTIONS
   const [open, setOpen] = useState(false)
   const [columns, setColumns] = useState<NestedOption[][]>([optionColumns])
@@ -8640,6 +8675,7 @@ export function Cascader({
     if (childOptions.length) return
 
     onChange?.(nextSelected)
+    if (value === undefined) setInternalValue(nextSelected)
     setOpen(false)
   }
 
@@ -8671,6 +8707,7 @@ export function Cascader({
           <FieldClearAction
             label="Clear selection"
             onClear={() => {
+              if (value === undefined) setInternalValue(EMPTY_CASCADER_VALUE)
               onChange?.([])
               setOpen(false)
             }}
@@ -8714,7 +8751,8 @@ export function Cascader({
 }
 
 export function TreeSelect({
-  value = [],
+  value,
+  defaultValue,
   onChange,
   options = [],
   placeholder = 'Select...',
@@ -8724,6 +8762,7 @@ export function TreeSelect({
   className,
 }: {
   value?: string[]
+  defaultValue?: string[]
   onChange?: (value: string[]) => void
   options?: NestedOption[]
   placeholder?: string
@@ -8733,7 +8772,9 @@ export function TreeSelect({
   className?: string
 }) {
   const [open, setOpen] = useState(false)
-  const selectedValues = new Set(value)
+  const [internalValue, setInternalValue] = useState<string[]>(defaultValue ?? [])
+  const currentValue = value ?? internalValue
+  const selectedValues = new Set(currentValue)
   const selectedLabels: string[] = []
   const optionStack = [...options].reverse()
   while (optionStack.length) {
@@ -8750,15 +8791,21 @@ export function TreeSelect({
   function toggle(val: string) {
     if (multiple) {
       if (!selectedValues.has(val)) {
-        onChange?.([...value, val])
+        const nextValue = [...currentValue, val]
+        if (value === undefined) setInternalValue(nextValue)
+        onChange?.(nextValue)
         return
       }
 
-      onChange?.(value.filter((item) => item !== val))
+      const nextValue = currentValue.filter((item) => item !== val)
+      if (value === undefined) setInternalValue(nextValue)
+      onChange?.(nextValue)
       return
     }
 
-    onChange?.([val])
+    const nextValue = [val]
+    if (value === undefined) setInternalValue(nextValue)
+    onChange?.(nextValue)
     setOpen(false)
   }
 
@@ -8772,8 +8819,8 @@ export function TreeSelect({
             aria-expanded={open}
             className={cn(
               fieldTriggerClassName,
-              value.length === 0 && 'text-muted-foreground',
-              value.length > 0 && !disabled && !required && 'pr-8',
+              currentValue.length === 0 && 'text-muted-foreground',
+              currentValue.length > 0 && !disabled && !required && 'pr-8',
             )}
           >
             <span className="flex-1 truncate text-left">
@@ -8781,10 +8828,11 @@ export function TreeSelect({
             </span>
           </button>
         </PopoverPrimitive.Trigger>
-        {value.length > 0 && !disabled && !required && (
+        {currentValue.length > 0 && !disabled && !required && (
           <FieldClearAction
             label="Clear selection"
             onClear={() => {
+              if (value === undefined) setInternalValue([])
               onChange?.([])
               setOpen(false)
             }}
@@ -8899,7 +8947,7 @@ function TreeNode({
     </li>
   )
 }
-32:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+32:T357a4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Command</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> CommandPrimitive</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'cmdk'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Check</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronDown</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronRight</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronUp</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SearchIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
@@ -9211,6 +9259,7 @@ function TreeNode({
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Cascader</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  defaultValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  options</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  placeholder</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Select...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -9219,6 +9268,7 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  value</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  defaultValue</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">value</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  options</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NestedOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  placeholder</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
@@ -9226,7 +9276,8 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  required</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedPath</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#E5C07B"> EMPTY_CASCADER_VALUE</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">internalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]>(</span><span style="color:#383A42;--shiki-dark:#E06C75">defaultValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#E5C07B"> EMPTY_CASCADER_VALUE</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedPath</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> internalValue</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> optionColumns</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> options</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#E5C07B"> EMPTY_CASCADER_OPTIONS</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">open</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">columns</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setColumns</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">NestedOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[][]>([</span><span style="color:#383A42;--shiki-dark:#E06C75">optionColumns</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
@@ -9259,6 +9310,7 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#E45649;--shiki-dark:#E5C07B">childOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextSelected</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextSelected</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""></span>
@@ -9290,6 +9342,7 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">FieldClearAction</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Clear selection"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            onClear</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">              if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#E5C07B">EMPTY_CASCADER_VALUE</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([])</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -9333,7 +9386,8 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> TreeSelect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [],</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  defaultValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  options</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [],</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  placeholder</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Select...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -9343,6 +9397,7 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  value</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  defaultValue</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">value</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  options</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NestedOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  placeholder</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
@@ -9352,7 +9407,9 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">open</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedValues</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#A626A4;--shiki-dark:#C678DD"> new</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Set</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">internalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]>(</span><span style="color:#383A42;--shiki-dark:#E06C75">defaultValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [])</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> currentValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> internalValue</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedValues</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#A626A4;--shiki-dark:#C678DD"> new</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Set</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedLabels</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> []</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> optionStack</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#383A42;--shiki-dark:#ABB2BF">].</span><span style="color:#4078F2;--shiki-dark:#61AFEF">reverse</span><span style="color:#383A42;--shiki-dark:#ABB2BF">()</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  while</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#E45649;--shiki-dark:#E5C07B">optionStack</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
@@ -9369,15 +9426,21 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> toggle</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">val</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">multiple</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#0184BC;--shiki-dark:#56B6C2">!</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">has</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)) {</span></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">        onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        const</span><span style="color:#986801;--shiki-dark:#E5C07B"> nextValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">        onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        return</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      }</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#E45649;--shiki-dark:#E5C07B">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">filter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">item</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#E06C75"> item</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> !==</span><span style="color:#383A42;--shiki-dark:#E06C75"> val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">))</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      const</span><span style="color:#986801;--shiki-dark:#E5C07B"> nextValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#E45649;--shiki-dark:#E5C07B"> currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">filter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">item</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#E06C75"> item</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> !==</span><span style="color:#383A42;--shiki-dark:#E06C75"> val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      return</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([</span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    const</span><span style="color:#986801;--shiki-dark:#E5C07B"> nextValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""></span>
@@ -9391,8 +9454,8 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            aria-expanded</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">open</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">              fieldTriggerClassName</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'pr-8'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'pr-8'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex-1 truncate text-left"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -9400,10 +9463,11 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">PopoverPrimitive.Trigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#E45649;--shiki-dark:#E5C07B">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#E45649;--shiki-dark:#E5C07B">currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">FieldClearAction</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Clear selection"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            onClear</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">              if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">([])</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([])</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -9755,7 +9819,7 @@ export function FieldPopoverContent({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">PopoverPrimitive.Portal</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>36:T5797,'use client'
+<span class="line" data-line=""></span></code></pre>36:T5acc,'use client'
 
 import { Command as CommandPrimitive } from 'cmdk'
 import { Check, ChevronDown, ChevronRight, ChevronUp, SearchIcon } from 'lucide-react'
@@ -10067,6 +10131,7 @@ export function Select({
 
 export function Cascader({
   value,
+  defaultValue,
   onChange,
   options,
   placeholder = 'Select...',
@@ -10075,6 +10140,7 @@ export function Cascader({
   className,
 }: {
   value?: string[]
+  defaultValue?: string[]
   onChange?: (value: string[]) => void
   options?: NestedOption[]
   placeholder?: string
@@ -10082,7 +10148,8 @@ export function Cascader({
   required?: boolean
   className?: string
 }) {
-  const selectedPath = value ?? EMPTY_CASCADER_VALUE
+  const [internalValue, setInternalValue] = useState<string[]>(defaultValue ?? EMPTY_CASCADER_VALUE)
+  const selectedPath = value ?? internalValue
   const optionColumns = options ?? EMPTY_CASCADER_OPTIONS
   const [open, setOpen] = useState(false)
   const [columns, setColumns] = useState<NestedOption[][]>([optionColumns])
@@ -10115,6 +10182,7 @@ export function Cascader({
     if (childOptions.length) return
 
     onChange?.(nextSelected)
+    if (value === undefined) setInternalValue(nextSelected)
     setOpen(false)
   }
 
@@ -10146,6 +10214,7 @@ export function Cascader({
           <FieldClearAction
             label="Clear selection"
             onClear={() => {
+              if (value === undefined) setInternalValue(EMPTY_CASCADER_VALUE)
               onChange?.([])
               setOpen(false)
             }}
@@ -10189,7 +10258,8 @@ export function Cascader({
 }
 
 export function TreeSelect({
-  value = [],
+  value,
+  defaultValue,
   onChange,
   options = [],
   placeholder = 'Select...',
@@ -10199,6 +10269,7 @@ export function TreeSelect({
   className,
 }: {
   value?: string[]
+  defaultValue?: string[]
   onChange?: (value: string[]) => void
   options?: NestedOption[]
   placeholder?: string
@@ -10208,7 +10279,9 @@ export function TreeSelect({
   className?: string
 }) {
   const [open, setOpen] = useState(false)
-  const selectedValues = new Set(value)
+  const [internalValue, setInternalValue] = useState<string[]>(defaultValue ?? [])
+  const currentValue = value ?? internalValue
+  const selectedValues = new Set(currentValue)
   const selectedLabels: string[] = []
   const optionStack = [...options].reverse()
   while (optionStack.length) {
@@ -10225,15 +10298,21 @@ export function TreeSelect({
   function toggle(val: string) {
     if (multiple) {
       if (!selectedValues.has(val)) {
-        onChange?.([...value, val])
+        const nextValue = [...currentValue, val]
+        if (value === undefined) setInternalValue(nextValue)
+        onChange?.(nextValue)
         return
       }
 
-      onChange?.(value.filter((item) => item !== val))
+      const nextValue = currentValue.filter((item) => item !== val)
+      if (value === undefined) setInternalValue(nextValue)
+      onChange?.(nextValue)
       return
     }
 
-    onChange?.([val])
+    const nextValue = [val]
+    if (value === undefined) setInternalValue(nextValue)
+    onChange?.(nextValue)
     setOpen(false)
   }
 
@@ -10247,8 +10326,8 @@ export function TreeSelect({
             aria-expanded={open}
             className={cn(
               fieldTriggerClassName,
-              value.length === 0 && 'text-muted-foreground',
-              value.length > 0 && !disabled && !required && 'pr-8',
+              currentValue.length === 0 && 'text-muted-foreground',
+              currentValue.length > 0 && !disabled && !required && 'pr-8',
             )}
           >
             <span className="flex-1 truncate text-left">
@@ -10256,10 +10335,11 @@ export function TreeSelect({
             </span>
           </button>
         </PopoverPrimitive.Trigger>
-        {value.length > 0 && !disabled && !required && (
+        {currentValue.length > 0 && !disabled && !required && (
           <FieldClearAction
             label="Clear selection"
             onClear={() => {
+              if (value === undefined) setInternalValue([])
               onChange?.([])
               setOpen(false)
             }}
@@ -10374,7 +10454,7 @@ function TreeNode({
     </li>
   )
 }
-37:T3368d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+37:T357a4,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#383A42;--shiki-dark:#E06C75">Command</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> CommandPrimitive</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'cmdk'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Check</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronDown</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronRight</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">ChevronUp</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">SearchIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
@@ -10686,6 +10766,7 @@ function TreeNode({
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Cascader</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  defaultValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  options</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  placeholder</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Select...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -10694,6 +10775,7 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  value</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  defaultValue</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">value</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  options</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NestedOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  placeholder</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
@@ -10701,7 +10783,8 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  required</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedPath</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#E5C07B"> EMPTY_CASCADER_VALUE</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">internalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]>(</span><span style="color:#383A42;--shiki-dark:#E06C75">defaultValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#E5C07B"> EMPTY_CASCADER_VALUE</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedPath</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> internalValue</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> optionColumns</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> options</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#986801;--shiki-dark:#E5C07B"> EMPTY_CASCADER_OPTIONS</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">open</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">columns</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setColumns</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">NestedOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[][]>([</span><span style="color:#383A42;--shiki-dark:#E06C75">optionColumns</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
@@ -10734,6 +10817,7 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#E45649;--shiki-dark:#E5C07B">childOptions</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextSelected</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextSelected</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""></span>
@@ -10765,6 +10849,7 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">FieldClearAction</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Clear selection"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            onClear</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">              if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#E5C07B">EMPTY_CASCADER_VALUE</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([])</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
@@ -10808,7 +10893,8 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> TreeSelect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [],</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  defaultValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  options</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [],</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  placeholder</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'Select...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -10818,6 +10904,7 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  className</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  value</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  defaultValue</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onChange</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">value</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> void</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  options</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> NestedOption</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  placeholder</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
@@ -10827,7 +10914,9 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  className</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">open</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedValues</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#A626A4;--shiki-dark:#C678DD"> new</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Set</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#E5C07B">internalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#E5C07B">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]>(</span><span style="color:#383A42;--shiki-dark:#E06C75">defaultValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [])</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> currentValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#E06C75"> value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ??</span><span style="color:#383A42;--shiki-dark:#E06C75"> internalValue</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedValues</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#A626A4;--shiki-dark:#C678DD"> new</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> Set</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> selectedLabels</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[] </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> []</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  const</span><span style="color:#986801;--shiki-dark:#E5C07B"> optionStack</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">options</span><span style="color:#383A42;--shiki-dark:#ABB2BF">].</span><span style="color:#4078F2;--shiki-dark:#61AFEF">reverse</span><span style="color:#383A42;--shiki-dark:#ABB2BF">()</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  while</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#E45649;--shiki-dark:#E5C07B">optionStack</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
@@ -10844,15 +10933,21 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> toggle</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">val</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">multiple</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#0184BC;--shiki-dark:#56B6C2">!</span><span style="color:#E45649;--shiki-dark:#E5C07B">selectedValues</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">has</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)) {</span></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">        onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        const</span><span style="color:#986801;--shiki-dark:#E5C07B"> nextValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">...</span><span style="color:#383A42;--shiki-dark:#E06C75">currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">        onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">        return</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">      }</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#E45649;--shiki-dark:#E5C07B">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">filter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">item</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#E06C75"> item</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> !==</span><span style="color:#383A42;--shiki-dark:#E06C75"> val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">))</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      const</span><span style="color:#986801;--shiki-dark:#E5C07B"> nextValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#E45649;--shiki-dark:#E5C07B"> currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">filter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">((</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">item</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#E06C75"> item</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> !==</span><span style="color:#383A42;--shiki-dark:#E06C75"> val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">      onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">      return</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    }</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([</span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">])</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    const</span><span style="color:#986801;--shiki-dark:#E5C07B"> nextValue</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#383A42;--shiki-dark:#E06C75">val</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">    if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
+<span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.(</span><span style="color:#383A42;--shiki-dark:#E06C75">nextValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">    setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""></span>
@@ -10866,8 +10961,8 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            aria-expanded</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#E06C75">open</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#4078F2;--shiki-dark:#61AFEF">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">              fieldTriggerClassName</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
-<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'pr-8'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'text-muted-foreground'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
+<span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">              currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'pr-8'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            )</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          ></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic"> className</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"flex-1 truncate text-left"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
@@ -10875,10 +10970,11 @@ function TreeNode({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">span</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">button</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">        &#x3C;/</span><span style="color:#C18401;--shiki-dark:#E5C07B">PopoverPrimitive.Trigger</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
-<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#E45649;--shiki-dark:#E5C07B">value</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
+<span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#C678DD">        {</span><span style="color:#E45649;--shiki-dark:#E5C07B">currentValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E06C75">length</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ></span><span style="color:#986801;--shiki-dark:#D19A66"> 0</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">disabled</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#56B6C2"> !</span><span style="color:#383A42;--shiki-dark:#E06C75">required</span><span style="color:#383A42;--shiki-dark:#56B6C2"> &#x26;&#x26;</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">          &#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">FieldClearAction</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            label</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#50A14F;--shiki-dark:#98C379">"Clear selection"</span></span>
 <span class="line" data-line=""><span style="color:#986801;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic">            onClear</span><span style="color:#383A42;--shiki-dark:#56B6C2">=</span><span style="color:#383A42;--shiki-dark:#C678DD">{</span><span style="color:#383A42;--shiki-dark:#ABB2BF">() </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">              if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">value</span><span style="color:#383A42;--shiki-dark:#56B6C2"> ===</span><span style="color:#986801;--shiki-dark:#D19A66"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#4078F2;--shiki-dark:#61AFEF">setInternalValue</span><span style="color:#383A42;--shiki-dark:#ABB2BF">([])</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              onChange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">?.([])</span></span>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">              setOpen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#986801;--shiki-dark:#D19A66">false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">            }</span><span style="color:#383A42;--shiki-dark:#C678DD">}</span></span>
