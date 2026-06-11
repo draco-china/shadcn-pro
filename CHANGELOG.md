@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/draco-china/shadcn-pro/compare/v1.18.4...v1.19.0) (2026-06-11)
+
+
+### Features
+
+* **pro-form:** use react hook form ([0105ba9](https://github.com/draco-china/shadcn-pro/commit/0105ba9c848decf2d3fe731442ae386e42a56993))
+
 ## [1.18.4](https://github.com/draco-china/shadcn-pro/compare/v1.18.3...v1.18.4) (2026-06-08)
 
 
