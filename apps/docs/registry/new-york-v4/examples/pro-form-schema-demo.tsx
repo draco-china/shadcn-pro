@@ -15,7 +15,7 @@ export default function ProFormSchemaDemo() {
   return (
     <div className="w-full max-w-lg space-y-4 p-4">
       <ProSchemaForm
-        initialValues={{ role: 'editor', active: true }}
+        defaultValues={{ role: 'editor', active: true }}
         onFinish={async (values) => setResult(values)}
         schema={[
           {

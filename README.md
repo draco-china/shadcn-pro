@@ -38,9 +38,7 @@ npx shadcn@latest add https://draco-china.github.io/shadcn-pro/r/pro-form.json
 ```
 
 ```tsx
-import { Input } from '@/components/pro/base/fields/input'
-import { Select } from '@/components/pro/base/fields/select'
-import { FormItem, ProForm } from '@/components/pro/form'
+import { ProForm } from '@/components/pro/form'
 
 const roleOptions = [
   { label: 'Admin', value: 'admin' },
@@ -49,14 +47,18 @@ const roleOptions = [
 
 export default function Page() {
   return (
-    <ProForm onFinish={console.log}>
-      <FormItem label="Username" required htmlFor="username">
-        <Input id="username" name="username" required />
-      </FormItem>
-      <FormItem label="Role" htmlFor="role">
-        <Select id="role" name="role" options={roleOptions} />
-      </FormItem>
-    </ProForm>
+    <ProForm
+      onFinish={console.log}
+      schema={[
+        { name: 'username', label: 'Username', required: true },
+        {
+          name: 'role',
+          label: 'Role',
+          valueType: 'select',
+          fieldProps: { options: roleOptions },
+        },
+      ]}
+    />
   )
 }
 ```

@@ -151,17 +151,21 @@ const tableState = useProTableUrlState({
 ### Schema forms
 
 ```tsx
-<ProForm onFinish={saveValues}>
-  <FormItem label="Name" htmlFor="name">
-    <Input id="name" name="name" />
-  </FormItem>
-  <FormItem label="Role" htmlFor="role">
-    <Select id="role" name="role" options={roleOptions} />
-  </FormItem>
-</ProForm>
+<ProForm
+  onFinish={saveValues}
+  schema={[
+    { name: "name", label: "Name", required: true },
+    {
+      name: "role",
+      label: "Role",
+      valueType: "select",
+      fieldProps: { options: roleOptions },
+    },
+  ]}
+/>
 ```
 
-Use `ProSchemaForm` when a light schema-to-field mapping is enough, and ordinary React state for conditional visibility and linkage. `ModalForm` and `DrawerForm` can be controlled with `open` / `onOpenChange` without a trigger, while reusable modal, drawer, and confirm shells live in `pro-overlay`.
+Use schema for common forms, and use `formRef` when a page needs imperative form control. `ModalForm` and `DrawerForm` can be controlled with `open` / `onOpenChange` without a trigger, while reusable modal, drawer, and confirm shells live in `pro-overlay`.
 
 ## TypeScript
 

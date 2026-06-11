@@ -1,11 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-
-import { Switch } from '@/registry/new-york-v4/pro/base/fields/checkbox'
-import { Input, Textarea } from '@/registry/new-york-v4/pro/base/fields/input'
-import { Select } from '@/registry/new-york-v4/pro/base/fields/select'
-import { FormItem, ProForm } from '@/registry/new-york-v4/pro/form'
+import { ProForm } from '@/registry/new-york-v4/pro/form'
 
 const roleOptions = [
   { label: 'Admin', value: 'admin' },
@@ -27,37 +23,55 @@ export default function ProFormDemo() {
       <div>
         <h2 className="text-lg font-semibold">Team Member Registration</h2>
         <p className="text-sm text-muted-foreground">
-          A composed ProForm using shadcn-pro fields directly.
+          ProForm manages react-hook-form internally and renders fields from schema.
         </p>
       </div>
 
-      <ProForm onFinish={handleFinish}>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <FormItem label="First Name" required htmlFor="firstName">
-            <Input id="firstName" name="firstName" placeholder="First name" />
-          </FormItem>
-          <FormItem label="Last Name" required htmlFor="lastName">
-            <Input id="lastName" name="lastName" placeholder="Last name" />
-          </FormItem>
-          <FormItem label="Email" required htmlFor="email">
-            <Input id="email" name="email" type="email" placeholder="user@example.com" />
-          </FormItem>
-          <FormItem label="Role" required htmlFor="role">
-            <Select id="role" name="role" placeholder="Select a role" options={roleOptions} />
-          </FormItem>
-          <FormItem
-            label="Bio"
-            htmlFor="bio"
-            description="Shown as helper text below the field."
-            className="sm:col-span-2"
-          >
-            <Textarea id="bio" name="bio" placeholder="Tell us about yourself" rows={3} />
-          </FormItem>
-          <FormItem label="Active" htmlFor="active" extra="Enable this account immediately.">
-            <Switch id="active" name="active" value="true" defaultChecked />
-          </FormItem>
-        </div>
-      </ProForm>
+      <ProForm
+        defaultValues={{ active: true }}
+        onFinish={handleFinish}
+        schema={[
+          {
+            name: 'firstName',
+            label: 'First Name',
+            required: true,
+            fieldProps: { placeholder: 'First name' },
+          },
+          {
+            name: 'lastName',
+            label: 'Last Name',
+            required: true,
+            fieldProps: { placeholder: 'Last name' },
+          },
+          {
+            name: 'email',
+            label: 'Email',
+            valueType: 'email',
+            required: true,
+            fieldProps: { placeholder: 'user@example.com' },
+          },
+          {
+            name: 'role',
+            label: 'Role',
+            valueType: 'select',
+            required: true,
+            fieldProps: { placeholder: 'Select a role', options: roleOptions },
+          },
+          {
+            name: 'bio',
+            label: 'Bio',
+            valueType: 'textarea',
+            description: 'Shown as helper text below the field.',
+            fieldProps: { placeholder: 'Tell us about yourself', rows: 3 },
+          },
+          {
+            name: 'active',
+            label: 'Active',
+            valueType: 'switch',
+            extra: 'Enable this account immediately.',
+          },
+        ]}
+      />
 
       {result && (
         <pre className="rounded-md bg-muted p-3 text-xs">{JSON.stringify(result, null, 2)}</pre>

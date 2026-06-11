@@ -1,7 +1,16 @@
 'use client'
 
 import { InfoIcon } from 'lucide-react'
-import { type ReactNode, useState } from 'react'
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
+  useImperativeHandle,
+  useState,
+} from 'react'
 import {
   Controller,
   type DefaultValues,
@@ -11,6 +20,7 @@ import {
   type FieldValues,
   FormProvider,
   type RefCallBack,
+  type RegisterOptions,
   type Resolver,
   type SubmitErrorHandler,
   type SubmitHandler,
@@ -32,16 +42,19 @@ type OverlayFormSubmitter =
   | ReactNode
   | ((context: { submitting: boolean; cancel: () => void | Promise<void> }) => ReactNode)
 
+export type ProFormInstance<TFieldValues extends FieldValues = FieldValues> =
+  UseFormReturn<TFieldValues>
+
 interface OverlayFormProps<TFieldValues extends FieldValues = FieldValues> {
   trigger?: ReactNode
   title: string
   description?: string
   children?: ReactNode
   schema?: ProSchemaFormItem[]
+  formRef?: Ref<ProFormInstance<TFieldValues>>
   form?: UseFormReturn<TFieldValues>
   resolver?: Resolver<TFieldValues>
   defaultValues?: DefaultValues<TFieldValues>
-  initialValues?: DefaultValues<TFieldValues>
   open?: boolean
   onOpenChange?: (open: boolean) => void
   onFinish?: SubmitHandler<TFieldValues>
@@ -53,6 +66,8 @@ interface OverlayFormProps<TFieldValues extends FieldValues = FieldValues> {
 
 interface ProFormProps<TFieldValues extends FieldValues = FieldValues> {
   children?: ReactNode
+  schema?: ProSchemaFormItem[]
+  formRef?: Ref<ProFormInstance<TFieldValues>>
   form?: UseFormReturn<TFieldValues>
   resolver?: Resolver<TFieldValues>
   defaultValues?: DefaultValues<TFieldValues>
@@ -119,6 +134,7 @@ export interface ProSchemaFormItem<
   extra?: ReactNode
   errors?: string[]
   initialValue?: ProSchemaFormValue
+  rules?: RegisterOptions<TFieldValues, TName>
   fieldProps?: Record<string, unknown>
   formItemProps?: Omit<FormItemProps, 'children' | 'label' | 'required' | 'disabled'>
   render?: (
@@ -129,6 +145,8 @@ export interface ProSchemaFormItem<
 
 export function ProForm<TFieldValues extends FieldValues = FieldValues>({
   children,
+  schema,
+  formRef,
   form: formProp,
   resolver,
   defaultValues,
@@ -141,6 +159,8 @@ export function ProForm<TFieldValues extends FieldValues = FieldValues>({
   const internalForm = useForm<TFieldValues>({ resolver, defaultValues })
   const form = formProp ?? internalForm
   const [loading, setLoading] = useState(false)
+
+  useImperativeHandle(formRef, () => form, [form])
 
   async function reset() {
     form.reset(defaultValues)
@@ -166,7 +186,10 @@ export function ProForm<TFieldValues extends FieldValues = FieldValues>({
   return (
     <FormProvider {...form}>
       <form onSubmit={submitHandler} className={className}>
-        <div className="mb-4">{children}</div>
+        <div className="mb-4">
+          {schema && <ProSchemaFields schema={schema} />}
+          {children}
+        </div>
         {submitter !== false && (
           <div data-slot="pro-form-actions" className="flex flex-wrap items-center gap-2 pt-2">
             {renderFormSubmitter(submitter, loading, reset)}
@@ -179,19 +202,16 @@ export function ProForm<TFieldValues extends FieldValues = FieldValues>({
 
 export function ProSchemaForm<TFieldValues extends FieldValues = FieldValues>({
   schema,
-  initialValues,
   defaultValues,
   children,
   ...props
-}: Omit<ProFormProps<TFieldValues>, 'children'> & {
+}: Omit<ProFormProps<TFieldValues>, 'children' | 'schema'> & {
   schema: ProSchemaFormItem[]
   defaultValues?: DefaultValues<TFieldValues>
-  initialValues?: DefaultValues<TFieldValues>
   children?: ReactNode
 }) {
   return (
-    <ProForm<TFieldValues> defaultValues={defaultValues ?? initialValues} {...props}>
-      <ProSchemaFields schema={schema} />
+    <ProForm<TFieldValues> schema={schema} defaultValues={defaultValues} {...props}>
       {children}
     </ProForm>
   )
@@ -203,10 +223,10 @@ export function ModalForm<TFieldValues extends FieldValues = FieldValues>({
   description,
   children,
   schema,
+  formRef,
   form: formProp,
   resolver,
   defaultValues,
-  initialValues,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
   onFinish,
@@ -217,8 +237,9 @@ export function ModalForm<TFieldValues extends FieldValues = FieldValues>({
 }: OverlayFormProps<TFieldValues>) {
   const { form, open, setOpen, loading, handleSubmit, handleCancel } = useOverlayForm({
     form: formProp,
+    formRef,
     resolver,
-    defaultValues: defaultValues ?? initialValues,
+    defaultValues,
     open: controlledOpen,
     onOpenChange: controlledOnOpenChange,
     onFinish,
@@ -264,10 +285,10 @@ export function DrawerForm<TFieldValues extends FieldValues = FieldValues>({
   description,
   children,
   schema,
+  formRef,
   form: formProp,
   resolver,
   defaultValues,
-  initialValues,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
   onFinish,
@@ -279,8 +300,9 @@ export function DrawerForm<TFieldValues extends FieldValues = FieldValues>({
 }: OverlayFormProps<TFieldValues> & { side?: 'top' | 'right' | 'bottom' | 'left' }) {
   const { form, open, setOpen, loading, handleSubmit, handleCancel } = useOverlayForm({
     form: formProp,
+    formRef,
     resolver,
-    defaultValues: defaultValues ?? initialValues,
+    defaultValues,
     open: controlledOpen,
     onOpenChange: controlledOnOpenChange,
     onFinish,
@@ -323,6 +345,7 @@ export function DrawerForm<TFieldValues extends FieldValues = FieldValues>({
 
 function useOverlayForm<TFieldValues extends FieldValues = FieldValues>({
   form: formProp,
+  formRef,
   resolver,
   defaultValues,
   open: controlledOpen,
@@ -332,6 +355,7 @@ function useOverlayForm<TFieldValues extends FieldValues = FieldValues>({
   onCancel,
 }: {
   form?: UseFormReturn<TFieldValues>
+  formRef?: Ref<ProFormInstance<TFieldValues>>
   resolver?: Resolver<TFieldValues>
   defaultValues?: DefaultValues<TFieldValues>
   open?: boolean
@@ -345,6 +369,8 @@ function useOverlayForm<TFieldValues extends FieldValues = FieldValues>({
   const [internalOpen, setInternalOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const open = controlledOpen ?? internalOpen
+
+  useImperativeHandle(formRef, () => form, [form])
 
   function setOpen(value: boolean) {
     if (controlledOpen === undefined) setInternalOpen(value)
@@ -434,6 +460,8 @@ interface FormItemProps {
   className?: string
   children?: ReactNode
   name?: string
+  bind?: boolean
+  rules?: RegisterOptions<FieldValues, string>
   label?: ReactNode
   required?: boolean
   disabled?: boolean
@@ -448,6 +476,8 @@ export function FormItem({
   className,
   children,
   name,
+  bind = true,
+  rules,
   label,
   required,
   disabled,
@@ -459,6 +489,8 @@ export function FormItem({
 }: FormItemProps) {
   const fieldError = useFieldErrors(name ?? htmlFor)
   const errorMessages = errors.length > 0 ? errors : fieldError
+  const control = useOptionalFormControl()
+  const shouldBind = bind && name && control && isValidElement(children)
 
   return (
     <div className={cn('space-y-1.5', className)}>
@@ -490,7 +522,28 @@ export function FormItem({
           )}
         </div>
       )}
-      {children}
+      {shouldBind ? (
+        <Controller
+          name={name}
+          control={control}
+          rules={{
+            ...(required ? { required: 'This field is required.' } : {}),
+            ...rules,
+          }}
+          render={({ field }) =>
+            cloneElement(Children.only(children) as ReactElement<Record<string, unknown>>, {
+              id: htmlFor ?? name,
+              name: field.name,
+              value: field.value,
+              onBlur: field.onBlur,
+              onChange: field.onChange,
+              ref: field.ref,
+            })
+          }
+        />
+      ) : (
+        children
+      )}
       {errorMessages.length > 0 && (
         <p className="text-xs text-destructive" role="alert">
           {errorMessages.join(', ')}
@@ -499,6 +552,14 @@ export function FormItem({
       {extra != null && <div className="text-xs text-muted-foreground">{extra}</div>}
     </div>
   )
+}
+
+function useOptionalFormControl() {
+  try {
+    return useFormContext().control
+  } catch {
+    return undefined
+  }
 }
 
 function ProSchemaFields({ schema }: { schema: ProSchemaFormItem[] }) {
@@ -512,10 +573,14 @@ function ProSchemaFields({ schema }: { schema: ProSchemaFormItem[] }) {
             key={item.name}
             name={item.name}
             defaultValue={item.initialValue}
-            rules={item.required ? { required: 'This field is required.' } : undefined}
+            rules={{
+              ...(item.required ? { required: 'This field is required.' } : {}),
+              ...item.rules,
+            }}
             render={({ field }) => (
               <FormItem
                 name={item.name}
+                bind={false}
                 label={item.label}
                 required={item.required}
                 disabled={item.disabled}

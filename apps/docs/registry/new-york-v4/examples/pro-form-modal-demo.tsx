@@ -19,7 +19,7 @@ export default function ProFormModalDemo() {
         trigger={<Button>New Member</Button>}
         title="Add Team Member"
         description="Fill in the details below to add a new team member."
-        initialValues={{ active: true }}
+        defaultValues={{ active: true }}
         schema={[
           {
             name: 'name',

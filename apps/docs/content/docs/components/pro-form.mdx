@@ -49,7 +49,7 @@ bun add lucide-react
 ## Usage
 
 ```tsx
-import { ProSchemaForm } from "@/components/pro/form"
+import { ProForm } from "@/components/pro/form"
 
 const roleOptions = [
   { label: "Admin", value: "admin" },
@@ -59,7 +59,7 @@ const roleOptions = [
 
 export function AccountForm() {
   return (
-    <ProSchemaForm
+    <ProForm
       onFinish={async (values) => console.log(values)}
       schema={[
         { name: "name", label: "Name", required: true, fieldProps: { placeholder: "Alice Wang" } },
@@ -82,9 +82,62 @@ export function AccountForm() {
 }
 ```
 
-`ProSchemaForm` is a lightweight mapping layer over `ProForm`, `FormItem`, and ProFields. It keeps field state locally, writes hidden form values for submit, and does not introduce a validation or linkage engine.
+`ProForm` manages react-hook-form internally. Schema items only describe how fields render; values and validation flow through RHF `Controller` and `handleSubmit`.
 
-Use `ProForm` with `FormItem` directly when the layout needs custom composition.
+For custom layout, put fields inside `FormItem`. When `name` is set, `FormItem` binds the child control to the internal form.
+
+```tsx
+import { Input } from "@/components/pro/base/fields/input"
+import { FormItem, ProForm } from "@/components/pro/form"
+
+type Values = { name: string; role?: string }
+
+export function AccountForm() {
+  return (
+    <ProForm<Values> defaultValues={{ name: "" }} onFinish={async (values) => console.log(values)}>
+      <FormItem
+        label="Name"
+        name="name"
+        required
+        rules={{ minLength: { value: 2, message: "Name must be at least 2 characters." } }}
+      >
+        <Input placeholder="Alice Wang" />
+      </FormItem>
+    </ProForm>
+  )
+}
+```
+
+Use `formRef` when a page needs imperative access to the internal form instance.
+
+Use `resolver` for Zod validation.
+
+```tsx
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { ProForm } from "@/components/pro/form"
+
+const formSchema = z.object({
+  email: z.string().email("Enter a valid email address."),
+  password: z.string().min(8, "Password must be at least 8 characters."),
+})
+
+type Values = z.infer<typeof formSchema>
+
+export function AccountForm() {
+  return (
+    <ProForm<Values>
+      resolver={zodResolver(formSchema)}
+      defaultValues={{ email: "", password: "" }}
+      onFinish={async (values) => console.log(values)}
+      schema={[
+        { name: "email", label: "Email", valueType: "email", required: true },
+        { name: "password", label: "Password", valueType: "password", required: true },
+      ]}
+    />
+  )
+}
+```
 
 ## Schema Form
 
@@ -115,7 +168,7 @@ import { ProButton } from "@/components/pro/base/button"
 
 <ComponentPreview name="pro-form-modal-demo" />
 
-`ModalForm` wraps the same composed form body in a Dialog and closes after `onFinish` resolves. It also accepts the same `schema` and `initialValues` props as `ProSchemaForm`.
+`ModalForm` wraps the same composed form body in a Dialog and closes after `onFinish` resolves. It also accepts the same `schema` and `defaultValues` props as `ProForm`.
 
 ## DrawerForm
 
@@ -130,7 +183,8 @@ import { ProButton } from "@/components/pro/base/button"
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `children` | `ReactNode` | — | Form fields and layout sections. |
-| `form` | `UseFormReturn<T>` | internal form | External react-hook-form instance. |
+| `schema` | `Array<{ name: string; valueType?: string; ... }>` | — | Optional field definitions rendered with ProFields. |
+| `formRef` | `Ref<ProFormInstance<T>>` | — | Imperative access to the internal form instance. |
 | `resolver` | `Resolver<T>` | — | react-hook-form resolver used by the internal form. |
 | `defaultValues` | `DefaultValues<T>` | — | Initial values used by the internal form. |
 | `onFinish` | `(values) => void \| Promise<void>` | — | Called by `form.handleSubmit` with validated values. |
@@ -145,7 +199,6 @@ import { ProButton } from "@/components/pro/base/button"
 |---|---|---|---|
 | `schema` | `Array<{ name: string; valueType?: string; ... }>` | — | Field definitions rendered with ProFields. |
 | `defaultValues` | `DefaultValues<T>` | — | Initial field values keyed by schema `name`. |
-| `initialValues` | `Record<string, unknown>` | — | Backward-compatible alias for `defaultValues`. |
 | `children` | `ReactNode` | — | Extra custom content rendered after generated fields. |
 
 ### ModalForm / DrawerForm
@@ -153,10 +206,9 @@ import { ProButton } from "@/components/pro/base/button"
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `schema` | `Array<{ name: string; valueType?: string; ... }>` | — | Optional generated fields rendered before `children`. |
-| `form` | `UseFormReturn<T>` | internal form | External react-hook-form instance. |
+| `formRef` | `Ref<ProFormInstance<T>>` | — | Imperative access to the internal form instance. |
 | `resolver` | `Resolver<T>` | — | react-hook-form resolver used by the internal form. |
 | `defaultValues` | `DefaultValues<T>` | — | Initial values used by generated schema fields. |
-| `initialValues` | `Record<string, unknown>` | — | Backward-compatible alias for `defaultValues`. |
 | `children` | `ReactNode` | — | Custom composed form body. |
 
 ### FormItem
@@ -165,6 +217,7 @@ import { ProButton } from "@/components/pro/base/button"
 |---|---|---|---|
 | `label` | `ReactNode` | — | Field label. |
 | `required` | `boolean` | — | Shows the required mark. |
+| `rules` | `RegisterOptions` | — | react-hook-form validation rules for auto-bound fields. |
 | `htmlFor` | `string` | — | Associates label with a field id. |
 | `description` | `ReactNode` | — | Label tooltip content. |
 | `tooltip` | `ReactNode` | — | Explicit tooltip content. |

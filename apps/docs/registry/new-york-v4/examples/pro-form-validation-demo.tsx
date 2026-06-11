@@ -1,8 +1,8 @@
 'use client'
 
-import { Input, Password } from '@/registry/new-york-v4/pro/base/fields/input'
-import { Select } from '@/registry/new-york-v4/pro/base/fields/select'
-import { FormItem, ProForm } from '@/registry/new-york-v4/pro/form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { ProForm } from '@/registry/new-york-v4/pro/form'
 
 const roleOptions = [
   { label: 'Admin', value: 'admin' },
@@ -10,8 +10,16 @@ const roleOptions = [
   { label: 'User', value: 'user' },
 ]
 
+const formSchema = z.object({
+  email: z.string().email('Enter a valid email address.'),
+  password: z.string().min(8, 'Password must be at least 8 characters.'),
+  role: z.string().min(1, 'Please select a role.'),
+})
+
+type FormValues = z.infer<typeof formSchema>
+
 export default function ProFormValidationDemo() {
-  async function handleFinish(values: Record<string, unknown>) {
+  async function handleFinish(values: FormValues) {
     await new Promise((resolve) => setTimeout(resolve, 800))
     alert(`Submitted successfully:\n${JSON.stringify(values, null, 2)}`)
   }
@@ -19,23 +27,34 @@ export default function ProFormValidationDemo() {
   return (
     <div className="w-full max-w-md p-6">
       <h2 className="mb-4 text-lg font-semibold">Create Account</h2>
-      <ProForm onFinish={handleFinish}>
-        <FormItem label="Email" required htmlFor="email">
-          <Input id="email" name="email" type="email" required placeholder="your@email.com" />
-        </FormItem>
-        <FormItem label="Password" required htmlFor="password">
-          <Password
-            id="password"
-            name="password"
-            required
-            minLength={8}
-            placeholder="At least 8 characters"
-          />
-        </FormItem>
-        <FormItem label="Role" required htmlFor="role">
-          <Select id="role" name="role" required placeholder="Select a role" options={roleOptions} />
-        </FormItem>
-      </ProForm>
+      <ProForm<FormValues>
+        defaultValues={{ email: '', password: '', role: '' }}
+        onFinish={handleFinish}
+        resolver={zodResolver(formSchema)}
+        schema={[
+          {
+            name: 'email',
+            label: 'Email',
+            valueType: 'email',
+            required: true,
+            fieldProps: { placeholder: 'your@email.com' },
+          },
+          {
+            name: 'password',
+            label: 'Password',
+            valueType: 'password',
+            required: true,
+            fieldProps: { placeholder: 'At least 8 characters' },
+          },
+          {
+            name: 'role',
+            label: 'Role',
+            valueType: 'select',
+            required: true,
+            fieldProps: { placeholder: 'Select a role', options: roleOptions },
+          },
+        ]}
+      />
     </div>
   )
 }
