@@ -1,7 +1,23 @@
 'use client'
 
 import { InfoIcon } from 'lucide-react'
-import { type ReactNode, useRef, useState } from 'react'
+import { type ReactNode, useState } from 'react'
+import {
+  Controller,
+  type DefaultValues,
+  type FieldErrors,
+  type FieldPath,
+  type FieldPathValue,
+  type FieldValues,
+  FormProvider,
+  type RefCallBack,
+  type Resolver,
+  type SubmitErrorHandler,
+  type SubmitHandler,
+  type UseFormReturn,
+  useForm,
+  useFormContext,
+} from 'react-hook-form'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../base/button'
 import { Checkbox, Switch } from '../base/fields/checkbox'
@@ -16,25 +32,31 @@ type OverlayFormSubmitter =
   | ReactNode
   | ((context: { submitting: boolean; cancel: () => void | Promise<void> }) => ReactNode)
 
-interface OverlayFormProps {
+interface OverlayFormProps<TFieldValues extends FieldValues = FieldValues> {
   trigger?: ReactNode
   title: string
   description?: string
   children?: ReactNode
   schema?: ProSchemaFormItem[]
-  initialValues?: ProSchemaFormValues
+  form?: UseFormReturn<TFieldValues>
+  resolver?: Resolver<TFieldValues>
+  defaultValues?: DefaultValues<TFieldValues>
+  initialValues?: DefaultValues<TFieldValues>
   open?: boolean
   onOpenChange?: (open: boolean) => void
-  onFinish?: (values: Record<string, unknown>) => void | Promise<void>
+  onFinish?: SubmitHandler<TFieldValues>
   onFinishFailed?: (errors: unknown) => void
   onCancel?: () => void | Promise<void>
   submitter?: false | OverlayFormSubmitter
   className?: string
 }
 
-interface ProFormProps {
+interface ProFormProps<TFieldValues extends FieldValues = FieldValues> {
   children?: ReactNode
-  onFinish?: (values: Record<string, unknown>) => void | Promise<void>
+  form?: UseFormReturn<TFieldValues>
+  resolver?: Resolver<TFieldValues>
+  defaultValues?: DefaultValues<TFieldValues>
+  onFinish?: SubmitHandler<TFieldValues>
   onFinishFailed?: (errors: unknown) => void
   onReset?: () => void | Promise<void>
   submitter?:
@@ -55,15 +77,22 @@ type ProSchemaFormValue =
   | undefined
   | null
 
-type ProSchemaFormValues = Record<string, ProSchemaFormValue>
-
-interface ProSchemaValueField {
-  value: ProSchemaFormValue
+export interface ProSchemaValueField<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+> {
+  name: TName
+  value: FieldPathValue<TFieldValues, TName>
   onChange: (value: ProSchemaFormValue) => void
+  onBlur: () => void
+  ref: RefCallBack
 }
 
-interface ProSchemaFormItem {
-  name: string
+export interface ProSchemaFormItem<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+> {
+  name: TName
   label?: ReactNode
   valueType?:
     | 'text'
@@ -92,81 +121,91 @@ interface ProSchemaFormItem {
   initialValue?: ProSchemaFormValue
   fieldProps?: Record<string, unknown>
   formItemProps?: Omit<FormItemProps, 'children' | 'label' | 'required' | 'disabled'>
-  render?: (field: ProSchemaValueField, item: ProSchemaFormItem) => ReactNode
+  render?: (
+    field: ProSchemaValueField<TFieldValues, TName>,
+    item: ProSchemaFormItem<TFieldValues, TName>,
+  ) => ReactNode
 }
 
-export function ProForm({
+export function ProForm<TFieldValues extends FieldValues = FieldValues>({
   children,
+  form: formProp,
+  resolver,
+  defaultValues,
   onFinish,
   onFinishFailed,
   onReset,
   submitter,
   className,
-}: ProFormProps) {
-  const formRef = useRef<HTMLFormElement>(null)
+}: ProFormProps<TFieldValues>) {
+  const internalForm = useForm<TFieldValues>({ resolver, defaultValues })
+  const form = formProp ?? internalForm
   const [loading, setLoading] = useState(false)
 
   async function reset() {
-    formRef.current?.reset()
+    form.reset(defaultValues)
     await onReset?.()
   }
 
-  async function submit() {
-    if (loading) return
+  const submitHandler = form.handleSubmit(
+    async (values) => {
+      if (loading) return
 
-    setLoading(true)
-    try {
-      await onFinish?.(getFormValues(formRef.current))
-    } catch (err) {
-      onFinishFailed?.(err)
-    } finally {
-      setLoading(false)
-    }
-  }
+      setLoading(true)
+      try {
+        await onFinish?.(values)
+      } catch (err) {
+        onFinishFailed?.(err)
+      } finally {
+        setLoading(false)
+      }
+    },
+    onFinishFailed as SubmitErrorHandler<TFieldValues>,
+  )
 
   return (
-    <form
-      ref={formRef}
-      onSubmit={async (event) => {
-        event.preventDefault()
-        await submit()
-      }}
-      className={className}
-    >
-      <div className="mb-4">{children}</div>
-      {submitter !== false && (
-        <div data-slot="pro-form-actions" className="flex flex-wrap items-center gap-2 pt-2">
-          {renderFormSubmitter(submitter, loading, reset)}
-        </div>
-      )}
-    </form>
+    <FormProvider {...form}>
+      <form onSubmit={submitHandler} className={className}>
+        <div className="mb-4">{children}</div>
+        {submitter !== false && (
+          <div data-slot="pro-form-actions" className="flex flex-wrap items-center gap-2 pt-2">
+            {renderFormSubmitter(submitter, loading, reset)}
+          </div>
+        )}
+      </form>
+    </FormProvider>
   )
 }
 
-export function ProSchemaForm({
+export function ProSchemaForm<TFieldValues extends FieldValues = FieldValues>({
   schema,
   initialValues,
+  defaultValues,
   children,
   ...props
-}: Omit<ProFormProps, 'children'> & {
+}: Omit<ProFormProps<TFieldValues>, 'children'> & {
   schema: ProSchemaFormItem[]
-  initialValues?: ProSchemaFormValues
+  defaultValues?: DefaultValues<TFieldValues>
+  initialValues?: DefaultValues<TFieldValues>
   children?: ReactNode
 }) {
   return (
-    <ProForm {...props}>
-      <ProSchemaFields schema={schema} initialValues={initialValues} />
+    <ProForm<TFieldValues> defaultValues={defaultValues ?? initialValues} {...props}>
+      <ProSchemaFields schema={schema} />
       {children}
     </ProForm>
   )
 }
 
-export function ModalForm({
+export function ModalForm<TFieldValues extends FieldValues = FieldValues>({
   trigger,
   title,
   description,
   children,
   schema,
+  form: formProp,
+  resolver,
+  defaultValues,
   initialValues,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
@@ -175,8 +214,11 @@ export function ModalForm({
   onCancel,
   submitter,
   className,
-}: OverlayFormProps) {
-  const { formRef, open, setOpen, loading, handleSubmit, handleCancel } = useOverlayForm({
+}: OverlayFormProps<TFieldValues>) {
+  const { form, open, setOpen, loading, handleSubmit, handleCancel } = useOverlayForm({
+    form: formProp,
+    resolver,
+    defaultValues: defaultValues ?? initialValues,
     open: controlledOpen,
     onOpenChange: controlledOnOpenChange,
     onFinish,
@@ -192,38 +234,39 @@ export function ModalForm({
       open={open}
       onOpenChange={setOpen}
     >
-      <form
-        ref={formRef}
-        onSubmit={async (event) => {
-          event.preventDefault()
-          await handleSubmit()
-        }}
-        className={cn('flex flex-1 flex-col overflow-hidden', className)}
-      >
-        <div className="flex-1 overflow-y-auto px-1 py-2">
-          {schema && <ProSchemaFields schema={schema} initialValues={initialValues} />}
-          {children}
-        </div>
-        {submitter !== false && (
-          <OverlayFormFooter
-            slot="modal-form-footer"
-            submitter={submitter}
-            submitting={loading}
-            cancel={handleCancel}
-            className="flex-col-reverse pt-4 sm:flex-row sm:justify-end"
-          />
-        )}
-      </form>
+      <FormProvider {...form}>
+        <form
+          onSubmit={handleSubmit}
+          className={cn('flex flex-1 flex-col overflow-hidden', className)}
+        >
+          <div className="flex-1 overflow-y-auto px-1 py-2">
+            {schema && <ProSchemaFields schema={schema} />}
+            {children}
+          </div>
+          {submitter !== false && (
+            <OverlayFormFooter
+              slot="modal-form-footer"
+              submitter={submitter}
+              submitting={loading}
+              cancel={handleCancel}
+              className="flex-col-reverse pt-4 sm:flex-row sm:justify-end"
+            />
+          )}
+        </form>
+      </FormProvider>
     </ProModal>
   )
 }
 
-export function DrawerForm({
+export function DrawerForm<TFieldValues extends FieldValues = FieldValues>({
   trigger,
   title,
   description,
   children,
   schema,
+  form: formProp,
+  resolver,
+  defaultValues,
   initialValues,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
@@ -233,8 +276,11 @@ export function DrawerForm({
   submitter,
   className,
   side = 'right',
-}: OverlayFormProps & { side?: 'top' | 'right' | 'bottom' | 'left' }) {
-  const { formRef, open, setOpen, loading, handleSubmit, handleCancel } = useOverlayForm({
+}: OverlayFormProps<TFieldValues> & { side?: 'top' | 'right' | 'bottom' | 'left' }) {
+  const { form, open, setOpen, loading, handleSubmit, handleCancel } = useOverlayForm({
+    form: formProp,
+    resolver,
+    defaultValues: defaultValues ?? initialValues,
     open: controlledOpen,
     onOpenChange: controlledOnOpenChange,
     onFinish,
@@ -251,46 +297,51 @@ export function DrawerForm({
       onOpenChange={setOpen}
       side={side}
     >
-      <form
-        ref={formRef}
-        onSubmit={async (event) => {
-          event.preventDefault()
-          await handleSubmit()
-        }}
-        className={cn('flex flex-1 flex-col overflow-hidden', className)}
-      >
-        <div className="flex-1 overflow-y-auto px-4 py-2">
-          {schema && <ProSchemaFields schema={schema} initialValues={initialValues} />}
-          {children}
-        </div>
-        {submitter !== false && (
-          <OverlayFormFooter
-            slot="drawer-form-footer"
-            submitter={submitter}
-            submitting={loading}
-            cancel={handleCancel}
-            className="mt-auto flex-col p-4"
-          />
-        )}
-      </form>
+      <FormProvider {...form}>
+        <form
+          onSubmit={handleSubmit}
+          className={cn('flex flex-1 flex-col overflow-hidden', className)}
+        >
+          <div className="flex-1 overflow-y-auto px-4 py-2">
+            {schema && <ProSchemaFields schema={schema} />}
+            {children}
+          </div>
+          {submitter !== false && (
+            <OverlayFormFooter
+              slot="drawer-form-footer"
+              submitter={submitter}
+              submitting={loading}
+              cancel={handleCancel}
+              className="mt-auto flex-col p-4"
+            />
+          )}
+        </form>
+      </FormProvider>
     </ProDrawer>
   )
 }
 
-function useOverlayForm({
+function useOverlayForm<TFieldValues extends FieldValues = FieldValues>({
+  form: formProp,
+  resolver,
+  defaultValues,
   open: controlledOpen,
   onOpenChange,
   onFinish,
   onFinishFailed,
   onCancel,
 }: {
+  form?: UseFormReturn<TFieldValues>
+  resolver?: Resolver<TFieldValues>
+  defaultValues?: DefaultValues<TFieldValues>
   open?: boolean
   onOpenChange?: (open: boolean) => void
-  onFinish?: (values: Record<string, unknown>) => void | Promise<void>
+  onFinish?: SubmitHandler<TFieldValues>
   onFinishFailed?: (errors: unknown) => void
   onCancel?: () => void | Promise<void>
 }) {
-  const formRef = useRef<HTMLFormElement>(null)
+  const internalForm = useForm<TFieldValues>({ resolver, defaultValues })
+  const form = formProp ?? internalForm
   const [internalOpen, setInternalOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const open = controlledOpen ?? internalOpen
@@ -300,27 +351,30 @@ function useOverlayForm({
     onOpenChange?.(value)
   }
 
-  async function handleSubmit() {
-    if (loading) return
-    setLoading(true)
-    try {
-      await onFinish?.(getFormValues(formRef.current))
-      setOpen(false)
-      formRef.current?.reset()
-    } catch (err) {
-      onFinishFailed?.(err)
-    } finally {
-      setLoading(false)
-    }
-  }
+  const handleSubmit = form.handleSubmit(
+    async (values) => {
+      if (loading) return
+      setLoading(true)
+      try {
+        await onFinish?.(values)
+        setOpen(false)
+        form.reset(defaultValues)
+      } catch (err) {
+        onFinishFailed?.(err)
+      } finally {
+        setLoading(false)
+      }
+    },
+    onFinishFailed as SubmitErrorHandler<TFieldValues>,
+  )
 
   async function handleCancel() {
     setOpen(false)
-    formRef.current?.reset()
+    form.reset(defaultValues)
     await onCancel?.()
   }
 
-  return { formRef, open, setOpen, loading, handleSubmit, handleCancel }
+  return { form, open, setOpen, loading, handleSubmit, handleCancel }
 }
 
 function OverlayFormFooter({
@@ -376,41 +430,10 @@ function renderOverlaySubmitter(
   )
 }
 
-function appendFormValue(currentValue: unknown, value: FormDataEntryValue) {
-  if (currentValue === undefined) return value
-  if (Array.isArray(currentValue)) return [...currentValue, value]
-  return [currentValue, value]
-}
-
-function getHiddenValues(value: ProSchemaFormValue) {
-  if (Array.isArray(value)) return value
-  if (value instanceof Date) return [value.toISOString()]
-  if (typeof value === 'object' && value != null) {
-    return [
-      JSON.stringify({
-        from: value.from?.toISOString(),
-        to: value.to?.toISOString(),
-      }),
-    ]
-  }
-  if (value != null) return [String(value)]
-  return []
-}
-
-function getFormValues(form: HTMLFormElement | null) {
-  if (!form) return {}
-
-  const values: Record<string, unknown> = {}
-  for (const [key, value] of new FormData(form).entries()) {
-    const currentValue = values[key]
-    values[key] = appendFormValue(currentValue, value)
-  }
-  return values
-}
-
 interface FormItemProps {
   className?: string
   children?: ReactNode
+  name?: string
   label?: ReactNode
   required?: boolean
   disabled?: boolean
@@ -424,6 +447,7 @@ interface FormItemProps {
 export function FormItem({
   className,
   children,
+  name,
   label,
   required,
   disabled,
@@ -433,6 +457,9 @@ export function FormItem({
   errors = [],
   extra,
 }: FormItemProps) {
+  const fieldError = useFieldErrors(name ?? htmlFor)
+  const errorMessages = errors.length > 0 ? errors : fieldError
+
   return (
     <div className={cn('space-y-1.5', className)}>
       {label != null && (
@@ -464,9 +491,9 @@ export function FormItem({
         </div>
       )}
       {children}
-      {errors.length > 0 && (
+      {errorMessages.length > 0 && (
         <p className="text-xs text-destructive" role="alert">
-          {errors.join(', ')}
+          {errorMessages.join(', ')}
         </p>
       )}
       {extra != null && <div className="text-xs text-muted-foreground">{extra}</div>}
@@ -474,66 +501,85 @@ export function FormItem({
   )
 }
 
-function ProSchemaFields({
-  schema,
-  initialValues,
-}: {
-  schema: ProSchemaFormItem[]
-  initialValues?: ProSchemaFormValues
-}) {
-  const [values, setValues] = useState<ProSchemaFormValues>(() =>
-    Object.fromEntries(
-      schema.map((item) => [item.name, initialValues?.[item.name] ?? item.initialValue]),
-    ),
-  )
-
+function ProSchemaFields({ schema }: { schema: ProSchemaFormItem[] }) {
   return (
     <div className="space-y-4">
       {schema.map((item) => {
         if (item.hidden) return null
 
-        const field = {
-          value: values[item.name],
-          onChange: (nextValue: ProSchemaFormValue) =>
-            setValues((current) => ({ ...current, [item.name]: nextValue })),
-        }
-        const hiddenValues = getHiddenValues(field.value)
-
         return (
-          <FormItem
+          <Controller
             key={item.name}
-            label={item.label}
-            required={item.required}
-            disabled={item.disabled}
-            htmlFor={item.name}
-            description={item.description}
-            tooltip={item.tooltip}
-            errors={item.errors}
-            extra={item.extra}
-            {...item.formItemProps}
-          >
-            {item.render ? item.render(field, item) : renderSchemaField(item, field)}
-            {hiddenValues.map((fieldValue) => (
-              <input
-                key={`${item.name}-${fieldValue}`}
-                type="hidden"
+            name={item.name}
+            defaultValue={item.initialValue}
+            rules={item.required ? { required: 'This field is required.' } : undefined}
+            render={({ field }) => (
+              <FormItem
                 name={item.name}
-                value={fieldValue}
-              />
-            ))}
-          </FormItem>
+                label={item.label}
+                required={item.required}
+                disabled={item.disabled}
+                htmlFor={item.name}
+                description={item.description}
+                tooltip={item.tooltip}
+                errors={item.errors}
+                extra={item.extra}
+                {...item.formItemProps}
+              >
+                {item.render
+                  ? item.render(field as ProSchemaValueField, item)
+                  : renderSchemaField(item, field as ProSchemaValueField)}
+              </FormItem>
+            )}
+          />
         )
       })}
     </div>
   )
 }
 
-function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) {
+function useFieldErrors(name?: string) {
+  try {
+    const { formState } = useFormContext()
+    const error = name ? getFieldError(formState.errors, name) : undefined
+    if (!error) return []
+    if (error.types && typeof error.types === 'object')
+      return Object.values(error.types).map(String)
+    return error.message ? [String(error.message)] : []
+  } catch {
+    return []
+  }
+}
+
+function getFieldError(
+  errors: FieldErrors<FieldValues>,
+  name: string,
+): { message?: unknown; types?: Record<string, unknown> } | undefined {
+  const error = name.split('.').reduce<unknown>((current, key) => {
+    if (current == null || typeof current !== 'object') return undefined
+    return (current as Record<string, unknown>)[key]
+  }, errors) as { message?: unknown; types?: unknown } | undefined
+
+  if (!error) return undefined
+  return {
+    message: error.message,
+    types:
+      error.types && typeof error.types === 'object'
+        ? (error.types as Record<string, unknown>)
+        : undefined,
+  }
+}
+
+function renderSchemaField<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+>(item: ProSchemaFormItem<TFieldValues, TName>, field: ProSchemaValueField<TFieldValues, TName>) {
   const fieldProps = item.fieldProps ?? {}
-  const textValue = String(field.value ?? '')
-  const dateValue = field.value instanceof Date ? field.value : undefined
-  const stringValue = typeof field.value === 'string' ? field.value : undefined
-  const numberValue = typeof field.value === 'number' ? field.value : undefined
+  const value = field.value as ProSchemaFormValue
+  const textValue = String(value ?? '')
+  const dateValue = value instanceof Date ? value : undefined
+  const stringValue = typeof value === 'string' ? value : undefined
+  const numberValue = typeof value === 'number' ? value : undefined
 
   switch (item.valueType ?? 'text') {
     case 'password':
@@ -561,7 +607,7 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
     case 'select':
       return (
         <Select
-          value={field.value as string | string[] | undefined}
+          value={value as string | string[] | undefined}
           disabled={item.disabled}
           required={item.required}
           onChange={field.onChange}
@@ -571,7 +617,7 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
     case 'multiSelect':
       return (
         <Select
-          value={field.value as string | string[] | undefined}
+          value={value as string | string[] | undefined}
           disabled={item.disabled}
           required={item.required}
           multiple
@@ -582,7 +628,7 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
     case 'checkbox':
       return (
         <Checkbox
-          value={field.value as boolean | string[] | undefined}
+          value={value as boolean | string[] | undefined}
           disabled={item.disabled}
           onChange={field.onChange}
           {...fieldProps}
@@ -620,7 +666,7 @@ function renderSchemaField(item: ProSchemaFormItem, field: ProSchemaValueField) 
     case 'dateRange':
       return (
         <DateRangePicker
-          value={field.value as { from?: Date; to?: Date } | undefined}
+          value={value as { from?: Date; to?: Date } | undefined}
           disabled={item.disabled}
           onChange={field.onChange}
           {...fieldProps}

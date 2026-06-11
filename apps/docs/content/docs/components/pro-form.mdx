@@ -130,9 +130,12 @@ import { ProButton } from "@/components/pro/base/button"
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `children` | `ReactNode` | — | Form fields and layout sections. |
-| `onFinish` | `(values) => void \| Promise<void>` | — | Called with collected `FormData` values. |
-| `onFinishFailed` | `(error) => void` | — | Called when `onFinish` throws. |
-| `onReset` | `() => void \| Promise<void>` | — | Called after native form reset. |
+| `form` | `UseFormReturn<T>` | internal form | External react-hook-form instance. |
+| `resolver` | `Resolver<T>` | — | react-hook-form resolver used by the internal form. |
+| `defaultValues` | `DefaultValues<T>` | — | Initial values used by the internal form. |
+| `onFinish` | `(values) => void \| Promise<void>` | — | Called by `form.handleSubmit` with validated values. |
+| `onFinishFailed` | `(error) => void` | — | Called with validation errors or errors thrown by `onFinish`. |
+| `onReset` | `() => void \| Promise<void>` | — | Called after `form.reset()`. |
 | `submitter` | `false \| ReactNode \| (context) => ReactNode` | submit button | Custom footer actions. |
 | `className` | `string` | — | Class name on the form element. |
 
@@ -141,7 +144,8 @@ import { ProButton } from "@/components/pro/base/button"
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `schema` | `Array<{ name: string; valueType?: string; ... }>` | — | Field definitions rendered with ProFields. |
-| `initialValues` | `Record<string, unknown>` | — | Initial field values keyed by schema `name`. |
+| `defaultValues` | `DefaultValues<T>` | — | Initial field values keyed by schema `name`. |
+| `initialValues` | `Record<string, unknown>` | — | Backward-compatible alias for `defaultValues`. |
 | `children` | `ReactNode` | — | Extra custom content rendered after generated fields. |
 
 ### ModalForm / DrawerForm
@@ -149,7 +153,10 @@ import { ProButton } from "@/components/pro/base/button"
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `schema` | `Array<{ name: string; valueType?: string; ... }>` | — | Optional generated fields rendered before `children`. |
-| `initialValues` | `Record<string, unknown>` | — | Initial values used by generated schema fields. |
+| `form` | `UseFormReturn<T>` | internal form | External react-hook-form instance. |
+| `resolver` | `Resolver<T>` | — | react-hook-form resolver used by the internal form. |
+| `defaultValues` | `DefaultValues<T>` | — | Initial values used by generated schema fields. |
+| `initialValues` | `Record<string, unknown>` | — | Backward-compatible alias for `defaultValues`. |
 | `children` | `ReactNode` | — | Custom composed form body. |
 
 ### FormItem
