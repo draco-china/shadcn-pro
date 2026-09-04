@@ -75,7 +75,6 @@ Every field is a plain React/shadcn component. Simple fields preserve the underl
   align="start"
 />
 
-
 ### Password
 
 <ComponentPreview
@@ -83,7 +82,6 @@ Every field is a plain React/shadcn component. Simple fields preserve the underl
   previewClassName="min-h-[160px] items-start p-6"
   align="start"
 />
-
 
 ### Digit
 
@@ -112,6 +110,8 @@ Every field is a plain React/shadcn component. Simple fields preserve the underl
   previewClassName="min-h-[180px] items-start p-6"
   align="start"
 />
+
+`Money` preserves intermediate values such as `1.` and `-` while editing, and works in both controlled and uncontrolled usage.
 
 
 ### Select
@@ -260,6 +260,8 @@ For single-file URL fields, store the pasted URL as an `UploadFile[]` yourself a
   previewClassName="min-h-[180px] items-start p-6"
   align="start"
 />
+
+`Captcha` ignores duplicate send attempts while a request is pending. The countdown starts only after a successful send; use `onSendError` to surface failures.
 
 
 ### ArrayField

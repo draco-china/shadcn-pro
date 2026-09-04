@@ -56,7 +56,7 @@
       "name": "pro-editor",
       "type": "registry:component",
       "title": "pro-editor",
-      "description": "Monaco-powered editor with controlled language, theme, view mode, and external preview slot.",
+      "description": "Monaco-powered editor with Worker-backed Shiki syntax highlighting, controlled language, theme, view mode, and external preview slot.",
       "categories": ["content"]
     },
     {

@@ -20,6 +20,7 @@ type FieldCalendarProps = DayPickerProps extends infer TDayPickerProps
     : never
   : never
 
+/** Calendar styled for date and date-range fields. */
 export function FieldCalendar({ className, showOutsideDays = true, ...props }: FieldCalendarProps) {
   const defaultClassNames = getDefaultClassNames()
 

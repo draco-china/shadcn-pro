@@ -29,7 +29,7 @@ npx shadcn@latest add https://draco-china.github.io/shadcn-pro/r/markdown-viewer
 <Step>Install the following dependencies.</Step>
 
 ```bash
-bun add class-variance-authority react-markdown lucide-react remark-gfm remark-breaks remark-math remark-toc rehype-raw rehype-sanitize rehype-mathjax
+bun add class-variance-authority hast-util-to-jsx-runtime lucide-react
 ```
 
 <Step>Install or copy `code-viewer` when installing manually.</Step>
@@ -69,6 +69,9 @@ export default function Example() {
 | `content` | `string` | — | Markdown string to render. |
 | `theme` | `"light" \| "dark"` | `"dark"` | Code block surface theme. Pass this from your app theme when needed. |
 | `className` | `string` | — | Additional CSS class for the prose wrapper. |
+| `cdnBaseUrl` | `string` | `"https://esm.sh"` | ESM CDN used by the parser worker. Point this at an internal mirror for offline or restricted deployments. |
+
+Markdown parsing runs in a shared module Worker. The pinned `unified`, remark, rehype, and MathJax modules are fetched from the CDN only on first use, then cached by the browser and reused by the Worker. The page bundle contains only the React HAST renderer. If your app uses CSP, allow the CDN in `script-src` and allow same-origin module workers in `worker-src`.
 
 ## Supported Syntax
 

@@ -49,6 +49,7 @@ interface ArrayFieldProps<TItem extends object> {
   className?: string
 }
 
+/** Repeating field collection with add, duplicate, remove, and reorder actions. */
 export function ArrayField<TItem extends object = Record<string, unknown>>({
   value,
   onChange,

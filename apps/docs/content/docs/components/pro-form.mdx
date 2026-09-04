@@ -29,7 +29,7 @@ npx shadcn@latest add https://draco-china.github.io/shadcn-pro/r/pro-form.json
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add lucide-react
+bun add @tanstack/react-form lucide-react
 ```
 
 <Step>Install or copy `pro-fields`, `pro-base`, and `pro-overlay`.</Step>
@@ -82,7 +82,7 @@ export function AccountForm() {
 }
 ```
 
-`ProForm` manages react-hook-form internally. Schema items only describe how fields render; values and validation flow through RHF `Controller` and `handleSubmit`.
+`ProForm` manages TanStack Form internally. Schema items only describe how fields render; values and validation flow through `form.Field` and `form.handleSubmit`.
 
 For custom layout, put fields inside `FormItem`. When `name` is set, `FormItem` binds the child control to the internal form.
 
@@ -99,7 +99,12 @@ export function AccountForm() {
         label="Name"
         name="name"
         required
-        rules={{ minLength: { value: 2, message: "Name must be at least 2 characters." } }}
+        validators={{
+          onBlur: ({ value }) =>
+            typeof value === "string" && value.length < 2
+              ? "Name must be at least 2 characters."
+              : undefined,
+        }}
       >
         <Input placeholder="Alice Wang" />
       </FormItem>
@@ -110,10 +115,9 @@ export function AccountForm() {
 
 Use `formRef` when a page needs imperative access to the internal form instance.
 
-Use `resolver` for Zod validation.
+Pass a Zod schema directly to `validator`. TanStack Form supports Standard Schema without an adapter.
 
 ```tsx
-import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { ProForm } from "@/components/pro/form"
 
@@ -127,7 +131,7 @@ type Values = z.infer<typeof formSchema>
 export function AccountForm() {
   return (
     <ProForm<Values>
-      resolver={zodResolver(formSchema)}
+      validator={formSchema}
       defaultValues={{ email: "", password: "" }}
       onFinish={async (values) => console.log(values)}
       schema={[
@@ -185,8 +189,8 @@ import { ProButton } from "@/components/pro/base/button"
 | `children` | `ReactNode` | — | Form fields and layout sections. |
 | `schema` | `Array<{ name: string; valueType?: string; ... }>` | — | Optional field definitions rendered with ProFields. |
 | `formRef` | `Ref<ProFormInstance<T>>` | — | Imperative access to the internal form instance. |
-| `resolver` | `Resolver<T>` | — | react-hook-form resolver used by the internal form. |
-| `defaultValues` | `DefaultValues<T>` | — | Initial values used by the internal form. |
+| `validator` | `FormValidateOrFn<T>` | — | TanStack Form submit validator; accepts Standard Schema such as Zod directly. |
+| `defaultValues` | `T` | — | Initial values used by the internal form. |
 | `onFinish` | `(values) => void \| Promise<void>` | — | Called by `form.handleSubmit` with validated values. |
 | `onFinishFailed` | `(error) => void` | — | Called with validation errors or errors thrown by `onFinish`. |
 | `onReset` | `() => void \| Promise<void>` | — | Called after `form.reset()`. |
@@ -198,7 +202,7 @@ import { ProButton } from "@/components/pro/base/button"
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `schema` | `Array<{ name: string; valueType?: string; ... }>` | — | Field definitions rendered with ProFields. |
-| `defaultValues` | `DefaultValues<T>` | — | Initial field values keyed by schema `name`. |
+| `defaultValues` | `T` | — | Initial field values keyed by schema `name`. |
 | `children` | `ReactNode` | — | Extra custom content rendered after generated fields. |
 
 ### ModalForm / DrawerForm
@@ -207,8 +211,8 @@ import { ProButton } from "@/components/pro/base/button"
 |---|---|---|---|
 | `schema` | `Array<{ name: string; valueType?: string; ... }>` | — | Optional generated fields rendered before `children`. |
 | `formRef` | `Ref<ProFormInstance<T>>` | — | Imperative access to the internal form instance. |
-| `resolver` | `Resolver<T>` | — | react-hook-form resolver used by the internal form. |
-| `defaultValues` | `DefaultValues<T>` | — | Initial values used by generated schema fields. |
+| `validator` | `FormValidateOrFn<T>` | — | TanStack Form submit validator; accepts Standard Schema directly. |
+| `defaultValues` | `T` | — | Initial values used by generated schema fields. |
 | `children` | `ReactNode` | — | Custom composed form body. |
 
 ### FormItem
@@ -216,10 +220,11 @@ import { ProButton } from "@/components/pro/base/button"
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `label` | `ReactNode` | — | Field label. |
-| `required` | `boolean` | — | Shows the required mark. |
-| `rules` | `RegisterOptions` | — | react-hook-form validation rules for auto-bound fields. |
+| `required` | `boolean` | — | Shows the required mark and composes required validation with `validators.onSubmit`. |
+| `disabled` | `boolean` | — | Disables the bound child control and applies disabled field styling. |
+| `validators` | `ProFieldValidators` | — | TanStack Form field validators for change, blur, or submit. |
 | `htmlFor` | `string` | — | Associates label with a field id. |
 | `description` | `ReactNode` | — | Label tooltip content. |
 | `tooltip` | `ReactNode` | — | Explicit tooltip content. |
-| `errors` | `string[]` | `[]` | Error messages rendered below the field. |
+| `errors` | `string[]` | `[]` | Error messages rendered below the field and reflected through `aria-invalid`. |
 | `extra` | `ReactNode` | — | Helper content rendered below errors. |

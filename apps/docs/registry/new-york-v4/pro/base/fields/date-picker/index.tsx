@@ -3,22 +3,26 @@
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
 import { Popover as PopoverPrimitive } from 'radix-ui'
+import type { FocusEventHandler } from 'react'
 import { cn } from '@/lib/utils'
 import { FieldCalendar } from '../shared/calendar'
 import { FieldClearAction, FieldPopoverContent, fieldTriggerClassName } from '../shared/field'
 
+/** Popover-backed single-date picker. */
 export function DatePicker({
   value,
   onChange,
   disabled,
   placeholder = 'Pick a date',
   className,
+  onBlur,
 }: {
   value?: Date
   onChange?: (date: Date | undefined) => void
   disabled?: boolean
   placeholder?: string
   className?: string
+  onBlur?: FocusEventHandler<HTMLButtonElement>
 }) {
   return (
     <PopoverPrimitive.Root data-slot="field-popover">
@@ -27,6 +31,7 @@ export function DatePicker({
           <button
             type="button"
             disabled={disabled}
+            onBlur={onBlur}
             className={cn(
               fieldTriggerClassName,
               !value && 'text-muted-foreground',
@@ -56,18 +61,21 @@ export function DatePicker({
   )
 }
 
+/** Popover-backed date-range picker. */
 export function DateRangePicker({
   value,
   onChange,
   disabled,
   placeholder = 'Pick date range',
   className,
+  onBlur,
 }: {
   value?: { from?: Date; to?: Date }
   onChange?: (value: { from?: Date; to?: Date } | undefined) => void
   disabled?: boolean
   placeholder?: string
   className?: string
+  onBlur?: FocusEventHandler<HTMLButtonElement>
 }) {
   const from = value?.from
   const to = value?.to
@@ -79,6 +87,7 @@ export function DateRangePicker({
           <button
             type="button"
             disabled={disabled}
+            onBlur={onBlur}
             className={cn(
               fieldTriggerClassName,
               !from && 'text-muted-foreground',

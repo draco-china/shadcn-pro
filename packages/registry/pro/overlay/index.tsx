@@ -7,6 +7,7 @@ import { Drawer as DrawerPrimitive } from 'vaul'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../base/button'
 
+/** Accessible modal shell built on Radix Dialog. */
 export function ProModal({
   trigger,
   title,
@@ -81,6 +82,7 @@ export function ProModal({
   )
 }
 
+/** Directional drawer shell built on Vaul. */
 export function ProDrawer({
   trigger,
   title,
@@ -153,6 +155,7 @@ export function ProDrawer({
   )
 }
 
+/** Confirmation dialog with guarded async submission. */
 export function ProConfirm({
   trigger,
   title,

@@ -7,9 +7,9 @@ import { ProButton } from "@/registry/new-york-v4/pro/base/button"
 import { ProEditor } from "@/registry/new-york-v4/pro/editor"
 
 type ViewMode = NonNullable<NonNullable<ComponentProps<typeof ProEditor>["preview"]>["mode"]>
-type PreviewProps = Parameters<
+type PreviewProps = ComponentProps<
   NonNullable<NonNullable<ComponentProps<typeof ProEditor>["preview"]>["component"]>
->[0]
+>
 
 const INITIAL_CODE = `import { useState } from "react"
 

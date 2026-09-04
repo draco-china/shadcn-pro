@@ -16,17 +16,20 @@ import { Input } from '../base/fields/input'
 import { Select } from '../base/fields/select'
 import { ProPagination } from '../pagination'
 
+/** Zero-based pagination state used by ProList. */
 export interface ProListPaginationState {
   pageIndex: number
   pageSize: number
 }
 
+/** Search, filter, and pagination state emitted by ProList. */
 export interface ProListState {
   pagination: ProListPaginationState
   search: string
   filters: Record<string, string | string[] | undefined>
 }
 
+/** Declarative filter definition for ProList. */
 export interface ProListFilter<TData> {
   key: string
   placeholder?: string
@@ -38,6 +41,7 @@ export interface ProListFilter<TData> {
   onFilter?: (value: string, record: TData) => boolean
 }
 
+/** Data and actions passed to ProList render slots. */
 export interface ProListRenderContext<TData> {
   data: TData[]
   pageData: TData[]
@@ -55,6 +59,7 @@ type ProListVariant = 'default' | 'outline' | 'ghost'
 
 type ProListDirection = 'vertical' | 'horizontal'
 
+/** Searchable, filterable, pageable local or remote data list. */
 export function ProList<TData>({
   data,
   request,
@@ -552,4 +557,5 @@ function getProListItemKey<TData>(
   return index
 }
 
+/** Props accepted by ProList. */
 export type ProListProps<TData> = ComponentProps<typeof ProList<TData>>

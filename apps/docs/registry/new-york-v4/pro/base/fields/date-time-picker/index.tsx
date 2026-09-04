@@ -3,6 +3,7 @@
 import { format } from 'date-fns'
 import { CalendarIcon, Check, ChevronDown, ChevronUp } from 'lucide-react'
 import { Popover as PopoverPrimitive, Select as SelectPrimitive } from 'radix-ui'
+import type { FocusEventHandler } from 'react'
 import { cn } from '@/lib/utils'
 import { FieldCalendar } from '../shared/calendar'
 import {
@@ -12,18 +13,21 @@ import {
   fieldTriggerClassName,
 } from '../shared/field'
 
+/** Date picker with hour, minute, and second controls. */
 export function DateTimePicker({
   value,
   onChange,
   disabled,
   placeholder = 'Pick date & time',
   className,
+  onBlur,
 }: {
   value?: Date
   onChange?: (date: Date | undefined) => void
   disabled?: boolean
   placeholder?: string
   className?: string
+  onBlur?: FocusEventHandler<HTMLButtonElement>
 }) {
   const [hour, minute, second] = value
     ? [value.getHours(), value.getMinutes(), value.getSeconds()]
@@ -44,6 +48,7 @@ export function DateTimePicker({
           <button
             type="button"
             disabled={disabled}
+            onBlur={onBlur}
             className={cn(
               fieldTriggerClassName,
               !value && 'text-muted-foreground',
@@ -108,16 +113,19 @@ export function DateTimePicker({
   )
 }
 
+/** Controlled time picker that emits HH:mm:ss values. */
 export function TimePicker({
   value,
   onChange,
   disabled,
   className,
+  onBlur,
 }: {
   value?: string
   onChange?: (value: string | undefined) => void
   disabled?: boolean
   className?: string
+  onBlur?: FocusEventHandler<HTMLButtonElement>
 }) {
   const [hourValue, minuteValue, secondValue] = value?.split(':') ?? []
   const hour = Number(hourValue) || 0
@@ -145,6 +153,7 @@ export function TimePicker({
         value={hour}
         max={23}
         disabled={disabled}
+        onBlur={onBlur}
         onChange={(next) => emit(next, minute, second)}
       />
       <span className="text-muted-foreground">:</span>
@@ -153,6 +162,7 @@ export function TimePicker({
         value={minute}
         max={59}
         disabled={disabled}
+        onBlur={onBlur}
         onChange={(next) => emit(hour, next, second)}
       />
       <span className="text-muted-foreground">:</span>
@@ -161,6 +171,7 @@ export function TimePicker({
         value={second}
         max={59}
         disabled={disabled}
+        onBlur={onBlur}
         onChange={(next) => emit(hour, minute, next)}
       />
       <span className="relative flex size-4 shrink-0 items-center justify-center">
@@ -182,12 +193,14 @@ function TimeSegmentSelect({
   max,
   disabled,
   onChange,
+  onBlur,
 }: {
   variant?: 'popover' | 'inline'
   value: number
   max: number
   disabled?: boolean
   onChange: (value: number) => void
+  onBlur?: FocusEventHandler<HTMLButtonElement>
 }) {
   return (
     <SelectPrimitive.Root
@@ -198,6 +211,7 @@ function TimeSegmentSelect({
     >
       <SelectPrimitive.Trigger
         data-slot="time-segment-trigger"
+        onBlur={onBlur}
         className={cn(
           fieldTriggerClassName,
           variant === 'popover'

@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
 
+/** Sandboxed iframe surface for rendering supplied HTML. */
 export function HtmlViewer({
   content,
   sandbox = 'allow-scripts',

@@ -3,6 +3,7 @@
   "description": "Component registry for shadcn-pro",
   "private": true,
   "scripts": {
+    "test": "bun test",
     "validate": "bun run scripts/validate.ts"
   },
   "devDependencies": {

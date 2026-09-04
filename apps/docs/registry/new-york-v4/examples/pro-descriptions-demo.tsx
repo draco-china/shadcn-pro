@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { type ComponentProps, useState } from "react"
 import { Badge } from "@/registry/new-york-v4/ui/badge"
 import { Button } from "@/registry/new-york-v4/ui/button"
 import { ProButton } from "@/registry/new-york-v4/pro/base/button"
@@ -63,7 +63,7 @@ export default function ProDescriptionsDemo() {
     setMode("view")
   }
 
-  const items = [
+  const items: ComponentProps<typeof ProDescriptions>["items"] = [
     { label: "Name", value: data.name },
     { label: "Email", value: data.email },
     {

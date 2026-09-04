@@ -1,27 +1,14 @@
 'use client'
 
 import { cva } from 'class-variance-authority'
+import { type Components, toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { CircleCheckIcon, InfoIcon, type LucideIcon, TriangleAlertIcon } from 'lucide-react'
-import { isValidElement, useMemo } from 'react'
-import type { Components, Options as ReactMarkdownOptions } from 'react-markdown'
-import ReactMarkdown from 'react-markdown'
-import rehypeMathjax from 'rehype-mathjax/svg'
-import rehypeRaw from 'rehype-raw'
-import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
-import remarkBreaks from 'remark-breaks'
-import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
-import remarkToc from 'remark-toc'
+import { Fragment, isValidElement, useMemo } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
 import { cn } from '@/lib/utils'
 import { CodeViewer } from '../code'
-
-interface MarkdownNode {
-  type?: string
-  lang?: string
-  value?: string
-  data?: Record<string, unknown>
-  children?: MarkdownNode[]
-}
+import { type MarkdownRoot, markdownAlertLabels } from './plugins'
+import { useMarkdownWorker } from './use-markdown-worker'
 
 const MARKDOWN_TABLE_ALIGN_CLASSES = {
   center: 'text-center',
@@ -29,74 +16,12 @@ const MARKDOWN_TABLE_ALIGN_CLASSES = {
   left: 'text-left',
 } as const
 
-const sanitizeSchema = {
-  ...defaultSchema,
-  tagNames: [...(defaultSchema.tagNames ?? []), 'details', 'summary', 'kbd', 'sub', 'sup'],
-  attributes: {
-    ...defaultSchema.attributes,
-    a: [...(defaultSchema.attributes?.a ?? []), 'className', 'target', 'rel'],
-    code: [...(defaultSchema.attributes?.code ?? []), 'className'],
-    div: [...(defaultSchema.attributes?.div ?? []), 'className', 'data-alert'],
-    input: [...(defaultSchema.attributes?.input ?? []), 'type', 'checked', 'disabled'],
-    span: [...(defaultSchema.attributes?.span ?? []), 'className', 'aria-hidden'],
-    svg: [
-      ...(defaultSchema.attributes?.svg ?? []),
-      'className',
-      'height',
-      'role',
-      'style',
-      'viewBox',
-      'width',
-      'xmlns',
-    ],
-    path: [...(defaultSchema.attributes?.path ?? []), 'd', 'fill', 'stroke'],
-    g: [...(defaultSchema.attributes?.g ?? []), 'fill', 'stroke', 'transform'],
-    line: [
-      ...(defaultSchema.attributes?.line ?? []),
-      'stroke',
-      'strokeWidth',
-      'x1',
-      'x2',
-      'y1',
-      'y2',
-    ],
-    rect: [
-      ...(defaultSchema.attributes?.rect ?? []),
-      'fill',
-      'height',
-      'rx',
-      'ry',
-      'stroke',
-      'width',
-      'x',
-      'y',
-    ],
-    td: [...(defaultSchema.attributes?.td ?? []), 'align'],
-    th: [...(defaultSchema.attributes?.th ?? []), 'align'],
-  },
-}
-
-const markdownRemarkPlugins: ReactMarkdownOptions['remarkPlugins'] = [
-  remarkGfm,
-  [remarkToc, { heading: 'contents|table[ -]of[ -]contents|toc', tight: true }],
-  remarkBreaks,
-  remarkMath,
-  remarkMathCodeBlocks,
-  remarkGitHubAlerts,
-]
-
-const markdownRehypePlugins: ReactMarkdownOptions['rehypePlugins'] = [
-  rehypeRaw,
-  [rehypeSanitize, sanitizeSchema],
-  rehypeMathjax,
-]
-
 const alerts = {
-  note: { label: 'Note', icon: InfoIcon },
-  tip: { label: 'Tip', icon: CircleCheckIcon },
-  important: { label: 'Important', icon: InfoIcon },
-  warning: { label: 'Warning', icon: TriangleAlertIcon },
-  caution: { label: 'Caution', icon: TriangleAlertIcon },
+  note: { label: markdownAlertLabels.note, icon: InfoIcon },
+  tip: { label: markdownAlertLabels.tip, icon: CircleCheckIcon },
+  important: { label: markdownAlertLabels.important, icon: InfoIcon },
+  warning: { label: markdownAlertLabels.warning, icon: TriangleAlertIcon },
+  caution: { label: markdownAlertLabels.caution, icon: TriangleAlertIcon },
 } satisfies Record<string, { label: string; icon: LucideIcon }>
 
 const alertVariants = cva('', {
@@ -131,15 +56,20 @@ const alertVariants = cva('', {
   },
 })
 
+/** Sanitized GFM and math renderer with shared code highlighting. */
 export function MarkdownViewer({
   content,
   theme = 'dark',
   className,
+  cdnBaseUrl,
 }: {
   content: string
   theme?: 'light' | 'dark'
   className?: string
+  /** ESM CDN base URL used by the parser worker. Defaults to https://esm.sh. */
+  cdnBaseUrl?: string
 }) {
+  const { tree, error, loading } = useMarkdownWorker(content, cdnBaseUrl)
   const components = useMemo<Components>(
     () => ({
       div: MarkdownDiv,
@@ -321,7 +251,7 @@ export function MarkdownViewer({
             align={align}
             className={cn(
               'border-r border-b border-border px-4 py-2.5 align-top last:border-r-0',
-              MARKDOWN_TABLE_ALIGN_CLASSES[align ?? 'left'],
+              getMarkdownTableAlignClass(align),
               className,
             )}
             {...elementProps}
@@ -336,7 +266,7 @@ export function MarkdownViewer({
             align={align}
             className={cn(
               'border-r border-b border-border bg-muted px-4 py-2.5 font-semibold align-top last:border-r-0',
-              MARKDOWN_TABLE_ALIGN_CLASSES[align ?? 'left'],
+              getMarkdownTableAlignClass(align),
               className,
             )}
             {...elementProps}
@@ -346,13 +276,29 @@ export function MarkdownViewer({
     }),
     [theme],
   )
+  const renderedContent = useMemo(
+    () => (tree ? renderMarkdownTree(tree, components) : null),
+    [components, tree],
+  )
 
   if (!content.trim()) {
     return <div className={cn('text-sm text-muted-foreground', className)}>No markdown content</div>
   }
 
+  if (error) {
+    return (
+      <div
+        className={cn('rounded-lg border border-destructive/30 bg-destructive/5 p-4', className)}
+      >
+        <p className="font-medium text-destructive">Markdown could not be loaded</p>
+        <p className="mt-1 text-sm text-muted-foreground">{error.message}</p>
+      </div>
+    )
+  }
+
   return (
     <div
+      aria-busy={loading}
       className={cn(
         'max-w-none text-foreground',
         '[&_.contains-task-list]:list-none [&_.contains-task-list]:pl-0 [&_.task-list-item]:my-1 [&_.task-list-item]:flex [&_.task-list-item]:items-start [&_.task-list-item]:gap-2 [&_.task-list-item_input]:mt-1',
@@ -361,77 +307,32 @@ export function MarkdownViewer({
         className,
       )}
     >
-      <ReactMarkdown
-        remarkPlugins={markdownRemarkPlugins}
-        rehypePlugins={markdownRehypePlugins}
-        components={components}
-      >
-        {content}
-      </ReactMarkdown>
+      {renderedContent ?? (
+        <div
+          className="h-20 animate-pulse rounded-lg bg-muted"
+          role="status"
+          aria-label="Loading Markdown"
+        />
+      )}
     </div>
   )
 }
 
-function remarkMathCodeBlocks() {
-  return (tree: MarkdownNode) => {
-    walkMarkdownNode(tree, (node) => {
-      if (node.type !== 'code' || node.lang !== 'math') return
-      node.type = 'math'
-      node.lang = undefined
-    })
-  }
+function renderMarkdownTree(tree: MarkdownRoot, components: Components) {
+  return toJsxRuntime(tree as never, {
+    Fragment,
+    jsx,
+    jsxs,
+    components,
+    passNode: true,
+  })
 }
 
-function remarkGitHubAlerts() {
-  return (tree: MarkdownNode) => {
-    walkMarkdownNode(tree, (node) => {
-      if (node.type !== 'blockquote') return
-
-      const firstParagraph = node.children?.[0]
-      const firstText = firstParagraph?.children?.[0]
-      if (firstParagraph?.type !== 'paragraph' || firstText?.type !== 'text' || !firstText.value) {
-        return
-      }
-
-      const match = firstText.value.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)]\s*\n?/i)
-      if (!match) return
-
-      const type = match[1].toLowerCase() as keyof typeof alerts
-      if (!(type in alerts)) return
-
-      firstText.value = firstText.value.slice(match[0].length).replace(/^\s+/, '')
-      while (firstParagraph.children?.[0] && isEmptyAlertLeadNode(firstParagraph.children[0])) {
-        firstParagraph.children.shift()
-      }
-      if (firstParagraph.children?.length === 0) {
-        node.children?.shift()
-      }
-      node.data = {
-        hName: 'div',
-        hProperties: { className: `markdown-alert markdown-alert-${type}`, dataAlert: type },
-      }
-      node.children?.unshift({
-        type: 'paragraph',
-        data: {
-          hName: 'div',
-          hProperties: { className: `markdown-alert-title markdown-alert-title-${type}` },
-        },
-        children: [{ type: 'text', value: alerts[type].label }],
-      })
-    })
+function getMarkdownTableAlignClass(align?: string) {
+  if (align === 'center' || align === 'right' || align === 'left') {
+    return MARKDOWN_TABLE_ALIGN_CLASSES[align]
   }
-}
-
-function isEmptyAlertLeadNode(node: MarkdownNode) {
-  return (node.type === 'text' && (node.value ?? '').trim().length === 0) || node.type === 'break'
-}
-
-function walkMarkdownNode(node: MarkdownNode, visitor: (node: MarkdownNode) => void) {
-  visitor(node)
-  if (!node.children) return
-  for (const child of node.children) {
-    walkMarkdownNode(child, visitor)
-  }
+  return undefined
 }
 
 function withoutMarkdownNode<TProps extends { node?: unknown }>(props: TProps) {

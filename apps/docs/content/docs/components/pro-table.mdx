@@ -236,7 +236,7 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `columns`               | `ColumnDef<T>[]`                      | —                            | TanStack Table column definitions.                                                                             |
 | `data`                  | `T[]`                                 | `[]`                         | Table data array for local/client data.                                                                        |
 | `request`               | `(state) => Promise<{ data, total? }>`| —                            | Server request function. Return `{ data, total }`; `total` feeds pagination automatically.     |
-| `initialState`          | `Partial<ProTableState>`              | —                            | Initial pagination, sorting, and column filters. Useful for URL-derived initial state.                          |
+| `initialState`          | `Partial<ProTableState>`              | —                            | Pagination, sorting, and column filters synchronized from external state, including browser navigation.       |
 | `onChange`              | `(state) => void`                     | —                            | Called when pagination, sorting, or filters change. Useful for URL sync or manually loading data.               |
 | `header`                | `ReactNode \| (context) => ReactNode` | —                            | Title/description area rendered above the toolbar. Do not put search, filters, or actions here.                                                                     |
 | `toolbar`               | `false \| ReactNode \| (context) => ReactNode` | enabled | Custom toolbar content. Pass `false` to hide the whole toolbar. |
@@ -246,7 +246,7 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | `toolbarColumns`        | `boolean` | `true` | Show the column settings menu. |
 | `bulkToolbar`           | `false \| ReactNode \| (context) => ReactNode` | — | Bulk toolbar actions shown when rows are selected. |
 | `pagination`            | `false` | enabled                   | Set to `false` to hide pagination. |
-| `dragSort`              | `false \| { rowKey?, onDragSortEnd? }` | —                            | Drag sort config. Pass an object to enable row drag sorting.                                                   |
+| `dragSort`              | `false \| { rowKey, onDragSortEnd? }` | —                            | Drag sort config. `rowKey` is required and must resolve to a unique row identifier.                            |
 | `loading`               | `boolean \| { rows? }`                | `false`                      | Shows a skeleton loading state. Object form configures skeleton rows.                                           |
 | `layout`                | `'full' \| 'auto'`                    | `'full'`                     | Full layout keeps pagination at the bottom with a spacer; the table itself still follows content height. |
 | `table`                 | `{ stickyHeader?, pinning? }`         | `{ stickyHeader: true }`     | Table behavior config. `pinning` can be controlled with `{ value, onChange(value) }` or disabled with `false`.  |
@@ -267,7 +267,7 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 
 ### useProTableUrlState
 
-Use URL search params as initial table state and sync later table state changes back to the URL — framework-agnostic via a `search` + `navigate` interface (compatible with TanStack Router, Next.js App Router, React Router, etc.).
+Synchronize URL search params and table state in both directions — including browser back/forward navigation — through a framework-agnostic `search` + `navigate` interface compatible with TanStack Router, Next.js App Router, React Router, and similar routers.
 
 ```tsx
 import { useProTableUrlState } from '@/components/pro/table'

@@ -72,6 +72,7 @@ const descriptionsValueVariants = cva('flex-1 text-sm text-foreground', {
   },
 })
 
+/** Responsive key-value description grid. */
 export function ProDescriptions({
   title,
   items,

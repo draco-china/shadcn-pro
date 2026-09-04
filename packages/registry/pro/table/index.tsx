@@ -19,7 +19,6 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 import { compareItems, type RankingInfo, rankItem } from '@tanstack/match-sorter-utils'
 import {
-  type Cell,
   type Column,
   type ColumnDef,
   type ColumnFiltersState,
@@ -50,7 +49,6 @@ import {
   ArrowUpDown,
   Check,
   GripVertical,
-  Inbox,
   Pin,
   PinOff,
   RefreshCw,
@@ -60,7 +58,6 @@ import {
 } from 'lucide-react'
 import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
 import {
-  type CSSProperties,
   type Dispatch,
   type KeyboardEvent,
   type ReactNode,
@@ -80,12 +77,26 @@ import { CheckboxControl } from '../base/fields/checkbox'
 import { Input } from '../base/fields/input'
 import { Select } from '../base/fields/select'
 import { ProPagination } from '../pagination'
+import {
+  getPinnedColumnClassName,
+  getPinnedColumnStyle,
+  ProTableBody,
+  type ProTablePinnedColumnOffsets,
+} from './body'
+import {
+  type ProTableStateValue,
+  type UrlColumnFilterConfig,
+  useProTableUrlStateValue,
+} from './url-state'
 
-export interface ProTableState {
-  pagination: PaginationState
-  sorting: SortingState
-  columnFilters: ColumnFiltersState
-}
+/** Pagination, sorting, and filter state managed by ProTable. */
+export interface ProTableState extends ProTableStateValue {}
+
+/** Maps a table column filter to a URL search parameter. */
+export type ColumnFilterConfig = UrlColumnFilterConfig
+
+/** Synchronizes ProTable state with a router's search parameters. */
+export const useProTableUrlState = useProTableUrlStateValue
 
 const TABLE_SIZE_OPTIONS = [
   { value: 'default', label: 'Comfortable' },
@@ -104,7 +115,7 @@ type ProTableSearch =
     }
 
 interface ProTableDragSortOptions<TData> {
-  rowKey?: Extract<keyof TData, string | number>
+  rowKey: Extract<keyof TData, string | number>
   onDragSortEnd?: (newData: TData[]) => void
 }
 
@@ -127,172 +138,6 @@ interface ProTableRenderContext<TData> {
 }
 
 type ProTableToolbarSlot<TData> = ReactNode | ((context: ProTableRenderContext<TData>) => ReactNode)
-
-export type ColumnFilterConfig =
-  | {
-      columnId: string
-      searchKey: string
-      type?: 'string'
-      serialize?: (value: unknown) => unknown
-      deserialize?: (value: unknown) => unknown
-    }
-  | {
-      columnId: string
-      searchKey: string
-      type: 'array'
-      serialize?: (value: unknown) => unknown
-      deserialize?: (value: unknown) => unknown
-    }
-
-export function useProTableUrlState(params: {
-  search: Record<string, unknown>
-  navigate: (opts: {
-    search:
-      | true
-      | Record<string, unknown>
-      | ((
-          prev: Record<string, unknown>,
-        ) => Partial<Record<string, unknown>> | Record<string, unknown>)
-    replace?: boolean
-  }) => void
-  pagination?: {
-    pageKey?: string
-    pageSizeKey?: string
-    defaultPage?: number
-    defaultPageSize?: number
-  }
-  sorting?: {
-    sortKey?: string
-    orderKey?: string
-  }
-  columnFilters?: ColumnFilterConfig[]
-}): {
-  initialState: Partial<ProTableState>
-  onChange: (state: ProTableState) => void
-} {
-  const {
-    search,
-    navigate,
-    pagination: paginationCfg,
-    sorting: sortingCfg,
-    columnFilters: columnFiltersCfg,
-  } = params
-  const pageKey = paginationCfg?.pageKey ?? 'page'
-  const pageSizeKey = paginationCfg?.pageSizeKey ?? 'pageSize'
-  const defaultPage = paginationCfg?.defaultPage ?? 1
-  const defaultPageSize = paginationCfg?.defaultPageSize ?? 10
-  const sortKey = sortingCfg?.sortKey ?? 'sort'
-  const orderKey = sortingCfg?.orderKey ?? 'order'
-
-  const initialState = useMemo<Partial<ProTableState>>(() => {
-    const page = typeof search[pageKey] === 'number' ? search[pageKey] : Number(search[pageKey])
-    const pageSize =
-      typeof search[pageSizeKey] === 'number' ? search[pageSizeKey] : Number(search[pageSizeKey])
-
-    const sortId = search[sortKey]
-
-    const columnFilters: ColumnFiltersState = (columnFiltersCfg ?? []).flatMap((cfg) => {
-      const value = cfg.deserialize ? cfg.deserialize(search[cfg.searchKey]) : search[cfg.searchKey]
-      if (cfg.type === 'array') {
-        return Array.isArray(value) && value.length > 0 ? [{ id: cfg.columnId, value }] : []
-      }
-
-      if (typeof value === 'string' && value.trim() !== '') {
-        return [{ id: cfg.columnId, value }]
-      }
-      return []
-    })
-
-    const sorting: SortingState =
-      typeof sortId === 'string' && sortId.trim() !== ''
-        ? [{ id: sortId, desc: search[orderKey] === 'desc' }]
-        : []
-
-    return {
-      pagination: {
-        pageIndex: Math.max(0, (Number.isFinite(page) ? page : defaultPage) - 1),
-        pageSize: Number.isFinite(pageSize) ? pageSize : defaultPageSize,
-      },
-      sorting,
-      columnFilters,
-    }
-  }, [
-    columnFiltersCfg,
-    defaultPage,
-    defaultPageSize,
-    orderKey,
-    pageKey,
-    pageSizeKey,
-    search,
-    sortKey,
-  ])
-
-  const onChange = useCallback(
-    (state: ProTableState) => {
-      const sorting = state.sorting[0]
-      const patch: Record<string, unknown> = {
-        [pageKey]: undefined,
-        [pageSizeKey]: undefined,
-        [sortKey]: undefined,
-        [orderKey]: undefined,
-      }
-
-      const nextPage = state.pagination.pageIndex + 1
-      if (nextPage > defaultPage) patch[pageKey] = nextPage
-      if (state.pagination.pageSize !== defaultPageSize) {
-        patch[pageSizeKey] = state.pagination.pageSize
-      }
-      if (sorting) {
-        patch[sortKey] = sorting.id
-        patch[orderKey] = 'asc'
-        if (sorting.desc) patch[orderKey] = 'desc'
-      }
-
-      const filterValues = new Map(
-        state.columnFilters.map((filter) => [filter.id, filter.value] as const),
-      )
-      for (const cfg of columnFiltersCfg ?? []) {
-        const filterValue = filterValues.get(cfg.columnId)
-
-        if (cfg.type === 'array') {
-          const value = Array.isArray(filterValue) ? filterValue : []
-          patch[cfg.searchKey] = undefined
-          if (value.length > 0) {
-            patch[cfg.searchKey] = value
-            if (cfg.serialize) patch[cfg.searchKey] = cfg.serialize(value)
-          }
-          continue
-        }
-
-        const value = typeof filterValue === 'string' ? filterValue : ''
-        patch[cfg.searchKey] = undefined
-        if (value.trim() !== '') {
-          patch[cfg.searchKey] = value
-          if (cfg.serialize) patch[cfg.searchKey] = cfg.serialize(value)
-        }
-      }
-
-      navigate({
-        search: (prev) => ({
-          ...prev,
-          ...patch,
-        }),
-      })
-    },
-    [
-      columnFiltersCfg,
-      defaultPage,
-      defaultPageSize,
-      navigate,
-      orderKey,
-      pageKey,
-      pageSizeKey,
-      sortKey,
-    ],
-  )
-
-  return { initialState, onChange }
-}
 
 interface ColumnFilterMeta<TData> {
   options: Array<{
@@ -319,11 +164,6 @@ declare module '@tanstack/react-table' {
   interface FilterMeta {
     itemRank?: RankingInfo
   }
-}
-
-interface ProTablePinnedColumnOffsets {
-  left: Record<string, number>
-  right: Record<string, number>
 }
 
 function useProTable<TData, TValue>({
@@ -868,6 +708,32 @@ function arePinnedColumnOffsetsEqual(
   return true
 }
 
+/** Props accepted by ProTable. */
+export interface ProTableProps<TData, TValue = unknown> {
+  columns: ColumnDef<TData, TValue>[]
+  data?: TData[]
+  request?: (
+    params: ProTableState,
+  ) => Promise<{ data: TData[]; total?: number }> | { data: TData[]; total?: number }
+  initialState?: Partial<ProTableState>
+  onChange?: (state: ProTableState) => void
+  header?: ReactNode | ((context: ProTableRenderContext<TData>) => ReactNode)
+  toolbar?: false | ProTableToolbarSlot<TData>
+  toolbarSearch?: ProTableSearch
+  size?: ProButtonSize
+  toolbarDensity?: boolean
+  toolbarColumns?: boolean
+  onRefresh?: () => void
+  bulkToolbar?: false | ProTableToolbarSlot<TData>
+  pagination?: false
+  dragSort?: false | ProTableDragSortOptions<TData>
+  loading?: boolean | { rows?: number }
+  layout?: 'full' | 'auto'
+  table?: ProTableTableOptions
+  className?: string
+}
+
+/** Feature-rich local or remote TanStack data table. */
 export function ProTable<TData, TValue>({
   columns,
   data,
@@ -888,33 +754,7 @@ export function ProTable<TData, TValue>({
   layout,
   table,
   className,
-}: {
-  columns: ColumnDef<TData, TValue>[]
-  data?: TData[]
-  request?: (
-    params: ProTableState,
-  ) => Promise<{ data: TData[]; total?: number }> | { data: TData[]; total?: number }
-  initialState?: Partial<ProTableState>
-  onChange?: (state: ProTableState) => void
-  header?: ReactNode | ((context: ProTableRenderContext<TData>) => ReactNode)
-  toolbar?: false | ProTableToolbarSlot<TData>
-  toolbarSearch?: ProTableSearch
-  size?: ProButtonSize
-  toolbarDensity?: boolean
-  toolbarColumns?: boolean
-  onRefresh?: () => void
-  bulkToolbar?: false | ProTableToolbarSlot<TData>
-  pagination?: false
-  dragSort?: false | ProTableDragSortOptions<TData>
-  loading?:
-    | boolean
-    | {
-        rows?: number
-      }
-  layout?: 'full' | 'auto'
-  table?: ProTableTableOptions
-  className?: string
-}) {
+}: ProTableProps<TData, TValue>) {
   const toolbarButtonSize = size ?? 'icon'
   const [tableData, setTableData] = useState<TData[]>(data ?? [])
   const [requestLoading, setRequestLoading] = useState(false)
@@ -930,6 +770,31 @@ export function ProTable<TData, TValue>({
       pageSize: 10,
     },
   )
+
+  useEffect(() => {
+    const nextPagination = initialState?.pagination
+    const nextSorting = initialState?.sorting
+    const nextColumnFilters = initialState?.columnFilters
+
+    if (nextPagination) {
+      setPagination((current) =>
+        current.pageIndex === nextPagination.pageIndex &&
+        current.pageSize === nextPagination.pageSize
+          ? current
+          : nextPagination,
+      )
+    }
+    if (nextSorting) {
+      setSorting((current) =>
+        JSON.stringify(current) === JSON.stringify(nextSorting) ? current : nextSorting,
+      )
+    }
+    if (nextColumnFilters) {
+      setColumnFilters((current) =>
+        JSON.stringify(current) === JSON.stringify(nextColumnFilters) ? current : nextColumnFilters,
+      )
+    }
+  }, [initialState?.columnFilters, initialState?.pagination, initialState?.sorting])
   const state = useMemo<ProTableState>(
     () => ({ pagination: paginationState, sorting, columnFilters }),
     [paginationState, sorting, columnFilters],
@@ -1328,15 +1193,6 @@ function getFilterValue(rawFilterValue: unknown, values: string[]) {
   return undefined
 }
 
-function getAutoFilterValues(autoRender: boolean, cellValue: unknown) {
-  if (!autoRender) return []
-  if (typeof cellValue === 'string') return [cellValue]
-  if (Array.isArray(cellValue) && cellValue.every((item) => typeof item === 'string')) {
-    return cellValue
-  }
-  return []
-}
-
 function ProTableToolbar<TData>({
   table,
   defaultColumnOrder,
@@ -1707,304 +1563,4 @@ function SortableColumnItem<TData>({
       )}
     </div>
   )
-}
-
-function ProTableBody<TData>({
-  rows,
-  visibleColumns,
-  visibleColumnCount,
-  dragSort,
-  loading,
-  loadingRows,
-  paddingClass,
-  emptyFallbackText,
-  pinnedOffsets,
-}: {
-  rows: Row<TData>[]
-  visibleColumns: ReturnType<Row<TData>['getVisibleCells']>[number]['column'][]
-  visibleColumnCount: number
-  dragSort: boolean
-  loading: boolean
-  loadingRows: number
-  paddingClass: string
-  emptyFallbackText?: ReactNode
-  pinnedOffsets: ProTablePinnedColumnOffsets
-}) {
-  const emptyRow = (
-    <tr
-      data-slot="pro-table-row"
-      className={
-        'border-b transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted'
-      }
-    >
-      <td
-        data-slot="pro-table-cell"
-        colSpan={visibleColumnCount}
-        className={
-          'p-2 align-middle whitespace-nowrap h-32 text-center text-muted-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]'
-        }
-      >
-        <div className="flex flex-col items-center gap-2">
-          <Inbox className="size-8 opacity-40" />
-          <span className="text-sm">{emptyFallbackText ?? 'No data'}</span>
-        </div>
-      </td>
-    </tr>
-  )
-
-  if (loading) {
-    return Array.from({ length: loadingRows }, (_, index) => (
-      <tr
-        // biome-ignore lint/suspicious/noArrayIndexKey: skeleton rows are fixed placeholders.
-        key={`skeleton-row-${index}`}
-        data-slot="pro-table-row"
-        className={
-          'group/row border-b transition-colors duration-150 hover:bg-muted has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted'
-        }
-      >
-        {dragSort && (
-          <td
-            data-slot="pro-table-cell"
-            className={
-              'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted'
-            }
-          >
-            <div
-              data-slot="pro-table-skeleton"
-              className="size-4 animate-pulse rounded-md bg-accent"
-            />
-          </td>
-        )}
-        {visibleColumns.map((column) => (
-          <td
-            key={column.id}
-            data-slot="pro-table-cell"
-            className={getPinnedColumnClassName(
-              column,
-              cn(
-                'p-2 align-middle whitespace-nowrap transition-colors duration-150 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
-                column.columnDef.meta?.className,
-              ),
-            )}
-            style={getPinnedColumnStyle(column, pinnedOffsets, dragSort ? 32 : 0)}
-            data-pro-table-column-id={column.id}
-          >
-            <div
-              data-slot="pro-table-skeleton"
-              className="h-4 w-full animate-pulse rounded-md bg-accent"
-            />
-          </td>
-        ))}
-      </tr>
-    ))
-  }
-
-  if (dragSort) {
-    return (
-      <SortableContext items={rows.map((row) => row.id)} strategy={verticalListSortingStrategy}>
-        {rows.map((row) => (
-          <SortableRow key={row.id} row={row} paddingClass={paddingClass}>
-            {row.getVisibleCells().map((cell) => (
-              <BodyCell
-                key={cell.id}
-                cell={cell}
-                dragSort
-                paddingClass={paddingClass}
-                pinnedOffsets={pinnedOffsets}
-              />
-            ))}
-          </SortableRow>
-        ))}
-        {rows.length === 0 && emptyRow}
-      </SortableContext>
-    )
-  }
-
-  if (rows.length === 0) return emptyRow
-  return rows.map((row) => (
-    <tr
-      key={row.id}
-      data-slot="pro-table-row"
-      data-state={row.getIsSelected() && 'selected'}
-      className={
-        'group/row border-b transition-colors duration-150 hover:bg-muted has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted'
-      }
-    >
-      {row.getVisibleCells().map((cell) => (
-        <BodyCell
-          key={cell.id}
-          cell={cell}
-          paddingClass={paddingClass}
-          pinnedOffsets={pinnedOffsets}
-        />
-      ))}
-    </tr>
-  ))
-}
-
-function BodyCell<TData>({
-  cell,
-  dragSort,
-  paddingClass,
-  pinnedOffsets,
-}: {
-  cell: Cell<TData, unknown>
-  dragSort?: boolean
-  paddingClass: string
-  pinnedOffsets: ProTablePinnedColumnOffsets
-}) {
-  const meta = cell.column.columnDef.meta
-  const pinned = cell.column.getIsPinned()
-  const align = meta?.align ?? (pinned === 'right' ? 'right' : pinned || undefined)
-  const filter = meta?.filter
-  const autoRender = !!filter && cell.column.columnDef.cell === undefined
-  const cellValue = cell.getValue()
-  const autoFilterValues = getAutoFilterValues(autoRender, cellValue)
-  const autoFilterLabels = new Map(
-    autoRender ? filter.options.map((option) => [option.value, option.label] as const) : [],
-  )
-  const cellContent = renderTableCellContent({
-    autoRender,
-    autoFilterValues,
-    autoFilterLabels,
-    cell,
-  })
-  return (
-    <td
-      data-slot="pro-table-cell"
-      className={getPinnedColumnClassName(
-        cell.column,
-        cn(
-          'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
-          paddingClass,
-          align === 'center' && 'text-center',
-          align === 'right' && 'text-right',
-          align === 'left' && 'text-left',
-          meta?.className,
-        ),
-      )}
-      style={getPinnedColumnStyle(cell.column, pinnedOffsets, dragSort ? 32 : 0)}
-      data-pro-table-column-id={cell.column.id}
-    >
-      {cellContent}
-    </td>
-  )
-}
-
-function renderTableCellContent<TData>({
-  autoRender,
-  autoFilterValues,
-  autoFilterLabels,
-  cell,
-}: {
-  autoRender: boolean
-  autoFilterValues: string[]
-  autoFilterLabels: Map<string, string>
-  cell: Cell<TData, unknown>
-}) {
-  if (!autoRender) return flexRender(cell.column.columnDef.cell, cell.getContext())
-  if (autoFilterValues.length === 0) return <span className="text-muted-foreground">-</span>
-
-  return (
-    <div className="flex flex-wrap gap-1">
-      {autoFilterValues.map((itemValue) => (
-        <span
-          key={itemValue}
-          className={
-            'inline-flex shrink-0 items-center justify-center rounded-sm bg-secondary px-2 py-0.5 text-xs font-normal text-secondary-foreground'
-          }
-        >
-          {autoFilterLabels.get(itemValue) ?? itemValue}
-        </span>
-      ))}
-    </div>
-  )
-}
-
-function SortableRow<TData>({
-  row,
-  children,
-  paddingClass,
-}: {
-  row: Row<TData>
-  children: ReactNode
-  paddingClass: string
-}) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: row.id,
-  })
-
-  return (
-    <tr
-      ref={setNodeRef}
-      data-slot="pro-table-row"
-      data-state={row.getIsSelected() && 'selected'}
-      className={
-        'group/row border-b transition-colors duration-150 hover:bg-muted has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted'
-      }
-      style={{
-        transform: CSS.Transform.toString(transform),
-        transition,
-        opacity: isDragging ? 0.5 : 1,
-        position: isDragging ? 'relative' : undefined,
-        zIndex: isDragging ? 10 : undefined,
-      }}
-    >
-      <td
-        data-slot="pro-table-cell"
-        className={cn(
-          'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
-          paddingClass,
-          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-        )}
-      >
-        <ProButton
-          variant="ghost"
-          size="icon-xs"
-          {...attributes}
-          {...listeners}
-          className="cursor-grab active:cursor-grabbing"
-          aria-label="Drag to reorder"
-        >
-          <GripVertical />
-        </ProButton>
-      </td>
-      {children}
-    </tr>
-  )
-}
-
-function getPinnedColumnClassName<TData>(column: Column<TData, unknown>, className?: string) {
-  const pinned = column.getIsPinned()
-
-  return cn(
-    pinned &&
-      'sticky z-10 bg-background transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-    pinned === 'left' &&
-      column.getIsLastColumn('left') &&
-      'shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)]',
-    pinned === 'right' &&
-      column.getIsFirstColumn('right') &&
-      'shadow-[-6px_0_10px_-10px_hsl(var(--foreground)/0.45),-1px_0_0_0_var(--border)]',
-    className,
-  )
-}
-
-function getPinnedColumnStyle<TData>(
-  column: Column<TData, unknown>,
-  offsets: ProTablePinnedColumnOffsets,
-  leftOffset = 0,
-): CSSProperties {
-  const pinned = column.getIsPinned()
-  const style: CSSProperties = {}
-
-  if (pinned === 'left') {
-    style.left = `${offsets.left[column.id] ?? column.getStart('left') + leftOffset}px`
-  }
-
-  if (pinned === 'right') {
-    style.right = `${offsets.right[column.id] ?? column.getAfter('right')}px`
-  }
-
-  return style
 }

@@ -13,6 +13,7 @@ import { Select as SelectPrimitive } from 'radix-ui'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../base/button'
 
+/** Responsive page and page-size navigation. */
 export function ProPagination({
   current,
   pageCount,
@@ -208,7 +209,7 @@ export function ProPagination({
   )
 }
 
-function getPaginationRange(currentPage: number, pageCount: number) {
+function getPaginationRange(currentPage: number, pageCount: number): Array<number | '...'> {
   if (pageCount <= 5) return Array.from({ length: pageCount }, (_, index) => index + 1)
   if (currentPage <= 3) return [1, 2, 3, 4, '...', pageCount]
   if (currentPage >= pageCount - 2) {

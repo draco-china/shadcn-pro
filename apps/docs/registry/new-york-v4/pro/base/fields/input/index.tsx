@@ -15,6 +15,7 @@ import {
 import { cn } from '@/lib/utils'
 import { ProButton } from '../../button'
 import { FieldClearButton, fieldShellClassName } from '../shared/field'
+import { formatMoneyValue, normalizeMoneyInput, parseMoneyValue } from './money'
 
 interface InputProps
   extends Omit<
@@ -33,6 +34,7 @@ interface InputProps
   ref?: Ref<HTMLInputElement>
 }
 
+/** Composite text input with prefix, suffix, and clear affordance. */
 export function Input({
   prefix,
   suffix,
@@ -125,6 +127,7 @@ export function Input({
   )
 }
 
+/** Password input with visibility control. */
 export function Password({
   className,
   suffix,
@@ -164,6 +167,7 @@ interface TextareaProps extends Omit<ComponentProps<'textarea'>, 'ref'> {
   ref?: Ref<HTMLTextAreaElement>
 }
 
+/** Textarea with an optional clear action. */
 export function Textarea({
   onClear,
   className,
@@ -230,6 +234,7 @@ export function Textarea({
   )
 }
 
+/** Numeric input that emits finite numbers or undefined. */
 export function Digit({
   value,
   onChange,
@@ -272,6 +277,7 @@ export function Digit({
   )
 }
 
+/** Paired minimum and maximum numeric inputs. */
 export function DigitRange({
   value,
   onChange,
@@ -349,6 +355,7 @@ export function DigitRange({
   )
 }
 
+/** Single-value Radix slider. */
 export function Slider({
   value,
   defaultValue,
@@ -361,7 +368,15 @@ export function Slider({
   ...props
 }: Omit<
   ComponentProps<typeof SliderPrimitive.Root>,
-  'value' | 'defaultValue' | 'onValueChange' | 'min' | 'max' | 'step' | 'disabled' | 'className'
+  | 'value'
+  | 'defaultValue'
+  | 'onValueChange'
+  | 'onChange'
+  | 'min'
+  | 'max'
+  | 'step'
+  | 'disabled'
+  | 'className'
 > & {
   value?: number
   defaultValue?: number
@@ -404,6 +419,7 @@ export function Slider({
   )
 }
 
+/** Money input that preserves intermediate decimal editing states. */
 export function Money({
   value,
   onChange,
@@ -412,20 +428,38 @@ export function Money({
   className,
   prefix,
   suffix,
+  onFocus,
+  onBlur,
   ...props
-}: Omit<InputProps, 'value' | 'defaultValue' | 'onChange'> & {
+}: Omit<InputProps, 'value' | 'defaultValue' | 'onChange' | 'type' | 'inputMode'> & {
   value?: number
   onChange?: (value: number | undefined) => void
 }) {
+  const [displayValue, setDisplayValue] = useState(() => formatMoneyValue(value))
+  const focusedRef = useRef(false)
+
+  useEffect(() => {
+    if (!focusedRef.current) setDisplayValue(formatMoneyValue(value))
+  }, [value])
+
   return (
     <Input
       type="text"
       inputMode="decimal"
-      value={value === undefined ? '' : String(value)}
+      value={displayValue}
       onChange={(event) => {
-        const parsed = parseFloat(event.target.value.replace(/[^0-9.]/g, ''))
-        if (Number.isNaN(parsed)) onChange?.(undefined)
-        else onChange?.(parsed)
+        const nextDisplayValue = normalizeMoneyInput(event.target.value)
+        setDisplayValue(nextDisplayValue)
+        onChange?.(parseMoneyValue(nextDisplayValue))
+      }}
+      onFocus={(event) => {
+        focusedRef.current = true
+        onFocus?.(event)
+      }}
+      onBlur={(event) => {
+        focusedRef.current = false
+        setDisplayValue(formatMoneyValue(parseMoneyValue(displayValue)))
+        onBlur?.(event)
       }}
       placeholder={placeholder}
       disabled={disabled}
@@ -437,6 +471,7 @@ export function Money({
   )
 }
 
+/** Captcha input with guarded async send and countdown behavior. */
 export function Captcha({
   value,
   onChange,
@@ -444,16 +479,20 @@ export function Captcha({
   placeholder = 'Enter captcha',
   disabled,
   className,
+  onSendError,
   ...inputProps
 }: Omit<InputProps, 'inputClassName' | 'suffix' | 'value' | 'onChange' | 'disabled'> & {
   value?: string
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
   onSend?: () => void | Promise<void>
+  onSendError?: (error: unknown) => void
   disabled?: boolean
 }) {
   const deadlineRef = useRef(0)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const [remaining, setRemaining] = useState(0)
+  const sendingRef = useRef(false)
+  const [sending, setSending] = useState(false)
 
   function stopCountdown() {
     deadlineRef.current = 0
@@ -464,7 +503,12 @@ export function Captcha({
     setRemaining(0)
   }
 
-  useEffect(() => () => stopCountdown(), [])
+  useEffect(
+    () => () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    },
+    [],
+  )
 
   return (
     <Input
@@ -479,18 +523,30 @@ export function Captcha({
         <ProButton
           variant="ghost"
           size="sm"
+          loading={sending}
           disabled={disabled || remaining > 0}
           onClick={async (event) => {
             event.stopPropagation()
-            await onSend?.()
-            stopCountdown()
-            deadlineRef.current = Date.now() + 60_000
-            setRemaining(60_000)
-            timerRef.current = setInterval(() => {
-              const nextRemaining = Math.max(deadlineRef.current - Date.now(), 0)
-              setRemaining(nextRemaining)
-              if (nextRemaining === 0) stopCountdown()
-            }, 250)
+            if (sendingRef.current || remaining > 0) return
+
+            sendingRef.current = true
+            setSending(true)
+            try {
+              await onSend?.()
+              stopCountdown()
+              deadlineRef.current = Date.now() + 60_000
+              setRemaining(60_000)
+              timerRef.current = setInterval(() => {
+                const nextRemaining = Math.max(deadlineRef.current - Date.now(), 0)
+                setRemaining(nextRemaining)
+                if (nextRemaining === 0) stopCountdown()
+              }, 1000)
+            } catch (error) {
+              onSendError?.(error)
+            } finally {
+              sendingRef.current = false
+              setSending(false)
+            }
           }}
         >
           {remaining > 0 ? `${Math.ceil(remaining / 1000)}s` : 'Get code'}

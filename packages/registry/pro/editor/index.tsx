@@ -1,7 +1,6 @@
 'use client'
 
-import MonacoEditor, { type Monaco } from '@monaco-editor/react'
-import { shikiToMonaco, textmateThemeToMonacoTheme } from '@shikijs/monaco'
+import type { Monaco, EditorProps as MonacoReactEditorProps } from '@monaco-editor/react'
 import { Columns2, Copy, Eye, EyeOff, Maximize2, Minimize2, WandSparkles } from 'lucide-react'
 import type { editor } from 'monaco-editor'
 import {
@@ -16,10 +15,10 @@ import {
   useRef,
   useState,
 } from 'react'
-import { createHighlighter, type Highlighter } from 'shiki'
 import { cn } from '@/lib/utils'
 import { CopyButton, ProButton, type ProButtonSize } from '../base/button'
 import { useFullscreen } from '../base/hooks/use-fullscreen'
+import { applyShadcnTheme, configureMonaco } from './theme'
 
 type EditorTheme = 'light' | 'dark'
 type MonacoEditorInstance = editor.IStandaloneCodeEditor
@@ -54,6 +53,10 @@ interface EditorProps {
   className?: string
   height?: string | number
   size?: ProButtonSize
+  /** Monaco `vs` CDN path. */
+  monacoCdnBaseUrl?: string
+  /** ESM CDN base URL used by the Shiki syntax/theme Worker. */
+  shikiCdnBaseUrl?: string
   toolbar?: false | EditorToolbarSlot
   toolbarTitle?: EditorToolbarSlot
   toolbarMode?: boolean
@@ -80,137 +83,6 @@ interface EditorProps {
   }
 }
 
-const TSX_REACT_TYPES = `
-declare namespace JSX {
-  interface IntrinsicElements {
-    [elemName: string]: any
-  }
-}
-
-declare module "react" {
-  export type ReactNode = any
-  export type ComponentType<P = any> = (props: P) => ReactNode
-  export function useState<S>(initialState: S | (() => S)): [S, (value: S | ((prev: S) => S)) => void]
-  export function useEffect(effect: () => void | (() => void), deps?: readonly unknown[]): void
-  export function useMemo<T>(factory: () => T, deps?: readonly unknown[]): T
-  export function useCallback<T extends (...args: any[]) => any>(callback: T, deps?: readonly unknown[]): T
-  const React: {
-    createElement: (...args: any[]) => any
-  }
-  export default React
-}
-
-declare module "react/jsx-runtime" {
-  export const jsx: (...args: any[]) => any
-  export const jsxs: (...args: any[]) => any
-  export const Fragment: any
-}
-`
-
-let highlighterPromise: Promise<Highlighter> | null = null
-let wiredMonaco: Monaco | null = null
-let hasRegisteredTsxTypes = false
-
-async function applyShadcnTheme(monaco: Monaco, theme: EditorTheme) {
-  const name = theme === 'dark' ? 'one-dark-pro' : 'one-light'
-  const highlighter = await ensureShiki(monaco)
-  const base = textmateThemeToMonacoTheme(highlighter.getTheme(name))
-  const baseColors = base.colors
-  const bg = cssVar('--background') || baseColors?.['editor.background'] || '#ffffff'
-  const fg = cssVar('--foreground') || baseColors?.['editor.foreground'] || '#000000'
-  const muted = cssVar('--muted') || '#f4f4f5'
-  const mutedFg = cssVar('--muted-foreground') || '#71717a'
-  const border = cssVar('--border') || '#e4e4e7'
-  const accent = cssVar('--accent') || '#f4f4f5'
-  const primary = cssVar('--primary') || '#18181b'
-
-  monaco.editor.defineTheme(name, {
-    ...base,
-    colors: {
-      ...baseColors,
-      'editor.background': bg,
-      'editor.foreground': fg,
-      'editorLineNumber.foreground': mutedFg,
-      'editorLineNumber.activeForeground': fg,
-      'editor.lineHighlightBackground': muted,
-      'editor.selectionBackground': `${primary}33`,
-      'editor.inactiveSelectionBackground': `${primary}1a`,
-      'editorCursor.foreground': fg,
-      'editorWhitespace.foreground': border,
-      'editorIndentGuide.background1': border,
-      'editorIndentGuide.activeBackground1': mutedFg,
-      'editor.selectionHighlightBorder': border,
-      'editorWidget.background': bg,
-      'editorWidget.border': border,
-      'editorSuggestWidget.background': bg,
-      'editorSuggestWidget.border': border,
-      'editorSuggestWidget.foreground': fg,
-      'editorSuggestWidget.selectedBackground': accent,
-      'editorSuggestWidget.selectedForeground': fg,
-      'editorHoverWidget.background': bg,
-      'editorHoverWidget.border': border,
-      'editorGutter.background': bg,
-      'scrollbar.shadow': '#00000000',
-      'scrollbarSlider.background': `${mutedFg}40`,
-      'scrollbarSlider.hoverBackground': `${mutedFg}66`,
-      'scrollbarSlider.activeBackground': `${mutedFg}99`,
-      'minimap.background': bg,
-    },
-  })
-  monaco.editor.setTheme(name)
-}
-
-async function ensureShiki(monaco: Monaco): Promise<Highlighter> {
-  highlighterPromise ??= createHighlighter({
-    themes: ['one-dark-pro', 'one-light'],
-    langs: [
-      'tsx',
-      'jsx',
-      'css',
-      'go',
-      'html',
-      'java',
-      'json',
-      'markdown',
-      'python',
-      'rust',
-      'shell',
-      'sql',
-      'yaml',
-    ],
-    langAlias: {
-      typescript: 'tsx',
-      javascript: 'jsx',
-    },
-  })
-  const highlighter = await highlighterPromise
-  if (wiredMonaco !== monaco) {
-    shikiToMonaco(highlighter, monaco)
-    wiredMonaco = monaco
-  }
-  return highlighter
-}
-
-function cssVar(name: string): string {
-  if (typeof document === 'undefined') return ''
-  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
-  if (!raw) return ''
-  try {
-    const canvas = document.createElement('canvas')
-    canvas.width = canvas.height = 1
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return ''
-    ctx.fillStyle = raw
-    ctx.fillRect(0, 0, 1, 1)
-    const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data
-    return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b
-      .toString(16)
-      .padStart(2, '0')}`
-  } catch {
-    return ''
-  }
-}
-
 function useEditorState({
   value,
   onChange,
@@ -221,6 +93,7 @@ function useEditorState({
   height,
   fullscreen,
   preview,
+  shikiCdnBaseUrl,
 }: Pick<
   EditorProps,
   | 'value'
@@ -232,6 +105,7 @@ function useEditorState({
   | 'height'
   | 'fullscreen'
   | 'preview'
+  | 'shikiCdnBaseUrl'
 >) {
   const [localValue, setLocalValue] = useState(value ?? '')
   const [uncontrolledMode, setUncontrolledMode] = useState<EditorViewMode>(
@@ -256,7 +130,7 @@ function useEditorState({
   const isFixedFullscreen = fullscreenState.fullscreen && fullscreenMode === 'fixed'
   const isScreenFullscreen = fullscreenState.fullscreen && fullscreenMode === 'screen'
   const previewScroll = useEditorPreviewScrollSync()
-  const monacoEditor = useMonacoEditor({ disabled, theme, previewScroll })
+  const monacoEditor = useMonacoEditor({ disabled, theme, previewScroll, shikiCdnBaseUrl })
   const hasExplicitHeight = height !== undefined
   const contentHeight = typeof height === 'number' ? `${height}px` : height
   const contentStyle =
@@ -336,10 +210,12 @@ function useMonacoEditor({
   disabled,
   theme,
   previewScroll,
+  shikiCdnBaseUrl,
 }: {
   disabled?: boolean
   theme?: EditorTheme
   previewScroll: ReturnType<typeof useEditorPreviewScrollSync>
+  shikiCdnBaseUrl?: string
 }) {
   const themeRef = useRef(theme ?? 'dark')
   const editorRef = useRef<MonacoEditorInstance | null>(null)
@@ -356,28 +232,19 @@ function useMonacoEditor({
       monacoRef.current = monaco
       scrollDisposableRef.current?.dispose()
       scrollDisposableRef.current = editor.onDidScrollChange(() => syncPreviewFromEditor(editor))
-      monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-        jsx: monaco.languages.typescript.JsxEmit.ReactJSX,
-        allowNonTsExtensions: true,
-        target: monaco.languages.typescript.ScriptTarget.Latest,
-        moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+      configureMonaco(monaco, {
+        cdnBaseUrl: shikiCdnBaseUrl,
+        getTheme: () => themeRef.current,
       })
-      if (!hasRegisteredTsxTypes) {
-        monaco.languages.typescript.typescriptDefaults.addExtraLib(
-          TSX_REACT_TYPES,
-          'file:///node_modules/@types/react/index.d.ts',
-        )
-        hasRegisteredTsxTypes = true
-      }
-      applyShadcnTheme(monaco, themeRef.current).catch(() => {})
+      applyShadcnTheme(monaco, themeRef.current, shikiCdnBaseUrl).catch(() => {})
     },
-    [scrollDisposableRef, syncPreviewFromEditor],
+    [scrollDisposableRef, shikiCdnBaseUrl, syncPreviewFromEditor],
   )
 
   useEffect(() => {
     const monaco = monacoRef.current
-    if (monaco) applyShadcnTheme(monaco, theme ?? 'dark').catch(() => {})
-  }, [theme])
+    if (monaco) applyShadcnTheme(monaco, theme ?? 'dark', shikiCdnBaseUrl).catch(() => {})
+  }, [shikiCdnBaseUrl, theme])
 
   const handleFormat = useCallback(() => {
     if (disabled) return
@@ -469,6 +336,7 @@ function useEditorPreviewScrollSync() {
   }
 }
 
+/** Monaco editor with preview, formatting, scroll sync, and fullscreen modes. */
 export function ProEditor({
   value,
   onChange,
@@ -485,6 +353,8 @@ export function ProEditor({
   toolbarCopy = true,
   fullscreen,
   preview,
+  monacoCdnBaseUrl = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.55.1/min/vs',
+  shikiCdnBaseUrl,
 }: EditorProps) {
   const editor = useEditorState({
     value,
@@ -496,7 +366,9 @@ export function ProEditor({
     height,
     fullscreen,
     preview,
+    shikiCdnBaseUrl,
   })
+  const MonacoEditor = useMonacoEditorComponent(editor.showEditorPane, monacoCdnBaseUrl)
   const PreviewComponent = editor.PreviewComponent
   const defaultToolbarTitle =
     {
@@ -615,7 +487,7 @@ export function ProEditor({
         >
           {editor.showEditorPane && (
             <div className={cn('flex-1 min-w-0', editor.isSplitView ? 'w-1/2' : 'w-full')}>
-              <Suspense fallback={<div className="size-full bg-muted animate-pulse" />}>
+              {MonacoEditor ? (
                 <MonacoEditor
                   height="100%"
                   language={language === 'tsx' ? 'typescript' : language}
@@ -638,12 +510,19 @@ export function ProEditor({
                       horizontalScrollbarSize: 10,
                     },
                     automaticLayout: true,
+                    'semanticHighlighting.enabled': true,
                     readOnly: disabled,
                     domReadOnly: disabled,
                     padding: { top: 8, bottom: 8 },
                   }}
                 />
-              </Suspense>
+              ) : (
+                <div
+                  className="size-full animate-pulse bg-muted"
+                  role="status"
+                  aria-label="Loading editor"
+                />
+              )}
             </div>
           )}
 
@@ -680,6 +559,26 @@ export function ProEditor({
       </div>
     </div>
   )
+}
+
+function useMonacoEditorComponent(enabled: boolean, cdnBaseUrl: string) {
+  const [component, setComponent] = useState<ComponentType<MonacoReactEditorProps> | null>(null)
+
+  useEffect(() => {
+    let active = true
+    if (!enabled) return
+
+    void import('@monaco-editor/react').then(({ default: MonacoComponent, loader }) => {
+      loader.config({ paths: { vs: cdnBaseUrl.replace(/\/+$/, '') } })
+      if (active) setComponent(() => MonacoComponent)
+    })
+
+    return () => {
+      active = false
+    }
+  }, [cdnBaseUrl, enabled])
+
+  return component
 }
 
 function getEditorPath(language: string) {

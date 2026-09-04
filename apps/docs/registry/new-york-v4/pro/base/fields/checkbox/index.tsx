@@ -5,6 +5,7 @@ import { Checkbox as CheckboxPrimitive, Switch as SwitchPrimitive } from 'radix-
 import { type ComponentProps, type ReactNode, useId, useState } from 'react'
 import { cn } from '@/lib/utils'
 
+/** Single checkbox or checkbox group with controlled and uncontrolled values. */
 export function Checkbox({
   value,
   defaultValue,
@@ -111,6 +112,7 @@ export function Checkbox({
   )
 }
 
+/** Low-level checkbox control used by composed fields and tables. */
 export function CheckboxControl({
   className,
   ...props
@@ -141,6 +143,7 @@ export function CheckboxControl({
   )
 }
 
+/** Controlled boolean switch. */
 export function Switch({
   value,
   onChange,

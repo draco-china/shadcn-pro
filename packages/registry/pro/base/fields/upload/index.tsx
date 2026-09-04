@@ -2,10 +2,19 @@
 
 import { cva } from 'class-variance-authority'
 import { File, Upload as UploadIcon, X } from 'lucide-react'
-import { createContext, type ReactNode, type RefObject, useContext, useRef, useState } from 'react'
+import {
+  createContext,
+  type ReactNode,
+  type RefObject,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../../button'
 
+/** File metadata managed by Upload. */
 export interface UploadFile {
   uid: string
   name: string
@@ -47,6 +56,7 @@ function useUploadContext() {
   return context
 }
 
+/** Upload state provider with optional async upload transformation. */
 export function Upload({
   value,
   onChange,
@@ -74,14 +84,38 @@ export function Upload({
   const inputRef = useRef<HTMLInputElement>(null)
   const [internalValue, setInternalValue] = useState<UploadFile[]>([])
   const files = value ?? internalValue
+  const filesRef = useRef(files)
+  filesRef.current = files
+  const objectUrlsRef = useRef(new Set<string>())
   const remainingSlots =
     multiple && maxCount !== undefined ? Math.max(maxCount - files.length, 0) : 1
   const reachedMax = remainingSlots === 0
 
   function setFiles(nextFiles: UploadFile[]) {
+    filesRef.current = nextFiles
     if (value === undefined) setInternalValue(nextFiles)
     onChange?.(nextFiles)
   }
+
+  function releaseObjectUrl(url?: string) {
+    if (!url || !objectUrlsRef.current.delete(url)) return
+    URL.revokeObjectURL(url)
+  }
+
+  useEffect(() => {
+    const currentUrls = new Set(files.flatMap((file) => (file.url ? [file.url] : [])))
+    for (const url of objectUrlsRef.current) {
+      if (!currentUrls.has(url)) releaseObjectUrl(url)
+    }
+  }, [files])
+
+  useEffect(
+    () => () => {
+      for (const url of objectUrlsRef.current) URL.revokeObjectURL(url)
+      objectUrlsRef.current.clear()
+    },
+    [],
+  )
 
   async function addFiles(selectedFileList: FileList | File[] | null) {
     if (!selectedFileList) return
@@ -117,25 +151,31 @@ export function Upload({
       if (typeof result === 'object') {
         return [{ ...baseFile, ...result }]
       }
-      return [{ ...baseFile, url: URL.createObjectURL(file) }]
+      const url = URL.createObjectURL(file)
+      objectUrlsRef.current.add(url)
+      return [{ ...baseFile, url }]
     })
     if (!newFiles.length) return
 
     if (!multiple) {
-      for (const file of files) {
-        if (file.url?.startsWith('blob:')) URL.revokeObjectURL(file.url)
-      }
+      for (const file of filesRef.current) releaseObjectUrl(file.url)
       setFiles([newFiles[0]])
       return
     }
 
-    setFiles([...files, ...newFiles])
+    const currentFiles = filesRef.current
+    const available =
+      maxCount === undefined ? newFiles.length : Math.max(maxCount - currentFiles.length, 0)
+    const acceptedFiles = newFiles.slice(0, available)
+    for (const file of newFiles.slice(available)) releaseObjectUrl(file.url)
+    if (acceptedFiles.length) setFiles([...currentFiles, ...acceptedFiles])
   }
 
   function removeFile(uid: string) {
-    const removedFile = files.find((file) => file.uid === uid)
-    if (removedFile?.url?.startsWith('blob:')) URL.revokeObjectURL(removedFile.url)
-    setFiles(files.filter((file) => file.uid !== uid))
+    const currentFiles = filesRef.current
+    const removedFile = currentFiles.find((file) => file.uid === uid)
+    releaseObjectUrl(removedFile?.url)
+    setFiles(currentFiles.filter((file) => file.uid !== uid))
   }
 
   return (
@@ -168,6 +208,7 @@ export function Upload({
   )
 }
 
+/** Click and drop trigger for the nearest Upload provider. */
 export function UploadTrigger({
   variant = 'dropzone',
   className,
@@ -246,6 +287,7 @@ function renderUploadTriggerContent({
   )
 }
 
+/** Current file list for the nearest Upload provider. */
 export function UploadFileList({ className }: { className?: string }) {
   const upload = useUploadContext()
 

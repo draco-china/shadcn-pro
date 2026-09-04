@@ -258,18 +258,6 @@ export const ui: Registry["items"] = [
     ],
   },
   {
-    name: "form",
-    type: "registry:ui",
-    dependencies: ["radix-ui", "@hookform/resolvers", "zod", "react-hook-form"],
-    registryDependencies: ["button", "label"],
-    files: [
-      {
-        path: "ui/form.tsx",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
     name: "hover-card",
     type: "registry:ui",
     dependencies: ["radix-ui"],

@@ -4,9 +4,9 @@ import { type ComponentProps, useState } from "react"
 import { ProEditor } from "@/registry/new-york-v4/pro/editor"
 import { MarkdownViewer } from "@/registry/new-york-v4/pro/viewer/markdown"
 
-type PreviewProps = Parameters<
+type PreviewProps = ComponentProps<
   NonNullable<NonNullable<ComponentProps<typeof ProEditor>["preview"]>["component"]>
->[0]
+>
 
 const INITIAL = `# Getting Started
 

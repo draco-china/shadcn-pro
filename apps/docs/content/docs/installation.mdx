@@ -68,21 +68,21 @@ Install the dependencies for the component you copy:
 | `pro-fields` | `@dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities class-variance-authority cmdk date-fns lucide-react radix-ui react-day-picker` plus `pro-base` |
 | `pro-pagination` | `lucide-react radix-ui` plus `pro-base` |
 | `pro-overlay` | `lucide-react radix-ui vaul` plus `pro-base` |
-| `pro-form` | `lucide-react` plus `pro-fields`, `pro-base`, and `pro-overlay` |
+| `pro-form` | `@tanstack/react-form lucide-react` plus `pro-fields`, `pro-base`, and `pro-overlay` |
 | `pro-list` | `lucide-react` plus `pro-fields`, `pro-base`, and `pro-pagination` |
 | `pro-table` | `@tanstack/react-table @tanstack/match-sorter-utils @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react radix-ui` plus `pro-fields`, `pro-base`, and `pro-pagination` |
-| `pro-editor` | `@monaco-editor/react @shikijs/monaco monaco-editor shiki lucide-react` plus `pro-base` |
+| `pro-editor` | `@monaco-editor/react monaco-editor lucide-react` plus `pro-base` |
 | `pro-descriptions` | `class-variance-authority` |
-| `code-viewer` | `shiki lucide-react` plus `pro-base` |
-| `diff-viewer` | `diff shiki` plus `pro-base` |
+| `code-viewer` | `lucide-react` plus `pro-base` |
+| `diff-viewer` | `diff` plus `pro-base` and `code-viewer` |
 | `html-viewer` | None |
-| `image-viewer` | `lucide-react` plus `pro-base` |
-| `markdown-viewer` | `class-variance-authority react-markdown lucide-react remark-gfm remark-breaks remark-math remark-toc rehype-raw rehype-sanitize rehype-mathjax` plus `code-viewer` |
+| `image-viewer` | `lucide-react radix-ui` plus `pro-base` |
+| `markdown-viewer` | `class-variance-authority hast-util-to-jsx-runtime lucide-react` plus `code-viewer` |
 
 For example:
 
 ```bash
-bun add react-markdown shiki lucide-react remark-gfm remark-breaks remark-math remark-toc rehype-raw rehype-sanitize rehype-mathjax
+bun add class-variance-authority hast-util-to-jsx-runtime lucide-react
 ```
 
 ### 2. Copy the component

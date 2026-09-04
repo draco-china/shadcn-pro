@@ -23,7 +23,7 @@ export default function ProFormDemo() {
       <div>
         <h2 className="text-lg font-semibold">Team Member Registration</h2>
         <p className="text-sm text-muted-foreground">
-          ProForm manages react-hook-form internally and renders fields from schema.
+          ProForm manages TanStack Form internally and renders fields from schema.
         </p>
       </div>
 

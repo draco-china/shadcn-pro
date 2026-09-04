@@ -1,77 +1,81 @@
 'use client'
 
+import { type AnyFormApi, type FormValidateOrFn, useForm } from '@tanstack/react-form'
 import { InfoIcon } from 'lucide-react'
 import {
   Children,
   cloneElement,
+  createContext,
+  type FormEvent,
   isValidElement,
   type ReactElement,
   type ReactNode,
   type Ref,
+  useContext,
   useImperativeHandle,
   useState,
 } from 'react'
-import {
-  Controller,
-  type DefaultValues,
-  type FieldErrors,
-  type FieldPath,
-  type FieldPathValue,
-  type FieldValues,
-  FormProvider,
-  type RefCallBack,
-  type RegisterOptions,
-  type Resolver,
-  type SubmitErrorHandler,
-  type SubmitHandler,
-  type UseFormReturn,
-  useForm,
-  useFormContext,
-} from 'react-hook-form'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../base/button'
-import { Checkbox, Switch } from '../base/fields/checkbox'
-import { DatePicker, DateRangePicker } from '../base/fields/date-picker'
-import { DateTimePicker, TimePicker } from '../base/fields/date-time-picker'
-import { Input, Password, Slider, Textarea } from '../base/fields/input'
-import { Radio, Rate, Segmented } from '../base/fields/radio'
-import { Select } from '../base/fields/select'
 import { ProDrawer, ProModal } from '../overlay'
+import {
+  renderSchemaField,
+  type SchemaFieldValue,
+  type SchemaValueField,
+  type SchemaValueType,
+} from './schema-render'
+import {
+  getControlValue,
+  getErrorMessages,
+  type ProFieldValidators as InternalProFieldValidators,
+  withRequiredValidator,
+} from './validators'
+
+/** Validators supported by a ProForm field at each validation phase. */
+export interface ProFieldValidators<TValue = unknown> extends InternalProFieldValidators<TValue> {}
 
 type OverlayFormSubmitter =
   | ReactNode
   | ((context: { submitting: boolean; cancel: () => void | Promise<void> }) => ReactNode)
 
-export type ProFormInstance<TFieldValues extends FieldValues = FieldValues> =
-  UseFormReturn<TFieldValues>
+type FormValues = Record<string, unknown>
 
-interface OverlayFormProps<TFieldValues extends FieldValues = FieldValues> {
+/** Imperative TanStack Form instance exposed by ProForm. */
+export type ProFormInstance<TFieldValues extends FormValues = FormValues> = ReturnType<
+  typeof useProForm<TFieldValues>
+>
+
+/** Form-level submit validator, including Standard Schema validators. */
+export type ProFormValidator<TFieldValues extends FormValues = FormValues> =
+  FormValidateOrFn<TFieldValues>
+
+const ProFormContext = createContext<ProFormInstance | null>(null)
+
+interface OverlayFormProps<TFieldValues extends FormValues = FormValues> {
   trigger?: ReactNode
   title: string
   description?: string
   children?: ReactNode
   schema?: ProSchemaFormItem[]
   formRef?: Ref<ProFormInstance<TFieldValues>>
-  form?: UseFormReturn<TFieldValues>
-  resolver?: Resolver<TFieldValues>
-  defaultValues?: DefaultValues<TFieldValues>
+  validator?: ProFormValidator<TFieldValues>
+  defaultValues?: TFieldValues
   open?: boolean
   onOpenChange?: (open: boolean) => void
-  onFinish?: SubmitHandler<TFieldValues>
+  onFinish?: (values: TFieldValues) => void | Promise<void>
   onFinishFailed?: (errors: unknown) => void
   onCancel?: () => void | Promise<void>
   submitter?: false | OverlayFormSubmitter
   className?: string
 }
 
-interface ProFormProps<TFieldValues extends FieldValues = FieldValues> {
+interface ProFormProps<TFieldValues extends FormValues = FormValues> {
   children?: ReactNode
   schema?: ProSchemaFormItem[]
   formRef?: Ref<ProFormInstance<TFieldValues>>
-  form?: UseFormReturn<TFieldValues>
-  resolver?: Resolver<TFieldValues>
-  defaultValues?: DefaultValues<TFieldValues>
-  onFinish?: SubmitHandler<TFieldValues>
+  validator?: ProFormValidator<TFieldValues>
+  defaultValues?: TFieldValues
+  onFinish?: (values: TFieldValues) => void | Promise<void>
   onFinishFailed?: (errors: unknown) => void
   onReset?: () => void | Promise<void>
   submitter?:
@@ -81,51 +85,16 @@ interface ProFormProps<TFieldValues extends FieldValues = FieldValues> {
   className?: string
 }
 
-type ProSchemaFormValue =
-  | string
-  | number
-  | boolean
-  | Date
-  | string[]
-  | number[]
-  | { from?: Date; to?: Date }
-  | undefined
-  | null
+type ProSchemaFormValue = SchemaFieldValue
 
-export interface ProSchemaValueField<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> {
-  name: TName
-  value: FieldPathValue<TFieldValues, TName>
-  onChange: (value: ProSchemaFormValue) => void
-  onBlur: () => void
-  ref: RefCallBack
-}
+/** Field state supplied to schema item render functions. */
+export interface ProSchemaValueField extends SchemaValueField {}
 
-export interface ProSchemaFormItem<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> {
-  name: TName
+/** Declarative field definition accepted by schema-driven forms. */
+export interface ProSchemaFormItem {
+  name: string
   label?: ReactNode
-  valueType?:
-    | 'text'
-    | 'email'
-    | 'password'
-    | 'textarea'
-    | 'select'
-    | 'multiSelect'
-    | 'checkbox'
-    | 'radio'
-    | 'switch'
-    | 'date'
-    | 'dateRange'
-    | 'dateTime'
-    | 'time'
-    | 'slider'
-    | 'rate'
-    | 'segmented'
+  valueType?: SchemaValueType
   required?: boolean
   disabled?: boolean
   hidden?: boolean
@@ -134,21 +103,18 @@ export interface ProSchemaFormItem<
   extra?: ReactNode
   errors?: string[]
   initialValue?: ProSchemaFormValue
-  rules?: RegisterOptions<TFieldValues, TName>
+  validators?: ProFieldValidators<ProSchemaFormValue>
   fieldProps?: Record<string, unknown>
   formItemProps?: Omit<FormItemProps, 'children' | 'label' | 'required' | 'disabled'>
-  render?: (
-    field: ProSchemaValueField<TFieldValues, TName>,
-    item: ProSchemaFormItem<TFieldValues, TName>,
-  ) => ReactNode
+  render?: (field: ProSchemaValueField, item: ProSchemaFormItem) => ReactNode
 }
 
-export function ProForm<TFieldValues extends FieldValues = FieldValues>({
+/** Composable TanStack Form wrapper with schema and render-prop support. */
+export function ProForm<TFieldValues extends FormValues = FormValues>({
   children,
   schema,
   formRef,
-  form: formProp,
-  resolver,
+  validator,
   defaultValues,
   onFinish,
   onFinishFailed,
@@ -156,9 +122,7 @@ export function ProForm<TFieldValues extends FieldValues = FieldValues>({
   submitter,
   className,
 }: ProFormProps<TFieldValues>) {
-  const internalForm = useForm<TFieldValues>({ resolver, defaultValues })
-  const form = formProp ?? internalForm
-  const [loading, setLoading] = useState(false)
+  const form = useProForm({ defaultValues, validator, onFinish, onFinishFailed })
 
   useImperativeHandle(formRef, () => form, [form])
 
@@ -167,47 +131,36 @@ export function ProForm<TFieldValues extends FieldValues = FieldValues>({
     await onReset?.()
   }
 
-  const submitHandler = form.handleSubmit(
-    async (values) => {
-      if (loading) return
-
-      setLoading(true)
-      try {
-        await onFinish?.(values)
-      } catch (err) {
-        onFinishFailed?.(err)
-      } finally {
-        setLoading(false)
-      }
-    },
-    onFinishFailed as SubmitErrorHandler<TFieldValues>,
-  )
-
   return (
-    <FormProvider {...form}>
-      <form onSubmit={submitHandler} className={className}>
+    <ProFormContext value={form as ProFormInstance}>
+      <form onSubmit={submitForm(form)} className={className}>
         <div className="mb-4">
           {schema && <ProSchemaFields schema={schema} />}
           {children}
         </div>
         {submitter !== false && (
-          <div data-slot="pro-form-actions" className="flex flex-wrap items-center gap-2 pt-2">
-            {renderFormSubmitter(submitter, loading, reset)}
-          </div>
+          <form.Subscribe selector={(state) => state.isSubmitting}>
+            {(submitting) => (
+              <div data-slot="pro-form-actions" className="flex flex-wrap items-center gap-2 pt-2">
+                {renderFormSubmitter(submitter, submitting, reset)}
+              </div>
+            )}
+          </form.Subscribe>
         )}
       </form>
-    </FormProvider>
+    </ProFormContext>
   )
 }
 
-export function ProSchemaForm<TFieldValues extends FieldValues = FieldValues>({
+/** Schema-required convenience wrapper around ProForm. */
+export function ProSchemaForm<TFieldValues extends FormValues = FormValues>({
   schema,
   defaultValues,
   children,
   ...props
 }: Omit<ProFormProps<TFieldValues>, 'children' | 'schema'> & {
   schema: ProSchemaFormItem[]
-  defaultValues?: DefaultValues<TFieldValues>
+  defaultValues?: TFieldValues
   children?: ReactNode
 }) {
   return (
@@ -217,15 +170,15 @@ export function ProSchemaForm<TFieldValues extends FieldValues = FieldValues>({
   )
 }
 
-export function ModalForm<TFieldValues extends FieldValues = FieldValues>({
+/** ProForm hosted inside a modal and reset after close or success. */
+export function ModalForm<TFieldValues extends FormValues = FormValues>({
   trigger,
   title,
   description,
   children,
   schema,
   formRef,
-  form: formProp,
-  resolver,
+  validator,
   defaultValues,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
@@ -235,10 +188,9 @@ export function ModalForm<TFieldValues extends FieldValues = FieldValues>({
   submitter,
   className,
 }: OverlayFormProps<TFieldValues>) {
-  const { form, open, setOpen, loading, handleSubmit, handleCancel } = useOverlayForm({
-    form: formProp,
+  const { form, open, setOpen, handleSubmit, handleCancel } = useOverlayForm({
     formRef,
-    resolver,
+    validator,
     defaultValues,
     open: controlledOpen,
     onOpenChange: controlledOnOpenChange,
@@ -255,7 +207,7 @@ export function ModalForm<TFieldValues extends FieldValues = FieldValues>({
       open={open}
       onOpenChange={setOpen}
     >
-      <FormProvider {...form}>
+      <ProFormContext value={form as ProFormInstance}>
         <form
           onSubmit={handleSubmit}
           className={cn('flex flex-1 flex-col overflow-hidden', className)}
@@ -267,27 +219,27 @@ export function ModalForm<TFieldValues extends FieldValues = FieldValues>({
           {submitter !== false && (
             <OverlayFormFooter
               slot="modal-form-footer"
+              form={form as ProFormInstance}
               submitter={submitter}
-              submitting={loading}
               cancel={handleCancel}
               className="flex-col-reverse pt-4 sm:flex-row sm:justify-end"
             />
           )}
         </form>
-      </FormProvider>
+      </ProFormContext>
     </ProModal>
   )
 }
 
-export function DrawerForm<TFieldValues extends FieldValues = FieldValues>({
+/** ProForm hosted inside a directional drawer. */
+export function DrawerForm<TFieldValues extends FormValues = FormValues>({
   trigger,
   title,
   description,
   children,
   schema,
   formRef,
-  form: formProp,
-  resolver,
+  validator,
   defaultValues,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
@@ -298,10 +250,9 @@ export function DrawerForm<TFieldValues extends FieldValues = FieldValues>({
   className,
   side = 'right',
 }: OverlayFormProps<TFieldValues> & { side?: 'top' | 'right' | 'bottom' | 'left' }) {
-  const { form, open, setOpen, loading, handleSubmit, handleCancel } = useOverlayForm({
-    form: formProp,
+  const { form, open, setOpen, handleSubmit, handleCancel } = useOverlayForm({
     formRef,
-    resolver,
+    validator,
     defaultValues,
     open: controlledOpen,
     onOpenChange: controlledOnOpenChange,
@@ -319,7 +270,7 @@ export function DrawerForm<TFieldValues extends FieldValues = FieldValues>({
       onOpenChange={setOpen}
       side={side}
     >
-      <FormProvider {...form}>
+      <ProFormContext value={form as ProFormInstance}>
         <form
           onSubmit={handleSubmit}
           className={cn('flex flex-1 flex-col overflow-hidden', className)}
@@ -331,22 +282,21 @@ export function DrawerForm<TFieldValues extends FieldValues = FieldValues>({
           {submitter !== false && (
             <OverlayFormFooter
               slot="drawer-form-footer"
+              form={form as ProFormInstance}
               submitter={submitter}
-              submitting={loading}
               cancel={handleCancel}
               className="mt-auto flex-col p-4"
             />
           )}
         </form>
-      </FormProvider>
+      </ProFormContext>
     </ProDrawer>
   )
 }
 
-function useOverlayForm<TFieldValues extends FieldValues = FieldValues>({
-  form: formProp,
+function useOverlayForm<TFieldValues extends FormValues = FormValues>({
   formRef,
-  resolver,
+  validator,
   defaultValues,
   open: controlledOpen,
   onOpenChange,
@@ -354,45 +304,34 @@ function useOverlayForm<TFieldValues extends FieldValues = FieldValues>({
   onFinishFailed,
   onCancel,
 }: {
-  form?: UseFormReturn<TFieldValues>
   formRef?: Ref<ProFormInstance<TFieldValues>>
-  resolver?: Resolver<TFieldValues>
-  defaultValues?: DefaultValues<TFieldValues>
+  validator?: ProFormValidator<TFieldValues>
+  defaultValues?: TFieldValues
   open?: boolean
   onOpenChange?: (open: boolean) => void
-  onFinish?: SubmitHandler<TFieldValues>
+  onFinish?: (values: TFieldValues) => void | Promise<void>
   onFinishFailed?: (errors: unknown) => void
   onCancel?: () => void | Promise<void>
 }) {
-  const internalForm = useForm<TFieldValues>({ resolver, defaultValues })
-  const form = formProp ?? internalForm
   const [internalOpen, setInternalOpen] = useState(false)
-  const [loading, setLoading] = useState(false)
   const open = controlledOpen ?? internalOpen
-
-  useImperativeHandle(formRef, () => form, [form])
 
   function setOpen(value: boolean) {
     if (controlledOpen === undefined) setInternalOpen(value)
     onOpenChange?.(value)
   }
 
-  const handleSubmit = form.handleSubmit(
-    async (values) => {
-      if (loading) return
-      setLoading(true)
-      try {
-        await onFinish?.(values)
-        setOpen(false)
-        form.reset(defaultValues)
-      } catch (err) {
-        onFinishFailed?.(err)
-      } finally {
-        setLoading(false)
-      }
+  const form = useProForm({
+    defaultValues,
+    validator,
+    onFinish,
+    onFinishFailed,
+    onSuccess: () => {
+      setOpen(false)
+      form.reset(defaultValues)
     },
-    onFinishFailed as SubmitErrorHandler<TFieldValues>,
-  )
+  })
+  useImperativeHandle(formRef, () => form, [form])
 
   async function handleCancel() {
     setOpen(false)
@@ -400,26 +339,82 @@ function useOverlayForm<TFieldValues extends FieldValues = FieldValues>({
     await onCancel?.()
   }
 
-  return { form, open, setOpen, loading, handleSubmit, handleCancel }
+  function handleOpenChange(value: boolean) {
+    setOpen(value)
+    if (!value) form.reset(defaultValues)
+  }
+
+  return { form, open, setOpen: handleOpenChange, handleSubmit: submitForm(form), handleCancel }
+}
+
+function useProForm<TFieldValues extends FormValues>({
+  defaultValues,
+  validator,
+  onFinish,
+  onFinishFailed,
+  onSuccess,
+}: {
+  defaultValues?: TFieldValues
+  validator?: ProFormValidator<TFieldValues>
+  onFinish?: (values: TFieldValues) => void | Promise<void>
+  onFinishFailed?: (errors: unknown) => void
+  onSuccess?: () => void | Promise<void>
+}) {
+  return useForm({
+    defaultValues: (defaultValues ?? {}) as TFieldValues,
+    validators: validator ? ({ onSubmit: validator } as never) : undefined,
+    onSubmit: async ({ value }) => {
+      try {
+        await onFinish?.(value)
+        await onSuccess?.()
+      } catch (error) {
+        onFinishFailed?.(error)
+      }
+    },
+    onSubmitInvalid: ({ formApi }) => onFinishFailed?.(getFormValidationErrors(formApi)),
+  })
+}
+
+function getFormValidationErrors(form: AnyFormApi) {
+  return {
+    form: form.state.errors,
+    fields: Object.fromEntries(
+      Object.entries(form.state.fieldMeta).flatMap(([name, metadata]) =>
+        metadata?.errors.length ? [[name, metadata.errors]] : [],
+      ),
+    ),
+  }
+}
+
+function submitForm(form: AnyFormApi) {
+  return (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+    void form.handleSubmit()
+  }
 }
 
 function OverlayFormFooter({
   slot,
+  form,
   submitter,
-  submitting,
   cancel,
   className,
 }: {
   slot: string
+  form: ProFormInstance
   submitter?: OverlayFormSubmitter
-  submitting: boolean
   cancel: () => void | Promise<void>
   className?: string
 }) {
   return (
-    <div data-slot={slot} className={cn('flex shrink-0 gap-2', className)}>
-      {renderOverlaySubmitter(submitter, submitting, cancel)}
-    </div>
+    <form.Subscribe selector={(state) => state.isSubmitting}>
+      {(submitting) => (
+        <div data-slot={slot} className={cn('flex shrink-0 gap-2', className)}>
+          {renderOverlaySubmitter(submitter, submitting, cancel)}
+        </div>
+      )}
+    </form.Subscribe>
   )
 }
 
@@ -461,7 +456,7 @@ interface FormItemProps {
   children?: ReactNode
   name?: string
   bind?: boolean
-  rules?: RegisterOptions<FieldValues, string>
+  validators?: ProFieldValidators
   label?: ReactNode
   required?: boolean
   disabled?: boolean
@@ -472,12 +467,13 @@ interface FormItemProps {
   extra?: ReactNode
 }
 
+/** Binds one child control to the nearest ProForm field context. */
 export function FormItem({
   className,
   children,
   name,
   bind = true,
-  rules,
+  validators,
   label,
   required,
   disabled,
@@ -487,13 +483,83 @@ export function FormItem({
   errors = [],
   extra,
 }: FormItemProps) {
-  const fieldError = useFieldErrors(name ?? htmlFor)
-  const errorMessages = errors.length > 0 ? errors : fieldError
-  const control = useOptionalFormControl()
-  const shouldBind = bind && name && control && isValidElement(children)
+  const form = useContext(ProFormContext)
+  const shouldBind = bind && name && form && isValidElement(children)
+
+  if (!shouldBind) {
+    return (
+      <FormItemContent
+        className={className}
+        label={label}
+        required={required}
+        disabled={disabled}
+        htmlFor={htmlFor}
+        description={description}
+        tooltip={tooltip}
+        errors={errors}
+        extra={extra}
+      >
+        {children}
+      </FormItemContent>
+    )
+  }
 
   return (
-    <div className={cn('space-y-1.5', className)}>
+    <form.Field
+      name={name as never}
+      validators={withRequiredValidator(required, validators) as never}
+    >
+      {(field) => {
+        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+        const hasErrors = errors.length > 0
+        return (
+          <FormItemContent
+            className={className}
+            label={label}
+            required={required}
+            disabled={disabled}
+            htmlFor={htmlFor ?? name}
+            description={description}
+            tooltip={tooltip}
+            errors={hasErrors ? errors : isInvalid ? getErrorMessages(field.state.meta.errors) : []}
+            extra={extra}
+          >
+            {cloneElement(Children.only(children) as ReactElement<Record<string, unknown>>, {
+              id: htmlFor ?? name,
+              name: field.name,
+              value: field.state.value,
+              disabled: disabled || undefined,
+              required: required || undefined,
+              'aria-invalid': hasErrors || isInvalid,
+              onBlur: field.handleBlur,
+              onChange: (value: unknown) =>
+                (field.handleChange as (nextValue: unknown) => void)(getControlValue(value)),
+            })}
+          </FormItemContent>
+        )
+      }}
+    </form.Field>
+  )
+}
+
+function FormItemContent({
+  className,
+  children,
+  label,
+  required,
+  disabled,
+  htmlFor,
+  description,
+  tooltip,
+  errors = [],
+  extra,
+}: Omit<FormItemProps, 'name' | 'bind' | 'validators'>) {
+  return (
+    <div
+      className={cn('flex flex-col gap-1.5', className)}
+      data-invalid={errors.length > 0 || undefined}
+      data-disabled={disabled || undefined}
+    >
       {label != null && (
         <div className="flex items-center gap-1.5">
           <label
@@ -522,31 +588,10 @@ export function FormItem({
           )}
         </div>
       )}
-      {shouldBind ? (
-        <Controller
-          name={name}
-          control={control}
-          rules={{
-            ...(required ? { required: 'This field is required.' } : {}),
-            ...rules,
-          }}
-          render={({ field }) =>
-            cloneElement(Children.only(children) as ReactElement<Record<string, unknown>>, {
-              id: htmlFor ?? name,
-              name: field.name,
-              value: field.value,
-              onBlur: field.onBlur,
-              onChange: field.onChange,
-              ref: field.ref,
-            })
-          }
-        />
-      ) : (
-        children
-      )}
-      {errorMessages.length > 0 && (
+      {children}
+      {errors.length > 0 && (
         <p className="text-xs text-destructive" role="alert">
-          {errorMessages.join(', ')}
+          {errors.join(', ')}
         </p>
       )}
       {extra != null && <div className="text-xs text-muted-foreground">{extra}</div>}
@@ -554,245 +599,59 @@ export function FormItem({
   )
 }
 
-function useOptionalFormControl() {
-  try {
-    return useFormContext().control
-  } catch {
-    return undefined
-  }
-}
-
 function ProSchemaFields({ schema }: { schema: ProSchemaFormItem[] }) {
+  const form = useContext(ProFormContext)
+  if (!form) throw new Error('ProSchemaFields must be rendered inside ProForm.')
+
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4">
       {schema.map((item) => {
         if (item.hidden) return null
 
         return (
-          <Controller
-            key={item.name}
-            name={item.name}
-            defaultValue={item.initialValue}
-            rules={{
-              ...(item.required ? { required: 'This field is required.' } : {}),
-              ...item.rules,
+          <form.Field
+            key={String(item.name)}
+            name={item.name as never}
+            defaultValue={item.initialValue as never}
+            validators={withRequiredValidator(item.required, item.validators) as never}
+          >
+            {(field) => {
+              const validationErrors =
+                field.state.meta.isTouched && !field.state.meta.isValid
+                  ? getErrorMessages(field.state.meta.errors)
+                  : []
+              const fieldErrors = item.errors?.length ? item.errors : validationErrors
+              const valueField: ProSchemaValueField = {
+                name: field.name,
+                value: field.state.value as ProSchemaFormValue,
+                invalid: fieldErrors.length > 0,
+                onChange: (value) =>
+                  (field.handleChange as (nextValue: ProSchemaFormValue) => void)(value),
+                onBlur: field.handleBlur,
+              }
+              return (
+                <FormItem
+                  name={item.name}
+                  bind={false}
+                  label={item.label}
+                  required={item.required}
+                  disabled={item.disabled}
+                  htmlFor={String(item.name)}
+                  description={item.description}
+                  tooltip={item.tooltip}
+                  errors={fieldErrors}
+                  extra={item.extra}
+                  {...item.formItemProps}
+                >
+                  {item.render
+                    ? item.render(valueField, item)
+                    : renderSchemaField(item, valueField)}
+                </FormItem>
+              )
             }}
-            render={({ field }) => (
-              <FormItem
-                name={item.name}
-                bind={false}
-                label={item.label}
-                required={item.required}
-                disabled={item.disabled}
-                htmlFor={item.name}
-                description={item.description}
-                tooltip={item.tooltip}
-                errors={item.errors}
-                extra={item.extra}
-                {...item.formItemProps}
-              >
-                {item.render
-                  ? item.render(field as ProSchemaValueField, item)
-                  : renderSchemaField(item, field as ProSchemaValueField)}
-              </FormItem>
-            )}
-          />
+          </form.Field>
         )
       })}
     </div>
-  )
-}
-
-function useFieldErrors(name?: string) {
-  try {
-    const { formState } = useFormContext()
-    const error = name ? getFieldError(formState.errors, name) : undefined
-    if (!error) return []
-    if (error.types && typeof error.types === 'object')
-      return Object.values(error.types).map(String)
-    return error.message ? [String(error.message)] : []
-  } catch {
-    return []
-  }
-}
-
-function getFieldError(
-  errors: FieldErrors<FieldValues>,
-  name: string,
-): { message?: unknown; types?: Record<string, unknown> } | undefined {
-  const error = name.split('.').reduce<unknown>((current, key) => {
-    if (current == null || typeof current !== 'object') return undefined
-    return (current as Record<string, unknown>)[key]
-  }, errors) as { message?: unknown; types?: unknown } | undefined
-
-  if (!error) return undefined
-  return {
-    message: error.message,
-    types:
-      error.types && typeof error.types === 'object'
-        ? (error.types as Record<string, unknown>)
-        : undefined,
-  }
-}
-
-function renderSchemaField<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->(item: ProSchemaFormItem<TFieldValues, TName>, field: ProSchemaValueField<TFieldValues, TName>) {
-  const fieldProps = item.fieldProps ?? {}
-  const value = field.value as ProSchemaFormValue
-  const textValue = String(value ?? '')
-  const dateValue = value instanceof Date ? value : undefined
-  const stringValue = typeof value === 'string' ? value : undefined
-  const numberValue = typeof value === 'number' ? value : undefined
-
-  switch (item.valueType ?? 'text') {
-    case 'password':
-      return (
-        <Password
-          id={item.name}
-          value={textValue}
-          disabled={item.disabled}
-          required={item.required}
-          onChange={(event) => field.onChange(event.target.value)}
-          {...fieldProps}
-        />
-      )
-    case 'textarea':
-      return (
-        <Textarea
-          id={item.name}
-          value={textValue}
-          disabled={item.disabled}
-          required={item.required}
-          onChange={(event) => field.onChange(event.target.value)}
-          {...fieldProps}
-        />
-      )
-    case 'select':
-      return (
-        <Select
-          value={value as string | string[] | undefined}
-          disabled={item.disabled}
-          required={item.required}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'multiSelect':
-      return (
-        <Select
-          value={value as string | string[] | undefined}
-          disabled={item.disabled}
-          required={item.required}
-          multiple
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'checkbox':
-      return (
-        <Checkbox
-          value={value as boolean | string[] | undefined}
-          disabled={item.disabled}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'radio':
-      return (
-        <Radio
-          name={item.name}
-          value={stringValue}
-          disabled={item.disabled}
-          required={item.required}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'switch':
-      return (
-        <Switch
-          value={Boolean(field.value)}
-          disabled={item.disabled}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'date':
-      return (
-        <DatePicker
-          value={dateValue}
-          disabled={item.disabled}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'dateRange':
-      return (
-        <DateRangePicker
-          value={value as { from?: Date; to?: Date } | undefined}
-          disabled={item.disabled}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'dateTime':
-      return (
-        <DateTimePicker
-          value={dateValue}
-          disabled={item.disabled}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'time':
-      return (
-        <TimePicker
-          value={stringValue}
-          disabled={item.disabled}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'slider':
-      return (
-        <Slider
-          value={numberValue}
-          disabled={item.disabled}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'rate':
-      return (
-        <Rate
-          value={numberValue ?? 0}
-          disabled={item.disabled}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-    case 'segmented':
-      return (
-        <Segmented
-          value={stringValue}
-          disabled={item.disabled}
-          onChange={field.onChange}
-          {...fieldProps}
-        />
-      )
-  }
-
-  return (
-    <Input
-      id={item.name}
-      type={item.valueType === 'email' ? 'email' : 'text'}
-      value={textValue}
-      disabled={item.disabled}
-      required={item.required}
-      onChange={(event) => field.onChange(event.target.value)}
-      {...fieldProps}
-    />
   )
 }

@@ -11,7 +11,7 @@ Inspired by [Ant Design Pro Components](https://procomponents.ant.design/), shad
 - **ProOverlay** — Reusable modal, drawer, and confirm shells.
 - **ProForm** — Composable form layout, lightweight schema forms, ModalForm, and DrawerForm.
 - **ProTable** — Feature-rich data tables powered by [TanStack Table](https://tanstack.com/table), with search, pagination, sorting, and column management built in.
-- **ProEditor** — Monaco-powered editor with controlled language, theme, view mode, and external preview slots.
+- **ProEditor** — Monaco-powered editor with Worker-backed Shiki syntax highlighting, controlled language, theme, view mode, and external preview slots.
 - **ProDescriptions** — Key-value detail panels for displaying structured record data.
 - **CodeViewer** — Shiki-powered read-only code viewer with copy, line numbers, folding, and loading/error states.
 - **DiffViewer** — Split and unified code diff viewer with shared Shiki highlighting.
@@ -33,7 +33,7 @@ npx shadcn@latest add https://draco-china.github.io/shadcn-pro/r/markdown-viewer
 ## Key Features
 
 ### Composable Forms
-Build form layouts from `ProForm`, `FormItem`, and standalone ProFields. Values are collected from native `FormData`, so you can bring your own validation and state model.
+Build form layouts from `ProForm`, `FormItem`, and standalone ProFields. TanStack Form manages field state, validation, and submission.
 
 ### Registry Installation
 Add any component with the official shadcn CLI. The registry copies source files directly into your project, respecting your existing folder structure.
@@ -45,7 +45,7 @@ Each field primitive (for example `Input`, `Select`, or `DatePicker`) is indepen
 
 | Scenario | Recommended |
 |---|---|
-| Simple one-off forms | shadcn/ui `<Form>` + react-hook-form |
+| Simple one-off forms | shadcn/ui fields + TanStack Form |
 | Complex forms with dynamic fields, linkage, array/object nesting | **ProForm** |
 | Standalone inputs and reusable field primitives | **ProFields** |
 | Simple lists | shadcn/ui `<Table>` |

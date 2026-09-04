@@ -1,6 +1,6 @@
 ---
 title: ProEditor
-description: Monaco-powered editor with controlled language, theme, preview mode, and external preview slot.
+description: Monaco-powered editor with Worker-backed Shiki syntax highlighting, controlled language, theme, preview mode, and external preview slot.
 ---
 
 <ComponentPreview
@@ -33,7 +33,7 @@ npx shadcn@latest add https://draco-china.github.io/shadcn-pro/r/pro-editor.json
 <Step>Install the following dependencies:</Step>
 
 ```bash
-bun add @monaco-editor/react @shikijs/monaco monaco-editor shiki lucide-react
+bun add @monaco-editor/react monaco-editor lucide-react
 ```
 
 <Step>Install or copy `pro-base` for the button and fullscreen utilities.</Step>
@@ -79,6 +79,8 @@ export default function EditorPage() {
 ```
 
 `ProEditor` receives `language` and `theme` as controlled props. Keep language and theme switchers in your page or demo state and pass the selected values into `ProEditor`; the built-in toolbar displays the current language but does not own those controls.
+
+The React wrapper is loaded only when the editor pane becomes visible. Monaco loads its runtime and language workers from jsDelivr by default, while a separate module Worker loads pinned Shiki modules from esm.sh and returns serializable theme data and semantic tokens. Use `monacoCdnBaseUrl` and `shikiCdnBaseUrl` to point both loaders at internal mirrors. With CSP, allow those origins in `script-src` and same-origin module workers in `worker-src`.
 
 `ProEditor` does not ship a built-in preview renderer. Pass `preview.component` from the outside when you want preview or split mode; omit `preview` for edit-only usage.
 
@@ -206,6 +208,8 @@ Use `toolbarTitle` to customize the title area. Custom actions render before the
 | `theme`       | `'light' \| 'dark'`          | `'dark'`         | Editor theme. Internally maps to One Light / One Dark Pro syntax themes. |
 | `className`   | `string`                              | —              | Additional CSS class for the editor root. |
 | `height`      | `string \| number`                    | —              | Content height. When omitted, the editor fills its parent container. |
+| `monacoCdnBaseUrl` | `string` | jsDelivr Monaco `vs` path | Monaco runtime and language-worker CDN path. |
+| `shikiCdnBaseUrl` | `string` | `"https://esm.sh"` | ESM CDN used by the Shiki syntax/theme Worker. |
 | `toolbar`     | `false \| ReactNode \| (context) => ReactNode` | — | Custom toolbar actions. Pass `false` to hide the toolbar. |
 | `toolbarTitle` | `ReactNode \| (context) => ReactNode` | Current language | Toolbar title content. |
 | `toolbarMode` | `boolean` | `true` | Shows preview/split buttons when `preview` is enabled. |

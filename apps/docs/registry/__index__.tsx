@@ -124,11 +124,6 @@ export const Index: Record<string, Record<string, any>> = {
       type: "registry:ui",
       component: lazy(() => import("@/registry/new-york-v4/ui/field")),
     },
-    "form": {
-      name: "form",
-      type: "registry:ui",
-      component: lazy(() => import("@/registry/new-york-v4/ui/form")),
-    },
     "hover-card": {
       name: "hover-card",
       type: "registry:ui",
@@ -301,7 +296,9 @@ export const Index: Record<string, Record<string, any>> = {
         { path: "registry/new-york-v4/pro/base/fields/shared/field.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/base/fields/shared/calendar.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/base/fields/input/index.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/base/fields/input/money.ts", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/base/fields/select/index.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/base/fields/select/tree.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/base/fields/checkbox/index.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/base/fields/radio/index.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/base/fields/date-picker/index.tsx", type: "registry:ui" },
@@ -340,6 +337,8 @@ export const Index: Record<string, Record<string, any>> = {
       type: "registry:ui",
       files: [
         { path: "registry/new-york-v4/pro/form/index.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/form/schema-render.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/form/validators.ts", type: "registry:ui" },
       ],
       component: lazy(() => import("@/registry/new-york-v4/pro/form/index")),
     },
@@ -348,6 +347,8 @@ export const Index: Record<string, Record<string, any>> = {
       type: "registry:ui",
       files: [
         { path: "registry/new-york-v4/pro/table/index.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/table/body.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/table/url-state.ts", type: "registry:ui" },
       ],
       component: lazy(() => import("@/registry/new-york-v4/pro/table/index")),
     },
@@ -356,6 +357,9 @@ export const Index: Record<string, Record<string, any>> = {
       type: "registry:ui",
       files: [
         { path: "registry/new-york-v4/pro/editor/index.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/editor/theme.ts", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/editor/theme-types.ts", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/editor/theme-worker.ts", type: "registry:ui" },
       ],
       component: lazy(() => import("@/registry/new-york-v4/pro/editor/index")),
     },
@@ -372,6 +376,15 @@ export const Index: Record<string, Record<string, any>> = {
       type: "registry:ui",
       files: [
         { path: "registry/new-york-v4/pro/viewer/code/index.tsx", type: "registry:ui" },
+        {
+          path: "registry/new-york-v4/pro/viewer/code/highlight-types.ts",
+          type: "registry:ui",
+        },
+        { path: "registry/new-york-v4/pro/viewer/code/highlighter.ts", type: "registry:ui" },
+        {
+          path: "registry/new-york-v4/pro/viewer/code/highlight-worker.ts",
+          type: "registry:ui",
+        },
       ],
       component: lazy(() => import("@/registry/new-york-v4/pro/viewer/code")),
     },
@@ -404,6 +417,12 @@ export const Index: Record<string, Record<string, any>> = {
       type: "registry:ui",
       files: [
         { path: "registry/new-york-v4/pro/viewer/markdown/index.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/viewer/markdown/plugins.ts", type: "registry:ui" },
+        {
+          path: "registry/new-york-v4/pro/viewer/markdown/use-markdown-worker.ts",
+          type: "registry:ui",
+        },
+        { path: "registry/new-york-v4/pro/viewer/markdown/worker.ts", type: "registry:ui" },
       ],
       component: lazy(() => import("@/registry/new-york-v4/pro/viewer/markdown")),
     },

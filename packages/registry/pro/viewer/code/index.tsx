@@ -2,19 +2,21 @@
 
 import { ChevronRight, Copy } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
-import { type BundledLanguage, bundledLanguages, codeToTokensBase, type ThemedToken } from 'shiki'
 import { cn } from '@/lib/utils'
 import { CopyButton, ProButton } from '../../base/button'
+import type { HighlightToken } from './highlight-types'
+import { highlightCode } from './highlighter'
 
 interface CodeLine {
   index: number
-  tokens: ThemedToken[]
+  tokens: HighlightToken[]
   content: string
   indent: number
   isFoldable: boolean
   foldEnd: number
 }
 
+/** Syntax-highlighted code viewer with copy and folding controls. */
 export function CodeViewer({
   code,
   lang = 'typescript',
@@ -28,8 +30,9 @@ export function CodeViewer({
   className?: string
   title?: string
 }) {
-  const [tokenLines, setTokenLines] = useState<ThemedToken[][]>([])
+  const [tokenLines, setTokenLines] = useState<HighlightToken[][]>([])
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
+  const [errorMessage, setErrorMessage] = useState('')
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set())
   const isLight = theme === 'light'
   const lines = useMemo<CodeLine[]>(() => {
@@ -77,7 +80,9 @@ export function CodeViewer({
   )
   const codeContent =
     status !== 'ready' || lines.length === 0 ? (
-      <div className="px-4 py-6 font-mono text-sm opacity-60">{getCodeStatusText(status)}</div>
+      <div className="px-4 py-6 font-mono text-sm opacity-60">
+        {getCodeStatusText(status, errorMessage)}
+      </div>
     ) : (
       <CodeLinesTable
         lines={lines}
@@ -99,10 +104,8 @@ export function CodeViewer({
 
   useEffect(() => {
     let cancelled = false
-    const normalizedLang = lang.toLowerCase()
-    const highlightLang = getBundledLanguage(normalizedLang)
-
     setStatus('loading')
+    setErrorMessage('')
     setCollapsed(new Set())
 
     if (!code) {
@@ -110,16 +113,14 @@ export function CodeViewer({
       setStatus('ready')
       return
     }
-    codeToTokensBase(code, {
-      lang: highlightLang,
-      theme: theme === 'dark' ? 'one-dark-pro' : 'one-light',
-    })
+    highlightCode(code, lang, theme)
       .then((result) => {
         if (!cancelled) setTokenLines(result)
       })
-      .catch(() => {
+      .catch((error: Error) => {
         if (!cancelled) {
           setTokenLines([])
+          setErrorMessage(error.message)
           setStatus('error')
         }
       })
@@ -263,20 +264,13 @@ function CodeLinesTable({
   )
 }
 
-function getBundledLanguage(normalizedLang: string): BundledLanguage {
-  if (normalizedLang in bundledLanguages) return normalizedLang as BundledLanguage
-  if (normalizedLang === 'typescript' || normalizedLang === 'ts') return 'tsx'
-  if (normalizedLang === 'javascript' || normalizedLang === 'js') return 'jsx'
-  return 'javascript'
-}
-
-function getCodeStatusText(status: 'idle' | 'loading' | 'ready' | 'error') {
+function getCodeStatusText(status: 'idle' | 'loading' | 'ready' | 'error', errorMessage: string) {
   if (status === 'loading') return 'Loading...'
-  if (status === 'error') return 'Unable to highlight code'
+  if (status === 'error') return errorMessage || 'Unable to highlight code'
   return 'No code'
 }
 
-function renderTokenLineHtml(tokens: ThemedToken[]) {
+function renderTokenLineHtml(tokens: HighlightToken[]) {
   if (!tokens.length) return '\u00a0'
 
   return tokens

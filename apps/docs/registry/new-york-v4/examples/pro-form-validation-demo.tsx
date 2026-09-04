@@ -1,6 +1,5 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { ProForm } from '@/registry/new-york-v4/pro/form'
 
@@ -30,7 +29,7 @@ export default function ProFormValidationDemo() {
       <ProForm<FormValues>
         defaultValues={{ email: '', password: '', role: '' }}
         onFinish={handleFinish}
-        resolver={zodResolver(formSchema)}
+        validator={formSchema}
         schema={[
           {
             name: 'email',

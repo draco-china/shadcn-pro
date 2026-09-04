@@ -2,6 +2,7 @@
 
 import { type RefObject, useCallback, useEffect, useRef, useState } from 'react'
 
+/** Manages controlled or uncontrolled fixed and browser fullscreen state. */
 export function useFullscreen({
   fullscreen: controlledFullscreen,
   defaultFullscreen = false,

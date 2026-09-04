@@ -34,17 +34,32 @@ function demoFile(name: string): BlockFile {
   }
 }
 
-const codeViewerFiles = ['code/index.tsx']
+const codeViewerFiles = [
+  'code/index.tsx',
+  'code/highlight-types.ts',
+  'code/highlighter.ts',
+  'code/highlight-worker.ts',
+]
 
-const markdownViewerFiles = ['markdown/index.tsx', ...codeViewerFiles]
+const markdownViewerFiles = [
+  'markdown/index.tsx',
+  'markdown/plugins.ts',
+  'markdown/use-markdown-worker.ts',
+  'markdown/worker.ts',
+  ...codeViewerFiles,
+]
 
-const inputFieldFiles = ['shared/field.tsx', 'input/index.tsx']
-const selectFieldFiles = ['shared/field.tsx', 'select/index.tsx']
+const editorFiles = ['index.tsx', 'theme.ts', 'theme-types.ts', 'theme-worker.ts']
+
+const inputFieldFiles = ['shared/field.tsx', 'input/index.tsx', 'input/money.ts']
+const selectFieldFiles = ['shared/field.tsx', 'select/index.tsx', 'select/tree.tsx']
 const proFieldFiles = [
   'shared/field.tsx',
   'shared/calendar.tsx',
   'input/index.tsx',
+  'input/money.ts',
   'select/index.tsx',
+  'select/tree.tsx',
   'checkbox/index.tsx',
   'radio/index.tsx',
   'date-picker/index.tsx',
@@ -79,7 +94,7 @@ export const CATEGORIES: Category[] = [
         iframeHeight: '676px',
         files: [
           demoFile('pro-table-demo'),
-          ...componentFiles('table', ['index.tsx']),
+          ...componentFiles('table', ['index.tsx', 'body.tsx', 'url-state.ts']),
           ...componentFiles('pagination', ['index.tsx']),
         ],
       },
@@ -90,7 +105,7 @@ export const CATEGORIES: Category[] = [
         iframeHeight: '536px',
         files: [
           demoFile('pro-table-drag-sort-demo'),
-          ...componentFiles('table', ['index.tsx']),
+          ...componentFiles('table', ['index.tsx', 'body.tsx']),
           ...componentFiles('pagination', ['index.tsx']),
         ],
       },
@@ -122,7 +137,7 @@ export const CATEGORIES: Category[] = [
         iframeHeight: '537px',
         files: [
           demoFile('pro-form-demo'),
-          ...componentFiles('form', ['index.tsx']),
+          ...componentFiles('form', ['index.tsx', 'schema-render.tsx', 'validators.ts']),
           ...componentFiles('overlay', ['index.tsx']),
         ],
       },
@@ -139,7 +154,7 @@ export const CATEGORIES: Category[] = [
       {
         name: 'pro-form-validation-demo',
         description:
-          'Schema validation with native rules, optional Zod validators, and real-time error messages.',
+          'TanStack Form validation with Standard Schema and touched-field error messages.',
         iframeHeight: '500px',
         files: [
           demoFile('pro-form-validation-demo'),
@@ -206,13 +221,13 @@ export const CATEGORIES: Category[] = [
         description:
           'Monaco-powered code editor with externally controlled language, syntax theme, format, and live preview.',
         iframeHeight: '490px',
-        files: [demoFile('pro-editor-demo'), ...componentFiles('editor', ['index.tsx'])],
+        files: [demoFile('pro-editor-demo'), ...componentFiles('editor', editorFiles)],
       },
       {
         name: 'pro-editor-monaco-demo',
         description: 'Edit-only Monaco editor without a preview renderer or preview mode controls.',
         iframeHeight: '430px',
-        files: [demoFile('pro-editor-monaco-demo'), ...componentFiles('editor', ['index.tsx'])],
+        files: [demoFile('pro-editor-monaco-demo'), ...componentFiles('editor', editorFiles)],
       },
       {
         name: 'pro-editor-markdown-demo',
@@ -220,7 +235,7 @@ export const CATEGORIES: Category[] = [
         iframeHeight: '490px',
         files: [
           demoFile('pro-editor-markdown-demo'),
-          ...componentFiles('editor', ['index.tsx']),
+          ...componentFiles('editor', editorFiles),
           ...componentFiles('viewer', markdownViewerFiles),
         ],
       },

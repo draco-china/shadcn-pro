@@ -2,9 +2,10 @@
 
 import { diffLines } from 'diff'
 import { useEffect, useMemo, useState } from 'react'
-import { type BundledLanguage, bundledLanguages, codeToTokensBase, type ThemedToken } from 'shiki'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../../base/button'
+import type { HighlightToken } from '../code/highlight-types'
+import { highlightCode } from '../code/highlighter'
 
 interface DiffLine {
   type: 'added' | 'removed' | 'unchanged'
@@ -13,6 +14,7 @@ interface DiffLine {
   newLineNo?: number
 }
 
+/** Split or unified line diff with batched syntax highlighting. */
 export function DiffViewer({
   oldCode,
   newCode,
@@ -70,26 +72,16 @@ export function DiffViewer({
       removed,
     }
   }, [oldCode, newCode])
-  const [htmlMap, setHtmlMap] = useState<Map<string, string>>(new Map())
+  const [htmlLines, setHtmlLines] = useState<string[]>([])
 
   useEffect(() => {
     let cancelled = false
-    const normalizedLang = lang.toLowerCase()
-    const highlightLang = getBundledLanguage(normalizedLang)
-    Promise.all(
-      Array.from(new Set(unified.map((line) => line.content)), async (line) => {
-        const tokenLines = await codeToTokensBase(line || ' ', {
-          lang: highlightLang,
-          theme: theme === 'dark' ? 'one-dark-pro' : 'one-light',
-        })
-        return [line, renderTokenLinesHtml(tokenLines)] as const
-      }),
-    )
-      .then((entries) => {
-        if (!cancelled) setHtmlMap(new Map(entries))
+    highlightCode(unified.map((line) => line.content).join('\n') || ' ', lang, theme)
+      .then((tokenLines) => {
+        if (!cancelled) setHtmlLines(tokenLines.map(renderTokenLineHtml))
       })
       .catch(() => {
-        if (!cancelled) setHtmlMap(new Map())
+        if (!cancelled) setHtmlLines([])
       })
 
     return () => {
@@ -155,7 +147,7 @@ export function DiffViewer({
                   >
                     {getDiffSign(line.type)}
                   </td>
-                  {renderHighlightedLine(line.content, htmlMap)}
+                  {renderHighlightedLine(line.content, htmlLines[index])}
                 </tr>
               ))}
             </tbody>
@@ -163,19 +155,12 @@ export function DiffViewer({
         </div>
       ) : (
         <div className="grid grid-cols-2 divide-x divide-border overflow-auto">
-          <SplitDiffPane title={oldTitle} lines={left} side="old" htmlMap={htmlMap} />
-          <SplitDiffPane title={newTitle} lines={right} side="new" htmlMap={htmlMap} />
+          <SplitDiffPane title={oldTitle} lines={left} side="old" htmlLines={htmlLines} />
+          <SplitDiffPane title={newTitle} lines={right} side="new" htmlLines={htmlLines} />
         </div>
       )}
     </div>
   )
-}
-
-function getBundledLanguage(normalizedLang: string): BundledLanguage {
-  if (normalizedLang in bundledLanguages) return normalizedLang as BundledLanguage
-  if (normalizedLang === 'typescript' || normalizedLang === 'ts') return 'tsx'
-  if (normalizedLang === 'javascript' || normalizedLang === 'js') return 'jsx'
-  return 'javascript'
 }
 
 function getDiffSign(type: DiffLine['type']) {
@@ -188,12 +173,12 @@ function SplitDiffPane({
   title,
   lines,
   side,
-  htmlMap,
+  htmlLines,
 }: {
   title: string
   lines: (DiffLine | null)[]
   side: 'old' | 'new'
-  htmlMap: Map<string, string>
+  htmlLines: string[]
 }) {
   return (
     <div>
@@ -233,7 +218,7 @@ function SplitDiffPane({
                 >
                   {(side === 'old' ? line.oldLineNo : line.newLineNo) ?? ''}
                 </td>
-                {renderHighlightedLine(line.content, htmlMap)}
+                {renderHighlightedLine(line.content, htmlLines[index])}
               </tr>
             )
           })}
@@ -243,8 +228,7 @@ function SplitDiffPane({
   )
 }
 
-function renderHighlightedLine(content: string, htmlMap: Map<string, string>) {
-  const html = htmlMap.get(content)
+function renderHighlightedLine(content: string, html?: string) {
   if (!html) {
     return (
       <td className="py-0 pl-2 pr-4 whitespace-pre font-mono text-xs text-foreground">
@@ -262,18 +246,16 @@ function renderHighlightedLine(content: string, htmlMap: Map<string, string>) {
   )
 }
 
-function renderTokenLinesHtml(tokenLines: ThemedToken[][]) {
+function renderTokenLineHtml(tokens: HighlightToken[]) {
   return (
-    tokenLines
-      .flatMap((line) =>
-        line.map((token) => {
-          const content = token.content
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-          return `<span${token.color ? ` style="color:${token.color}"` : ''}>${content}</span>`
-        }),
-      )
+    tokens
+      .map((token) => {
+        const content = token.content
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+        return `<span${token.color ? ` style="color:${token.color}"` : ''}>${content}</span>`
+      })
       .join('') || '\u00a0'
   )
 }
