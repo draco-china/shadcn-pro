@@ -12,7 +12,10 @@ import {
   type ReactNode,
   type Ref,
   useContext,
+  useEffect,
   useImperativeHandle,
+  useMemo,
+  useRef,
   useState,
 } from 'react'
 import { cn } from '@/lib/utils'
@@ -28,6 +31,7 @@ import {
   getControlValue,
   getErrorMessages,
   type ProFieldValidators as InternalProFieldValidators,
+  withRequiredFormValidator,
   withRequiredValidator,
 } from './validators'
 
@@ -50,6 +54,15 @@ export type ProFormValidator<TFieldValues extends FormValues = FormValues> =
   FormValidateOrFn<TFieldValues>
 
 const ProFormContext = createContext<ProFormInstance | null>(null)
+const ProFormRequiredFieldsContext = createContext<{
+  fields: Map<string, number>
+  hasFormValidator: boolean
+} | null>(null)
+
+function useRequiredFieldsRegistry(hasFormValidator: boolean) {
+  const fields = useRef(new Map<string, number>())
+  return useMemo(() => ({ fields: fields.current, hasFormValidator }), [hasFormValidator])
+}
 
 interface OverlayFormProps<TFieldValues extends FormValues = FormValues> {
   trigger?: ReactNode
@@ -122,7 +135,14 @@ export function ProForm<TFieldValues extends FormValues = FormValues>({
   submitter,
   className,
 }: ProFormProps<TFieldValues>) {
-  const form = useProForm({ defaultValues, validator, onFinish, onFinishFailed })
+  const requiredFields = useRequiredFieldsRegistry(!!validator)
+  const form = useProForm({
+    defaultValues,
+    validator,
+    requiredFields: requiredFields.fields,
+    onFinish,
+    onFinishFailed,
+  })
 
   useImperativeHandle(formRef, () => form, [form])
 
@@ -133,21 +153,26 @@ export function ProForm<TFieldValues extends FormValues = FormValues>({
 
   return (
     <ProFormContext value={form as ProFormInstance}>
-      <form onSubmit={submitForm(form)} className={className}>
-        <div className="mb-4">
-          {schema && <ProSchemaFields schema={schema} />}
-          {children}
-        </div>
-        {submitter !== false && (
-          <form.Subscribe selector={(state) => state.isSubmitting}>
-            {(submitting) => (
-              <div data-slot="pro-form-actions" className="flex flex-wrap items-center gap-2 pt-2">
-                {renderFormSubmitter(submitter, submitting, reset)}
-              </div>
-            )}
-          </form.Subscribe>
-        )}
-      </form>
+      <ProFormRequiredFieldsContext value={requiredFields}>
+        <form onSubmit={submitForm(form)} className={className}>
+          <div className="mb-4">
+            {schema && <ProSchemaFields schema={schema} />}
+            {children}
+          </div>
+          {submitter !== false && (
+            <form.Subscribe selector={(state) => state.isSubmitting}>
+              {(submitting) => (
+                <div
+                  data-slot="pro-form-actions"
+                  className="flex flex-wrap items-center gap-2 pt-2"
+                >
+                  {renderFormSubmitter(submitter, submitting, reset)}
+                </div>
+              )}
+            </form.Subscribe>
+          )}
+        </form>
+      </ProFormRequiredFieldsContext>
     </ProFormContext>
   )
 }
@@ -188,7 +213,7 @@ export function ModalForm<TFieldValues extends FormValues = FormValues>({
   submitter,
   className,
 }: OverlayFormProps<TFieldValues>) {
-  const { form, open, setOpen, handleSubmit, handleCancel } = useOverlayForm({
+  const { form, requiredFields, open, setOpen, handleSubmit, handleCancel } = useOverlayForm({
     formRef,
     validator,
     defaultValues,
@@ -208,24 +233,26 @@ export function ModalForm<TFieldValues extends FormValues = FormValues>({
       onOpenChange={setOpen}
     >
       <ProFormContext value={form as ProFormInstance}>
-        <form
-          onSubmit={handleSubmit}
-          className={cn('flex flex-1 flex-col overflow-hidden', className)}
-        >
-          <div className="flex-1 overflow-y-auto px-1 py-2">
-            {schema && <ProSchemaFields schema={schema} />}
-            {children}
-          </div>
-          {submitter !== false && (
-            <OverlayFormFooter
-              slot="modal-form-footer"
-              form={form as ProFormInstance}
-              submitter={submitter}
-              cancel={handleCancel}
-              className="flex-col-reverse pt-4 sm:flex-row sm:justify-end"
-            />
-          )}
-        </form>
+        <ProFormRequiredFieldsContext value={requiredFields}>
+          <form
+            onSubmit={handleSubmit}
+            className={cn('flex flex-1 flex-col overflow-hidden', className)}
+          >
+            <div className="flex-1 overflow-y-auto px-1 py-2">
+              {schema && <ProSchemaFields schema={schema} />}
+              {children}
+            </div>
+            {submitter !== false && (
+              <OverlayFormFooter
+                slot="modal-form-footer"
+                form={form as ProFormInstance}
+                submitter={submitter}
+                cancel={handleCancel}
+                className="flex-col-reverse pt-4 sm:flex-row sm:justify-end"
+              />
+            )}
+          </form>
+        </ProFormRequiredFieldsContext>
       </ProFormContext>
     </ProModal>
   )
@@ -250,7 +277,7 @@ export function DrawerForm<TFieldValues extends FormValues = FormValues>({
   className,
   side = 'right',
 }: OverlayFormProps<TFieldValues> & { side?: 'top' | 'right' | 'bottom' | 'left' }) {
-  const { form, open, setOpen, handleSubmit, handleCancel } = useOverlayForm({
+  const { form, requiredFields, open, setOpen, handleSubmit, handleCancel } = useOverlayForm({
     formRef,
     validator,
     defaultValues,
@@ -271,24 +298,26 @@ export function DrawerForm<TFieldValues extends FormValues = FormValues>({
       side={side}
     >
       <ProFormContext value={form as ProFormInstance}>
-        <form
-          onSubmit={handleSubmit}
-          className={cn('flex flex-1 flex-col overflow-hidden', className)}
-        >
-          <div className="flex-1 overflow-y-auto px-4 py-2">
-            {schema && <ProSchemaFields schema={schema} />}
-            {children}
-          </div>
-          {submitter !== false && (
-            <OverlayFormFooter
-              slot="drawer-form-footer"
-              form={form as ProFormInstance}
-              submitter={submitter}
-              cancel={handleCancel}
-              className="mt-auto flex-col p-4"
-            />
-          )}
-        </form>
+        <ProFormRequiredFieldsContext value={requiredFields}>
+          <form
+            onSubmit={handleSubmit}
+            className={cn('flex flex-1 flex-col overflow-hidden', className)}
+          >
+            <div className="flex-1 overflow-y-auto px-4 py-2">
+              {schema && <ProSchemaFields schema={schema} />}
+              {children}
+            </div>
+            {submitter !== false && (
+              <OverlayFormFooter
+                slot="drawer-form-footer"
+                form={form as ProFormInstance}
+                submitter={submitter}
+                cancel={handleCancel}
+                className="mt-auto flex-col p-4"
+              />
+            )}
+          </form>
+        </ProFormRequiredFieldsContext>
       </ProFormContext>
     </ProDrawer>
   )
@@ -314,6 +343,7 @@ function useOverlayForm<TFieldValues extends FormValues = FormValues>({
   onCancel?: () => void | Promise<void>
 }) {
   const [internalOpen, setInternalOpen] = useState(false)
+  const requiredFields = useRequiredFieldsRegistry(!!validator)
   const open = controlledOpen ?? internalOpen
 
   function setOpen(value: boolean) {
@@ -324,6 +354,7 @@ function useOverlayForm<TFieldValues extends FormValues = FormValues>({
   const form = useProForm({
     defaultValues,
     validator,
+    requiredFields: requiredFields.fields,
     onFinish,
     onFinishFailed,
     onSuccess: () => {
@@ -344,25 +375,38 @@ function useOverlayForm<TFieldValues extends FormValues = FormValues>({
     if (!value) form.reset(defaultValues)
   }
 
-  return { form, open, setOpen: handleOpenChange, handleSubmit: submitForm(form), handleCancel }
+  return {
+    form,
+    requiredFields,
+    open,
+    setOpen: handleOpenChange,
+    handleSubmit: submitForm(form),
+    handleCancel,
+  }
 }
 
 function useProForm<TFieldValues extends FormValues>({
   defaultValues,
   validator,
+  requiredFields,
   onFinish,
   onFinishFailed,
   onSuccess,
 }: {
   defaultValues?: TFieldValues
   validator?: ProFormValidator<TFieldValues>
+  requiredFields: Map<string, number>
   onFinish?: (values: TFieldValues) => void | Promise<void>
   onFinishFailed?: (errors: unknown) => void
   onSuccess?: () => void | Promise<void>
 }) {
   return useForm({
     defaultValues: (defaultValues ?? {}) as TFieldValues,
-    validators: validator ? ({ onSubmit: validator } as never) : undefined,
+    validators: validator
+      ? ({
+          onSubmit: withRequiredFormValidator(validator, () => requiredFields.keys()),
+        } as never)
+      : undefined,
     onSubmit: async ({ value }) => {
       try {
         await onFinish?.(value)
@@ -484,7 +528,19 @@ export function FormItem({
   extra,
 }: FormItemProps) {
   const form = useContext(ProFormContext)
+  const requiredFields = useContext(ProFormRequiredFieldsContext)
   const shouldBind = bind && name && form && isValidElement(children)
+
+  useEffect(() => {
+    if (!required || !name || !requiredFields) return
+    const count = requiredFields.fields.get(name) ?? 0
+    requiredFields.fields.set(name, count + 1)
+    return () => {
+      const nextCount = (requiredFields.fields.get(name) ?? 1) - 1
+      if (nextCount > 0) requiredFields.fields.set(name, nextCount)
+      else requiredFields.fields.delete(name)
+    }
+  }, [name, required, requiredFields])
 
   if (!shouldBind) {
     return (
@@ -507,7 +563,9 @@ export function FormItem({
   return (
     <form.Field
       name={name as never}
-      validators={withRequiredValidator(required, validators) as never}
+      validators={
+        withRequiredValidator(required && !requiredFields?.hasFormValidator, validators) as never
+      }
     >
       {(field) => {
         const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
@@ -601,6 +659,7 @@ function FormItemContent({
 
 function ProSchemaFields({ schema }: { schema: ProSchemaFormItem[] }) {
   const form = useContext(ProFormContext)
+  const requiredFields = useContext(ProFormRequiredFieldsContext)
   if (!form) throw new Error('ProSchemaFields must be rendered inside ProForm.')
 
   return (
@@ -613,7 +672,12 @@ function ProSchemaFields({ schema }: { schema: ProSchemaFormItem[] }) {
             key={String(item.name)}
             name={item.name as never}
             defaultValue={item.initialValue as never}
-            validators={withRequiredValidator(item.required, item.validators) as never}
+            validators={
+              withRequiredValidator(
+                item.required && !requiredFields?.hasFormValidator,
+                item.validators,
+              ) as never
+            }
           >
             {(field) => {
               const validationErrors =

@@ -1,4 +1,8 @@
-import type { StandardSchemaV1 } from '@tanstack/react-form'
+import type {
+  FormValidateOrFn,
+  StandardSchemaV1,
+  StandardSchemaV1Issue,
+} from '@tanstack/react-form'
 
 type ProFieldValidator<TValue = unknown> =
   | ((props: { value: TValue }) => unknown)
@@ -21,6 +25,40 @@ export function withRequiredValidator<TValue>(
   return {
     ...validators,
     onSubmit: combineRequiredValidator(validator),
+  }
+}
+
+/** Adds registered required fields to a form validator without replacing its own errors. */
+export function withRequiredFormValidator<TValues extends Record<string, unknown>>(
+  validator: FormValidateOrFn<TValues>,
+  getRequiredFields: () => Iterable<string>,
+): FormValidateOrFn<TValues> {
+  if (isStandardSchema(validator)) {
+    const standard = validator['~standard']
+    return {
+      '~standard': {
+        ...standard,
+        validate: (value: unknown) => {
+          const result = standard.validate(value)
+          if (result instanceof Promise) {
+            return result.then((resolved) =>
+              mergeStandardSchemaRequiredErrors(resolved, value, getRequiredFields()),
+            )
+          }
+          return mergeStandardSchemaRequiredErrors(result, value, getRequiredFields())
+        },
+      },
+    } satisfies StandardSchemaV1<TValues, unknown>
+  }
+
+  return (props) => {
+    const result = validator(props)
+    const fields = getRequiredFieldErrors(props.value, getRequiredFields())
+    if (Object.keys(fields).length === 0) return result
+    if (isGlobalFormError(result)) {
+      return { ...result, fields: { ...fields, ...getDefinedErrors(result.fields) } }
+    }
+    return { form: result, fields }
   }
 }
 
@@ -49,6 +87,63 @@ export function validateRequired({ value }: { value: unknown }) {
     return 'This field is required.'
   }
   return undefined
+}
+
+function mergeStandardSchemaRequiredErrors(
+  result: { value: unknown; issues?: undefined } | { issues: readonly StandardSchemaV1Issue[] },
+  value: unknown,
+  requiredFields: Iterable<string>,
+) {
+  const issues = 'issues' in result && result.issues ? [...result.issues] : []
+  const issueFields = new Set(issues.map(getIssueField).filter(Boolean))
+
+  for (const [name, message] of Object.entries(getRequiredFieldErrors(value, requiredFields))) {
+    if (!issueFields.has(name)) issues.push({ message, path: name.split('.') })
+  }
+
+  return issues.length > 0 ? { issues } : result
+}
+
+function getRequiredFieldErrors(value: unknown, requiredFields: Iterable<string>) {
+  const errors: Record<string, string> = {}
+  for (const name of requiredFields) {
+    const error = validateRequired({ value: getValueAtPath(value, name) })
+    if (error) errors[name] = error
+  }
+  return errors
+}
+
+function getValueAtPath(value: unknown, path: string) {
+  return (path.match(/[^.[\]]+/g) ?? []).reduce<unknown>((current, key) => {
+    if (current == null || typeof current !== 'object') return undefined
+    return (current as Record<string, unknown>)[key]
+  }, value)
+}
+
+function getIssueField(issue: StandardSchemaV1Issue) {
+  return issue.path
+    ?.map((segment) =>
+      typeof segment === 'object' && segment !== null && 'key' in segment
+        ? String(segment.key)
+        : String(segment),
+    )
+    .join('.')
+}
+
+function isStandardSchema<TValues extends Record<string, unknown>>(
+  validator: FormValidateOrFn<TValues>,
+): validator is StandardSchemaV1<TValues, unknown> {
+  return typeof validator === 'object' && validator !== null && '~standard' in validator
+}
+
+function isGlobalFormError(
+  value: unknown,
+): value is { form?: unknown; fields: Record<string, unknown> } {
+  return typeof value === 'object' && value !== null && 'fields' in value
+}
+
+function getDefinedErrors(fields: Record<string, unknown>) {
+  return Object.fromEntries(Object.entries(fields).filter(([, error]) => error !== undefined))
 }
 
 /** Normalizes TanStack and Standard Schema errors for rendering. */

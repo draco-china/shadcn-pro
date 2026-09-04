@@ -8,10 +8,17 @@ import type { CSSProperties, ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../base/button'
 
+const TABLE_ROW_CLASS_NAME =
+  'group/row bg-background transition-colors duration-150 hover:bg-muted has-aria-expanded:bg-muted data-[state=selected]:bg-muted'
+const TABLE_CELL_STATE_CLASS_NAME = 'bg-inherit bg-clip-padding'
+const TABLE_ROW_COLOR_TRANSITION =
+  'color 150ms cubic-bezier(0.4, 0, 0.2, 1), background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), border-color 150ms cubic-bezier(0.4, 0, 0.2, 1)'
+
 /** Measured left and right offsets for sticky table columns. */
 export interface ProTablePinnedColumnOffsets {
   left: Record<string, number>
   right: Record<string, number>
+  dragWidth: number
 }
 
 /** Renders loading, empty, static, and sortable ProTable rows. */
@@ -37,14 +44,14 @@ export function ProTableBody<TData>({
   pinnedOffsets: ProTablePinnedColumnOffsets
 }) {
   const emptyRow = (
-    <tr
-      data-slot="pro-table-row"
-      className="border-b transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted"
-    >
+    <tr data-slot="pro-table-row" className={TABLE_ROW_CLASS_NAME}>
       <td
         data-slot="pro-table-cell"
         colSpan={visibleColumnCount}
-        className="h-32 p-2 text-center align-middle whitespace-nowrap text-muted-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+        className={cn(
+          'h-32 p-2 text-center align-middle whitespace-nowrap text-muted-foreground [&:has([role=checkbox])]:pr-0 [&_[role=checkbox]]:border-border [&_[role=checkbox]]:shadow-none [&>[role=checkbox]]:translate-y-[2px] dark:[&_[role=checkbox][data-state=unchecked]]:bg-transparent',
+          TABLE_CELL_STATE_CLASS_NAME,
+        )}
       >
         <div className="flex flex-col items-center gap-2">
           <Inbox className="size-8 opacity-40" />
@@ -60,12 +67,16 @@ export function ProTableBody<TData>({
         // biome-ignore lint/suspicious/noArrayIndexKey: skeleton rows are fixed placeholders.
         key={`skeleton-row-${index}`}
         data-slot="pro-table-row"
-        className="group/row border-b transition-colors duration-150 hover:bg-muted has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted"
+        className={TABLE_ROW_CLASS_NAME}
       >
         {dragSort && (
           <td
             data-slot="pro-table-cell"
-            className="sticky left-0 z-20 w-8 bg-background p-2 pr-0 align-middle whitespace-nowrap shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-pro-table-drag-column=""
+            className={cn(
+              'sticky left-0 z-20 w-8 p-2 pr-0 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&_[role=checkbox]]:border-border [&_[role=checkbox]]:shadow-none [&>[role=checkbox]]:translate-y-[2px] dark:[&_[role=checkbox][data-state=unchecked]]:bg-transparent',
+              TABLE_CELL_STATE_CLASS_NAME,
+            )}
           >
             <div
               data-slot="pro-table-skeleton"
@@ -80,11 +91,12 @@ export function ProTableBody<TData>({
             className={getPinnedColumnClassName(
               column,
               cn(
-                'p-2 align-middle whitespace-nowrap transition-colors duration-150 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+                'p-2 align-middle whitespace-nowrap transition-colors duration-150 [&:has([role=checkbox])]:pr-0 [&_[role=checkbox]]:border-border [&_[role=checkbox]]:shadow-none [&>[role=checkbox]]:translate-y-[2px] dark:[&_[role=checkbox][data-state=unchecked]]:bg-transparent',
+                TABLE_CELL_STATE_CLASS_NAME,
                 column.columnDef.meta?.className,
               ),
             )}
-            style={getPinnedColumnStyle(column, pinnedOffsets, dragSort ? 32 : 0)}
+            style={getPinnedColumnStyle(column, pinnedOffsets)}
             data-pro-table-column-id={column.id}
           >
             <div
@@ -106,7 +118,6 @@ export function ProTableBody<TData>({
               <BodyCell
                 key={cell.id}
                 cell={cell}
-                dragSort
                 paddingClass={paddingClass}
                 pinnedOffsets={pinnedOffsets}
               />
@@ -124,7 +135,7 @@ export function ProTableBody<TData>({
       key={row.id}
       data-slot="pro-table-row"
       data-state={row.getIsSelected() && 'selected'}
-      className="group/row border-b transition-colors duration-150 hover:bg-muted has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted"
+      className={TABLE_ROW_CLASS_NAME}
     >
       {row.getVisibleCells().map((cell) => (
         <BodyCell
@@ -140,12 +151,10 @@ export function ProTableBody<TData>({
 
 function BodyCell<TData>({
   cell,
-  dragSort,
   paddingClass,
   pinnedOffsets,
 }: {
   cell: Cell<TData, unknown>
-  dragSort?: boolean
   paddingClass: string
   pinnedOffsets: ProTablePinnedColumnOffsets
 }) {
@@ -165,7 +174,8 @@ function BodyCell<TData>({
       className={getPinnedColumnClassName(
         cell.column,
         cn(
-          'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+          'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&_[role=checkbox]]:border-border [&_[role=checkbox]]:shadow-none [&>[role=checkbox]]:translate-y-[2px] dark:[&_[role=checkbox][data-state=unchecked]]:bg-transparent',
+          TABLE_CELL_STATE_CLASS_NAME,
           paddingClass,
           align === 'center' && 'text-center',
           align === 'right' && 'text-right',
@@ -173,7 +183,7 @@ function BodyCell<TData>({
           meta?.className,
         ),
       )}
-      style={getPinnedColumnStyle(cell.column, pinnedOffsets, dragSort ? 32 : 0)}
+      style={getPinnedColumnStyle(cell.column, pinnedOffsets)}
       data-pro-table-column-id={cell.column.id}
     >
       <TableCellContent autoRender={autoRender} values={values} labels={labels} cell={cell} />
@@ -227,10 +237,10 @@ function SortableRow<TData>({
       ref={setNodeRef}
       data-slot="pro-table-row"
       data-state={row.getIsSelected() && 'selected'}
-      className="group/row border-b transition-colors duration-150 hover:bg-muted has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted"
+      className={TABLE_ROW_CLASS_NAME}
       style={{
         transform: CSS.Transform.toString(transform),
-        transition,
+        transition: [transition, TABLE_ROW_COLOR_TRANSITION].filter(Boolean).join(', '),
         opacity: isDragging ? 0.5 : 1,
         position: isDragging ? 'relative' : undefined,
         zIndex: isDragging ? 10 : undefined,
@@ -238,18 +248,20 @@ function SortableRow<TData>({
     >
       <td
         data-slot="pro-table-cell"
+        data-pro-table-drag-column=""
         className={cn(
-          'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+          'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&_[role=checkbox]]:border-border [&_[role=checkbox]]:shadow-none [&>[role=checkbox]]:translate-y-[2px] dark:[&_[role=checkbox][data-state=unchecked]]:bg-transparent',
           paddingClass,
-          'sticky left-0 z-20 w-8 bg-background pr-0 shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)] transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
+          TABLE_CELL_STATE_CLASS_NAME,
+          'sticky left-0 z-20 w-8 pr-0',
         )}
       >
         <ProButton
-          variant="ghost"
+          variant="link"
           size="icon-xs"
           {...attributes}
           {...listeners}
-          className="cursor-grab active:cursor-grabbing"
+          className="cursor-grab text-muted-foreground no-underline hover:text-foreground hover:no-underline active:cursor-grabbing"
           aria-label="Drag to reorder"
         >
           <GripVertical />
@@ -276,14 +288,8 @@ export function getPinnedColumnClassName<TData>(
   const pinned = column.getIsPinned()
 
   return cn(
-    pinned &&
-      'sticky z-10 bg-background transition-colors duration-150 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-    pinned === 'left' &&
-      column.getIsLastColumn('left') &&
-      'shadow-[6px_0_10px_-10px_hsl(var(--foreground)/0.45),1px_0_0_0_var(--border)]',
-    pinned === 'right' &&
-      column.getIsFirstColumn('right') &&
-      'shadow-[-6px_0_10px_-10px_hsl(var(--foreground)/0.45),-1px_0_0_0_var(--border)]',
+    column.columnDef.meta?.__proTableFixedSize !== undefined && 'truncate',
+    pinned && 'sticky z-10',
     className,
   )
 }
@@ -292,13 +298,22 @@ export function getPinnedColumnClassName<TData>(
 export function getPinnedColumnStyle<TData>(
   column: Column<TData, unknown>,
   offsets: ProTablePinnedColumnOffsets,
-  leftOffset = 0,
 ): CSSProperties {
   const pinned = column.getIsPinned()
   const style: CSSProperties = {}
+  const fixedSize = column.columnDef.meta?.__proTableFixedSize
+
+  if (typeof fixedSize === 'number') {
+    style.width = `${fixedSize}px`
+    style.minWidth = `${fixedSize}px`
+    style.maxWidth = `${fixedSize}px`
+  } else {
+    style.width = 'var(--pro-table-flex-column-width)'
+  }
 
   if (pinned === 'left') {
-    style.left = `${offsets.left[column.id] ?? column.getStart('left') + leftOffset}px`
+    const left = offsets.left[column.id] ?? column.getStart('left') + offsets.dragWidth
+    style.left = `${left}px`
   }
   if (pinned === 'right') {
     style.right = `${offsets.right[column.id] ?? column.getAfter('right')}px`

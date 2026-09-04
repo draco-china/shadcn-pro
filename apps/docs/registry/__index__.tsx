@@ -348,6 +348,11 @@ export const Index: Record<string, Record<string, any>> = {
       files: [
         { path: "registry/new-york-v4/pro/table/index.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/table/body.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/table/bulk-actions.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/table/columns.ts", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/table/search-bar.tsx", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/table/table-state.ts", type: "registry:ui" },
+        { path: "registry/new-york-v4/pro/table/toolbar-actions.tsx", type: "registry:ui" },
         { path: "registry/new-york-v4/pro/table/url-state.ts", type: "registry:ui" },
       ],
       component: lazy(() => import("@/registry/new-york-v4/pro/table/index")),

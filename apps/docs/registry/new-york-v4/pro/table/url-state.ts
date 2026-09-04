@@ -63,8 +63,8 @@ export function useProTableUrlStateValue(params: {
   } = params
   const pageKey = paginationCfg?.pageKey ?? 'page'
   const pageSizeKey = paginationCfg?.pageSizeKey ?? 'pageSize'
-  const defaultPage = paginationCfg?.defaultPage ?? 1
-  const defaultPageSize = paginationCfg?.defaultPageSize ?? 10
+  const defaultPage = Math.max(1, paginationCfg?.defaultPage ?? 1)
+  const defaultPageSize = Math.max(1, paginationCfg?.defaultPageSize ?? 10)
   const sortKey = sortingCfg?.sortKey ?? 'sort'
   const orderKey = sortingCfg?.orderKey ?? 'order'
 
@@ -72,6 +72,9 @@ export function useProTableUrlStateValue(params: {
     const page = typeof search[pageKey] === 'number' ? search[pageKey] : Number(search[pageKey])
     const pageSize =
       typeof search[pageSizeKey] === 'number' ? search[pageSizeKey] : Number(search[pageSizeKey])
+    const normalizedPage = Number.isFinite(page) && page > 0 ? Math.floor(page) : defaultPage
+    const normalizedPageSize =
+      Number.isFinite(pageSize) && pageSize > 0 ? Math.floor(pageSize) : defaultPageSize
     const sortId = search[sortKey]
     const columnFilters: ColumnFiltersState = []
 
@@ -95,8 +98,8 @@ export function useProTableUrlStateValue(params: {
 
     return {
       pagination: {
-        pageIndex: Math.max(0, (Number.isFinite(page) ? page : defaultPage) - 1),
-        pageSize: Number.isFinite(pageSize) ? pageSize : defaultPageSize,
+        pageIndex: normalizedPage - 1,
+        pageSize: normalizedPageSize,
       },
       sorting,
       columnFilters,
@@ -123,7 +126,7 @@ export function useProTableUrlStateValue(params: {
       }
 
       const nextPage = state.pagination.pageIndex + 1
-      if (nextPage > defaultPage) patch[pageKey] = nextPage
+      if (nextPage !== defaultPage) patch[pageKey] = nextPage
       if (state.pagination.pageSize !== defaultPageSize) {
         patch[pageSizeKey] = state.pagination.pageSize
       }

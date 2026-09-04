@@ -137,6 +137,11 @@
       "files": [
         "pro/table/index.tsx",
         "pro/table/body.tsx",
+        "pro/table/bulk-actions.tsx",
+        "pro/table/columns.ts",
+        "pro/table/search-bar.tsx",
+        "pro/table/table-state.ts",
+        "pro/table/toolbar-actions.tsx",
         "pro/table/url-state.ts"
       ]
     },

@@ -22,9 +22,10 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
     header: "Name",
+    size: 160,
     meta: { pinned: "left", search: { placeholder: "Search name..." } },
   },
-  { accessorKey: "email", header: "Email" },
+  { accessorKey: "email", header: "Email", size: 220 },
   {
     accessorKey: "role",
     header: "Role",
@@ -39,6 +40,7 @@ export default function ProTableDocsDemo() {
       <ProTable
         columns={columns}
         data={data}
+        rowKey={(record) => record.email}
         header={<h3 className="text-base font-semibold">Team members</h3>}
       />
     </div>

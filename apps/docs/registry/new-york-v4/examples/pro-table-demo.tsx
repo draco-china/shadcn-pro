@@ -222,6 +222,7 @@ const data: User[] = [
 const columns: ColumnDef<User>[] = [
   {
     id: "select",
+    size: 32,
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
@@ -241,6 +242,7 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
     header: "Name",
+    size: 176,
     meta: {
       pinned: "left",
       className: "w-44",
@@ -288,6 +290,7 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "createdAt",
     header: "Created",
+    size: 144,
     meta: { pinned: "right", className: "w-36" },
     enableSorting: true,
   },
@@ -299,6 +302,7 @@ export default function ProTableDemo() {
       <ProTable
         data={data}
         columns={columns}
+        rowKey="id"
         header={({ table }) => (
           <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -325,19 +329,21 @@ export default function ProTableDemo() {
             </ProButton>
           </>
         )}
-        onRefresh={() => {}}
-        toolbar={
-          <>
-            <ProButton variant="default" tooltip="Create user">
-              <Plus size={16} />
-              New
-            </ProButton>
-            <ProButton tooltip="Export users">
-              <Download size={16} />
-              Export
-            </ProButton>
-          </>
-        }
+        toolbar={{
+          onRefresh: () => {},
+          actions: (
+            <>
+              <ProButton variant="default" tooltip="Create user">
+                <Plus size={16} />
+                New
+              </ProButton>
+              <ProButton tooltip="Export users">
+                <Download size={16} />
+                Export
+              </ProButton>
+            </>
+          ),
+        }}
       />
     </div>
   )

@@ -16,6 +16,7 @@ export function DatePicker({
   placeholder = 'Pick a date',
   className,
   onBlur,
+  'aria-invalid': ariaInvalid,
 }: {
   value?: Date
   onChange?: (date: Date | undefined) => void
@@ -23,6 +24,7 @@ export function DatePicker({
   placeholder?: string
   className?: string
   onBlur?: FocusEventHandler<HTMLButtonElement>
+  'aria-invalid'?: boolean
 }) {
   return (
     <PopoverPrimitive.Root data-slot="field-popover">
@@ -32,6 +34,7 @@ export function DatePicker({
             type="button"
             disabled={disabled}
             onBlur={onBlur}
+            aria-invalid={ariaInvalid}
             className={cn(
               fieldTriggerClassName,
               !value && 'text-muted-foreground',
@@ -69,6 +72,7 @@ export function DateRangePicker({
   placeholder = 'Pick date range',
   className,
   onBlur,
+  'aria-invalid': ariaInvalid,
 }: {
   value?: { from?: Date; to?: Date }
   onChange?: (value: { from?: Date; to?: Date } | undefined) => void
@@ -76,6 +80,7 @@ export function DateRangePicker({
   placeholder?: string
   className?: string
   onBlur?: FocusEventHandler<HTMLButtonElement>
+  'aria-invalid'?: boolean
 }) {
   const from = value?.from
   const to = value?.to
@@ -88,6 +93,7 @@ export function DateRangePicker({
             type="button"
             disabled={disabled}
             onBlur={onBlur}
+            aria-invalid={ariaInvalid}
             className={cn(
               fieldTriggerClassName,
               !from && 'text-muted-foreground',

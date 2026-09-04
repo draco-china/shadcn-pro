@@ -118,6 +118,7 @@ Use `request` to keep existing API hooks or stores outside the table component w
 ```tsx
 <ProTable
   columns={columns}
+  rowKey="id"
   request={({ pagination, sorting, columnFilters }) =>
     userStore.fetchUsers({
       page: pagination.pageIndex + 1,
@@ -145,7 +146,7 @@ const tableState = useProTableUrlState({
   ],
 })
 
-<ProTable columns={columns} request={request} {...tableState} />
+<ProTable columns={columns} rowKey="id" request={request} {...tableState} />
 ```
 
 ### Schema forms

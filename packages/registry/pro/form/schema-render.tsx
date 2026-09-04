@@ -97,6 +97,7 @@ export function renderSchemaField(
           value={value as string | string[] | undefined}
           disabled={item.disabled}
           required={item.required}
+          aria-invalid={field.invalid}
           multiple={item.valueType === 'multiSelect'}
           onChange={field.onChange}
           onBlur={field.onBlur}
@@ -120,6 +121,7 @@ export function renderSchemaField(
           name={item.name}
           value={stringValue}
           disabled={item.disabled}
+          aria-invalid={field.invalid}
           required={item.required}
           onChange={field.onChange}
           onBlur={field.onBlur}
@@ -142,6 +144,7 @@ export function renderSchemaField(
         <DatePicker
           value={dateValue}
           disabled={item.disabled}
+          aria-invalid={field.invalid}
           onChange={field.onChange}
           onBlur={field.onBlur}
           {...fieldProps}
@@ -152,6 +155,7 @@ export function renderSchemaField(
         <DateRangePicker
           value={value as { from?: Date; to?: Date } | undefined}
           disabled={item.disabled}
+          aria-invalid={field.invalid}
           onChange={field.onChange}
           onBlur={field.onBlur}
           {...fieldProps}
@@ -162,6 +166,7 @@ export function renderSchemaField(
         <DateTimePicker
           value={dateValue}
           disabled={item.disabled}
+          aria-invalid={field.invalid}
           onChange={field.onChange}
           onBlur={field.onBlur}
           {...fieldProps}
@@ -172,6 +177,7 @@ export function renderSchemaField(
         <TimePicker
           value={stringValue}
           disabled={item.disabled}
+          aria-invalid={field.invalid}
           onChange={field.onChange}
           onBlur={field.onBlur}
           {...fieldProps}
@@ -182,6 +188,7 @@ export function renderSchemaField(
         <Slider
           value={numberValue}
           disabled={item.disabled}
+          aria-invalid={field.invalid}
           onChange={field.onChange}
           onBlur={field.onBlur}
           {...fieldProps}
@@ -192,6 +199,7 @@ export function renderSchemaField(
         <Rate
           value={numberValue ?? 0}
           disabled={item.disabled}
+          aria-invalid={field.invalid}
           onChange={field.onChange}
           onBlur={field.onBlur}
           {...fieldProps}
@@ -202,6 +210,7 @@ export function renderSchemaField(
         <Segmented
           value={stringValue}
           disabled={item.disabled}
+          aria-invalid={field.invalid}
           onChange={field.onChange}
           onBlur={field.onBlur}
           {...fieldProps}

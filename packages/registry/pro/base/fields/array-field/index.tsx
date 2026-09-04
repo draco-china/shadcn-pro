@@ -17,13 +17,9 @@ import {
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { ArrowDown, ArrowUp, Copy, GripVertical, Plus, Trash2 } from 'lucide-react'
-import { type CSSProperties, type ReactNode, useEffect, useState } from 'react'
+import { type CSSProperties, type ReactNode, useEffect, useId, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../../button'
-
-function createArrayFieldId() {
-  return `item-${Math.random().toString(36).slice(2)}`
-}
 
 type ArrayFieldSortMode = 'button' | 'drag' | 'none'
 
@@ -59,15 +55,16 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   max,
   min = 0,
   sortable = 'drag',
-  variant = 'outline',
+  variant = 'ghost',
   disabled,
   className,
 }: ArrayFieldProps<TItem>) {
+  const idPrefix = useId()
+  const nextIdRef = useRef(0)
+  const createItemId = () => `${idPrefix}-item-${nextIdRef.current++}`
   const [internalValue, setInternalValue] = useState<TItem[]>(defaultValue ?? [])
   const items = value ?? internalValue
-  const [ids, setIds] = useState<string[]>(() =>
-    Array.from({ length: items.length }, createArrayFieldId),
-  )
+  const [ids, setIds] = useState<string[]>(() => Array.from({ length: items.length }, createItemId))
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
@@ -79,7 +76,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
     setIds((prev) => {
       if (prev.length === items.length) return prev
       if (items.length > prev.length) {
-        return [...prev, ...Array.from({ length: items.length - prev.length }, createArrayFieldId)]
+        return [...prev, ...Array.from({ length: items.length - prev.length }, createItemId)]
       }
       return prev.slice(0, items.length)
     })
@@ -106,7 +103,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
   }
 
   function duplicate(index: number) {
-    setIds((prev) => [...prev.slice(0, index + 1), createArrayFieldId(), ...prev.slice(index + 1)])
+    setIds((prev) => [...prev.slice(0, index + 1), createItemId(), ...prev.slice(index + 1)])
     commit([...items.slice(0, index + 1), structuredClone(items[index]), ...items.slice(index + 1)])
   }
 
@@ -151,6 +148,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
     <div className={cn('space-y-2', className)}>
       {sortMode === 'drag' ? (
         <DndContext
+          id={`${idPrefix}-dnd`}
           sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={({ active, over }) => {
@@ -176,7 +174,7 @@ export function ArrayField<TItem extends object = Record<string, unknown>>({
           variant="outline"
           disabled={disabled}
           onClick={() => {
-            setIds((prev) => [...prev, createArrayFieldId()])
+            setIds((prev) => [...prev, createItemId()])
             commit([...items, newItem()])
           }}
           className="w-full border-dashed"

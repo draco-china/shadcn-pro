@@ -9,23 +9,7 @@ import { FieldClearAction, FieldPopoverContent, fieldTriggerClassName } from '..
 import { CascaderField, TreeSelectField } from './tree'
 
 /** Selects one or multiple values with optional search. */
-
-export function Select({
-  value,
-  defaultValue,
-  onChange,
-  placeholder,
-  disabled,
-  required,
-  options,
-  allowClear = false,
-  multiple = false,
-  searchable = false,
-  className,
-  id,
-  name,
-  onBlur,
-}: {
+export interface SelectProps {
   value?: string | string[]
   defaultValue?: string | string[]
   onChange?: (value: string | string[] | undefined) => void
@@ -45,10 +29,31 @@ export function Select({
   id?: string
   name?: string
   onBlur?: FocusEventHandler<HTMLElement>
-}) {
+  'aria-invalid'?: boolean
+}
+
+export function Select(props: SelectProps) {
+  const isValueControlled = Object.hasOwn(props, 'value')
+  const {
+    value,
+    defaultValue,
+    onChange,
+    placeholder,
+    disabled,
+    required,
+    options,
+    allowClear = false,
+    multiple = false,
+    searchable = false,
+    className,
+    id,
+    name,
+    onBlur,
+    'aria-invalid': ariaInvalid,
+  } = props
   const [internalValue, setInternalValue] = useState<string | string[] | undefined>(defaultValue)
   const [open, setOpen] = useState(false)
-  const currentValue = value ?? internalValue
+  const currentValue = isValueControlled ? value : internalValue
   const selectedValues = getSelectedValues(currentValue)
   const selectedValueSet = new Set(selectedValues)
   const selectedOptions = options?.filter((option) => selectedValueSet.has(option.value)) ?? []
@@ -57,7 +62,7 @@ export function Select({
   const showClear = allowClear && selectedValues.length > 0 && !disabled && !required
 
   function handleChange(nextValue: string | string[] | undefined) {
-    if (value === undefined) setInternalValue(nextValue)
+    if (!isValueControlled) setInternalValue(nextValue)
     onChange?.(nextValue)
   }
 
@@ -89,6 +94,7 @@ export function Select({
             role="combobox"
             aria-expanded={open}
             aria-required={required}
+            aria-invalid={ariaInvalid}
             disabled={disabled}
             onBlur={onBlur}
             className={cn(
@@ -190,6 +196,7 @@ export function Select({
         data-slot="field-select-trigger"
         disabled={disabled}
         onBlur={onBlur}
+        aria-invalid={ariaInvalid}
         className={cn(
           fieldTriggerClassName,
           'group/select w-full justify-between font-normal disabled:pointer-events-none disabled:opacity-50',

@@ -4,7 +4,12 @@ import {
   normalizeMoneyInput,
   parseMoneyValue,
 } from '../pro/base/fields/input/money'
-import { validateRequired, withRequiredValidator } from '../pro/form/validators'
+import {
+  validateRequired,
+  withRequiredFormValidator,
+  withRequiredValidator,
+} from '../pro/form/validators'
+import { getColumnDropState } from '../pro/table/columns'
 
 describe('money input helpers', () => {
   test('preserves editable decimal and negative states', () => {
@@ -42,5 +47,56 @@ describe('required form validation', () => {
     expect(validate({ value: '' })).toBe('This field is required.')
     expect(validate({ value: 'ab' })).toBe('Enter at least three characters.')
     expect(validate({ value: 'abc' })).toBeUndefined()
+  })
+
+  test('merges required fields into a form validator without replacing its errors', () => {
+    const validate = withRequiredFormValidator(
+      ({ value }) => ({ fields: { email: value.email === 'bad' ? 'Invalid email.' : undefined } }),
+      () => ['email', 'role'],
+    )
+
+    if (typeof validate !== 'function') throw new Error('Expected a function validator')
+    expect(validate({ value: { email: 'bad', role: '' }, formApi: undefined as never })).toEqual({
+      fields: { email: 'Invalid email.', role: 'This field is required.' },
+    })
+    expect(validate({ value: { email: '', role: '' }, formApi: undefined as never })).toEqual({
+      fields: { email: 'This field is required.', role: 'This field is required.' },
+    })
+  })
+})
+
+describe('table column settings', () => {
+  test('reorders visible columns while preserving system columns', () => {
+    expect(
+      getColumnDropState({
+        columnOrder: ['select', 'name', 'email', 'role', 'status', 'createdAt', 'actions'],
+        sortableOrder: ['name', 'email', 'role', 'status', 'createdAt'],
+        columnPinning: { left: ['select', 'name'], right: ['createdAt', 'actions'] },
+        activeId: 'email',
+        overId: 'status',
+        targetSide: false,
+        pinningEnabled: true,
+      }),
+    ).toEqual({
+      order: ['select', 'name', 'role', 'status', 'email', 'createdAt', 'actions'],
+      pinning: { left: ['select', 'name'], right: ['createdAt', 'actions'] },
+    })
+  })
+
+  test('moves a dragged column into the target pin group in visual order', () => {
+    expect(
+      getColumnDropState({
+        columnOrder: ['select', 'name', 'role', 'status', 'email', 'createdAt', 'actions'],
+        sortableOrder: ['name', 'role', 'status', 'email', 'createdAt'],
+        columnPinning: { left: ['select', 'name', 'role'], right: ['createdAt', 'actions'] },
+        activeId: 'role',
+        overId: 'createdAt',
+        targetSide: 'right',
+        pinningEnabled: true,
+      }),
+    ).toEqual({
+      order: ['select', 'name', 'status', 'email', 'createdAt', 'role', 'actions'],
+      pinning: { left: ['select', 'name'], right: ['createdAt', 'role', 'actions'] },
+    })
   })
 })

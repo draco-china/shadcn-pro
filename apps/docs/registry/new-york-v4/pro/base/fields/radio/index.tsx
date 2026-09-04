@@ -16,6 +16,7 @@ export function Radio({
   name,
   required,
   onBlur,
+  'aria-invalid': ariaInvalid,
 }: {
   value?: string
   defaultValue?: string
@@ -31,6 +32,7 @@ export function Radio({
   required?: boolean
   name?: string
   onBlur?: FocusEventHandler<HTMLDivElement>
+  'aria-invalid'?: boolean
 }) {
   const generatedId = useId()
 
@@ -44,6 +46,7 @@ export function Radio({
       name={name}
       required={required}
       onBlur={onBlur}
+      aria-invalid={ariaInvalid}
       className={cn('flex flex-col gap-2', className)}
     >
       {options?.map((opt, index) => {
@@ -56,6 +59,7 @@ export function Radio({
               value={opt.value}
               id={itemId}
               disabled={disabled || opt.disabled}
+              aria-invalid={ariaInvalid}
               className={
                 'aspect-square size-4 shrink-0 rounded-full border border-input text-primary shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30 dark:aria-invalid:ring-destructive/40'
               }
@@ -102,6 +106,7 @@ export function Segmented({
   className,
   name,
   onBlur,
+  'aria-invalid': ariaInvalid,
 }: {
   value?: string
   defaultValue?: string
@@ -115,6 +120,7 @@ export function Segmented({
   className?: string
   name?: string
   onBlur?: FocusEventHandler<HTMLDivElement>
+  'aria-invalid'?: boolean
 }) {
   const [internalValue, setInternalValue] = useState(defaultValue ?? '')
   const currentValue = value ?? internalValue
@@ -128,6 +134,7 @@ export function Segmented({
         value={currentValue}
         disabled={disabled}
         onBlur={onBlur}
+        aria-invalid={ariaInvalid}
         onValueChange={(nextValue) => {
           if (!nextValue) return
           if (value === undefined) setInternalValue(nextValue)
@@ -144,6 +151,7 @@ export function Segmented({
             data-slot="segmented-item"
             value={option.value}
             disabled={option.disabled}
+            aria-invalid={ariaInvalid}
             className={
               "inline-flex h-9 w-auto min-w-0 shrink-0 items-center justify-center gap-2 rounded-none border border-l-0 border-input bg-transparent px-3 text-sm font-medium whitespace-nowrap shadow-none transition-[color,box-shadow] outline-none first:rounded-l-md first:border-l last:rounded-r-md hover:bg-accent hover:text-accent-foreground focus:z-10 focus-visible:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
             }
@@ -167,6 +175,7 @@ export function Rate({
   id,
   'aria-label': ariaLabel = 'Rating',
   onBlur,
+  'aria-invalid': ariaInvalid,
 }: {
   value?: number
   defaultValue?: number
@@ -177,6 +186,7 @@ export function Rate({
   id?: string
   'aria-label'?: string
   onBlur?: FocusEventHandler<HTMLDivElement>
+  'aria-invalid'?: boolean
 }) {
   const generatedId = useId()
   const [hovered, setHovered] = useState<number | null>(null)
@@ -188,6 +198,7 @@ export function Rate({
       className={cn('flex gap-0.5', className)}
       role="radiogroup"
       aria-label={ariaLabel}
+      aria-invalid={ariaInvalid}
       onBlur={onBlur}
     >
       {[1, 2, 3, 4, 5].map((star) => (
@@ -205,6 +216,7 @@ export function Rate({
             checked={currentValue === star}
             disabled={disabled}
             aria-label={star === 1 ? '1 star' : `${star} stars`}
+            aria-invalid={ariaInvalid}
             className="peer sr-only"
             onChange={() => {
               if (disabled) return
@@ -218,6 +230,7 @@ export function Rate({
               star <= (hovered ?? currentValue)
                 ? 'fill-primary text-primary'
                 : 'text-muted-foreground',
+              ariaInvalid && 'text-destructive',
             )}
           />
         </label>

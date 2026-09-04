@@ -83,15 +83,23 @@ export function Input({
 
   return (
     <div
+      data-slot="input-group"
+      data-disabled={disabled || undefined}
       className={cn(
         fieldShellClassName,
-        hasPrefix && 'pl-0',
-        hasSuffix && 'pr-0',
+        'px-0',
         disabled && 'pointer-events-none opacity-50',
         className,
       )}
     >
-      {hasPrefix && <div className="flex shrink-0 items-center">{prefix}</div>}
+      {hasPrefix && (
+        <div
+          data-slot="input-prefix"
+          className="flex h-auto shrink-0 cursor-text items-center justify-center gap-2 py-1.5 pl-3 text-sm font-medium text-muted-foreground select-none has-[>button]:ml-[-0.45rem] [&_svg:not([class*='size-'])]:size-4"
+        >
+          {prefix}
+        </div>
+      )}
 
       <input
         ref={setInputRef}
@@ -102,14 +110,19 @@ export function Input({
         disabled={disabled}
         readOnly={readOnly}
         className={cn(
-          'h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 text-base shadow-none outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:ring-0 disabled:pointer-events-none disabled:cursor-not-allowed md:text-sm dark:bg-transparent',
+          'h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent px-3 py-0 text-base shadow-none outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:ring-0 disabled:pointer-events-none disabled:cursor-not-allowed md:text-sm dark:bg-transparent',
+          hasPrefix && 'pl-2',
+          hasSuffix && 'pr-2',
           inputClassName,
         )}
         {...props}
       />
 
       {hasSuffix && (
-        <div className="flex shrink-0 items-center">
+        <div
+          data-slot="input-suffix"
+          className="flex h-auto shrink-0 cursor-text items-center justify-center gap-2 py-1.5 pr-3 text-sm font-medium text-muted-foreground select-none has-[>button]:mr-[-0.45rem] [&_svg:not([class*='size-'])]:size-4"
+        >
           {showClear && (
             <FieldClearButton
               label="Clear input"
@@ -365,6 +378,7 @@ export function Slider({
   step = 1,
   disabled,
   className,
+  'aria-invalid': ariaInvalid,
   ...props
 }: Omit<
   ComponentProps<typeof SliderPrimitive.Root>,
@@ -397,6 +411,7 @@ export function Slider({
       max={max}
       step={step}
       disabled={disabled}
+      aria-invalid={ariaInvalid}
       className={cn(
         'relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50',
         className,
@@ -411,9 +426,8 @@ export function Slider({
       </SliderPrimitive.Track>
       <SliderPrimitive.Thumb
         data-slot="slider-thumb"
-        className={
-          'block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
-        }
+        aria-invalid={ariaInvalid}
+        className="block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40"
       />
     </SliderPrimitive.Root>
   )
@@ -463,8 +477,8 @@ export function Money({
       }}
       placeholder={placeholder}
       disabled={disabled}
-      prefix={<span className="px-3">{prefix ?? '$'}</span>}
-      suffix={suffix ? <span className="px-3">{suffix}</span> : undefined}
+      prefix={prefix ?? '$'}
+      suffix={suffix}
       className={className}
       {...props}
     />

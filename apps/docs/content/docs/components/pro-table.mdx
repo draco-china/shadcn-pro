@@ -57,11 +57,12 @@ const columns = [
   {
     accessorKey: "name",
     header: "Name",
+    size: 176,
     enableSorting: true,
     meta: { pinned: "left", search: { placeholder: "Search by name..." } },
   },
   { accessorKey: "email", header: "Email" },
-  { accessorKey: "createdAt", header: "Created", meta: { pinned: "right" } },
+  { accessorKey: "createdAt", header: "Created", size: 144, meta: { pinned: "right" } },
 ]
 
 export default function UsersTable() {
@@ -71,20 +72,24 @@ export default function UsersTable() {
       data={users}
       header={<h2 className="text-lg font-semibold">Users</h2>}
       table={{ stickyHeader: true }}
-      toolbar={<DateRangePicker value={range} onChange={setRange} />}
-      onRefresh={() => refetch()}
+      toolbar={{
+        actions: <DateRangePicker value={range} onChange={setRange} />,
+        onRefresh: () => refetch(),
+      }}
     />
   )
 }
 ```
 
-`header` is reserved for title and description content. Search, filters, and actions belong in the toolbar area. Use `toolbar` for business-specific controls, custom action buttons, or a composed group that manages its own alignment.
+`header` renders the title and description beside the toolbar actions. Search and filters render in a separate row by default; set `toolbar.searchPlacement` to `"header"` to place them in the same row.
 
 ## Examples
 
 ### Pinned Columns and Sticky Header
 
 Use `meta.pinned` on column definitions to keep important columns visible during horizontal scroll. Users can also pin or unpin columns from the column settings menu. System columns (`select`, `drag`, `actions`, `operation`) are pinned by default, use `w-8` by default, and are hidden from column settings; columns with `enableHiding: false` are also omitted from column settings. The table header is sticky by default; set `table={{ stickyHeader: false }}` to disable it.
+
+Set TanStack's numeric `size` to give a column a fixed width. ProTable uses fixed sizes directly without measuring them; columns without `size` share the remaining width. Sticky offsets have deterministic SSR fallbacks, then auto-sized columns are calibrated before the first client paint and observed only through their header cells.
 
 ```tsx
 const columns = [
@@ -147,11 +152,11 @@ const columns: ColumnDef<User>[] = [
 <ProTable
   columns={columns}
   data={data}
-  toolbar={<DateRangePicker value={range} onChange={setRange} />}
+  toolbar={{ actions: <DateRangePicker value={range} onChange={setRange} /> }}
 />
 ```
 
-`meta.search` writes to the same column filter state as the rest of the toolbar. Search columns use `@tanstack/match-sorter-utils` by default for fuzzy matching and rank-aware sorting in client-side tables. If you do not want to put search config in column meta, pass `toolbarSearch={{ columnId: "name", placeholder: "Search name..." }}` instead; the target column gets the same default fuzzy behavior.
+Each column with `meta.search` becomes its own query field. Search and `meta.filter` fields write to the same column-filter state only when the user submits the form. Client-side search uses `@tanstack/match-sorter-utils` for fuzzy matching and rank-aware sorting.
 
 When `request` is provided, ProTable switches to manual filtering and sorting. Fuzzy matching is not run on the client; search/sort state is passed through to your request handler.
 
@@ -166,6 +171,7 @@ Filtering, searching, and sorting reset pagination to the first page automatical
 ```tsx
 <ProTable
   columns={columns}
+  rowKey="id"
   request={async ({ pagination, sorting, columnFilters }) => {
     const result = await api.users.list({
       page: pagination.pageIndex + 1,
@@ -235,15 +241,12 @@ Drag sorting reorders the backing `data` array by the currently rendered rows. W
 | ----------------------- | ------------------------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `columns`               | `ColumnDef<T>[]`                      | —                            | TanStack Table column definitions.                                                                             |
 | `data`                  | `T[]`                                 | `[]`                         | Table data array for local/client data.                                                                        |
+| `rowKey`                | `keyof T \| (record) => string \| number` | row index                | Stable row identifier for selection and remote pagination. Recommended whenever rows can be selected.          |
 | `request`               | `(state) => Promise<{ data, total? }>`| —                            | Server request function. Return `{ data, total }`; `total` feeds pagination automatically.     |
 | `initialState`          | `Partial<ProTableState>`              | —                            | Pagination, sorting, and column filters synchronized from external state, including browser navigation.       |
 | `onChange`              | `(state) => void`                     | —                            | Called when pagination, sorting, or filters change. Useful for URL sync or manually loading data.               |
-| `header`                | `ReactNode \| (context) => ReactNode` | —                            | Title/description area rendered above the toolbar. Do not put search, filters, or actions here.                                                                     |
-| `toolbar`               | `false \| ReactNode \| (context) => ReactNode` | enabled | Custom toolbar content. Pass `false` to hide the whole toolbar. |
-| `toolbarSearch`         | `false \| string \| { columnId, placeholder? }` | from `columns[].meta.search` | Explicit toolbar search config. Writes to the target column filter. |
-| `onRefresh`             | `() => void` | — | Optional refresh action. |
-| `toolbarDensity`        | `boolean` | `true` | Show the density menu. |
-| `toolbarColumns`        | `boolean` | `true` | Show the column settings menu. |
+| `header`                | `ReactNode \| (context) => ReactNode` | —                            | Title/description content rendered in the toolbar header row. |
+| `toolbar`               | `false \| { actions?, searchPlacement?, density?, columns?, onRefresh? }` | enabled | Toolbar actions and built-in controls. Search placement is `"below"` by default or `"header"`; fields come from column meta. Pass `false` to hide the whole area. |
 | `bulkToolbar`           | `false \| ReactNode \| (context) => ReactNode` | — | Bulk toolbar actions shown when rows are selected. |
 | `pagination`            | `false` | enabled                   | Set to `false` to hide pagination. |
 | `dragSort`              | `false \| { rowKey, onDragSortEnd? }` | —                            | Drag sort config. `rowKey` is required and must resolve to a unique row identifier.                            |

@@ -21,6 +21,7 @@ export function DateTimePicker({
   placeholder = 'Pick date & time',
   className,
   onBlur,
+  'aria-invalid': ariaInvalid,
 }: {
   value?: Date
   onChange?: (date: Date | undefined) => void
@@ -28,6 +29,7 @@ export function DateTimePicker({
   placeholder?: string
   className?: string
   onBlur?: FocusEventHandler<HTMLButtonElement>
+  'aria-invalid'?: boolean
 }) {
   const [hour, minute, second] = value
     ? [value.getHours(), value.getMinutes(), value.getSeconds()]
@@ -49,6 +51,7 @@ export function DateTimePicker({
             type="button"
             disabled={disabled}
             onBlur={onBlur}
+            aria-invalid={ariaInvalid}
             className={cn(
               fieldTriggerClassName,
               !value && 'text-muted-foreground',
@@ -120,12 +123,14 @@ export function TimePicker({
   disabled,
   className,
   onBlur,
+  'aria-invalid': ariaInvalid,
 }: {
   value?: string
   onChange?: (value: string | undefined) => void
   disabled?: boolean
   className?: string
   onBlur?: FocusEventHandler<HTMLButtonElement>
+  'aria-invalid'?: boolean
 }) {
   const [hourValue, minuteValue, secondValue] = value?.split(':') ?? []
   const hour = Number(hourValue) || 0
@@ -151,6 +156,7 @@ export function TimePicker({
       <TimeSegmentSelect
         variant="inline"
         value={hour}
+        aria-invalid={ariaInvalid}
         max={23}
         disabled={disabled}
         onBlur={onBlur}
@@ -160,6 +166,7 @@ export function TimePicker({
       <TimeSegmentSelect
         variant="inline"
         value={minute}
+        aria-invalid={ariaInvalid}
         max={59}
         disabled={disabled}
         onBlur={onBlur}
@@ -169,6 +176,7 @@ export function TimePicker({
       <TimeSegmentSelect
         variant="inline"
         value={second}
+        aria-invalid={ariaInvalid}
         max={59}
         disabled={disabled}
         onBlur={onBlur}
@@ -194,6 +202,7 @@ function TimeSegmentSelect({
   disabled,
   onChange,
   onBlur,
+  'aria-invalid': ariaInvalid,
 }: {
   variant?: 'popover' | 'inline'
   value: number
@@ -201,6 +210,7 @@ function TimeSegmentSelect({
   disabled?: boolean
   onChange: (value: number) => void
   onBlur?: FocusEventHandler<HTMLButtonElement>
+  'aria-invalid'?: boolean
 }) {
   return (
     <SelectPrimitive.Root
@@ -212,6 +222,7 @@ function TimeSegmentSelect({
       <SelectPrimitive.Trigger
         data-slot="time-segment-trigger"
         onBlur={onBlur}
+        aria-invalid={ariaInvalid}
         className={cn(
           fieldTriggerClassName,
           variant === 'popover'

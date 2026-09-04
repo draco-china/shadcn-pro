@@ -170,7 +170,7 @@ function getCopyIcon({
   icon?: ReactNode
 }) {
   if (loading) return null
-  if (status === 'success') return <Check className="size-4 text-green-600 dark:text-green-400" />
+  if (status === 'success') return <Check className="size-4 text-primary" />
   if (status === 'error') return <X className="size-4 text-destructive" />
   return icon
 }
