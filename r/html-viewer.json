@@ -10,14 +10,14 @@
   "files": [
     {
       "path": "packages/registry/pro/viewer/html/index.tsx",
-      "content": "import type { ComponentProps } from 'react'\nimport { cn } from '@/lib/utils'\n\nexport function HtmlViewer({\n  content,\n  sandbox = 'allow-scripts',\n  className,\n  title = 'HTML preview',\n  ...props\n}: Omit<ComponentProps<'iframe'>, 'srcDoc'> & {\n  content: string\n}) {\n  return (\n    <iframe\n      srcDoc={content}\n      sandbox={sandbox}\n      className={cn('size-full border-0 bg-background', className)}\n      title={title}\n      {...props}\n    />\n  )\n}\n",
+      "content": "import type { ComponentProps } from 'react'\nimport { cn } from '@/lib/utils'\n\n/** Sandboxed iframe surface for rendering supplied HTML. */\nexport function HtmlViewer({\n  content,\n  sandbox = 'allow-scripts',\n  className,\n  title = 'HTML preview',\n  ...props\n}: Omit<ComponentProps<'iframe'>, 'srcDoc'> & {\n  content: string\n}) {\n  return (\n    <iframe\n      srcDoc={content}\n      sandbox={sandbox}\n      className={cn('size-full border-0 bg-background', className)}\n      title={title}\n      {...props}\n    />\n  )\n}\n",
       "type": "registry:component",
       "target": "@components/pro/viewer/html/index.tsx"
     }
   ],
   "categories": ["display"],
   "meta": {
-    "version": "1.18.4",
+    "version": "1.19.0",
     "docs": "https://draco-china.github.io/shadcn-pro/docs/components/html-viewer"
   }
 }

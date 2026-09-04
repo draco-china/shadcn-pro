@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[625209,["/shadcn-pro/_next/static/chunks/09tzpmwkohb4n.js","/shadcn-pro/_next/static/chunks/0ibtb4kvrph_5.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/04m6luujjl7_h.js","/shadcn-pro/_next/static/chunks/17ipkmo4wy~8o.js","/shadcn-pro/_next/static/chunks/0~enwo81i_uvb.js","/shadcn-pro/_next/static/chunks/089hvz4hl051s.js","/shadcn-pro/_next/static/chunks/0aj62plmaa797.js"],"BlockViewer"]
+2:I[625209,["/shadcn-pro/_next/static/chunks/09tzpmwkohb4n.js","/shadcn-pro/_next/static/chunks/0ibtb4kvrph_5.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/04m6luujjl7_h.js","/shadcn-pro/_next/static/chunks/134v_9w_4_aep.js","/shadcn-pro/_next/static/chunks/0~enwo81i_uvb.js","/shadcn-pro/_next/static/chunks/0b7p~k29tueam.js","/shadcn-pro/_next/static/chunks/00p0mri1m1tng.js"],"BlockViewer"]
 b:I[80196,["/shadcn-pro/_next/static/chunks/09tzpmwkohb4n.js","/shadcn-pro/_next/static/chunks/0ibtb4kvrph_5.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/04m6luujjl7_h.js"],"OutletBoundary"]
 c:"$Sreact.suspense"
 3:T12ec,'use client'
@@ -332,7 +332,7 @@ export default function ProListDemo() {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>5:T3f18,'use client'
+<span class="line" data-line=""></span></code></pre>5:T405b,'use client'
 
 import { Inbox, RefreshCw, X } from 'lucide-react'
 import {
@@ -350,17 +350,20 @@ import { Input } from '../base/fields/input'
 import { Select } from '../base/fields/select'
 import { ProPagination } from '../pagination'
 
+/** Zero-based pagination state used by ProList. */
 export interface ProListPaginationState {
   pageIndex: number
   pageSize: number
 }
 
+/** Search, filter, and pagination state emitted by ProList. */
 export interface ProListState {
   pagination: ProListPaginationState
   search: string
   filters: Record<string, string | string[] | undefined>
 }
 
+/** Declarative filter definition for ProList. */
 export interface ProListFilter<TData> {
   key: string
   placeholder?: string
@@ -372,6 +375,7 @@ export interface ProListFilter<TData> {
   onFilter?: (value: string, record: TData) => boolean
 }
 
+/** Data and actions passed to ProList render slots. */
 export interface ProListRenderContext<TData> {
   data: TData[]
   pageData: TData[]
@@ -389,6 +393,7 @@ type ProListVariant = 'default' | 'outline' | 'ghost'
 
 type ProListDirection = 'vertical' | 'horizontal'
 
+/** Searchable, filterable, pageable local or remote data list. */
 export function ProList<TData>({
   data,
   request,
@@ -886,8 +891,9 @@ function getProListItemKey<TData>(
   return index
 }
 
+/** Props accepted by ProList. */
 export type ProListProps<TData> = ComponentProps<typeof ProList<TData>>
-6:T302c8,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+6:T307bf,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Inbox</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">RefreshCw</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">X</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
@@ -905,17 +911,20 @@ export type ProListProps<TData> = ComponentProps<typeof ProList<TData>>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Select</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/fields/select'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProPagination</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../pagination'</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Zero-based pagination state used by ProList. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProListPaginationState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  pageIndex</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  pageSize</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Search, filter, and pagination state emitted by ProList. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProListState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  pagination</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProListPaginationState</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  search</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  filters</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Record</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E5C07B">string</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#383A42;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[] </span><span style="color:#0184BC;--shiki-dark:#ABB2BF">|</span><span style="color:#383A42;--shiki-dark:#E5C07B"> undefined</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Declarative filter definition for ProList. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProListFilter</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">TData</span><span style="color:#383A42;--shiki-dark:#ABB2BF">> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  key</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  placeholder</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span></span>
@@ -927,6 +936,7 @@ export type ProListProps<TData> = ComponentProps<typeof ProList<TData>>
 <span class="line" data-line=""><span style="color:#4078F2;--shiki-dark:#61AFEF">  onFilter</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">value</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> string</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">record</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> TData</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#0184BC;--shiki-dark:#E5C07B"> boolean</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Data and actions passed to ProList render slots. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProListRenderContext</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">TData</span><span style="color:#383A42;--shiki-dark:#ABB2BF">> {</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  data</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> TData</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  pageData</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> TData</span><span style="color:#383A42;--shiki-dark:#ABB2BF">[]</span></span>
@@ -944,6 +954,7 @@ export type ProListProps<TData> = ComponentProps<typeof ProList<TData>>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProListDirection</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'vertical'</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'horizontal'</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Searchable, filterable, pageable local or remote data list. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProList</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">TData</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  data</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  request</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1441,8 +1452,9 @@ export type ProListProps<TData> = ComponentProps<typeof ProList<TData>>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#E06C75"> index</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Props accepted by ProList. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProListProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">TData</span><span style="color:#383A42;--shiki-dark:#ABB2BF">> </span><span style="color:#0184BC;--shiki-dark:#56B6C2">=</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ComponentProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#0184BC;--shiki-dark:#C678DD">typeof</span><span style="color:#383A42;--shiki-dark:#E06C75"> ProList</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#C18401;--shiki-dark:#E5C07B">TData</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>></span></span>
-<span class="line" data-line=""></span></code></pre>7:T2248,'use client'
+<span class="line" data-line=""></span></code></pre>7:T2290,'use client'
 
 import {
   CheckIcon,
@@ -1457,6 +1469,7 @@ import { Select as SelectPrimitive } from 'radix-ui'
 import { cn } from '@/lib/utils'
 import { ProButton } from '../base/button'
 
+/** Responsive page and page-size navigation. */
 export function ProPagination({
   current,
   pageCount,
@@ -1652,7 +1665,7 @@ export function ProPagination({
   )
 }
 
-function getPaginationRange(currentPage: number, pageCount: number) {
+function getPaginationRange(currentPage: number, pageCount: number): Array<number | '...'> {
   if (pageCount <= 5) return Array.from({ length: pageCount }, (_, index) => index + 1)
   if (currentPage <= 3) return [1, 2, 3, 4, '...', pageCount]
   if (currentPage >= pageCount - 2) {
@@ -1660,7 +1673,7 @@ function getPaginationRange(currentPage: number, pageCount: number) {
   }
   return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', pageCount]
 }
-8:T1273e,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+8:T129b1,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  CheckIcon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1675,6 +1688,7 @@ function getPaginationRange(currentPage: number, pageCount: number) {
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cn</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '@/lib/utils'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> '../base/button'</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Responsive page and page-size navigation. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProPagination</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  current</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  pageCount</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -1870,7 +1884,7 @@ function getPaginationRange(currentPage: number, pageCount: number) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
-<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getPaginationRange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">currentPage</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">pageCount</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
+<span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> getPaginationRange</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">currentPage</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">pageCount</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#0184BC;--shiki-dark:#E5C07B"> number</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> Array</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#383A42;--shiki-dark:#E5C07B">number</span><span style="color:#0184BC;--shiki-dark:#ABB2BF"> |</span><span style="color:#50A14F;--shiki-dark:#98C379"> '...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">> {</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">pageCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> &#x3C;=</span><span style="color:#986801;--shiki-dark:#D19A66"> 5</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span><span style="color:#E45649;--shiki-dark:#E5C07B"> Array</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">from</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({ </span><span style="color:#383A42;--shiki-dark:#E06C75">length</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#383A42;--shiki-dark:#E06C75"> pageCount</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> }, (</span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">_</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">index</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">=></span><span style="color:#383A42;--shiki-dark:#E06C75"> index</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> +</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">currentPage</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> &#x3C;=</span><span style="color:#986801;--shiki-dark:#D19A66"> 3</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) </span><span style="color:#A626A4;--shiki-dark:#C678DD">return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#D19A66">1</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#D19A66">2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#D19A66">3</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#986801;--shiki-dark:#D19A66">4</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">pageCount</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  if</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> (</span><span style="color:#383A42;--shiki-dark:#E06C75">currentPage</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> >=</span><span style="color:#383A42;--shiki-dark:#E06C75"> pageCount</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> -</span><span style="color:#986801;--shiki-dark:#D19A66"> 2</span><span style="color:#383A42;--shiki-dark:#ABB2BF">) {</span></span>
@@ -1878,7 +1892,7 @@ function getPaginationRange(currentPage: number, pageCount: number) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">  return</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> [</span><span style="color:#986801;--shiki-dark:#D19A66">1</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">currentPage</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> -</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">currentPage</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">currentPage</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> +</span><span style="color:#986801;--shiki-dark:#D19A66"> 1</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#50A14F;--shiki-dark:#98C379">'...'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">pageCount</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-list-demo",{"item":{"name":"pro-list-demo","description":"Data list with search, filters, custom item rendering, and pagination.","iframeHeight":"560px","installName":"pro-list"},"tree":[{"name":"examples","children":[{"name":"pro-list-demo.tsx","path":"examples/pro-list-demo.tsx"}]},{"name":"list","children":[{"name":"index.tsx","path":"list/index.tsx"}]},{"name":"pagination","children":[{"name":"index.tsx","path":"pagination/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-list-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"list/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pagination/index.tsx","content":"$7","highlightedContent":"$8"}]}]]}],["$L9"],"$La"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"852PqD-OTPtUyvwgaofUR"}
-9:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0aj62plmaa797.js","async":true}]
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-list-demo",{"item":{"name":"pro-list-demo","description":"Data list with search, filters, custom item rendering, and pagination.","iframeHeight":"560px","installName":"pro-list"},"tree":[{"name":"examples","children":[{"name":"pro-list-demo.tsx","path":"examples/pro-list-demo.tsx"}]},{"name":"list","children":[{"name":"index.tsx","path":"list/index.tsx"}]},{"name":"pagination","children":[{"name":"index.tsx","path":"pagination/index.tsx"}]}],"highlightedFiles":[{"target":"examples/pro-list-demo.tsx","content":"$3","highlightedContent":"$4"},{"target":"list/index.tsx","content":"$5","highlightedContent":"$6"},{"target":"pagination/index.tsx","content":"$7","highlightedContent":"$8"}]}]]}],["$L9"],"$La"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"D_--mvaXODO51E65fr1QT"}
+9:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/00p0mri1m1tng.js","async":true}]
 a:["$","$Lb",null,{"children":["$","$c",null,{"name":"Next.MetadataOutlet","children":"$@d"}]}]
 d:null

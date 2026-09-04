@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[625209,["/shadcn-pro/_next/static/chunks/09tzpmwkohb4n.js","/shadcn-pro/_next/static/chunks/0ibtb4kvrph_5.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/04m6luujjl7_h.js","/shadcn-pro/_next/static/chunks/17ipkmo4wy~8o.js","/shadcn-pro/_next/static/chunks/0~enwo81i_uvb.js","/shadcn-pro/_next/static/chunks/089hvz4hl051s.js","/shadcn-pro/_next/static/chunks/0aj62plmaa797.js"],"BlockViewer"]
+2:I[625209,["/shadcn-pro/_next/static/chunks/09tzpmwkohb4n.js","/shadcn-pro/_next/static/chunks/0ibtb4kvrph_5.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/04m6luujjl7_h.js","/shadcn-pro/_next/static/chunks/134v_9w_4_aep.js","/shadcn-pro/_next/static/chunks/0~enwo81i_uvb.js","/shadcn-pro/_next/static/chunks/0b7p~k29tueam.js","/shadcn-pro/_next/static/chunks/00p0mri1m1tng.js"],"BlockViewer"]
 a:I[80196,["/shadcn-pro/_next/static/chunks/09tzpmwkohb4n.js","/shadcn-pro/_next/static/chunks/0ibtb4kvrph_5.js","/shadcn-pro/_next/static/chunks/0ekus6s._fkb1.js","/shadcn-pro/_next/static/chunks/06jmn8b7573dg.js","/shadcn-pro/_next/static/chunks/04m6luujjl7_h.js"],"OutletBoundary"]
 b:"$Sreact.suspense"
 3:T252d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">"use client"</span></span>
@@ -37,10 +37,11 @@ b:"$Sreact.suspense"
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">    &#x3C;/</span><span style="color:#E45649;--shiki-dark:#E06C75">div</span><span style="color:#383A42;--shiki-dark:#ABB2BF">></span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>4:T761,'use client'
+<span class="line" data-line=""></span></code></pre>4:T7af,'use client'
 
 import { type RefObject, useCallback, useEffect, useRef, useState } from 'react'
 
+/** Manages controlled or uncontrolled fixed and browser fullscreen state. */
 export function useFullscreen({
   fullscreen: controlledFullscreen,
   defaultFullscreen = false,
@@ -104,10 +105,11 @@ export function useFullscreen({
     setFullscreen,
   }
 }
-5:T533a,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+5:T5426,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> RefObject</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useCallback</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useEffect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useRef</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Manages controlled or uncontrolled fixed and browser fullscreen state. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> useFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E06C75">  fullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">: </span><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">controlledFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  defaultFullscreen</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#986801;--shiki-dark:#D19A66"> false</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -171,13 +173,14 @@ export function useFullscreen({
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">    setFullscreen</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>6:T19dd,'use client'
+<span class="line" data-line=""></span></code></pre>6:T1ab6,'use client'
 
 import { cva, type VariantProps } from 'class-variance-authority'
 import { Check, LoaderCircle, X } from 'lucide-react'
 import { Slot, Tooltip as TooltipPrimitive } from 'radix-ui'
 import { type ComponentProps, type MouseEvent, type ReactNode, useEffect, useState } from 'react'
 
+/** Shared visual variants for ProButton. */
 export const buttonVariants = cva(
   "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
@@ -210,6 +213,7 @@ export const buttonVariants = cva(
   },
 )
 
+/** Supported ProButton size variants. */
 export type ProButtonSize = VariantProps<typeof buttonVariants>['size']
 
 interface ProButtonProps
@@ -221,6 +225,7 @@ interface ProButtonProps
   children?: ReactNode
 }
 
+/** Button primitive with loading and tooltip composition. */
 export function ProButton({
   asChild,
   disabled,
@@ -278,6 +283,7 @@ export function ProButton({
   )
 }
 
+/** Copies text and exposes transient success or error feedback. */
 export function CopyButton({
   copy,
   icon,
@@ -365,13 +371,14 @@ async function copyToClipboard(text: string) {
     document.body.removeChild(textarea)
   }
 }
-7:Tf82c,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
+7:Tfb7d,<pre class="no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none !bg-transparent" style="background-color:#FAFAFA;--shiki-dark-bg:#282c34;color:#383A42;--shiki-dark:#abb2bf" tabindex="0"><code data-line-numbers=""><span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">'use client'</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">cva</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> VariantProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'class-variance-authority'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Check</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">LoaderCircle</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">X</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'lucide-react'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#E45649;--shiki-dark:#E06C75">Slot</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#383A42;--shiki-dark:#E06C75">Tooltip</span><span style="color:#383A42;--shiki-dark:#C678DD"> as</span><span style="color:#E45649;--shiki-dark:#E06C75"> TooltipPrimitive</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'radix-ui'</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">import</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> { </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ComponentProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> MouseEvent</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#A626A4;--shiki-dark:#C678DD">type</span><span style="color:#E45649;--shiki-dark:#E06C75"> ReactNode</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useEffect</span><span style="color:#383A42;--shiki-dark:#ABB2BF">, </span><span style="color:#E45649;--shiki-dark:#E06C75">useState</span><span style="color:#383A42;--shiki-dark:#ABB2BF"> } </span><span style="color:#A626A4;--shiki-dark:#C678DD">from</span><span style="color:#50A14F;--shiki-dark:#98C379"> 'react'</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Shared visual variants for ProButton. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> const</span><span style="color:#986801;--shiki-dark:#E5C07B"> buttonVariants</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> cva</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span></span>
 <span class="line" data-line=""><span style="color:#50A14F;--shiki-dark:#98C379">  "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&#x26;_svg]:pointer-events-none [&#x26;_svg]:shrink-0 [&#x26;_svg:not([class*='size-'])]:size-4"</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  {</span></span>
@@ -404,6 +411,7 @@ async function copyToClipboard(text: string) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  },</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Supported ProButton size variants. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> type</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProButtonSize</span><span style="color:#0184BC;--shiki-dark:#56B6C2"> =</span><span style="color:#C18401;--shiki-dark:#E5C07B"> VariantProps</span><span style="color:#383A42;--shiki-dark:#ABB2BF">&#x3C;</span><span style="color:#0184BC;--shiki-dark:#C678DD">typeof</span><span style="color:#383A42;--shiki-dark:#E06C75"> buttonVariants</span><span style="color:#383A42;--shiki-dark:#ABB2BF">>[</span><span style="color:#50A14F;--shiki-dark:#98C379">'size'</span><span style="color:#383A42;--shiki-dark:#ABB2BF">]</span></span>
 <span class="line" data-line=""></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">interface</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ProButtonProps</span></span>
@@ -415,6 +423,7 @@ async function copyToClipboard(text: string) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#E06C75">  children</span><span style="color:#0184BC;--shiki-dark:#C678DD">?</span><span style="color:#0184BC;--shiki-dark:#ABB2BF">:</span><span style="color:#C18401;--shiki-dark:#E5C07B"> ReactNode</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Button primitive with loading and tooltip composition. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> ProButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  asChild</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  disabled</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -472,6 +481,7 @@ async function copyToClipboard(text: string) {
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  )</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
 <span class="line" data-line=""></span>
+<span class="line" data-line=""><span style="color:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">/** Copies text and exposes transient success or error feedback. */</span></span>
 <span class="line" data-line=""><span style="color:#A626A4;--shiki-dark:#C678DD">export</span><span style="color:#A626A4;--shiki-dark:#C678DD"> function</span><span style="color:#4078F2;--shiki-dark:#61AFEF"> CopyButton</span><span style="color:#383A42;--shiki-dark:#ABB2BF">({</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  copy</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-light-font-style:inherit;--shiki-dark:#E06C75;--shiki-dark-font-style:italic">  icon</span><span style="color:#383A42;--shiki-dark:#ABB2BF">,</span></span>
@@ -559,7 +569,7 @@ async function copyToClipboard(text: string) {
 <span class="line" data-line=""><span style="color:#E45649;--shiki-dark:#E5C07B">    document</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#E45649;--shiki-dark:#E5C07B">body</span><span style="color:#383A42;--shiki-dark:#ABB2BF">.</span><span style="color:#4078F2;--shiki-dark:#61AFEF">removeChild</span><span style="color:#383A42;--shiki-dark:#ABB2BF">(</span><span style="color:#383A42;--shiki-dark:#E06C75">textarea</span><span style="color:#383A42;--shiki-dark:#ABB2BF">)</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">  }</span></span>
 <span class="line" data-line=""><span style="color:#383A42;--shiki-dark:#ABB2BF">}</span></span>
-<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-base-demo",{"item":{"name":"pro-base-demo","description":"Shared primitives for button, copy feedback, loading, and fullscreen state.","iframeHeight":"240px","installName":"pro-base"},"tree":[{"name":"examples","children":[{"name":"pro-base-demo.tsx","path":"examples/pro-base-demo.tsx"}]},{"name":"base","children":[{"name":"hooks","children":[{"name":"use-fullscreen.ts","path":"base/hooks/use-fullscreen.ts"}]},{"name":"button","children":[{"name":"index.tsx","path":"base/button/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/pro-base-demo.tsx","content":"\"use client\"\n\nimport { Maximize2, RefreshCw } from \"lucide-react\"\n\nimport { CopyButton, ProButton } from \"@/registry/new-york-v4/pro/base/button\"\n\nexport default function ProBaseDemo() {\n  return (\n    <div className=\"flex items-center gap-2 rounded-lg border p-4\">\n      <ProButton\n        tooltip=\"Refresh\"\n        variant=\"outline\"\n        onClick={() => {}}\n      >\n        <RefreshCw className=\"size-4\" />\n        Refresh\n      </ProButton>\n      <CopyButton\n        icon={<RefreshCw className=\"size-4\" />}\n        tooltip=\"Copy\"\n        variant=\"outline\"\n        copy=\"https://shadcn-pro.draco.run\"\n      >\n        Copy\n      </CopyButton>\n      <ProButton\n        tooltip=\"Fullscreen\"\n        variant=\"outline\"\n        size=\"icon\"\n      >\n        <Maximize2 className=\"size-4\" />\n      </ProButton>\n    </div>\n  )\n}\n","highlightedContent":"$3"},{"target":"base/hooks/use-fullscreen.ts","content":"$4","highlightedContent":"$5"},{"target":"base/button/index.tsx","content":"$6","highlightedContent":"$7"}]}]]}],["$L8"],"$L9"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"852PqD-OTPtUyvwgaofUR"}
-8:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/0aj62plmaa797.js","async":true}]
+<span class="line" data-line=""></span></code></pre>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex flex-col gap-10 md:gap-14","children":[["$","$L2","pro-base-demo",{"item":{"name":"pro-base-demo","description":"Shared primitives for button, copy feedback, loading, and fullscreen state.","iframeHeight":"240px","installName":"pro-base"},"tree":[{"name":"examples","children":[{"name":"pro-base-demo.tsx","path":"examples/pro-base-demo.tsx"}]},{"name":"base","children":[{"name":"hooks","children":[{"name":"use-fullscreen.ts","path":"base/hooks/use-fullscreen.ts"}]},{"name":"button","children":[{"name":"index.tsx","path":"base/button/index.tsx"}]}]}],"highlightedFiles":[{"target":"examples/pro-base-demo.tsx","content":"\"use client\"\n\nimport { Maximize2, RefreshCw } from \"lucide-react\"\n\nimport { CopyButton, ProButton } from \"@/registry/new-york-v4/pro/base/button\"\n\nexport default function ProBaseDemo() {\n  return (\n    <div className=\"flex items-center gap-2 rounded-lg border p-4\">\n      <ProButton\n        tooltip=\"Refresh\"\n        variant=\"outline\"\n        onClick={() => {}}\n      >\n        <RefreshCw className=\"size-4\" />\n        Refresh\n      </ProButton>\n      <CopyButton\n        icon={<RefreshCw className=\"size-4\" />}\n        tooltip=\"Copy\"\n        variant=\"outline\"\n        copy=\"https://shadcn-pro.draco.run\"\n      >\n        Copy\n      </CopyButton>\n      <ProButton\n        tooltip=\"Fullscreen\"\n        variant=\"outline\"\n        size=\"icon\"\n      >\n        <Maximize2 className=\"size-4\" />\n      </ProButton>\n    </div>\n  )\n}\n","highlightedContent":"$3"},{"target":"base/hooks/use-fullscreen.ts","content":"$4","highlightedContent":"$5"},{"target":"base/button/index.tsx","content":"$6","highlightedContent":"$7"}]}]]}],["$L8"],"$L9"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"D_--mvaXODO51E65fr1QT"}
+8:["$","script","script-0",{"src":"/shadcn-pro/_next/static/chunks/00p0mri1m1tng.js","async":true}]
 9:["$","$La",null,{"children":["$","$b",null,{"name":"Next.MetadataOutlet","children":"$@c"}]}]
 c:null
