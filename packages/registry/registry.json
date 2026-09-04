@@ -1,14 +1,21 @@
 {
-  "version": "1.19.0",
+  "version": "1.20.0",
   "baseUrl": "https://raw.githubusercontent.com/draco-china/shadcn-pro/main/packages/registry",
   "components": [
     {
       "name": "pro-base",
       "category": "base",
       "description": "Shared low-level primitives for Pro components.",
-      "dependencies": ["class-variance-authority", "lucide-react", "radix-ui"],
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react",
+        "radix-ui"
+      ],
       "registryDependencies": [],
-      "files": ["pro/base/hooks/use-fullscreen.ts", "pro/base/button/index.tsx"]
+      "files": [
+        "pro/base/hooks/use-fullscreen.ts",
+        "pro/base/button/index.tsx"
+      ]
     },
     {
       "name": "pro-fields",
@@ -25,7 +32,9 @@
         "radix-ui",
         "react-day-picker"
       ],
-      "registryDependencies": ["pro-base"],
+      "registryDependencies": [
+        "pro-base"
+      ],
       "files": [
         "pro/base/fields/shared/field.tsx",
         "pro/base/fields/shared/calendar.tsx",
@@ -45,33 +54,67 @@
       "name": "pro-pagination",
       "category": "base",
       "description": "Reusable pagination control for table and non-table views.",
-      "dependencies": ["lucide-react", "radix-ui"],
-      "registryDependencies": ["pro-base"],
-      "files": ["pro/pagination/index.tsx"]
+      "dependencies": [
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "pro-base"
+      ],
+      "files": [
+        "pro/pagination/index.tsx"
+      ]
     },
     {
       "name": "pro-list",
       "category": "list",
       "description": "Data list container with search, filters, request loading, and pagination.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["pro-fields", "pro-base", "pro-pagination"],
-      "files": ["pro/list/index.tsx"]
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "pro-fields",
+        "pro-base",
+        "pro-pagination"
+      ],
+      "files": [
+        "pro/list/index.tsx"
+      ]
     },
     {
       "name": "pro-overlay",
       "category": "base",
       "description": "Reusable modal, drawer, and confirm overlay primitives.",
-      "dependencies": ["lucide-react", "radix-ui", "vaul"],
-      "registryDependencies": ["pro-base"],
-      "files": ["pro/overlay/index.tsx"]
+      "dependencies": [
+        "lucide-react",
+        "radix-ui",
+        "vaul"
+      ],
+      "registryDependencies": [
+        "pro-base"
+      ],
+      "files": [
+        "pro/overlay/index.tsx"
+      ]
     },
     {
       "name": "pro-form",
       "category": "form",
       "description": "shadcn/ui driven form layout and overlay form components",
-      "dependencies": ["@tanstack/react-form", "lucide-react"],
-      "registryDependencies": ["pro-fields", "pro-base", "pro-overlay"],
-      "files": ["pro/form/index.tsx", "pro/form/schema-render.tsx", "pro/form/validators.ts"]
+      "dependencies": [
+        "@tanstack/react-form",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "pro-fields",
+        "pro-base",
+        "pro-overlay"
+      ],
+      "files": [
+        "pro/form/index.tsx",
+        "pro/form/schema-render.tsx",
+        "pro/form/validators.ts"
+      ]
     },
     {
       "name": "pro-table",
@@ -86,15 +129,29 @@
         "lucide-react",
         "radix-ui"
       ],
-      "registryDependencies": ["pro-fields", "pro-base", "pro-pagination"],
-      "files": ["pro/table/index.tsx", "pro/table/body.tsx", "pro/table/url-state.ts"]
+      "registryDependencies": [
+        "pro-fields",
+        "pro-base",
+        "pro-pagination"
+      ],
+      "files": [
+        "pro/table/index.tsx",
+        "pro/table/body.tsx",
+        "pro/table/url-state.ts"
+      ]
     },
     {
       "name": "pro-editor",
       "category": "content",
       "description": "Monaco-powered editor with Worker-backed Shiki syntax highlighting, controlled language, theme, view mode, and external preview slot.",
-      "dependencies": ["@monaco-editor/react", "lucide-react", "monaco-editor"],
-      "registryDependencies": ["pro-base"],
+      "dependencies": [
+        "@monaco-editor/react",
+        "lucide-react",
+        "monaco-editor"
+      ],
+      "registryDependencies": [
+        "pro-base"
+      ],
       "files": [
         "pro/editor/index.tsx",
         "pro/editor/theme.ts",
@@ -106,16 +163,24 @@
       "name": "pro-descriptions",
       "category": "display",
       "description": "Key-value display component for detail pages, supporting grid layout, bordered style, and horizontal/vertical modes",
-      "dependencies": ["class-variance-authority"],
+      "dependencies": [
+        "class-variance-authority"
+      ],
       "registryDependencies": [],
-      "files": ["pro/descriptions/index.tsx"]
+      "files": [
+        "pro/descriptions/index.tsx"
+      ]
     },
     {
       "name": "code-viewer",
       "category": "display",
       "description": "Shiki-powered code viewer with One themes, copy, line numbers, folding, and empty/error states.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["pro-base"],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "pro-base"
+      ],
       "files": [
         "pro/viewer/code/index.tsx",
         "pro/viewer/code/highlight-types.ts",
@@ -127,9 +192,16 @@
       "name": "diff-viewer",
       "category": "display",
       "description": "Split and unified diff viewer with shared Shiki One syntax highlighting.",
-      "dependencies": ["diff"],
-      "registryDependencies": ["pro-base", "code-viewer"],
-      "files": ["pro/viewer/diff/index.tsx"]
+      "dependencies": [
+        "diff"
+      ],
+      "registryDependencies": [
+        "pro-base",
+        "code-viewer"
+      ],
+      "files": [
+        "pro/viewer/diff/index.tsx"
+      ]
     },
     {
       "name": "html-viewer",
@@ -137,22 +209,37 @@
       "description": "Sandboxed HTML preview surface.",
       "dependencies": [],
       "registryDependencies": [],
-      "files": ["pro/viewer/html/index.tsx"]
+      "files": [
+        "pro/viewer/html/index.tsx"
+      ]
     },
     {
       "name": "image-viewer",
       "category": "display",
       "description": "Fullscreen image viewer with zoom, pan, rotate, fullscreen, thumbnails, and keyboard navigation.",
-      "dependencies": ["lucide-react", "radix-ui"],
-      "registryDependencies": ["pro-base"],
-      "files": ["pro/viewer/image/index.tsx"]
+      "dependencies": [
+        "lucide-react",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "pro-base"
+      ],
+      "files": [
+        "pro/viewer/image/index.tsx"
+      ]
     },
     {
       "name": "markdown-viewer",
       "category": "display",
       "description": "GitHub Flavored Markdown viewer with alerts, math, sanitized raw HTML, tables, and shared CodeViewer-powered code blocks.",
-      "dependencies": ["class-variance-authority", "hast-util-to-jsx-runtime", "lucide-react"],
-      "registryDependencies": ["code-viewer"],
+      "dependencies": [
+        "class-variance-authority",
+        "hast-util-to-jsx-runtime",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "code-viewer"
+      ],
       "files": [
         "pro/viewer/markdown/index.tsx",
         "pro/viewer/markdown/plugins.ts",

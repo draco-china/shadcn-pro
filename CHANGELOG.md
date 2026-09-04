@@ -1,3 +1,11 @@
+# [1.20.0](https://github.com/draco-china/shadcn-pro/compare/v1.19.0...v1.20.0) (2026-09-04)
+
+
+### Features
+
+* optimize pro components and worker rendering ([674b977](https://github.com/draco-china/shadcn-pro/commit/674b9771babbb3724d8b9249045b9f3a15ab1390))
+* **pro-form:** simplify react hook form api ([deb93ee](https://github.com/draco-china/shadcn-pro/commit/deb93eeada1518a9b94f8a3da874e544f7ed8699))
+
 # [1.19.0](https://github.com/draco-china/shadcn-pro/compare/v1.18.4...v1.19.0) (2026-06-11)
 
 
