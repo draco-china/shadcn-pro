@@ -1,3 +1,15 @@
+# [1.21.0](https://github.com/draco-china/shadcn-pro/compare/v1.20.0...v1.21.0) (2026-09-15)
+
+
+### Bug Fixes
+
+* preserve registry formatting during releases ([1bf13ca](https://github.com/draco-china/shadcn-pro/commit/1bf13ca3f038bc3c91622cae90be0820d3ef6c3b))
+
+
+### Features
+
+* refine pro component interactions and APIs ([f316e1b](https://github.com/draco-china/shadcn-pro/commit/f316e1b40b53f7d03609167217f8f9541b84fd4d))
+
 # [1.20.0](https://github.com/draco-china/shadcn-pro/compare/v1.19.0...v1.20.0) (2026-09-04)
 
 
